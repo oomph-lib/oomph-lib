@@ -158,6 +158,8 @@ double \& \mbox{\hyperlink{classoomph_1_1Problem_adffc8921bf61edac68ed017bcdc1d7
 \begin{DoxyCompactList}\small\item\em Access function to min timestep in adaptive timestepping. \end{DoxyCompactList}\item 
 double \& \mbox{\hyperlink{classoomph_1_1Problem_ac5355154d4991ec634e74d4817176f5f}{maximum\+\_\+dt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to max timestep in adaptive timestepping. \end{DoxyCompactList}\item 
+double \& \mbox{\hyperlink{classoomph_1_1Problem_a6b68978063f7eb0e317cc90c883e8601}{target\+\_\+error\+\_\+safety\+\_\+factor}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the safety factor in adaptive timestepping. \end{DoxyCompactList}\item 
 unsigned \& \mbox{\hyperlink{classoomph_1_1Problem_aa30b2e89f61a327ffb1be4ff30bb868f}{max\+\_\+newton\+\_\+iterations}} ()
 \begin{DoxyCompactList}\small\item\em Access function to max Newton iterations before giving up. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_a92acc3c193a38f321fc318fafd142f7a}{problem\+\_\+is\+\_\+nonlinear}} (const bool \&prob\+\_\+lin)
@@ -248,10 +250,6 @@ void \mbox{\hyperlink{classoomph_1_1Problem_af4d959a47ef6a8d50b394a6761dfab5a}{g
 \begin{DoxyCompactList}\small\item\em Get the derivative of the entire residuals vector wrt a global parameter, used in continuation problems. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_ac65cbe00a72cfc91ccaea10818f1a507}{get\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} const \&Y, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} $>$ const \&C, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}} $>$ \&product)
 \begin{DoxyCompactList}\small\item\em Return the product of the global hessian (derivative of Jacobian matrix with respect to all variables) with an eigenvector, Y, and any number of other specified vectors C (d(J\+\_\+\{ij\})/d u\+\_\+\{k\}) Y\+\_\+\{j\} C\+\_\+\{k\}. This function is used in assembling and solving the augmented systems associated with bifurcation tracking. The default implementation is to use finite differences at the global level. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Problem_a8cde2d21879264ae7bc8a140142db8ea}{solve\+\_\+eigenproblem\+\_\+legacy}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector, const bool \&steady=true)
-\begin{DoxyCompactList}\small\item\em Get derivative of an element in the problem wrt a global parameter, used in continuation problems. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Problem_aa4c4d1c36972399b365017b967622449}{solve\+\_\+eigenproblem\+\_\+legacy}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, const bool \&steady=true)
-\begin{DoxyCompactList}\small\item\em Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements. Calculate (at least) n\+\_\+eval eigenvalues. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-\/matrix terms from the timestepper will be included in the jacobian --- this is almost certainly never wanted. Legacy version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_afb6e5ef95c303d531f5949d7e9f6774a}{solve\+\_\+eigenproblem}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&alpha, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&beta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+real, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+imag, const bool \&steady=true)
 \begin{DoxyCompactList}\small\item\em Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements. Calculate (at least) n\+\_\+eval eigenvalues and return the corresponding eigenvectors. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-\/matrix terms from the timestepper will be included in the jacobian --- this is almost certainly never wanted. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. There\textquotesingle{}s a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.\+h header and the associated feenable function). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_a1af2e46e4a98d88ccf85f96dd18c4d25}{solve\+\_\+eigenproblem}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+real, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+imag, const bool \&steady=true)
@@ -260,8 +258,6 @@ void \mbox{\hyperlink{classoomph_1_1Problem_a02a607f961a4f5651972035abd8529b3}{s
 \begin{DoxyCompactList}\small\item\em Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements but only return the eigenvalues, not the eigenvectors. At least n\+\_\+eval eigenvalues are computed. The boolean flag (default true) is used to specify whether the weighted mass-\/matrix terms from the timestepping scheme should be included in the jacobian --- this is almost certainly never wanted. Note that the eigenvalues may be infinite. In this case it\textquotesingle{}s safer to use the other version of this function which returns the eigenvalues in terms of a fractional representation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_abdeda71a6cde679015d0a064a2122744}{solve\+\_\+eigenproblem}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&alpha, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&beta, const bool \&steady=true)
 \begin{DoxyCompactList}\small\item\em Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements but only return the eigenvalues, not the eigenvectors. At least n\+\_\+eval eigenvalues are computed. The boolean flag (default true) is used to specify whether the weighted mass-\/matrix terms from the timestepping scheme should be included in the jacobian --- this is almost certainly never wanted. Note that the eigenvalues may be infinite and are therefore returned as $ \lambda_i = \alpha_i / \beta_i $ where $ \alpha_i $ is complex while $ \beta_i $ is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid Na\+Ns. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Problem_a0a7c8ab31dc0297e049b15d67eb7661b}{solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector, const bool \&make\+\_\+timesteppers\+\_\+steady=true)
-\begin{DoxyCompactList}\small\item\em Solve an adjoint eigenvalue problem using the same procedure as solve\+\_\+eigenproblem. See the documentation on that function for more details. Note\+: this is a legacy version of this function that stores re \& imag parts of eigenvectors in some solver-\/specific collection of real vectors. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_a238820e0f1029699f362510557b77d24}{solve\+\_\+adjoint\+\_\+eigenproblem}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+real, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector\+\_\+imag, const bool \&steady=true)
 \begin{DoxyCompactList}\small\item\em Solve an adjoint eigenvalue problem using the same procedure as solve\+\_\+eigenproblem. See the documentation on that function for more details. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Problem_ae42812f6d3b950698cf0936e28f0e415}{solve\+\_\+adjoint\+\_\+eigenproblem}} (const unsigned \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, const bool \&steady=true)
@@ -644,6 +640,8 @@ double \mbox{\hyperlink{classoomph_1_1Problem_aaaeab9469b342a3b849ee5f2ef7051f3}
 \begin{DoxyCompactList}\small\item\em Maximum possible increase of dt between time-\/steps in adaptive schemes. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1Problem_abbb93979ed99d40eb845ba7296355965}{DTSF\+\_\+min\+\_\+decrease}}
 \begin{DoxyCompactList}\small\item\em Minimum allowed decrease of dt between time-\/steps in adaptive schemes. Lower scaling values will reject the time-\/step (and retry with a smaller dt). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1Problem_aacb61c79a0cbdab75d68c95348898874}{Target\+\_\+error\+\_\+safety\+\_\+factor}}
+\begin{DoxyCompactList}\small\item\em Safety factor to ensure we are aiming for a target error, TARGET, that is below our tolerance\+: TARGET = Target\+\_\+error\+\_\+safety\+\_\+factor $\ast$ TOL For this to make sense Target\+\_\+error\+\_\+safety\+\_\+factor should be $<$1.\+0. If Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance is set to true (default) then, without this, timesteps suggested by the adaptive time-\/stepper can be expected to lead to rejection (because the error exceeds TOL) about half of the time. Harier et al. (1993, ISBN\+:978-\/3-\/540-\/56670-\/0, p168) suggest a value around 0.\+25-\/0.\+40 to be the most efficient, however this is highly problem and timestepper dependent and sometimes as high as 0.\+95 may be effective at improving the robustness of timestep prediction. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1Problem_abdee700b2cec37540cf1e7e1462df6c3}{Minimum\+\_\+dt\+\_\+but\+\_\+still\+\_\+proceed}}
 \begin{DoxyCompactList}\small\item\em If Minimum\+\_\+dt\+\_\+but\+\_\+still\+\_\+proceed positive, then dt will not be reduced below this value during adaptive timestepping and the computation will continue with this value, accepting the larger errors that this will incur). Note\+: This option is disabled by default as this value is initialised to -\/1.\+0. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1Problem_a708322baf423e373970384006c2ca4db}{Scale\+\_\+arc\+\_\+length}}
@@ -902,7 +900,7 @@ Obviously, at this level in the code hierarchy, many things become very problem-
 \end{DoxyCode}
  
 
-Definition at line 150 of file problem.\+h.
+Definition at line 153 of file problem.\+h.
 
 
 
@@ -919,7 +917,7 @@ Function pointer for spatial error estimator.
 
 
 
-Definition at line 1258 of file problem.\+h.
+Definition at line 1278 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a220abfde16b8b1b544b4127e0e4cc9e4}\label{classoomph_1_1Problem_a220abfde16b8b1b544b4127e0e4cc9e4}} 
 \index{oomph::Problem@{oomph::Problem}!SpatialErrorEstimatorWithDocFctPt@{SpatialErrorEstimatorWithDocFctPt}}
@@ -933,7 +931,7 @@ Function pointer for spatial error estimator with doc.
 
 
 
-Definition at line 1262 of file problem.\+h.
+Definition at line 1282 of file problem.\+h.
 
 
 
@@ -972,7 +970,7 @@ Perform\+\_\+assembly\+\_\+using\+\_\+two\+\_\+arrays&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 644 of file problem.\+h.
+Definition at line 647 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a8fc1f40f2a9309e9ff02772fa2258402}\label{classoomph_1_1Problem_a8fc1f40f2a9309e9ff02772fa2258402}} 
 \index{oomph::Problem@{oomph::Problem}!Distributed\_problem\_matrix\_distribution@{Distributed\_problem\_matrix\_distribution}}
@@ -1000,7 +998,7 @@ Uniform\+\_\+matrix\+\_\+distribution&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 829 of file problem.\+h.
+Definition at line 849 of file problem.\+h.
 
 
 
@@ -1045,7 +1043,7 @@ Virtual destructor to clean up memory.
 
 Destructor to clean up memory. 
 
-Definition at line 181 of file problem.\+cc.
+Definition at line 182 of file problem.\+cc.
 
 
 
@@ -1066,7 +1064,7 @@ Actions that are to be performed after a mesh adaptation.
 
 
 
-Definition at line 1025 of file problem.\+h.
+Definition at line 1045 of file problem.\+h.
 
 
 
@@ -1084,7 +1082,7 @@ Actions that are to be performed after a change in the parameter that is being v
 
 
 
-Definition at line 1151 of file problem.\+h.
+Definition at line 1171 of file problem.\+h.
 
 
 
@@ -1106,7 +1104,7 @@ Actions that are to be performed when the global parameter addressed by paramete
 
 
 
-Definition at line 1133 of file problem.\+h.
+Definition at line 1153 of file problem.\+h.
 
 
 
@@ -1128,7 +1126,7 @@ Actions to be performed after a (mesh) distribution.
 
 
 
-Definition at line 1119 of file problem.\+h.
+Definition at line 1139 of file problem.\+h.
 
 
 
@@ -1150,7 +1148,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a2
 
 
 
-Definition at line 1081 of file problem.\+h.
+Definition at line 1101 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a012692496c968960f4ea27db4e89cc7d}\label{classoomph_1_1Problem_a012692496c968960f4ea27db4e89cc7d}} 
 \index{oomph::Problem@{oomph::Problem}!actions\_after\_implicit\_timestep@{actions\_after\_implicit\_timestep}}
@@ -1164,7 +1162,7 @@ Actions that should be performed after each implicit time step. This is needed w
 
 
 
-Definition at line 1070 of file problem.\+h.
+Definition at line 1090 of file problem.\+h.
 
 
 
@@ -1182,7 +1180,7 @@ Actions that should be performed after each implicit time step. This is needed i
 
 
 
-Definition at line 1075 of file problem.\+h.
+Definition at line 1095 of file problem.\+h.
 
 
 
@@ -1204,7 +1202,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a248ab44d5058e1
 
 
 
-Definition at line 1038 of file problem.\+h.
+Definition at line 1058 of file problem.\+h.
 
 
 
@@ -1222,7 +1220,7 @@ Any actions that are to be performed after each individual Newton step. Most lik
 
 
 
-Definition at line 1058 of file problem.\+h.
+Definition at line 1078 of file problem.\+h.
 
 
 
@@ -1240,7 +1238,7 @@ Empty virtual function; provides hook to perform actions after the increase in t
 
 
 
-Definition at line 1161 of file problem.\+h.
+Definition at line 1181 of file problem.\+h.
 
 
 
@@ -1258,7 +1256,7 @@ Actions that are to be performed before reading in restart data for problems inv
 
 
 
-Definition at line 1109 of file problem.\+h.
+Definition at line 1129 of file problem.\+h.
 
 
 
@@ -1280,7 +1278,7 @@ Actions that are to be performed before a mesh adaptation. These might include r
 
 
 
-Definition at line 1022 of file problem.\+h.
+Definition at line 1042 of file problem.\+h.
 
 
 
@@ -1298,7 +1296,7 @@ Actions to be performed before a (mesh) distribution.
 
 
 
-Definition at line 1116 of file problem.\+h.
+Definition at line 1136 of file problem.\+h.
 
 
 
@@ -1320,7 +1318,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ae
 
 
 
-Definition at line 1078 of file problem.\+h.
+Definition at line 1098 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a4f19896906d2c0274ad6798cd3ac38dc}\label{classoomph_1_1Problem_a4f19896906d2c0274ad6798cd3ac38dc}} 
 \index{oomph::Problem@{oomph::Problem}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
@@ -1338,7 +1336,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1WomersleyProblem_af87f80658aaada
 
 
 
-Definition at line 1064 of file problem.\+h.
+Definition at line 1084 of file problem.\+h.
 
 
 
@@ -1356,7 +1354,7 @@ Any actions that are to be performed before the residual is checked in the Newto
 
 
 
-Definition at line 1048 of file problem.\+h.
+Definition at line 1068 of file problem.\+h.
 
 
 
@@ -1378,7 +1376,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1WomersleyProblem_a7aa82fe18099c9
 
 
 
-Definition at line 1032 of file problem.\+h.
+Definition at line 1052 of file problem.\+h.
 
 
 
@@ -1396,7 +1394,7 @@ Any actions that are to be performed before each individual Newton step. Most li
 
 
 
-Definition at line 1053 of file problem.\+h.
+Definition at line 1073 of file problem.\+h.
 
 
 
@@ -1414,7 +1412,7 @@ Actions that are to be performed before reading in restart data for problems inv
 
 
 
-Definition at line 1095 of file problem.\+h.
+Definition at line 1115 of file problem.\+h.
 
 
 
@@ -1436,7 +1434,7 @@ Activate generic bifurcation tracking for a single (real) eigenvalue where the i
 
 Activate the generic bifurcation ///tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10322 of file problem.\+cc.
+Definition at line 10149 of file problem.\+cc.
 
 
 
@@ -1454,7 +1452,7 @@ Activate generic bifurcation tracking for a single (real) eigenvalue where the i
 
 Activate the generic bifurcation ///tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10350 of file problem.\+cc.
+Definition at line 10177 of file problem.\+cc.
 
 
 
@@ -1472,7 +1470,7 @@ Turn on fold tracking using the augmented system specified in the \mbox{\hyperli
 
 Activate the fold tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10296 of file problem.\+cc.
+Definition at line 10123 of file problem.\+cc.
 
 
 
@@ -1494,7 +1492,7 @@ Turn on Hopf bifurcation tracking using the augmented system specified in the \m
 
 Activate the hopf tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt. 
 
-Definition at line 10411 of file problem.\+cc.
+Definition at line 10238 of file problem.\+cc.
 
 
 
@@ -1516,7 +1514,7 @@ Turn on Hopf bifurcation tracking using the augmented system specified in the \m
 
 Activate the hopf tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt and the frequency and null vectors specified. 
 
-Definition at line 10439 of file problem.\+cc.
+Definition at line 10266 of file problem.\+cc.
 
 
 
@@ -1534,7 +1532,7 @@ Turn on pitchfork tracking using the augmented system specified in the \mbox{\hy
 
 Activate the pitchfork tracking system by changing the assembly handler and initialising it using the parameter addressed by parameter\+\_\+pt and a symmetry vector. The boolean flag is used to specify whether a block solver is used, default is true. 
 
-Definition at line 10381 of file problem.\+cc.
+Definition at line 10208 of file problem.\+cc.
 
 
 
@@ -1556,7 +1554,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 
 
-Definition at line 2988 of file problem.\+h.
+Definition at line 2964 of file problem.\+h.
 
 
 
@@ -1574,7 +1572,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 
 
-Definition at line 13859 of file problem.\+cc.
+Definition at line 13729 of file problem.\+cc.
 
 
 
@@ -1592,7 +1590,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 Perform mesh adaptation for (all) refineable (sub)mesh(es), based on the error estimates in elemental\+\_\+error and the target errors specified in the mesh(es). Following mesh adaptation, update global mesh, and re-\/assign equation numbers. Return \# of refined/unrefined elements. On return from this function, \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} can immediately be solved again. 
 
-Definition at line 14721 of file problem.\+cc.
+Definition at line 14591 of file problem.\+cc.
 
 
 
@@ -1614,7 +1612,7 @@ Adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es), bas
 
 
 
-Definition at line 3039 of file problem.\+h.
+Definition at line 3015 of file problem.\+h.
 
 
 
@@ -1632,7 +1630,7 @@ Attempt to advance timestep by dt\+\_\+desired. If the solution fails the timest
 
 Attempt to take one timestep forward using dt\+\_\+desired. The error control parameter, epsilon, is used to specify the desired approximate value of the global error norm per timestep. The routine returns the value an estimate of the next value of dt that should be taken. 
 
-Definition at line 11249 of file problem.\+cc.
+Definition at line 11086 of file problem.\+cc.
 
 
 
@@ -1648,13 +1646,15 @@ Referenced by doubly\+\_\+adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve\+\_\+hel
 
 Attempt to advance timestep by dt\+\_\+desired. If the solution fails the timestep will be halved until convergence is achieved, or the timestep falls below Newton\+Solver\+Parameters\+::\+Minimum\+\_\+time\+\_\+step. The error control parameter epsilon represents the (approximate) desired magnitude of the global error at each timestep. The routine returns a double that is the suggested next timestep and should be passed as dt\+\_\+desired the next time the routine is called. Once again the boolean flag, shift\+\_\+values, is used to control whether the time values are shifted. 
 
-Attempt to take one timestep forward using the dt\+\_\+desired. This is the driver for a number of adaptive solvers. If the solution fails to converge at a given timestep, the routine will automatically halve the time step and try again, until the time step falls below the specified minimum value. The routine returns the value an estimate of the next value of dt that should be taken. Timestep is also rejected if the error estimate post-\/solve (computed by \mbox{\hyperlink{classoomph_1_1Problem_ac7667864b71a3889c95c29307422ac8e}{global\+\_\+temporal\+\_\+error\+\_\+norm()}}) exceeds epsilon. This behaviour can be over-\/ruled by setting the protected boolean \mbox{\hyperlink{classoomph_1_1Problem_ab27af4a444de9f59125ee50ac778d97a}{Problem\+::\+Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance}} to false. 
+Attempt to take one timestep forward using the dt\+\_\+desired. This is the driver for a number of adaptive solvers. If the solution fails to converge at a given timestep, the routine will automatically halve the time step and try again, until the time step falls below the specified minimum value. The routine returns the value an estimate of the next value of dt that should be taken. Timestep is also rejected if the error estimate post-\/solve (computed by \mbox{\hyperlink{classoomph_1_1Problem_ac7667864b71a3889c95c29307422ac8e}{global\+\_\+temporal\+\_\+error\+\_\+norm()}}) exceeds epsilon. This behaviour can be over-\/ruled by setting the protected boolean \mbox{\hyperlink{classoomph_1_1Problem_ab27af4a444de9f59125ee50ac778d97a}{Problem\+::\+Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance}} to false. Reject the timestep, if we have an exception
 
-Definition at line 11269 of file problem.\+cc.
+Half the time step
+
+Definition at line 11106 of file problem.\+cc.
 
 
 
-References actions\+\_\+after\+\_\+implicit\+\_\+timestep(), actions\+\_\+after\+\_\+implicit\+\_\+timestep\+\_\+and\+\_\+error\+\_\+estimation(), actions\+\_\+after\+\_\+newton\+\_\+solve(), actions\+\_\+after\+\_\+newton\+\_\+step(), oomph\+::\+Time\+Stepper\+::actions\+\_\+after\+\_\+timestep(), actions\+\_\+before\+\_\+implicit\+\_\+timestep(), actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), oomph\+::\+Time\+Stepper\+::actions\+\_\+before\+\_\+timestep(), calculate\+\_\+predictions(), dof(), dof\+\_\+distribution\+\_\+pt(), oomph\+::\+Time\+::dt(), DTSF\+\_\+max\+\_\+increase, DTSF\+\_\+min\+\_\+decrease, e, global\+\_\+temporal\+\_\+error\+\_\+norm(), i, Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance, oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error, Maximum\+\_\+dt, Minimum\+\_\+dt, Minimum\+\_\+dt\+\_\+but\+\_\+still\+\_\+proceed, newton\+\_\+solve(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, oomph\+::\+Time\+Stepper\+::set\+\_\+error\+\_\+weights(), oomph\+::\+Time\+Stepper\+::set\+\_\+predictor\+\_\+weights(), oomph\+::\+Time\+Stepper\+::set\+\_\+weights(), shift\+\_\+time\+\_\+values(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), synchronise\+\_\+all\+\_\+dofs(), oomph\+::\+Time\+::time(), Time\+\_\+adaptive\+\_\+newton\+\_\+crash\+\_\+on\+\_\+solve\+\_\+fail, time\+\_\+pt(), time\+\_\+stepper\+\_\+pt(), and Timestep\+\_\+reduction\+\_\+factor\+\_\+after\+\_\+nonconvergence.
+References actions\+\_\+after\+\_\+implicit\+\_\+timestep(), actions\+\_\+after\+\_\+implicit\+\_\+timestep\+\_\+and\+\_\+error\+\_\+estimation(), actions\+\_\+after\+\_\+newton\+\_\+solve(), actions\+\_\+after\+\_\+newton\+\_\+step(), oomph\+::\+Time\+Stepper\+::actions\+\_\+after\+\_\+timestep(), actions\+\_\+before\+\_\+implicit\+\_\+timestep(), actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), oomph\+::\+Time\+Stepper\+::actions\+\_\+before\+\_\+timestep(), calculate\+\_\+predictions(), dof(), dof\+\_\+distribution\+\_\+pt(), oomph\+::\+Time\+::dt(), DTSF\+\_\+max\+\_\+increase, DTSF\+\_\+min\+\_\+decrease, e, global\+\_\+temporal\+\_\+error\+\_\+norm(), i, Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance, oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error(), Maximum\+\_\+dt, Minimum\+\_\+dt, Minimum\+\_\+dt\+\_\+but\+\_\+still\+\_\+proceed, newton\+\_\+solve(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, oomph\+::\+Time\+Stepper\+::set\+\_\+error\+\_\+weights(), oomph\+::\+Time\+Stepper\+::set\+\_\+predictor\+\_\+weights(), oomph\+::\+Time\+Stepper\+::set\+\_\+weights(), shift\+\_\+time\+\_\+values(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), synchronise\+\_\+all\+\_\+dofs(), Target\+\_\+error\+\_\+safety\+\_\+factor, oomph\+::\+Time\+::time(), Time\+\_\+adaptive\+\_\+newton\+\_\+crash\+\_\+on\+\_\+solve\+\_\+fail, time\+\_\+pt(), time\+\_\+stepper\+\_\+pt(), and Timestep\+\_\+reduction\+\_\+factor\+\_\+after\+\_\+nonconvergence.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_aa803fbccb2c8c70702b2c39837e7ad2e}\label{classoomph_1_1Problem_aa803fbccb2c8c70702b2c39837e7ad2e}} 
 \index{oomph::Problem@{oomph::Problem}!add\_eigenvector\_to\_dofs@{add\_eigenvector\_to\_dofs}}
@@ -1668,7 +1668,7 @@ Add the eigenvector passed to the function scaled by the constat epsilon to the 
 
 Add the eigenvector passed to the function to the dofs with magnitude epsilon. 
 
-Definition at line 8933 of file problem.\+cc.
+Definition at line 8760 of file problem.\+cc.
 
 
 
@@ -1686,7 +1686,7 @@ Add \mbox{\hyperlink{classoomph_1_1Data}{Data}} to the \mbox{\hyperlink{classoom
 
 
 
-Definition at line 1654 of file problem.\+h.
+Definition at line 1680 of file problem.\+h.
 
 
 
@@ -1704,7 +1704,7 @@ Add a submesh to the problem and return its number, i, by which it can be access
 
 
 
-Definition at line 1330 of file problem.\+h.
+Definition at line 1350 of file problem.\+h.
 
 
 
@@ -1726,7 +1726,7 @@ Add a timestepper to the problem. The function will automatically create or resi
 
 
 
-Definition at line 1631 of file problem.\+cc.
+Definition at line 1632 of file problem.\+cc.
 
 
 
@@ -1752,7 +1752,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0
 
 
 
-Definition at line 3650 of file problem.\+cc.
+Definition at line 3651 of file problem.\+cc.
 
 
 
@@ -1770,7 +1770,7 @@ Solve a steady problem using arc-\/length continuation, when the variable corres
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument data\+\_\+pt is a pointer to the data that holds the parameter (global variable) that is being traded for arc-\/length. The exact value is located at the location given by data\+\_\+index. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. 
 
-Definition at line 10575 of file problem.\+cc.
+Definition at line 10402 of file problem.\+cc.
 
 
 
@@ -1788,7 +1788,7 @@ Solve a steady problem using arc-\/length continuation, when the parameter that 
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument parameter\+\_\+pt is a pointer to the parameter (global variable) that is being traded for arc-\/length. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. 
 
-Definition at line 10487 of file problem.\+cc.
+Definition at line 10314 of file problem.\+cc.
 
 
 
@@ -1806,11 +1806,11 @@ Private helper function that actually contains the guts of the arc-\/length step
 
 This function takes one step of length ds in pseudo-\/arclength.\+The argument parameter\+\_\+pt is a pointer to the parameter (global variable) that is being traded for arc-\/length. The function returns the next desired arc-\/length according to criteria based upon the desired number of Newton Iterations per solve. end of adaptation loop
 
-Definition at line 10708 of file problem.\+cc.
+Definition at line 10535 of file problem.\+cc.
 
 
 
-References actions\+\_\+after\+\_\+parameter\+\_\+increase(), adapt(), Arc\+\_\+length\+\_\+step\+\_\+taken, Bifurcation\+\_\+detection, Bisect\+\_\+to\+\_\+find\+\_\+bifurcation, calculate\+\_\+continuation\+\_\+derivatives(), calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd(), communicator\+\_\+pt(), Desired\+\_\+newton\+\_\+iterations\+\_\+ds, Dof\+\_\+current, dof\+\_\+current(), Dof\+\_\+derivative, dof\+\_\+derivative(), Dof\+\_\+distribution\+\_\+pt, Dof\+\_\+pt, Ds\+\_\+current, First\+\_\+jacobian\+\_\+sign\+\_\+change, i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error, oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), Minimum\+\_\+ds, newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, Parameter\+\_\+current, Parameter\+\_\+derivative, Problem\+\_\+has\+\_\+been\+\_\+distributed, set\+\_\+consistent\+\_\+pinned\+\_\+values\+\_\+for\+\_\+continuation(), Sign\+\_\+of\+\_\+jacobian, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), time\+\_\+stepper\+\_\+pt(), oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady(), Use\+\_\+continuation\+\_\+timestepper, and Use\+\_\+finite\+\_\+differences\+\_\+for\+\_\+continuation\+\_\+derivatives.
+References actions\+\_\+after\+\_\+parameter\+\_\+increase(), adapt(), Arc\+\_\+length\+\_\+step\+\_\+taken, Bifurcation\+\_\+detection, Bisect\+\_\+to\+\_\+find\+\_\+bifurcation, calculate\+\_\+continuation\+\_\+derivatives(), calculate\+\_\+continuation\+\_\+derivatives\+\_\+fd(), communicator\+\_\+pt(), Desired\+\_\+newton\+\_\+iterations\+\_\+ds, Dof\+\_\+current, dof\+\_\+current(), Dof\+\_\+derivative, dof\+\_\+derivative(), Dof\+\_\+distribution\+\_\+pt, Dof\+\_\+pt, Ds\+\_\+current, First\+\_\+jacobian\+\_\+sign\+\_\+change, i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), Minimum\+\_\+ds, newton\+\_\+solve\+\_\+continuation(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow\+\_\+local(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, Parameter\+\_\+current, Parameter\+\_\+derivative, Problem\+\_\+has\+\_\+been\+\_\+distributed, set\+\_\+consistent\+\_\+pinned\+\_\+values\+\_\+for\+\_\+continuation(), Sign\+\_\+of\+\_\+jacobian, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), time\+\_\+stepper\+\_\+pt(), oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady(), Use\+\_\+continuation\+\_\+timestepper, and Use\+\_\+finite\+\_\+differences\+\_\+for\+\_\+continuation\+\_\+derivatives.
 
 
 
@@ -1828,7 +1828,7 @@ Function to determine whether the hessian products are calculated analytically.
 
 
 
-Definition at line 303 of file problem.\+h.
+Definition at line 306 of file problem.\+h.
 
 
 
@@ -1850,7 +1850,7 @@ Return a pointer to the assembly handler object.
 
 
 
-Definition at line 1570 of file problem.\+h.
+Definition at line 1590 of file problem.\+h.
 
 
 
@@ -1872,7 +1872,7 @@ Return a pointer to the assembly handler object (const version)
 
 
 
-Definition at line 1576 of file problem.\+h.
+Definition at line 1596 of file problem.\+h.
 
 
 
@@ -1890,7 +1890,7 @@ Assign the eigenvector passed to the function to the dofs in the problem so that
 
 Assign the eigenvector passed to the function to the dofs. 
 
-Definition at line 8896 of file problem.\+cc.
+Definition at line 8723 of file problem.\+cc.
 
 
 
@@ -1908,7 +1908,7 @@ Assign all equation numbers for problem\+: Deals with global data (= data that i
 
 Assign all equation numbers for problem\+: Deals with global data (= data that isn\textquotesingle{}t attached to any elements) and then does the equation numbering for the elements. Bool argument can be set to false to ignore assigning local equation numbers (necessary in the parallel implementation of locate\+\_\+zeta between multiple meshes). 
 
-Definition at line 2075 of file problem.\+cc.
+Definition at line 2076 of file problem.\+cc.
 
 
 
@@ -1930,7 +1930,7 @@ Initialise data and nodal positions to simulate impulsive start from initial con
 
 Initialise the previous values of the variables for time stepping corresponding to an impulsive start. Previous history for all data is generated by the appropriate timesteppers. Previous nodal positions are simply copied backwards. 
 
-Definition at line 11692 of file problem.\+cc.
+Definition at line 11562 of file problem.\+cc.
 
 
 
@@ -1952,7 +1952,7 @@ Initialise data and nodal positions to simulate an impulsive start and also set 
 
 Assign the values for an impulsive start and also set the initial values of the previous dts to both be dt. 
 
-Definition at line 11712 of file problem.\+cc.
+Definition at line 11582 of file problem.\+cc.
 
 
 
@@ -1970,7 +1970,7 @@ A function that is used to document the errors used in the adaptive solution of 
 
 A function that is used to document the errors when adapting a bifurcation-\/tracking problem, which requires separate interpolation of the associated eigenfunction. The error measure is chosen to be a suitable combination of the errors in the base flow and the eigenfunction. The bifurcation type is passed as an argument. 
 
-Definition at line 13841 of file problem.\+cc.
+Definition at line 13711 of file problem.\+cc.
 
 
 
@@ -1992,7 +1992,7 @@ A function that is used to adapt a bifurcation-\/tracking problem, which require
 
 A function that is used to adapt a bifurcation-\/tracking problem, which requires separate interpolation of the associated eigenfunction. The error measure is chosen to be a suitable combination of the errors in the base flow and the eigenfunction. The bifurcation type is passed as an argument. 
 
-Definition at line 13547 of file problem.\+cc.
+Definition at line 13417 of file problem.\+cc.
 
 
 
@@ -2014,7 +2014,7 @@ Return pointer to the parameter that is used in the bifurcation detection. If we
 
 
 
-Definition at line 10274 of file problem.\+cc.
+Definition at line 10101 of file problem.\+cc.
 
 
 
@@ -2036,7 +2036,7 @@ Build the global mesh by combining the all the submeshes. {\bfseries{Note\+:}} T
 
 Build a single (global) mesh from a number of submeshes which are passed as a vector of pointers to the submeshes. The ordering is not necessarily optimal. 
 
-Definition at line 1579 of file problem.\+cc.
+Definition at line 1580 of file problem.\+cc.
 
 
 
@@ -2058,7 +2058,7 @@ Function to build the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquot
 
 
 
-Definition at line 1365 of file problem.\+h.
+Definition at line 1385 of file problem.\+h.
 
 
 
@@ -2080,7 +2080,7 @@ A function to calculate the derivatives with respect to the arc-\/length require
 
 
 
-Definition at line 9985 of file problem.\+cc.
+Definition at line 9812 of file problem.\+cc.
 
 
 
@@ -2098,7 +2098,7 @@ A function to calculate the derivatives wrt the arc-\/length. This version of th
 
 A function to calculate the derivatives wrt the arc-\/length. This version of the function actually does a linear solve so that the derivatives are calculated \char`\"{}exactly\char`\"{} rather than using the values at the Newton step just before convergence. This is only necessary in spatially adaptive problems, in which the number of degrees of freedom changes and so the appropriate derivatives must be calculated for the new variables. 
 
-Definition at line 9908 of file problem.\+cc.
+Definition at line 9735 of file problem.\+cc.
 
 
 
@@ -2120,7 +2120,7 @@ A function to calculate the derivatives with respect to the arc-\/length require
 
 A function to calculate the derivatives with respect to the arc-\/length required for continuation using finite differences. 
 
-Definition at line 10011 of file problem.\+cc.
+Definition at line 9838 of file problem.\+cc.
 
 
 
@@ -2142,7 +2142,7 @@ A function that performs the guts of the continuation derivative calculation in 
 
 A private helper function to calculate the derivatives with respect to the arc-\/length required for continuation using finite differences. 
 
-Definition at line 10197 of file problem.\+cc.
+Definition at line 10024 of file problem.\+cc.
 
 
 
@@ -2164,7 +2164,7 @@ A function that performs the guts of the continuation derivative calculation in 
 
 A private helper function to calculate the derivatives with respect to the arc-\/length required for continuation. The arguments is the solution of the linear system, Jz = d\+R/dparameter, that gives du/dparameter and the direction output from the newton\+\_\+solve\+\_\+continuation function. The derivatives are stored in the Continuation\+Parameters namespace. 
 
-Definition at line 10105 of file problem.\+cc.
+Definition at line 9932 of file problem.\+cc.
 
 
 
@@ -2186,7 +2186,7 @@ Calculate predictions.
 
 Calculate the predictions of all variables in problem. 
 
-Definition at line 11849 of file problem.\+cc.
+Definition at line 11719 of file problem.\+cc.
 
 
 
@@ -2208,7 +2208,7 @@ Check the halo/haloed node/element schemes.
 
 
 
-Definition at line 2245 of file problem.\+h.
+Definition at line 2221 of file problem.\+h.
 
 
 
@@ -2230,7 +2230,7 @@ Check the halo/haloed node/element schemes.
 
 Check the halo/haloed/shared node/element schemes. 
 
-Definition at line 16596 of file problem.\+cc.
+Definition at line 16466 of file problem.\+cc.
 
 
 
@@ -2248,7 +2248,7 @@ Clear storage of most-\/recent elemental assembly times (used for load balancing
 
 
 
-Definition at line 872 of file problem.\+h.
+Definition at line 892 of file problem.\+h.
 
 
 
@@ -2266,7 +2266,7 @@ access function to the oomph-\/lib communicator
 
 
 
-Definition at line 1246 of file problem.\+h.
+Definition at line 1266 of file problem.\+h.
 
 
 
@@ -2274,7 +2274,7 @@ References Communicator\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), copy\+\_\+haloed\+\_\+eqn\+\_\+numbers\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), distribute(), doubly\+\_\+adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve\+\_\+helper(), dump(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+dim\+\_\+helper(), oomph\+::\+Fold\+Handler\+::get\+\_\+eigenfunction(), oomph\+::\+Hopf\+Handler\+::get\+\_\+eigenfunction(), get\+\_\+hessian\+\_\+vector\+\_\+products(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), get\+\_\+jacobian(), get\+\_\+residuals(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), load\+\_\+balance(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), newton\+\_\+solve(), parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+METIS\+::partition\+\_\+distributed\+\_\+mesh(), partition\+\_\+global\+\_\+mesh(), oomph\+::\+METIS\+::partition\+\_\+mesh(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), read(), recompute\+\_\+load\+\_\+balanced\+\_\+assembly(), remove\+\_\+duplicate\+\_\+data(), remove\+\_\+null\+\_\+pointers\+\_\+from\+\_\+external\+\_\+halo\+\_\+node\+\_\+storage(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas(), send\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), send\+\_\+refinement\+\_\+info\+\_\+helper(), set\+\_\+default\+\_\+first\+\_\+and\+\_\+last\+\_\+element\+\_\+for\+\_\+assembly(), oomph\+::\+Solid\+ICProblem\+::set\+\_\+static\+\_\+initial\+\_\+condition(), setup\+\_\+base\+\_\+mesh\+\_\+info\+\_\+after\+\_\+pruning(), setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), oomph\+::\+GS$<$ MATRIX $>$\+::solve(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Fold\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+complex\+\_\+system(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem\+\_\+legacy(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+standard\+\_\+system(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), oomph\+::\+Pitch\+Fork\+Handler\+::synchronise(), synchronise\+\_\+dofs(), unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler(), and oomph\+::\+Hopf\+Handler\+::$\sim$\+Hopf\+Handler().
+Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::aux\+\_\+setup\+\_\+multi\+\_\+domain\+\_\+interaction(), copy\+\_\+haloed\+\_\+eqn\+\_\+numbers\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::create\+\_\+external\+\_\+halo\+\_\+elements(), distribute(), doubly\+\_\+adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve\+\_\+helper(), dump(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+dim\+\_\+helper(), oomph\+::\+Fold\+Handler\+::get\+\_\+eigenfunction(), oomph\+::\+Hopf\+Handler\+::get\+\_\+eigenfunction(), get\+\_\+hessian\+\_\+vector\+\_\+products(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), get\+\_\+jacobian(), get\+\_\+residuals(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), load\+\_\+balance(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+zeta\+\_\+for\+\_\+missing\+\_\+coordinates(), newton\+\_\+solve(), parallel\+\_\+sparse\+\_\+assemble(), oomph\+::\+METIS\+::partition\+\_\+distributed\+\_\+mesh(), partition\+\_\+global\+\_\+mesh(), oomph\+::\+METIS\+::partition\+\_\+mesh(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), read(), recompute\+\_\+load\+\_\+balanced\+\_\+assembly(), remove\+\_\+duplicate\+\_\+data(), remove\+\_\+null\+\_\+pointers\+\_\+from\+\_\+external\+\_\+halo\+\_\+node\+\_\+storage(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+located\+\_\+info(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::send\+\_\+and\+\_\+receive\+\_\+missing\+\_\+zetas(), send\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\+\_\+load\+\_\+balancing(), send\+\_\+refinement\+\_\+info\+\_\+helper(), set\+\_\+default\+\_\+first\+\_\+and\+\_\+last\+\_\+element\+\_\+for\+\_\+assembly(), oomph\+::\+Solid\+ICProblem\+::set\+\_\+static\+\_\+initial\+\_\+condition(), setup\+\_\+base\+\_\+mesh\+\_\+info\+\_\+after\+\_\+pruning(), setup\+\_\+element\+\_\+count\+\_\+per\+\_\+dof(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), oomph\+::\+GS$<$ MATRIX $>$\+::solve(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Fold\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+augmented\+\_\+block\+\_\+system(), oomph\+::\+Fold\+Handler\+::solve\+\_\+block\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+complex\+\_\+system(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Fold\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Pitch\+Fork\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+full\+\_\+system(), oomph\+::\+Hopf\+Handler\+::solve\+\_\+standard\+\_\+system(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), oomph\+::\+Pitch\+Fork\+Handler\+::synchronise(), synchronise\+\_\+dofs(), unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler(), and oomph\+::\+Hopf\+Handler\+::$\sim$\+Hopf\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_af1875e771e99a2e8f1d344d8b880d0de}\label{classoomph_1_1Problem_af1875e771e99a2e8f1d344d8b880d0de}} 
 \index{oomph::Problem@{oomph::Problem}!communicator\_pt@{communicator\_pt}}
@@ -2288,7 +2288,7 @@ access function to the oomph-\/lib communicator, const version
 
 
 
-Definition at line 1252 of file problem.\+h.
+Definition at line 1272 of file problem.\+h.
 
 
 
@@ -2306,7 +2306,7 @@ Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, nodal positions etc fro
 
 Copy \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, nodal positions etc from specified problem. Note\+: This is not a copy constructor. We assume that the current and the \char`\"{}original\char`\"{} problem have both been created by calling the same problem constructor so that all \mbox{\hyperlink{classoomph_1_1Data}{Data}} objects, time steppers etc. in the two problems are completely independent. This function copies the nodal, internal and global values and the time parameters from the original problem into \char`\"{}this\char`\"{} one. This functionality is required, e.\+g. for multigrid computations. 
 
-Definition at line 12058 of file problem.\+cc.
+Definition at line 11928 of file problem.\+cc.
 
 
 
@@ -2324,7 +2324,7 @@ A private helper function to copy the haloed equation numbers into the halo equa
 
 
 
-Definition at line 17144 of file problem.\+cc.
+Definition at line 17014 of file problem.\+cc.
 
 
 
@@ -2346,7 +2346,7 @@ Get new linear algebra distribution (you\textquotesingle{}re in charge of deleti
 
 Build new \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}}. Note\+: you\textquotesingle{}re in charge of deleting it! 
 
-Definition at line 299 of file problem.\+cc.
+Definition at line 300 of file problem.\+cc.
 
 
 
@@ -2368,7 +2368,7 @@ Deactivate all bifuraction tracking, by reseting the assembly handler to the def
 
 
 
-Definition at line 2482 of file problem.\+h.
+Definition at line 2458 of file problem.\+h.
 
 
 
@@ -2390,7 +2390,7 @@ Hook for debugging. Can be overloaded in driver code; argument allows identifica
 
 
 
-Definition at line 249 of file problem.\+h.
+Definition at line 252 of file problem.\+h.
 
 
 
@@ -2408,7 +2408,7 @@ Wrapper function to delete external storage for each submesh of the problem.
 
 Delete any external storage for any submeshes NB this would ordinarily take place within the adaptation procedure for each submesh (See Refineable\+Mesh\+::adapt\+\_\+mesh(...)), but there are instances where the actions\+\_\+before/after\+\_\+adapt routines are used and no adaptive routines are called in between (e.\+g. when doc-\/ing errors at the end of an adaptive newton solver) 
 
-Definition at line 16548 of file problem.\+cc.
+Definition at line 16418 of file problem.\+cc.
 
 
 
@@ -2430,7 +2430,7 @@ Function to describe the dofs in terms of the global equation number, i.\+e. wha
 
 
 
-Definition at line 2445 of file problem.\+cc.
+Definition at line 2446 of file problem.\+cc.
 
 
 
@@ -2448,7 +2448,7 @@ Disable the use of a discontinuous-\/element formulation. Note that the methods 
 
 
 
-Definition at line 1740 of file problem.\+h.
+Definition at line 1766 of file problem.\+h.
 
 
 
@@ -2466,7 +2466,7 @@ Disable doc of load imbalance in parallel assembly of distributed problem.
 
 
 
-Definition at line 856 of file problem.\+h.
+Definition at line 876 of file problem.\+h.
 
 
 
@@ -2484,7 +2484,7 @@ disable globally convergent Newton method
 
 
 
-Definition at line 2138 of file problem.\+h.
+Definition at line 2114 of file problem.\+h.
 
 
 
@@ -2502,7 +2502,7 @@ Disable the output of information when in the newton solver.
 
 
 
-Definition at line 3070 of file problem.\+h.
+Definition at line 3046 of file problem.\+h.
 
 
 
@@ -2524,7 +2524,7 @@ Disable recycling of Jacobian in Newton iteration.
 
 
 
-Definition at line 2111 of file problem.\+h.
+Definition at line 2087 of file problem.\+h.
 
 
 
@@ -2542,7 +2542,7 @@ Turn off recyling of the mass matrix in explicit timestepping schemes.
 
 Turn off the recyling of the mass matrix in explicit time-\/stepping schemes. 
 
-Definition at line 12025 of file problem.\+cc.
+Definition at line 11895 of file problem.\+cc.
 
 
 
@@ -2560,7 +2560,7 @@ Disable problem distributed.
 
 
 
-Definition at line 977 of file problem.\+h.
+Definition at line 997 of file problem.\+h.
 
 
 
@@ -2578,7 +2578,7 @@ Insist that local dof pointers are NOT set up in each element when equation numb
 
 
 
-Definition at line 1707 of file problem.\+h.
+Definition at line 1733 of file problem.\+h.
 
 
 
@@ -2596,7 +2596,7 @@ Distribute the problem; returns a vector which details the partitioning.
 
 Distribute the problem without doc; report stats if required. Returns actual partitioning used, e.\+g. for restart. 
 
-Definition at line 415 of file problem.\+cc.
+Definition at line 416 of file problem.\+cc.
 
 
 
@@ -2614,7 +2614,7 @@ Distribute the problem using the specified partition; returns a vector which det
 
 Distribute the problem according to specified partition. If all entries in partitioning vector are zero we use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to do the partitioning after all. Returns actual partitioning used, e.\+g. for restart. 
 
-Definition at line 435 of file problem.\+cc.
+Definition at line 436 of file problem.\+cc.
 
 
 
@@ -2632,7 +2632,7 @@ Distribute the problem and doc, using the specified partition; returns a vector 
 
 Distribute the problem according to specified partition. (If all entries in partitioning vector are zero we use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to do the partitioning after all) and doc. Returns actual partitioning used, e.\+g. for restart. 
 
-Definition at line 490 of file problem.\+cc.
+Definition at line 491 of file problem.\+cc.
 
 
 
@@ -2654,7 +2654,7 @@ Distribute the problem; returns a vector which details the partitioning.
 
 Distribute the problem and doc to specified \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}}. Returns actual partitioning used, e.\+g. for restart. 
 
-Definition at line 471 of file problem.\+cc.
+Definition at line 472 of file problem.\+cc.
 
 
 
@@ -2672,7 +2672,7 @@ If we have MPI return the \char`\"{}problem has been distributed\char`\"{} flag,
 
 
 
-Definition at line 808 of file problem.\+h.
+Definition at line 828 of file problem.\+h.
 
 
 
@@ -2694,7 +2694,7 @@ accesss function to the distributed matrix distribution method 1 -\/ Automatic -
 
 
 
-Definition at line 842 of file problem.\+h.
+Definition at line 862 of file problem.\+h.
 
 
 
@@ -2712,7 +2712,7 @@ Get max and min error for all elements in submeshes.
 
 
 
-Definition at line 3055 of file problem.\+h.
+Definition at line 3031 of file problem.\+h.
 
 
 
@@ -2730,7 +2730,7 @@ Get max and min error for all elements in submeshes.
 
 
 
-Definition at line 14967 of file problem.\+cc.
+Definition at line 14837 of file problem.\+cc.
 
 
 
@@ -2748,7 +2748,7 @@ Return a boolean flag to indicate whether the pointer parameter\+\_\+pt refers t
 
 Function that returns a boolean flag to indicate whether the pointer parameter\+\_\+pt refers to memory that is a value in a \mbox{\hyperlink{classoomph_1_1Data}{Data}} object used within the problem. 
 
-Definition at line 10039 of file problem.\+cc.
+Definition at line 9866 of file problem.\+cc.
 
 
 
@@ -2770,7 +2770,7 @@ i-\/th dof in the problem
 
 
 
-Definition at line 1817 of file problem.\+h.
+Definition at line 1843 of file problem.\+h.
 
 
 
@@ -2792,7 +2792,7 @@ i-\/th dof in the problem (const version)
 
 
 
-Definition at line 1823 of file problem.\+h.
+Definition at line 1849 of file problem.\+h.
 
 
 
@@ -2810,7 +2810,7 @@ Access function to the current value of the i-\/th (local) dof at the start of a
 
 
 
-Definition at line 1182 of file problem.\+h.
+Definition at line 1202 of file problem.\+h.
 
 
 
@@ -2832,7 +2832,7 @@ Access function to the derivative of the i-\/th (local) dof with respect to the 
 
 
 
-Definition at line 1168 of file problem.\+h.
+Definition at line 1188 of file problem.\+h.
 
 
 
@@ -2854,7 +2854,7 @@ Return the pointer to the dof distribution (read-\/only)
 
 
 
-Definition at line 1672 of file problem.\+h.
+Definition at line 1698 of file problem.\+h.
 
 
 
@@ -2862,7 +2862,7 @@ References Dof\+\_\+distribution\+\_\+pt.
 
 
 
-Referenced by adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator(), oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Problem\+Based\+Shift\+Invert\+Operator(), and oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem\+\_\+legacy().
+Referenced by adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), and oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a02f480ec17e0b9b03c892be5ed0c64d1}\label{classoomph_1_1Problem_a02f480ec17e0b9b03c892be5ed0c64d1}} 
 \index{oomph::Problem@{oomph::Problem}!dof\_pt@{dof\_pt}}
@@ -2876,7 +2876,7 @@ Pointer to i-\/th dof in the problem.
 
 
 
-Definition at line 1829 of file problem.\+h.
+Definition at line 1855 of file problem.\+h.
 
 
 
@@ -2898,7 +2898,7 @@ Pointer to i-\/th dof in the problem (const version)
 
 
 
-Definition at line 1835 of file problem.\+h.
+Definition at line 1861 of file problem.\+h.
 
 
 
@@ -2916,7 +2916,7 @@ Unsteady \char`\"{}doubly\char`\"{} adaptive Newton solve\+: Does temporal adapt
 
 
 
-Definition at line 2600 of file problem.\+h.
+Definition at line 2576 of file problem.\+h.
 
 
 
@@ -2934,7 +2934,7 @@ Unsteady \char`\"{}doubly\char`\"{} adaptive Newton solve\+: Does temporal adapt
 
 
 
-Definition at line 2633 of file problem.\+h.
+Definition at line 2609 of file problem.\+h.
 
 
 
@@ -2952,7 +2952,7 @@ Private helper function that actually performs the unsteady \char`\"{}doubly\cha
 
 Private helper function to perform unsteady \char`\"{}doubly\char`\"{} adaptive Newton solve\+: Does temporal adaptation first, i.\+e. we try to do a timestep with an increment of dt, and adjusting dt until the solution on the given mesh satisfies the temporal error measure with tolerance epsilon. Following this, we do up to max\+\_\+adapt spatial adaptions (without re-\/examining the temporal error). If first==true, the initial conditions are re-\/assigned after the mesh adaptations. Shifting of time can be suppressed by overwriting the default value of shift (true). \mbox{[}Shifting must be done if first\+\_\+timestep==true because we\textquotesingle{}re constantly re-\/assigning the initial conditions; if first\+\_\+timestep==true and shift==false shifting is performed anyway and a warning is issued. Pseudo-\/\+Boolean flag suppress\+\_\+resolve\+\_\+after\+\_\+spatial\+\_\+adapt \mbox{[}0\+: false; 1\+: true\mbox{]} does what it says.\mbox{]}. 
 
-Definition at line 11572 of file problem.\+cc.
+Definition at line 11442 of file problem.\+cc.
 
 
 
@@ -2974,7 +2974,7 @@ Dump refinement pattern of all refineable meshes and all generic \mbox{\hyperlin
 
 
 
-Definition at line 2207 of file problem.\+h.
+Definition at line 2183 of file problem.\+h.
 
 
 
@@ -2992,7 +2992,7 @@ Dump refinement pattern of all refineable meshes and all generic \mbox{\hyperlin
 
 
 
-Definition at line 12222 of file problem.\+cc.
+Definition at line 12092 of file problem.\+cc.
 
 
 
@@ -3014,7 +3014,7 @@ Return a pointer to the eigen solver object.
 
 
 
-Definition at line 1492 of file problem.\+h.
+Definition at line 1512 of file problem.\+h.
 
 
 
@@ -3032,7 +3032,7 @@ Return a pointer to the eigen solver object (const version)
 
 
 
-Definition at line 1498 of file problem.\+h.
+Definition at line 1518 of file problem.\+h.
 
 
 
@@ -3050,7 +3050,7 @@ Return vector of most-\/recent elemental assembly times (used for load balancing
 
 
 
-Definition at line 864 of file problem.\+h.
+Definition at line 884 of file problem.\+h.
 
 
 
@@ -3072,7 +3072,7 @@ Indicate that the problem involves discontinuous elements This allows for a more
 
 
 
-Definition at line 1731 of file problem.\+h.
+Definition at line 1757 of file problem.\+h.
 
 
 
@@ -3090,7 +3090,7 @@ Enable doc of load imbalance in parallel assembly of distributed problem.
 
 
 
-Definition at line 849 of file problem.\+h.
+Definition at line 869 of file problem.\+h.
 
 
 
@@ -3108,7 +3108,7 @@ enable globally convergent Newton method
 
 
 
-Definition at line 2132 of file problem.\+h.
+Definition at line 2108 of file problem.\+h.
 
 
 
@@ -3126,7 +3126,7 @@ Enable the output of information when in the newton solver (Default)
 
 
 
-Definition at line 3064 of file problem.\+h.
+Definition at line 3040 of file problem.\+h.
 
 
 
@@ -3144,7 +3144,7 @@ Enable recycling of Jacobian in Newton iteration (if the linear solver allows it
 
 
 
-Definition at line 2104 of file problem.\+h.
+Definition at line 2080 of file problem.\+h.
 
 
 
@@ -3162,7 +3162,7 @@ Enable recycling of the mass matrix in explicit timestepping schemes. Useful for
 
 
 
-Definition at line 12000 of file problem.\+cc.
+Definition at line 11870 of file problem.\+cc.
 
 
 
@@ -3180,7 +3180,7 @@ Enable problem distributed.
 
 
 
-Definition at line 971 of file problem.\+h.
+Definition at line 991 of file problem.\+h.
 
 
 
@@ -3202,7 +3202,7 @@ Insist that local dof pointers are set up in each element when equation numberin
 
 
 
-Definition at line 1700 of file problem.\+h.
+Definition at line 1726 of file problem.\+h.
 
 
 
@@ -3220,7 +3220,7 @@ Return a pointer to the explicit timestepper.
 
 
 
-Definition at line 1555 of file problem.\+h.
+Definition at line 1575 of file problem.\+h.
 
 
 
@@ -3242,7 +3242,7 @@ Take an explicit timestep of size dt and optionally shift any stored values of t
 
 Take an explicit timestep of size dt. 
 
-Definition at line 11111 of file problem.\+cc.
+Definition at line 10948 of file problem.\+cc.
 
 
 
@@ -3264,7 +3264,7 @@ Flush the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s g
 
 
 
-Definition at line 1662 of file problem.\+h.
+Definition at line 1688 of file problem.\+h.
 
 
 
@@ -3282,7 +3282,7 @@ Flush the problem\textquotesingle{}s collection of sub-\/meshes. Must be followe
 
 
 
-Definition at line 1339 of file problem.\+h.
+Definition at line 1359 of file problem.\+h.
 
 
 
@@ -3304,7 +3304,7 @@ Return the error estimates computed by (all) refineable (sub)mesh(es) in the ele
 
 Return the error estimates computed by (all) refineable (sub)mesh(es) in the elemental\+\_\+error structure, which consists of a vector of elemental errors for each (sub)mesh. 
 
-Definition at line 14820 of file problem.\+cc.
+Definition at line 14690 of file problem.\+cc.
 
 
 
@@ -3326,7 +3326,7 @@ Get pointers to all possible halo data indexed by global equation number in a ma
 
 Get all the halo data stored on this processor and store pointers to the data in a map, indexed by the gobal eqn number. 
 
-Definition at line 16570 of file problem.\+cc.
+Definition at line 16440 of file problem.\+cc.
 
 
 
@@ -3348,7 +3348,7 @@ Return the eigenfunction calculated as part of a bifurcation tracking process. I
 
 
 
-Definition at line 10284 of file problem.\+cc.
+Definition at line 10111 of file problem.\+cc.
 
 
 
@@ -3379,7 +3379,7 @@ Load balance helper routine\+: Get data to be sent to other processors during lo
 
 Where do I come from, where do I go to?
 
-Definition at line 19472 of file problem.\+cc.
+Definition at line 19342 of file problem.\+cc.
 
 
 
@@ -3401,7 +3401,7 @@ Get the derivative of the entire residuals vector wrt a global parameter, used i
 
 Get derivative of the residuals vector wrt a global parameter This is required in continuation problems. 
 
-Definition at line 7864 of file problem.\+cc.
+Definition at line 7865 of file problem.\+cc.
 
 
 
@@ -3427,7 +3427,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a3
 
 
 
-Definition at line 2581 of file problem.\+cc.
+Definition at line 2582 of file problem.\+cc.
 
 
 
@@ -3449,7 +3449,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a0
 
 
 
-Definition at line 2565 of file problem.\+cc.
+Definition at line 2566 of file problem.\+cc.
 
 
 
@@ -3475,7 +3475,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_ab
 
 
 
-Definition at line 3770 of file problem.\+cc.
+Definition at line 3771 of file problem.\+cc.
 
 
 
@@ -3497,7 +3497,7 @@ Get the matrices required by a eigensolver. If the shift parameter is non-\/zero
 
 Get the matrices required to solve an eigenproblem WARNING\+: temporarily this method only works with non-\/distributed matrices. 
 
-Definition at line 8602 of file problem.\+cc.
+Definition at line 8429 of file problem.\+cc.
 
 
 
@@ -3505,7 +3505,7 @@ References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+CRDouble\+Matrix\+::build()
 
 
 
-Referenced by oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator(), oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Problem\+Based\+Shift\+Invert\+Operator(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), and oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem\+\_\+legacy().
+Referenced by oomph\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Adjoint\+Problem\+Based\+Shift\+Invert\+Operator(), oomph\+::\+Problem\+Based\+Shift\+Invert\+Operator\+::\+Problem\+Based\+Shift\+Invert\+Operator(), and oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a74f6540dc7228b21f5bc07c0477dfbe7}\label{classoomph_1_1Problem_a74f6540dc7228b21f5bc07c0477dfbe7}} 
 \index{oomph::Problem@{oomph::Problem}!get\_fd\_jacobian@{get\_fd\_jacobian}}
@@ -3519,7 +3519,7 @@ Return the fully-\/assembled Jacobian and residuals, generated by finite differe
 
 Get the full Jacobian by finite differencing. 
 
-Definition at line 7800 of file problem.\+cc.
+Definition at line 7801 of file problem.\+cc.
 
 
 
@@ -3541,7 +3541,7 @@ Get first and last elements for parallel assembly of non-\/distributed problem.
 
 
 
-Definition at line 1004 of file problem.\+h.
+Definition at line 1024 of file problem.\+h.
 
 
 
@@ -3577,7 +3577,7 @@ Get flat-\/packed refinement pattern for each root element in current mesh (labe
 \end{DoxyItemize}
 \end{DoxyItemize}
 
-Definition at line 20028 of file problem.\+cc.
+Definition at line 19898 of file problem.\+cc.
 
 
 
@@ -3599,7 +3599,7 @@ Return the product of the global hessian (derivative of Jacobian matrix with res
 
 Alice\+: My bifurcation tracking converges better with this FD\+\_\+step as 1.\+0e-\/5. The default value remains at 1.\+0e-\/8.
 
-Definition at line 7962 of file problem.\+cc.
+Definition at line 7963 of file problem.\+cc.
 
 
 
@@ -3621,7 +3621,7 @@ Return the residual vector multiplied by the inverse mass matrix Virtual so that
 
 
 
-Definition at line 3665 of file problem.\+cc.
+Definition at line 3666 of file problem.\+cc.
 
 
 
@@ -3643,7 +3643,7 @@ Return the fully-\/assembled Jacobian and residuals for the problem. Interface f
 
 Return the fully-\/assembled Jacobian and residuals for the problem, in the case when the jacobian matrix is in column-\/compressed storage format. 
 
-Definition at line 4162 of file problem.\+cc.
+Definition at line 4163 of file problem.\+cc.
 
 
 
@@ -3667,7 +3667,7 @@ Return the fully-\/assembled Jacobian and residuals for the problem, in the case
 \item If the distribution of the jacobian and residuals are not setup then their distribution will computed based on\+: Distributed\+\_\+problem\+\_\+matrix\+\_\+distribution. 
 \end{DoxyEnumerate}
 
-Definition at line 4028 of file problem.\+cc.
+Definition at line 4029 of file problem.\+cc.
 
 
 
@@ -3685,7 +3685,7 @@ Return the fully-\/assembled Jacobian and residuals for the problem Interface fo
 
 Get the fully assembled residual vector and Jacobian matrix in dense storage. The \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} residuals returned will be non-\/distributed. If on calling this method the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} residuals is setup then it must be non-\/distributed and of the correct length. The matrix type \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable and therefore the residual vector is also assumed to be non distributable. 
 
-Definition at line 3921 of file problem.\+cc.
+Definition at line 3922 of file problem.\+cc.
 
 
 
@@ -3707,7 +3707,7 @@ Dummy virtual function that must be overloaded by the problem to specify which m
 
 
 
-Definition at line 1883 of file problem.\+h.
+Definition at line 1909 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_ae222ce1fa229441a733d350105dfd1f7}\label{classoomph_1_1Problem_ae222ce1fa229441a733d350105dfd1f7}} 
 \index{oomph::Problem@{oomph::Problem}!get\_my\_eqns@{get\_my\_eqns}}
@@ -3721,7 +3721,7 @@ Helper method that returns the (unique) global equations to which the elements i
 
 Helper method that returns the global equations to which the elements in the range el\+\_\+lo to el\+\_\+hi contribute on this processor. 
 
-Definition at line 6486 of file problem.\+cc.
+Definition at line 6487 of file problem.\+cc.
 
 
 
@@ -3743,7 +3743,7 @@ Return the fully-\/assembled residuals \mbox{\hyperlink{classoomph_1_1Vector}{Ve
 
 Get the total residuals \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} for the problem. 
 
-Definition at line 3800 of file problem.\+cc.
+Definition at line 3801 of file problem.\+cc.
 
 
 
@@ -3765,7 +3765,7 @@ Return a pointer to the the i-\/th global data object.
 
 
 
-Definition at line 1647 of file problem.\+h.
+Definition at line 1673 of file problem.\+h.
 
 
 
@@ -3787,7 +3787,7 @@ Return a pointer to the dof, indexed by global equation number which may be halo
 
 
 
-Definition at line 1768 of file problem.\+h.
+Definition at line 1794 of file problem.\+h.
 
 
 
@@ -3809,7 +3809,7 @@ Function to calculate a global error norm, used in adaptive timestepping to cont
 
 
 
-Definition at line 1230 of file problem.\+h.
+Definition at line 1250 of file problem.\+h.
 
 
 
@@ -3831,7 +3831,7 @@ Line search helper for globally convergent Newton method.
 
 Helper function for the globally convergent Newton solver. 
 
-Definition at line 9339 of file problem.\+cc.
+Definition at line 9166 of file problem.\+cc.
 
 
 
@@ -3853,7 +3853,7 @@ Set all timesteps to the same value, dt, and assign weights for all timesteppers
 
 
 
-Definition at line 13424 of file problem.\+cc.
+Definition at line 13294 of file problem.\+cc.
 
 
 
@@ -3875,7 +3875,7 @@ Set the value of the timesteps to be equal to the values passed in a vector and 
 
 
 
-Definition at line 13447 of file problem.\+cc.
+Definition at line 13317 of file problem.\+cc.
 
 
 
@@ -3893,7 +3893,7 @@ Function to determine whether the parameter derivatives are calculated analytica
 
 
 
-Definition at line 277 of file problem.\+h.
+Definition at line 280 of file problem.\+h.
 
 
 
@@ -3915,7 +3915,7 @@ Is recycling of Jacobian in Newton iteration enabled?
 
 
 
-Definition at line 2118 of file problem.\+h.
+Definition at line 2094 of file problem.\+h.
 
 
 
@@ -3933,7 +3933,7 @@ Return a pointer to the linear solver object.
 
 
 
-Definition at line 1466 of file problem.\+h.
+Definition at line 1486 of file problem.\+h.
 
 
 
@@ -3941,7 +3941,7 @@ References Linear\+\_\+solver\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project(), oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem(), oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem\+\_\+legacy(), oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler(), oomph\+::\+Hopf\+Handler\+::$\sim$\+Hopf\+Handler(), and oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
+Referenced by oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), oomph\+::\+Projection\+Problem$<$ PROJECTABLE\+\_\+\+ELEMENT $>$\+::project(), oomph\+::\+Solid\+ICProblem\+::set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(), oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem(), oomph\+::\+Fold\+Handler\+::$\sim$\+Fold\+Handler(), oomph\+::\+Hopf\+Handler\+::$\sim$\+Hopf\+Handler(), and oomph\+::\+Pitch\+Fork\+Handler\+::$\sim$\+Pitch\+Fork\+Handler().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a50b5365e0de1212b9c07f41ae9deab5a}\label{classoomph_1_1Problem_a50b5365e0de1212b9c07f41ae9deab5a}} 
 \index{oomph::Problem@{oomph::Problem}!linear\_solver\_pt@{linear\_solver\_pt}}
@@ -3955,7 +3955,7 @@ Return a pointer to the linear solver object (const version)
 
 
 
-Definition at line 1472 of file problem.\+h.
+Definition at line 1492 of file problem.\+h.
 
 
 
@@ -3973,7 +3973,7 @@ Balance the load of a (possibly non-\/uniformly refined) problem that has alread
 
 
 
-Definition at line 1382 of file problem.\+h.
+Definition at line 1402 of file problem.\+h.
 
 
 
@@ -3995,7 +3995,7 @@ Balance the load of a (possibly non-\/uniformly refined) problem that has alread
 
 
 
-Definition at line 1403 of file problem.\+h.
+Definition at line 1423 of file problem.\+h.
 
 
 
@@ -4013,7 +4013,7 @@ Balance the load of a (possibly non-\/uniformly refined) problem that has alread
 
 
 
-Definition at line 1422 of file problem.\+h.
+Definition at line 1442 of file problem.\+h.
 
 
 
@@ -4031,7 +4031,7 @@ Balance the load of a (possibly non-\/uniformly refined) problem that has alread
 
 Balance the load of a (possibly non-\/uniformly refined) problem that has already been distributed, by re-\/distributing elements over the processors. Produce explicit stats of load balancing process if boolean, report\+\_\+stats, is set to true and doc various bits of data (mainly for debugging) in directory specified by \mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} object. 
 
-Definition at line 17383 of file problem.\+cc.
+Definition at line 17253 of file problem.\+cc.
 
 
 
@@ -4049,7 +4049,7 @@ Make and return a pointer to the copy of the problem. A virtual function that mu
 
 
 
-Definition at line 12204 of file problem.\+cc.
+Definition at line 12074 of file problem.\+cc.
 
 
 
@@ -4067,7 +4067,7 @@ Return whether the mass matrix is being reused.
 
 
 
-Definition at line 2697 of file problem.\+h.
+Definition at line 2673 of file problem.\+h.
 
 
 
@@ -4085,7 +4085,7 @@ Return a pointer to the linear solver object used for explicit time stepping.
 
 
 
-Definition at line 1479 of file problem.\+h.
+Definition at line 1499 of file problem.\+h.
 
 
 
@@ -4107,7 +4107,7 @@ Return a pointer to the linear solver object used for explicit time stepping (co
 
 
 
-Definition at line 1486 of file problem.\+h.
+Definition at line 1506 of file problem.\+h.
 
 
 
@@ -4125,7 +4125,7 @@ Access function to max Newton iterations before giving up.
 
 
 
-Definition at line 1594 of file problem.\+h.
+Definition at line 1620 of file problem.\+h.
 
 
 
@@ -4143,7 +4143,7 @@ Access function to max residuals in Newton iterations before giving up.
 
 
 
-Definition at line 1608 of file problem.\+h.
+Definition at line 1634 of file problem.\+h.
 
 
 
@@ -4161,7 +4161,7 @@ Access function to max timestep in adaptive timestepping.
 
 
 
-Definition at line 1588 of file problem.\+h.
+Definition at line 1608 of file problem.\+h.
 
 
 
@@ -4179,7 +4179,7 @@ Return a pointer to the global mesh.
 
 
 
-Definition at line 1280 of file problem.\+h.
+Definition at line 1300 of file problem.\+h.
 
 
 
@@ -4201,7 +4201,7 @@ Return a pointer to the global mesh (const version)
 
 
 
-Definition at line 1286 of file problem.\+h.
+Definition at line 1306 of file problem.\+h.
 
 
 
@@ -4219,7 +4219,7 @@ Return a pointer to the i-\/th submesh. If there are no submeshes, the 0-\/th su
 
 
 
-Definition at line 1293 of file problem.\+h.
+Definition at line 1313 of file problem.\+h.
 
 
 
@@ -4237,7 +4237,7 @@ Return a pointer to the i-\/th submesh (const version)
 
 
 
-Definition at line 1308 of file problem.\+h.
+Definition at line 1328 of file problem.\+h.
 
 
 
@@ -4255,7 +4255,7 @@ Access function to min timestep in adaptive timestepping.
 
 
 
-Definition at line 1582 of file problem.\+h.
+Definition at line 1602 of file problem.\+h.
 
 
 
@@ -4273,7 +4273,7 @@ Return the number of dofs.
 
 
 
-Definition at line 1678 of file problem.\+h.
+Definition at line 1704 of file problem.\+h.
 
 
 
@@ -4281,7 +4281,7 @@ References Dof\+\_\+distribution\+\_\+pt, and oomph\+::\+Linear\+Algebra\+Distri
 
 
 
-Referenced by oomph\+::\+IMRBy\+BDF\+::actions\+\_\+after\+\_\+timestep(), oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep(), adapt(), add\+\_\+eigenvector\+\_\+to\+\_\+dofs(), add\+\_\+to\+\_\+dofs(), assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(), bifurcation\+\_\+adapt\+\_\+helper(), calculate\+\_\+continuation\+\_\+derivatives(), calculate\+\_\+predictions(), create\+\_\+new\+\_\+linear\+\_\+algebra\+\_\+distribution(), distribute(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), get\+\_\+dofs(), get\+\_\+fd\+\_\+jacobian(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), get\+\_\+jacobian(), globally\+\_\+convergent\+\_\+line\+\_\+search(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), load\+\_\+balance(), newton\+\_\+solve(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+HSL\+\_\+\+MA42\+::reorder\+\_\+elements(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), restore\+\_\+dof\+\_\+values(), set\+\_\+dofs(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), oomph\+::\+GS$<$ MATRIX $>$\+::solve(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Dense\+LU\+::solve(), oomph\+::\+FD\+\_\+\+LU\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), oomph\+::\+ARPACK\+::solve\+\_\+eigenproblem\+\_\+legacy(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+legacy(), oomph\+::\+HSL\+\_\+\+MA42\+::solve\+\_\+for\+\_\+one\+\_\+dof(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+lists(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+maps(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+arrays(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+vectors(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+vectors\+\_\+of\+\_\+pairs(), and store\+\_\+current\+\_\+dof\+\_\+values().
+Referenced by oomph\+::\+IMRBy\+BDF\+::actions\+\_\+after\+\_\+timestep(), oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep(), adapt(), add\+\_\+eigenvector\+\_\+to\+\_\+dofs(), add\+\_\+to\+\_\+dofs(), assign\+\_\+eigenvector\+\_\+to\+\_\+dofs(), bifurcation\+\_\+adapt\+\_\+helper(), calculate\+\_\+continuation\+\_\+derivatives(), calculate\+\_\+predictions(), create\+\_\+new\+\_\+linear\+\_\+algebra\+\_\+distribution(), distribute(), oomph\+::\+Fold\+Handler\+::\+Fold\+Handler(), get\+\_\+dofs(), get\+\_\+fd\+\_\+jacobian(), get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(), get\+\_\+jacobian(), globally\+\_\+convergent\+\_\+line\+\_\+search(), oomph\+::\+Hopf\+Handler\+::\+Hopf\+Handler(), load\+\_\+balance(), newton\+\_\+solve(), oomph\+::\+Pitch\+Fork\+Handler\+::\+Pitch\+Fork\+Handler(), oomph\+::\+MGPreconditioner$<$ DIM $>$\+::preconditioner\+\_\+solve(), prune\+\_\+halo\+\_\+elements\+\_\+and\+\_\+nodes(), oomph\+::\+HSL\+\_\+\+MA42\+::reorder\+\_\+elements(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::resolve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::resolve(), restore\+\_\+dof\+\_\+values(), set\+\_\+dofs(), oomph\+::\+Augmented\+Block\+Fold\+Linear\+Solver\+::solve(), oomph\+::\+Augmented\+Block\+Pitch\+Fork\+Linear\+Solver\+::solve(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve(), oomph\+::\+HSL\+\_\+\+MA42\+::solve(), oomph\+::\+GS$<$ MATRIX $>$\+::solve(), oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve(), oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve(), oomph\+::\+GMRES$<$ MATRIX $>$\+::solve(), oomph\+::\+Augmented\+Problem\+GMRES\+::solve(), oomph\+::\+Dense\+LU\+::solve(), oomph\+::\+FD\+\_\+\+LU\+::solve(), oomph\+::\+Super\+LUSolver\+::solve(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Helmholtz\+GMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+Helmholtz\+FGMRESMG$<$ MATRIX $>$\+::solve(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem(), oomph\+::\+LAPACK\+\_\+\+QZ\+::solve\+\_\+eigenproblem\+\_\+helper(), oomph\+::\+HSL\+\_\+\+MA42\+::solve\+\_\+for\+\_\+one\+\_\+dof(), oomph\+::\+Block\+Hopf\+Linear\+Solver\+::solve\+\_\+for\+\_\+two\+\_\+rhs(), oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+lists(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+maps(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+arrays(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+two\+\_\+vectors(), sparse\+\_\+assemble\+\_\+row\+\_\+or\+\_\+column\+\_\+compressed\+\_\+with\+\_\+vectors\+\_\+of\+\_\+pairs(), and store\+\_\+current\+\_\+dof\+\_\+values().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a62a989ae9a9169b9d905f844db59787f}\label{classoomph_1_1Problem_a62a989ae9a9169b9d905f844db59787f}} 
 \index{oomph::Problem@{oomph::Problem}!newton\_solve@{newton\_solve}}
@@ -4297,7 +4297,7 @@ General Newton solver. Requires only a convergence tolerance. The linear solver 
 
 \[ {\bf J} {\bf x} = - \bf{r} \]. 
 
-Definition at line 8976 of file problem.\+cc.
+Definition at line 8803 of file problem.\+cc.
 
 
 
@@ -4321,11 +4321,11 @@ Adaptive Newton solver. The linear solver takes a pointer to the problem (which 
 
 \[ {\bf J} {\bf x} = - \bf{r} \]. Performs at most max\+\_\+adapt adaptations on all meshes. 
 
-Definition at line 16416 of file problem.\+cc.
+Definition at line 16286 of file problem.\+cc.
 
 
 
-References adapt(), communicator\+\_\+pt(), oomph\+::\+Newton\+Solver\+Error\+::iterations, Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres, newton\+\_\+solve(), oomph\+::oomph\+\_\+info, and Problem\+\_\+has\+\_\+been\+\_\+distributed.
+References adapt(), communicator\+\_\+pt(), oomph\+::\+Newton\+Solver\+Error\+::iterations(), Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres(), newton\+\_\+solve(), oomph\+::oomph\+\_\+info, and Problem\+\_\+has\+\_\+been\+\_\+distributed.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_aea0efdeb4814de433fa2ffb3065831ce}\label{classoomph_1_1Problem_aea0efdeb4814de433fa2ffb3065831ce}} 
 \index{oomph::Problem@{oomph::Problem}!newton\_solve\_continuation@{newton\_solve\_continuation}}
@@ -4339,7 +4339,7 @@ Perform a basic arc-\/length continuation step using Newton\textquotesingle{}s m
 
 Perform a basic continuation step using Newton\textquotesingle{}s method. The governing parameter of the problem is passed as a pointer to the routine. The number of Newton steps taken is returned. 
 
-Definition at line 9569 of file problem.\+cc.
+Definition at line 9396 of file problem.\+cc.
 
 
 
@@ -4357,7 +4357,7 @@ This function performs a basic continuation step using the Newton method. The nu
 
 This function performs a basic continuation step using the Newton method. The number of Newton steps taken is returned, to be used in any external step-\/size control routines. The governing parameter of the problem is passed as a pointer to the routine, as is the sign of the Jacobian and a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} in which to store the derivatives wrt the parameter, if required. 
 
-Definition at line 9589 of file problem.\+cc.
+Definition at line 9416 of file problem.\+cc.
 
 
 
@@ -4375,7 +4375,7 @@ Access function to tolererance of the Newton solver, i.\+e. the maximum value of
 
 
 
-Definition at line 1621 of file problem.\+h.
+Definition at line 1647 of file problem.\+h.
 
 
 
@@ -4393,7 +4393,7 @@ Return the number of global data values.
 
 
 
-Definition at line 1690 of file problem.\+h.
+Definition at line 1716 of file problem.\+h.
 
 
 
@@ -4415,7 +4415,7 @@ Return number of submeshes.
 
 
 
-Definition at line 1323 of file problem.\+h.
+Definition at line 1343 of file problem.\+h.
 
 
 
@@ -4437,7 +4437,7 @@ Return the number of time steppers.
 
 
 
-Definition at line 1684 of file problem.\+h.
+Definition at line 1710 of file problem.\+h.
 
 
 
@@ -4445,7 +4445,7 @@ References Time\+\_\+stepper\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep(), adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), copy(), get\+\_\+dvaluesdt(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), initialise\+\_\+dt(), solve\+\_\+adjoint\+\_\+eigenproblem(), solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy(), solve\+\_\+eigenproblem(), solve\+\_\+eigenproblem\+\_\+legacy(), steady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::steady\+\_\+segregated\+\_\+solve(), unsteady\+\_\+newton\+\_\+solve(), and oomph\+::\+Segregatable\+FSIProblem\+::unsteady\+\_\+segregated\+\_\+solve().
+Referenced by oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep(), adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), copy(), get\+\_\+dvaluesdt(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), initialise\+\_\+dt(), solve\+\_\+adjoint\+\_\+eigenproblem(), solve\+\_\+eigenproblem(), steady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::steady\+\_\+segregated\+\_\+solve(), unsteady\+\_\+newton\+\_\+solve(), and oomph\+::\+Segregatable\+FSIProblem\+::unsteady\+\_\+segregated\+\_\+solve().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_ae015f3c07e2218748b347f42abe45da1}\label{classoomph_1_1Problem_ae015f3c07e2218748b347f42abe45da1}} 
 \index{oomph::Problem@{oomph::Problem}!operator=@{operator=}}
@@ -4469,7 +4469,7 @@ p-\/adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es),
 
 
 
-Definition at line 3010 of file problem.\+h.
+Definition at line 2986 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a1303b2fde2fe84b71519cadabc18f868}\label{classoomph_1_1Problem_a1303b2fde2fe84b71519cadabc18f868}} 
 \index{oomph::Problem@{oomph::Problem}!p\_adapt@{p\_adapt}}
@@ -4483,7 +4483,7 @@ p-\/adapt problem\+: Perform mesh adaptation for (all) refineable (sub)mesh(es),
 
 
 
-Definition at line 14436 of file problem.\+cc.
+Definition at line 14306 of file problem.\+cc.
 
 
 
@@ -4501,7 +4501,7 @@ p-\/refine specified submesh by refining the elements identified by their pointe
 
 
 
-Definition at line 15498 of file problem.\+cc.
+Definition at line 15368 of file problem.\+cc.
 
 
 
@@ -4519,7 +4519,7 @@ p-\/refine specified submesh by refining the elements identified by their number
 
 p-\/refine specified submesh by refining the elements identified by their numbers relative to the specified mesh, then rebuild the problem. 
 
-Definition at line 15446 of file problem.\+cc.
+Definition at line 15316 of file problem.\+cc.
 
 
 
@@ -4537,7 +4537,7 @@ p-\/refine (one and only!) mesh by refining the elements identified by their poi
 
 
 
-Definition at line 15399 of file problem.\+cc.
+Definition at line 15269 of file problem.\+cc.
 
 
 
@@ -4555,7 +4555,7 @@ p-\/refine (one and only!) mesh by refining the elements identified by their num
 
 
 
-Definition at line 15352 of file problem.\+cc.
+Definition at line 15222 of file problem.\+cc.
 
 
 
@@ -4573,7 +4573,7 @@ p-\/refine all submeshes by refining the elements identified by their pointers w
 
 
 
-Definition at line 15593 of file problem.\+cc.
+Definition at line 15463 of file problem.\+cc.
 
 
 
@@ -4591,7 +4591,7 @@ p-\/refine all submeshes by refining the elements identified by their numbers re
 
 
 
-Definition at line 15551 of file problem.\+cc.
+Definition at line 15421 of file problem.\+cc.
 
 
 
@@ -4609,7 +4609,7 @@ p-\/refine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem
 
 
 
-Definition at line 2866 of file problem.\+h.
+Definition at line 2842 of file problem.\+h.
 
 
 
@@ -4631,7 +4631,7 @@ Do uniform p-\/refinement for submesh i\+\_\+mesh without documentation.
 
 
 
-Definition at line 2877 of file problem.\+h.
+Definition at line 2853 of file problem.\+h.
 
 
 
@@ -4649,7 +4649,7 @@ Do uniform p-\/refinement for submesh i\+\_\+mesh with documentation.
 
 p-\/refine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15977 of file problem.\+cc.
+Definition at line 15847 of file problem.\+cc.
 
 
 
@@ -4667,7 +4667,7 @@ p-\/refine p-\/refineable sub-\/meshes, each as many times as specified in the v
 
 
 
-Definition at line 2789 of file problem.\+h.
+Definition at line 2765 of file problem.\+h.
 
 
 
@@ -4685,7 +4685,7 @@ p-\/refine p-\/refineable sub-\/meshes, each as many times as specified in the v
 
 
 
-Definition at line 2799 of file problem.\+h.
+Definition at line 2775 of file problem.\+h.
 
 
 
@@ -4703,7 +4703,7 @@ p-\/refine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem; doc
 
 
 
-Definition at line 2836 of file problem.\+h.
+Definition at line 2812 of file problem.\+h.
 
 
 
@@ -4721,7 +4721,7 @@ p-\/refine p-\/refineable sub-\/meshes, each as many times as specified in the v
 
 
 
-Definition at line 2809 of file problem.\+h.
+Definition at line 2785 of file problem.\+h.
 
 
 
@@ -4743,7 +4743,7 @@ p-\/refine p-\/refineable sub-\/meshes, each as many times as specified in the v
 
 
 
-Definition at line 2823 of file problem.\+h.
+Definition at line 2799 of file problem.\+h.
 
 
 
@@ -4761,7 +4761,7 @@ p-\/refine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem; doc
 
 
 
-Definition at line 2849 of file problem.\+h.
+Definition at line 2825 of file problem.\+h.
 
 
 
@@ -4779,7 +4779,7 @@ Helper function to do compund p-\/refinement of (all) p-\/refineable (sub)mesh(e
 
 
 
-Definition at line 15785 of file problem.\+cc.
+Definition at line 15655 of file problem.\+cc.
 
 
 
@@ -4801,7 +4801,7 @@ Do uniform p-\/unrefinement for submesh i\+\_\+mesh without documentation.
 
 p-\/unrefine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 16212 of file problem.\+cc.
+Definition at line 16082 of file problem.\+cc.
 
 
 
@@ -4819,7 +4819,7 @@ p-\/unrefine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem.
 
 p-\/unrefine (all) p-\/refineable (sub)mesh(es) uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 16153 of file problem.\+cc.
+Definition at line 16023 of file problem.\+cc.
 
 
 
@@ -4837,7 +4837,7 @@ Helper method to assemble CRDouble\+Matrices from distributed on multiple proces
 
 
 
-Definition at line 6533 of file problem.\+cc.
+Definition at line 6534 of file problem.\+cc.
 
 
 
@@ -4859,7 +4859,7 @@ Partition the global mesh, return vector specifying the processor number for eac
 
 
 
-Definition at line 964 of file problem.\+cc.
+Definition at line 965 of file problem.\+cc.
 
 
 
@@ -4881,7 +4881,7 @@ Access to Problem\+\_\+has\+\_\+been\+\_\+distributed flag.
 
 
 
-Definition at line 2307 of file problem.\+h.
+Definition at line 2283 of file problem.\+h.
 
 
 
@@ -4903,7 +4903,7 @@ Access function to Problem\+\_\+is\+\_\+nonlinear.
 
 
 
-Definition at line 1600 of file problem.\+h.
+Definition at line 1626 of file problem.\+h.
 
 
 
@@ -4921,7 +4921,7 @@ References Problem\+\_\+is\+\_\+nonlinear.
 
 
 
-Definition at line 2296 of file problem.\+h.
+Definition at line 2272 of file problem.\+h.
 
 
 
@@ -4939,7 +4939,7 @@ References oomph\+::\+Doc\+Info\+::disable\+\_\+doc(), and prune\+\_\+halo\+\_\+
 
 
 
-Definition at line 1139 of file problem.\+cc.
+Definition at line 1140 of file problem.\+cc.
 
 
 
@@ -4961,7 +4961,7 @@ Read refinement pattern of all refineable meshes and refine them accordingly, th
 
 
 
-Definition at line 2195 of file problem.\+h.
+Definition at line 2171 of file problem.\+h.
 
 
 
@@ -4979,7 +4979,7 @@ Read refinement pattern of all refineable meshes and refine them accordingly, th
 
 
 
-Definition at line 12444 of file problem.\+cc.
+Definition at line 12314 of file problem.\+cc.
 
 
 
@@ -5001,7 +5001,7 @@ If one of the submeshes has changed (e.\+g. by mesh adaptation) we need to updat
 
 If one of the submeshes has changed (e.\+g. by mesh adaptation) we need to update the global mesh. {\bfseries{Note\+:}} The nodes boundary information refers to the boundary numbers within the submesh! N.\+B. This is essentially the same function as the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} constructor that assembles a single global mesh from submeshes. 
 
-Definition at line 1619 of file problem.\+cc.
+Definition at line 1620 of file problem.\+cc.
 
 
 
@@ -5023,7 +5023,7 @@ Helper function to re-\/assign the first and last elements to be assembled by ea
 
 
 
-Definition at line 1775 of file problem.\+cc.
+Definition at line 1776 of file problem.\+cc.
 
 
 
@@ -5045,7 +5045,7 @@ Load balance helper routine\+: refine each new base (sub)mesh based upon the ele
 
 Load balance helper routine\+: Function performs max\+\_\+level\+\_\+overall successive refinements of the problem\textquotesingle{}s mesh(es) using the following procdure\+: Given ID of root element, root\+\_\+element\+\_\+id, and current refinement level, level, the e-\/th entry in refinement\+\_\+info\+\_\+for\+\_\+root\+\_\+elements\mbox{[}root\+\_\+element\+\_\+id\mbox{]}\mbox{[}level\mbox{]}\mbox{[}e\mbox{]} is equal to 2 if the e-\/th element (using the enumeration when the mesh has been refined to the level-\/th level) is to be refined during the next refinement; it\textquotesingle{}s 1 if it\textquotesingle{}s not to be refined. 
 
-Definition at line 20183 of file problem.\+cc.
+Definition at line 20053 of file problem.\+cc.
 
 
 
@@ -5067,7 +5067,7 @@ Refine specified submesh by splitting the elements identified by their pointers,
 
 
 
-Definition at line 15230 of file problem.\+cc.
+Definition at line 15100 of file problem.\+cc.
 
 
 
@@ -5085,7 +5085,7 @@ Refine specified submesh by splitting the elements identified by their numbers r
 
 Refine specified submesh by splitting the elements identified by their numbers relative to the specified mesh, then rebuild the problem. 
 
-Definition at line 15183 of file problem.\+cc.
+Definition at line 15053 of file problem.\+cc.
 
 
 
@@ -5103,7 +5103,7 @@ Refine (one and only!) mesh by splitting the elements identified by their pointe
 
 
 
-Definition at line 15137 of file problem.\+cc.
+Definition at line 15007 of file problem.\+cc.
 
 
 
@@ -5121,7 +5121,7 @@ Refine (one and only!) mesh by splitting the elements identified by their number
 
 
 
-Definition at line 15091 of file problem.\+cc.
+Definition at line 14961 of file problem.\+cc.
 
 
 
@@ -5139,7 +5139,7 @@ Refine all submeshes by splitting the elements identified by their pointers with
 
 
 
-Definition at line 15315 of file problem.\+cc.
+Definition at line 15185 of file problem.\+cc.
 
 
 
@@ -5157,7 +5157,7 @@ Refine all submeshes by splitting the elements identified by their numbers relat
 
 
 
-Definition at line 15278 of file problem.\+cc.
+Definition at line 15148 of file problem.\+cc.
 
 
 
@@ -5175,7 +5175,7 @@ Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem.
 
 
 
-Definition at line 2769 of file problem.\+h.
+Definition at line 2745 of file problem.\+h.
 
 
 
@@ -5197,7 +5197,7 @@ Do uniform refinement for submesh i\+\_\+mesh without documentation.
 
 
 
-Definition at line 2780 of file problem.\+h.
+Definition at line 2756 of file problem.\+h.
 
 
 
@@ -5215,7 +5215,7 @@ Do uniform refinement for submesh i\+\_\+mesh with documentation.
 
 Refine submesh i\+\_\+mesh uniformly and rebuild problem; doc refinement process. 
 
-Definition at line 15933 of file problem.\+cc.
+Definition at line 15803 of file problem.\+cc.
 
 
 
@@ -5233,7 +5233,7 @@ Refine refineable sub-\/meshes, each as many times as specified in the vector an
 
 
 
-Definition at line 2704 of file problem.\+h.
+Definition at line 2680 of file problem.\+h.
 
 
 
@@ -5251,7 +5251,7 @@ Refine refineable sub-\/meshes, each as many times as specified in the vector an
 
 
 
-Definition at line 2714 of file problem.\+h.
+Definition at line 2690 of file problem.\+h.
 
 
 
@@ -5269,7 +5269,7 @@ Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem; doc refinem
 
 
 
-Definition at line 2743 of file problem.\+h.
+Definition at line 2719 of file problem.\+h.
 
 
 
@@ -5287,7 +5287,7 @@ Refine refineable sub-\/meshes, each as many times as specified in the vector an
 
 
 
-Definition at line 2724 of file problem.\+h.
+Definition at line 2700 of file problem.\+h.
 
 
 
@@ -5309,7 +5309,7 @@ Refine refineable sub-\/meshes, each as many times as specified in the vector an
 
 
 
-Definition at line 2734 of file problem.\+h.
+Definition at line 2710 of file problem.\+h.
 
 
 
@@ -5327,7 +5327,7 @@ Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem; doc refinem
 
 
 
-Definition at line 2756 of file problem.\+h.
+Definition at line 2732 of file problem.\+h.
 
 
 
@@ -5345,7 +5345,7 @@ Helper function to do compund refinement of (all) refineable (sub)mesh(es) unifo
 
 
 
-Definition at line 15638 of file problem.\+cc.
+Definition at line 15508 of file problem.\+cc.
 
 
 
@@ -5367,7 +5367,7 @@ Private helper function to remove repeated data in external haloed elements in s
 
 Private helper function to remove repeated data in external haloed elements associated with specified mesh. Bool is true if some data was removed -- this usually requires re-\/running through certain parts of the equation numbering procedure. 
 
-Definition at line 2654 of file problem.\+cc.
+Definition at line 2655 of file problem.\+cc.
 
 
 
@@ -5389,7 +5389,7 @@ Consolidate external halo node storage by removing nulled out pointers in extern
 
 
 
-Definition at line 3264 of file problem.\+cc.
+Definition at line 3265 of file problem.\+cc.
 
 
 
@@ -5411,7 +5411,7 @@ Reset the \char`\"{}internal\char`\"{} arc-\/length continuation parameters, so 
 
 
 
-Definition at line 2538 of file problem.\+h.
+Definition at line 2514 of file problem.\+h.
 
 
 
@@ -5429,7 +5429,7 @@ Reset the system to the standard non-\/augemented state.
 
 Reset the assembly handler to default. 
 
-Definition at line 10468 of file problem.\+cc.
+Definition at line 10295 of file problem.\+cc.
 
 
 
@@ -5451,7 +5451,7 @@ Restore the stored values of the degrees of freedom.
 
 Restore the saved dofs. 
 
-Definition at line 8833 of file problem.\+cc.
+Definition at line 8660 of file problem.\+cc.
 
 
 
@@ -5473,7 +5473,7 @@ Self-\/test\+: Check meshes and global data. Return 0 for OK.
 
 
 
-Definition at line 13469 of file problem.\+cc.
+Definition at line 13339 of file problem.\+cc.
 
 
 
@@ -5500,7 +5500,7 @@ Load balance helper routine\+: Send data to other processors during load balanci
 \item send\+\_\+displacement\+: Input, start location within send\+\_\+data for data to be sent to each processor 
 \end{DoxyItemize}
 
-Definition at line 19142 of file problem.\+cc.
+Definition at line 19012 of file problem.\+cc.
 
 
 
@@ -5522,7 +5522,7 @@ Send refinement information between processors.
 
 
 
-Definition at line 18521 of file problem.\+cc.
+Definition at line 18391 of file problem.\+cc.
 
 
 
@@ -5544,7 +5544,7 @@ Function to turn on analytic calculation of the parameter derivatives in continu
 
 
 
-Definition at line 256 of file problem.\+h.
+Definition at line 259 of file problem.\+h.
 
 
 
@@ -5562,7 +5562,7 @@ Function to turn on analytic calculation of the parameter derivatives in continu
 
 
 
-Definition at line 289 of file problem.\+h.
+Definition at line 292 of file problem.\+h.
 
 
 
@@ -5580,7 +5580,7 @@ Private helper function that is used to set the appropriate pinned values for co
 
 Private helper function that is used to set the appropriate pinned values for continuation. If the data is pinned, the its current value is always the same as the original value and the derivative is always zero. If these are not set properly then interpolation and projection in spatial adaptivity will not give the best answers. 
 
-Definition at line 10659 of file problem.\+cc.
+Definition at line 10486 of file problem.\+cc.
 
 
 
@@ -5602,7 +5602,7 @@ Set default first and last elements for parallel assembly of non-\/distributed p
 
 
 
-Definition at line 1699 of file problem.\+cc.
+Definition at line 1700 of file problem.\+cc.
 
 
 
@@ -5624,7 +5624,7 @@ Set the use of the default partition in the load balance.
 
 
 
-Definition at line 1445 of file problem.\+h.
+Definition at line 1465 of file problem.\+h.
 
 
 
@@ -5646,7 +5646,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a7
 
 
 
-Definition at line 3497 of file problem.\+cc.
+Definition at line 3498 of file problem.\+cc.
 
 
 
@@ -5668,7 +5668,7 @@ Set the history values of the dofs.
 
 Set history values of dofs. 
 
-Definition at line 3519 of file problem.\+cc.
+Definition at line 3520 of file problem.\+cc.
 
 
 
@@ -5686,7 +5686,7 @@ Set history values of dofs from the type of vector stored in problem\+::\+Dof\+\
 
 
 
-Definition at line 3583 of file problem.\+cc.
+Definition at line 3584 of file problem.\+cc.
 
 
 
@@ -5704,7 +5704,7 @@ Set the explicit timestepper for the problem. The function will automatically cr
 
 Set the explicit time stepper for the problem and also ensure that a time object has been created. 
 
-Definition at line 1672 of file problem.\+cc.
+Definition at line 1673 of file problem.\+cc.
 
 
 
@@ -5722,7 +5722,7 @@ Manually set first and last elements for parallel assembly of non-\/distributed 
 
 
 
-Definition at line 988 of file problem.\+h.
+Definition at line 1008 of file problem.\+h.
 
 
 
@@ -5744,7 +5744,7 @@ Set initial condition (incl previous timesteps). We need to establish this inter
 
 
 
-Definition at line 1198 of file problem.\+h.
+Definition at line 1218 of file problem.\+h.
 
 
 
@@ -5766,7 +5766,7 @@ Set all pinned values to zero. Used to set boundary conditions to be homogeneous
 
 
 
-Definition at line 4281 of file problem.\+cc.
+Definition at line 4282 of file problem.\+cc.
 
 
 
@@ -5784,7 +5784,7 @@ Set all problem data to have the same timestepper (timestepper\+\_\+pt) Return t
 
 Set all problem data to have the same timestepper (timestepper\+\_\+pt). This is mainly used in continuation and bifurcation detection problems in which case the total number of unknowns may change and the changes to the underlying memory layout means that the Dof\+\_\+pt must be reallocated. Thus, the function calls \mbox{\hyperlink{classoomph_1_1Problem_a0df501c6aed60c4938861df776b10119}{assign\+\_\+eqn\+\_\+numbers()}} and returns the number of new equation numbers. 
 
-Definition at line 11765 of file problem.\+cc.
+Definition at line 11635 of file problem.\+cc.
 
 
 
@@ -5806,7 +5806,7 @@ Helper function to re-\/setup the Base\+\_\+mesh enumeration (used during load b
 
 
 
-Definition at line 20295 of file problem.\+cc.
+Definition at line 20165 of file problem.\+cc.
 
 
 
@@ -5828,7 +5828,7 @@ Function that is used to setup the halo scheme.
 
 Setup the halo scheme for the degrees of freedom. 
 
-Definition at line 386 of file problem.\+cc.
+Definition at line 387 of file problem.\+cc.
 
 
 
@@ -5850,7 +5850,7 @@ Function that populates the Element\+\_\+counter\+\_\+per\+\_\+dof vector with t
 
 Setup the count vector that records how many elements contribute to each degree of freedom. Returns the total number of elements in the problem. 
 
-Definition at line 230 of file problem.\+cc.
+Definition at line 231 of file problem.\+cc.
 
 
 
@@ -5868,7 +5868,7 @@ Shift all values along to prepare for next timestep.
 
 Shift all time-\/dependent data along for next timestep. 
 
-Definition at line 11827 of file problem.\+cc.
+Definition at line 11697 of file problem.\+cc.
 
 
 
@@ -5890,7 +5890,7 @@ Access function for the sign of the global jacobian matrix. This will be set by 
 
 
 
-Definition at line 2553 of file problem.\+h.
+Definition at line 2529 of file problem.\+h.
 
 
 
@@ -5912,7 +5912,7 @@ Solve an adjoint eigenvalue problem using the same procedure as solve\+\_\+eigen
 
 
 
-Definition at line 2063 of file problem.\+h.
+Definition at line 2039 of file problem.\+h.
 
 
 
@@ -5930,7 +5930,7 @@ Solve an adjoint eigenvalue problem using the same procedure as solve\+\_\+eigen
 
 Solve the adjoint eigenproblem. 
 
-Definition at line 8536 of file problem.\+cc.
+Definition at line 8363 of file problem.\+cc.
 
 
 
@@ -5939,24 +5939,6 @@ References Eigen\+\_\+solver\+\_\+pt, i, oomph\+::\+Time\+Stepper\+::is\+\_\+ste
 
 
 Referenced by solve\+\_\+adjoint\+\_\+eigenproblem().
-
-\mbox{\Hypertarget{classoomph_1_1Problem_a0a7c8ab31dc0297e049b15d67eb7661b}\label{classoomph_1_1Problem_a0a7c8ab31dc0297e049b15d67eb7661b}} 
-\index{oomph::Problem@{oomph::Problem}!solve\_adjoint\_eigenproblem\_legacy@{solve\_adjoint\_eigenproblem\_legacy}}
-\index{solve\_adjoint\_eigenproblem\_legacy@{solve\_adjoint\_eigenproblem\_legacy}!oomph::Problem@{oomph::Problem}}
-\doxysubsubsection{\texorpdfstring{solve\_adjoint\_eigenproblem\_legacy()}{solve\_adjoint\_eigenproblem\_legacy()}}
-{\footnotesize\ttfamily void oomph\+::\+Problem\+::solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector,  }\item[{const bool \&}]{make\+\_\+timesteppers\+\_\+steady = {\ttfamily true} }\end{DoxyParamCaption})}
-
-
-
-Solve an adjoint eigenvalue problem using the same procedure as solve\+\_\+eigenproblem. See the documentation on that function for more details. Note\+: this is a legacy version of this function that stores re \& imag parts of eigenvectors in some solver-\/specific collection of real vectors. 
-
-Solve the adjoint eigenproblem. 
-
-Definition at line 8479 of file problem.\+cc.
-
-
-
-References Eigen\+\_\+solver\+\_\+pt, i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), ntime\+\_\+stepper(), oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem\+\_\+legacy(), time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_abdeda71a6cde679015d0a064a2122744}\label{classoomph_1_1Problem_abdeda71a6cde679015d0a064a2122744}} 
 \index{oomph::Problem@{oomph::Problem}!solve\_eigenproblem@{solve\_eigenproblem}}
@@ -5970,7 +5952,7 @@ Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem
 
 
 
-Definition at line 2025 of file problem.\+h.
+Definition at line 2014 of file problem.\+h.
 
 
 
@@ -5988,7 +5970,7 @@ Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem
 
 Solve the eigenproblem. 
 
-Definition at line 8348 of file problem.\+cc.
+Definition at line 8232 of file problem.\+cc.
 
 
 
@@ -6010,7 +5992,7 @@ Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem
 
 
 
-Definition at line 2000 of file problem.\+h.
+Definition at line 1989 of file problem.\+h.
 
 
 
@@ -6028,55 +6010,11 @@ Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem
 
 Solve the eigenproblem. 
 
-Definition at line 8415 of file problem.\+cc.
+Definition at line 8299 of file problem.\+cc.
 
 
 
 References Eigen\+\_\+solver\+\_\+pt, i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), ntime\+\_\+stepper(), oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem(), time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady().
-
-\mbox{\Hypertarget{classoomph_1_1Problem_aa4c4d1c36972399b365017b967622449}\label{classoomph_1_1Problem_aa4c4d1c36972399b365017b967622449}} 
-\index{oomph::Problem@{oomph::Problem}!solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}}
-\index{solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}!oomph::Problem@{oomph::Problem}}
-\doxysubsubsection{\texorpdfstring{solve\_eigenproblem\_legacy()}{solve\_eigenproblem\_legacy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Problem\+::solve\+\_\+eigenproblem\+\_\+legacy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{const bool \&}]{steady = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements. Calculate (at least) n\+\_\+eval eigenvalues. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-\/matrix terms from the timestepper will be included in the jacobian --- this is almost certainly never wanted. Legacy version. 
-
-
-
-Definition at line 1945 of file problem.\+h.
-
-
-
-References solve\+\_\+eigenproblem\+\_\+legacy().
-
-\mbox{\Hypertarget{classoomph_1_1Problem_a8cde2d21879264ae7bc8a140142db8ea}\label{classoomph_1_1Problem_a8cde2d21879264ae7bc8a140142db8ea}} 
-\index{oomph::Problem@{oomph::Problem}!solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}}
-\index{solve\_eigenproblem\_legacy@{solve\_eigenproblem\_legacy}!oomph::Problem@{oomph::Problem}}
-\doxysubsubsection{\texorpdfstring{solve\_eigenproblem\_legacy()}{solve\_eigenproblem\_legacy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Problem\+::solve\+\_\+eigenproblem\+\_\+legacy (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector,  }\item[{const bool \&}]{make\+\_\+timesteppers\+\_\+steady = {\ttfamily true} }\end{DoxyParamCaption})}
-
-
-
-Get derivative of an element in the problem wrt a global parameter, used in continuation problems. 
-
-Get derivative of an element in the problem wrt a global parameter, to be used in continuation problems.
-
-Solve an eigenproblem as assembled by the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s constituent elements. Calculate (at least) n\+\_\+eval eigenvalues and return the corresponding eigenvectors. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-\/matrix terms from the timestepper will be included in the jacobian --- this is almost certainly never wanted. Legacy version that returns real vectors which are related in some solver-\/specific way to the real and imaginary parts of the actual, usually complex eigenvalues.
-
-Solve the eigenproblem. Legacy version that returns real vectors which are related in some solver-\/specific way to the real and imaginary parts of the actual, usually complex eigenvalues. At least n\+\_\+eval eigenvalues are computed. 
-
-Definition at line 8293 of file problem.\+cc.
-
-
-
-References Eigen\+\_\+solver\+\_\+pt, i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), ntime\+\_\+stepper(), oomph\+::\+Eigen\+Solver\+::solve\+\_\+eigenproblem\+\_\+legacy(), time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady().
-
-
-
-Referenced by solve\+\_\+eigenproblem\+\_\+legacy().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a072f2894b20672be1a48783684c4a50b}\label{classoomph_1_1Problem_a072f2894b20672be1a48783684c4a50b}} 
 \index{oomph::Problem@{oomph::Problem}!sparse\_assemble\_row\_or\_column\_compressed@{sparse\_assemble\_row\_or\_column\_compressed}}
@@ -6090,7 +6028,7 @@ Protected helper function that is used to assemble the Jacobian matrix in the ca
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors. The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by changing the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. We provide four different assembly methods, each with different memory requirements/execution speeds. The method is set by the public flag \mbox{\hyperlink{classoomph_1_1Problem_a447f9d42b248f6c394581ff1a0b02513}{Problem\+::\+Sparse\+\_\+assembly\+\_\+method}}. 
 
-Definition at line 4461 of file problem.\+cc.
+Definition at line 4462 of file problem.\+cc.
 
 
 
@@ -6112,7 +6050,7 @@ Private helper function that is used to assemble the Jacobian matrix in the case
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors using lists The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by chaging the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. 
 
-Definition at line 4907 of file problem.\+cc.
+Definition at line 4908 of file problem.\+cc.
 
 
 
@@ -6134,7 +6072,7 @@ Private helper function that is used to assemble the Jacobian matrix in the case
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors, using maps The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by chaging the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. 
 
-Definition at line 4561 of file problem.\+cc.
+Definition at line 4562 of file problem.\+cc.
 
 
 
@@ -6156,7 +6094,7 @@ Private helper function that is used to assemble the Jacobian matrix in the case
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors using two vectors. The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by chaging the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. 
 
-Definition at line 6038 of file problem.\+cc.
+Definition at line 6039 of file problem.\+cc.
 
 
 
@@ -6178,7 +6116,7 @@ Private helper function that is used to assemble the Jacobian matrix in the case
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors using two vectors. The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by chaging the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. 
 
-Definition at line 5675 of file problem.\+cc.
+Definition at line 5676 of file problem.\+cc.
 
 
 
@@ -6200,7 +6138,7 @@ Private helper function that is used to assemble the Jacobian matrix in the case
 
 This is a (private) helper function that is used to assemble system matrices in compressed row or column format and compute residual vectors using vectors of pairs The default action is to assemble the jacobian matrix and residuals for the Newton method. The action can be overloaded at an elemental level by chaging the default behaviour of the function Element\+::get\+\_\+all\+\_\+vectors\+\_\+and\+\_\+matrices(). column\+\_\+or\+\_\+row\+\_\+index\+: Column \mbox{[}or row\mbox{]} index of given entry row\+\_\+or\+\_\+column\+\_\+start\+: Index of first entry for given row \mbox{[}or column\mbox{]} value \+: \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of nonzero entries residuals \+: Residual vector compressed\+\_\+row\+\_\+flag\+: Bool flag to indicate if storage format is compressed row \mbox{[}if false interpretation of arguments is as stated in square brackets\mbox{]}. 
 
-Definition at line 5322 of file problem.\+cc.
+Definition at line 5323 of file problem.\+cc.
 
 
 
@@ -6222,11 +6160,11 @@ Solve a steady problem using adaptive Newton\textquotesingle{}s method, but in t
 
 Solve a steady problem, in the context of an overall unsteady problem. This is achieved by setting the weights in the timesteppers to be zero which has the effect of rendering them steady timesteppers The optional argument max\+\_\+adapt specifies the max. number of adaptations of all refineable submeshes are performed to achieve the the error targets specified in the refineable submeshes. 
 
-Definition at line 9485 of file problem.\+cc.
+Definition at line 9312 of file problem.\+cc.
 
 
 
-References assign\+\_\+initial\+\_\+values\+\_\+impulsive(), i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Newton\+Solver\+Error\+::iterations, oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error, oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres, newton\+\_\+solve(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady().
+References assign\+\_\+initial\+\_\+values\+\_\+impulsive(), i, oomph\+::\+Time\+Stepper\+::is\+\_\+steady(), oomph\+::\+Newton\+Solver\+Error\+::iterations(), oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error(), oomph\+::\+Time\+Stepper\+::make\+\_\+steady(), Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres(), newton\+\_\+solve(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, time\+\_\+stepper\+\_\+pt(), and oomph\+::\+Time\+Stepper\+::undo\+\_\+make\+\_\+steady().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a5a2906b9a6a22445d1dbb8aebbce9fa7}\label{classoomph_1_1Problem_a5a2906b9a6a22445d1dbb8aebbce9fa7}} 
 \index{oomph::Problem@{oomph::Problem}!store\_current\_dof\_values@{store\_current\_dof\_values}}
@@ -6240,7 +6178,7 @@ Store the current values of the degrees of freedom.
 
 Stored the current values of the dofs. 
 
-Definition at line 8787 of file problem.\+cc.
+Definition at line 8614 of file problem.\+cc.
 
 
 
@@ -6262,7 +6200,7 @@ Virtual function that is used to symmetrise the problem so that the current solu
 
 
 
-Definition at line 10252 of file problem.\+cc.
+Definition at line 10079 of file problem.\+cc.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a5d9a3ba5696a7bcd275223ff16b7392e}\label{classoomph_1_1Problem_a5d9a3ba5696a7bcd275223ff16b7392e}} 
 \index{oomph::Problem@{oomph::Problem}!synchronise\_all\_dofs@{synchronise\_all\_dofs}}
@@ -6276,7 +6214,7 @@ Perform all required synchronisation in solvers.
 
 Synchronise all dofs by calling the appropriate synchronisation routines for all meshes and the assembly handler. 
 
-Definition at line 16632 of file problem.\+cc.
+Definition at line 16502 of file problem.\+cc.
 
 
 
@@ -6298,7 +6236,7 @@ Synchronise the degrees of freedom by overwriting the haloed values with their n
 
 
 
-Definition at line 16655 of file problem.\+cc.
+Definition at line 16525 of file problem.\+cc.
 
 
 
@@ -6320,7 +6258,7 @@ Classify any non-\/classified nodes into halo/haloed and synchronise equation nu
 
 Synchronise equation numbers and return the total number of degrees of freedom in the overall problem. 
 
-Definition at line 16898 of file problem.\+cc.
+Definition at line 16768 of file problem.\+cc.
 
 
 
@@ -6329,6 +6267,24 @@ References oomph\+::\+Mesh\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers(), oomph\+
 
 
 Referenced by assign\+\_\+eqn\+\_\+numbers().
+
+\mbox{\Hypertarget{classoomph_1_1Problem_a6b68978063f7eb0e317cc90c883e8601}\label{classoomph_1_1Problem_a6b68978063f7eb0e317cc90c883e8601}} 
+\index{oomph::Problem@{oomph::Problem}!target\_error\_safety\_factor@{target\_error\_safety\_factor}}
+\index{target\_error\_safety\_factor@{target\_error\_safety\_factor}!oomph::Problem@{oomph::Problem}}
+\doxysubsubsection{\texorpdfstring{target\_error\_safety\_factor()}{target\_error\_safety\_factor()}}
+{\footnotesize\ttfamily double\& oomph\+::\+Problem\+::target\+\_\+error\+\_\+safety\+\_\+factor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the safety factor in adaptive timestepping. 
+
+
+
+Definition at line 1614 of file problem.\+h.
+
+
+
+References Target\+\_\+error\+\_\+safety\+\_\+factor.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_acd8c357349d20a28af70b2b7ea7f488d}\label{classoomph_1_1Problem_acd8c357349d20a28af70b2b7ea7f488d}} 
 \index{oomph::Problem@{oomph::Problem}!time@{time}}
@@ -6346,7 +6302,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a4
 
 
 
-Definition at line 11724 of file problem.\+cc.
+Definition at line 11594 of file problem.\+cc.
 
 
 
@@ -6368,7 +6324,7 @@ Return the current value of continuous time (const version)
 
 Return the current value of continuous time. If not \mbox{\hyperlink{classoomph_1_1Time}{Time}} object has been assigned, then throw an error. Const version. 
 
-Definition at line 11742 of file problem.\+cc.
+Definition at line 11612 of file problem.\+cc.
 
 
 
@@ -6386,7 +6342,7 @@ Access function for Time\+\_\+adaptive\+\_\+newton\+\_\+crash\+\_\+on\+\_\+solve
 
 
 
-Definition at line 1614 of file problem.\+h.
+Definition at line 1640 of file problem.\+h.
 
 
 
@@ -6404,7 +6360,7 @@ Return a pointer to the global time object.
 
 
 
-Definition at line 1504 of file problem.\+h.
+Definition at line 1524 of file problem.\+h.
 
 
 
@@ -6430,7 +6386,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject_a4
 
 
 
-Definition at line 1510 of file problem.\+h.
+Definition at line 1530 of file problem.\+h.
 
 
 
@@ -6448,7 +6404,7 @@ Access function for the pointer to the first (presumably only) timestepper.
 
 
 
-Definition at line 1524 of file problem.\+h.
+Definition at line 1544 of file problem.\+h.
 
 
 
@@ -6456,7 +6412,7 @@ References Time\+\_\+stepper\+\_\+pt.
 
 
 
-Referenced by adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), add\+\_\+time\+\_\+stepper\+\_\+pt(), arc\+\_\+length\+\_\+step\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), calculate\+\_\+predictions(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), copy(), get\+\_\+dvaluesdt(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), initialise\+\_\+dt(), set\+\_\+timestepper\+\_\+for\+\_\+all\+\_\+data(), solve\+\_\+adjoint\+\_\+eigenproblem(), solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy(), solve\+\_\+eigenproblem(), solve\+\_\+eigenproblem\+\_\+legacy(), steady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::steady\+\_\+segregated\+\_\+solve(), unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::unsteady\+\_\+segregated\+\_\+solve(), and oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem().
+Referenced by adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), add\+\_\+time\+\_\+stepper\+\_\+pt(), arc\+\_\+length\+\_\+step\+\_\+solve(), arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), calculate\+\_\+predictions(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+master\+\_\+node\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::construct\+\_\+new\+\_\+external\+\_\+halo\+\_\+node\+\_\+helper(), copy(), get\+\_\+dvaluesdt(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+master\+\_\+nodal\+\_\+information\+\_\+helper(), oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::get\+\_\+required\+\_\+nodal\+\_\+information\+\_\+helper(), initialise\+\_\+dt(), set\+\_\+timestepper\+\_\+for\+\_\+all\+\_\+data(), solve\+\_\+adjoint\+\_\+eigenproblem(), solve\+\_\+eigenproblem(), steady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::steady\+\_\+segregated\+\_\+solve(), unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Segregatable\+FSIProblem\+::unsteady\+\_\+segregated\+\_\+solve(), and oomph\+::\+Womersley\+Problem$<$ ELEMENT, DIM $>$\+::\+Womersley\+Problem().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a3f952a57b5238978250849c04e2fcbdb}\label{classoomph_1_1Problem_a3f952a57b5238978250849c04e2fcbdb}} 
 \index{oomph::Problem@{oomph::Problem}!time\_stepper\_pt@{time\_stepper\_pt}}
@@ -6470,7 +6426,7 @@ Access function for the pointer to the first (presumably only) timestepper.
 
 
 
-Definition at line 1537 of file problem.\+h.
+Definition at line 1557 of file problem.\+h.
 
 
 
@@ -6488,7 +6444,7 @@ Return a pointer to the i-\/th timestepper.
 
 
 
-Definition at line 1549 of file problem.\+h.
+Definition at line 1569 of file problem.\+h.
 
 
 
@@ -6506,7 +6462,7 @@ Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem. Return 0 fo
 
 Unrefine (all) refineable (sub)mesh(es) uniformly and rebuild problem. Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level) 
 
-Definition at line 16024 of file problem.\+cc.
+Definition at line 15894 of file problem.\+cc.
 
 
 
@@ -6524,7 +6480,7 @@ Do uniform refinement for submesh i\+\_\+mesh without documentation. Return 0 fo
 
 Unrefine submesh i\+\_\+mesh uniformly and rebuild problem. Return 0 for success, 1 for failure (if unrefinement has reached the coarsest permitted level) 
 
-Definition at line 16095 of file problem.\+cc.
+Definition at line 15965 of file problem.\+cc.
 
 
 
@@ -6542,7 +6498,7 @@ Function to turn off analytic calculation of the parameter derivatives in contin
 
 
 
-Definition at line 263 of file problem.\+h.
+Definition at line 266 of file problem.\+h.
 
 
 
@@ -6560,7 +6516,7 @@ Function to turn off analytic calculation of the parameter derivatives in contin
 
 
 
-Definition at line 296 of file problem.\+h.
+Definition at line 299 of file problem.\+h.
 
 
 
@@ -6578,7 +6534,7 @@ Do not use the default partition in the load balance.
 
 
 
-Definition at line 1451 of file problem.\+h.
+Definition at line 1471 of file problem.\+h.
 
 
 
@@ -6596,7 +6552,7 @@ Advance time by dt and solve by Newton\textquotesingle{}s method. This version a
 
 Do one timestep of size dt using Newton\textquotesingle{}s method with the specified tolerance and linear solver defined as member data of the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} class. This will be the most commonly used version of unsteady\+\_\+newton\+\_\+solve, in which the time values are always shifted This does not include any kind of adaptativity. If the solution fails to converge the program will end. 
 
-Definition at line 11146 of file problem.\+cc.
+Definition at line 10983 of file problem.\+cc.
 
 
 
@@ -6614,11 +6570,11 @@ Advance time by dt and solve the system, using Newton\textquotesingle{}s method.
 
 Do one timestep forward of size dt using Newton\textquotesingle{}s method with the specified tolerance and linear solver defined via member data of the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} class. The boolean flag shift\+\_\+values is used to control whether the time values should be shifted or not. 
 
-Definition at line 11159 of file problem.\+cc.
+Definition at line 10996 of file problem.\+cc.
 
 
 
-References actions\+\_\+after\+\_\+implicit\+\_\+timestep(), actions\+\_\+after\+\_\+implicit\+\_\+timestep\+\_\+and\+\_\+error\+\_\+estimation(), oomph\+::\+Time\+Stepper\+::actions\+\_\+after\+\_\+timestep(), actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Time\+Stepper\+::actions\+\_\+before\+\_\+timestep(), oomph\+::\+Time\+::dt(), i, oomph\+::\+Newton\+Solver\+Error\+::iterations, oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error, Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres, newton\+\_\+solve(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, oomph\+::\+Time\+Stepper\+::set\+\_\+weights(), shift\+\_\+time\+\_\+values(), oomph\+::\+Time\+::time(), time\+\_\+pt(), and time\+\_\+stepper\+\_\+pt().
+References actions\+\_\+after\+\_\+implicit\+\_\+timestep(), actions\+\_\+after\+\_\+implicit\+\_\+timestep\+\_\+and\+\_\+error\+\_\+estimation(), oomph\+::\+Time\+Stepper\+::actions\+\_\+after\+\_\+timestep(), actions\+\_\+before\+\_\+implicit\+\_\+timestep(), oomph\+::\+Time\+Stepper\+::actions\+\_\+before\+\_\+timestep(), oomph\+::\+Time\+::dt(), i, oomph\+::\+Newton\+Solver\+Error\+::iterations(), oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error(), Max\+\_\+newton\+\_\+iterations, Max\+\_\+residuals, oomph\+::\+Newton\+Solver\+Error\+::maxres(), newton\+\_\+solve(), ntime\+\_\+stepper(), oomph\+::oomph\+\_\+info, oomph\+::\+Time\+Stepper\+::set\+\_\+weights(), shift\+\_\+time\+\_\+values(), oomph\+::\+Time\+::time(), time\+\_\+pt(), and time\+\_\+stepper\+\_\+pt().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_af26bd71c24ba99c9391d6e932b68e5e8}\label{classoomph_1_1Problem_af26bd71c24ba99c9391d6e932b68e5e8}} 
 \index{oomph::Problem@{oomph::Problem}!unsteady\_newton\_solve@{unsteady\_newton\_solve}}
@@ -6632,7 +6588,7 @@ Unsteady adaptive Newton solve\+: up to max\+\_\+adapt adaptations of all refine
 
 Do one timestep, dt, forward using Newton\textquotesingle{}s method with specified tolerance and linear solver specified via member data. Keep adapting on all meshes to criteria specified in these meshes (up to max\+\_\+adapt adaptations are performed). If first\+\_\+timestep==true, re-\/set initial conditions after mesh adaptation. Shifting of time can be suppressed by overwriting the default value of shift (true). \mbox{[}Shifting must be done if first\+\_\+timestep==true because we\textquotesingle{}re constantly re-\/assigning the initial conditions; if first\+\_\+timestep==true and shift==false shifting is performed anyway and a warning is issued. 
 
-Definition at line 16265 of file problem.\+cc.
+Definition at line 16135 of file problem.\+cc.
 
 
 
@@ -6646,7 +6602,7 @@ References adapt(), communicator\+\_\+pt(), Default\+\_\+set\+\_\+initial\+\_\+c
 
 
 
-Definition at line 2123 of file problem.\+h.
+Definition at line 2099 of file problem.\+h.
 
 
 
@@ -6667,7 +6623,7 @@ Referenced by oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep(), and 
 
 
 
-Definition at line 160 of file problem.\+h.
+Definition at line 163 of file problem.\+h.
 
 
 
@@ -6681,7 +6637,7 @@ Referenced by activate\+\_\+bifurcation\+\_\+tracking(), and activate\+\_\+fold\
 
 
 
-Definition at line 161 of file problem.\+h.
+Definition at line 164 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a32e190795c94d11d2e206e62eb63994b}\label{classoomph_1_1Problem_a32e190795c94d11d2e206e62eb63994b}} 
 \index{oomph::Problem@{oomph::Problem}!BlockFoldLinearSolver@{BlockFoldLinearSolver}}
@@ -6691,7 +6647,7 @@ Definition at line 161 of file problem.\+h.
 
 
 
-Definition at line 158 of file problem.\+h.
+Definition at line 161 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a199677d64d3b2f908690d10a2398b737}\label{classoomph_1_1Problem_a199677d64d3b2f908690d10a2398b737}} 
 \index{oomph::Problem@{oomph::Problem}!BlockHopfLinearSolver@{BlockHopfLinearSolver}}
@@ -6701,7 +6657,7 @@ Definition at line 158 of file problem.\+h.
 
 
 
-Definition at line 162 of file problem.\+h.
+Definition at line 165 of file problem.\+h.
 
 
 
@@ -6715,7 +6671,7 @@ Referenced by activate\+\_\+hopf\+\_\+tracking().
 
 
 
-Definition at line 159 of file problem.\+h.
+Definition at line 162 of file problem.\+h.
 
 
 
@@ -6729,7 +6685,7 @@ Referenced by activate\+\_\+pitchfork\+\_\+tracking().
 
 
 
-Definition at line 153 of file problem.\+h.
+Definition at line 156 of file problem.\+h.
 
 
 
@@ -6743,7 +6699,7 @@ Referenced by activate\+\_\+bifurcation\+\_\+tracking(), and activate\+\_\+fold\
 
 
 
-Definition at line 155 of file problem.\+h.
+Definition at line 158 of file problem.\+h.
 
 
 
@@ -6758,7 +6714,7 @@ friend class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Period
 
 
 
-Definition at line 157 of file problem.\+h.
+Definition at line 160 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a58bcd2e5d47842c64018e2c842bff302}\label{classoomph_1_1Problem_a58bcd2e5d47842c64018e2c842bff302}} 
 \index{oomph::Problem@{oomph::Problem}!PitchForkHandler@{PitchForkHandler}}
@@ -6768,7 +6724,7 @@ Definition at line 157 of file problem.\+h.
 
 
 
-Definition at line 154 of file problem.\+h.
+Definition at line 157 of file problem.\+h.
 
 
 
@@ -6789,7 +6745,7 @@ Boolean to indicate whether a Newton step should be taken even if the initial re
 
 
 
-Definition at line 2326 of file problem.\+h.
+Definition at line 2302 of file problem.\+h.
 
 
 
@@ -6807,7 +6763,7 @@ Boolean to indicate whether an arc-\/length step has been taken.
 
 
 
-Definition at line 799 of file problem.\+h.
+Definition at line 819 of file problem.\+h.
 
 
 
@@ -6821,7 +6777,7 @@ Referenced by arc\+\_\+length\+\_\+step\+\_\+solve(), arc\+\_\+length\+\_\+step\
 
 
 
-Definition at line 185 of file problem.\+h.
+Definition at line 188 of file problem.\+h.
 
 
 
@@ -6839,7 +6795,7 @@ Map which stores the correspondence between a root element and its element numbe
 
 
 
-Definition at line 538 of file problem.\+h.
+Definition at line 541 of file problem.\+h.
 
 
 
@@ -6857,7 +6813,7 @@ Referenced by distribute(), get\+\_\+data\+\_\+to\+\_\+be\+\_\+sent\+\_\+during\
 
 
 
-Definition at line 548 of file problem.\+h.
+Definition at line 551 of file problem.\+h.
 
 
 
@@ -6875,7 +6831,7 @@ Boolean to control bifurcation detection via determinant of Jacobian.
 
 
 
-Definition at line 790 of file problem.\+h.
+Definition at line 810 of file problem.\+h.
 
 
 
@@ -6893,7 +6849,7 @@ Boolean to control wheter bisection is used to located bifurcation.
 
 
 
-Definition at line 793 of file problem.\+h.
+Definition at line 813 of file problem.\+h.
 
 
 
@@ -6911,7 +6867,7 @@ Boolean to bypass check of increase in dofs during pruning.
 
 
 
-Definition at line 967 of file problem.\+h.
+Definition at line 987 of file problem.\+h.
 
 
 
@@ -6929,7 +6885,7 @@ Map used to determine whether the derivatives with respect to a parameter should
 
 
 
-Definition at line 239 of file problem.\+h.
+Definition at line 242 of file problem.\+h.
 
 
 
@@ -6947,7 +6903,7 @@ Map used to determine whether the hessian products should be computed using fini
 
 
 
-Definition at line 244 of file problem.\+h.
+Definition at line 247 of file problem.\+h.
 
 
 
@@ -6965,7 +6921,7 @@ The communicator for this problem.
 
 
 
-Definition at line 1242 of file problem.\+h.
+Definition at line 1262 of file problem.\+h.
 
 
 
@@ -6983,7 +6939,7 @@ The direction of the change in parameter that will ensure that a branch is follo
 
 
 
-Definition at line 749 of file problem.\+h.
+Definition at line 769 of file problem.\+h.
 
 
 
@@ -7001,7 +6957,7 @@ Storage for the single static continuation timestorage object.
 
 The continuation timestepper object. 
 
-Definition at line 761 of file problem.\+h.
+Definition at line 781 of file problem.\+h.
 
 
 
@@ -7019,7 +6975,7 @@ Referenced by arc\+\_\+length\+\_\+step\+\_\+solve(), and set\+\_\+consistent\+\
 
 
 
-Definition at line 234 of file problem.\+h.
+Definition at line 237 of file problem.\+h.
 
 
 
@@ -7037,7 +6993,7 @@ Pointer to the default assembly handler.
 
 
 
-Definition at line 194 of file problem.\+h.
+Definition at line 197 of file problem.\+h.
 
 
 
@@ -7055,7 +7011,7 @@ Pointer to the default eigensolver.
 
 
 
-Definition at line 191 of file problem.\+h.
+Definition at line 194 of file problem.\+h.
 
 
 
@@ -7073,7 +7029,7 @@ Pointer to the default linear solver.
 
 
 
-Definition at line 188 of file problem.\+h.
+Definition at line 191 of file problem.\+h.
 
 
 
@@ -7091,7 +7047,7 @@ Has default set\+\_\+initial\+\_\+condition function been called? Default\+: fal
 
 
 
-Definition at line 211 of file problem.\+h.
+Definition at line 214 of file problem.\+h.
 
 
 
@@ -7109,7 +7065,7 @@ The desired number of Newton Steps to reach convergence at each step along the a
 
 
 
-Definition at line 784 of file problem.\+h.
+Definition at line 804 of file problem.\+h.
 
 
 
@@ -7127,7 +7083,7 @@ Proportion of the arc-\/length to taken by the parameter.
 
 
 
-Definition at line 734 of file problem.\+h.
+Definition at line 754 of file problem.\+h.
 
 
 
@@ -7145,7 +7101,7 @@ Is the problem a discontinuous one, i.\+e. can the elemental contributions be tr
 
 
 
-Definition at line 700 of file problem.\+h.
+Definition at line 703 of file problem.\+h.
 
 
 
@@ -7163,7 +7119,7 @@ The distributed matrix distribution method 1 -\/ Automatic -\/ the \mbox{\hyperl
 
 
 
-Definition at line 956 of file problem.\+h.
+Definition at line 976 of file problem.\+h.
 
 
 
@@ -7181,7 +7137,7 @@ Boolean to switch on assessment of load imbalance in parallel assembly of distri
 
 
 
-Definition at line 510 of file problem.\+h.
+Definition at line 513 of file problem.\+h.
 
 
 
@@ -7199,7 +7155,7 @@ Protected boolean flag to provide comprehensive timimings during problem distrib
 
 
 
-Definition at line 637 of file problem.\+h.
+Definition at line 640 of file problem.\+h.
 
 
 
@@ -7217,7 +7173,7 @@ Storage for the present values of the variables.
 
 
 
-Definition at line 777 of file problem.\+h.
+Definition at line 797 of file problem.\+h.
 
 
 
@@ -7235,7 +7191,7 @@ Storage for the offset for the current values of dofs from the original dofs (de
 
 
 
-Definition at line 771 of file problem.\+h.
+Definition at line 791 of file problem.\+h.
 
 
 
@@ -7253,7 +7209,7 @@ Storage for the derivative of the problem variables wrt arc-\/length.
 
 
 
-Definition at line 774 of file problem.\+h.
+Definition at line 794 of file problem.\+h.
 
 
 
@@ -7271,7 +7227,7 @@ Storage for the offset for the continuation derivatives from the original dofs (
 
 
 
-Definition at line 766 of file problem.\+h.
+Definition at line 786 of file problem.\+h.
 
 
 
@@ -7289,7 +7245,7 @@ The distribution of the DOFs in this problem. This object is created in the \mbo
 
 
 
-Definition at line 460 of file problem.\+h.
+Definition at line 463 of file problem.\+h.
 
 
 
@@ -7307,7 +7263,7 @@ Referenced by adapt(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\
 
 
 
-Definition at line 554 of file problem.\+h.
+Definition at line 557 of file problem.\+h.
 
 
 
@@ -7325,7 +7281,7 @@ Storage for the current step value.
 
 
 
-Definition at line 780 of file problem.\+h.
+Definition at line 800 of file problem.\+h.
 
 
 
@@ -7343,7 +7299,7 @@ Maximum possible increase of dt between time-\/steps in adaptive schemes.
 
 
 
-Definition at line 713 of file problem.\+h.
+Definition at line 716 of file problem.\+h.
 
 
 
@@ -7361,7 +7317,7 @@ Minimum allowed decrease of dt between time-\/steps in adaptive schemes. Lower s
 
 
 
-Definition at line 718 of file problem.\+h.
+Definition at line 721 of file problem.\+h.
 
 
 
@@ -7379,11 +7335,11 @@ Pointer to the eigen solver for the problem.
 
 
 
-Definition at line 182 of file problem.\+h.
+Definition at line 185 of file problem.\+h.
 
 
 
-Referenced by eigen\+\_\+solver\+\_\+pt(), Problem(), solve\+\_\+adjoint\+\_\+eigenproblem(), solve\+\_\+adjoint\+\_\+eigenproblem\+\_\+legacy(), solve\+\_\+eigenproblem(), and solve\+\_\+eigenproblem\+\_\+legacy().
+Referenced by eigen\+\_\+solver\+\_\+pt(), Problem(), solve\+\_\+adjoint\+\_\+eigenproblem(), and solve\+\_\+eigenproblem().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_ae4177b73a790b80d541b416d1e83c6c3}\label{classoomph_1_1Problem_ae4177b73a790b80d541b416d1e83c6c3}} 
 \index{oomph::Problem@{oomph::Problem}!Element\_count\_per\_dof@{Element\_count\_per\_dof}}
@@ -7397,7 +7353,7 @@ Counter that records how many elements contribute to each dof. Used to determine
 
 
 
-Definition at line 560 of file problem.\+h.
+Definition at line 563 of file problem.\+h.
 
 
 
@@ -7415,7 +7371,7 @@ Storage for assembly times (used for load balancing)
 
 
 
-Definition at line 573 of file problem.\+h.
+Definition at line 576 of file problem.\+h.
 
 
 
@@ -7433,7 +7389,7 @@ Boolean to indicate that empty \mbox{\hyperlink{classoomph_1_1Problem_a498317b3e
 
 
 
-Definition at line 222 of file problem.\+h.
+Definition at line 225 of file problem.\+h.
 
 
 
@@ -7451,7 +7407,7 @@ Boolean to indicate that empty \mbox{\hyperlink{classoomph_1_1Problem_af10662119
 
 
 
-Definition at line 218 of file problem.\+h.
+Definition at line 221 of file problem.\+h.
 
 
 
@@ -7469,7 +7425,7 @@ Pointer to a single explicit timestepper.
 
 
 
-Definition at line 204 of file problem.\+h.
+Definition at line 207 of file problem.\+h.
 
 
 
@@ -7483,7 +7439,7 @@ Referenced by explicit\+\_\+time\+\_\+stepper\+\_\+pt(), and set\+\_\+explicit\+
 
 
 
-Definition at line 685 of file problem.\+h.
+Definition at line 688 of file problem.\+h.
 
 
 
@@ -7501,7 +7457,7 @@ First element to be assembled by given processor for non-\/distributed problem (
 
 
 
-Definition at line 519 of file problem.\+h.
+Definition at line 522 of file problem.\+h.
 
 
 
@@ -7519,7 +7475,7 @@ Boolean to indicate whether a sign change has occured in the Jacobian.
 
 
 
-Definition at line 796 of file problem.\+h.
+Definition at line 816 of file problem.\+h.
 
 
 
@@ -7537,7 +7493,7 @@ Referenced by arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), and reset\+\_\
 
 
 
-Definition at line 425 of file problem.\+h.
+Definition at line 428 of file problem.\+h.
 
 
 
@@ -7555,7 +7511,7 @@ Storage for the halo degrees of freedom (only required) when accessing via the g
 
 
 
-Definition at line 581 of file problem.\+h.
+Definition at line 584 of file problem.\+h.
 
 
 
@@ -7573,7 +7529,7 @@ Pointer to the halo scheme for any global vectors that have the Dof\+\_\+distrib
 
 
 
-Definition at line 577 of file problem.\+h.
+Definition at line 580 of file problem.\+h.
 
 
 
@@ -7591,7 +7547,7 @@ Has a Jacobian been computed (and can therefore be re-\/used if required)? Defau
 
 
 
-Definition at line 622 of file problem.\+h.
+Definition at line 625 of file problem.\+h.
 
 
 
@@ -7609,7 +7565,7 @@ Is re-\/use of Jacobian in Newton iteration enabled? Default\+: false.
 
 
 
-Definition at line 618 of file problem.\+h.
+Definition at line 621 of file problem.\+h.
 
 
 
@@ -7627,7 +7583,7 @@ Boolean to decide if a timestep is to be rejected if the error estimate post-\/s
 
 
 
-Definition at line 2338 of file problem.\+h.
+Definition at line 2314 of file problem.\+h.
 
 
 
@@ -7645,7 +7601,7 @@ Last element (plus one) to be assembled by given processor for non-\/distributed
 
 
 
-Definition at line 524 of file problem.\+h.
+Definition at line 527 of file problem.\+h.
 
 
 
@@ -7663,7 +7619,7 @@ Pointer to the linear solver for the problem.
 
 
 
-Definition at line 173 of file problem.\+h.
+Definition at line 176 of file problem.\+h.
 
 
 
@@ -7681,7 +7637,7 @@ Has the mass matrix been computed (and can therefore be reused) Default\+: false
 
 
 
-Definition at line 695 of file problem.\+h.
+Definition at line 698 of file problem.\+h.
 
 
 
@@ -7699,7 +7655,7 @@ Is re-\/use of the mass matrix in explicit timestepping enabled Default\+:false.
 
 
 
-Definition at line 691 of file problem.\+h.
+Definition at line 694 of file problem.\+h.
 
 
 
@@ -7717,7 +7673,7 @@ Pointer to the linear solver used for explicit time steps (this is likely to be 
 
 
 
-Definition at line 179 of file problem.\+h.
+Definition at line 182 of file problem.\+h.
 
 
 
@@ -7735,7 +7691,7 @@ Maximum number of Newton iterations.
 
 
 
-Definition at line 599 of file problem.\+h.
+Definition at line 602 of file problem.\+h.
 
 
 
@@ -7753,7 +7709,7 @@ Threshold for error throwing in \mbox{\hyperlink{classoomph_1_1Problem_a8dd5cb24
 
 
 
-Definition at line 2304 of file problem.\+h.
+Definition at line 2280 of file problem.\+h.
 
 
 
@@ -7771,7 +7727,7 @@ Maximum residuals at start and after each newton iteration.
 
 
 
-Definition at line 606 of file problem.\+h.
+Definition at line 609 of file problem.\+h.
 
 
 
@@ -7789,7 +7745,7 @@ Maximum desired residual\+: if the maximum residual exceeds this value, the prog
 
 
 
-Definition at line 610 of file problem.\+h.
+Definition at line 613 of file problem.\+h.
 
 
 
@@ -7807,7 +7763,7 @@ Maximum desired dt.
 
 
 
-Definition at line 709 of file problem.\+h.
+Definition at line 712 of file problem.\+h.
 
 
 
@@ -7825,7 +7781,7 @@ The mesh pointer.
 
 
 
-Definition at line 167 of file problem.\+h.
+Definition at line 170 of file problem.\+h.
 
 
 
@@ -7843,7 +7799,7 @@ Minimum desired value of arc-\/length.
 
 
 
-Definition at line 787 of file problem.\+h.
+Definition at line 807 of file problem.\+h.
 
 
 
@@ -7861,7 +7817,7 @@ Minimum desired dt\+: if dt falls below this value, exit.
 
 
 
-Definition at line 706 of file problem.\+h.
+Definition at line 709 of file problem.\+h.
 
 
 
@@ -7879,7 +7835,7 @@ If Minimum\+\_\+dt\+\_\+but\+\_\+still\+\_\+proceed positive, then dt will not b
 
 
 
-Definition at line 725 of file problem.\+h.
+Definition at line 745 of file problem.\+h.
 
 
 
@@ -7897,7 +7853,7 @@ Boolean indicating that the division of elements over processors during the asse
 
 
 
-Definition at line 529 of file problem.\+h.
+Definition at line 532 of file problem.\+h.
 
 
 
@@ -7915,7 +7871,7 @@ The Tolerance below which the Newton Method is deemed to have converged.
 
 
 
-Definition at line 596 of file problem.\+h.
+Definition at line 599 of file problem.\+h.
 
 
 
@@ -7933,7 +7889,7 @@ Actual number of Newton iterations taken during the most recent iteration.
 
 
 
-Definition at line 603 of file problem.\+h.
+Definition at line 606 of file problem.\+h.
 
 
 
@@ -7951,7 +7907,7 @@ A tolerance used to determine whether the entry in a sparse matrix is zero. If i
 
 
 
-Definition at line 671 of file problem.\+h.
+Definition at line 674 of file problem.\+h.
 
 
 
@@ -7969,7 +7925,7 @@ The amount of data allocated during the previous parallel sparse assemble. Used 
 
 
 
-Definition at line 960 of file problem.\+h.
+Definition at line 980 of file problem.\+h.
 
 
 
@@ -7987,7 +7943,7 @@ Storage for the present value of the global parameter.
 
 
 
-Definition at line 755 of file problem.\+h.
+Definition at line 775 of file problem.\+h.
 
 
 
@@ -8005,7 +7961,7 @@ Storage for the derivative of the global parameter wrt arc-\/length.
 
 
 
-Definition at line 752 of file problem.\+h.
+Definition at line 772 of file problem.\+h.
 
 
 
@@ -8023,7 +7979,7 @@ Protected boolean flag to halt program execution during sparse assemble process 
 
 
 
-Definition at line 633 of file problem.\+h.
+Definition at line 636 of file problem.\+h.
 
 
 
@@ -8041,7 +7997,7 @@ Has the problem been distributed amongst multiple processors?
 
 
 
-Definition at line 964 of file problem.\+h.
+Definition at line 984 of file problem.\+h.
 
 
 
@@ -8059,7 +8015,7 @@ Boolean flag indicating if we\textquotesingle{}re dealing with a linear or nonli
 
 
 
-Definition at line 628 of file problem.\+h.
+Definition at line 631 of file problem.\+h.
 
 
 
@@ -8077,7 +8033,7 @@ Relaxation fator for Newton method (only a fractional Newton correction is appli
 
 
 
-Definition at line 592 of file problem.\+h.
+Definition at line 595 of file problem.\+h.
 
 
 
@@ -8095,7 +8051,7 @@ Pointer to vector for backup of dofs.
 
 
 
-Definition at line 207 of file problem.\+h.
+Definition at line 210 of file problem.\+h.
 
 
 
@@ -8113,7 +8069,7 @@ Boolean to control whether arc-\/length should be scaled.
 
 
 
-Definition at line 731 of file problem.\+h.
+Definition at line 751 of file problem.\+h.
 
 
 
@@ -8131,7 +8087,7 @@ Boolean to indicate if all output is suppressed in \mbox{\hyperlink{classoomph_1
 
 
 
-Definition at line 2320 of file problem.\+h.
+Definition at line 2296 of file problem.\+h.
 
 
 
@@ -8149,7 +8105,7 @@ Storage for the sign of the global Jacobian.
 
 
 
-Definition at line 745 of file problem.\+h.
+Definition at line 765 of file problem.\+h.
 
 
 
@@ -8167,7 +8123,7 @@ the number of elements to add to a matrix row when the initial allocation is exc
 
 
 
-Definition at line 663 of file problem.\+h.
+Definition at line 666 of file problem.\+h.
 
 
 
@@ -8185,7 +8141,7 @@ the number of elements to initially allocate for a matrix row within the sparse\
 
 
 
-Definition at line 658 of file problem.\+h.
+Definition at line 661 of file problem.\+h.
 
 
 
@@ -8203,7 +8159,7 @@ the number of elements in each row of a compressed matrix in the previous matrix
 
 
 
-Definition at line 667 of file problem.\+h.
+Definition at line 670 of file problem.\+h.
 
 
 
@@ -8221,7 +8177,7 @@ Flag to determine which sparse assembly method to use By default we use assembly
 
 
 
-Definition at line 641 of file problem.\+h.
+Definition at line 644 of file problem.\+h.
 
 
 
@@ -8239,7 +8195,7 @@ Boolean to indicate whether local dof pointers should be stored in the elements.
 
 
 
-Definition at line 226 of file problem.\+h.
+Definition at line 229 of file problem.\+h.
 
 
 
@@ -8257,7 +8213,7 @@ Referenced by assign\+\_\+eqn\+\_\+numbers(), disable\+\_\+store\+\_\+local\+\_\
 
 
 
-Definition at line 170 of file problem.\+h.
+Definition at line 173 of file problem.\+h.
 
 
 
@@ -8281,11 +8237,29 @@ Flag to allow suppression of warning messages re reading in unstructured meshes 
 
 Instantiation of public flag to allow suppression of warning messages re reading in unstructured meshes during restart. 
 
-Definition at line 317 of file problem.\+h.
+Definition at line 320 of file problem.\+h.
 
 
 
 Referenced by read().
+
+\mbox{\Hypertarget{classoomph_1_1Problem_aacb61c79a0cbdab75d68c95348898874}\label{classoomph_1_1Problem_aacb61c79a0cbdab75d68c95348898874}} 
+\index{oomph::Problem@{oomph::Problem}!Target\_error\_safety\_factor@{Target\_error\_safety\_factor}}
+\index{Target\_error\_safety\_factor@{Target\_error\_safety\_factor}!oomph::Problem@{oomph::Problem}}
+\doxysubsubsection{\texorpdfstring{Target\_error\_safety\_factor}{Target\_error\_safety\_factor}}
+{\footnotesize\ttfamily double oomph\+::\+Problem\+::\+Target\+\_\+error\+\_\+safety\+\_\+factor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Safety factor to ensure we are aiming for a target error, TARGET, that is below our tolerance\+: TARGET = Target\+\_\+error\+\_\+safety\+\_\+factor $\ast$ TOL For this to make sense Target\+\_\+error\+\_\+safety\+\_\+factor should be $<$1.\+0. If Keep\+\_\+temporal\+\_\+error\+\_\+below\+\_\+tolerance is set to true (default) then, without this, timesteps suggested by the adaptive time-\/stepper can be expected to lead to rejection (because the error exceeds TOL) about half of the time. Harier et al. (1993, ISBN\+:978-\/3-\/540-\/56670-\/0, p168) suggest a value around 0.\+25-\/0.\+40 to be the most efficient, however this is highly problem and timestepper dependent and sometimes as high as 0.\+95 may be effective at improving the robustness of timestep prediction. 
+
+Note\+: Despite this, we are setting this to default to 1.\+0 to prevent introducing any change in the default behaviour of oomph-\/lib for now. 
+
+Definition at line 738 of file problem.\+h.
+
+
+
+Referenced by adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), and target\+\_\+error\+\_\+safety\+\_\+factor().
 
 \mbox{\Hypertarget{classoomph_1_1Problem_a123843ca2ed6384342939ef2b19477ef}\label{classoomph_1_1Problem_a123843ca2ed6384342939ef2b19477ef}} 
 \index{oomph::Problem@{oomph::Problem}!Theta\_squared@{Theta\_squared}}
@@ -8299,7 +8273,7 @@ Value of the scaling parameter required so that the parameter occupies the desir
 
 
 
-Definition at line 742 of file problem.\+h.
+Definition at line 762 of file problem.\+h.
 
 
 
@@ -8317,7 +8291,7 @@ Bool to specify what to do if a Newton solve fails within a time adaptive solve.
 
 
 
-Definition at line 615 of file problem.\+h.
+Definition at line 618 of file problem.\+h.
 
 
 
@@ -8335,7 +8309,7 @@ Pointer to global time for the problem.
 
 
 
-Definition at line 197 of file problem.\+h.
+Definition at line 200 of file problem.\+h.
 
 
 
@@ -8353,7 +8327,7 @@ The \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of time steppers (there coul
 
 
 
-Definition at line 201 of file problem.\+h.
+Definition at line 204 of file problem.\+h.
 
 
 
@@ -8371,7 +8345,7 @@ What it says\+: If temporally adaptive Newton solver fails to to converge, reduc
 
 
 
-Definition at line 2331 of file problem.\+h.
+Definition at line 2307 of file problem.\+h.
 
 
 
@@ -8389,7 +8363,7 @@ Boolean to control original or new storage of dof stuff.
 
 
 
-Definition at line 758 of file problem.\+h.
+Definition at line 778 of file problem.\+h.
 
 
 
@@ -8407,7 +8381,7 @@ Flag to use \char`\"{}default partition\char`\"{} during load balance. Should on
 
 
 
-Definition at line 514 of file problem.\+h.
+Definition at line 517 of file problem.\+h.
 
 
 
@@ -8425,7 +8399,7 @@ Boolean to specify which scheme to use to calculate the continuation derivatievs
 
 
 
-Definition at line 803 of file problem.\+h.
+Definition at line 823 of file problem.\+h.
 
 
 
@@ -8443,7 +8417,7 @@ Use the globally convergent newton method.
 
 
 
-Definition at line 214 of file problem.\+h.
+Definition at line 217 of file problem.\+h.
 
 
 
@@ -8461,7 +8435,7 @@ Use values from the time stepper predictor as an initial guess.
 
 
 
-Definition at line 229 of file problem.\+h.
+Definition at line 232 of file problem.\+h.
 
 
 

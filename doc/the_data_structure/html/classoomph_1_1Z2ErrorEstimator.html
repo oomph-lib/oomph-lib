@@ -294,11 +294,11 @@ functions". In principle, one could use the finite element shape functions <img 
 <img class="formulaDsp" alt="\[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e'=1}^{N_e} \int_{\mbox{$e'$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \]" src="form_284.png" width="269" height="60"/>
 </p>
 <p> In this (default) form, mesh refinement, based on this error estimate will lead to an equidistribution of the error across all elements. Usually, this is the desired behaviour. However, there are cases in which the solution evolves towards a state in which the flux tends to zero while the solution itself becomes so simple that it can be represented exactly on any finite element mesh (e.g. in spin-up problems in which the fluid motion approaches a rigid body rotation). In that case the mesh adaptation tries to equidistribute any small roundoff errors in the solution, causing strong, spatially uniform mesh refinement throughout the domain, even though the solution is already fully converged. For such cases, it is possible to replace the denominator in the above expression by a prescribed reference flux, which may be specified via the access function </p><div class="fragment"><div class="line"><a class="code" href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">reference_flux_norm</a>()</div>
-<div class="ttc" id="aclassoomph_1_1Z2ErrorEstimator_html_a997dc6ba0b546a0f7363949a8d33d133"><div class="ttname"><a href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">oomph::Z2ErrorEstimator::reference_flux_norm</a></div><div class="ttdeci">double &amp; reference_flux_norm()</div><div class="ttdoc">Access function for prescribed reference flux norm.</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00355">error_estimator.h:355</a></div></div>
+<div class="ttc" id="aclassoomph_1_1Z2ErrorEstimator_html_a997dc6ba0b546a0f7363949a8d33d133"><div class="ttname"><a href="classoomph_1_1Z2ErrorEstimator.html#a997dc6ba0b546a0f7363949a8d33d133">oomph::Z2ErrorEstimator::reference_flux_norm</a></div><div class="ttdeci">double &amp; reference_flux_norm()</div><div class="ttdoc">Access function for prescribed reference flux norm.</div><div class="ttdef"><b>Definition:</b> <a href="error__estimator_8h_source.html#l00348">error_estimator.h:348</a></div></div>
 </div><!-- fragment --> </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00265">265</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00258">258</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a75ef55e67b21ec49ed1a37d095cfa9f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a75ef55e67b21ec49ed1a37d095cfa9f9">&#9670;&nbsp;</a></span>CombinedErrorEstimateFctPt</h2>
@@ -314,7 +314,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Function pointer to combined error estimator function. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00269">269</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00262">262</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 </div>
 </div>
@@ -345,7 +345,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Constructor: Set order of recovery shape functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00272">272</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00265">265</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 </div>
 </div>
@@ -374,7 +374,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Constructor: Leave order of recovery shape functions open for now &ndash; they will be read out from first element of the mesh when the error estimator is applied. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00284">284</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00277">277</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 </div>
 </div>
@@ -431,7 +431,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00299">299</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00292">292</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 </div>
 </div>
@@ -461,9 +461,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function: Pointer to combined error estimate function. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00334">334</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00327">327</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00420">Combined_error_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00413">Combined_error_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -492,9 +492,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function: Pointer to combined error estimate function. Const version. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00341">341</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00334">334</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00420">Combined_error_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00413">Combined_error_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -555,7 +555,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l01802">1802</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01600">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00524">oomph::DocInfo::directory()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="elements_8h_source.html#l03148">oomph::FiniteElement::get_s_plot()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l03186">oomph::FiniteElement::nplot_points()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00554">oomph::DocInfo::number()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="elements_8h_source.html#l03161">oomph::FiniteElement::tecplot_zone_string()</a>, and <a class="el" href="elements_8h_source.html#l03174">oomph::FiniteElement::write_tecplot_zone_footer()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01600">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00524">oomph::DocInfo::directory()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00473">oomph::Mesh::finite_element_pt()</a>, <a class="el" href="elements_8h_source.html#l03152">oomph::FiniteElement::get_s_plot()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l03190">oomph::FiniteElement::nplot_points()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00554">oomph::DocInfo::number()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>, <a class="el" href="elements_8h_source.html#l03165">oomph::FiniteElement::tecplot_zone_string()</a>, and <a class="el" href="elements_8h_source.html#l03178">oomph::FiniteElement::write_tecplot_zone_footer()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -582,7 +582,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00460">460</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00420">Combined_error_fct_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00413">Combined_error_fct_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -624,7 +624,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Compute the elemental error measures for a given mesh and store them in a vector. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00303">303</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00296">296</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 <p class="reference">References <a class="el" href="oomph__utilities_8h_source.html#l00542">oomph::DocInfo::disable_doc()</a>.</p>
 
@@ -681,7 +681,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00946">946</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01600">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="error__estimator_8cc_source.html#l01802">doc_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00142">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="error__estimator_8cc_source.html#l00460">get_combined_error_estimate()</a>, <a class="el" href="error__estimator_8cc_source.html#l00666">get_recovered_flux_in_patch()</a>, <a class="el" href="error__estimator_8h_source.html#l00127">oomph::ElementWithZ2ErrorEstimator::get_Z2_compound_flux_indices()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="mesh_8h_source.html#l01740">oomph::Mesh::halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l01779">oomph::Mesh::haloed_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00548">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="elements_8h_source.html#l01163">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="mesh_8h_source.html#l01588">oomph::Mesh::is_mesh_distributed()</a>, <a class="el" href="elements_8cc_source.html#l04103">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="error__estimator_8h_source.html#l00100">oomph::ElementWithZ2ErrorEstimator::ncompound_fluxes()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00596">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="mesh_8h_source.html#l00436">oomph::Mesh::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="error__estimator_8cc_source.html#l00812">nrecovery_terms()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#ae82c5728902e13da31be19c390fc28e3">oomph::ElementWithZ2ErrorEstimator::num_Z2_flux_terms()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="error__estimator_8h_source.html#l00322">recovery_order()</a>, <a class="el" href="error__estimator_8h_source.html#l00403">Recovery_order</a>, <a class="el" href="error__estimator_8h_source.html#l00407">Recovery_order_from_first_element</a>, <a class="el" href="error__estimator_8h_source.html#l00417">Reference_flux_norm</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00505">setup_patches()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="error__estimator_8cc_source.html#l00044">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="oomph__utilities_8cc_source.html#l01046">oomph::MPI_Helpers::communicator_pt()</a>, <a class="el" href="mesh_8h_source.html#l01600">oomph::Mesh::communicator_pt()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="error__estimator_8cc_source.html#l01802">doc_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="error__estimator_8h_source.html#l00135">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="error__estimator_8cc_source.html#l00460">get_combined_error_estimate()</a>, <a class="el" href="error__estimator_8cc_source.html#l00666">get_recovered_flux_in_patch()</a>, <a class="el" href="error__estimator_8h_source.html#l00127">oomph::ElementWithZ2ErrorEstimator::get_Z2_compound_flux_indices()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="mesh_8h_source.html#l01740">oomph::Mesh::halo_element_pt()</a>, <a class="el" href="mesh_8h_source.html#l01779">oomph::Mesh::haloed_element_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00548">oomph::DocInfo::is_doc_enabled()</a>, <a class="el" href="elements_8h_source.html#l01167">oomph::GeneralisedElement::is_halo()</a>, <a class="el" href="mesh_8h_source.html#l01588">oomph::Mesh::is_mesh_distributed()</a>, <a class="el" href="elements_8cc_source.html#l04133">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="oomph__utilities_8h_source.html#l00851">oomph::MPI_Helpers::mpi_has_been_initialised()</a>, <a class="el" href="error__estimator_8h_source.html#l00100">oomph::ElementWithZ2ErrorEstimator::ncompound_fluxes()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="mesh_8h_source.html#l00596">oomph::Mesh::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="mesh_8h_source.html#l00436">oomph::Mesh::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="error__estimator_8cc_source.html#l00812">nrecovery_terms()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#ae82c5728902e13da31be19c390fc28e3">oomph::ElementWithZ2ErrorEstimator::num_Z2_flux_terms()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="error__estimator_8h_source.html#l00315">recovery_order()</a>, <a class="el" href="error__estimator_8h_source.html#l00396">Recovery_order</a>, <a class="el" href="error__estimator_8h_source.html#l00400">Recovery_order_from_first_element</a>, <a class="el" href="error__estimator_8h_source.html#l00410">Reference_flux_norm</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00505">setup_patches()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="error__estimator_8cc_source.html#l00044">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -741,7 +741,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00666">666</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="error__estimator_8h_source.html#l00142">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="error__estimator_8cc_source.html#l00245">integral_rec()</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8cc_source.html#l04103">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="matrices_8cc_source.html#l00202">oomph::DenseDoubleMatrix::lubksub()</a>, <a class="el" href="matrices_8cc_source.html#l00192">oomph::DenseDoubleMatrix::ludecompose()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00044">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="error__estimator_8h_source.html#l00135">oomph::ElementWithZ2ErrorEstimator::geometric_jacobian()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a5688ff5f546d81771cabad82ca5a7556">oomph::ElementWithZ2ErrorEstimator::get_Z2_flux()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="error__estimator_8cc_source.html#l00245">integral_rec()</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8cc_source.html#l04133">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="matrices_8cc_source.html#l00202">oomph::DenseDoubleMatrix::lubksub()</a>, <a class="el" href="matrices_8cc_source.html#l00192">oomph::DenseDoubleMatrix::ludecompose()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="error__estimator_8cc_source.html#l00044">shape_rec()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -790,7 +790,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00245">245</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00322">recovery_order()</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00315">recovery_order()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00666">get_recovered_flux_in_patch()</a>.</p>
 
@@ -825,7 +825,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00812">812</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00403">Recovery_order</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00396">Recovery_order</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -884,9 +884,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function for order of recovery polynomials. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00322">322</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00315">315</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00403">Recovery_order</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00396">Recovery_order</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, <a class="el" href="error__estimator_8cc_source.html#l00245">integral_rec()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00044">shape_rec()</a>.</p>
 
@@ -917,9 +917,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function for order of recovery polynomials (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00328">328</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00321">321</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00403">Recovery_order</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00396">Recovery_order</a>.</p>
 
 </div>
 </div>
@@ -948,9 +948,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function for prescribed reference flux norm. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00355">355</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00348">348</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00417">Reference_flux_norm</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00410">Reference_flux_norm</a>.</p>
 
 </div>
 </div>
@@ -979,9 +979,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Access function for prescribed reference flux norm (const. version) </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00361">361</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00354">354</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00417">Reference_flux_norm</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00410">Reference_flux_norm</a>.</p>
 
 </div>
 </div>
@@ -1022,7 +1022,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00505">505</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a19495a0e77ef4ff35f15fdf7913b4077">oomph::ElementWithZ2ErrorEstimator::nvertex_node()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="error__estimator_8h_source.html#l00403">Recovery_order</a>, and <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#a0eedccc33519f852c5dc2055ddf2774b">oomph::ElementWithZ2ErrorEstimator::vertex_node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00571">e</a>, <a class="el" href="mesh_8h_source.html#l00448">oomph::Mesh::element_pt()</a>, <a class="el" href="mesh_8h_source.html#l00590">oomph::Mesh::nelement()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1ElementWithZ2ErrorEstimator.html#af39480835bd3e0f6b2f4f7a9a4044798">oomph::ElementWithZ2ErrorEstimator::nrecovery_order()</a>, <a class="el" href="elements_8h_source.html#l02495">oomph::FiniteElement::nvertex_node()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="error__estimator_8h_source.html#l00396">Recovery_order</a>, and <a class="el" href="elements_8h_source.html#l02504">oomph::FiniteElement::vertex_node_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -1076,7 +1076,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p class="definition">Definition at line <a class="el" href="error__estimator_8cc_source.html#l00044">44</a> of file <a class="el" href="error__estimator_8cc_source.html">error_estimator.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00322">recovery_order()</a>.</p>
+<p class="reference">References <a class="el" href="error__estimator_8h_source.html#l00315">recovery_order()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00666">get_recovered_flux_in_patch()</a>.</p>
 
@@ -1105,9 +1105,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Function pointer to combined error estimator function. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00420">420</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00413">413</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00334">combined_error_fct_pt()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00460">get_combined_error_estimate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8h_source.html#l00327">combined_error_fct_pt()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00460">get_combined_error_estimate()</a>.</p>
 
 </div>
 </div>
@@ -1133,9 +1133,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Order of recovery polynomials. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00403">403</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00396">396</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, <a class="el" href="error__estimator_8cc_source.html#l00812">nrecovery_terms()</a>, <a class="el" href="error__estimator_8h_source.html#l00322">recovery_order()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00505">setup_patches()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, <a class="el" href="error__estimator_8cc_source.html#l00812">nrecovery_terms()</a>, <a class="el" href="error__estimator_8h_source.html#l00315">recovery_order()</a>, and <a class="el" href="error__estimator_8cc_source.html#l00505">setup_patches()</a>.</p>
 
 </div>
 </div>
@@ -1161,7 +1161,7 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Bool to indicate if recovery order is to be read out from first element in mesh or set globally. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00407">407</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00400">400</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>.</p>
 
@@ -1189,9 +1189,9 @@ functions". In principle, one could use the finite element shape functions <img 
 
 <p>Prescribed reference flux norm. </p>
 
-<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00417">417</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__estimator_8h_source.html#l00410">410</a> of file <a class="el" href="error__estimator_8h_source.html">error_estimator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, and <a class="el" href="error__estimator_8h_source.html#l00355">reference_flux_norm()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="error__estimator_8cc_source.html#l00946">get_element_errors()</a>, and <a class="el" href="error__estimator_8h_source.html#l00348">reference_flux_norm()</a>.</p>
 
 </div>
 </div>
@@ -1227,7 +1227,7 @@ functions". In principle, one could use the finite element shape functions <img 
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:54:26
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:11:10
         </div>
       </div>
     </footer>

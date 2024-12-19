@@ -164,9 +164,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab44c634b95861be02003e7f9f2a4ad3e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LAPACK__QZ.html#ab44c634b95861be02003e7f9f2a4ad3e">~LAPACK_QZ</a> ()</td></tr>
 <tr class="memdesc:ab44c634b95861be02003e7f9f2a4ad3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty desctructor.  <a href="classoomph_1_1LAPACK__QZ.html#ab44c634b95861be02003e7f9f2a4ad3e">More...</a><br /></td></tr>
 <tr class="separator:ab44c634b95861be02003e7f9f2a4ad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace099d9e0f27de3ae2f944375486f614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LAPACK__QZ.html#ace099d9e0f27de3ae2f944375486f614">solve_eigenproblem_legacy</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const int &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;eigenvalue, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector, const bool &amp;do_adjoint_problem=false)</td></tr>
-<tr class="memdesc:ace099d9e0f27de3ae2f944375486f614"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use LAPACK QZ to solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. This is a legacy version of this function that stores re &amp; imag parts of eigenvectors in some solver-specific collection of real vectors; they are disentangled in the alternative version of this function that returns Vectors of complex Vectors. At least n_eval eigenvalues are computed.  <a href="classoomph_1_1LAPACK__QZ.html#ace099d9e0f27de3ae2f944375486f614">More...</a><br /></td></tr>
-<tr class="separator:ace099d9e0f27de3ae2f944375486f614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6857491fb96b3c3b0c883c5a129282f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LAPACK__QZ.html#a6857491fb96b3c3b0c883c5a129282f5">solve_eigenproblem</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const int &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;alpha, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;beta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_real, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_imag, const bool &amp;do_adjoint_problem=false)</td></tr>
 <tr class="memdesc:a6857491fb96b3c3b0c883c5a129282f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_208.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_209.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_210.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs. There's a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.h header and the associated feenable function). At least n_eval eigenvalues are computed.  <a href="classoomph_1_1LAPACK__QZ.html#a6857491fb96b3c3b0c883c5a129282f5">More...</a><br /></td></tr>
 <tr class="separator:a6857491fb96b3c3b0c883c5a129282f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,7 +242,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a207157191fd1b143a6accb69bc09b2ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LAPACK__QZ.html#a207157191fd1b143a6accb69bc09b2ac">solve_eigenproblem_helper</a> (<a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;problem_pt, const int &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;alpha, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;beta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector)</td></tr>
-<tr class="memdesc:a207157191fd1b143a6accb69bc09b2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function called from legacy and updated version from "raw" lapack code.  <a href="classoomph_1_1LAPACK__QZ.html#a207157191fd1b143a6accb69bc09b2ac">More...</a><br /></td></tr>
+<tr class="memdesc:a207157191fd1b143a6accb69bc09b2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function called from "raw" lapack code.  <a href="classoomph_1_1LAPACK__QZ.html#a207157191fd1b143a6accb69bc09b2ac">More...</a><br /></td></tr>
 <tr class="separator:a207157191fd1b143a6accb69bc09b2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a735e38f88cfa0c21a01f486df261013e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1LAPACK__QZ.html#a735e38f88cfa0c21a01f486df261013e">DGGEV_error</a> (const int &amp;info, const int &amp;n)</td></tr>
 <tr class="memdesc:a735e38f88cfa0c21a01f486df261013e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide diagonstic for DGGEV error return.  <a href="classoomph_1_1LAPACK__QZ.html#a735e38f88cfa0c21a01f486df261013e">More...</a><br /></td></tr>
@@ -274,7 +271,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for the LAPACK QZ eigensolver. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00317">317</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00157">157</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ade55daae7bca3f5d40cfd523f6e0169c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ade55daae7bca3f5d40cfd523f6e0169c">&#9670;&nbsp;</a></span>LAPACK_QZ() <span class="overload">[1/2]</span></h2>
@@ -301,7 +298,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Empty constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00321">321</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00161">161</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
 </div>
 </div>
@@ -358,7 +355,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Empty desctructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00330">330</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00170">170</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
 </div>
 </div>
@@ -399,9 +396,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Provide diagonstic for DGGEV error return. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00402">402</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00227">227</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00566">solve_eigenproblem_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00065">solve_eigenproblem_helper()</a>.</p>
 
 </div>
 </div>
@@ -446,9 +443,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Find the eigenvalues of a complex generalised eigenvalue problem specified by <img class="formulaInl" alt="$ Ax = \lambda Mx $" src="form_211.png" width="61" height="10"/>. Note: the (real) shift that's specifiable via the <a class="el" href="classoomph_1_1EigenSolver.html" title="Base class for all EigenProblem solves. This simply defines standard interfaces so that different sol...">EigenSolver</a> base class is ignored here. A warning gets issued if it's set to a nonzero value. </p>
 <p>Use LAPACK to solve a complex eigen problem specified by the given matrices. Note: the (real) shift that's specifiable via the <a class="el" href="classoomph_1_1EigenSolver.html" title="Base class for all EigenProblem solves. This simply defines standard interfaces so that different sol...">EigenSolver</a> base class is ignored here. A warning gets issued if it's set to a nonzero value. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00946">946</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00401">401</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">oomph::ComplexMatrixBase::nrow()</a>, <a class="el" href="eigen__solver_8h_source.html#l00065">oomph::EigenSolver::Sigma_real</a>, and <a class="el" href="eigen__solver_8h_source.html#l00441">ZGGEV_error()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="classoomph_1_1ComplexMatrixBase.html#adcbdf19bc82c61c0a4fbfd8c8de97b3b">oomph::ComplexMatrixBase::nrow()</a>, <a class="el" href="eigen__solver_8h_source.html#l00065">oomph::EigenSolver::Sigma_real</a>, and <a class="el" href="eigen__solver_8h_source.html#l00266">ZGGEV_error()</a>.</p>
 
 </div>
 </div>
@@ -548,9 +545,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classoomph_1_1EigenSolver.html#aad724fb650a5c8dc9dfe8cd0587a01ca">oomph::EigenSolver</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00811">811</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00266">266</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="problem_8h_source.html#l01678">oomph::Problem::ndof()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00566">solve_eigenproblem_helper()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00479">Tolerance_for_ccness_check</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="problem_8h_source.html#l01704">oomph::Problem::ndof()</a>, <a class="el" href="eigen__solver_8cc_source.html#l00065">solve_eigenproblem_helper()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00304">Tolerance_for_ccness_check</a>.</p>
 
 </div>
 </div>
@@ -606,77 +603,14 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper function called from legacy and updated version from "raw" lapack code. </p>
+<p>Helper function called from "raw" lapack code. </p>
 <p>Use LAPACK QZ to solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_208.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_209.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_210.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs. This is actually a helper function that stores re &amp; imag parts of eigenvectors in a collection of real vectors; they are disentangled in the alternative version of this function that returns Vectors of complex vectors. At least n_eval eigenvalues are computed. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00566">566</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00065">65</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="problem_8h_source.html#l01246">oomph::Problem::communicator_pt()</a>, <a class="el" href="eigen__solver_8h_source.html#l00402">DGGEV_error()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="problem_8cc_source.html#l08602">oomph::Problem::get_eigenproblem_matrices()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01678">oomph::Problem::ndof()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00065">oomph::EigenSolver::Sigma_real</a>.</p>
+<p class="reference">References <a class="el" href="linear__algebra__distribution_8h_source.html#l00507">oomph::DistributableLinearAlgebraObject::build_distribution()</a>, <a class="el" href="problem_8h_source.html#l01266">oomph::Problem::communicator_pt()</a>, <a class="el" href="eigen__solver_8h_source.html#l00227">DGGEV_error()</a>, <a class="el" href="linear__algebra__distribution_8h_source.html#l00457">oomph::DistributableLinearAlgebraObject::distribution_pt()</a>, <a class="el" href="problem_8cc_source.html#l08429">oomph::Problem::get_eigenproblem_matrices()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01704">oomph::Problem::ndof()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00065">oomph::EigenSolver::Sigma_real</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00811">solve_eigenproblem()</a>, and <a class="el" href="eigen__solver_8cc_source.html#l00763">solve_eigenproblem_legacy()</a>.</p>
-
-</div>
-</div>
-<a id="ace099d9e0f27de3ae2f944375486f614"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace099d9e0f27de3ae2f944375486f614">&#9670;&nbsp;</a></span>solve_eigenproblem_legacy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void oomph::LAPACK_QZ::solve_eigenproblem_legacy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Problem.html">Problem</a> *const &amp;&#160;</td>
-          <td class="paramname"><em>problem_pt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>n_eval</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>eigenvalue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>eigenvector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool &amp;&#160;</td>
-          <td class="paramname"><em>do_adjoint_problem</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Use LAPACK QZ to solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. This is a legacy version of this function that stores re &amp; imag parts of eigenvectors in some solver-specific collection of real vectors; they are disentangled in the alternative version of this function that returns Vectors of complex Vectors. At least n_eval eigenvalues are computed. </p>
-<p>Use LAPACK QZ to solve the real eigenproblem that is assembled by elements in a mesh in a <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a> object. Note that the assembled matrices include the shift and are real. The eigenvalues and eigenvectors are, in general, complex. This is a legacy version of this function that stores re &amp; imag parts of eigenvectors in some solver-specific collection of real vectors; they are disentangled in the alternative version of this function that returns Vectors of complex vectors. At least n_eval eigenvalues are computed. </p>
-
-<p>Implements <a class="el" href="classoomph_1_1EigenSolver.html#adbaf38eeb5bab7fe47b7f8cdc94d59b5">oomph::EigenSolver</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8cc_source.html#l00763">763</a> of file <a class="el" href="eigen__solver_8cc_source.html">eigen_solver.cc</a>.</p>
-
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01678">oomph::Problem::ndof()</a>, and <a class="el" href="eigen__solver_8cc_source.html#l00566">solve_eigenproblem_helper()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00266">solve_eigenproblem()</a>.</p>
 
 </div>
 </div>
@@ -705,9 +639,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to tolerance for checking complex conjugateness of eigenvalues. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00386">386</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00211">211</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="eigen__solver_8h_source.html#l00479">Tolerance_for_ccness_check</a>.</p>
+<p class="reference">References <a class="el" href="eigen__solver_8h_source.html#l00304">Tolerance_for_ccness_check</a>.</p>
 
 </div>
 </div>
@@ -736,9 +670,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to tolerance for checking complex conjugateness of eigenvalues (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00379">379</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00204">204</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="eigen__solver_8h_source.html#l00479">Tolerance_for_ccness_check</a>.</p>
+<p class="reference">References <a class="el" href="eigen__solver_8h_source.html#l00304">Tolerance_for_ccness_check</a>.</p>
 
 </div>
 </div>
@@ -778,9 +712,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Provide diagonstic for ZGGEV error return. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00441">441</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00266">266</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00946">find_eigenvalues()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00401">find_eigenvalues()</a>.</p>
 
 </div>
 </div>
@@ -807,9 +741,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Tolerance for checking complex conjugateness of eigenvalues. </p>
 
-<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00479">479</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="eigen__solver_8h_source.html#l00304">304</a> of file <a class="el" href="eigen__solver_8h_source.html">eigen_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00811">solve_eigenproblem()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00379">tolerance_for_ccness_check()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="eigen__solver_8cc_source.html#l00266">solve_eigenproblem()</a>, and <a class="el" href="eigen__solver_8h_source.html#l00204">tolerance_for_ccness_check()</a>.</p>
 
 </div>
 </div>
@@ -845,7 +779,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:54:22
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:11:07
         </div>
       </div>
     </footer>

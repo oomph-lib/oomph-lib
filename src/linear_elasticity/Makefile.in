@@ -139,7 +139,8 @@ liblinear_elasticity_la_LIBADD =
 am__objects_1 =
 am__objects_2 = elasticity_tensor.lo linear_elasticity_elements.lo \
 	refineable_linear_elasticity_elements.lo \
-	Tlinear_elasticity_elements.lo
+	Tlinear_elasticity_elements.lo \
+	linear_elasticity_traction_elements.lo
 am__objects_3 = $(am__objects_1) $(am__objects_2)
 am_liblinear_elasticity_la_OBJECTS = $(am__objects_3)
 liblinear_elasticity_la_OBJECTS =  \
@@ -166,6 +167,7 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Tlinear_elasticity_elements.Plo \
 	./$(DEPDIR)/elasticity_tensor.Plo \
 	./$(DEPDIR)/linear_elasticity_elements.Plo \
+	./$(DEPDIR)/linear_elasticity_traction_elements.Plo \
 	./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -418,7 +420,8 @@ top_srcdir = @top_srcdir@
 # Define the sources
 sources = \
 elasticity_tensor.cc linear_elasticity_elements.cc \
-refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc
+refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc \
+linear_elasticity_traction_elements.cc 
 
 
 # Include files which shouldn't be compiled
@@ -429,7 +432,7 @@ headers = \
 elasticity_tensor.h linear_elasticity_elements.h \
 linear_elasticity_traction_elements.h \
 Tlinear_elasticity_elements.h \
-refineable_linear_elasticity_elements.h 
+refineable_linear_elasticity_elements.h
 
 
 # Template only files. These should be included in include directory
@@ -543,6 +546,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Tlinear_elasticity_elements.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/elasticity_tensor.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linear_elasticity_elements.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linear_elasticity_traction_elements.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/refineable_linear_elasticity_elements.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
@@ -750,6 +754,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/Tlinear_elasticity_elements.Plo
 	-rm -f ./$(DEPDIR)/elasticity_tensor.Plo
 	-rm -f ./$(DEPDIR)/linear_elasticity_elements.Plo
+	-rm -f ./$(DEPDIR)/linear_elasticity_traction_elements.Plo
 	-rm -f ./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -800,6 +805,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/Tlinear_elasticity_elements.Plo
 	-rm -f ./$(DEPDIR)/elasticity_tensor.Plo
 	-rm -f ./$(DEPDIR)/linear_elasticity_elements.Plo
+	-rm -f ./$(DEPDIR)/linear_elasticity_traction_elements.Plo
 	-rm -f ./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic

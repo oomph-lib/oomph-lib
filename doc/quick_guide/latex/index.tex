@@ -11,7 +11,7 @@ To solve a given PDE with {\ttfamily oomph-\/lib}, its discretisation needs to b
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Build the problem }}
 \DoxyCodeLine{  DemoPoissonProblem problem;}
-\DoxyCodeLine{}
+\DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Solve the problem, using Newton's method}}
 \DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{}
@@ -214,7 +214,7 @@ Here is the full specification for the {\ttfamily Demo\+Poisson\+Problem} class 
 \DoxyCodeLine{\textcolor{comment}{  /// Print out the result after the solve}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} actions\_after\_newton\_solve() }
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    ofstream file (\textcolor{stringliteral}{"{}result.dat"{}});}
+\DoxyCodeLine{    ofstream file(\textcolor{stringliteral}{"{}result.dat"{}});}
 \DoxyCodeLine{    mesh\_pt()-\/>output(file);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{}
@@ -395,7 +395,7 @@ Here is the complete class definition for a simple, one-\/dimensional (line) mes
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Boundary 1 contains the final node in the mesh:}}
 \DoxyCodeLine{  add\_boundary\_node(1,Node\_pt[n\_global\_node-\/1]); }
-\DoxyCodeLine{}
+\DoxyCodeLine{  }
 \DoxyCodeLine{ \} \textcolor{comment}{// End of constructor}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// End of OneDimMesh class.}}

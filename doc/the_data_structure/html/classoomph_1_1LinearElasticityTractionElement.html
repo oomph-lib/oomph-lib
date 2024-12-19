@@ -1251,6 +1251,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress output while checking for inverted elements.  <a href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">More...</a><br /></td></tr>
 <tr class="separator:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">Suppress_warning_about_any_repeated_data</a> = false</td></tr>
+<tr class="memdesc:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">More...</a><br /></td></tr>
+<tr class="separator:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a></td></tr>
 <tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
 <tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1284,7 +1287,7 @@ class oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;</h3>
 
 <p>A class for elements that allow the imposition of an applied traction in the equations of linear elasticity. The geometrical information can be read from the FaceGeometry&lt;ELEMENT&gt; class and and thus, we can be generic enough without the need to have a separate equations class. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00075">75</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00068">68</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a77439a3f9cc538b690e43f9198e6b6f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77439a3f9cc538b690e43f9198e6b6f1">&#9670;&nbsp;</a></span>LinearElasticityTractionElement()</h2>
@@ -1324,9 +1327,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Constructor, which takes a "bulk" element and the value of the index and its limit. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00119">119</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00112">112</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l05132">oomph::FiniteElement::build_face_element()</a>, <a class="el" href="elements_8h_source.html#l04626">oomph::FaceElement::face_index()</a>, <a class="el" href="elements_8h_source.html#l02470">oomph::FiniteElement::has_hanging_nodes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00087">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::Traction_fct_pt</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00052">oomph::LinearElasticityTractionElementHelper::Zero_traction_fct()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l05162">oomph::FiniteElement::build_face_element()</a>, <a class="el" href="elements_8h_source.html#l04630">oomph::FaceElement::face_index()</a>, <a class="el" href="elements_8h_source.html#l02474">oomph::FiniteElement::has_hanging_nodes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00080">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::Traction_fct_pt</a>, and <a class="el" href="linear__elasticity__traction__elements_8cc_source.html#l00011">oomph::LinearElasticityTractionElementHelper::Zero_traction_fct()</a>.</p>
 
 </div>
 </div>
@@ -1371,9 +1374,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#a0ae7af222af38a0d53bf283dc85bdfea">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00187">187</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00180">180</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00275">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals_linear_elasticity_traction()</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00268">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals_linear_elasticity_traction()</a>.</p>
 
 </div>
 </div>
@@ -1407,9 +1410,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#a310c97f515e8504a48179c0e72c550d7">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00180">180</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00173">173</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00275">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals_linear_elasticity_traction()</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00268">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals_linear_elasticity_traction()</a>.</p>
 
 </div>
 </div>
@@ -1442,11 +1445,11 @@ template&lt;class ELEMENT &gt; </div>
 <p>Helper function that actually calculates the residuals. </p>
 <p>Return the residuals for the <a class="el" href="classoomph_1_1LinearElasticityTractionElement.html" title="A class for elements that allow the imposition of an applied traction in the equations of linear elas...">LinearElasticityTractionElement</a> equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00274">274</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00267">267</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00187">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00180">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00180">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00173">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::fill_in_contribution_to_residuals()</a>.</p>
 
 </div>
 </div>
@@ -1506,9 +1509,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Get the traction vector: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00098">98</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00091">91</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00249">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::traction()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00087">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::Traction_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00242">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::traction()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00080">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::Traction_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -1542,9 +1545,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#a72cddd09f8ddbee1a20a1ff404c6943e">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00219">219</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00212">212</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03050">oomph::FiniteElement::output()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03054">oomph::FiniteElement::output()</a>.</p>
 
 </div>
 </div>
@@ -1588,9 +1591,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#adfaee690bb0608f03320eeb9d110d48c">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00225">225</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00218">218</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03050">oomph::FiniteElement::output()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03054">oomph::FiniteElement::output()</a>.</p>
 
 </div>
 </div>
@@ -1624,9 +1627,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#a2ad98a3d2ef4999f1bef62c0ff13f2a7">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00207">207</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00200">200</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03050">oomph::FiniteElement::output()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03054">oomph::FiniteElement::output()</a>.</p>
 
 </div>
 </div>
@@ -1670,9 +1673,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#afa9d9b2670f999b43e6679c9dd28c457">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00213">213</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00206">206</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03050">oomph::FiniteElement::output()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03054">oomph::FiniteElement::output()</a>.</p>
 
 </div>
 </div>
@@ -1714,11 +1717,11 @@ template&lt;class ELEMENT &gt; </div>
 <p>//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////</p>
 <p>Compute traction vector at specified local coordinate Should only be used for post-processing; ignores dependence on integration point! </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00249">249</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00242">242</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00098">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::get_traction()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00091">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::get_traction()</a>.</p>
 
 </div>
 </div>
@@ -1768,9 +1771,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FaceElement.html#a58c9f93705c7741f76c8487d152e68a6">oomph::FaceElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00199">199</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00192">192</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l04497">oomph::FaceElement::zeta_nodal()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l04501">oomph::FaceElement::zeta_nodal()</a>.</p>
 
 </div>
 </div>
@@ -1799,7 +1802,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Reference to the traction function pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00170">170</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00163">163</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1827,9 +1830,9 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Pointer to an imposed traction function. Arguments: Eulerian coordinate; outer unit normal; applied traction. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00087">87</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00080">80</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00098">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::get_traction()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00119">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::LinearElasticityTractionElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00091">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::get_traction()</a>, and <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00112">oomph::LinearElasticityTractionElement&lt; ELEMENT &gt;::LinearElasticityTractionElement()</a>.</p>
 
 </div>
 </div>
@@ -1857,7 +1860,7 @@ template&lt;class ELEMENT &gt; </div>
 
 <p>Index at which the i-th displacement component is stored. </p>
 
-<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00080">80</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="linear__elasticity__traction__elements_8h_source.html#l00073">73</a> of file <a class="el" href="linear__elasticity__traction__elements_8h_source.html">linear_elasticity_traction_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1892,7 +1895,7 @@ template&lt;class ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:55:13
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:11:57
         </div>
       </div>
     </footer>

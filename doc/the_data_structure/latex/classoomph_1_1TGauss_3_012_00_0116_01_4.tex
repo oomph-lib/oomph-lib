@@ -33,7 +33,9 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_0116_01_4_a
 static const double \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_0116_01_4_a04e096e7446c033b71d6ec440f93f2c1}{Knot}} \mbox{[}52\mbox{]}\mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em Array to hold the weights and knots (defined in cc file) \end{DoxyCompactList}\item 
 static const double \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_0116_01_4_ab89539b4866863f4d58b2a88cc262ac4}{Weight}} \mbox{[}52\mbox{]}
-\end{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_0116_01_4_a15335c99a21028c48adfc2a0109b57fa}{User\+\_\+has\+\_\+been\+\_\+warned}} = false
+\begin{DoxyCompactList}\small\item\em A flag to track whether we have warned the user about the exterior knots and negative weights in this scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -56,7 +58,11 @@ Default constructor (empty)
 
 
 
-Definition at line 1060 of file integral.\+h.
+Definition at line 1066 of file integral.\+h.
+
+
+
+References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_0116_01_4_ac9a08f70843e8fd64a843caced3b1d77}\label{classoomph_1_1TGauss_3_012_00_0116_01_4_ac9a08f70843e8fd64a843caced3b1d77}} 
 \index{oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}!TGauss@{TGauss}}
@@ -87,7 +93,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed73
 
 
 
-Definition at line 1075 of file integral.\+h.
+Definition at line 1103 of file integral.\+h.
 
 
 
@@ -109,7 +115,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f
 
 
 
-Definition at line 1069 of file integral.\+h.
+Definition at line 1097 of file integral.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_0116_01_4_a5f778fb2c0351e6e76218faa9a753ce0}\label{classoomph_1_1TGauss_3_012_00_0116_01_4_a5f778fb2c0351e6e76218faa9a753ce0}} 
 \index{oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}!operator=@{operator=}}
@@ -137,7 +143,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c29450
 
 
 
-Definition at line 1081 of file integral.\+h.
+Definition at line 1109 of file integral.\+h.
 
 
 
@@ -174,6 +180,20 @@ Number of integration points in the scheme.
 
 Definition at line 1054 of file integral.\+h.
 
+\mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_0116_01_4_a15335c99a21028c48adfc2a0109b57fa}\label{classoomph_1_1TGauss_3_012_00_0116_01_4_a15335c99a21028c48adfc2a0109b57fa}} 
+\index{oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}!User\_has\_been\_warned@{User\_has\_been\_warned}}
+\index{User\_has\_been\_warned@{User\_has\_been\_warned}!oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}}
+\doxysubsubsection{\texorpdfstring{User\_has\_been\_warned}{User\_has\_been\_warned}}
+{\footnotesize\ttfamily bool \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 16 $>$\+::User\+\_\+has\+\_\+been\+\_\+warned = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+A flag to track whether we have warned the user about the exterior knots and negative weights in this scheme. 
+
+
+
+Definition at line 1061 of file integral.\+h.
+
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_0116_01_4_ab89539b4866863f4d58b2a88cc262ac4}\label{classoomph_1_1TGauss_3_012_00_0116_01_4_ab89539b4866863f4d58b2a88cc262ac4}} 
 \index{oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}!Weight@{Weight}}
 \index{Weight@{Weight}!oomph::TGauss$<$ 2, 16 $>$@{oomph::TGauss$<$ 2, 16 $>$}}
@@ -183,24 +203,24 @@ Definition at line 1054 of file integral.\+h.
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{= \{}
-\DoxyCodeLine{    2 * 0.046875697427642, 2 * 0.006405878578585, 2 * 0.006405878578585,}
-\DoxyCodeLine{    2 * 0.006405878578585, 2 * 0.041710296739387, 2 * 0.041710296739387,}
-\DoxyCodeLine{    2 * 0.041710296739387, 2 * 0.026891484250064, 2 * 0.026891484250064,}
-\DoxyCodeLine{    2 * 0.026891484250064, 2 * 0.04213252276165,  2 * 0.04213252276165,}
-\DoxyCodeLine{    2 * 0.04213252276165,  2 * 0.030000266842773, 2 * 0.030000266842773,}
-\DoxyCodeLine{    2 * 0.030000266842773, 2 * 0.014200098925024, 2 * 0.014200098925024,}
-\DoxyCodeLine{    2 * 0.014200098925024, 2 * 0.003582462351273, 2 * 0.003582462351273,}
-\DoxyCodeLine{    2 * 0.003582462351273, 2 * 0.032773147460627, 2 * 0.032773147460627,}
-\DoxyCodeLine{    2 * 0.032773147460627, 2 * 0.032773147460627, 2 * 0.032773147460627,}
-\DoxyCodeLine{    2 * 0.032773147460627, 2 * 0.015298306248441, 2 * 0.015298306248441,}
-\DoxyCodeLine{    2 * 0.015298306248441, 2 * 0.015298306248441, 2 * 0.015298306248441,}
-\DoxyCodeLine{    2 * 0.015298306248441, 2 * 0.002386244192839, 2 * 0.002386244192839,}
-\DoxyCodeLine{    2 * 0.002386244192839, 2 * 0.002386244192839, 2 * 0.002386244192839,}
-\DoxyCodeLine{    2 * 0.002386244192839, 2 * 0.019084792755899, 2 * 0.019084792755899,}
-\DoxyCodeLine{    2 * 0.019084792755899, 2 * 0.019084792755899, 2 * 0.019084792755899,}
-\DoxyCodeLine{    2 * 0.019084792755899, 2 * 0.006850054546542, 2 * 0.006850054546542,}
-\DoxyCodeLine{    2 * 0.006850054546542, 2 * 0.006850054546542, 2 * 0.006850054546542,}
-\DoxyCodeLine{    2 * 0.006850054546542\}}
+\DoxyCodeLine{    0.5 * 0.046875697427642, 0.5 * 0.006405878578585, 0.5 * 0.006405878578585,}
+\DoxyCodeLine{    0.5 * 0.006405878578585, 0.5 * 0.041710296739387, 0.5 * 0.041710296739387,}
+\DoxyCodeLine{    0.5 * 0.041710296739387, 0.5 * 0.026891484250064, 0.5 * 0.026891484250064,}
+\DoxyCodeLine{    0.5 * 0.026891484250064, 0.5 * 0.04213252276165,  0.5 * 0.04213252276165,}
+\DoxyCodeLine{    0.5 * 0.04213252276165,  0.5 * 0.030000266842773, 0.5 * 0.030000266842773,}
+\DoxyCodeLine{    0.5 * 0.030000266842773, 0.5 * 0.014200098925024, 0.5 * 0.014200098925024,}
+\DoxyCodeLine{    0.5 * 0.014200098925024, 0.5 * 0.003582462351273, 0.5 * 0.003582462351273,}
+\DoxyCodeLine{    0.5 * 0.003582462351273, 0.5 * 0.032773147460627, 0.5 * 0.032773147460627,}
+\DoxyCodeLine{    0.5 * 0.032773147460627, 0.5 * 0.032773147460627, 0.5 * 0.032773147460627,}
+\DoxyCodeLine{    0.5 * 0.032773147460627, 0.5 * 0.015298306248441, 0.5 * 0.015298306248441,}
+\DoxyCodeLine{    0.5 * 0.015298306248441, 0.5 * 0.015298306248441, 0.5 * 0.015298306248441,}
+\DoxyCodeLine{    0.5 * 0.015298306248441, 0.5 * 0.002386244192839, 0.5 * 0.002386244192839,}
+\DoxyCodeLine{    0.5 * 0.002386244192839, 0.5 * 0.002386244192839, 0.5 * 0.002386244192839,}
+\DoxyCodeLine{    0.5 * 0.002386244192839, 0.5 * 0.019084792755899, 0.5 * 0.019084792755899,}
+\DoxyCodeLine{    0.5 * 0.019084792755899, 0.5 * 0.019084792755899, 0.5 * 0.019084792755899,}
+\DoxyCodeLine{    0.5 * 0.019084792755899, 0.5 * 0.006850054546542, 0.5 * 0.006850054546542,}
+\DoxyCodeLine{    0.5 * 0.006850054546542, 0.5 * 0.006850054546542, 0.5 * 0.006850054546542,}
+\DoxyCodeLine{    0.5 * 0.006850054546542\}}
 
 \end{DoxyCode}
 

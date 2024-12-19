@@ -116,7 +116,6 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classoomph_1_1SegregatedSolverError-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">oomph::SegregatedSolverError Class Reference</div>  </div>
@@ -127,18 +126,21 @@
  <a href="classoomph_1_1SegregatedSolverError.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for oomph::SegregatedSolverError:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoomph_1_1SegregatedSolverError.png" usemap="#oomph::SegregatedSolverError_map" alt=""/>
+  <map id="oomph::SegregatedSolverError_map" name="oomph::SegregatedSolverError_map">
+<area href="classoomph_1_1RanOutOfIterationsInSegregatedSolverError.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////..." alt="oomph::RanOutOfIterationsInSegregatedSolverError" shape="rect" coords="0,112,304,136"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a047930f506d1060fef2f6746755248b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatedSolverError.html#a047930f506d1060fef2f6746755248b7">SegregatedSolverError</a> (const bool &amp;ran_out_of_iterations=false)</td></tr>
-<tr class="memdesc:a047930f506d1060fef2f6746755248b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, does nothing.  <a href="classoomph_1_1SegregatedSolverError.html#a047930f506d1060fef2f6746755248b7">More...</a><br /></td></tr>
-<tr class="separator:a047930f506d1060fef2f6746755248b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ad3aa39f2cc87179429a16373f197f600"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatedSolverError.html#ad3aa39f2cc87179429a16373f197f600">Ran_out_of_iterations</a></td></tr>
-<tr class="memdesc:ad3aa39f2cc87179429a16373f197f600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean indicating if the error occured because we ran out of iterations.  <a href="classoomph_1_1SegregatedSolverError.html#ad3aa39f2cc87179429a16373f197f600">More...</a><br /></td></tr>
-<tr class="separator:ad3aa39f2cc87179429a16373f197f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9beda33b1ad32cc06d133bc446719587"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1SegregatedSolverError.html#a9beda33b1ad32cc06d133bc446719587">SegregatedSolverError</a> (const std::string &amp;error_description, const std::string &amp;function_name, const char *location)</td></tr>
+<tr class="memdesc:a9beda33b1ad32cc06d133bc446719587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, does nothing.  <a href="classoomph_1_1SegregatedSolverError.html#a9beda33b1ad32cc06d133bc446719587">More...</a><br /></td></tr>
+<tr class="separator:a9beda33b1ad32cc06d133bc446719587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// </p>
@@ -146,8 +148,8 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00143">143</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a047930f506d1060fef2f6746755248b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a047930f506d1060fef2f6746755248b7">&#9670;&nbsp;</a></span>SegregatedSolverError()</h2>
+<a id="a9beda33b1ad32cc06d133bc446719587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9beda33b1ad32cc06d133bc446719587">&#9670;&nbsp;</a></span>SegregatedSolverError()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -158,9 +160,25 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">oomph::SegregatedSolverError::SegregatedSolverError </td>
           <td>(</td>
-          <td class="paramtype">const bool &amp;&#160;</td>
-          <td class="paramname"><em>ran_out_of_iterations</em> = <code>false</code></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>error_description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>function_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -173,29 +191,6 @@ Public Attributes</h2></td></tr>
 <p>Default constructor, does nothing. </p>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00147">147</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
-
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00154">Ran_out_of_iterations</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad3aa39f2cc87179429a16373f197f600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3aa39f2cc87179429a16373f197f600">&#9670;&nbsp;</a></span>Ran_out_of_iterations</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool oomph::SegregatedSolverError::Ran_out_of_iterations</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Boolean indicating if the error occured because we ran out of iterations. </p>
-
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00154">154</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00147">SegregatedSolverError()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00964">oomph::SegregatableFSIProblem::steady_segregated_solve()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01045">oomph::SegregatableFSIProblem::unsteady_segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -230,7 +225,7 @@ Public Attributes</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 08:15:06
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:32:12
         </div>
       </div>
     </footer>

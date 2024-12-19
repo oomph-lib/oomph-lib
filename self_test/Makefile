@@ -154,7 +154,8 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 DIST_SUBDIRS = navier_stokes poisson matrix_matrix_multiply \
 	line_visualiser deliberately_broken_code_for_self_test_test \
-	locate_zeta mpi generic analyse_self_tests
+	locate_zeta faceted_surface_vtu_output mpi generic \
+	analyse_self_tests
 am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
@@ -227,7 +228,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_arpack -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
+EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
 F77 = f77
 FC = gfortran
 FCFLAGS = -g -O2
@@ -376,7 +377,9 @@ full_self_test = navier_stokes poisson \
 	matrix_matrix_multiply \
 	line_visualiser \
 	deliberately_broken_code_for_self_test_test \
-	locate_zeta $(am__append_1)
+	locate_zeta \
+	faceted_surface_vtu_output \
+	$(am__append_1)
 
 # Append the generic folder
 other_self_test = \

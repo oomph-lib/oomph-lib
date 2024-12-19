@@ -125,6 +125,8 @@ virtual void \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb2
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+static bool \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a673e7be60ca447645949638293beda7e}{Suppress\+\_\+warning\+\_\+about\+\_\+any\+\_\+repeated\+\_\+data}} = false
+\begin{DoxyCompactList}\small\item\em Static boolean to suppress warnings about repeated data. Defaults to false. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{classoomph_1_1GeneralisedElement_acbfce11cb0f35821b108be5ec48c76d6}{Suppress\+\_\+warning\+\_\+about\+\_\+repeated\+\_\+internal\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Static boolean to suppress warnings about repeated internal data. Defaults to false. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a1bf8531f4b0ba0a0008e9a25af9b0b8b}{Suppress\+\_\+warning\+\_\+about\+\_\+repeated\+\_\+external\+\_\+data}} = true
@@ -277,7 +279,7 @@ Add a (pointer to an) external data object to the element and return its index (
 
 Add a (pointer to an) external data object to the element and return the index required to obtain it from the access function {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a3ec4e27a7a3d16122b00e2b5be0d1036}{external\+\_\+data\+\_\+pt()}}} 
 
-Definition at line 307 of file elements.\+cc.
+Definition at line 312 of file elements.\+cc.
 
 
 
@@ -299,7 +301,7 @@ Add the contents of the queue global\+\_\+eqn\+\_\+numbers to the local storage 
 
 Add the contents of the queue global\+\_\+eqn\+\_\+numbers to the local storage for the equation numbers, which represents the local-\/to-\/global translation scheme. It is essential that the entries are added in order, i.\+e. from the front. 
 
-Definition at line 156 of file elements.\+cc.
+Definition at line 161 of file elements.\+cc.
 
 
 
@@ -323,7 +325,7 @@ Add a (pointer to an) internal data object to the element and return the index r
 
 //////////////////////////////////////////////////////////////////////// Add a (pointer to an) internal data object to the element and return the index required to obtain it from the access function {\ttfamily \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a45e32d895d4b3686e0f15fe455f4ed44}{internal\+\_\+data\+\_\+pt()}}} 
 
-Definition at line 62 of file elements.\+cc.
+Definition at line 67 of file elements.\+cc.
 
 
 
@@ -345,7 +347,7 @@ Add all internal data and time history values to the vector in the internal stor
 
 
 
-Definition at line 628 of file elements.\+cc.
+Definition at line 633 of file elements.\+cc.
 
 
 
@@ -367,7 +369,7 @@ Add all equation numbers associated with internal data to the vector in the inte
 
 
 
-Definition at line 655 of file elements.\+cc.
+Definition at line 660 of file elements.\+cc.
 
 
 
@@ -389,7 +391,7 @@ Add pointers to the internal data values to map indexed by the global equation n
 
 This function loops over the internal data of the element and add pointers to their unconstrained values to a map indexed by the global equation number. 
 
-Definition at line 611 of file elements.\+cc.
+Definition at line 616 of file elements.\+cc.
 
 
 
@@ -463,7 +465,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithExternalElement_ab8f4
 
 
 
-Definition at line 938 of file elements.\+cc.
+Definition at line 966 of file elements.\+cc.
 
 
 
@@ -491,7 +493,7 @@ Pass\+:
 \item Dof\+\_\+pt, the \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to the global dofs (to which any internal dofs are added).
 \end{DoxyItemize}
 
-Definition at line 529 of file elements.\+cc.
+Definition at line 534 of file elements.\+cc.
 
 
 
@@ -513,11 +515,11 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1Hijacked_afd4a5578291487aa37b093
 
 
 
-Definition at line 691 of file elements.\+cc.
+Definition at line 696 of file elements.\+cc.
 
 
 
-References assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), clear\+\_\+global\+\_\+eqn\+\_\+numbers(), Eqn\+\_\+number, oomph\+::\+Data\+::eqn\+\_\+number(), external\+\_\+data\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt(), i, internal\+\_\+data\+\_\+pt(), is\+\_\+halo(), oomph\+::\+Node\+::ndim(), Ndof, nexternal\+\_\+data(), oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+field\+\_\+data(), oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+geometric\+\_\+data(), ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Finite\+Element\+::required\+\_\+nvalue(), oomph\+::\+Data\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
+References assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers(), assign\+\_\+all\+\_\+generic\+\_\+local\+\_\+eqn\+\_\+numbers(), clear\+\_\+global\+\_\+eqn\+\_\+numbers(), Eqn\+\_\+number, oomph\+::\+Data\+::eqn\+\_\+number(), external\+\_\+data\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+field\+\_\+data\+\_\+pt(), oomph\+::\+Element\+With\+External\+Element\+::external\+\_\+interaction\+\_\+geometric\+\_\+data\+\_\+pt(), i, internal\+\_\+data\+\_\+pt(), is\+\_\+halo(), oomph\+::\+Node\+::ndim(), Ndof, nexternal\+\_\+data(), oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+field\+\_\+data(), oomph\+::\+Element\+With\+External\+Element\+::nexternal\+\_\+interaction\+\_\+geometric\+\_\+data(), ninternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Finite\+Element\+::required\+\_\+nvalue(), Suppress\+\_\+warning\+\_\+about\+\_\+any\+\_\+repeated\+\_\+data, oomph\+::\+Data\+::value(), oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt(), and oomph\+::\+Node\+::x().
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedElement_a75da2bf85ec82c9d59cbb2e06f82b9a1}\label{classoomph_1_1GeneralisedElement_a75da2bf85ec82c9d59cbb2e06f82b9a1}} 
 \index{oomph::GeneralisedElement@{oomph::GeneralisedElement}!clear\_global\_eqn\_numbers@{clear\_global\_eqn\_numbers}}
@@ -557,7 +559,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_aefb
 
 
 
-Definition at line 974 of file elements.\+h.
+Definition at line 978 of file elements.\+h.
 
 
 
@@ -579,7 +581,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a0b5413cd7
 
 
 
-Definition at line 1140 of file elements.\+h.
+Definition at line 1144 of file elements.\+h.
 
 
 
@@ -601,7 +603,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderE
 
 
 
-Definition at line 1128 of file elements.\+h.
+Definition at line 1132 of file elements.\+h.
 
 
 
@@ -623,7 +625,7 @@ Function to describe the dofs of the element. The ostream specifies the output s
 
 Function to describe the dofs of the Element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
 
-Definition at line 551 of file elements.\+cc.
+Definition at line 556 of file elements.\+cc.
 
 
 
@@ -645,7 +647,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeM
 
 
 
-Definition at line 573 of file elements.\+cc.
+Definition at line 578 of file elements.\+cc.
 
 
 
@@ -667,7 +669,7 @@ Return the vector of pointers to dof values.
 
 
 
-Definition at line 866 of file elements.\+h.
+Definition at line 870 of file elements.\+h.
 
 
 
@@ -689,7 +691,7 @@ Return the vector of dof values at time level t.
 
 
 
-Definition at line 841 of file elements.\+h.
+Definition at line 845 of file elements.\+h.
 
 
 
@@ -711,7 +713,7 @@ Return the global equation number corresponding to the ieqn\+\_\+local-\/th loca
 
 
 
-Definition at line 704 of file elements.\+h.
+Definition at line 708 of file elements.\+h.
 
 
 
@@ -733,7 +735,7 @@ Set the boolean flag to exclude the external datum from the the finite differenc
 
 
 
-Definition at line 778 of file elements.\+h.
+Definition at line 782 of file elements.\+h.
 
 
 
@@ -769,7 +771,7 @@ Return the status of the boolean flag indicating whether the external data is in
 
 
 
-Definition at line 757 of file elements.\+h.
+Definition at line 761 of file elements.\+h.
 
 
 
@@ -857,7 +859,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderE
 
 
 
-Definition at line 1452 of file elements.\+cc.
+Definition at line 1480 of file elements.\+cc.
 
 
 
@@ -883,7 +885,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderE
 
 
 
-Definition at line 1402 of file elements.\+cc.
+Definition at line 1430 of file elements.\+cc.
 
 
 
@@ -909,7 +911,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderE
 
 
 
-Definition at line 1358 of file elements.\+cc.
+Definition at line 1386 of file elements.\+cc.
 
 
 
@@ -935,7 +937,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderE
 
 
 
-Definition at line 1503 of file elements.\+cc.
+Definition at line 1531 of file elements.\+cc.
 
 
 
@@ -957,7 +959,7 @@ Fill in the contributions to the vectors that when taken as dot product with oth
 
 
 
-Definition at line 1571 of file elements.\+cc.
+Definition at line 1599 of file elements.\+cc.
 
 
 
@@ -979,7 +981,7 @@ Fill in the contribution to the inner products between given pairs of history va
 
 
 
-Definition at line 1543 of file elements.\+cc.
+Definition at line 1571 of file elements.\+cc.
 
 
 
@@ -1031,7 +1033,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_a
 
 
 
-Definition at line 1322 of file elements.\+cc.
+Definition at line 1350 of file elements.\+cc.
 
 
 
@@ -1057,7 +1059,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ODEElement_aef001ba04ec222921cbd
 
 
 
-Definition at line 1292 of file elements.\+cc.
+Definition at line 1320 of file elements.\+cc.
 
 
 
@@ -1123,7 +1125,7 @@ Calculate the contributions to the jacobian from the external degrees of freedom
 
 This function calculates the entries of Jacobian matrix, used in the Newton method, associated with the external degrees of freedom. It does this using finite differences, rather than an analytical formulation, so can be done in total generality. If the boolean argument is true, the finite differencing will be performed for all internal data, irrespective of the information in Data\+\_\+fd. The default value (false) uses the information in Data\+\_\+fd to selectively difference only certain data. 
 
-Definition at line 1199 of file elements.\+cc.
+Definition at line 1227 of file elements.\+cc.
 
 
 
@@ -1163,7 +1165,7 @@ Calculate the contributions to the jacobian from the internal degrees of freedom
 
 This function calculates the entries of Jacobian matrix, used in the Newton method, associated with the internal degrees of freedom. It does this using finite differences, rather than an analytical formulation, so can be done in total generality. If the boolean argument is true, the finite differencing will be performed for all internal data, irrespective of the information in Data\+\_\+fd. The default value (false) uses the information in Data\+\_\+fd to selectively difference only certain data. 
 
-Definition at line 1102 of file elements.\+cc.
+Definition at line 1130 of file elements.\+cc.
 
 
 
@@ -1185,7 +1187,7 @@ Flush all external data.
 
 Flush all the external data, i.\+e. clear the pointers to external data from the internal storage. 
 
-Definition at line 387 of file elements.\+cc.
+Definition at line 392 of file elements.\+cc.
 
 
 
@@ -1207,7 +1209,7 @@ Flush the object addressed by data\+\_\+pt from the external data array.
 
 Remove the object addressed by data\+\_\+pt from the external data array Note that this could mess up the numbering of other external data. 
 
-Definition at line 429 of file elements.\+cc.
+Definition at line 434 of file elements.\+cc.
 
 
 
@@ -1225,7 +1227,7 @@ Calculate the derivatives of the elemental Jacobian matrix mass matrix and resid
 
 
 
-Definition at line 1061 of file elements.\+h.
+Definition at line 1065 of file elements.\+h.
 
 
 
@@ -1247,7 +1249,7 @@ Calculate the derivatives of the elemental Jacobian matrix and residuals with re
 
 
 
-Definition at line 1046 of file elements.\+h.
+Definition at line 1050 of file elements.\+h.
 
 
 
@@ -1273,7 +1275,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BlockPreconditionableSpaceTimeEl
 
 
 
-Definition at line 1221 of file elements.\+h.
+Definition at line 1225 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedElement_a63bf8f3db94fdb4098ff61fa930a6d40}\label{classoomph_1_1GeneralisedElement_a63bf8f3db94fdb4098ff61fa930a6d40}} 
 \index{oomph::GeneralisedElement@{oomph::GeneralisedElement}!get\_dresiduals\_dparameter@{get\_dresiduals\_dparameter}}
@@ -1287,7 +1289,7 @@ Calculate the derivatives of the residuals with respect to a parameter.
 
 
 
-Definition at line 1034 of file elements.\+h.
+Definition at line 1038 of file elements.\+h.
 
 
 
@@ -1309,7 +1311,7 @@ Calculate the product of the Hessian (derivative of Jacobian with respect to all
 
 Add the elemental contribution to the product
 
-Definition at line 1083 of file elements.\+h.
+Definition at line 1087 of file elements.\+h.
 
 
 
@@ -1331,7 +1333,7 @@ Compute the vectors that when taken as a dot product with other history values g
 
 
 
-Definition at line 1106 of file elements.\+h.
+Definition at line 1110 of file elements.\+h.
 
 
 
@@ -1353,7 +1355,7 @@ Return the vector of inner product of the given pairs of history values.
 
 
 
-Definition at line 1095 of file elements.\+h.
+Definition at line 1099 of file elements.\+h.
 
 
 
@@ -1379,7 +1381,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_a7
 
 
 
-Definition at line 990 of file elements.\+h.
+Definition at line 994 of file elements.\+h.
 
 
 
@@ -1405,7 +1407,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ElementWithSpecificMovingNodes_a
 
 
 
-Definition at line 1016 of file elements.\+h.
+Definition at line 1020 of file elements.\+h.
 
 
 
@@ -1427,7 +1429,7 @@ Calculate the residuals and the elemental \char`\"{}mass\char`\"{} matrix, the m
 
 
 
-Definition at line 1003 of file elements.\+h.
+Definition at line 1007 of file elements.\+h.
 
 
 
@@ -1453,7 +1455,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1ImposeFluxForWomersleyElement_a6
 
 
 
-Definition at line 980 of file elements.\+h.
+Definition at line 984 of file elements.\+h.
 
 
 
@@ -1475,7 +1477,7 @@ Set the boolean flag to include the external datum in the the finite difference 
 
 
 
-Definition at line 798 of file elements.\+h.
+Definition at line 802 of file elements.\+h.
 
 
 
@@ -1595,7 +1597,7 @@ Is this element a halo?
 
 
 
-Definition at line 1163 of file elements.\+h.
+Definition at line 1167 of file elements.\+h.
 
 
 
@@ -1617,7 +1619,7 @@ Return the local equation number corresponding to the ieqn\+\_\+global-\/th glob
 
 
 
-Definition at line 726 of file elements.\+h.
+Definition at line 730 of file elements.\+h.
 
 
 
@@ -1639,7 +1641,7 @@ Test whether the element must be kept as a halo element.
 
 
 
-Definition at line 1189 of file elements.\+h.
+Definition at line 1193 of file elements.\+h.
 
 
 
@@ -1661,7 +1663,7 @@ Return the number of equations/dofs in the element.
 
 
 
-Definition at line 835 of file elements.\+h.
+Definition at line 839 of file elements.\+h.
 
 
 
@@ -1687,7 +1689,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1NetFluxControlElementForWomersle
 
 
 
-Definition at line 1202 of file elements.\+h.
+Definition at line 1206 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedElement_a01ff34b3ace7455df74ad77fc86beb71}\label{classoomph_1_1GeneralisedElement_a01ff34b3ace7455df74ad77fc86beb71}} 
 \index{oomph::GeneralisedElement@{oomph::GeneralisedElement}!nexternal\_data@{nexternal\_data}}
@@ -1701,7 +1703,7 @@ Return the number of external data objects.
 
 
 
-Definition at line 829 of file elements.\+h.
+Definition at line 833 of file elements.\+h.
 
 
 
@@ -1723,7 +1725,7 @@ Return the number of internal data objects.
 
 
 
-Definition at line 823 of file elements.\+h.
+Definition at line 827 of file elements.\+h.
 
 
 
@@ -1745,7 +1747,7 @@ ID of processor ID that holds non-\/halo counterpart of halo element; negative i
 
 
 
-Definition at line 1170 of file elements.\+h.
+Definition at line 1174 of file elements.\+h.
 
 
 
@@ -1777,7 +1779,7 @@ Read all internal data and time history values from the vector starting from ind
 
 
 
-Definition at line 642 of file elements.\+cc.
+Definition at line 647 of file elements.\+cc.
 
 
 
@@ -1799,7 +1801,7 @@ Read all equation numbers associated with internal data from the vector starting
 
 
 
-Definition at line 670 of file elements.\+cc.
+Definition at line 675 of file elements.\+cc.
 
 
 
@@ -1921,7 +1923,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1YoungLaplaceEquations_a5856fb300
 
 
 
-Definition at line 1603 of file elements.\+cc.
+Definition at line 1631 of file elements.\+cc.
 
 
 
@@ -1943,7 +1945,7 @@ Label the element as halo and specify processor that holds non-\/halo counterpar
 
 
 
-Definition at line 1151 of file elements.\+h.
+Definition at line 1155 of file elements.\+h.
 
 
 
@@ -1965,7 +1967,7 @@ Set the timestepper associated with the i-\/th internal data object.
 
 
 
-Definition at line 893 of file elements.\+h.
+Definition at line 897 of file elements.\+h.
 
 
 
@@ -1983,7 +1985,7 @@ Insist that this element be kept as a halo element during a distribute?
 
 
 
-Definition at line 1176 of file elements.\+h.
+Definition at line 1180 of file elements.\+h.
 
 
 
@@ -2001,7 +2003,7 @@ Label the element as not being a halo.
 
 
 
-Definition at line 1157 of file elements.\+h.
+Definition at line 1161 of file elements.\+h.
 
 
 
@@ -2019,7 +2021,7 @@ Do not insist that this element be kept as a halo element during distribution.
 
 
 
-Definition at line 1183 of file elements.\+h.
+Definition at line 1187 of file elements.\+h.
 
 
 
@@ -2174,7 +2176,7 @@ Double used for the default finite difference step in elemental jacobian calcula
 
 Default value used as the increment for finite difference calculations of the jacobian matrices. 
 
-Definition at line 1198 of file elements.\+h.
+Definition at line 1202 of file elements.\+h.
 
 
 
@@ -2342,6 +2344,24 @@ Definition at line 128 of file elements.\+h.
 
 Referenced by oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), is\+\_\+halo(), non\+\_\+halo\+\_\+proc\+\_\+\+ID(), set\+\_\+halo(), and set\+\_\+nonhalo().
 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedElement_a673e7be60ca447645949638293beda7e}\label{classoomph_1_1GeneralisedElement_a673e7be60ca447645949638293beda7e}} 
+\index{oomph::GeneralisedElement@{oomph::GeneralisedElement}!Suppress\_warning\_about\_any\_repeated\_data@{Suppress\_warning\_about\_any\_repeated\_data}}
+\index{Suppress\_warning\_about\_any\_repeated\_data@{Suppress\_warning\_about\_any\_repeated\_data}!oomph::GeneralisedElement@{oomph::GeneralisedElement}}
+\doxysubsubsection{\texorpdfstring{Suppress\_warning\_about\_any\_repeated\_data}{Suppress\_warning\_about\_any\_repeated\_data}}
+{\footnotesize\ttfamily bool oomph\+::\+Generalised\+Element\+::\+Suppress\+\_\+warning\+\_\+about\+\_\+any\+\_\+repeated\+\_\+data = false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static boolean to suppress warnings about repeated data. Defaults to false. 
+
+Static boolean to suppress warnings about any repeated data. Defaults to false. 
+
+Definition at line 696 of file elements.\+h.
+
+
+
+Referenced by assign\+\_\+local\+\_\+eqn\+\_\+numbers().
+
 \mbox{\Hypertarget{classoomph_1_1GeneralisedElement_a1bf8531f4b0ba0a0008e9a25af9b0b8b}\label{classoomph_1_1GeneralisedElement_a1bf8531f4b0ba0a0008e9a25af9b0b8b}} 
 \index{oomph::GeneralisedElement@{oomph::GeneralisedElement}!Suppress\_warning\_about\_repeated\_external\_data@{Suppress\_warning\_about\_repeated\_external\_data}}
 \index{Suppress\_warning\_about\_repeated\_external\_data@{Suppress\_warning\_about\_repeated\_external\_data}!oomph::GeneralisedElement@{oomph::GeneralisedElement}}
@@ -2354,7 +2374,7 @@ Static boolean to suppress warnings about repeated external data. Defaults to tr
 
 
 
-Definition at line 700 of file elements.\+h.
+Definition at line 704 of file elements.\+h.
 
 
 
@@ -2378,7 +2398,7 @@ Static boolean to suppress warnings about repeated internal data. Defaults to fa
 
 
 
-Definition at line 696 of file elements.\+h.
+Definition at line 700 of file elements.\+h.
 
 
 

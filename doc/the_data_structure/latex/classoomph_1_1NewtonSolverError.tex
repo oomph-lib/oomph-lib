@@ -9,6 +9,12 @@ A class to handle errors in the Newton solver.
 
 {\ttfamily \#include $<$problem.\+h$>$}
 
+Inheritance diagram for oomph\+::Newton\+Solver\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classoomph_1_1NewtonSolverError}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,22 +23,29 @@ A class to handle errors in the Newton solver.
 \mbox{\hyperlink{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242}{Newton\+Solver\+Error}} (const bool \&Passed\+\_\+linear\+\_\+failure)
 \begin{DoxyCompactList}\small\item\em Constructor that passes a failure of the linear solver. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b}{Newton\+Solver\+Error}} (unsigned Passed\+\_\+iterations, double Passed\+\_\+maxres)
-\begin{DoxyCompactList}\small\item\em Constructor that passes number of iterations and residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Constructor that passes number of iterations and residuals. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9}{linear\+\_\+solver\+\_\+error}} ()
+\begin{DoxyCompactList}\small\item\em Access function to the error in the linear solver. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58}{iterations}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max. \# of iterations performed when the Newton solver died. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2}{maxres}} ()
+\begin{DoxyCompactList}\small\item\em Access function to Max. residual when Newton solver died. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a30a00b1e2e2baaf733f6197572399875}{linear\+\_\+solver\+\_\+error}}
+bool \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e}{Linear\+\_\+solver\+\_\+error}}
 \begin{DoxyCompactList}\small\item\em Error in the linear solver. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1NewtonSolverError_aaae34aeb5b4128c87e03c89de1de60a8}{iterations}}
+unsigned \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38}{Iterations}}
 \begin{DoxyCompactList}\small\item\em Max. \# of iterations performed when the Newton solver died. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NewtonSolverError_ae9ee0ef969c2fbf869afb7c4a75dcbe0}{maxres}}
+double \mbox{\hyperlink{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065}{Maxres}}
 \begin{DoxyCompactList}\small\item\em Max. residual when Newton solver died. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 A class to handle errors in the Newton solver. 
 
-Definition at line 3080 of file problem.\+h.
+Definition at line 3056 of file problem.\+h.
 
 
 
@@ -49,7 +62,7 @@ Default constructor, does nothing.
 
 
 
-Definition at line 3093 of file problem.\+h.
+Definition at line 3070 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242}\label{classoomph_1_1NewtonSolverError_ae58d468c558b69a3b0a02b8287c7d242}} 
 \index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!NewtonSolverError@{NewtonSolverError}}
@@ -63,7 +76,7 @@ Constructor that passes a failure of the linear solver.
 
 
 
-Definition at line 3098 of file problem.\+h.
+Definition at line 3081 of file problem.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b}\label{classoomph_1_1NewtonSolverError_a13723668ce6a21c38dcd612ee580716b}} 
 \index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!NewtonSolverError@{NewtonSolverError}}
@@ -77,16 +90,85 @@ Constructor that passes number of iterations and residuals.
 
 
 
-Definition at line 3104 of file problem.\+h.
+Definition at line 3092 of file problem.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58}\label{classoomph_1_1NewtonSolverError_a1ed0bf5583f8ce078813b4467963ca58}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!iterations@{iterations}}
+\index{iterations@{iterations}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Newton\+Solver\+Error\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max. \# of iterations performed when the Newton solver died. 
+
+
+
+Definition at line 3110 of file problem.\+h.
+
+
+
+References Iterations.
+
+
+
+Referenced by oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9}\label{classoomph_1_1NewtonSolverError_a04d81878889cdd99ac4b7d7d625be5a9}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!linear\_solver\_error@{linear\_solver\_error}}
+\index{linear\_solver\_error@{linear\_solver\_error}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{linear\_solver\_error()}{linear\_solver\_error()}}
+{\footnotesize\ttfamily bool oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to the error in the linear solver. 
+
+
+
+Definition at line 3103 of file problem.\+h.
+
+
+
+References Linear\+\_\+solver\+\_\+error.
+
+
+
+Referenced by oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
+
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2}\label{classoomph_1_1NewtonSolverError_aaf75f8ae04b5d3a5e096b4e5426051e2}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!maxres@{maxres}}
+\index{maxres@{maxres}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{maxres()}{maxres()}}
+{\footnotesize\ttfamily double oomph\+::\+Newton\+Solver\+Error\+::maxres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Access function to Max. residual when Newton solver died. 
+
+
+
+Definition at line 3116 of file problem.\+h.
+
+
+
+References Maxres.
+
+
+
+Referenced by oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_aaae34aeb5b4128c87e03c89de1de60a8}\label{classoomph_1_1NewtonSolverError_aaae34aeb5b4128c87e03c89de1de60a8}} 
-\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!iterations@{iterations}}
-\index{iterations@{iterations}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
-\doxysubsubsection{\texorpdfstring{iterations}{iterations}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Newton\+Solver\+Error\+::iterations}
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38}\label{classoomph_1_1NewtonSolverError_a160c1e785b93f5724978790de6102d38}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Iterations@{Iterations}}
+\index{Iterations@{Iterations}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Newton\+Solver\+Error\+::\+Iterations\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -94,17 +176,17 @@ Max. \# of iterations performed when the Newton solver died.
 
 
 
-Definition at line 3087 of file problem.\+h.
+Definition at line 3063 of file problem.\+h.
 
 
 
-Referenced by oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
+Referenced by iterations().
 
-\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a30a00b1e2e2baaf733f6197572399875}\label{classoomph_1_1NewtonSolverError_a30a00b1e2e2baaf733f6197572399875}} 
-\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!linear\_solver\_error@{linear\_solver\_error}}
-\index{linear\_solver\_error@{linear\_solver\_error}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
-\doxysubsubsection{\texorpdfstring{linear\_solver\_error}{linear\_solver\_error}}
-{\footnotesize\ttfamily bool oomph\+::\+Newton\+Solver\+Error\+::linear\+\_\+solver\+\_\+error}
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e}\label{classoomph_1_1NewtonSolverError_a91d8a7c5b01d26aec0aaf9faf8de2c2e}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Linear\_solver\_error@{Linear\_solver\_error}}
+\index{Linear\_solver\_error@{Linear\_solver\_error}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Linear\_solver\_error}{Linear\_solver\_error}}
+{\footnotesize\ttfamily bool oomph\+::\+Newton\+Solver\+Error\+::\+Linear\+\_\+solver\+\_\+error\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -112,17 +194,17 @@ Error in the linear solver.
 
 
 
-Definition at line 3084 of file problem.\+h.
+Definition at line 3060 of file problem.\+h.
 
 
 
-Referenced by oomph\+::\+Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(), oomph\+::\+Problem\+::arc\+\_\+length\+\_\+step\+\_\+solve\+\_\+helper(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
+Referenced by linear\+\_\+solver\+\_\+error().
 
-\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_ae9ee0ef969c2fbf869afb7c4a75dcbe0}\label{classoomph_1_1NewtonSolverError_ae9ee0ef969c2fbf869afb7c4a75dcbe0}} 
-\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!maxres@{maxres}}
-\index{maxres@{maxres}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
-\doxysubsubsection{\texorpdfstring{maxres}{maxres}}
-{\footnotesize\ttfamily double oomph\+::\+Newton\+Solver\+Error\+::maxres}
+\mbox{\Hypertarget{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065}\label{classoomph_1_1NewtonSolverError_a3d8b92064b90b7d26073f219b42f0065}} 
+\index{oomph::NewtonSolverError@{oomph::NewtonSolverError}!Maxres@{Maxres}}
+\index{Maxres@{Maxres}!oomph::NewtonSolverError@{oomph::NewtonSolverError}}
+\doxysubsubsection{\texorpdfstring{Maxres}{Maxres}}
+{\footnotesize\ttfamily double oomph\+::\+Newton\+Solver\+Error\+::\+Maxres\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -130,11 +212,11 @@ Max. residual when Newton solver died.
 
 
 
-Definition at line 3090 of file problem.\+h.
+Definition at line 3066 of file problem.\+h.
 
 
 
-Referenced by oomph\+::\+Problem\+::newton\+\_\+solve(), oomph\+::\+Problem\+::steady\+\_\+newton\+\_\+solve(), and oomph\+::\+Problem\+::unsteady\+\_\+newton\+\_\+solve().
+Referenced by maxres().
 
 
 

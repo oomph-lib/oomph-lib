@@ -168,7 +168,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_arpack -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
+EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
 F77 = f77
 FC = gfortran
 FCFLAGS = -g -O2
@@ -513,7 +513,7 @@ uninstall-am:
 html/index.html: raw_doxygen.h
         # Make, then kill symbolic link, but don't delete the directory itself!
 #	if [ -L extra_latex_style_files ]; then rm -f extra_latex_style_files; fi
-#	if [ ! -d extra_latex_style_files ]; then ln -s $(top_srcdir)/doc/extra_latex_style_files; fi
+#	if [ ! -d extra_latex_style_files ]; then ln -sf $(top_srcdir)/doc/extra_latex_style_files; fi
 	doxygen
 
 #oomph-lib_header.html:

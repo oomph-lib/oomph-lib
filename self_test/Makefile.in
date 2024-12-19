@@ -154,7 +154,8 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 DIST_SUBDIRS = navier_stokes poisson matrix_matrix_multiply \
 	line_visualiser deliberately_broken_code_for_self_test_test \
-	locate_zeta mpi generic analyse_self_tests
+	locate_zeta faceted_surface_vtu_output mpi generic \
+	analyse_self_tests
 am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
@@ -376,7 +377,9 @@ top_srcdir = @top_srcdir@
 @WANT_EXTENDED_SELF_TESTS_TRUE@	matrix_matrix_multiply \
 @WANT_EXTENDED_SELF_TESTS_TRUE@	line_visualiser \
 @WANT_EXTENDED_SELF_TESTS_TRUE@	deliberately_broken_code_for_self_test_test \
-@WANT_EXTENDED_SELF_TESTS_TRUE@	locate_zeta $(am__append_1)
+@WANT_EXTENDED_SELF_TESTS_TRUE@	locate_zeta \
+@WANT_EXTENDED_SELF_TESTS_TRUE@	faceted_surface_vtu_output \
+@WANT_EXTENDED_SELF_TESTS_TRUE@	$(am__append_1)
 
 # Append the generic folder
 other_self_test = \

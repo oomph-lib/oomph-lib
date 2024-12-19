@@ -293,7 +293,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_arpack -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
+EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
 F77 = f77
 FC = gfortran
 FCFLAGS = -g -O2
@@ -864,7 +864,7 @@ $(srcdir)/frontal.f:
 	if [ ! -f $(srcdir)/frontal.f ]; then \
 	  if [ -f $(srcdir)/../../private/external_src/hsl/frontal.f ]; then \
 	      echo "Creating link to private/external_src/hsl/frontal.f"; \
-	      ln -s $(srcdir)/../../private/external_src/hsl/frontal.f $(srcdir); \
+	      ln -sf $(srcdir)/../../private/external_src/hsl/frontal.f $(srcdir); \
 	  fi; \
 	  touch $(srcdir)/frontal.f; \
 	fi; 

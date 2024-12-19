@@ -1289,6 +1289,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress output while checking for inverted elements.  <a href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">More...</a><br /></td></tr>
 <tr class="separator:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">Suppress_warning_about_any_repeated_data</a> = false</td></tr>
+<tr class="memdesc:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">More...</a><br /></td></tr>
+<tr class="separator:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a></td></tr>
 <tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
 <tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1320,11 +1323,11 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// </p>
 <p><a class="el" href="classoomph_1_1SolidFiniteElement.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">SolidFiniteElement</a> class.</p>
 <p>Solid elements are elements whose nodal positions are unknowns in the problem &ndash; their nodes are SolidNodes. In such elements, the nodes not only have a variable (Eulerian) but also a fixed (Lagrangian) position. The positional variables have their own local equation numbering scheme which is set up with </p><div class="fragment"><div class="line"><a class="code" href="classoomph_1_1SolidFiniteElement.html#a3c7ad30f234e87649ed34cea94f65ea3">assign_solid_local_eqn_numbers</a> () </div>
-<div class="ttc" id="aclassoomph_1_1SolidFiniteElement_html_a3c7ad30f234e87649ed34cea94f65ea3"><div class="ttname"><a href="classoomph_1_1SolidFiniteElement.html#a3c7ad30f234e87649ed34cea94f65ea3">oomph::SolidFiniteElement::assign_solid_local_eqn_numbers</a></div><div class="ttdeci">virtual void assign_solid_local_eqn_numbers(const bool &amp;store_local_dof)</div><div class="ttdoc">Assigns local equation numbers for the generic solid local equation numbering schemes....</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l06898">elements.cc:6898</a></div></div>
+<div class="ttc" id="aclassoomph_1_1SolidFiniteElement_html_a3c7ad30f234e87649ed34cea94f65ea3"><div class="ttname"><a href="classoomph_1_1SolidFiniteElement.html#a3c7ad30f234e87649ed34cea94f65ea3">oomph::SolidFiniteElement::assign_solid_local_eqn_numbers</a></div><div class="ttdeci">virtual void assign_solid_local_eqn_numbers(const bool &amp;store_local_dof)</div><div class="ttdoc">Assigns local equation numbers for the generic solid local equation numbering schemes....</div><div class="ttdef"><b>Definition:</b> <a href="elements_8cc_source.html#l06928">elements.cc:6928</a></div></div>
 </div><!-- fragment --><p> The derivatives of the &lsquo;solid equations&rsquo; (i.e. the equations that determine the nodal positions) with respect to the nodal positions, required in the Jacobian matrix, are determined by finite differencing.</p>
 <p>In the present form, the <a class="el" href="classoomph_1_1SolidFiniteElement.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">SolidFiniteElement</a> represents a fully functional base class for &lsquo;proper&rsquo; solid mechanics elements, but it can also be combined (via inheritance) with elements that solve additional equations. This is particularly useful in cases where the solid equations are merely used to update the nodal positions in a moving mesh problem, although this can prove costly in practice. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03560">3560</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03564">3564</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a1ec1cdf98041a51f77aab2b892856fc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ec1cdf98041a51f77aab2b892856fc4">&#9670;&nbsp;</a></span>MultiplierFctPt</h2>
@@ -1340,7 +1343,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to function that computes the "multiplier" for the inertia terms in the consistent determination of the initial conditions for <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> timestepping. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03582">3582</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03586">3586</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 </div>
 </div>
@@ -1370,7 +1373,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Constructor: Set defaults. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03585">3585</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03589">3589</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 </div>
 </div>
@@ -1400,9 +1403,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Destructor to clean up any allocated memory. </p>
 <p>Destructor for <a class="el" href="classoomph_1_1SolidFiniteElement.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">SolidFiniteElement</a>: </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06629">6629</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06659">6659</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04281">Position_local_eqn</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04285">Position_local_eqn</a>.</p>
 
 </div>
 </div>
@@ -1474,11 +1477,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#ae0d5a2fc617a11036a80d0d016292d7a">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06528">6528</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06558">6558</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l04285">Lagrangian_dimension</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03897">raw_lagrangian_position_gen()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l04289">Lagrangian_dimension</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03901">raw_lagrangian_position_gen()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>.</p>
 
 </div>
 </div>
@@ -1521,11 +1524,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a5843ecc4836508342150862e11af99f4">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06586">6586</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06616">6616</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01483">oomph::FiniteElement::N2deriv</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03897">raw_lagrangian_position_gen()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01487">oomph::FiniteElement::N2deriv</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03901">raw_lagrangian_position_gen()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06781">d2shape_lagrangian()</a>, and <a class="el" href="elements_8cc_source.html#l06832">d2shape_lagrangian_at_knot()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06811">d2shape_lagrangian()</a>, and <a class="el" href="elements_8cc_source.html#l06862">d2shape_lagrangian_at_knot()</a>.</p>
 
 </div>
 </div>
@@ -1557,9 +1560,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#a564ba080f68132762510b1ec9465b05d">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03867">3867</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03871">3871</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02164">oomph::FiniteElement::assign_all_generic_local_eqn_numbers()</a>, and <a class="el" href="elements_8cc_source.html#l06898">assign_solid_local_eqn_numbers()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02168">oomph::FiniteElement::assign_all_generic_local_eqn_numbers()</a>, and <a class="el" href="elements_8cc_source.html#l06928">assign_solid_local_eqn_numbers()</a>.</p>
 
 </div>
 </div>
@@ -1593,11 +1596,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a7718105cbc38cff969a246b093b6ecee">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06898">6898</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06928">6928</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l00156">oomph::GeneralisedElement::add_global_eqn_numbers()</a>, <a class="el" href="elements_8h_source.html#l00231">oomph::GeneralisedElement::Dof_pt_deque</a>, <a class="el" href="elements_8h_source.html#l00704">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l00183">oomph::Data::Is_pinned</a>, <a class="el" href="elements_8h_source.html#l00726">oomph::GeneralisedElement::local_eqn_number()</a>, <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l01797">oomph::SolidNode::position_eqn_number()</a>, <a class="el" href="elements_8h_source.html#l04281">Position_local_eqn</a>, and <a class="el" href="nodes_8h_source.html#l01126">oomph::Node::x_gen()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l00161">oomph::GeneralisedElement::add_global_eqn_numbers()</a>, <a class="el" href="elements_8h_source.html#l00231">oomph::GeneralisedElement::Dof_pt_deque</a>, <a class="el" href="elements_8h_source.html#l00708">oomph::GeneralisedElement::eqn_number()</a>, <a class="el" href="nodes_8h_source.html#l00183">oomph::Data::Is_pinned</a>, <a class="el" href="elements_8h_source.html#l00730">oomph::GeneralisedElement::local_eqn_number()</a>, <a class="el" href="elements_8h_source.html#l00839">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l01797">oomph::SolidNode::position_eqn_number()</a>, <a class="el" href="elements_8h_source.html#l04285">Position_local_eqn</a>, and <a class="el" href="nodes_8h_source.html#l01126">oomph::Node::x_gen()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03867">assign_all_generic_local_eqn_numbers()</a>, and <a class="el" href="refineable__elements_8h_source.html#l00940">oomph::RefineableSolidElement::assign_solid_local_eqn_numbers()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03871">assign_all_generic_local_eqn_numbers()</a>, and <a class="el" href="refineable__elements_8h_source.html#l00940">oomph::RefineableSolidElement::assign_solid_local_eqn_numbers()</a>.</p>
 
 </div>
 </div>
@@ -1631,9 +1634,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeneralisedElement.html#af2025a472df6752a946739da58e7fb37">oomph::GeneralisedElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06442">6442</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06472">6472</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8cc_source.html#l07104">interpolated_xi()</a>, <a class="el" href="elements_8cc_source.html#l04103">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8cc_source.html#l07134">interpolated_xi()</a>, <a class="el" href="elements_8cc_source.html#l04133">oomph::FiniteElement::J_eulerian()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
 
 </div>
 </div>
@@ -1665,9 +1668,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#ac6f9b6635daf3bfca24adb2c22c8dc81">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03827">3827</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03831">3831</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="elements_8h_source.html#l02455">oomph::FiniteElement::required_nvalue()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="elements_8h_source.html#l02459">oomph::FiniteElement::required_nvalue()</a>.</p>
 
 </div>
 </div>
@@ -1709,9 +1712,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#ae49607dfdff1f24e9857d5b93d2ebf67">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03846">3846</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03850">3850</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02455">oomph::FiniteElement::required_nvalue()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02459">oomph::FiniteElement::required_nvalue()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
 
 </div>
 </div>
@@ -1743,9 +1746,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#a22ff82b3c3a2c0f204090fcb31bea1f5">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03791">3791</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03795">3795</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="elements_8h_source.html#l02455">oomph::FiniteElement::required_nvalue()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="elements_8h_source.html#l02459">oomph::FiniteElement::required_nvalue()</a>.</p>
 
 </div>
 </div>
@@ -1787,9 +1790,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1FiniteElement.html#ab340a73573761cfceb22b2fca985026a">oomph::FiniteElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03809">3809</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03813">3813</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02455">oomph::FiniteElement::required_nvalue()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="elements_8h_source.html#l02459">oomph::FiniteElement::required_nvalue()</a>, and <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>.</p>
 
 </div>
 </div>
@@ -1833,9 +1836,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Compute the geometric shape functions and also first and second derivatives w.r.t. Lagrangian coordinates at local coordinate s; Returns Jacobian of mapping from Lagrangian to local coordinates. Numbering: <b>1D:</b> d2pidxi(i,0) = <img class="formulaInl" alt="$ d^2 \psi_j / d \xi^2 $" src="form_232.png" width="49" height="15"/> <b>2D:</b> d2psidxi(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_0^2 $" src="form_233.png" width="50" height="15"/> d2psidxi(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_1^2 $" src="form_234.png" width="50" height="15"/> d2psidxi(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 $" src="form_235.png" width="68" height="15"/> <b>3D:</b> d2psidxi(i,0) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_0^2 $" src="form_233.png" width="50" height="15"/> d2psidxi(i,1) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_1^2 $" src="form_234.png" width="50" height="15"/> d2psidxi(i,2) = <img class="formulaInl" alt="$ \partial^2 \psi_j / \partial \xi_2^2 $" src="form_236.png" width="50" height="15"/> d2psidxi(i,3) = <img class="formulaInl" alt="$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 $" src="form_237.png" width="68" height="15"/> d2psidxi(i,4) = <img class="formulaInl" alt="$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 $" src="form_238.png" width="69" height="15"/> d2psidxi(i,5) = <img class="formulaInl" alt="$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 $" src="form_239.png" width="69" height="15"/>. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06781">6781</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06811">6811</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l06586">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8h_source.html#l02016">oomph::FiniteElement::d2shape_local()</a>, <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>, <a class="el" href="elements_8h_source.html#l01483">oomph::FiniteElement::N2deriv</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="elements_8cc_source.html#l03125">oomph::FiniteElement::transform_second_derivatives()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l06616">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8h_source.html#l02020">oomph::FiniteElement::d2shape_local()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>, <a class="el" href="elements_8h_source.html#l01487">oomph::FiniteElement::N2deriv</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="elements_8cc_source.html#l03155">oomph::FiniteElement::transform_second_derivatives()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>.</p>
 
@@ -1892,9 +1895,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1StorableShapeSolidElementBase.html#a55f3ab1f51572cf77e374e4917f47f2b">oomph::StorableShapeSolidElementBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06832">6832</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06862">6862</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l06586">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8cc_source.html#l03274">oomph::FiniteElement::d2shape_local_at_knot()</a>, <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>, <a class="el" href="elements_8h_source.html#l01483">oomph::FiniteElement::N2deriv</a>, and <a class="el" href="elements_8cc_source.html#l03125">oomph::FiniteElement::transform_second_derivatives()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l06616">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8cc_source.html#l03304">oomph::FiniteElement::d2shape_local_at_knot()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>, <a class="el" href="elements_8h_source.html#l01487">oomph::FiniteElement::N2deriv</a>, and <a class="el" href="elements_8cc_source.html#l03155">oomph::FiniteElement::transform_second_derivatives()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="stored__shape__function__elements_8cc_source.html#l01143">oomph::StorableShapeSolidElementBase::d2shape_lagrangian_at_knot()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, and <a class="el" href="stored__shape__function__elements_8cc_source.html#l01023">oomph::StorableShapeSolidElementBase::pre_compute_d2shape_lagrangian_at_knots()</a>.</p>
 
@@ -1940,9 +1943,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement.html#ad53849f509cfd0d3eb469bfacf7cfabf">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>, and <a class="el" href="classoomph_1_1FSIWallElement.html#afe120348dddfc3acfd95e7d08c2d0a1d">oomph::FSIWallElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06514">6514</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06544">6544</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l01709">oomph::FiniteElement::describe_local_dofs()</a>, and <a class="el" href="elements_8cc_source.html#l06874">describe_solid_local_dofs()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l01737">oomph::FiniteElement::describe_local_dofs()</a>, and <a class="el" href="elements_8cc_source.html#l06904">describe_solid_local_dofs()</a>.</p>
 
 </div>
 </div>
@@ -1983,11 +1986,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Classifies dofs locally for solid specific aspects. </p>
 <p>Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data::describe_dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem::describe_dofs(...) </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06874">6874</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06904">6904</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="nodes_8cc_source.html#l03671">oomph::SolidNode::describe_dofs()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
+<p class="reference">References <a class="el" href="nodes_8cc_source.html#l03671">oomph::SolidNode::describe_dofs()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, and <a class="el" href="oomph__definitions_8cc_source.html#l00286">oomph::Global_string_for_annotation::string()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06514">describe_local_dofs()</a>, and <a class="el" href="fsi_8cc_source.html#l00078">oomph::FSIWallElement::describe_local_dofs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06544">describe_local_dofs()</a>, and <a class="el" href="fsi_8cc_source.html#l00078">oomph::FSIWallElement::describe_local_dofs()</a>.</p>
 
 </div>
 </div>
@@ -2016,9 +2019,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set to reset the problem being solved to be the standard problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03972">3972</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03976">3976</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04302">Solve_for_consistent_newmark_accel_flag</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04306">Solve_for_consistent_newmark_accel_flag</a>.</p>
 
 </div>
 </div>
@@ -2057,11 +2060,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Calculate shape functions and derivatives w.r.t. Lagrangian coordinates at local coordinate s. Returns the Jacobian of the mapping from Lagrangian to local coordinates. </p>
 <p>Calculate shape functions and derivatives w.r.t. Lagrangian coordinates at local coordinate s. Returns the Jacobian of the mapping from Lagrangian to local coordinates. General case, may be overloaded. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06710">6710</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06740">6740</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l01981">oomph::FiniteElement::dshape_local()</a>, <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="elements_8cc_source.html#l02833">oomph::FiniteElement::transform_derivatives()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l01985">oomph::FiniteElement::dshape_local()</a>, <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="elements_8cc_source.html#l02863">oomph::FiniteElement::transform_derivatives()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="beam__elements_8cc_source.html#l01199">oomph::FSIHermiteBeamElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="shell__elements_8cc_source.html#l01332">oomph::FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="shell__elements_8cc_source.html#l00072">oomph::KirchhoffLoveShellEquations::get_normal()</a>, <a class="el" href="beam__elements_8cc_source.html#l00077">oomph::KirchhoffLoveBeamEquations::get_normal()</a>, and <a class="el" href="shell__elements_8cc_source.html#l01080">oomph::KirchhoffLoveShellEquations::load_rate_of_work()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="beam__elements_8cc_source.html#l01199">oomph::FSIHermiteBeamElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="shell__elements_8cc_source.html#l01332">oomph::FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate()</a>, <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="shell__elements_8cc_source.html#l00072">oomph::KirchhoffLoveShellEquations::get_normal()</a>, <a class="el" href="beam__elements_8cc_source.html#l00077">oomph::KirchhoffLoveBeamEquations::get_normal()</a>, and <a class="el" href="shell__elements_8cc_source.html#l01080">oomph::KirchhoffLoveShellEquations::load_rate_of_work()</a>.</p>
 
 </div>
 </div>
@@ -2110,9 +2113,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1StorableShapeSolidElementBase.html#a69eefa335919d8d4b5143bb11b40c2df">oomph::StorableShapeSolidElementBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06737">6737</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06767">6767</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8cc_source.html#l03239">oomph::FiniteElement::dshape_local_at_knot()</a>, <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>, and <a class="el" href="elements_8cc_source.html#l02833">oomph::FiniteElement::transform_derivatives()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8cc_source.html#l03269">oomph::FiniteElement::dshape_local_at_knot()</a>, <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>, and <a class="el" href="elements_8cc_source.html#l02863">oomph::FiniteElement::transform_derivatives()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="axisym__solid__elements_8h_source.html#l00284">oomph::AxisymmetricPVDEquations::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01132">oomph::AxisymmetricPVDEquationsWithPressure::compute_physical_size()</a>, <a class="el" href="stored__shape__function__elements_8cc_source.html#l01119">oomph::StorableShapeSolidElementBase::dshape_lagrangian_at_knot()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, and <a class="el" href="stored__shape__function__elements_8cc_source.html#l00960">oomph::StorableShapeSolidElementBase::pre_compute_dshape_lagrangian_at_knots()</a>.</p>
 
@@ -2143,9 +2146,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set to alter the problem being solved when assigning the initial conditions for time-dependent problems: solve for the history value that corresponds to the acceleration in the <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme by demanding that the PDE is satisifed at the initial time. In this case the Jacobian is replaced by the mass matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03966">3966</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03970">3970</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04302">Solve_for_consistent_newmark_accel_flag</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04306">Solve_for_consistent_newmark_accel_flag</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="elastic__problems_8h_source.html#l00356">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>.</p>
 
@@ -2191,9 +2194,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableFSIImposeDisplacementByLagrangeMultiplierElement.html#a3c86bf6884cd7cfdfa8e7381fbd16fcf">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1FSIImposeDisplacementByLagrangeMultiplierElement.html#a48006d22e0ad79703914c687390150b8">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RefineableImposeDisplacementByLagrangeMultiplierElement.html#af0d1b2633de720222d85e2083296a209">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1ImposeDisplacementByLagrangeMultiplierElement.html#a8f196eaf084264031cf36fb541978123">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1RefineableFSISolidTractionElement.html#a886a6bcb5722c9535f6f78ccefdc0646">oomph::RefineableFSISolidTractionElement&lt; ELEMENT, DIM &gt;</a>, <a class="el" href="classoomph_1_1FSISolidTractionElement.html#a789bdb99ca30e3c7b56adab5be79a59d">oomph::FSISolidTractionElement&lt; ELEMENT, DIM &gt;</a>, <a class="el" href="classoomph_1_1RefineableSolidTractionElement.html#ad1921c9d88c2d71c0f3735259faaef35">oomph::RefineableSolidTractionElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1SolidTractionElement.html#a7f6315287b8d863631a06b75e0cc7daf">oomph::SolidTractionElement&lt; ELEMENT &gt;</a>, <a class="el" href="classoomph_1_1PVDEquationsWithPressure.html#ac1d61d6c3be895e5d033cfbcbfc8bd71">oomph::PVDEquationsWithPressure&lt; DIM &gt;</a>, <a class="el" href="classoomph_1_1PVDEquations.html#a7a84eddfcf9bd10eec76fd4baa739806">oomph::PVDEquations&lt; DIM &gt;</a>, <a class="el" href="classoomph_1_1FSIDiagHermiteShellElement.html#a5e48d1c0291cf16cacaa8b42112efe90">oomph::FSIDiagHermiteShellElement</a>, <a class="el" href="classoomph_1_1KirchhoffLoveShellEquations.html#a2c8049fa371d484a43e157ebef54b474">oomph::KirchhoffLoveShellEquations</a>, and <a class="el" href="classoomph_1_1FSIWallElement.html#a7817d2662c24540d3757cb1a1194a635">oomph::FSIWallElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04185">4185</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04189">4189</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00357">oomph::GeneralisedElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="elements_8cc_source.html#l01199">oomph::GeneralisedElement::fill_in_jacobian_from_external_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l01102">oomph::GeneralisedElement::fill_in_jacobian_from_internal_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l03660">oomph::FiniteElement::fill_in_jacobian_from_nodal_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="elements_8h_source.html#l00980">oomph::GeneralisedElement::get_residuals()</a>, <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="elements_8h_source.html#l04302">Solve_for_consistent_newmark_accel_flag</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00357">oomph::GeneralisedElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="elements_8cc_source.html#l01227">oomph::GeneralisedElement::fill_in_jacobian_from_external_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l01130">oomph::GeneralisedElement::fill_in_jacobian_from_internal_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l03690">oomph::FiniteElement::fill_in_jacobian_from_nodal_by_fd()</a>, <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="elements_8h_source.html#l00984">oomph::GeneralisedElement::get_residuals()</a>, <a class="el" href="elements_8h_source.html#l00839">oomph::GeneralisedElement::ndof()</a>, and <a class="el" href="elements_8h_source.html#l04306">Solve_for_consistent_newmark_accel_flag</a>.</p>
 
 </div>
 </div>
@@ -2243,11 +2246,11 @@ Additional Inherited Members</h2></td></tr>
 </p>
 <p> where <img class="formulaInl" alt="$ N $" src="form_241.png" width="11" height="10"/> is the number of nodes in the mesh and <img class="formulaInl" alt="$ K $" src="form_12.png" width="11" height="10"/> the number of generalised nodal coordinates. The initial shape of the solid body, <img class="formulaInl" alt="$ {\bf R}^{(IC)},$" src="form_242.png" width="36" height="15"/> and its time-derivatives are specified via the <code><a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a></code> that is stored in the <code>SolidFiniteElement::SolidInitialCondition</code> object. The latter also stores the order of the time-derivative <img class="formulaInl" alt="$ D $" src="form_243.png" width="10" height="10"/> to be assigned. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07376">7376</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07406">7406</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="geom__objects_8h_source.html#l00292">oomph::GeomObject::dposition_dt()</a>, <a class="el" href="elements_8h_source.html#l03511">oomph::SolidInitialCondition::geom_object_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03517">oomph::SolidInitialCondition::ic_time_deriv()</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l03912">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="elements_8h_source.html#l04137">position_local_eqn()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="elements_8h_source.html#l04131">Solid_ic_pt</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="geom__objects_8h_source.html#l00292">oomph::GeomObject::dposition_dt()</a>, <a class="el" href="elements_8h_source.html#l03515">oomph::SolidInitialCondition::geom_object_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03521">oomph::SolidInitialCondition::ic_time_deriv()</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l03916">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="elements_8h_source.html#l04141">position_local_eqn()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="elements_8h_source.html#l04135">Solid_ic_pt</a>, and <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04035">fill_in_jacobian_for_solid_ic()</a>, and <a class="el" href="elements_8h_source.html#l04018">fill_in_residuals_for_solid_ic()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04039">fill_in_jacobian_for_solid_ic()</a>, and <a class="el" href="elements_8h_source.html#l04022">fill_in_residuals_for_solid_ic()</a>.</p>
 
 </div>
 </div>
@@ -2270,11 +2273,11 @@ Additional Inherited Members</h2></td></tr>
 <p>Fill in the contributions of the Jacobian matrix for the consistent assignment of the initial "accelerations" in <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme. In this case the Jacobian is the mass matrix. </p>
 <p>Add jacobian and residuals for consistent assignment of initial "accelerations" in <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme. Jacobian is the mass matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07227">7227</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07257">7257</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8cc_source.html#l06710">dshape_lagrangian()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l07104">interpolated_xi()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l04308">multiplier()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="elements_8h_source.html#l04137">position_local_eqn()</a>, <a class="el" href="nodes_8h_source.html#l01022">oomph::Node::position_time_stepper_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="elements_8h_source.html#l04131">Solid_ic_pt</a>, <a class="el" href="elements_8h_source.html#l04302">Solve_for_consistent_newmark_accel_flag</a>, <a class="el" href="timesteppers_8h_source.html#l00490">oomph::TimeStepper::type()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>, and <a class="el" href="timesteppers_8h_source.html#l00594">oomph::TimeStepper::weight()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8cc_source.html#l06740">dshape_lagrangian()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="elements_8cc_source.html#l07134">interpolated_xi()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l04312">multiplier()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="elements_8h_source.html#l04141">position_local_eqn()</a>, <a class="el" href="nodes_8h_source.html#l01022">oomph::Node::position_time_stepper_pt()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="elements_8h_source.html#l04135">Solid_ic_pt</a>, <a class="el" href="elements_8h_source.html#l04306">Solve_for_consistent_newmark_accel_flag</a>, <a class="el" href="timesteppers_8h_source.html#l00490">oomph::TimeStepper::type()</a>, <a class="el" href="quadtree_8h_source.html#l00063">oomph::QuadTreeNames::W</a>, <a class="el" href="classoomph_1_1Integral.html#ac65335e2aab120b285b3d6c294507b06">oomph::Integral::weight()</a>, and <a class="el" href="timesteppers_8h_source.html#l00594">oomph::TimeStepper::weight()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04185">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04189">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, and <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
 
 </div>
 </div>
@@ -2318,9 +2321,9 @@ Additional Inherited Members</h2></td></tr>
 </p>
 <p> where <img class="formulaInl" alt="$ N $" src="form_241.png" width="11" height="10"/> is the number of nodes in the mesh and <img class="formulaInl" alt="$ K $" src="form_12.png" width="11" height="10"/> the number of generalised nodal coordinates. The initial shape of the solid body, <img class="formulaInl" alt="$ {\bf R}^{(IC)},$" src="form_242.png" width="36" height="15"/> and its time-derivatives are specified via the <code><a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a></code> that is stored in the <code>SolidFiniteElement::SolidInitialCondition</code> object. The latter also stores the order of the time-derivative <img class="formulaInl" alt="$ D $" src="form_243.png" width="10" height="10"/> to be assigned. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04035">4035</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04039">4039</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>.</p>
 
@@ -2352,9 +2355,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use finite differences to calculate the Jacobian entries corresponding to the solid positions. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04225">4225</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04229">4229</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="elements_8h_source.html#l00980">oomph::GeneralisedElement::get_residuals()</a>, and <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="elements_8h_source.html#l00984">oomph::GeneralisedElement::get_residuals()</a>, and <a class="el" href="elements_8h_source.html#l00839">oomph::GeneralisedElement::ndof()</a>.</p>
 
 </div>
 </div>
@@ -2397,11 +2400,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a97f911c422af3e4fbd078b58cfe3e207">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06985">6985</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07015">7015</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l01198">oomph::GeneralisedElement::Default_fd_jacobian_step</a>, <a class="el" href="elements_8h_source.html#l00980">oomph::GeneralisedElement::get_residuals()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00835">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l01615">oomph::Node::perform_auxiliary_node_update_fct()</a>, <a class="el" href="elements_8h_source.html#l04137">position_local_eqn()</a>, <a class="el" href="elements_8h_source.html#l04245">reset_after_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04255">reset_in_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04240">update_before_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04250">update_in_solid_position_fd()</a>, and <a class="el" href="nodes_8h_source.html#l01126">oomph::Node::x_gen()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l01202">oomph::GeneralisedElement::Default_fd_jacobian_step</a>, <a class="el" href="elements_8h_source.html#l00984">oomph::GeneralisedElement::get_residuals()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l00839">oomph::GeneralisedElement::ndof()</a>, <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="nodes_8h_source.html#l01615">oomph::Node::perform_auxiliary_node_update_fct()</a>, <a class="el" href="elements_8h_source.html#l04141">position_local_eqn()</a>, <a class="el" href="elements_8h_source.html#l04249">reset_after_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04259">reset_in_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04244">update_before_solid_position_fd()</a>, <a class="el" href="elements_8h_source.html#l04254">update_in_solid_position_fd()</a>, and <a class="el" href="nodes_8h_source.html#l01126">oomph::Node::x_gen()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00780">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="specific__node__update__interface__elements_8h_source.html#l01100">oomph::ElasticPointFluidInterfaceBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="specific__node__update__interface__elements_8h_source.html#l01186">oomph::ElasticLineFluidInterfaceBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04185">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="elements_8h_source.html#l04225">fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00780">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="specific__node__update__interface__elements_8h_source.html#l01100">oomph::ElasticPointFluidInterfaceBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="specific__node__update__interface__elements_8h_source.html#l01186">oomph::ElasticLineFluidInterfaceBoundingElement&lt; ELEMENT &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04189">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="elements_8h_source.html#l04229">fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
 
 </div>
 </div>
@@ -2435,11 +2438,11 @@ Additional Inherited Members</h2></td></tr>
 </p>
 <p> where <img class="formulaInl" alt="$ N $" src="form_241.png" width="11" height="10"/> is the number of nodes in the mesh and <img class="formulaInl" alt="$ K $" src="form_12.png" width="11" height="10"/> the number of generalised nodal coordinates. The initial shape of the solid body, <img class="formulaInl" alt="$ {\bf R}^{(IC)},$" src="form_242.png" width="36" height="15"/> and its time-derivatives are specified via the <code><a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a></code> that is stored in the <code>SolidFiniteElement::SolidInitialCondition</code> object. The latter also stores the order of the time-derivative <img class="formulaInl" alt="$ D $" src="form_243.png" width="10" height="10"/> to be assigned. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04018">4018</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04022">4022</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l00227">oomph::GeneralisedElement::Dummy_matrix</a>, and <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l00227">oomph::GeneralisedElement::Dummy_matrix</a>, and <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, and <a class="el" href="elements_8h_source.html#l04003">get_residuals_for_solid_ic()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, and <a class="el" href="elements_8h_source.html#l04007">get_residuals_for_solid_ic()</a>.</p>
 
 </div>
 </div>
@@ -2473,9 +2476,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a3f20de56e3a920644b01dac184f67ef1">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03615">3615</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03619">3619</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="solid__traction__elements_8h_source.html#l01209">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::set_boundary_shape_geom_object_pt()</a>.</p>
 
@@ -2511,9 +2514,9 @@ Additional Inherited Members</h2></td></tr>
 </p>
 <p> where <img class="formulaInl" alt="$ N $" src="form_241.png" width="11" height="10"/> is the number of nodes in the mesh and <img class="formulaInl" alt="$ K $" src="form_12.png" width="11" height="10"/> the number of generalised nodal coordinates. The initial shape of the solid body, <img class="formulaInl" alt="$ {\bf R}^{(IC)},$" src="form_242.png" width="36" height="15"/> and its time-derivatives are specified via the <code><a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a></code> that is stored in the <code>SolidFiniteElement::SolidInitialCondition</code> object. The latter also stores the order of the time-derivative <img class="formulaInl" alt="$ D $" src="form_243.png" width="10" height="10"/> to be assigned. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04003">4003</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04007">4007</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04018">fill_in_residuals_for_solid_ic()</a>, and <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04022">fill_in_residuals_for_solid_ic()</a>, and <a class="el" href="Vector_8h_source.html#l00167">oomph::Vector&lt; _Tp &gt;::initialise()</a>.</p>
 
 </div>
 </div>
@@ -2573,7 +2576,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1QSolidElementBase.html#a2afc3bfd3aa6ed253f42d55ac4e20839">oomph::QSolidElementBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03659">3659</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03663">3663</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00926">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, and <a class="el" href="refineable__mesh_8cc_source.html#l04433">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>.</p>
 
@@ -2606,7 +2609,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1QPVDElementWithPressure.html#ad94b8af9930b59635389d803b94046ad">oomph::QPVDElementWithPressure&lt; DIM &gt;</a>, and <a class="el" href="classoomph_1_1AxisymQPVDElementWithPressure.html#af5a06f24c310d233555f165189ff353a">oomph::AxisymQPVDElementWithPressure</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03574">3574</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03578">3578</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="elastic__problems_8cc_source.html#l00191">oomph::SolidICProblem::backup_original_state()</a>, <a class="el" href="elastic__problems_8cc_source.html#l00343">oomph::SolidICProblem::reset_original_state()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00048">oomph::SolidICProblem::setup_problem()</a>.</p>
 
@@ -2642,9 +2645,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#ac895a84017b3eb57dadc19384b6ce7f4">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03624">3624</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03628">3628</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
 </div>
 </div>
@@ -2684,9 +2687,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Compute derivatives of FE-interpolated Lagrangian coordinates xi with respect to local coordinates: dxids[i][j]=dxi_i/ds_j. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07180">7180</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07210">7210</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l01981">oomph::FiniteElement::dshape_local()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03912">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="elements_8h_source.html#l01985">oomph::FiniteElement::dshape_local()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03916">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -2729,11 +2732,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1SolidFaceElement.html#ace3eb64ce511c869bd140922b6597667">oomph::SolidFaceElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07104">7104</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07134">7134</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03912">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03916">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06442">compute_norm()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00284">oomph::AxisymmetricPVDEquations::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01132">oomph::AxisymmetricPVDEquationsWithPressure::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>, <a class="el" href="Qelements_8h_source.html#l00379">oomph::QSolidElementBase::get_x_and_xi()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00413">oomph::AxisymmetricPVDEquations::output()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00561">oomph::AxisymDiagHermitePVDElement::output()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01263">oomph::AxisymmetricPVDEquationsWithPressure::output()</a>, <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>, <a class="el" href="shell__elements_8cc_source.html#l01267">oomph::HermiteShellElement::output()</a>, and <a class="el" href="shell__elements_8cc_source.html#l01678">oomph::ClampedHermiteShellBoundaryConditionElement::output()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06472">compute_norm()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00284">oomph::AxisymmetricPVDEquations::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01132">oomph::AxisymmetricPVDEquationsWithPressure::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>, <a class="el" href="Qelements_8h_source.html#l00379">oomph::QSolidElementBase::get_x_and_xi()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00413">oomph::AxisymmetricPVDEquations::output()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00561">oomph::AxisymDiagHermitePVDElement::output()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01263">oomph::AxisymmetricPVDEquationsWithPressure::output()</a>, <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>, <a class="el" href="shell__elements_8cc_source.html#l01267">oomph::HermiteShellElement::output()</a>, and <a class="el" href="shell__elements_8cc_source.html#l01678">oomph::ClampedHermiteShellBoundaryConditionElement::output()</a>.</p>
 
 </div>
 </div>
@@ -2776,9 +2779,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1SolidFaceElement.html#ae1c414e42a48c736a9b634e922dbb314">oomph::SolidFaceElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07139">7139</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l07169">7169</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03912">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, <a class="el" href="elements_8h_source.html#l03916">lagrangian_position_gen()</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, and <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>.</p>
 
 </div>
 </div>
@@ -2808,7 +2811,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return the Jacobian of mapping from local to Lagrangian coordinates at local position s. NOT YET IMPLEMENTED. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03936">3936</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03940">3940</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 </div>
 </div>
@@ -2838,7 +2841,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return the Jacobian of the mapping from local to Lagrangian coordinates at the ipt-th integration point. NOT YET IMPLEMENTED. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03946">3946</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03950">3950</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
 </div>
 </div>
@@ -2867,11 +2870,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return the number of Lagrangian coordinates that the element requires at all nodes. This is by default the elemental dimension. If we ever need any other case, it can be implemented. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03774">3774</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03778">3778</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04285">Lagrangian_dimension</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04289">Lagrangian_dimension</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03827">construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l03791">construct_node()</a>, <a class="el" href="elements_8cc_source.html#l07180">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07139">interpolated_xi()</a>, and <a class="el" href="elements_8h_source.html#l03565">set_lagrangian_dimension()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03831">construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l03795">construct_node()</a>, <a class="el" href="elements_8cc_source.html#l07210">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07169">interpolated_xi()</a>, and <a class="el" href="elements_8h_source.html#l03569">set_lagrangian_dimension()</a>.</p>
 
 </div>
 </div>
@@ -2911,9 +2914,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return i-th Lagrangian coordinate at local node n. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03905">3905</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03909">3909</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="solid__traction__elements_8h_source.html#l01676">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02780">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03133">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, and <a class="el" href="solid__traction__elements_8h_source.html#l01517">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::square_of_l2_norm_of_error()</a>.</p>
 
@@ -2961,11 +2964,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return Generalised Lagrangian coordinate at local node n. &lsquo;Direction&rsquo; i, &lsquo;Type&rsquo; k. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03912">3912</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03916">3916</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__elements_8cc_source.html#l00855">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00894">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00284">oomph::AxisymmetricPVDEquations::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01132">oomph::AxisymmetricPVDEquationsWithPressure::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="elements_8cc_source.html#l07180">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07104">interpolated_xi()</a>, <a class="el" href="shell__elements_8cc_source.html#l01080">oomph::KirchhoffLoveShellEquations::load_rate_of_work()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00938">oomph::RefineableSolidElement::local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="elements_8h_source.html#l03642">zeta_nodal()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__elements_8cc_source.html#l00855">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00894">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00284">oomph::AxisymmetricPVDEquations::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l01132">oomph::AxisymmetricPVDEquationsWithPressure::compute_physical_size()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="shell__elements_8cc_source.html#l00777">oomph::KirchhoffLoveShellEquations::get_energy()</a>, <a class="el" href="elements_8cc_source.html#l07210">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07134">interpolated_xi()</a>, <a class="el" href="shell__elements_8cc_source.html#l01080">oomph::KirchhoffLoveShellEquations::load_rate_of_work()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00938">oomph::RefineableSolidElement::local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="elements_8h_source.html#l03646">zeta_nodal()</a>.</p>
 
 </div>
 </div>
@@ -3005,9 +3008,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Calculate the mapping from local to lagrangian coordinates, given the derivatives of the shape functions w.r.t. local coordinates, Return only the determinant of the jacobian and the inverse of the mapping (ds/dx) </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04097">4097</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04101">4101</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, and <a class="el" href="elements_8h_source.html#l04082">local_to_lagrangian_mapping()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, and <a class="el" href="elements_8h_source.html#l04086">local_to_lagrangian_mapping()</a>.</p>
 
 </div>
 </div>
@@ -3055,11 +3058,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1SolidDiagQHermiteElement.html#a781e03c735c8c17533315781982882e1">oomph::SolidDiagQHermiteElement&lt; DIM &gt;</a>, <a class="el" href="classoomph_1_1SolidDiagQHermiteElement.html#a781e03c735c8c17533315781982882e1">oomph::SolidDiagQHermiteElement&lt; 1 &gt;</a>, and <a class="el" href="classoomph_1_1SolidDiagQHermiteElement.html#a781e03c735c8c17533315781982882e1">oomph::SolidDiagQHermiteElement&lt; 2 &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04082">4082</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04086">4086</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l06528">assemble_local_to_lagrangian_jacobian()</a>, and <a class="el" href="elements_8cc_source.html#l02166">oomph::FiniteElement::invert_jacobian_mapping()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l06558">assemble_local_to_lagrangian_jacobian()</a>, and <a class="el" href="elements_8cc_source.html#l02196">oomph::FiniteElement::invert_jacobian_mapping()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06781">d2shape_lagrangian()</a>, <a class="el" href="elements_8cc_source.html#l06832">d2shape_lagrangian_at_knot()</a>, <a class="el" href="elements_8cc_source.html#l06710">dshape_lagrangian()</a>, <a class="el" href="elements_8cc_source.html#l06737">dshape_lagrangian_at_knot()</a>, and <a class="el" href="elements_8h_source.html#l04097">local_to_lagrangian_mapping()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06811">d2shape_lagrangian()</a>, <a class="el" href="elements_8cc_source.html#l06862">d2shape_lagrangian_at_knot()</a>, <a class="el" href="elements_8cc_source.html#l06740">dshape_lagrangian()</a>, <a class="el" href="elements_8cc_source.html#l06767">dshape_lagrangian_at_knot()</a>, and <a class="el" href="elements_8h_source.html#l04101">local_to_lagrangian_mapping()</a>.</p>
 
 </div>
 </div>
@@ -3108,9 +3111,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a492846d9f2c5d5235f9f3ff1001d4ec8">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06643">6643</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8cc_source.html#l06673">6673</a> of file <a class="el" href="elements_8cc_source.html">elements.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8cc_source.html#l01750">oomph::FiniteElement::check_jacobian()</a>, <a class="el" href="elements_8h_source.html#l02611">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03897">raw_lagrangian_position_gen()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8cc_source.html#l01778">oomph::FiniteElement::check_jacobian()</a>, <a class="el" href="elements_8h_source.html#l02615">oomph::FiniteElement::dim()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, and <a class="el" href="elements_8h_source.html#l03901">raw_lagrangian_position_gen()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="hermite__elements_8h_source.html#l00586">oomph::SolidDiagQHermiteElement&lt; DIM &gt;::local_to_lagrangian_mapping()</a>.</p>
 
@@ -3142,11 +3145,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access to the "multiplier" for the inertia terms in the consistent determination of the initial conditions for <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> timestepping. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04308">4308</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04312">4312</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04276">Multiplier_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04280">Multiplier_fct_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>.</p>
 
 </div>
 </div>
@@ -3175,9 +3178,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access function: Pointer to multiplicator function for assignment of consistent assignement of initial conditions for <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03979">3979</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03983">3983</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04276">Multiplier_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04280">Multiplier_fct_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="elastic__problems_8h_source.html#l00356">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>.</p>
 
@@ -3208,9 +3211,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access function: Pointer to multiplicator function for assignment of consistent assignement of initial conditions for <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme (const version) </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03988">3988</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03992">3992</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04276">Multiplier_fct_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04280">Multiplier_fct_pt</a>.</p>
 
 </div>
 </div>
@@ -3244,9 +3247,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidElement.html#a690e24cdbd9308da1b9e705fd0340de8">oomph::RefineableSolidElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03608">3608</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03612">3612</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>.</p>
 
 </div>
 </div>
@@ -3275,11 +3278,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return the number of types of (generalised) nodal Lagrangian coordinates required to interpolate the Lagrangian coordinates in the element. (E.g. 1 for Lagrange-type elements; 2 for Hermite beam elements; 4 for Hermite shell elements). Default value is 1. Needs to be overloaded for any other element. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03785">3785</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03789">3789</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04293">Nnodal_lagrangian_type</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04297">Nnodal_lagrangian_type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06528">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00855">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8cc_source.html#l06586">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00894">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8h_source.html#l03827">construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l03791">construct_node()</a>, <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elements_8cc_source.html#l07180">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07104">interpolated_xi()</a>, <a class="el" href="elements_8cc_source.html#l06643">local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l00938">oomph::RefineableSolidElement::local_to_lagrangian_mapping_diagonal()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06558">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00855">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8cc_source.html#l06616">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="refineable__elements_8cc_source.html#l00894">oomph::RefineableSolidElement::assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="elements_8h_source.html#l03831">construct_boundary_node()</a>, <a class="el" href="elements_8h_source.html#l03795">construct_node()</a>, <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elements_8cc_source.html#l07210">interpolated_dxids()</a>, <a class="el" href="elements_8cc_source.html#l07134">interpolated_xi()</a>, <a class="el" href="elements_8cc_source.html#l06673">local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l00938">oomph::RefineableSolidElement::local_to_lagrangian_mapping_diagonal()</a>.</p>
 
 </div>
 </div>
@@ -3325,11 +3328,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access function that returns the local equation number that corresponds to the j-th coordinate of the k-th position-type at the n-th local node. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04137">4137</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04141">4141</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02463">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02484">oomph::FiniteElement::nodal_dimension()</a>, and <a class="el" href="elements_8h_source.html#l04281">Position_local_eqn</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02467">oomph::FiniteElement::nnodal_position_type()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="elements_8h_source.html#l02488">oomph::FiniteElement::nodal_dimension()</a>, and <a class="el" href="elements_8h_source.html#l04285">Position_local_eqn</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__elements_8cc_source.html#l01178">oomph::RefineableSolidElement::assign_solid_hanging_local_eqn_numbers()</a>, <a class="el" href="beam__elements_8cc_source.html#l01357">oomph::ClampedSlidingHermiteBeamBoundaryConditionElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="shell__elements_8cc_source.html#l01520">oomph::ClampedHermiteShellBoundaryConditionElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01676">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02780">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="beam__elements_8cc_source.html#l01261">oomph::FSIHermiteBeamElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="shell__elements_8cc_source.html#l01398">oomph::FSIDiagHermiteShellElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="shell__elements_8cc_source.html#l01789">oomph::ClampedHermiteShellBoundaryConditionElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__elements_8h_source.html#l00329">oomph::PVDEquationsBase&lt; DIM &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__elements_8h_source.html#l01077">oomph::PVDEquationsWithPressure&lt; DIM &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03133">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01752">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00804">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="projection_8h_source.html#l00240">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__elements_8cc_source.html#l01178">oomph::RefineableSolidElement::assign_solid_hanging_local_eqn_numbers()</a>, <a class="el" href="beam__elements_8cc_source.html#l01357">oomph::ClampedSlidingHermiteBeamBoundaryConditionElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="shell__elements_8cc_source.html#l01520">oomph::ClampedHermiteShellBoundaryConditionElement::fill_in_contribution_to_residuals()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00094">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_residuals_axisym_pvd()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l01676">oomph::ImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02780">oomph::FSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00792">oomph::AxisymmetricPVDEquationsWithPressure::fill_in_generic_residual_contribution_axisym_pvd_with_pressure()</a>, <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>, <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="beam__elements_8cc_source.html#l01261">oomph::FSIHermiteBeamElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="shell__elements_8cc_source.html#l01398">oomph::FSIDiagHermiteShellElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="shell__elements_8cc_source.html#l01789">oomph::ClampedHermiteShellBoundaryConditionElement::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__elements_8h_source.html#l00329">oomph::PVDEquationsBase&lt; DIM &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__elements_8h_source.html#l01077">oomph::PVDEquationsWithPressure&lt; DIM &gt;::get_dof_numbers_for_unknowns()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l02063">oomph::RefineableImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()</a>, <a class="el" href="solid__traction__elements_8h_source.html#l03133">oomph::RefineableFSIImposeDisplacementByLagrangeMultiplierElement&lt; ELEMENT &gt;::refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()</a>, <a class="el" href="axisym__poroelasticity__elements_8h_source.html#l01752">oomph::ProjectableAxisymmetricPoroelasticityElement&lt; AXISYMMETRIC_POROELASTICITY_ELEMENT &gt;::residual_for_projection()</a>, <a class="el" href="darcy__elements_8h_source.html#l00804">oomph::ProjectableDarcyElement&lt; DARCY_ELEMENT &gt;::residual_for_projection()</a>, and <a class="el" href="projection_8h_source.html#l00240">oomph::ProjectableElement&lt; ELEMENT &gt;::residual_for_projection()</a>.</p>
 
 </div>
 </div>
@@ -3369,9 +3372,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return i-th Lagrangian coordinate at local node n without using the hanging representation. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03890">3890</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03894">3894</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="beam__elements_8cc_source.html#l01114">oomph::FSIHermiteBeamElement::locate_zeta()</a>.</p>
 
@@ -3419,11 +3422,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Return Generalised Lagrangian coordinate at local node n. &lsquo;Direction&rsquo; i, &lsquo;Type&rsquo; k. Does not use the hanging node representation. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03897">3897</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03901">3901</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06528">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8cc_source.html#l06586">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>, <a class="el" href="elements_8cc_source.html#l06643">local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06558">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8cc_source.html#l06616">assemble_local_to_lagrangian_jacobian2()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="shell__elements_8cc_source.html#l00357">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_residuals_shell()</a>, <a class="el" href="beam__elements_8cc_source.html#l00588">oomph::KirchhoffLoveBeamEquations::get_energy()</a>, <a class="el" href="shell__elements_8cc_source.html#l00154">oomph::KirchhoffLoveShellEquations::get_strain_and_bend()</a>, <a class="el" href="elements_8cc_source.html#l06673">local_to_lagrangian_mapping_diagonal()</a>, and <a class="el" href="beam__elements_8cc_source.html#l00825">oomph::HermiteBeamElement::output()</a>.</p>
 
 </div>
 </div>
@@ -3454,9 +3457,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1FSIWallElement.html#ae960e2a896fc81320f08cdbda6dc6526">oomph::FSIWallElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04245">4245</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04249">4249</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
 
 </div>
 </div>
@@ -3488,11 +3491,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1FSIWallElement.html#aa7a250a0958768f5393484ea3c528a37">oomph::FSIWallElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04255">4255</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04259">4259</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l04250">update_in_solid_position_fd()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l04254">update_in_solid_position_fd()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
 
 </div>
 </div>
@@ -3522,9 +3525,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set the lagrangian dimension of the element &mdash; the number of lagrangian coordinates stored at the nodes in the element. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03565">3565</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03569">3569</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, and <a class="el" href="elements_8h_source.html#l04285">Lagrangian_dimension</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, and <a class="el" href="elements_8h_source.html#l04289">Lagrangian_dimension</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="hermite__elements_8h_source.html#l00507">oomph::SolidQHermiteElement&lt; DIM &gt;::SolidQHermiteElement()</a>.</p>
 
@@ -3560,9 +3563,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidQElement_3_012_01_4.html#aac8a230631c509dd854d71a5f68b6483">oomph::RefineableSolidQElement&lt; 2 &gt;</a>, <a class="el" href="classoomph_1_1RefineableSolidQElement_3_011_01_4.html#ae0cd264bee16dd1d05d35f79e33dd408">oomph::RefineableSolidQElement&lt; 1 &gt;</a>, <a class="el" href="classoomph_1_1RefineableSolidQElement_3_013_01_4.html#a2b1aa7874048e0f38370ae7bf761d315">oomph::RefineableSolidQElement&lt; 3 &gt;</a>, and <a class="el" href="classoomph_1_1QSolidElementBase.html#a0ceca47c039bbb38b0feb3baa330a27f">oomph::QSolidElementBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03680">3680</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03684">3684</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l01683">oomph::FiniteElement::Macro_elem_pt</a>, <a class="el" href="elements_8h_source.html#l01878">oomph::FiniteElement::macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04076">Undeformed_macro_elem_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l01687">oomph::FiniteElement::Macro_elem_pt</a>, <a class="el" href="elements_8h_source.html#l01882">oomph::FiniteElement::macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04080">Undeformed_macro_elem_pt</a>.</p>
 
 </div>
 </div>
@@ -3604,9 +3607,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1RefineableSolidQElement_3_012_01_4.html#a8c0cb9d011cc070322945b1fecd03331">oomph::RefineableSolidQElement&lt; 2 &gt;</a>, <a class="el" href="classoomph_1_1RefineableSolidQElement_3_011_01_4.html#a9dd7e2622260d14c2bf92125707a3401">oomph::RefineableSolidQElement&lt; 1 &gt;</a>, <a class="el" href="classoomph_1_1RefineableSolidQElement_3_013_01_4.html#ab2c2950454d7c4ea16a597192c7fae15">oomph::RefineableSolidQElement&lt; 3 &gt;</a>, and <a class="el" href="classoomph_1_1QSolidElementBase.html#aa7f14a039224fb4c513da587448d2c3b">oomph::QSolidElementBase</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03689">3689</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03693">3693</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l01683">oomph::FiniteElement::Macro_elem_pt</a>, <a class="el" href="elements_8h_source.html#l01878">oomph::FiniteElement::macro_elem_pt()</a>, <a class="el" href="elements_8h_source.html#l03706">undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04076">Undeformed_macro_elem_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l01687">oomph::FiniteElement::Macro_elem_pt</a>, <a class="el" href="elements_8h_source.html#l01882">oomph::FiniteElement::macro_elem_pt()</a>, <a class="el" href="elements_8h_source.html#l03710">undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04080">Undeformed_macro_elem_pt</a>.</p>
 
 </div>
 </div>
@@ -3636,9 +3639,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set the number of types required to interpolate the Lagrangian coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04070">4070</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04074">4074</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04293">Nnodal_lagrangian_type</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04297">Nnodal_lagrangian_type</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="hermite__elements_8h_source.html#l00507">oomph::SolidQHermiteElement&lt; DIM &gt;::SolidQHermiteElement()</a>.</p>
 
@@ -3670,9 +3673,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Set pointer to "undeformed" macro element. Can be overloaded in derived classes to perform additional tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03699">3699</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03703">3703</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l03706">undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04076">Undeformed_macro_elem_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l03710">undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l04080">Undeformed_macro_elem_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Qelements_8h_source.html#l00349">oomph::QSolidElementBase::set_macro_elem_pt()</a>.</p>
 
@@ -3703,9 +3706,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to object that describes the initial condition. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03955">3955</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03959">3959</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04131">Solid_ic_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04135">Solid_ic_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="elastic__problems_8h_source.html#l00356">oomph::SolidICProblem::set_newmark_initial_condition_consistently()</a>, and <a class="el" href="elastic__problems_8cc_source.html#l00048">oomph::SolidICProblem::setup_problem()</a>.</p>
 
@@ -3736,11 +3739,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Access function to pointer to "undeformed" macro element. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03706">3706</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03710">3710</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l04076">Undeformed_macro_elem_pt</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l04080">Undeformed_macro_elem_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00926">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04433">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="elements_8h_source.html#l03689">set_macro_elem_pt()</a>, <a class="el" href="Qelements_8h_source.html#l00360">oomph::QSolidElementBase::set_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l03699">set_undeformed_macro_elem_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__mesh_8cc_source.html#l00926">oomph::TreeBasedRefineableMeshBase::adapt_mesh()</a>, <a class="el" href="refineable__mesh_8cc_source.html#l04433">oomph::TreeBasedRefineableMeshBase::p_adapt_mesh()</a>, <a class="el" href="elements_8h_source.html#l03693">set_macro_elem_pt()</a>, <a class="el" href="Qelements_8h_source.html#l00360">oomph::QSolidElementBase::set_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l03703">set_undeformed_macro_elem_pt()</a>.</p>
 
 </div>
 </div>
@@ -3769,9 +3772,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Function that is called before the finite differencing of any solid position data. This may be overloaded to update any dependent data before finite differencing takes place. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04240">4240</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04244">4244</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>.</p>
 
 </div>
 </div>
@@ -3803,9 +3806,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1FSIWallElement.html#ae05300394e531c7b80dc44d1f5e1dbfe">oomph::FSIWallElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04250">4250</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04254">4254</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06985">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="elements_8h_source.html#l04255">reset_in_solid_position_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l07015">fill_in_jacobian_from_solid_position_by_fd()</a>, <a class="el" href="refineable__elements_8cc_source.html#l01335">oomph::RefineableSolidElement::fill_in_jacobian_from_solid_position_by_fd()</a>, and <a class="el" href="elements_8h_source.html#l04259">reset_in_solid_position_fd()</a>.</p>
 
 </div>
 </div>
@@ -3855,9 +3858,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classoomph_1_1SolidFaceElement.html#a28526b0f7a7daa2ab90348e16cf6a529">oomph::SolidFaceElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03642">3642</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l03646">3646</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l03912">lagrangian_position_gen()</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="elements_8h_source.html#l03916">lagrangian_position_gen()</a>.</p>
 
 </div>
 </div>
@@ -3884,9 +3887,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The Lagrangian dimension of the nodes stored in the element, / i.e. the number of Lagrangian coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04285">4285</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04289">4289</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06528">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8h_source.html#l03774">lagrangian_dimension()</a>, and <a class="el" href="elements_8h_source.html#l03565">set_lagrangian_dimension()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06558">assemble_local_to_lagrangian_jacobian()</a>, <a class="el" href="elements_8h_source.html#l03778">lagrangian_dimension()</a>, and <a class="el" href="elements_8h_source.html#l03569">set_lagrangian_dimension()</a>.</p>
 
 </div>
 </div>
@@ -3912,9 +3915,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to function that computes the "multiplier" for the inertia terms in the consistent determination of the initial conditions for <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> timestepping. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04276">4276</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04280">4280</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04308">multiplier()</a>, and <a class="el" href="elements_8h_source.html#l03979">multiplier_fct_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l04312">multiplier()</a>, and <a class="el" href="elements_8h_source.html#l03983">multiplier_fct_pt()</a>.</p>
 
 </div>
 </div>
@@ -3940,9 +3943,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>The number of coordinate types requried to intepolate the Lagrangian coordinates in the element. For Lagrange elements it is 1 (the default). It must be over-ridden by using the set_nlagrangian_type() function in the constructors of elements that use generalised coordinate, e.g. for 1D Hermite elements Nnodal_position_types =2. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04293">4293</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04297">4297</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03785">nnodal_lagrangian_type()</a>, and <a class="el" href="elements_8h_source.html#l04070">set_nnodal_lagrangian_type()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03789">nnodal_lagrangian_type()</a>, and <a class="el" href="elements_8h_source.html#l04074">set_nnodal_lagrangian_type()</a>.</p>
 
 </div>
 </div>
@@ -3968,9 +3971,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Array to hold the local equation number information for the solid equations, whatever they may be. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04281">4281</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04285">4285</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06898">assign_solid_local_eqn_numbers()</a>, <a class="el" href="elements_8h_source.html#l04137">position_local_eqn()</a>, and <a class="el" href="elements_8cc_source.html#l06629">~SolidFiniteElement()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8cc_source.html#l06928">assign_solid_local_eqn_numbers()</a>, <a class="el" href="elements_8h_source.html#l04141">position_local_eqn()</a>, and <a class="el" href="elements_8cc_source.html#l06659">~SolidFiniteElement()</a>.</p>
 
 </div>
 </div>
@@ -3996,9 +3999,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to object that specifies the initial condition. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04131">4131</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04135">4135</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="elements_8cc_source.html#l07376">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>, and <a class="el" href="elements_8h_source.html#l03955">solid_ic_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, <a class="el" href="beam__elements_8cc_source.html#l00275">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_residuals_beam()</a>, <a class="el" href="elements_8cc_source.html#l07406">fill_in_generic_jacobian_for_solid_ic()</a>, <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>, and <a class="el" href="elements_8h_source.html#l03959">solid_ic_pt()</a>.</p>
 
 </div>
 </div>
@@ -4024,9 +4027,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Flag to indicate which system of equations to solve when assigning initial conditions for time-dependent problems. If true, solve for the history value that corresponds to the acceleration in the <a class="el" href="classoomph_1_1Newmark.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Newmark</a> scheme by demanding that the PDE is satisifed at the initial time. In this case the Jacobian is replaced by the mass matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04302">4302</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04306">4306</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03972">disable_solve_for_consistent_newmark_accel()</a>, <a class="el" href="elements_8h_source.html#l03966">enable_solve_for_consistent_newmark_accel()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04185">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="elements_8cc_source.html#l07227">fill_in_jacobian_for_newmark_accel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="elements_8h_source.html#l03976">disable_solve_for_consistent_newmark_accel()</a>, <a class="el" href="elements_8h_source.html#l03970">enable_solve_for_consistent_newmark_accel()</a>, <a class="el" href="axisym__solid__elements_8h_source.html#l00388">oomph::AxisymmetricPVDEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="beam__elements_8cc_source.html#l00534">oomph::KirchhoffLoveBeamEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="elements_8h_source.html#l04189">fill_in_contribution_to_jacobian()</a>, <a class="el" href="fsi_8h_source.html#l00323">oomph::FSIWallElement::fill_in_contribution_to_jacobian()</a>, <a class="el" href="shell__elements_8cc_source.html#l00744">oomph::KirchhoffLoveShellEquations::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00459">oomph::PVDEquations&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00914">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian()</a>, <a class="el" href="solid__elements_8h_source.html#l00958">oomph::PVDEquationsWithPressure&lt; DIM &gt;::fill_in_contribution_to_jacobian_and_mass_matrix()</a>, and <a class="el" href="elements_8cc_source.html#l07257">fill_in_jacobian_for_newmark_accel()</a>.</p>
 
 </div>
 </div>
@@ -4052,9 +4055,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Pointer to the element's "undeformed" macro element (NULL by default) </p>
 
-<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04076">4076</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="elements_8h_source.html#l04080">4080</a> of file <a class="el" href="elements_8h_source.html">elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8h_source.html#l00294">oomph::RefineableSolidQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8h_source.html#l00278">oomph::RefineableSolidQElement&lt; 2 &gt;::build()</a>, <a class="el" href="Qelements_8h_source.html#l00379">oomph::QSolidElementBase::get_x_and_xi()</a>, <a class="el" href="elements_8h_source.html#l03680">set_macro_elem_pt()</a>, <a class="el" href="elements_8h_source.html#l03699">set_undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l03706">undeformed_macro_elem_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="refineable__brick__element_8h_source.html#l00294">oomph::RefineableSolidQElement&lt; 3 &gt;::build()</a>, <a class="el" href="refineable__quad__element_8h_source.html#l00278">oomph::RefineableSolidQElement&lt; 2 &gt;::build()</a>, <a class="el" href="Qelements_8h_source.html#l00379">oomph::QSolidElementBase::get_x_and_xi()</a>, <a class="el" href="elements_8h_source.html#l03684">set_macro_elem_pt()</a>, <a class="el" href="elements_8h_source.html#l03703">set_undeformed_macro_elem_pt()</a>, and <a class="el" href="elements_8h_source.html#l03710">undeformed_macro_elem_pt()</a>.</p>
 
 </div>
 </div>
@@ -4090,7 +4093,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:54:24
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:11:08
         </div>
       </div>
     </footer>

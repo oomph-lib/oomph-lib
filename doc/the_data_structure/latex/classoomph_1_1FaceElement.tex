@@ -163,7 +163,7 @@ static bool \mbox{\hyperlink{classoomph_1_1FaceElement_a95ac8141871cfe5353667b64
 \doxysubsection{Detailed Description}
 Face\+Elements are elements that coincide with the faces of higher-\/dimensional \char`\"{}bulk\char`\"{} elements. They are used on boundaries where additional non-\/trivial boundary conditions need to be applied. Examples include free surfaces, and applied traction conditions. In many cases, Face\+Elements need to evaluate to quantities in the associated bulk elements. For instance, the evaluation of a shear stresses on 2D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} requires the evaluation of velocity derivatives in the associated 3D volume element etc. Therefore we store a pointer to the associated bulk element, and information about the relation between the local coordinates in the face and bulk elements. 
 
-Definition at line 4337 of file elements.\+h.
+Definition at line 4341 of file elements.\+h.
 
 
 
@@ -180,7 +180,7 @@ Typedef for the function that returns the partial derivative of the local coordi
 
 
 
-Definition at line 4349 of file elements.\+h.
+Definition at line 4353 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aaa3af8b5d2e9584bdcd9b133990d7591}\label{classoomph_1_1FaceElement_aaa3af8b5d2e9584bdcd9b133990d7591}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!CoordinateMappingFctPt@{CoordinateMappingFctPt}}
@@ -194,7 +194,7 @@ Typedef for the function that translates the face coordinate to the coordinate i
 
 
 
-Definition at line 4341 of file elements.\+h.
+Definition at line 4345 of file elements.\+h.
 
 
 
@@ -211,7 +211,7 @@ Constructor\+: Initialise all appropriate member data.
 
 
 
-Definition at line 4446 of file elements.\+h.
+Definition at line 4450 of file elements.\+h.
 
 
 
@@ -229,7 +229,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 4465 of file elements.\+h.
+Definition at line 4469 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1FaceElement_aec4564f727154b60940e8cb5cccde9a5}\label{classoomph_1_1FaceElement_aec4564f727154b60940e8cb5cccde9a5}} 
 \index{oomph::FaceElement@{oomph::FaceElement}!FaceElement@{FaceElement}}
@@ -256,7 +256,7 @@ Helper function adding additional values for the unknowns associated with the \m
 
 
 
-Definition at line 4428 of file elements.\+h.
+Definition at line 4432 of file elements.\+h.
 
 
 
@@ -278,7 +278,7 @@ Broken assignment operator.
 
 Access function for the boundary number in bulk mesh 
 
-Definition at line 4475 of file elements.\+h.
+Definition at line 4479 of file elements.\+h.
 
 
 
@@ -300,7 +300,7 @@ Return the pointer to the function that returns the derivatives of the bulk coor
 
 
 
-Definition at line 4770 of file elements.\+h.
+Definition at line 4774 of file elements.\+h.
 
 
 
@@ -322,7 +322,7 @@ Return the pointer to the function that returns the derivatives of the bulk coor
 
 
 
-Definition at line 4777 of file elements.\+h.
+Definition at line 4781 of file elements.\+h.
 
 
 
@@ -340,7 +340,7 @@ Pointer to higher-\/dimensional \char`\"{}bulk\char`\"{} element.
 
 
 
-Definition at line 4735 of file elements.\+h.
+Definition at line 4739 of file elements.\+h.
 
 
 
@@ -362,7 +362,7 @@ Pointer to higher-\/dimensional \char`\"{}bulk\char`\"{} element (const version)
 
 
 
-Definition at line 4742 of file elements.\+h.
+Definition at line 4746 of file elements.\+h.
 
 
 
@@ -380,7 +380,7 @@ Return the bulk node number that corresponds to the n-\/th local node number.
 
 
 
-Definition at line 4825 of file elements.\+h.
+Definition at line 4829 of file elements.\+h.
 
 
 
@@ -402,7 +402,7 @@ Return the bulk node number that corresponds to the n-\/th local node number (co
 
 
 
-Definition at line 4832 of file elements.\+h.
+Definition at line 4836 of file elements.\+h.
 
 
 
@@ -420,7 +420,7 @@ Resize the storage for the bulk node numbers.
 
 
 
-Definition at line 4818 of file elements.\+h.
+Definition at line 4822 of file elements.\+h.
 
 
 
@@ -442,7 +442,7 @@ Return the position type in the \char`\"{}bulk\char`\"{} element that correspond
 
 
 
-Definition at line 4805 of file elements.\+h.
+Definition at line 4809 of file elements.\+h.
 
 
 
@@ -464,7 +464,7 @@ Return the position type in the \char`\"{}bulk\char`\"{} element that correspond
 
 
 
-Definition at line 4812 of file elements.\+h.
+Definition at line 4816 of file elements.\+h.
 
 
 
@@ -482,7 +482,7 @@ Resize the storage for bulk\+\_\+position\+\_\+type to i entries.
 
 
 
-Definition at line 4838 of file elements.\+h.
+Definition at line 4842 of file elements.\+h.
 
 
 
@@ -504,7 +504,7 @@ Check that Jacobian of mapping between local and Eulerian coordinates at all int
 
 
 
-Definition at line 5410 of file elements.\+cc.
+Definition at line 5440 of file elements.\+cc.
 
 
 
@@ -522,7 +522,7 @@ Compute the tangent vector(s) and the outer unit normal vector at the ipt-\/th i
 
 
 
-Definition at line 5986 of file elements.\+cc.
+Definition at line 6016 of file elements.\+cc.
 
 
 
@@ -540,7 +540,7 @@ Compute the tangent vector(s) and the outer unit normal vector at the specified 
 
 
 
-Definition at line 5512 of file elements.\+cc.
+Definition at line 5542 of file elements.\+cc.
 
 
 
@@ -562,7 +562,7 @@ Index of the face (a number that uniquely identifies the face in the element)
 
 
 
-Definition at line 4626 of file elements.\+h.
+Definition at line 4630 of file elements.\+h.
 
 
 
@@ -584,7 +584,7 @@ Index of the face (a number that uniquely identifies the face in the element) (c
 
 
 
-Definition at line 4633 of file elements.\+h.
+Definition at line 4637 of file elements.\+h.
 
 
 
@@ -602,7 +602,7 @@ Return the pointer to the function that maps the face coordinate to the bulk coo
 
 
 
-Definition at line 4755 of file elements.\+h.
+Definition at line 4759 of file elements.\+h.
 
 
 
@@ -624,7 +624,7 @@ Return the pointer to the function that maps the face coordinate to the bulk coo
 
 
 
-Definition at line 4762 of file elements.\+h.
+Definition at line 4766 of file elements.\+h.
 
 
 
@@ -642,7 +642,7 @@ Calculate the derivatives of the local coordinates in the bulk element with resp
 
 
 
-Definition at line 6409 of file elements.\+cc.
+Definition at line 6439 of file elements.\+cc.
 
 
 
@@ -664,7 +664,7 @@ Calculate the vector of local coordinate in the bulk element given the local coo
 
 Calculate the vector of local coordinates in bulk element, given the local coordinates in this \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. 
 
-Definition at line 6384 of file elements.\+cc.
+Definition at line 6414 of file elements.\+cc.
 
 
 
@@ -690,7 +690,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a7e5ddde616cfd7f
 
 
 
-Definition at line 4583 of file elements.\+h.
+Definition at line 4587 of file elements.\+h.
 
 
 
@@ -712,7 +712,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a60cfd1dabcc51fa
 
 
 
-Definition at line 4598 of file elements.\+h.
+Definition at line 4602 of file elements.\+h.
 
 
 
@@ -734,7 +734,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aba7e6f4acad38c5
 
 
 
-Definition at line 4541 of file elements.\+h.
+Definition at line 4545 of file elements.\+h.
 
 
 
@@ -756,7 +756,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_af099c245fe3e3ec
 
 
 
-Definition at line 4568 of file elements.\+h.
+Definition at line 4572 of file elements.\+h.
 
 
 
@@ -778,7 +778,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a5a9c1ead9819cd1
 
 
 
-Definition at line 4528 of file elements.\+h.
+Definition at line 4532 of file elements.\+h.
 
 
 
@@ -804,7 +804,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a8a14a32734ecc92
 
 
 
-Definition at line 4555 of file elements.\+h.
+Definition at line 4559 of file elements.\+h.
 
 
 
@@ -830,7 +830,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement_acf685857a
 
 
 
-Definition at line 5242 of file elements.\+cc.
+Definition at line 5272 of file elements.\+cc.
 
 
 
@@ -856,7 +856,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_aa8a201e448a9200
 
 
 
-Definition at line 5328 of file elements.\+cc.
+Definition at line 5358 of file elements.\+cc.
 
 
 
@@ -878,7 +878,7 @@ Return vector of local coordinates in bulk element, given the local coordinates 
 
 
 
-Definition at line 6353 of file elements.\+cc.
+Definition at line 6383 of file elements.\+cc.
 
 
 
@@ -900,7 +900,7 @@ Return the number of values originally stored at local node n (before the \mbox{
 
 
 
-Definition at line 4845 of file elements.\+h.
+Definition at line 4849 of file elements.\+h.
 
 
 
@@ -922,7 +922,7 @@ Return the number of values originally stored at local node n (before the \mbox{
 
 
 
-Definition at line 4853 of file elements.\+h.
+Definition at line 4857 of file elements.\+h.
 
 
 
@@ -940,7 +940,7 @@ Resize the storage for the number of values originally stored at the local nodes
 
 
 
-Definition at line 4860 of file elements.\+h.
+Definition at line 4864 of file elements.\+h.
 
 
 
@@ -962,7 +962,7 @@ Sign of outer unit normal (relative to cross-\/products of tangent vectors in th
 
 
 
-Definition at line 4612 of file elements.\+h.
+Definition at line 4616 of file elements.\+h.
 
 
 
@@ -984,7 +984,7 @@ Return sign of outer unit normal (relative to cross-\/products of tangent vector
 
 
 
-Definition at line 4619 of file elements.\+h.
+Definition at line 4623 of file elements.\+h.
 
 
 
@@ -1002,7 +1002,7 @@ Compute outer unit normal at ipt-\/th integration point.
 
 Compute the outer unit normal at the ipt-\/th integration point. 
 
-Definition at line 6333 of file elements.\+cc.
+Definition at line 6363 of file elements.\+cc.
 
 
 
@@ -1020,7 +1020,7 @@ Compute outer unit normal at the specified local coordinate.
 
 Compute the outer unit normal at the specified local coordinate. 
 
-Definition at line 6006 of file elements.\+cc.
+Definition at line 6036 of file elements.\+cc.
 
 
 
@@ -1042,7 +1042,7 @@ Output boundary coordinate zeta.
 
 
 
-Definition at line 5200 of file elements.\+cc.
+Definition at line 5230 of file elements.\+cc.
 
 
 
@@ -1060,7 +1060,7 @@ Provide additional storage for a specified number of values at the nodes of the 
 
 
 
-Definition at line 4882 of file elements.\+h.
+Definition at line 4886 of file elements.\+h.
 
 
 
@@ -1082,7 +1082,7 @@ Set function for the boundary number in bulk mesh.
 
 
 
-Definition at line 4482 of file elements.\+h.
+Definition at line 4486 of file elements.\+h.
 
 
 
@@ -1104,7 +1104,7 @@ Set the tangent direction vector.
 
 
 
-Definition at line 4645 of file elements.\+h.
+Definition at line 4649 of file elements.\+h.
 
 
 
@@ -1122,7 +1122,7 @@ Public access function for the tangent direction pointer.
 
 
 
-Definition at line 4639 of file elements.\+h.
+Definition at line 4643 of file elements.\+h.
 
 
 
@@ -1144,7 +1144,7 @@ Turn off warning for when there may be discontinuous tangent vectors from contin
 
 
 
-Definition at line 4700 of file elements.\+h.
+Definition at line 4704 of file elements.\+h.
 
 
 
@@ -1162,7 +1162,7 @@ Turn on warning for when there may be discontinuous tangent vectors from continu
 
 
 
-Definition at line 4693 of file elements.\+h.
+Definition at line 4697 of file elements.\+h.
 
 
 
@@ -1188,7 +1188,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1YoungLaplaceContactAngleElement_
 
 
 
-Definition at line 4497 of file elements.\+h.
+Definition at line 4501 of file elements.\+h.
 
 
 
@@ -1213,7 +1213,7 @@ The boundary number in the bulk mesh to which this element is attached.
 
 
 
-Definition at line 4388 of file elements.\+h.
+Definition at line 4392 of file elements.\+h.
 
 
 
@@ -1231,7 +1231,7 @@ Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included
 
 
 
-Definition at line 4394 of file elements.\+h.
+Definition at line 4398 of file elements.\+h.
 
 
 
@@ -1249,7 +1249,7 @@ Pointer to a function that returns the derivatives of the local \char`\"{}bulk\c
 
 
 
-Definition at line 4361 of file elements.\+h.
+Definition at line 4365 of file elements.\+h.
 
 
 
@@ -1267,7 +1267,7 @@ Pointer to the associated higher-\/dimensional \char`\"{}bulk\char`\"{} element.
 
 
 
-Definition at line 4399 of file elements.\+h.
+Definition at line 4403 of file elements.\+h.
 
 
 
@@ -1285,7 +1285,7 @@ List of indices of the local node numbers in the \char`\"{}bulk\char`\"{} elemen
 
 
 
-Definition at line 4403 of file elements.\+h.
+Definition at line 4407 of file elements.\+h.
 
 
 
@@ -1303,7 +1303,7 @@ Referenced by bulk\+\_\+node\+\_\+number(), bulk\+\_\+node\+\_\+number\+\_\+resi
 
 
 
-Definition at line 4370 of file elements.\+h.
+Definition at line 4374 of file elements.\+h.
 
 
 
@@ -1321,7 +1321,7 @@ Index of the face.
 
 
 
-Definition at line 4377 of file elements.\+h.
+Definition at line 4381 of file elements.\+h.
 
 
 
@@ -1339,7 +1339,7 @@ Pointer to a function that translates the face coordinate to the coordinate in t
 
 
 
-Definition at line 4357 of file elements.\+h.
+Definition at line 4361 of file elements.\+h.
 
 
 
@@ -1357,7 +1357,7 @@ Ignores the warning when the tangent vectors from continuous\+\_\+tangent\+\_\+a
 
 /////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// 
 
-Definition at line 4384 of file elements.\+h.
+Definition at line 4388 of file elements.\+h.
 
 
 
@@ -1375,7 +1375,7 @@ A vector that will hold the number of data values at the nodes that are associat
 
 
 
-Definition at line 4413 of file elements.\+h.
+Definition at line 4417 of file elements.\+h.
 
 
 
@@ -1393,7 +1393,7 @@ Sign of outer unit normal (relative to cross-\/products of tangent vectors in th
 
 
 
-Definition at line 4374 of file elements.\+h.
+Definition at line 4378 of file elements.\+h.
 
 
 
@@ -1411,7 +1411,7 @@ A general direction pointer for the tangent vectors. This is used in the functio
 
 
 
-Definition at line 4420 of file elements.\+h.
+Definition at line 4424 of file elements.\+h.
 
 
 

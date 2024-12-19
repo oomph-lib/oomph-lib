@@ -192,7 +192,7 @@ Solid elements are elements whose nodal positions are unknowns in the problem --
 
 In the present form, the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}} represents a fully functional base class for `proper' solid mechanics elements, but it can also be combined (via inheritance) with elements that solve additional equations. This is particularly useful in cases where the solid equations are merely used to update the nodal positions in a moving mesh problem, although this can prove costly in practice. 
 
-Definition at line 3560 of file elements.\+h.
+Definition at line 3564 of file elements.\+h.
 
 
 
@@ -209,7 +209,7 @@ Pointer to function that computes the \char`\"{}multiplier\char`\"{} for the ine
 
 
 
-Definition at line 3582 of file elements.\+h.
+Definition at line 3586 of file elements.\+h.
 
 
 
@@ -226,7 +226,7 @@ Constructor\+: Set defaults.
 
 
 
-Definition at line 3585 of file elements.\+h.
+Definition at line 3589 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidFiniteElement_adc8527ae26aba090bed52da41f41b57f}\label{classoomph_1_1SolidFiniteElement_adc8527ae26aba090bed52da41f41b57f}} 
 \index{oomph::SolidFiniteElement@{oomph::SolidFiniteElement}!````~SolidFiniteElement@{$\sim$SolidFiniteElement}}
@@ -240,7 +240,7 @@ Destructor to clean up any allocated memory.
 
 Destructor for \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\+: 
 
-Definition at line 6629 of file elements.\+cc.
+Definition at line 6659 of file elements.\+cc.
 
 
 
@@ -275,7 +275,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ae0d5a2fc
 
 
 
-Definition at line 6528 of file elements.\+cc.
+Definition at line 6558 of file elements.\+cc.
 
 
 
@@ -301,7 +301,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a5843ecc4
 
 
 
-Definition at line 6586 of file elements.\+cc.
+Definition at line 6616 of file elements.\+cc.
 
 
 
@@ -327,7 +327,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a564ba080f681327
 
 
 
-Definition at line 3867 of file elements.\+h.
+Definition at line 3871 of file elements.\+h.
 
 
 
@@ -351,7 +351,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a7718105c
 
 
 
-Definition at line 6898 of file elements.\+cc.
+Definition at line 6928 of file elements.\+cc.
 
 
 
@@ -379,7 +379,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472d
 
 
 
-Definition at line 6442 of file elements.\+cc.
+Definition at line 6472 of file elements.\+cc.
 
 
 
@@ -401,7 +401,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac6f9b6635daf3bf
 
 
 
-Definition at line 3827 of file elements.\+h.
+Definition at line 3831 of file elements.\+h.
 
 
 
@@ -423,7 +423,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ae49607dfdff1f24
 
 
 
-Definition at line 3846 of file elements.\+h.
+Definition at line 3850 of file elements.\+h.
 
 
 
@@ -445,7 +445,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22ff82b3c3a2c0f
 
 
 
-Definition at line 3791 of file elements.\+h.
+Definition at line 3795 of file elements.\+h.
 
 
 
@@ -467,7 +467,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ab340a73573761cf
 
 
 
-Definition at line 3809 of file elements.\+h.
+Definition at line 3813 of file elements.\+h.
 
 
 
@@ -485,7 +485,7 @@ Compute the geometric shape functions and also first and second derivatives w.\+
 
 
 
-Definition at line 6781 of file elements.\+cc.
+Definition at line 6811 of file elements.\+cc.
 
 
 
@@ -511,7 +511,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a5
 
 
 
-Definition at line 6832 of file elements.\+cc.
+Definition at line 6862 of file elements.\+cc.
 
 
 
@@ -541,7 +541,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIImposeDisplacementByLagrangeM
 
 
 
-Definition at line 6514 of file elements.\+cc.
+Definition at line 6544 of file elements.\+cc.
 
 
 
@@ -559,7 +559,7 @@ Classifies dofs locally for solid specific aspects.
 
 Function to describe the local dofs of the element. The ostream specifies the output stream to which the description is written; the string stores the currently assembled output that is ultimately written to the output stream by Data\+::describe\+\_\+dofs(...); it is typically built up incrementally as we descend through the call hierarchy of this function when called from Problem\+::describe\+\_\+dofs(...) 
 
-Definition at line 6874 of file elements.\+cc.
+Definition at line 6904 of file elements.\+cc.
 
 
 
@@ -581,7 +581,7 @@ Set to reset the problem being solved to be the standard problem.
 
 
 
-Definition at line 3972 of file elements.\+h.
+Definition at line 3976 of file elements.\+h.
 
 
 
@@ -599,7 +599,7 @@ Calculate shape functions and derivatives w.\+r.\+t. Lagrangian coordinates at l
 
 Calculate shape functions and derivatives w.\+r.\+t. Lagrangian coordinates at local coordinate s. Returns the Jacobian of the mapping from Lagrangian to local coordinates. General case, may be overloaded. 
 
-Definition at line 6710 of file elements.\+cc.
+Definition at line 6740 of file elements.\+cc.
 
 
 
@@ -625,7 +625,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1StorableShapeSolidElementBase_a6
 
 
 
-Definition at line 6737 of file elements.\+cc.
+Definition at line 6767 of file elements.\+cc.
 
 
 
@@ -647,7 +647,7 @@ Set to alter the problem being solved when assigning the initial conditions for 
 
 
 
-Definition at line 3966 of file elements.\+h.
+Definition at line 3970 of file elements.\+h.
 
 
 
@@ -677,7 +677,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSIImposeDisplacementB
 
 
 
-Definition at line 4185 of file elements.\+h.
+Definition at line 4189 of file elements.\+h.
 
 
 
@@ -695,7 +695,7 @@ Helper function to fill in the residuals and (if flag==1) the Jacobian for the s
 
 \[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \] where $ N $ is the number of nodes in the mesh and $ K $ the number of generalised nodal coordinates. The initial shape of the solid body, $ {\bf R}^{(IC)},$ and its time-\/derivatives are specified via the {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}} that is stored in the {\ttfamily Solid\+Finite\+Element\+::\+Solid\+Initial\+Condition} object. The latter also stores the order of the time-\/derivative $ D $ to be assigned. 
 
-Definition at line 7376 of file elements.\+cc.
+Definition at line 7406 of file elements.\+cc.
 
 
 
@@ -717,7 +717,7 @@ Fill in the contributions of the Jacobian matrix for the consistent assignment o
 
 Add jacobian and residuals for consistent assignment of initial \char`\"{}accelerations\char`\"{} in \mbox{\hyperlink{classoomph_1_1Newmark}{Newmark}} scheme. Jacobian is the mass matrix. 
 
-Definition at line 7227 of file elements.\+cc.
+Definition at line 7257 of file elements.\+cc.
 
 
 
@@ -739,7 +739,7 @@ Fill in the residuals and Jacobian for the setup of an initial condition. The gl
 
 \[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \] where $ N $ is the number of nodes in the mesh and $ K $ the number of generalised nodal coordinates. The initial shape of the solid body, $ {\bf R}^{(IC)},$ and its time-\/derivatives are specified via the {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}} that is stored in the {\ttfamily Solid\+Finite\+Element\+::\+Solid\+Initial\+Condition} object. The latter also stores the order of the time-\/derivative $ D $ to be assigned. 
 
-Definition at line 4035 of file elements.\+h.
+Definition at line 4039 of file elements.\+h.
 
 
 
@@ -761,7 +761,7 @@ Use finite differences to calculate the Jacobian entries corresponding to the so
 
 
 
-Definition at line 4225 of file elements.\+h.
+Definition at line 4229 of file elements.\+h.
 
 
 
@@ -783,7 +783,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a97f911c4
 
 
 
-Definition at line 6985 of file elements.\+cc.
+Definition at line 7015 of file elements.\+cc.
 
 
 
@@ -805,7 +805,7 @@ Fill in the residuals for the setup of an initial condition. The global equation
 
 \[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \] where $ N $ is the number of nodes in the mesh and $ K $ the number of generalised nodal coordinates. The initial shape of the solid body, $ {\bf R}^{(IC)},$ and its time-\/derivatives are specified via the {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}} that is stored in the {\ttfamily Solid\+Finite\+Element\+::\+Solid\+Initial\+Condition} object. The latter also stores the order of the time-\/derivative $ D $ to be assigned. 
 
-Definition at line 4018 of file elements.\+h.
+Definition at line 4022 of file elements.\+h.
 
 
 
@@ -835,7 +835,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a3f20de56
 
 
 
-Definition at line 3615 of file elements.\+h.
+Definition at line 3619 of file elements.\+h.
 
 
 
@@ -857,7 +857,7 @@ Compute the residuals for the setup of an initial condition. The global equation
 
 \[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \] where $ N $ is the number of nodes in the mesh and $ K $ the number of generalised nodal coordinates. The initial shape of the solid body, $ {\bf R}^{(IC)},$ and its time-\/derivatives are specified via the {\ttfamily \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}} that is stored in the {\ttfamily Solid\+Finite\+Element\+::\+Solid\+Initial\+Condition} object. The latter also stores the order of the time-\/derivative $ D $ to be assigned. 
 
-Definition at line 4003 of file elements.\+h.
+Definition at line 4007 of file elements.\+h.
 
 
 
@@ -879,7 +879,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QSolidElementBase_a2afc3bfd3aa6e
 
 
 
-Definition at line 3659 of file elements.\+h.
+Definition at line 3663 of file elements.\+h.
 
 
 
@@ -901,7 +901,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1QPVDElementWithPressure_ad94b8af
 
 
 
-Definition at line 3574 of file elements.\+h.
+Definition at line 3578 of file elements.\+h.
 
 
 
@@ -927,7 +927,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_ac895a840
 
 
 
-Definition at line 3624 of file elements.\+h.
+Definition at line 3628 of file elements.\+h.
 
 
 
@@ -945,7 +945,7 @@ Compute derivatives of FE-\/interpolated Lagrangian coordinates xi with respect 
 
 
 
-Definition at line 7180 of file elements.\+cc.
+Definition at line 7210 of file elements.\+cc.
 
 
 
@@ -967,7 +967,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ace3eb64ce511c8
 
 
 
-Definition at line 7104 of file elements.\+cc.
+Definition at line 7134 of file elements.\+cc.
 
 
 
@@ -993,7 +993,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidFaceElement_ae1c414e42a48c7
 
 
 
-Definition at line 7139 of file elements.\+cc.
+Definition at line 7169 of file elements.\+cc.
 
 
 
@@ -1011,7 +1011,7 @@ Return the Jacobian of mapping from local to Lagrangian coordinates at local pos
 
 
 
-Definition at line 3936 of file elements.\+h.
+Definition at line 3940 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidFiniteElement_ace8b4aef572b9272648a7d1fc89d4664}\label{classoomph_1_1SolidFiniteElement_ace8b4aef572b9272648a7d1fc89d4664}} 
 \index{oomph::SolidFiniteElement@{oomph::SolidFiniteElement}!J\_lagrangian\_at\_knot@{J\_lagrangian\_at\_knot}}
@@ -1025,7 +1025,7 @@ Return the Jacobian of the mapping from local to Lagrangian coordinates at the i
 
 
 
-Definition at line 3946 of file elements.\+h.
+Definition at line 3950 of file elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1SolidFiniteElement_a0200f8dd7b61eea84d7921e78bfbb5f9}\label{classoomph_1_1SolidFiniteElement_a0200f8dd7b61eea84d7921e78bfbb5f9}} 
 \index{oomph::SolidFiniteElement@{oomph::SolidFiniteElement}!lagrangian\_dimension@{lagrangian\_dimension}}
@@ -1039,7 +1039,7 @@ Return the number of Lagrangian coordinates that the element requires at all nod
 
 
 
-Definition at line 3774 of file elements.\+h.
+Definition at line 3778 of file elements.\+h.
 
 
 
@@ -1061,7 +1061,7 @@ Return i-\/th Lagrangian coordinate at local node n.
 
 
 
-Definition at line 3905 of file elements.\+h.
+Definition at line 3909 of file elements.\+h.
 
 
 
@@ -1083,7 +1083,7 @@ Return Generalised Lagrangian coordinate at local node n. `Direction' i, `Type' 
 
 
 
-Definition at line 3912 of file elements.\+h.
+Definition at line 3916 of file elements.\+h.
 
 
 
@@ -1105,7 +1105,7 @@ Calculate the mapping from local to lagrangian coordinates, given the derivative
 
 
 
-Definition at line 4097 of file elements.\+h.
+Definition at line 4101 of file elements.\+h.
 
 
 
@@ -1127,7 +1127,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidDiagQHermiteElement_a781e03
 
 
 
-Definition at line 4082 of file elements.\+h.
+Definition at line 4086 of file elements.\+h.
 
 
 
@@ -1153,7 +1153,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a492846d9
 
 
 
-Definition at line 6643 of file elements.\+cc.
+Definition at line 6673 of file elements.\+cc.
 
 
 
@@ -1175,7 +1175,7 @@ Access to the \char`\"{}multiplier\char`\"{} for the inertia terms in the consis
 
 
 
-Definition at line 4308 of file elements.\+h.
+Definition at line 4312 of file elements.\+h.
 
 
 
@@ -1197,7 +1197,7 @@ Access function\+: Pointer to multiplicator function for assignment of consisten
 
 
 
-Definition at line 3979 of file elements.\+h.
+Definition at line 3983 of file elements.\+h.
 
 
 
@@ -1219,7 +1219,7 @@ Access function\+: Pointer to multiplicator function for assignment of consisten
 
 
 
-Definition at line 3988 of file elements.\+h.
+Definition at line 3992 of file elements.\+h.
 
 
 
@@ -1245,7 +1245,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a690e24cd
 
 
 
-Definition at line 3608 of file elements.\+h.
+Definition at line 3612 of file elements.\+h.
 
 
 
@@ -1263,7 +1263,7 @@ Return the number of types of (generalised) nodal Lagrangian coordinates require
 
 
 
-Definition at line 3785 of file elements.\+h.
+Definition at line 3789 of file elements.\+h.
 
 
 
@@ -1285,7 +1285,7 @@ Access function that returns the local equation number that corresponds to the j
 
 
 
-Definition at line 4137 of file elements.\+h.
+Definition at line 4141 of file elements.\+h.
 
 
 
@@ -1307,7 +1307,7 @@ Return i-\/th Lagrangian coordinate at local node n without using the hanging re
 
 
 
-Definition at line 3890 of file elements.\+h.
+Definition at line 3894 of file elements.\+h.
 
 
 
@@ -1329,7 +1329,7 @@ Return Generalised Lagrangian coordinate at local node n. `Direction' i, `Type' 
 
 
 
-Definition at line 3897 of file elements.\+h.
+Definition at line 3901 of file elements.\+h.
 
 
 
@@ -1355,7 +1355,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae960e2a896fc8132
 
 
 
-Definition at line 4245 of file elements.\+h.
+Definition at line 4249 of file elements.\+h.
 
 
 
@@ -1377,7 +1377,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_aa7a250a0958768f5
 
 
 
-Definition at line 4255 of file elements.\+h.
+Definition at line 4259 of file elements.\+h.
 
 
 
@@ -1399,7 +1399,7 @@ Set the lagrangian dimension of the element --- the number of lagrangian coordin
 
 
 
-Definition at line 3565 of file elements.\+h.
+Definition at line 3569 of file elements.\+h.
 
 
 
@@ -1429,7 +1429,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01
 
 
 
-Definition at line 3680 of file elements.\+h.
+Definition at line 3684 of file elements.\+h.
 
 
 
@@ -1451,7 +1451,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableSolidQElement_3_012_01
 
 
 
-Definition at line 3689 of file elements.\+h.
+Definition at line 3693 of file elements.\+h.
 
 
 
@@ -1469,7 +1469,7 @@ Set the number of types required to interpolate the Lagrangian coordinates.
 
 
 
-Definition at line 4070 of file elements.\+h.
+Definition at line 4074 of file elements.\+h.
 
 
 
@@ -1491,7 +1491,7 @@ Set pointer to \char`\"{}undeformed\char`\"{} macro element. Can be overloaded i
 
 
 
-Definition at line 3699 of file elements.\+h.
+Definition at line 3703 of file elements.\+h.
 
 
 
@@ -1513,7 +1513,7 @@ Pointer to object that describes the initial condition.
 
 
 
-Definition at line 3955 of file elements.\+h.
+Definition at line 3959 of file elements.\+h.
 
 
 
@@ -1535,7 +1535,7 @@ Access function to pointer to \char`\"{}undeformed\char`\"{} macro element.
 
 
 
-Definition at line 3706 of file elements.\+h.
+Definition at line 3710 of file elements.\+h.
 
 
 
@@ -1557,7 +1557,7 @@ Function that is called before the finite differencing of any solid position dat
 
 
 
-Definition at line 4240 of file elements.\+h.
+Definition at line 4244 of file elements.\+h.
 
 
 
@@ -1579,7 +1579,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIWallElement_ae05300394e531c7b
 
 
 
-Definition at line 4250 of file elements.\+h.
+Definition at line 4254 of file elements.\+h.
 
 
 
@@ -1605,7 +1605,7 @@ Reimplemented in \mbox{\hyperlink{classoomph_1_1SolidFaceElement_a28526b0f7a7daa
 
 
 
-Definition at line 3642 of file elements.\+h.
+Definition at line 3646 of file elements.\+h.
 
 
 
@@ -1626,7 +1626,7 @@ The Lagrangian dimension of the nodes stored in the element, / i.\+e. the number
 
 
 
-Definition at line 4285 of file elements.\+h.
+Definition at line 4289 of file elements.\+h.
 
 
 
@@ -1644,7 +1644,7 @@ Pointer to function that computes the \char`\"{}multiplier\char`\"{} for the ine
 
 
 
-Definition at line 4276 of file elements.\+h.
+Definition at line 4280 of file elements.\+h.
 
 
 
@@ -1662,7 +1662,7 @@ The number of coordinate types requried to intepolate the Lagrangian coordinates
 
 
 
-Definition at line 4293 of file elements.\+h.
+Definition at line 4297 of file elements.\+h.
 
 
 
@@ -1680,7 +1680,7 @@ Array to hold the local equation number information for the solid equations, wha
 
 
 
-Definition at line 4281 of file elements.\+h.
+Definition at line 4285 of file elements.\+h.
 
 
 
@@ -1698,7 +1698,7 @@ Pointer to object that specifies the initial condition.
 
 
 
-Definition at line 4131 of file elements.\+h.
+Definition at line 4135 of file elements.\+h.
 
 
 
@@ -1716,7 +1716,7 @@ Flag to indicate which system of equations to solve when assigning initial condi
 
 
 
-Definition at line 4302 of file elements.\+h.
+Definition at line 4306 of file elements.\+h.
 
 
 
@@ -1734,7 +1734,7 @@ Pointer to the element\textquotesingle{}s \char`\"{}undeformed\char`\"{} macro e
 
 
 
-Definition at line 4076 of file elements.\+h.
+Definition at line 4080 of file elements.\+h.
 
 
 

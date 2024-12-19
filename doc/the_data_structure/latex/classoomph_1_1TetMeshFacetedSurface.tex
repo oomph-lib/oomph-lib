@@ -50,6 +50,10 @@ void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ad8d350cfdd9f7c4dde067
 \begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_ac10b05cafa5f6b6cee9cd47b3be9e033}{output}} (const std\+::string \&filename) const
 \begin{DoxyCompactList}\small\item\em Output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a705aa5605d47402f3e71919b6f67d12a}{output\+\_\+paraview}} (std\+::ostream \&outfile) const
+\begin{DoxyCompactList}\small\item\em Outputs the faceted surface into a specified file in the Paraview format for viewing in Paraview. Make sure to output the file with a .vtu extension. (Not particularly optimised) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a6b9bea286a5bda40134749a7da3cfbd4}{output\+\_\+paraview}} (const std\+::string \&filename) const
+\begin{DoxyCompactList}\small\item\em Outputs the faceted surface into a file with the specified name in the Paraview format. (Not particularly optimised) \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a5882667d66ad8460782b9fa36f39f485}{boundary\+\_\+zeta01}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
 \begin{DoxyCompactList}\small\item\em Virtual function that specifies the variation of the zeta coordinates in the \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} along the boundary connecting vertices 0 and 1 in facet facet\+\_\+id. Default implementation\+: Linear interpolation between edges. zeta\+\_\+boundary=0.\+0\+: we\textquotesingle{}re on vertex 0; zeta\+\_\+boundary=1.\+0\+: we\textquotesingle{}re on vertex 1. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1TetMeshFacetedSurface_a7dd49826326e9926d92fc773853a9afb}{boundary\+\_\+zeta12}} (const unsigned \&facet\+\_\+id, const double \&zeta\+\_\+boundary, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
@@ -153,7 +157,7 @@ Virtual function that specifies the variation of the zeta coordinates in the \mb
 
 
 
-Definition at line 417 of file tet\+\_\+mesh.\+h.
+Definition at line 603 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -175,7 +179,7 @@ Virtual function that specifies the variation of the zeta coordinates in the \mb
 
 
 
-Definition at line 436 of file tet\+\_\+mesh.\+h.
+Definition at line 622 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -197,7 +201,7 @@ Virtual function that specifies the variation of the zeta coordinates in the \mb
 
 
 
-Definition at line 455 of file tet\+\_\+mesh.\+h.
+Definition at line 641 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -433,6 +437,46 @@ References Facet\+\_\+pt.
 
 Referenced by output().
 
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a6b9bea286a5bda40134749a7da3cfbd4}\label{classoomph_1_1TetMeshFacetedSurface_a6b9bea286a5bda40134749a7da3cfbd4}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!output\_paraview@{output\_paraview}}
+\index{output\_paraview@{output\_paraview}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{output\_paraview()}{output\_paraview()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::output\+\_\+paraview (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Outputs the faceted surface into a file with the specified name in the Paraview format. (Not particularly optimised) 
+
+
+
+Definition at line 589 of file tet\+\_\+mesh.\+h.
+
+
+
+References output\+\_\+paraview().
+
+\mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a705aa5605d47402f3e71919b6f67d12a}\label{classoomph_1_1TetMeshFacetedSurface_a705aa5605d47402f3e71919b6f67d12a}} 
+\index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!output\_paraview@{output\_paraview}}
+\index{output\_paraview@{output\_paraview}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
+\doxysubsubsection{\texorpdfstring{output\_paraview()}{output\_paraview()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void oomph\+::\+Tet\+Mesh\+Faceted\+Surface\+::output\+\_\+paraview (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Outputs the faceted surface into a specified file in the Paraview format for viewing in Paraview. Make sure to output the file with a .vtu extension. (Not particularly optimised) 
+
+
+
+Definition at line 418 of file tet\+\_\+mesh.\+h.
+
+
+
+References Facet\+\_\+pt, i, and vertex\+\_\+pt().
+
+
+
+Referenced by output\+\_\+paraview().
+
 \mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}\label{classoomph_1_1TetMeshFacetedSurface_aad0696eb07125a0847587b356ebaf735}} 
 \index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!setup\_facet\_connectivity\_for\_tetgen@{setup\_facet\_connectivity\_for\_tetgen}}
 \index{setup\_facet\_connectivity\_for\_tetgen@{setup\_facet\_connectivity\_for\_tetgen}!oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}}
@@ -445,7 +489,7 @@ Setup facet connectivity for tetgen.
 
 
 
-Definition at line 502 of file tet\+\_\+mesh.\+h.
+Definition at line 688 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -489,7 +533,7 @@ Facet connectivity\+: vertex\+\_\+index\mbox{[}j\mbox{]} is the index of the j-\
 
 
 
-Definition at line 472 of file tet\+\_\+mesh.\+h.
+Definition at line 658 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -519,7 +563,7 @@ References Vertex\+\_\+pt.
 
 
 
-Referenced by oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
+Referenced by output\+\_\+paraview(), and oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
 
 
 
@@ -536,7 +580,7 @@ Boolean to indicate whether extra vertices can be added on the boundary in tetge
 
 
 
-Definition at line 490 of file tet\+\_\+mesh.\+h.
+Definition at line 676 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -554,11 +598,11 @@ Referenced by boundaries\+\_\+can\+\_\+be\+\_\+split\+\_\+in\+\_\+tetgen(), disa
 
 
 
-Definition at line 486 of file tet\+\_\+mesh.\+h.
+Definition at line 672 of file tet\+\_\+mesh.\+h.
 
 
 
-Referenced by boundary\+\_\+zeta01(), boundary\+\_\+zeta12(), boundary\+\_\+zeta20(), facet\+\_\+pt(), nfacet(), nvertex\+\_\+on\+\_\+facet(), one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id(), output(), setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
+Referenced by boundary\+\_\+zeta01(), boundary\+\_\+zeta12(), boundary\+\_\+zeta20(), facet\+\_\+pt(), nfacet(), nvertex\+\_\+on\+\_\+facet(), one\+\_\+based\+\_\+facet\+\_\+boundary\+\_\+id(), output(), output\+\_\+paraview(), setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh(), and oomph\+::\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh\+::$\sim$\+Tet\+Mesh\+Faceted\+Closed\+Surface\+For\+Remesh().
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}\label{classoomph_1_1TetMeshFacetedSurface_a609f107e2737cec4b52b81977464c02b}} 
 \index{oomph::TetMeshFacetedSurface@{oomph::TetMeshFacetedSurface}!Facet\_vertex\_index\_in\_tetgen@{Facet\_vertex\_index\_in\_tetgen}}
@@ -572,7 +616,7 @@ Facet connectivity\+: Facet\+\_\+vertex\+\_\+index\mbox{[}f\mbox{]}\mbox{[}j\mbo
 
 
 
-Definition at line 494 of file tet\+\_\+mesh.\+h.
+Definition at line 680 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -590,7 +634,7 @@ Referenced by setup\+\_\+facet\+\_\+connectivity\+\_\+for\+\_\+tetgen(), and ver
 
 
 
-Definition at line 497 of file tet\+\_\+mesh.\+h.
+Definition at line 683 of file tet\+\_\+mesh.\+h.
 
 
 
@@ -608,7 +652,7 @@ Referenced by geom\+\_\+object\+\_\+with\+\_\+boundaries\+\_\+pt().
 
 
 
-Definition at line 483 of file tet\+\_\+mesh.\+h.
+Definition at line 669 of file tet\+\_\+mesh.\+h.
 
 
 

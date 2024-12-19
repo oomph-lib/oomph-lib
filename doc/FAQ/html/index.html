@@ -333,7 +333,7 @@ How do I compile/run the demo driver codes?</h2>
 </div><!-- fragment --><p> Note the omitted postfix! The argument to <code>make</code> is the name of the target, i.e. the executable that you wish to build &ndash; which source code to compile, where to locate the required headers and which libraries to link against is all encoded in the <code>Makefile</code> (which has itself been created by <a href="http://www.gnu.org/software/automake/">automake</a> (during the installation of the <code>oomph-lib</code>) from the <code>Makefile.am</code> file in the directory). As you see from the on-screen output, there is a lot of information that needs to be passed to the compiler/linker: </p><div class="fragment"><div class="line">mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make one_d_poisson</div>
 <div class="line">mpic++ -DHAVE_CONFIG_H -I. -I../../..  -I/home/mheil/local/hypre_default_installation_mpi/include -DOOMPH_HAS_HYPRE -I/home/mheil/local/trilinos_default_installation_mpi/include -DOOMPH_HAS_TRILINOS -I/home/mheil/local/mumps_and_scalapack_default_installation/include -DOOMPH_HAS_MUMPS -DOOMPH_HAS_STACKTRACE -DOOMPH_HAS_MPI -DOOMPH_HAS_TRIANGLE_LIB -DOOMPH_HAS_TETGEN_LIB -DUSING_OOMPH_SUPERLU -DUSING_OOMPH_SUPERLU_DIST -I/home/mheil/version339/build/include  -DgFortran -O3 -Wall -MT one_d_poisson.o -MD -MP -MF .deps/one_d_poisson.Tpo -c -o one_d_poisson.o one_d_poisson.cc</div>
 <div class="line">mv -f .deps/one_d_poisson.Tpo .deps/one_d_poisson.Po</div>
-<div class="line">/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_arpack -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread </div>
+<div class="line">/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread </div>
 <div class="line">libtool: link: mpic++ -DgFortran -O3 -Wall -o one_d_poisson</div>
 <div class="line">one_d_poisson.o</div>
 <div class="line">-L/home/mheil/local/hypre_default_installation_mpi/lib</div>
@@ -350,7 +350,6 @@ How do I compile/run the demo driver codes?</h2>
 <div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a</div>
 <div class="line">/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a</div>
 <div class="line">/home/mheil/version339/build/lib/liboomph_hsl.a</div>
-<div class="line">/home/mheil/version339/build/lib/liboomph_arpack.a</div>
 <div class="line">/home/mheil/version339/build/lib/liboomph_triangle.a</div>
 <div class="line">/home/mheil/version339/build/lib/liboomph_tetgen.a</div>
 <div class="line">/usr/lib/openmpi/lib/libmpi_cxx.so</div>
@@ -435,7 +434,7 @@ The oomph-lib distribution includes some third-party libraries. How do I get the
 <div class="line"><span class="preprocessor">#</span></div>
 <div class="line"><span class="preprocessor"># then replace &quot;-loomph_blas&quot;</span> by &quot;-lblas&quot; below:</div>
 <div class="line"><span class="preprocessor">#</span></div>
-<div class="line"><span class="preprocessor">EXTERNAL_LIBS=&#39;-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack -loomph_lapack -loomph_flapack -loomph_blas&#39;</span></div>
+<div class="line"><span class="preprocessor">EXTERNAL_LIBS=&#39;-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_lapack -loomph_flapack -loomph_blas&#39;</span></div>
 </div><!-- fragment --><p>If you wish to link against some other version of the library, edit the <code>EXTERNAL_LIBS</code> variable accordingly.</p>
 <p><b>WARNING:</b> If you work within the autotools framework, remember that the <code>configure</code> script is generated by <code>autoconf</code>, using the file <code> configure.ac</code>, which is itself (re-)generated whenever you run <code>autogen.sh</code>. If you use the autotools, you should edit the <code>EXTERNAL_LIBS</code> variable in the file <code>configure/configure.ac_scripts/start</code> which forms one of the building blocks from which <code> autogen.sh </code>assembles the <code>configure.ac </code> file. Once you have changed the <code>EXTERNAL_LIBS</code> variable in <code>configure/configure.ac_scripts/start</code> you should (re-)run <code>autogen.sh</code> in <code>oomph-lib's</code> top-level directory.</p>
 <center> <table border="1">
@@ -453,7 +452,7 @@ Missing 'this-&gt;'</h2>
 <div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
 <div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
 <div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel</span></div>
 <div class="line"><span class="comment">//LIC// </span></div>
 <div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
 <div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
@@ -653,7 +652,7 @@ I don't have tecplot. How do I change oomph-lib's output so it can be displayed 
 <div class="line"><span class="comment">//LIC// multi-physics finite-element library, available </span></div>
 <div class="line"><span class="comment">//LIC// at http://www.oomph-lib.org.</span></div>
 <div class="line"><span class="comment">//LIC// </span></div>
-<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel</span></div>
+<div class="line"><span class="comment">//LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel</span></div>
 <div class="line"><span class="comment">//LIC// </span></div>
 <div class="line"><span class="comment">//LIC// This library is free software; you can redistribute it and/or</span></div>
 <div class="line"><span class="comment">//LIC// modify it under the terms of the GNU Lesser General Public</span></div>
@@ -894,7 +893,7 @@ PDF file</h1>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:47:49
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:04:32
         </div>
       </div>
     </footer>

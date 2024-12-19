@@ -132,7 +132,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
+<p>FSI Axisym FoepplvonKarmanElement elements are 1D Foeppl von Karman elements with isoparametric interpolation for the function. Gets traction from adjacent fluid element(s) of type FLUID_ELEMENT.  
  <a href="classoomph_1_1FSIAxisymFoepplvonKarmanElement.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>&gt;</code></p>
@@ -994,9 +994,9 @@ variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a
 <tr class="memitem:ac24fc0416243162170ad09c7f3261ebd inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#ac24fc0416243162170ad09c7f3261ebd">interpolated_u_fvk</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>) const</td></tr>
 <tr class="memdesc:ac24fc0416243162170ad09c7f3261ebd inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of radial displacement.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#ac24fc0416243162170ad09c7f3261ebd">More...</a><br /></td></tr>
 <tr class="separator:ac24fc0416243162170ad09c7f3261ebd inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22d4a63c862395cae211773748c4c896 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a22d4a63c862395cae211773748c4c896">interpolated_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, double &amp;sigma_r_r, double &amp;sigma_phi_phi) const</td></tr>
-<tr class="memdesc:a22d4a63c862395cae211773748c4c896 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute in-plane stresses. Return boolean to indicate success (false if attempt to evaluate stresses at zero radius)  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a22d4a63c862395cae211773748c4c896">More...</a><br /></td></tr>
-<tr class="separator:a22d4a63c862395cae211773748c4c896 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a63ea6a0eaf38bddd3cfb753782de60ef">interpolated_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, double &amp;sigma_r_r, double &amp;sigma_phi_phi) const</td></tr>
+<tr class="memdesc:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute in-plane stresses.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a63ea6a0eaf38bddd3cfb753782de60ef">More...</a><br /></td></tr>
+<tr class="separator:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a2ececacf1a7dd89188a4a20e5abbb7c0">self_test</a> ()</td></tr>
 <tr class="memdesc:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Return 0 for OK.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a2ececacf1a7dd89188a4a20e5abbb7c0">More...</a><br /></td></tr>
 <tr class="separator:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1051,9 +1051,9 @@ variable".  <a href="classoomph_1_1GeneralisedElement.html#ab915bdad7e6643e5e73a
 <tr class="memitem:aca5188335be3d0432fbf92d493026558 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#aca5188335be3d0432fbf92d493026558">interpolated_w_fvk</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>) const</td></tr>
 <tr class="memdesc:aca5188335be3d0432fbf92d493026558 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return FE representation of vertical displacement, w_fvk(s) at local coordinate s.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#aca5188335be3d0432fbf92d493026558">More...</a><br /></td></tr>
 <tr class="separator:aca5188335be3d0432fbf92d493026558 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3462c52b14649baaea863ea664a41c16 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a3462c52b14649baaea863ea664a41c16">interpolated_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, double &amp;sigma_r_r, double &amp;sigma_phi_phi)</td></tr>
-<tr class="memdesc:a3462c52b14649baaea863ea664a41c16 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute in-plane stresses. Return boolean to indicate success (false if attempt to evaluate stresses at zero radius)  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a3462c52b14649baaea863ea664a41c16">More...</a><br /></td></tr>
-<tr class="separator:a3462c52b14649baaea863ea664a41c16 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a63ea6a0eaf38bddd3cfb753782de60ef">interpolated_stress</a> (const <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;<a class="el" href="cfortran_8h.html#ab7123126e4885ef647dd9c6e3807a21c">s</a>, double &amp;sigma_r_r, double &amp;sigma_phi_phi) const</td></tr>
+<tr class="memdesc:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute in-plane stresses.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a63ea6a0eaf38bddd3cfb753782de60ef">More...</a><br /></td></tr>
+<tr class="separator:a63ea6a0eaf38bddd3cfb753782de60ef inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a2ececacf1a7dd89188a4a20e5abbb7c0">self_test</a> ()</td></tr>
 <tr class="memdesc:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="mdescLeft">&#160;</td><td class="mdescRight">Self-test: Return 0 for OK.  <a href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#a2ececacf1a7dd89188a4a20e5abbb7c0">More...</a><br /></td></tr>
 <tr class="separator:a2ececacf1a7dd89188a4a20e5abbb7c0 inherit pub_methods_classoomph_1_1AxisymFoepplvonKarmanEquations"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1229,6 +1229,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress output while checking for inverted elements.  <a href="classoomph_1_1FiniteElement.html#ae8357b9337e2148c57267f1d4c32fcfa">More...</a><br /></td></tr>
 <tr class="separator:ae8357b9337e2148c57267f1d4c32fcfa inherit pub_static_attribs_classoomph_1_1FiniteElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classoomph_1_1GeneralisedElement"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classoomph_1_1GeneralisedElement')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classoomph_1_1GeneralisedElement.html">oomph::GeneralisedElement</a></td></tr>
+<tr class="memitem:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">Suppress_warning_about_any_repeated_data</a> = false</td></tr>
+<tr class="memdesc:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#a673e7be60ca447645949638293beda7e">More...</a><br /></td></tr>
+<tr class="separator:a673e7be60ca447645949638293beda7e inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">Suppress_warning_about_repeated_internal_data</a></td></tr>
 <tr class="memdesc:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static boolean to suppress warnings about repeated internal data. Defaults to false.  <a href="classoomph_1_1GeneralisedElement.html#acbfce11cb0f35821b108be5ec48c76d6">More...</a><br /></td></tr>
 <tr class="separator:acbfce11cb0f35821b108be5ec48c76d6 inherit pub_static_attribs_classoomph_1_1GeneralisedElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1540,10 +1543,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;unsigned NNODE_1D, class FLUID_ELEMENT&gt;<br />
 class oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;</h3>
 
-<p>//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// </p>
 <p>FSI Axisym FoepplvonKarmanElement elements are 1D Foeppl von Karman elements with isoparametric interpolation for the function. Gets traction from adjacent fluid element(s) of type FLUID_ELEMENT. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00557">557</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00556">556</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad81be06021aa008d04f805ed17900656"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad81be06021aa008d04f805ed17900656">&#9670;&nbsp;</a></span>FSIAxisymFoepplvonKarmanElement()</h2>
@@ -1572,7 +1574,7 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00563">563</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00562">562</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00178">oomph::ElementWithExternalElement::set_ninteraction()</a>.</p>
 
@@ -1605,7 +1607,7 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00572">572</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00571">571</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
 </div>
 </div>
@@ -1656,11 +1658,11 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#aa46469e491d25eda8dbe213f07152974">oomph::GeomObject</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00648">648</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00647">647</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00389">oomph::TimeStepper::is_steady()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02593">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="nodes_8h_source.html#l00238">oomph::Data::time_stepper_pt()</a>, and <a class="el" href="timesteppers_8h_source.html#l00594">oomph::TimeStepper::weight()</a>.</p>
+<p class="reference">References <a class="el" href="timesteppers_8h_source.html#l00389">oomph::TimeStepper::is_steady()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02597">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="timesteppers_8h_source.html#l00601">oomph::TimeStepper::ntstorage()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, <a class="el" href="geom__objects_8h_source.html#l00192">oomph::GeomObject::time_stepper_pt()</a>, <a class="el" href="nodes_8h_source.html#l00238">oomph::Data::time_stepper_pt()</a>, and <a class="el" href="timesteppers_8h_source.html#l00594">oomph::TimeStepper::weight()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00864">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::output()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00863">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::output()</a>.</p>
 
 </div>
 </div>
@@ -1694,9 +1696,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#ae1940fc6a3050e645c3882f2f6f3a202">oomph::GeomObject</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00597">597</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00596">596</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>.</p>
 
 </div>
 </div>
@@ -1746,9 +1748,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1AxisymFoepplvonKarmanEquations.html#acadd8cb7ef617690c79c0c76d7ed0000">oomph::AxisymFoepplvonKarmanEquations</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00701">701</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00700">700</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00136">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00196">oomph::AxisymFoepplvonKarmanEquations::get_pressure_fvk()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00576">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q()</a>.</p>
+<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00136">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00196">oomph::AxisymFoepplvonKarmanEquations::get_pressure_fvk()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00575">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q()</a>.</p>
 
 </div>
 </div>
@@ -1781,9 +1783,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#a19d325347e19964e127fe124df56f251">oomph::GeomObject</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00590">590</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00589">589</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>.</p>
 
 </div>
 </div>
@@ -1814,11 +1816,11 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Update the nodal positions in all fluid elements that affect the traction on this element. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00832">832</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00831">831</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, and <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>.</p>
+<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, and <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00808">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::reset_after_external_interaction_geometric_fd()</a>, <a class="el" href="axisym__fvk__elements_8h_source.html#l00824">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::reset_in_external_interaction_geometric_fd()</a>, <a class="el" href="axisym__fvk__elements_8h_source.html#l00801">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::update_before_external_interaction_geometric_fd()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00816">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::update_in_external_interaction_geometric_fd()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00807">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::reset_after_external_interaction_geometric_fd()</a>, <a class="el" href="axisym__fvk__elements_8h_source.html#l00823">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::reset_in_external_interaction_geometric_fd()</a>, <a class="el" href="axisym__fvk__elements_8h_source.html#l00800">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::update_before_external_interaction_geometric_fd()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00815">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::update_in_external_interaction_geometric_fd()</a>.</p>
 
 </div>
 </div>
@@ -1862,9 +1864,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1AxisymFoepplvonKarmanElement.html#a435aab946dfcaa0b23e7df59e9bc3933">oomph::AxisymFoepplvonKarmanElement&lt; NNODE_1D &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00864">864</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00863">863</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00648">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::dposition_dt()</a>, <a class="el" href="elements_8h_source.html#l03148">oomph::FiniteElement::get_s_plot()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8cc_source.html#l00234">oomph::AxisymFoepplvonKarmanEquations::interpolated_stress()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00249">oomph::AxisymFoepplvonKarmanEquations::interpolated_w_fvk()</a>, <a class="el" href="elements_8cc_source.html#l03962">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8h_source.html#l03186">oomph::FiniteElement::nplot_points()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00647">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::dposition_dt()</a>, <a class="el" href="elements_8h_source.html#l03152">oomph::FiniteElement::get_s_plot()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8cc_source.html#l00234">oomph::AxisymFoepplvonKarmanEquations::interpolated_stress()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00249">oomph::AxisymFoepplvonKarmanEquations::interpolated_w_fvk()</a>, <a class="el" href="elements_8cc_source.html#l03992">oomph::FiniteElement::interpolated_x()</a>, <a class="el" href="elements_8h_source.html#l03190">oomph::FiniteElement::nplot_points()</a>, and <a class="el" href="cfortran_8h_source.html#l00568">s</a>.</p>
 
 </div>
 </div>
@@ -1906,9 +1908,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Output adjacent fluid elements (for checking of fsi setup) </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00783">783</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00782">782</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, and <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>.</p>
+<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, and <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>.</p>
 
 </div>
 </div>
@@ -1940,9 +1942,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Output integration points (for checking of fsi setup) </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00734">734</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00733">733</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00136">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01963">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02593">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="element__with__external__element_8h_source.html#l00136">oomph::ElementWithExternalElement::external_element_local_coord()</a>, <a class="el" href="element__with__external__element_8h_source.html#l00107">oomph::ElementWithExternalElement::external_element_pt()</a>, <a class="el" href="elements_8h_source.html#l01967">oomph::FiniteElement::integral_pt()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a2122f99a87c18649bafdd9ed739758">oomph::Integral::knot()</a>, <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02597">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1Integral.html#a1a270de9d99a1fcf1d25a6c1017f65fa">oomph::Integral::nweight()</a>, <a class="el" href="cfortran_8h_source.html#l00568">s</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -1992,9 +1994,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1GeomObject.html#ad44a736d23dcd63af163a7d80b5c4dfa">oomph::GeomObject</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00614">614</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00613">613</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="elements_8h_source.html#l02210">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02593">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02175">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
+<p class="reference">References <a class="el" href="elements_8h_source.html#l02214">oomph::FiniteElement::nnode()</a>, <a class="el" href="axisym__displ__based__fvk__elements_8h_source.html#l00111">oomph::AxisymFoepplvonKarmanEquations::nodal_index_fvk()</a>, <a class="el" href="elements_8h_source.html#l02597">oomph::FiniteElement::nodal_value()</a>, <a class="el" href="elements_8h_source.html#l02179">oomph::FiniteElement::node_pt()</a>, <a class="el" href="classoomph_1_1FiniteElement.html#a58a25b6859ddd43b7bfe64a19fee5023">oomph::FiniteElement::shape()</a>, <a class="el" href="cfortran_8h_source.html#l00568">t</a>, and <a class="el" href="nodes_8h_source.html#l01060">oomph::Node::x()</a>.</p>
 
 </div>
 </div>
@@ -2038,7 +2040,7 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Implements <a class="el" href="classoomph_1_1GeomObject.html#a0d04c9d4667817f3ef24bb660fd56065">oomph::GeomObject</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00605">605</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00604">604</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
 <p class="reference">References <a class="el" href="cfortran_8h_source.html#l00568">t</a>.</p>
 
@@ -2071,11 +2073,11 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Return the ratio of the stress scales used to non-dimensionalise the fluid and elasticity equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00576">576</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00575">575</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00902">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::Q_pt</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00898">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::Q_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00701">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::get_pressure_fvk()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00700">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::get_pressure_fvk()</a>.</p>
 
 </div>
 </div>
@@ -2106,9 +2108,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Return a pointer the ratio of stress scales used to non-dimensionalise the fluid and solid equations. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00583">583</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00582">582</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00902">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::Q_pt</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00898">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::Q_pt</a>.</p>
 
 </div>
 </div>
@@ -2141,9 +2143,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a902a29b3e23a6fb6a6b06e672162a578">oomph::ElementWithExternalElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00808">808</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00807">807</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00832">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00831">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
 
 </div>
 </div>
@@ -2177,9 +2179,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a2bc7a069b01795d9c8036fb81e8b319d">oomph::ElementWithExternalElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00824">824</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00823">823</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00832">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00831">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
 
 </div>
 </div>
@@ -2212,9 +2214,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ElementWithExternalElement.html#a2460f9def76ae512936eba0a1010cdc2">oomph::ElementWithExternalElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00801">801</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00800">800</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00832">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00831">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
 
 </div>
 </div>
@@ -2248,9 +2250,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Reimplemented from <a class="el" href="classoomph_1_1ElementWithExternalElement.html#ab34f7db5cb5a473c6f5552f34af4a651">oomph::ElementWithExternalElement</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00816">816</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00815">815</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00832">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
+<p class="reference">References <a class="el" href="axisym__fvk__elements_8h_source.html#l00831">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::node_update_adjacent_fluid_elements()</a>.</p>
 
 </div>
 </div>
@@ -2279,9 +2281,9 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
 
 <p>Pointer to the ratio, <img class="formulaInl" alt="$ Q $" src="form_45.png" width="10" height="13"/> , of the stress used to non-dimensionalise the fluid stresses to the stress used to non-dimensionalise the solid stresses. </p>
 
-<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00902">902</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="axisym__fvk__elements_8h_source.html#l00898">898</a> of file <a class="el" href="axisym__fvk__elements_8h_source.html">axisym_fvk_elements.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00576">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00583">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q_pt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="axisym__fvk__elements_8h_source.html#l00575">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q()</a>, and <a class="el" href="axisym__fvk__elements_8h_source.html#l00582">oomph::FSIAxisymFoepplvonKarmanElement&lt; NNODE_1D, FLUID_ELEMENT &gt;::q_pt()</a>.</p>
 
 </div>
 </div>
@@ -2316,7 +2318,7 @@ template&lt;unsigned NNODE_1D, class FLUID_ELEMENT &gt; </div>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:53:41
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:10:26
         </div>
       </div>
     </footer>

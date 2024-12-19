@@ -13,15 +13,6 @@
 # PARTICULAR PURPOSE.
 
 @SET_MAKE@
-
-#####################################################
-# DOUBLE PRECISION SOURCES FROM ARPACK96 + PATCHES
-# We turn these into the libraray oomph_arpack
-# to avoid any clashes with existing installations
-# of arpack (probably installed as -larpack)
-####################################################
-
-
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -96,60 +87,26 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_ARPACK_SOURCES_TRUE@am__append_1 = all_arpack_sources.f
-@HAVE_ARPACK_SOURCES_FALSE@am__append_2 = dummy_arpack.f
-subdir = external_src/oomph_arpack
+check_PROGRAMS = faceted_surface_vtu_output_tester$(EXEEXT)
+subdir = self_test/faceted_surface_vtu_output
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/configure.ac_scripts/automake_init_command_file \
 	$(top_srcdir)/config/configure.ac_scripts/makefile_list \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-DIST_COMMON = $(srcdir)/Makefile.am $(include_HEADERS) \
-	$(am__DIST_COMMON)
+DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
-am__vpath_adj = case $$p in \
-    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
-    *) f=$$p;; \
-  esac;
-am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
-am__install_max = 40
-am__nobase_strip_setup = \
-  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
-am__nobase_strip = \
-  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
-am__nobase_list = $(am__nobase_strip_setup); \
-  for p in $$list; do echo "$$p $$p"; done | \
-  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
-  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
-    if (++n[$$2] == $(am__install_max)) \
-      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
-    END { for (dir in files) print dir, files[dir] }'
-am__base_list = \
-  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
-  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__uninstall_files_from_dir = { \
-  test -z "$$files" \
-    || { test ! -d "$$dir" && test ! -f "$$dir" && test ! -r "$$dir"; } \
-    || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
-         $(am__cd) "$$dir" && rm -f $$files; }; \
-  }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"
-LTLIBRARIES = $(lib_LTLIBRARIES)
-liboomph_arpack_la_LIBADD =
-am__liboomph_arpack_la_SOURCES_DIST = debug.h stat.h dummy.cc \
-	all_arpack_sources.f dummy_arpack.f
-am__objects_1 =
-@HAVE_ARPACK_SOURCES_TRUE@am__objects_2 = all_arpack_sources.lo
-@HAVE_ARPACK_SOURCES_FALSE@am__objects_3 = dummy_arpack.lo
-am__objects_4 = dummy.lo $(am__objects_2) $(am__objects_3)
-am__objects_5 = $(am__objects_1) $(am__objects_4)
-am_liboomph_arpack_la_OBJECTS = $(am__objects_5)
-liboomph_arpack_la_OBJECTS = $(am_liboomph_arpack_la_OBJECTS)
+am_faceted_surface_vtu_output_tester_OBJECTS =  \
+	faceted_surface_vtu_output_tester.$(OBJEXT)
+faceted_surface_vtu_output_tester_OBJECTS =  \
+	$(am_faceted_surface_vtu_output_tester_OBJECTS)
+am__DEPENDENCIES_1 =
+faceted_surface_vtu_output_tester_DEPENDENCIES =  \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -169,7 +126,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/dummy.Plo
+am__depfiles_remade =  \
+	./$(DEPDIR)/faceted_surface_vtu_output_tester.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -188,47 +146,13 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-F77COMPILE = $(F77) $(AM_FFLAGS) $(FFLAGS)
-LTF77COMPILE = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(F77) $(AM_FFLAGS) $(FFLAGS)
-AM_V_F77 = $(am__v_F77_@AM_V@)
-am__v_F77_ = $(am__v_F77_@AM_DEFAULT_V@)
-am__v_F77_0 = @echo "  F77     " $@;
-am__v_F77_1 = 
-F77LD = $(F77)
-F77LINK = $(LIBTOOL) $(AM_V_lt) --tag=F77 $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(F77LD) $(AM_FFLAGS) $(FFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_F77LD = $(am__v_F77LD_@AM_V@)
-am__v_F77LD_ = $(am__v_F77LD_@AM_DEFAULT_V@)
-am__v_F77LD_0 = @echo "  F77LD   " $@;
-am__v_F77LD_1 = 
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_@AM_V@)
-am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_@AM_V@)
-am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
-SOURCES = $(liboomph_arpack_la_SOURCES)
-DIST_SOURCES = $(am__liboomph_arpack_la_SOURCES_DIST)
+SOURCES = $(faceted_surface_vtu_output_tester_SOURCES)
+DIST_SOURCES = $(faceted_surface_vtu_output_tester_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-HEADERS = $(include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -246,11 +170,38 @@ am__define_uniq_tagged_files = \
   unique=`for i in $$list; do \
     if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
   done | $(am__uniquify_input)`
-am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
+am__tty_colors_dummy = \
+  mgn= red= grn= lgn= blu= brg= std=; \
+  am__color_tests=no
+am__tty_colors = { \
+  $(am__tty_colors_dummy); \
+  if test "X$(AM_COLOR_TESTS)" = Xno; then \
+    am__color_tests=no; \
+  elif test "X$(AM_COLOR_TESTS)" = Xalways; then \
+    am__color_tests=yes; \
+  elif test "X$$TERM" != Xdumb && { test -t 1; } 2>/dev/null; then \
+    am__color_tests=yes; \
+  fi; \
+  if test $$am__color_tests = yes; then \
+    red='[0;31m'; \
+    grn='[0;32m'; \
+    lgn='[1;32m'; \
+    blu='[1;34m'; \
+    mgn='[0;35m'; \
+    brg='[1m'; \
+    std='[m'; \
+  fi; \
+}
+am__DIST_COMMON = $(srcdir)/Makefile.in \
+	$(top_srcdir)/config/makefile_templates/demo_drivers \
+	$(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = @AM_CPPFLAGS@
+
+# Include path for library headers: All library headers live in 
+# the include directory which we specify with -I
+AM_CPPFLAGS = @AM_CPPFLAGS@ -I@includedir@
 AM_CXXFLAGS = @AM_CXXFLAGS@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AM_FFLAGS = @AM_FFLAGS@
@@ -432,39 +383,24 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+TESTS_ENVIRONMENT = MPI_RUN_COMMAND='@MPI_RUN_COMMAND@' MPI_VARIABLENP_RUN_COMMAND='@MPI_VARIABLENP_RUN_COMMAND@'
+@COMPARE_AGAINST_VALIDATA_FALSE@TESTS = $(top_builddir)/bin/dummy_validate.sh
+@COMPARE_AGAINST_VALIDATA_TRUE@TESTS = $(top_builddir)/bin/wrapper_for_validate.sh 
 
-# Define the sources
-sources = dummy.cc $(am__append_1) $(am__append_2)
-@HAVE_ARPACK_SOURCES_TRUE@EXTRA_DIST = dummy_arpack.f
+# Distribute validation script and validation data
+EXTRA_DIST = validate.sh validata
 
-# Define the headers
-headers = debug.h stat.h
+# Sources for executable
+faceted_surface_vtu_output_tester_SOURCES = faceted_surface_vtu_output_tester.cc
 
-#Define the name of the library
-libname = oomph_arpack
-
-# Combine headers and sources
-headers_and_sources = $(headers) $(sources)
-
-#Define the library that goes into the lib directory
-lib_LTLIBRARIES = liboomph_arpack.la
-
-#Source on which the library depends
-liboomph_arpack_la_SOURCES = $(headers_and_sources)
-
-#Include headers
-#Headers that should be included in the  $(includedir) directory:
-# This is the combined header which contains "#include<...>" commands
-# for the real headers in the subdirectory below  $(includedir)
-include_HEADERS = $(libname).h
-
-#Here's the subdirectory where the actual header files are placed
-library_includedir = $(includedir)/oomph_arpack
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+faceted_surface_vtu_output_tester_LDADD = -L@libdir@ -lgeneric -lpoisson $(EXTERNAL_LIBS) $(FLIBS)
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .f .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+.SUFFIXES: .cc .lo .o .obj
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/config/makefile_templates/demo_drivers $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -473,9 +409,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign external_src/oomph_arpack/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign self_test/faceted_surface_vtu_output/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign external_src/oomph_arpack/Makefile
+	  $(AUTOMAKE) --foreign self_test/faceted_surface_vtu_output/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -484,6 +420,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__maybe_remake_depfiles);; \
 	esac;
+$(top_srcdir)/config/makefile_templates/demo_drivers $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -494,43 +431,18 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	list2=; for p in $$list; do \
-	  if test -f $$p; then \
-	    list2="$$list2 $$p"; \
-	  else :; fi; \
-	done; \
-	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(libdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(libdir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
-	}
+clean-checkPROGRAMS:
+	@list='$(check_PROGRAMS)'; test -n "$$list" || exit 0; \
+	echo " rm -f" $$list; \
+	rm -f $$list || exit $$?; \
+	test -n "$(EXEEXT)" || exit 0; \
+	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+	echo " rm -f" $$list; \
+	rm -f $$list
 
-uninstall-libLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	for p in $$list; do \
-	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
-	done
-
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
-	@list='$(lib_LTLIBRARIES)'; \
-	locs=`for p in $$list; do echo $$p; done | \
-	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
-	      sort -u`; \
-	test -z "$$locs" || { \
-	  echo rm -f $${locs}; \
-	  rm -f $${locs}; \
-	}
-
-liboomph_arpack.la: $(liboomph_arpack_la_OBJECTS) $(liboomph_arpack_la_DEPENDENCIES) $(EXTRA_liboomph_arpack_la_DEPENDENCIES) 
-	$(AM_V_CXXLD)$(CXXLINK) -rpath $(libdir) $(liboomph_arpack_la_OBJECTS) $(liboomph_arpack_la_LIBADD) $(LIBS)
+faceted_surface_vtu_output_tester$(EXEEXT): $(faceted_surface_vtu_output_tester_OBJECTS) $(faceted_surface_vtu_output_tester_DEPENDENCIES) $(EXTRA_faceted_surface_vtu_output_tester_DEPENDENCIES) 
+	@rm -f faceted_surface_vtu_output_tester$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(faceted_surface_vtu_output_tester_OBJECTS) $(faceted_surface_vtu_output_tester_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -538,7 +450,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dummy.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/faceted_surface_vtu_output_tester.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -567,41 +479,11 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
-.f.o:
-	$(AM_V_F77)$(F77COMPILE) -c -o $@ $<
-
-.f.obj:
-	$(AM_V_F77)$(F77COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.f.lo:
-	$(AM_V_F77)$(LTF77COMPILE) -c -o $@ $<
-
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-includeHEADERS: $(include_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(includedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(includedir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(includedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(includedir)" || exit $$?; \
-	done
-
-uninstall-includeHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(includedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -654,6 +536,99 @@ cscopelist-am: $(am__tagged_files)
 
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
+
+check-TESTS: $(TESTS)
+	@failed=0; all=0; xfail=0; xpass=0; skip=0; \
+	srcdir=$(srcdir); export srcdir; \
+	list=' $(TESTS) '; \
+	$(am__tty_colors); \
+	if test -n "$$list"; then \
+	  for tst in $$list; do \
+	    if test -f ./$$tst; then dir=./; \
+	    elif test -f $$tst; then dir=; \
+	    else dir="$(srcdir)/"; fi; \
+	    if $(TESTS_ENVIRONMENT) $${dir}$$tst $(AM_TESTS_FD_REDIRECT); then \
+	      all=`expr $$all + 1`; \
+	      case " $(XFAIL_TESTS) " in \
+	      *[\ \	]$$tst[\ \	]*) \
+		xpass=`expr $$xpass + 1`; \
+		failed=`expr $$failed + 1`; \
+		col=$$red; res=XPASS; \
+	      ;; \
+	      *) \
+		col=$$grn; res=PASS; \
+	      ;; \
+	      esac; \
+	    elif test $$? -ne 77; then \
+	      all=`expr $$all + 1`; \
+	      case " $(XFAIL_TESTS) " in \
+	      *[\ \	]$$tst[\ \	]*) \
+		xfail=`expr $$xfail + 1`; \
+		col=$$lgn; res=XFAIL; \
+	      ;; \
+	      *) \
+		failed=`expr $$failed + 1`; \
+		col=$$red; res=FAIL; \
+	      ;; \
+	      esac; \
+	    else \
+	      skip=`expr $$skip + 1`; \
+	      col=$$blu; res=SKIP; \
+	    fi; \
+	    echo "$${col}$$res$${std}: $$tst"; \
+	  done; \
+	  if test "$$all" -eq 1; then \
+	    tests="test"; \
+	    All=""; \
+	  else \
+	    tests="tests"; \
+	    All="All "; \
+	  fi; \
+	  if test "$$failed" -eq 0; then \
+	    if test "$$xfail" -eq 0; then \
+	      banner="$$All$$all $$tests passed"; \
+	    else \
+	      if test "$$xfail" -eq 1; then failures=failure; else failures=failures; fi; \
+	      banner="$$All$$all $$tests behaved as expected ($$xfail expected $$failures)"; \
+	    fi; \
+	  else \
+	    if test "$$xpass" -eq 0; then \
+	      banner="$$failed of $$all $$tests failed"; \
+	    else \
+	      if test "$$xpass" -eq 1; then passes=pass; else passes=passes; fi; \
+	      banner="$$failed of $$all $$tests did not behave as expected ($$xpass unexpected $$passes)"; \
+	    fi; \
+	  fi; \
+	  dashes="$$banner"; \
+	  skipped=""; \
+	  if test "$$skip" -ne 0; then \
+	    if test "$$skip" -eq 1; then \
+	      skipped="($$skip test was not run)"; \
+	    else \
+	      skipped="($$skip tests were not run)"; \
+	    fi; \
+	    test `echo "$$skipped" | wc -c` -le `echo "$$banner" | wc -c` || \
+	      dashes="$$skipped"; \
+	  fi; \
+	  report=""; \
+	  if test "$$failed" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then \
+	    report="Please report to $(PACKAGE_BUGREPORT)"; \
+	    test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` || \
+	      dashes="$$report"; \
+	  fi; \
+	  dashes=`echo "$$dashes" | sed s/./=/g`; \
+	  if test "$$failed" -eq 0; then \
+	    col="$$grn"; \
+	  else \
+	    col="$$red"; \
+	  fi; \
+	  echo "$${col}$$dashes$${std}"; \
+	  echo "$${col}$$banner$${std}"; \
+	  test -z "$$skipped" || echo "$${col}$$skipped$${std}"; \
+	  test -z "$$report" || echo "$${col}$$report$${std}"; \
+	  echo "$${col}$$dashes$${std}"; \
+	  test "$$failed" -eq 0; \
+	else :; fi
 distdir: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) distdir-am
 
@@ -688,12 +663,11 @@ distdir-am: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
+	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(HEADERS)
+all-am: Makefile
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"; do \
-	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
-	done
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -726,11 +700,11 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libLTLIBRARIES clean-libtool clean-local \
+clean-am: clean-checkPROGRAMS clean-generic clean-libtool clean-local \
 	mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/dummy.Plo
+		-rm -f ./$(DEPDIR)/faceted_surface_vtu_output_tester.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -747,14 +721,13 @@ info: info-am
 
 info-am:
 
-install-data-am: install-includeHEADERS
-	@$(NORMAL_INSTALL)
-	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
+install-data-am:
+
 install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-libLTLIBRARIES
+install-exec-am:
 
 install-html: install-html-am
 
@@ -777,7 +750,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/dummy.Plo
+		-rm -f ./$(DEPDIR)/faceted_surface_vtu_output_tester.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -794,125 +767,46 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES
+uninstall-am:
 
-.MAKE: install-am install-data-am install-strip
+.MAKE: check-am install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-generic clean-libLTLIBRARIES clean-libtool clean-local \
-	cscopelist-am ctags ctags-am distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-data-hook install-dvi \
+.PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-TESTS \
+	check-am clean clean-checkPROGRAMS clean-generic clean-libtool \
+	clean-local cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-includeHEADERS install-info \
-	install-info-am install-libLTLIBRARIES install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-includeHEADERS \
-	uninstall-libLTLIBRARIES
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 
 
-# Dummy header file - there's no real header for the fortran stuff
-# we provide a cfortran-based header file for the relevant
-# subroutines in src/generic
-$(libname).h: 
-	echo "//Empty" > $(libname).h
+# Choose self tests
+@COMPARE_AGAINST_VALIDATA_TRUE@  # Test script
+@COMPARE_AGAINST_VALIDATA_FALSE@  # Just run the executables
 
-#These are the header files that are to be placed in subdirectory
-#library_include_HEADERS=$(headers)
+#Additional cleanup commands
+clean-local: 
+	rm -rf validate_sh_timing_generated_by_make_check.dat Validation *~
 
-#NONE HERE
-# Combined header file
-#---------------------
-# Rule for building combined header (dummy target never gets made so
-# the combined header is remade every time
-#$(libname).h: dummy_$(libname).h
+# Print top_builddir
+print-top_builddir: 
+	echo $(top_builddir)
 
-#NONE HERE
-# When building the combined header, we also create a symbolic
-# link to it from the directory above this one, so that
-# it can be used by other libaries (before "make install" is run)
-# in exactly the same way as after its installation in the include
-# directory. (After the installation, the combined header lives
-# in the directory above the actual individual header files)
-#dummy_$(libname).h:  $(headers)
-#	echo  $(libname) $(headers) > all_$(libname).aux
-#	$(AWK) -f $(top_builddir)/bin/headers.awk < \
-#	          all_$(libname).aux > $(libname).h
-#	rm all_$(libname).aux
-#	rm -f ../$(libname).h 
-#	(cd .. && $(LN_S) $(libname)/$(libname).h $(libname).h)
+# Check if the executables exist
+check-if-executables-exist: 
+	$(top_builddir)/bin/check_if_executable_exists.bash `echo $(check_PROGRAMS)`
 
-#NONE HERE
-# Extra hook for install: Optionally replace headers by symbolic links
-#---------------------------------------------------------------------
-#if SYMBOLIC_LINKS_FOR_HEADERS
-#install-data-hook: 
-#	(cd $(library_includedir) && rm -f $(headers) )
-#	(echo "$(headers)" > include_files.list )
-#	($(top_builddir)/bin/change_headers_to_links.sh `pwd`)
-#	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
-#	(rm -r include_files.list.aux include_files.list ) 
-#else
-install-data-hook: 
-#endif
-
-#Dummy for all_arpack_sources.f file -- needed during make dist even 
-#if it should not be included because the HAVE_ARPACK_SOURCES flag is false.
-#Touch creates a zero-length file
-$(srcdir)/all_arpack_sources.f: $(srcdir)/debug.h $(srcdir)/stat.h
-	if [ ! -f $(srcdir)/all_arpack_sources.f ]; then \
-	 if [ -f $(srcdir)/../../private/external_src/arpack/all_arpack_sources.f ]; then \
-	    echo "Creating link to private/external_src/arpack/all_arpack_sources.f"; \
-	    ln -s $(srcdir)/../../private/external_src/arpack/all_arpack_sources.f $(srcdir); \
-	 fi; \
-	 touch $(srcdir)/all_arpack_sources.f; \
-	fi;  
-
-#Dummy for debug.h file -- needed during make dist even 
-#if it should not be included because the HAVE_ARPACK_SOURCES flag is false.
-#Touch creates a zero-length file
-$(srcdir)/debug.h:
-	if [ ! -f $(srcdir)/debug.h ]; then \
-	 if [ -f $(srcdir)/../../private/external_src/arpack/debug.h ]; then \
-	    echo "Creating link to private/external_src/arpack/debug.h"; \
-	    ln -s $(srcdir)/../../private/external_src/arpack/debug.h $(srcdir); \
-	 fi; \
-	 touch $(srcdir)/debug.h; \
-	fi;  
-
-#Dummy for stat.h file -- needed during make dist even 
-#if it should not be included because the HAVE_ARPACK_SOURCES flag is false.
-#Touch creates a zero-length file
-$(srcdir)/stat.h:
-	if [ ! -f $(srcdir)/stat.h ]; then \
-	 if [ -f $(srcdir)/../../private/external_src/arpack/stat.h ]; then \
-	    echo "Creating link to private/external_src/arpack/stat.h"; \
-	    ln -s $(srcdir)/../../private/external_src/arpack/stat.h $(srcdir); \
-	 fi; \
-	 touch $(srcdir)/stat.h; \
-	fi;  
-
-# Tidy up: Remove symbolic link to private_external_src
-clean-local:                                           
-	if [ -L $(srcdir)/all_arpack_sources.f ] || ( [ -e $(srcdir)/all_arpack_sources.f ] && [ ! -s $(srcdir)/all_arpack_sources.f ] ); then \
-	     echo "Removing empty file or symbolic link to private_external_src/arpack/all_arpack_sources.f";\
-	     rm -f $(srcdir)/all_arpack_sources.f;\
-	fi;         	
-	if [ -L $(srcdir)/debug.h ] || ( [ -e $(srcdir)/debug.h ] && [ ! -s $(srcdir)/debug.h ] ); then \
-	     echo "Removing empty file or symbolic link to private_external_src/arpack/debug.h";\
-	     rm -f $(srcdir)/debug.h;\
-	fi;         	
-	if [ -L $(srcdir)/stat.h ] || ( [ -e $(srcdir)/stat.h ] && [ ! -s $(srcdir)/stat.h ] ); then \
-	     echo "Removing empty file or symbolic link to private_external_src/arpack/stat.h";\
-	     rm -f $(srcdir)/stat.h;\
-	fi;         	
-	rm -f $(libname).h
+# Get command to run gmsh on command line
+spit_out_gmsh_command:
+	@echo $(GMSH_RUN_COMMAND)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

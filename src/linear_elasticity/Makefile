@@ -139,7 +139,8 @@ liblinear_elasticity_la_LIBADD =
 am__objects_1 =
 am__objects_2 = elasticity_tensor.lo linear_elasticity_elements.lo \
 	refineable_linear_elasticity_elements.lo \
-	Tlinear_elasticity_elements.lo
+	Tlinear_elasticity_elements.lo \
+	linear_elasticity_traction_elements.lo
 am__objects_3 = $(am__objects_1) $(am__objects_2)
 am_liblinear_elasticity_la_OBJECTS = $(am__objects_3)
 liblinear_elasticity_la_OBJECTS =  \
@@ -166,6 +167,7 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Tlinear_elasticity_elements.Plo \
 	./$(DEPDIR)/elasticity_tensor.Plo \
 	./$(DEPDIR)/linear_elasticity_elements.Plo \
+	./$(DEPDIR)/linear_elasticity_traction_elements.Plo \
 	./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -275,7 +277,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_arpack -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
+EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
 F77 = f77
 FC = gfortran
 FCFLAGS = -g -O2
@@ -418,7 +420,8 @@ top_srcdir = ../..
 # Define the sources
 sources = \
 elasticity_tensor.cc linear_elasticity_elements.cc \
-refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc
+refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc \
+linear_elasticity_traction_elements.cc 
 
 
 # Include files which shouldn't be compiled
@@ -429,7 +432,7 @@ headers = \
 elasticity_tensor.h linear_elasticity_elements.h \
 linear_elasticity_traction_elements.h \
 Tlinear_elasticity_elements.h \
-refineable_linear_elasticity_elements.h 
+refineable_linear_elasticity_elements.h
 
 
 # Template only files. These should be included in include directory
@@ -543,6 +546,7 @@ distclean-compile:
 include ./$(DEPDIR)/Tlinear_elasticity_elements.Plo # am--include-marker
 include ./$(DEPDIR)/elasticity_tensor.Plo # am--include-marker
 include ./$(DEPDIR)/linear_elasticity_elements.Plo # am--include-marker
+include ./$(DEPDIR)/linear_elasticity_traction_elements.Plo # am--include-marker
 include ./$(DEPDIR)/refineable_linear_elasticity_elements.Plo # am--include-marker
 
 $(am__depfiles_remade):
@@ -750,6 +754,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/Tlinear_elasticity_elements.Plo
 	-rm -f ./$(DEPDIR)/elasticity_tensor.Plo
 	-rm -f ./$(DEPDIR)/linear_elasticity_elements.Plo
+	-rm -f ./$(DEPDIR)/linear_elasticity_traction_elements.Plo
 	-rm -f ./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -800,6 +805,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/Tlinear_elasticity_elements.Plo
 	-rm -f ./$(DEPDIR)/elasticity_tensor.Plo
 	-rm -f ./$(DEPDIR)/linear_elasticity_elements.Plo
+	-rm -f ./$(DEPDIR)/linear_elasticity_traction_elements.Plo
 	-rm -f ./$(DEPDIR)/refineable_linear_elasticity_elements.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic

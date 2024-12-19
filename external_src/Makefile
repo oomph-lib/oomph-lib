@@ -178,10 +178,10 @@ am__define_uniq_tagged_files = \
   unique=`for i in $$list; do \
     if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
   done | $(am__uniquify_input)`
-DIST_SUBDIRS = . oomph_hsl oomph_crbond_bessel oomph_arpack \
-	oomph_triangle oomph_tetgen oomph_metis_from_parmetis_3.1.1 \
-	oomph_superlu_4.3 oomph_blas oomph_lapack oomph_flapack \
-	oomph_superlu_dist_3.0 oomph_parmetis_3.1.1
+DIST_SUBDIRS = . oomph_hsl oomph_crbond_bessel oomph_triangle \
+	oomph_tetgen oomph_metis_from_parmetis_3.1.1 oomph_superlu_4.3 \
+	oomph_blas oomph_lapack oomph_flapack oomph_superlu_dist_3.0 \
+	oomph_parmetis_3.1.1
 am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
@@ -254,7 +254,7 @@ ECHO_T =
 EGREP = /usr/bin/grep -E
 ETAGS = etags
 EXEEXT = 
-EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_arpack -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
+EXTERNAL_LIBS = -lpthread -lboost_thread -lboost_system -lgmp -lmpfr -lCGAL_Core -lCGAL -loomph_hsl -loomph_crbond_bessel -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_metis_from_parmetis_3.1.1 -loomph_lapack -loomph_flapack -loomph_blas
 F77 = f77
 FC = gfortran
 FCFLAGS = -g -O2
@@ -400,7 +400,7 @@ top_srcdir = ..
 #
 #   https://www.gnu.org/software/automake/manual/html_node/Subdirectories.html
 #
-SUBDIRS = . oomph_hsl oomph_crbond_bessel oomph_arpack $(am__append_1) \
+SUBDIRS = . oomph_hsl oomph_crbond_bessel $(am__append_1) \
 	$(am__append_2) $(am__append_3) $(am__append_4) \
 	$(am__append_5) $(am__append_6) $(am__append_7) \
 	$(am__append_8)

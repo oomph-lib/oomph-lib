@@ -454,6 +454,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5355154d4991ec634e74d4817176f5f inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#ac5355154d4991ec634e74d4817176f5f">maximum_dt</a> ()</td></tr>
 <tr class="memdesc:ac5355154d4991ec634e74d4817176f5f inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to max timestep in adaptive timestepping.  <a href="classoomph_1_1Problem.html#ac5355154d4991ec634e74d4817176f5f">More...</a><br /></td></tr>
 <tr class="separator:ac5355154d4991ec634e74d4817176f5f inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b68978063f7eb0e317cc90c883e8601 inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">double &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#a6b68978063f7eb0e317cc90c883e8601">target_error_safety_factor</a> ()</td></tr>
+<tr class="memdesc:a6b68978063f7eb0e317cc90c883e8601 inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to the safety factor in adaptive timestepping.  <a href="classoomph_1_1Problem.html#a6b68978063f7eb0e317cc90c883e8601">More...</a><br /></td></tr>
+<tr class="separator:a6b68978063f7eb0e317cc90c883e8601 inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa30b2e89f61a327ffb1be4ff30bb868f inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">unsigned &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#aa30b2e89f61a327ffb1be4ff30bb868f">max_newton_iterations</a> ()</td></tr>
 <tr class="memdesc:aa30b2e89f61a327ffb1be4ff30bb868f inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access function to max Newton iterations before giving up.  <a href="classoomph_1_1Problem.html#aa30b2e89f61a327ffb1be4ff30bb868f">More...</a><br /></td></tr>
 <tr class="separator:aa30b2e89f61a327ffb1be4ff30bb868f inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -589,12 +592,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac65cbe00a72cfc91ccaea10818f1a507 inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#ac65cbe00a72cfc91ccaea10818f1a507">get_hessian_vector_products</a> (<a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> const &amp;Y, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &gt; const &amp;C, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVectorWithHaloEntries.html">DoubleVectorWithHaloEntries</a> &gt; &amp;product)</td></tr>
 <tr class="memdesc:ac65cbe00a72cfc91ccaea10818f1a507 inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the product of the global hessian (derivative of Jacobian matrix with respect to all variables) with an eigenvector, Y, and any number of other specified vectors C (d(J_{ij})/d u_{k}) Y_{j} C_{k}. This function is used in assembling and solving the augmented systems associated with bifurcation tracking. The default implementation is to use finite differences at the global level.  <a href="classoomph_1_1Problem.html#ac65cbe00a72cfc91ccaea10818f1a507">More...</a><br /></td></tr>
 <tr class="separator:ac65cbe00a72cfc91ccaea10818f1a507 inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cde2d21879264ae7bc8a140142db8ea inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#a8cde2d21879264ae7bc8a140142db8ea">solve_eigenproblem_legacy</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;eigenvalue, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector, const bool &amp;steady=true)</td></tr>
-<tr class="memdesc:a8cde2d21879264ae7bc8a140142db8ea inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get derivative of an element in the problem wrt a global parameter, used in continuation problems.  <a href="classoomph_1_1Problem.html#a8cde2d21879264ae7bc8a140142db8ea">More...</a><br /></td></tr>
-<tr class="separator:a8cde2d21879264ae7bc8a140142db8ea inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4c4d1c36972399b365017b967622449 inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#aa4c4d1c36972399b365017b967622449">solve_eigenproblem_legacy</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;eigenvalue, const bool &amp;steady=true)</td></tr>
-<tr class="memdesc:aa4c4d1c36972399b365017b967622449 inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve an eigenproblem as assembled by the <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>'s constituent elements. Calculate (at least) n_eval eigenvalues. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-matrix terms from the timestepper will be included in the jacobian &mdash; this is almost certainly never wanted. Legacy version.  <a href="classoomph_1_1Problem.html#aa4c4d1c36972399b365017b967622449">More...</a><br /></td></tr>
-<tr class="separator:aa4c4d1c36972399b365017b967622449 inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb6e5ef95c303d531f5949d7e9f6774a inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#afb6e5ef95c303d531f5949d7e9f6774a">solve_eigenproblem</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;alpha, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;beta, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_real, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_imag, const bool &amp;steady=true)</td></tr>
 <tr class="memdesc:afb6e5ef95c303d531f5949d7e9f6774a inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve an eigenproblem as assembled by the <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>'s constituent elements. Calculate (at least) n_eval eigenvalues and return the corresponding eigenvectors. The boolean flag (default true) specifies whether the steady jacobian should be assembled. If the flag is false then the weighted mass-matrix terms from the timestepper will be included in the jacobian &mdash; this is almost certainly never wanted. The eigenvalues and eigenvectors are, in general, complex. Eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_208.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_209.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_210.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs. There's a convenience wrapper to this function that simply computes these eigenvalues regardless. That version may die in NaN checking is enabled (via the fenv.h header and the associated feenable function).  <a href="classoomph_1_1Problem.html#afb6e5ef95c303d531f5949d7e9f6774a">More...</a><br /></td></tr>
 <tr class="separator:afb6e5ef95c303d531f5949d7e9f6774a inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -607,9 +604,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abdeda71a6cde679015d0a064a2122744 inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#abdeda71a6cde679015d0a064a2122744">solve_eigenproblem</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;alpha, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;beta, const bool &amp;steady=true)</td></tr>
 <tr class="memdesc:abdeda71a6cde679015d0a064a2122744 inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve an eigenproblem as assembled by the <a class="el" href="classoomph_1_1Problem.html" title="////////////////////////////////////////////////////////////////// //////////////////////////////////...">Problem</a>'s constituent elements but only return the eigenvalues, not the eigenvectors. At least n_eval eigenvalues are computed. The boolean flag (default true) is used to specify whether the weighted mass-matrix terms from the timestepping scheme should be included in the jacobian &mdash; this is almost certainly never wanted. Note that the eigenvalues may be infinite and are therefore returned as <img class="formulaInl" alt="$ \lambda_i = \alpha_i / \beta_i $" src="form_208.png" width="56" height="14"/> where <img class="formulaInl" alt="$ \alpha_i $" src="form_209.png" width="11" height="9"/> is complex while <img class="formulaInl" alt="$ \beta_i $" src="form_210.png" width="11" height="13"/> is real. The actual eigenvalues may then be computed by doing the division, checking for zero betas to avoid NaNs.  <a href="classoomph_1_1Problem.html#abdeda71a6cde679015d0a064a2122744">More...</a><br /></td></tr>
 <tr class="separator:abdeda71a6cde679015d0a064a2122744 inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a7c8ab31dc0297e049b15d67eb7661b inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#a0a7c8ab31dc0297e049b15d67eb7661b">solve_adjoint_eigenproblem_legacy</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;eigenvalue, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector, const bool &amp;make_timesteppers_steady=true)</td></tr>
-<tr class="memdesc:a0a7c8ab31dc0297e049b15d67eb7661b inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve an adjoint eigenvalue problem using the same procedure as solve_eigenproblem. See the documentation on that function for more details. Note: this is a legacy version of this function that stores re &amp; imag parts of eigenvectors in some solver-specific collection of real vectors.  <a href="classoomph_1_1Problem.html#a0a7c8ab31dc0297e049b15d67eb7661b">More...</a><br /></td></tr>
-<tr class="separator:a0a7c8ab31dc0297e049b15d67eb7661b inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a238820e0f1029699f362510557b77d24 inherit pub_methods_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#a238820e0f1029699f362510557b77d24">solve_adjoint_eigenproblem</a> (const unsigned &amp;n_eval, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; std::complex&lt; double &gt;&gt; &amp;eigenvalue, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_real, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; <a class="el" href="classoomph_1_1DoubleVector.html">DoubleVector</a> &gt; &amp;eigenvector_imag, const bool &amp;steady=true)</td></tr>
 <tr class="memdesc:a238820e0f1029699f362510557b77d24 inherit pub_methods_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve an adjoint eigenvalue problem using the same procedure as solve_eigenproblem. See the documentation on that function for more details.  <a href="classoomph_1_1Problem.html#a238820e0f1029699f362510557b77d24">More...</a><br /></td></tr>
 <tr class="separator:a238820e0f1029699f362510557b77d24 inherit pub_methods_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1244,6 +1238,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:abbb93979ed99d40eb845ba7296355965 inherit pro_attribs_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#abbb93979ed99d40eb845ba7296355965">DTSF_min_decrease</a></td></tr>
 <tr class="memdesc:abbb93979ed99d40eb845ba7296355965 inherit pro_attribs_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum allowed decrease of dt between time-steps in adaptive schemes. Lower scaling values will reject the time-step (and retry with a smaller dt).  <a href="classoomph_1_1Problem.html#abbb93979ed99d40eb845ba7296355965">More...</a><br /></td></tr>
 <tr class="separator:abbb93979ed99d40eb845ba7296355965 inherit pro_attribs_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb61c79a0cbdab75d68c95348898874 inherit pro_attribs_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#aacb61c79a0cbdab75d68c95348898874">Target_error_safety_factor</a></td></tr>
+<tr class="memdesc:aacb61c79a0cbdab75d68c95348898874 inherit pro_attribs_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">Safety factor to ensure we are aiming for a target error, TARGET, that is below our tolerance: TARGET = Target_error_safety_factor * TOL For this to make sense Target_error_safety_factor should be &lt;1.0. If Keep_temporal_error_below_tolerance is set to true (default) then, without this, timesteps suggested by the adaptive time-stepper can be expected to lead to rejection (because the error exceeds TOL) about half of the time. Harier et al. (1993, ISBN:978-3-540-56670-0, p168) suggest a value around 0.25-0.40 to be the most efficient, however this is highly problem and timestepper dependent and sometimes as high as 0.95 may be effective at improving the robustness of timestep prediction.  <a href="classoomph_1_1Problem.html#aacb61c79a0cbdab75d68c95348898874">More...</a><br /></td></tr>
+<tr class="separator:aacb61c79a0cbdab75d68c95348898874 inherit pro_attribs_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdee700b2cec37540cf1e7e1462df6c3 inherit pro_attribs_classoomph_1_1Problem"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1Problem.html#abdee700b2cec37540cf1e7e1462df6c3">Minimum_dt_but_still_proceed</a></td></tr>
 <tr class="memdesc:abdee700b2cec37540cf1e7e1462df6c3 inherit pro_attribs_classoomph_1_1Problem"><td class="mdescLeft">&#160;</td><td class="mdescRight">If Minimum_dt_but_still_proceed positive, then dt will not be reduced below this value during adaptive timestepping and the computation will continue with this value, accepting the larger errors that this will incur). Note: This option is disabled by default as this value is initialised to -1.0.  <a href="classoomph_1_1Problem.html#abdee700b2cec37540cf1e7e1462df6c3">More...</a><br /></td></tr>
 <tr class="separator:abdee700b2cec37540cf1e7e1462df6c3 inherit pro_attribs_classoomph_1_1Problem"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1399,7 +1396,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// </p>
 <p>Base class for problems that can be solved by segregated FSI solver </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00167">167</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00185">185</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a06634a6823bb5062d11e97f0be78f373"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06634a6823bb5062d11e97f0be78f373">&#9670;&nbsp;</a></span>convergence_criteria</h2>
@@ -1420,7 +1417,7 @@ Additional Inherited Members</h2></td></tr>
 <tr><td class="fieldname"><a id="a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd"></a>Assess_convergence_based_on_max_global_residual&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00409">409</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00427">427</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1443,7 +1440,7 @@ Additional Inherited Members</h2></td></tr>
 <tr><td class="fieldname"><a id="a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca"></a>Solid_solve&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00418">418</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00436">436</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1481,9 +1478,9 @@ Additional Inherited Members</h2></td></tr>
 </ul>
 <p>boolean flag to indicate if timer has been halted</p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">191</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">209</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00413">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00420">Full_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00503">Max_picard</a>, <a class="el" href="problem_8h_source.html#l00596">oomph::Problem::Newton_solver_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00604">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00494">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00567">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00616">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00621">T_spent_on_actual_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00624">Timer_has_been_halted</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00431">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00438">Full_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00521">Max_picard</a>, <a class="el" href="problem_8h_source.html#l00599">oomph::Problem::Newton_solver_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00622">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00512">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00585">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00569">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00634">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00639">T_spent_on_actual_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00642">Timer_has_been_halted</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 </div>
 </div>
@@ -1512,7 +1509,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Empty virtual destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00242">242</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00260">260</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 </div>
 </div>
@@ -1542,7 +1539,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This function is called once at the end of each segregated solve. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00176">176</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00194">194</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -1573,7 +1570,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This function is to be filled with actions that take place before the check for convergence of the entire segregated solve. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00180">180</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00198">198</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -1604,7 +1601,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This function is called once at the start of each segregated solve. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00172">172</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00190">190</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -1635,9 +1632,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. absolute change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, <a class="el" href="classoomph_1_1Problem.html#a94536b381e949edf5bb4d44434e08925" title="The Tolerance below which the Newton Method is deemed to have converged.">Problem::Newton_solver_tolerance</a> is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00338">338</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00356">356</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l00596">oomph::Problem::Newton_solver_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l00599">oomph::Problem::Newton_solver_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1667,9 +1664,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. absolute change of solid dofs. The argument specifies the convergence tolerance. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">328</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">346</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00411">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">Convergence_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00429">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">Convergence_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1698,9 +1695,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. residuals of coupled system of eqns. This interface has no argument and the default convergence tolerance for the Newton solver, <a class="el" href="classoomph_1_1Problem.html#a94536b381e949edf5bb4d44434e08925" title="The Tolerance below which the Newton Method is deemed to have converged.">Problem::Newton_solver_tolerance</a> is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00320">320</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00338">338</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l00596">oomph::Problem::Newton_solver_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l00599">oomph::Problem::Newton_solver_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1730,9 +1727,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. residual of coupled system of eqns. The argument specifies the convergence tolerance. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00310">310</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">328</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00413">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">Convergence_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00431">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">Convergence_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1761,9 +1758,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. relative change of solid dofs. This interface has no argument and the default convergence tolerance for the Newton solver, <a class="el" href="classoomph_1_1Problem.html#a94536b381e949edf5bb4d44434e08925" title="The Tolerance below which the Newton Method is deemed to have converged.">Problem::Newton_solver_tolerance</a> is used. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00356">356</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00374">374</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l00596">oomph::Problem::Newton_solver_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l00599">oomph::Problem::Newton_solver_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1793,9 +1790,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Assess convergence based on max. relative change of solid dofs. The argument specifies the convergence tolerance. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">346</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00364">364</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00412">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">Convergence_tolerance</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00430">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">Convergence_criterion</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">Convergence_tolerance</a>.</p>
 
 </div>
 </div>
@@ -1824,9 +1821,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Do not use Irons and Tuck extrapolation for solid dofs. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00403">403</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00421">421</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">Use_irons_and_tuck_extrapolation</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">Use_irons_and_tuck_extrapolation</a>.</p>
 
 </div>
 </div>
@@ -1855,9 +1852,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Disable the use of pointwise Aitken extrapolation. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00381">381</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00399">399</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 </div>
 </div>
@@ -1886,9 +1883,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use Irons and Tuck extrapolation for solid dofs. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00397">397</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00415">415</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">Use_irons_and_tuck_extrapolation</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">Use_irons_and_tuck_extrapolation</a>.</p>
 
 </div>
 </div>
@@ -1917,9 +1914,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use pointwise Aitken extrapolation. This interface has no argument and the current value of Pointwise_aitken_start will be used. The default is zero, extrapolation starts immediately. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00375">375</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00393">393</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 </div>
 </div>
@@ -1949,9 +1946,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use pointwise Aitken extrapolation. The argument is used to specify the Picard iteration after which pointwise Aitken extrapolation is to be used for the first time. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00366">366</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00384">384</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00494">Pointwise_aitken_start</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00512">Pointwise_aitken_start</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 </div>
 </div>
@@ -1981,9 +1978,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use under-relaxation and (optionally) specify under-relaxation parameter. Default: omega=1.0 (i.e. no actual under-relaxation; Other extreme: omega=0.0 (freeze wall shape). Under-relaxation parameter can also be computed dynamically by setting use_irons_and_tuck_extrapolation() </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">391</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00409">409</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00604">Omega_relax</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00622">Omega_relax</a>.</p>
 
 </div>
 </div>
@@ -2015,9 +2012,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">39</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_mesh_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01280">oomph::Problem::mesh_pt()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Fluid_mesh_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01300">oomph::Problem::mesh_pt()</a>, <a class="el" href="mesh_8cc_source.html#l00287">oomph::Mesh::node_update()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01045">unsteady_segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01054">unsteady_segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2057,7 +2054,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00303">303</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00541">Previous_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00559">Previous_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2088,11 +2085,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Halt timer (e.g. before performing non-essential parts of the code such as documentation of the iteration's progress) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00460">460</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00478">478</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00616">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00621">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00624">Timer_has_been_halted</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00634">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00639">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00642">Timer_has_been_halted</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00471">t_spent_on_actual_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00489">t_spent_on_actual_solve()</a>.</p>
 
 </div>
 </div>
@@ -2176,7 +2173,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00153">153</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">Fluid_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00542">Fluid_data_pt</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2210,7 +2207,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00206">206</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2244,7 +2241,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">490</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00487">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Pointwise_aitken_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00505">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00582">Pointwise_aitken_solid_value</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2278,7 +2275,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00087">87</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01330">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="problem_8h_source.html#l01339">oomph::Problem::flush_sub_meshes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00554">Orig_sub_mesh_pt</a>, and <a class="el" href="problem_8cc_source.html#l01619">oomph::Problem::rebuild_global_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01350">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="problem_8h_source.html#l01359">oomph::Problem::flush_sub_meshes()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00572">Orig_sub_mesh_pt</a>, and <a class="el" href="problem_8cc_source.html#l01620">oomph::Problem::rebuild_global_mesh()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2309,9 +2306,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reset timer. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">439</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00457">457</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00616">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00621">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00624">Timer_has_been_halted</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00634">T_ref</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00639">T_spent_on_actual_solve</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00642">Timer_has_been_halted</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2342,11 +2339,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>(Re-)start timer (e.g. after completing non-essential parts of the code such as documentation of the iteration's progress) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00450">450</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00468">468</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00616">T_ref</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00624">Timer_has_been_halted</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00634">T_ref</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00642">Timer_has_been_halted</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00471">t_spent_on_actual_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00489">t_spent_on_actual_solve()</a>.</p>
 
 </div>
 </div>
@@ -2378,7 +2375,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00176">176</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">Fluid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00528">Fluid_value_is_pinned</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00542">Fluid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_value_is_pinned</a>, and <a class="el" href="cfortran_8h_source.html#l00603">i</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2412,7 +2409,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00229">229</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00537">Solid_value_is_pinned</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00555">Solid_value_is_pinned</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2438,9 +2435,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">538</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00176">actions_after_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00180">actions_before_segregated_convergence_check()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00172">actions_before_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00411">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00413">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00412">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="problem_8cc_source.html#l02075">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00080">oomph::PicardConvergenceData::cpu_for_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00063">oomph::PicardConvergenceData::cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00071">oomph::PicardConvergenceData::essential_cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00421">Fluid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00420">Full_solve</a>, <a class="el" href="problem_8cc_source.html#l03800">oomph::Problem::get_residuals()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00303">get_solid_change()</a>, <a class="el" href="double__vector_8cc_source.html#l00604">oomph::DoubleVector::max()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00503">Max_picard</a>, <a class="el" href="problem_8cc_source.html#l08976">oomph::Problem::newton_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00057">oomph::PicardConvergenceData::niter()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00153">pin_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00206">pin_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00487">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00494">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00087">rebuild_monolithic_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00567">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00176">restore_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00229">restore_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00098">oomph::PicardConvergenceData::set_solver_converged()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00422">Solid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00471">t_spent_on_actual_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00086">oomph::PicardConvergenceData::tol_achieved()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00138">use_only_fluid_elements()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00115">use_only_solid_elements()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00194">actions_after_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00198">actions_before_segregated_convergence_check()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00190">actions_before_segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00429">Assess_convergence_based_on_absolute_solid_change</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00431">Assess_convergence_based_on_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00430">Assess_convergence_based_on_relative_solid_change</a>, <a class="el" href="problem_8cc_source.html#l02076">oomph::Problem::assign_eqn_numbers()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">Convergence_criterion</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">Convergence_tolerance</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00080">oomph::PicardConvergenceData::cpu_for_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00063">oomph::PicardConvergenceData::cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">Doc_max_global_residual</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00071">oomph::PicardConvergenceData::essential_cpu_total()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">Fluid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00438">Full_solve</a>, <a class="el" href="problem_8cc_source.html#l03801">oomph::Problem::get_residuals()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00303">get_solid_change()</a>, <a class="el" href="double__vector_8cc_source.html#l00604">oomph::DoubleVector::max()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00521">Max_picard</a>, <a class="el" href="problem_8cc_source.html#l08803">oomph::Problem::newton_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00057">oomph::PicardConvergenceData::niter()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00153">pin_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00206">pin_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00505">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00512">Pointwise_aitken_start</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00087">rebuild_monolithic_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00585">Recheck_convergence_after_pointwise_aitken</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00457">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00176">restore_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00229">restore_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00098">oomph::PicardConvergenceData::set_solver_converged()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00440">Solid_solve</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">Solve_type</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00489">t_spent_on_actual_solve()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00086">oomph::PicardConvergenceData::tol_achieved()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00138">use_only_fluid_elements()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00115">use_only_solid_elements()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00964">steady_segregated_solve()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01045">unsteady_segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00982">steady_segregated_solve()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01054">unsteady_segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2465,7 +2462,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">1111</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00557">Del_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">Fluid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00528">Fluid_value_is_pinned</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6bb2c76228b8f392729e41a288e72948">identify_fluid_and_solid_dofs()</a>, <a class="el" href="problem_8h_source.html#l01280">oomph::Problem::mesh_pt()</a>, <a class="el" href="problem_8h_source.html#l01323">oomph::Problem::nsub_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00604">Omega_relax</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00554">Orig_sub_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00487">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00541">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00560">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00537">Solid_value_is_pinned</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00575">Del_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00542">Fluid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Fluid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_value_is_pinned</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="classoomph_1_1SegregatableFSIProblem.html#a6bb2c76228b8f392729e41a288e72948">identify_fluid_and_solid_dofs()</a>, <a class="el" href="problem_8h_source.html#l01300">oomph::Problem::mesh_pt()</a>, <a class="el" href="problem_8h_source.html#l01343">oomph::Problem::nsub_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00622">Omega_relax</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00572">Orig_sub_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00505">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00582">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00559">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00569">Solid_mesh_pt</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00555">Solid_value_is_pinned</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">Use_irons_and_tuck_extrapolation</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 </div>
 </div>
@@ -2487,9 +2484,9 @@ Additional Inherited Members</h2></td></tr>
 <p><a class="el" href="classoomph_1_1Steady.html" title="////////////////////////////////////////////////////////////////////// //////////////////////////////...">Steady</a> version of segregated solver. Makes all timesteppers steady before solving. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 <p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00964">964</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00982">982</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8cc_source.html#l11692">oomph::Problem::assign_initial_values_impulsive()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="timesteppers_8h_source.html#l00389">oomph::TimeStepper::is_steady()</a>, <a class="el" href="timesteppers_8h_source.html#l00374">oomph::TimeStepper::make_steady()</a>, <a class="el" href="problem_8h_source.html#l01684">oomph::Problem::ntime_stepper()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00154">oomph::SegregatedSolverError::Ran_out_of_iterations</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="problem_8h_source.html#l01524">oomph::Problem::time_stepper_pt()</a>, and <a class="el" href="timesteppers_8h_source.html#l00482">oomph::TimeStepper::undo_make_steady()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8cc_source.html#l11562">oomph::Problem::assign_initial_values_impulsive()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="timesteppers_8h_source.html#l00389">oomph::TimeStepper::is_steady()</a>, <a class="el" href="timesteppers_8h_source.html#l00374">oomph::TimeStepper::make_steady()</a>, <a class="el" href="problem_8h_source.html#l01710">oomph::Problem::ntime_stepper()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="problem_8h_source.html#l01544">oomph::Problem::time_stepper_pt()</a>, and <a class="el" href="timesteppers_8h_source.html#l00482">oomph::TimeStepper::undo_make_steady()</a>.</p>
 
 </div>
 </div>
@@ -2513,7 +2510,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">260</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00487">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00541">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">Use_pointwise_aitken</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00505">Pointwise_aitken_counter</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00582">Pointwise_aitken_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00559">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">Use_pointwise_aitken</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2544,9 +2541,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Total elapsed time since start of solve. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00471">471</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00489">489</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00460">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00450">restart_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00621">T_spent_on_actual_solve</a>, and <a class="el" href="problem_8cc_source.html#l11724">oomph::Problem::time()</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00478">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00468">restart_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00639">T_spent_on_actual_solve</a>, and <a class="el" href="problem_8cc_source.html#l11594">oomph::Problem::time()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2580,7 +2577,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">354</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00557">Del_irons_and_tuck</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00604">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00541">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00560">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">Use_irons_and_tuck_extrapolation</a>.</p>
+<p class="reference">References <a class="el" href="segregated__fsi__solver_8h_source.html#l00575">Del_irons_and_tuck</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00622">Omega_relax</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00559">Previous_solid_value</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">R_irons_and_tuck</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_data_pt</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">Use_irons_and_tuck_extrapolation</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2605,7 +2602,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Unsteady segregated solver, advance time by dt and solve by the segregated solver. The time values are always shifted by this function. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 <p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01033">1033</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01042">1042</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
 </div>
 </div>
@@ -2638,9 +2635,9 @@ Additional Inherited Members</h2></td></tr>
 <p>Unsteady segregated solver. Advance time by dt and solve the system by a segregated method. The boolean flag is used to control whether the time values should be shifted. If it is true the current data values will be shifted (stored as previous timesteps) before the solution step. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 <p>Segregated fixed point solver with optional pointwise Aitken acceleration on selected solid dofs. Returns <a class="el" href="classoomph_1_1PicardConvergenceData.html" title="Object that collates convergence data of Picard iteration.">PicardConvergenceData</a> object that contains the vital stats of the iteration. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01045">1045</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l01054">1054</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01070">oomph::Problem::actions_after_implicit_timestep()</a>, <a class="el" href="problem_8h_source.html#l01064">oomph::Problem::actions_before_implicit_timestep()</a>, <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">extrapolate_solid_data()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01684">oomph::Problem::ntime_stepper()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00154">oomph::SegregatedSolverError::Ran_out_of_iterations</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper::set_weights()</a>, <a class="el" href="problem_8cc_source.html#l11827">oomph::Problem::shift_time_values()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, <a class="el" href="problem_8h_source.html#l01504">oomph::Problem::time_pt()</a>, and <a class="el" href="problem_8h_source.html#l01524">oomph::Problem::time_stepper_pt()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01090">oomph::Problem::actions_after_implicit_timestep()</a>, <a class="el" href="problem_8h_source.html#l01084">oomph::Problem::actions_before_implicit_timestep()</a>, <a class="el" href="timesteppers_8h_source.html#l00136">oomph::Time::dt()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">extrapolate_solid_data()</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, <a class="el" href="problem_8h_source.html#l01710">oomph::Problem::ntime_stepper()</a>, <a class="el" href="oomph__definitions_8cc_source.html#l00319">oomph::oomph_info</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="classoomph_1_1TimeStepper.html#a028fa3a8d3c6db6b0ddf580cb0468d55">oomph::TimeStepper::set_weights()</a>, <a class="el" href="problem_8cc_source.html#l11697">oomph::Problem::shift_time_values()</a>, <a class="el" href="timesteppers_8h_source.html#l00123">oomph::Time::time()</a>, <a class="el" href="problem_8h_source.html#l01524">oomph::Problem::time_pt()</a>, and <a class="el" href="problem_8h_source.html#l01544">oomph::Problem::time_stepper_pt()</a>.</p>
 
 </div>
 </div>
@@ -2671,7 +2668,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00138">138</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01330">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">Fluid_mesh_pt</a>, <a class="el" href="problem_8h_source.html#l01339">oomph::Problem::flush_sub_meshes()</a>, and <a class="el" href="problem_8cc_source.html#l01619">oomph::Problem::rebuild_global_mesh()</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01350">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">Fluid_mesh_pt</a>, <a class="el" href="problem_8h_source.html#l01359">oomph::Problem::flush_sub_meshes()</a>, and <a class="el" href="problem_8cc_source.html#l01620">oomph::Problem::rebuild_global_mesh()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2705,7 +2702,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8cc_source.html#l00115">115</a> of file <a class="el" href="segregated__fsi__solver_8cc_source.html">segregated_fsi_solver.cc</a>.</p>
 
-<p class="reference">References <a class="el" href="problem_8h_source.html#l01330">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="problem_8h_source.html#l01339">oomph::Problem::flush_sub_meshes()</a>, <a class="el" href="problem_8cc_source.html#l01619">oomph::Problem::rebuild_global_mesh()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">Solid_mesh_pt</a>.</p>
+<p class="reference">References <a class="el" href="problem_8h_source.html#l01350">oomph::Problem::add_sub_mesh()</a>, <a class="el" href="problem_8h_source.html#l01359">oomph::Problem::flush_sub_meshes()</a>, <a class="el" href="problem_8cc_source.html#l01620">oomph::Problem::rebuild_global_mesh()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00569">Solid_mesh_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
@@ -2734,9 +2731,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Convergence criterion (enumerated flag) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00611">611</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00629">629</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00310">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00364">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2762,9 +2759,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Convergence tolerance for Picard iteration. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00500">500</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00518">518</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00310">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00346">assess_convergence_based_on_absolute_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00328">assess_convergence_based_on_max_global_residual()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00364">assess_convergence_based_on_relative_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2790,7 +2787,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of changes in Irons and Tuck under-relaxation. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00557">557</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00575">575</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
@@ -2818,9 +2815,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Doc maximum global residual during iteration? (default: false) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00506">506</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">524</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2846,7 +2843,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> storing the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> objects associated with the fluid problem: Tyically the nodal and internal data of the elements in the fluid bulk mesh. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00524">524</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00542">542</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00153">pin_fluid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00176">restore_fluid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>.</p>
 
@@ -2874,9 +2871,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> containing only fluid elements &ndash; the elements in this <a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> will be excluded from the assembly process when the solid problem is solved. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">546</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">564</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00138">use_only_fluid_elements()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00138">use_only_fluid_elements()</a>.</p>
 
 </div>
 </div>
@@ -2902,7 +2899,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of vectors that store the pinned status of fluid <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00528">528</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00546">546</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00176">restore_fluid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>.</p>
 
@@ -2930,9 +2927,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Max. number of Picard iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00503">503</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00521">521</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -2958,9 +2955,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Under-relaxation parameter. (1.0: no under-relaxation; 0.0: Freeze wall shape) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00604">604</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00622">622</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00391">enable_under_relaxation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00409">enable_under_relaxation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
 </div>
 </div>
@@ -2986,7 +2983,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Backup for the pointers to the submeshes in the original problem. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00554">554</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00572">572</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00087">rebuild_monolithic_mesh()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>.</p>
 
@@ -3014,7 +3011,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Number of Aitken histories available (int because after extrapolation it's re-initialised to -1 to force the computation of three new genuine iterates). </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00487">487</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00505">505</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>.</p>
 
@@ -3042,7 +3039,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of Vectors containing up to three previous iterates for the solid dofs; used for pointwise Aitken extrapolation. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00564">564</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00582">582</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>.</p>
 
@@ -3070,9 +3067,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Start pointwise Aitken extrpolation after specified number of Picard iterations. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00494">494</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00512">512</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00366">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00384">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -3098,7 +3095,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> storing the previous solid values &ndash; used for convergence check. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00541">541</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00559">559</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00303">get_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
@@ -3126,7 +3123,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Irons and Tuck relaxation factor. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00560">560</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00578">578</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
@@ -3154,9 +3151,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Have we just done a pointwise Aitken step. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00567">567</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00585">585</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -3182,7 +3179,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> storing the <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> objects associated with the solid problem: Typically the positional data of solid nodes and any quantities associated with displacement control, say. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00533">533</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">551</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00039">extrapolate_solid_data()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00303">get_solid_change()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00206">pin_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00490">pointwise_aitken_extrapolate()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00229">restore_solid_dofs()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
@@ -3210,9 +3207,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Mesh.html" title="A general mesh class.">Mesh</a> containing only solid elements &ndash; the elements in this mesh will be excluded from the assembly process when the fluid problem is solved. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00551">551</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00569">569</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00115">use_only_solid_elements()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00115">use_only_solid_elements()</a>.</p>
 
 </div>
 </div>
@@ -3238,7 +3235,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of vectors that store the pinned status of solid <a class="el" href="classoomph_1_1Data.html" title="A class that represents a collection of data; each Data object may contain many different individual ...">Data</a> values. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00537">537</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00555">555</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8cc_source.html#l00229">restore_solid_dofs()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>.</p>
 
@@ -3266,9 +3263,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Solve that is taking place (enumerated flag) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00497">497</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00515">515</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>.</p>
 
 </div>
 </div>
@@ -3294,9 +3291,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reference time for segregated solve. Can be re-initialised whenever total elapsed time has been stored (before entering non-essential doc sections of the code) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00616">616</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00634">634</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00460">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00450">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00478">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00457">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00468">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>.</p>
 
 </div>
 </div>
@@ -3322,9 +3319,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Total elapsed time since start of solve, can be accumulated by adding bits of time spent in relevant parts of code (bypassing sections that only document the progress) </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00621">621</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00639">639</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00460">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00471">t_spent_on_actual_solve()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00478">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00457">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00489">t_spent_on_actual_solve()</a>.</p>
 
 </div>
 </div>
@@ -3350,9 +3347,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>boolean flag to indicate if timer has been halted </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00624">624</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00642">642</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00460">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00439">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00450">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00478">halt_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00457">reset_timer()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00468">restart_timer()</a>, and <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>.</p>
 
 </div>
 </div>
@@ -3378,9 +3375,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Boolean flag to indicate use of Irons and Tuck's extrapolation for solid values. </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00608">608</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00626">626</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00403">disable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00397">enable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00421">disable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00415">enable_irons_and_tuck_extrapolation()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00354">under_relax_solid()</a>.</p>
 
 </div>
 </div>
@@ -3406,9 +3403,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Use pointwise Aitken extrapolation? </p>
 
-<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00490">490</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="segregated__fsi__solver_8h_source.html#l00508">508</a> of file <a class="el" href="segregated__fsi__solver_8h_source.html">segregated_fsi_solver.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00381">disable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00366">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00191">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="segregated__fsi__solver_8h_source.html#l00399">disable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00384">enable_pointwise_aitken()</a>, <a class="el" href="segregated__fsi__solver_8h_source.html#l00209">SegregatableFSIProblem()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l00538">segregated_solve()</a>, <a class="el" href="segregated__fsi__solver_8cc_source.html#l01111">setup_segregated_solver()</a>, and <a class="el" href="segregated__fsi__solver_8cc_source.html#l00260">store_solid_dofs()</a>.</p>
 
 </div>
 </div>
@@ -3444,7 +3441,7 @@ Additional Inherited Members</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:55:40
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:12:23
         </div>
       </div>
     </footer>

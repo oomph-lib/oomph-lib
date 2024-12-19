@@ -200,6 +200,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac10b05cafa5f6b6cee9cd47b3be9e033"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#ac10b05cafa5f6b6cee9cd47b3be9e033">output</a> (const std::string &amp;filename) const</td></tr>
 <tr class="memdesc:ac10b05cafa5f6b6cee9cd47b3be9e033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output.  <a href="classoomph_1_1TetMeshFacetedSurface.html#ac10b05cafa5f6b6cee9cd47b3be9e033">More...</a><br /></td></tr>
 <tr class="separator:ac10b05cafa5f6b6cee9cd47b3be9e033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a705aa5605d47402f3e71919b6f67d12a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a705aa5605d47402f3e71919b6f67d12a">output_paraview</a> (std::ostream &amp;outfile) const</td></tr>
+<tr class="memdesc:a705aa5605d47402f3e71919b6f67d12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the faceted surface into a specified file in the Paraview format for viewing in Paraview. Make sure to output the file with a .vtu extension. (Not particularly optimised)  <a href="classoomph_1_1TetMeshFacetedSurface.html#a705aa5605d47402f3e71919b6f67d12a">More...</a><br /></td></tr>
+<tr class="separator:a705aa5605d47402f3e71919b6f67d12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9bea286a5bda40134749a7da3cfbd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a6b9bea286a5bda40134749a7da3cfbd4">output_paraview</a> (const std::string &amp;filename) const</td></tr>
+<tr class="memdesc:a6b9bea286a5bda40134749a7da3cfbd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the faceted surface into a file with the specified name in the Paraview format. (Not particularly optimised)  <a href="classoomph_1_1TetMeshFacetedSurface.html#a6b9bea286a5bda40134749a7da3cfbd4">More...</a><br /></td></tr>
+<tr class="separator:a6b9bea286a5bda40134749a7da3cfbd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5882667d66ad8460782b9fa36f39f485"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoomph_1_1TetMeshFacetedSurface.html#a5882667d66ad8460782b9fa36f39f485">boundary_zeta01</a> (const unsigned &amp;facet_id, const double &amp;zeta_boundary, <a class="el" href="classoomph_1_1Vector.html">Vector</a>&lt; double &gt; &amp;zeta)</td></tr>
 <tr class="memdesc:a5882667d66ad8460782b9fa36f39f485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 0 and 1 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 0; zeta_boundary=1.0: we're on vertex 1.  <a href="classoomph_1_1TetMeshFacetedSurface.html#a5882667d66ad8460782b9fa36f39f485">More...</a><br /></td></tr>
 <tr class="separator:a5882667d66ad8460782b9fa36f39f485"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -329,7 +335,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00355">355</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00490">Boundaries_can_be_split_in_tetgen</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00676">Boundaries_can_be_split_in_tetgen</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00253">oomph::TetgenMesh&lt; ELEMENT &gt;::TetgenMesh()</a>.</p>
 
@@ -377,9 +383,9 @@ Private Member Functions</h2></td></tr>
 
 <p>Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 0 and 1 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 0; zeta_boundary=1.0: we're on vertex 1. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00417">417</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00603">603</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>.</p>
 
@@ -427,9 +433,9 @@ Private Member Functions</h2></td></tr>
 
 <p>Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 1 and 2 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 1; zeta_boundary=1.0: we're on vertex 2. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00436">436</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00622">622</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>.</p>
 
@@ -477,9 +483,9 @@ Private Member Functions</h2></td></tr>
 
 <p>Virtual function that specifies the variation of the zeta coordinates in the <a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> along the boundary connecting vertices 2 and 0 in facet facet_id. Default implementation: Linear interpolation between edges. zeta_boundary=0.0: we're on vertex 2; zeta_boundary=1.0: we're on vertex 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00455">455</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00641">641</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>.</p>
 
@@ -512,7 +518,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00367">367</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00490">Boundaries_can_be_split_in_tetgen</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00676">Boundaries_can_be_split_in_tetgen</a>.</p>
 
 </div>
 </div>
@@ -543,7 +549,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00361">361</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00490">Boundaries_can_be_split_in_tetgen</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00676">Boundaries_can_be_split_in_tetgen</a>.</p>
 
 </div>
 </div>
@@ -575,7 +581,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00373">373</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01687">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
 
@@ -608,7 +614,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00386">386</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00497">Geom_object_with_boundaries_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00683">Geom_object_with_boundaries_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>.</p>
 
@@ -641,9 +647,9 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00325">325</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01687">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>, <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00049">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::update_faceted_surface_using_face_mesh()</a>, <a class="el" href="tet__mesh_8h_source.html#l00472">vertex_index_in_tetgen()</a>, <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01687">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tet__mesh_8h_source.html#l00688">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>, <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00049">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::update_faceted_surface_using_face_mesh()</a>, <a class="el" href="tet__mesh_8h_source.html#l00658">vertex_index_in_tetgen()</a>, <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
 
 </div>
 </div>
@@ -674,7 +680,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00319">319</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00669">Vertex_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
 
@@ -708,7 +714,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00349">349</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 </div>
 </div>
@@ -740,7 +746,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00331">331</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01687">oomph::GmshTetMesh&lt; ELEMENT &gt;::build_it()</a>, <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>, <a class="el" href="tetgen__mesh_8template_8cc_source.html#l00828">oomph::TetgenMesh&lt; ELEMENT &gt;::setup_reverse_lookup_schemes_for_faceted_surface()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00483">oomph::TetMeshBase::snap_nodes_onto_geometric_objects()</a>, <a class="el" href="refineable__tetgen__mesh_8template_8cc_source.html#l00049">oomph::RefineableTetgenMesh&lt; ELEMENT &gt;::update_faceted_surface_using_face_mesh()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
 
@@ -774,7 +780,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00337">337</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00669">Vertex_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>.</p>
 
@@ -840,9 +846,75 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00392">392</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00403">output()</a>.</p>
+
+</div>
+</div>
+<a id="a6b9bea286a5bda40134749a7da3cfbd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9bea286a5bda40134749a7da3cfbd4">&#9670;&nbsp;</a></span>output_paraview() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TetMeshFacetedSurface::output_paraview </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Outputs the faceted surface into a file with the specified name in the Paraview format. (Not particularly optimised) </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00589">589</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00418">output_paraview()</a>.</p>
+
+</div>
+</div>
+<a id="a705aa5605d47402f3e71919b6f67d12a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a705aa5605d47402f3e71919b6f67d12a">&#9670;&nbsp;</a></span>output_paraview() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oomph::TetMeshFacetedSurface::output_paraview </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>outfile</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Outputs the faceted surface into a specified file in the Paraview format for viewing in Paraview. Make sure to output the file with a .vtu extension. (Not particularly optimised) </p>
+
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00418">418</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>, <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00379">vertex_pt()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00589">output_paraview()</a>.</p>
 
 </div>
 </div>
@@ -871,11 +943,11 @@ Private Member Functions</h2></td></tr>
 
 <p>Setup facet connectivity for tetgen. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00502">502</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00688">688</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00486">Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00672">Facet_pt</a>, <a class="el" href="tet__mesh_8h_source.html#l00680">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00669">Vertex_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00472">vertex_index_in_tetgen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00658">vertex_index_in_tetgen()</a>.</p>
 
 </div>
 </div>
@@ -917,7 +989,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00343">343</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="cfortran_8h_source.html#l00603">i</a>, and <a class="el" href="tet__mesh_8h_source.html#l00669">Vertex_pt</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>.</p>
 
@@ -949,9 +1021,9 @@ Private Member Functions</h2></td></tr>
 
 <p>Facet connectivity: vertex_index[j] is the index of the j-th vertex (in the Vertex_pt vector) in facet f. Bit of an obscure functionality that's only needed for setup tetgen_io. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00472">472</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00658">658</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00494">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00680">Facet_vertex_index_in_tetgen</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00688">setup_facet_connectivity_for_tetgen()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tetgen__mesh_8template_8h_source.html#l00397">oomph::TetgenMesh&lt; ELEMENT &gt;::build_tetgenio()</a>.</p>
 
@@ -985,9 +1057,9 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00379">379</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00483">Vertex_pt</a>.</p>
+<p class="reference">References <a class="el" href="tet__mesh_8h_source.html#l00669">Vertex_pt</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00418">output_paraview()</a>, and <a class="el" href="gmsh__tet__mesh_8template_8h_source.html#l01020">oomph::GmshTetScaffoldMesh::write_geo_file()</a>.</p>
 
 </div>
 </div>
@@ -1014,7 +1086,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Boolean to indicate whether extra vertices can be added on the boundary in tetgen. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00490">490</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00676">676</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00355">boundaries_can_be_split_in_tetgen()</a>, <a class="el" href="tet__mesh_8h_source.html#l00367">disable_boundaries_can_be_split_in_tetgen()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00361">enable_boundaries_can_be_split_in_tetgen()</a>.</p>
 
@@ -1042,9 +1114,9 @@ Private Member Functions</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> of pointers to facets. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00486">486</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00672">672</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00417">boundary_zeta01()</a>, <a class="el" href="tet__mesh_8h_source.html#l00436">boundary_zeta12()</a>, <a class="el" href="tet__mesh_8h_source.html#l00455">boundary_zeta20()</a>, <a class="el" href="tet__mesh_8h_source.html#l00373">facet_pt()</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00349">nvertex_on_facet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00331">one_based_facet_boundary_id()</a>, <a class="el" href="tet__mesh_8h_source.html#l00392">output()</a>, <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00040">oomph::TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00603">boundary_zeta01()</a>, <a class="el" href="tet__mesh_8h_source.html#l00622">boundary_zeta12()</a>, <a class="el" href="tet__mesh_8h_source.html#l00641">boundary_zeta20()</a>, <a class="el" href="tet__mesh_8h_source.html#l00373">facet_pt()</a>, <a class="el" href="tet__mesh_8h_source.html#l00325">nfacet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00349">nvertex_on_facet()</a>, <a class="el" href="tet__mesh_8h_source.html#l00331">one_based_facet_boundary_id()</a>, <a class="el" href="tet__mesh_8h_source.html#l00392">output()</a>, <a class="el" href="tet__mesh_8h_source.html#l00418">output_paraview()</a>, <a class="el" href="tet__mesh_8h_source.html#l00688">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00040">oomph::TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
 
 </div>
 </div>
@@ -1070,9 +1142,9 @@ Private Member Functions</h2></td></tr>
 
 <p>Facet connectivity: Facet_vertex_index[f][j] is the index of the j-th vertex (in the Vertex_pt vector) in facet f. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00494">494</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00680">680</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00472">vertex_index_in_tetgen()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00688">setup_facet_connectivity_for_tetgen()</a>, and <a class="el" href="tet__mesh_8h_source.html#l00658">vertex_index_in_tetgen()</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1170,7 @@ Private Member Functions</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1GeomObject.html" title="/////////////////////////////////////////////////////////////////////">GeomObject</a> with boundaries associated with this surface. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00497">497</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00683">683</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00386">geom_object_with_boundaries_pt()</a>.</p>
 
@@ -1126,9 +1198,9 @@ Private Member Functions</h2></td></tr>
 
 <p><a class="el" href="classoomph_1_1Vector.html" title="A slight extension to the standard template vector class so that we can include &quot;graceful&quot; array rang...">Vector</a> pointers to vertices. </p>
 
-<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00483">483</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tet__mesh_8h_source.html#l00669">669</a> of file <a class="el" href="tet__mesh_8h_source.html">tet_mesh.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00319">nvertex()</a>, <a class="el" href="tet__mesh_8h_source.html#l00337">one_based_vertex_boundary_id()</a>, <a class="el" href="tet__mesh_8h_source.html#l00502">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00040">oomph::TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh()</a>, <a class="el" href="tet__mesh_8h_source.html#l00343">vertex_coordinate()</a>, <a class="el" href="tet__mesh_8h_source.html#l00379">vertex_pt()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="tet__mesh_8h_source.html#l00319">nvertex()</a>, <a class="el" href="tet__mesh_8h_source.html#l00337">one_based_vertex_boundary_id()</a>, <a class="el" href="tet__mesh_8h_source.html#l00688">setup_facet_connectivity_for_tetgen()</a>, <a class="el" href="tet__mesh_8cc_source.html#l00040">oomph::TetMeshFacetedClosedSurfaceForRemesh::TetMeshFacetedClosedSurfaceForRemesh()</a>, <a class="el" href="tet__mesh_8h_source.html#l00343">vertex_coordinate()</a>, <a class="el" href="tet__mesh_8h_source.html#l00379">vertex_pt()</a>, and <a class="el" href="tet__mesh_8cc_source.html#l00073">oomph::TetMeshFacetedClosedSurfaceForRemesh::~TetMeshFacetedClosedSurfaceForRemesh()</a>.</p>
 
 </div>
 </div>
@@ -1163,7 +1235,7 @@ Private Member Functions</h2></td></tr>
     <footer>
       <div class="container">
         <div class="text-muted" style="float:right;">Generated by <a href="http://www.doxygen.org/index.html">
-          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Fri Dec 29 2023 07:55:05
+          <img style="height:18px;" class="footer-img" src="doxygen.png" alt="doxygen"></a> on Thu Dec 19 2024 11:11:49
         </div>
       </div>
     </footer>
