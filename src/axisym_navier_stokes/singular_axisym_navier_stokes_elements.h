@@ -767,7 +767,7 @@ namespace oomph
 
         // ---------------------------------------------------------------------
         // Total velocity
-        Vector<double> velocity(cached_dim, 0.0);
+        Vector<double> velocity(this->n_u_nst(), 0.0);
         double pressure = 0;
         if (this->is_augmented())
         {
@@ -807,13 +807,13 @@ namespace oomph
         {
           // ---------------------------------------------------------------------
           // Finite element Velocity
-          Vector<double> velocity_fe_only(cached_dim, 0.0);
+          Vector<double> velocity_fe_only(this->n_u_nst(), 0.0);
           if (this->is_augmented())
           {
             this->interpolated_u_axi_nst(s, velocity_fe_only);
           }
 
-          for (unsigned i = 0; i < cached_dim; i++)
+          for (unsigned i = 0; i < this->n_u_nst(); i++)
           {
             outfile << velocity_fe_only[i] << " ";
           }
