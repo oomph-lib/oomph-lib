@@ -24,7 +24,8 @@ headers =  \
 	linearised_fsi_axisym_no_slip_bc_elements.h \
 	refineable_axisym_navier_stokes_elements.h \
 	singular_axisym_fluid_traction_elements.h \
-	singular_axisym_navier_stokes_elements.h
+	singular_axisym_navier_stokes_elements.h \
+	axisym_impose_impenetrability_element.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
