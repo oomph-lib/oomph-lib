@@ -2032,13 +2032,11 @@ namespace oomph
         if (local_eqn >= 0)
         {
           // Source term
-          // residuals[local_eqn] -=source*testp[l]*W;
           double aux = -source;
 
           // Loop over velocity components
           for (unsigned k = 0; k < DIM; k++)
           {
-            // residuals[local_eqn] += interpolated_dudx(k,k)*testp[l]*W;
             aux += interpolated_dudx(k, k);
           }
 
