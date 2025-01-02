@@ -12,7 +12,7 @@
 #include "meshes/triangle_mesh.h"
 
 // Local include files
-#include "sprittles_region_sector_problem.h"
+#include "sprittles_region_axisym_sector_problem.h"
 #include "my_element.h"
 #include "utility_functions.h"
 
@@ -31,7 +31,9 @@ int main(int argc, char** argv)
   oomph_info << "sprittles" << std::endl;
 
   // Create problem
-  SprittlesRegionSectorProblem<SingularNavierStokesElement<MyElement>> problem;
+  SprittlesRegionAxisymSectorProblem<
+    SingularAxisymNavierStokesElement<MyElement>>
+    problem;
   problem.setup();
 
   // Steady problem

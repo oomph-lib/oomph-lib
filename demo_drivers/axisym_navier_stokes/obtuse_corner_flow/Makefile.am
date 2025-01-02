@@ -26,6 +26,10 @@ RESLT_axi_fix_region/soln0.dat: structured_with_correction_region parameters.dat
 	mkdir -p RESLT_axi_fix_region
 	./structured_with_correction_region
 
+RESLT_axi_sprittles_region/soln0.dat: sprittles_region parameters.dat
+	mkdir -p RESLT_axi_sprittles_region
+	./sprittles_region
+
 # Name of executables
 check_PROGRAMS= \
 	structured_no_correction \
