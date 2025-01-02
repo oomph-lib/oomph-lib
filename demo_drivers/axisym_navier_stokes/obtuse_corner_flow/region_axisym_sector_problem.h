@@ -28,6 +28,8 @@ namespace oomph
     Mesh* No_penetration_boundary_mesh1_pt;
     Mesh* No_penetration_boundary_mesh2_pt;
     Mesh* Slip_boundary_mesh_pt;
+    unsigned AxisymFluxComputeMeshIndex;
+    unsigned AxisymFluxOutputMeshIndex;
 
     DocInfo Doc_info;
     Z2ErrorEstimator* Z2_error_estimator_pt;
@@ -88,6 +90,9 @@ namespace oomph
       create_slip_elements();
       create_no_penetration1_elements();
       create_no_penetration2_elements();
+
+      create_axisym_flux_compute_elements();
+      create_axisym_flux_output_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -256,6 +261,27 @@ namespace oomph
     void create_slip_elements();
     void create_no_penetration1_elements();
     void create_no_penetration2_elements();
+    void create_axisym_flux_compute_elements()
+    {
+      AxisymFluxComputeMeshIndex = add_sub_mesh(new Mesh);
+      const unsigned n_element =
+        Bulk_mesh_pt->nboundary_element(Inner_boundary_id);
+      for (unsigned e = 0; e < n_element; e++)
+      {
+        ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+          Bulk_mesh_pt->boundary_element_pt(Inner_boundary_id, e));
+        AxisymFluxOutputElement<ELEMENT>* flux_element_pt =
+          new AxisymFluxOutputElement<ELEMENT>(bulk_elem_pt);
+        mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(flux_element_pt);
+      }
+    }
+
+    void create_axisym_flux_output_elements()
+    {
+      AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
+      mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(flux_element_pt);
+    }
+
 
     void find_corner_bulk_node(const unsigned& boundary_1_id,
                                const unsigned& boundary_2_id,
@@ -518,7 +544,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,l_x,l_y,n_x,n_y,u_w,v_w,z_w,u,v,w,p" << std::endl;
+    output_stream << "x y l_x l_y n_x n_y u_w v_w z_w u v w p" << std::endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
     output_stream.close();
 
@@ -527,7 +553,7 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
+    output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh1_pt->output(output_stream, 3);
     output_stream.close();
 
@@ -536,8 +562,17 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x,y,u,v,p,lagrange_multiplier,nx,ny," << std::endl;
+    output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
+    output_stream.close();
+
+    sprintf(filename,
+            "%s/axisym_flux%i.csv",
+            Doc_info.directory().c_str(),
+            Doc_info.number());
+    output_stream.open(filename);
+    output_stream << "x y u v p nx ny int" << std::endl;
+    mesh_pt(AxisymFluxOutputMeshIndex)->output(output_stream, 3);
     output_stream.close();
 
     Doc_info.number()++;
