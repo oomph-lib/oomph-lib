@@ -31,13 +31,15 @@ check_PROGRAMS= \
 	structured_no_correction \
 	structured_no_correction_region \
 	structured_with_correction \
-	structured_with_correction_region
+	structured_with_correction_region \
+	sprittles_region
 
 # Sources for second executable
 structured_no_correction_SOURCES = structured_no_correction.cc
 structured_no_correction_region_SOURCES = structured_no_correction_region.cc
 structured_with_correction_SOURCES = structured_with_correction.cc
 structured_with_correction_region_SOURCES = structured_with_correction_region.cc
+sprittles_region_SOURCES = sprittles_region.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
