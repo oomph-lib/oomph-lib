@@ -14,6 +14,7 @@
 #include "parameter_struct.h"
 #include "two_region_refined_sector_tri_mesh.template.h"
 #include "two_region_refined_sector_tri_mesh.template.cc"
+#include "info_elements.h"
 
 namespace oomph
 {
@@ -91,8 +92,7 @@ namespace oomph
       create_no_penetration1_elements();
       create_no_penetration2_elements();
 
-      create_axisym_flux_compute_elements();
-      create_axisym_flux_output_elements();
+      create_axisym_flux_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -261,8 +261,13 @@ namespace oomph
     void create_slip_elements();
     void create_no_penetration1_elements();
     void create_no_penetration2_elements();
-    void create_axisym_flux_compute_elements()
+    void create_axisym_flux_elements()
     {
+      AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
+      InfoElement* info_element_pt = new InfoElement;
+      Data* net_flux_data_pt = info_element_pt->new_internal_data_pt();
+      mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(info_element_pt);
+
       AxisymFluxComputeMeshIndex = add_sub_mesh(new Mesh);
       const unsigned n_element =
         Bulk_mesh_pt->nboundary_element(Inner_boundary_id);
@@ -270,18 +275,14 @@ namespace oomph
       {
         ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
           Bulk_mesh_pt->boundary_element_pt(Inner_boundary_id, e));
-        AxisymFluxOutputElement<ELEMENT>* flux_element_pt =
-          new AxisymFluxOutputElement<ELEMENT>(bulk_elem_pt);
+        int face_index =
+          Bulk_mesh_pt->face_index_at_boundary(Inner_boundary_id, e);
+        AxisymmetricFluidFluxElement<ELEMENT>* flux_element_pt =
+          new AxisymmetricFluidFluxElement<ELEMENT>(
+            bulk_elem_pt, face_index, net_flux_data_pt);
         mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(flux_element_pt);
       }
     }
-
-    void create_axisym_flux_output_elements()
-    {
-      AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
-      mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(flux_element_pt);
-    }
-
 
     void find_corner_bulk_node(const unsigned& boundary_1_id,
                                const unsigned& boundary_2_id,
@@ -571,8 +572,19 @@ namespace oomph
             Doc_info.directory().c_str(),
             Doc_info.number());
     output_stream.open(filename);
-    output_stream << "x y u v p nx ny int" << std::endl;
-    mesh_pt(AxisymFluxOutputMeshIndex)->output(output_stream, 3);
+    output_stream << "x y u v" << std::endl;
+    mesh_pt(AxisymFluxComputeMeshIndex)->output(output_stream, 3);
+    output_stream.close();
+
+    sprintf(filename,
+            "%s/total_flux%i.csv",
+            Doc_info.directory().c_str(),
+            Doc_info.number());
+    output_stream.open(filename);
+    output_stream << "Q" << std::endl;
+    dynamic_cast<InfoElement*>(
+      mesh_pt(AxisymFluxOutputMeshIndex)->element_pt(0))
+      ->output(output_stream);
     output_stream.close();
 
     Doc_info.number()++;
