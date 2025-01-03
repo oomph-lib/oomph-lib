@@ -26,18 +26,24 @@ RESLT_axi_fix_region/soln0.dat: structured_with_correction_region parameters.dat
 	mkdir -p RESLT_axi_fix_region
 	./structured_with_correction_region
 
+RESLT_axi_sprittles_region/soln0.dat: sprittles_region parameters.dat
+	mkdir -p RESLT_axi_sprittles_region
+	./sprittles_region
+
 # Name of executables
 check_PROGRAMS= \
 	structured_no_correction \
 	structured_no_correction_region \
 	structured_with_correction \
-	structured_with_correction_region
+	structured_with_correction_region \
+	sprittles_region
 
 # Sources for second executable
 structured_no_correction_SOURCES = structured_no_correction.cc
 structured_no_correction_region_SOURCES = structured_no_correction_region.cc
 structured_with_correction_SOURCES = structured_with_correction.cc
 structured_with_correction_region_SOURCES = structured_with_correction_region.cc
+sprittles_region_SOURCES = sprittles_region.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
