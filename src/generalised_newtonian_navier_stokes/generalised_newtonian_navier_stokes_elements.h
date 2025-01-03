@@ -1368,6 +1368,12 @@ namespace oomph
       return this->internal_local_eqn(P_nst_internal_index, n);
     }
 
+    /// Return the local unknown numbers for the pressure values.
+    inline int p_local_unknown(const unsigned& n) const
+    {
+      return this->internal_local_eqn(P_nst_internal_index, n);
+    }
+
     /// Pin p_dof-th pressure dof and set it to value specified by p_value.
     void fix_pressure(const unsigned& p_dof, const double& p_value)
     {
@@ -1903,6 +1909,12 @@ namespace oomph
 
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
+    }
+
+    /// Return the local unknown numbers for the pressure values.
+    inline int p_local_unknown(const unsigned& n) const
     {
       return this->nodal_local_eqn(Pconv[n], p_nodal_index_nst());
     }

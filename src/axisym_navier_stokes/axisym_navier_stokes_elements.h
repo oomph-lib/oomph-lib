@@ -1605,6 +1605,13 @@ namespace oomph
       return nodal_local_eqn(Pconv[n], p_nodal_index_axi_nst());
     }
 
+    /// Overload the access function for the pressure's local
+    /// unknown numbers
+    inline int p_local_unknown(const unsigned& n) const
+    {
+      return nodal_local_eqn(Pconv[n], p_nodal_index_axi_nst());
+    }
+
     /// Redirect output to NavierStokesEquations output
     void output(std::ostream& outfile)
     {
