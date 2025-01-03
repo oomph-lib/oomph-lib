@@ -41,6 +41,9 @@ test_script()
     fi
 }
 
+# This is needed to ensure that sort is locale independent
+export LC_ALL=C
+
 test_script RESLT_no_fix structured_no_correction 
 test_script RESLT_no_fix_region structured_no_correction_region
 test_script RESLT_fix structured_with_correction 
