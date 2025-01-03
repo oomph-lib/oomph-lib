@@ -130,6 +130,12 @@ namespace oomph
       return this->internal_local_eqn(P_axi_nst_internal_index, n);
     }
 
+    /// Return the local unknown numbers for the pressure values.
+    inline int p_local_unknown(const unsigned& n) const
+    {
+      return this->internal_local_eqn(P_axi_nst_internal_index, n);
+    }
+
   public:
     /// Constructor, there are 3 internal values (for the pressure)
     GeneralisedNewtonianAxisymmetricTCrouzeixRaviartElement()
@@ -674,6 +680,12 @@ namespace oomph
 
     /// Return the local equation numbers for the pressure values.
     inline int p_local_eqn(const unsigned& n) const
+    {
+      return this->nodal_local_eqn(Pconv[n], 3);
+    }
+
+    /// Return the local unknown numbers for the pressure values.
+    inline int p_local_unknown(const unsigned& n) const
     {
       return this->nodal_local_eqn(Pconv[n], 3);
     }
