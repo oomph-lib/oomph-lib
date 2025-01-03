@@ -263,14 +263,16 @@ namespace oomph
     void create_no_penetration2_elements();
     void create_axisym_flux_elements()
     {
+        cout << "create_axisym_flux_elements" << endl;
       AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
       InfoElement* info_element_pt = new InfoElement;
       Data* net_flux_data_pt = info_element_pt->new_internal_data_pt();
-      mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(info_element_pt);
+      mesh_pt(AxisymFluxOutputMeshIndex)->add_element_pt(info_element_pt);
 
       AxisymFluxComputeMeshIndex = add_sub_mesh(new Mesh);
       const unsigned n_element =
         Bulk_mesh_pt->nboundary_element(Inner_boundary_id);
+      cout << "n_element: " << n_element << endl;
       for (unsigned e = 0; e < n_element; e++)
       {
         ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
@@ -281,6 +283,7 @@ namespace oomph
           new AxisymmetricFluidFluxElement<ELEMENT>(
             bulk_elem_pt, face_index, net_flux_data_pt);
         mesh_pt(AxisymFluxComputeMeshIndex)->add_element_pt(flux_element_pt);
+        std::cout << "Added flux element" << std::endl;
       }
     }
 
@@ -490,6 +493,9 @@ namespace oomph
     char filename[100];
     unsigned npts = 3;
 
+    double max_err = 0.0;
+    double min_err = 1e8;
+    /*
     // Get/output error estimates
     unsigned n_elements = Bulk_mesh_pt->nelement();
     Vector<double> elemental_error(n_elements);
@@ -499,8 +505,6 @@ namespace oomph
     Mesh* fluid_mesh_pt = dynamic_cast<Mesh*>(Bulk_mesh_pt);
     Z2_error_estimator_pt->get_element_errors(fluid_mesh_pt, elemental_error);
     // Set errors for post-processing and find extrema
-    double max_err = 0.0;
-    double min_err = 1e8;
     for (unsigned e = 0; e < n_elements; e++)
     {
       dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))
@@ -509,6 +513,7 @@ namespace oomph
       max_err = std::max(max_err, elemental_error[e]);
       min_err = std::min(min_err, elemental_error[e]);
     }
+    */
 
     oomph_info << "Max error is " << max_err << std::endl;
     oomph_info << "Min error is " << min_err << std::endl;
@@ -573,7 +578,7 @@ namespace oomph
             Doc_info.number());
     output_stream.open(filename);
     output_stream << "x y u v" << std::endl;
-    mesh_pt(AxisymFluxComputeMeshIndex)->output(output_stream, 3);
+    this->mesh_pt(AxisymFluxComputeMeshIndex)->output(output_stream);
     output_stream.close();
 
     sprintf(filename,
@@ -583,7 +588,7 @@ namespace oomph
     output_stream.open(filename);
     output_stream << "Q" << std::endl;
     dynamic_cast<InfoElement*>(
-      mesh_pt(AxisymFluxOutputMeshIndex)->element_pt(0))
+      this->mesh_pt(AxisymFluxOutputMeshIndex)->element_pt(0))
       ->output(output_stream);
     output_stream.close();
 

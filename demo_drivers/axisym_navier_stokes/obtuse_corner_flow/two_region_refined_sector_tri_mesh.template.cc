@@ -305,6 +305,7 @@ namespace oomph
         {
           this->convert_to_boundary_node(Node_pt[node_count]);
           add_boundary_node(Inner_boundary_id, Node_pt[node_count]);
+          cout << "Inner boundary node added" << endl;
         }
         if (i == N_radial)
         {
@@ -592,7 +593,7 @@ namespace oomph
     }
     // End of extra nodes for 6 noded trianglur elements
 
-    setup_boundary_element_info();
+    setup_boundary_element_info(cout);
   }
 
   //================================================================
@@ -604,12 +605,15 @@ namespace oomph
     std::ostream& outfile)
   {
     // Should we document the output here
-    bool doc = false;
-
-    if (outfile) doc = true;
+    bool doc;
+    if (outfile)
+    {
+      doc = true;
+    }
 
     // Number of boundaries
     unsigned nbound = nboundary();
+    cout << "Number of boundaries: " << nbound << endl;
 
     // Wipe/allocate storage for arrays
     Boundary_element_pt.clear();
