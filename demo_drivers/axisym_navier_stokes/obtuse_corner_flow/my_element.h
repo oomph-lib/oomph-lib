@@ -17,7 +17,7 @@ namespace oomph
       Region_id = value;
     }
 
-    const unsigned get_region_id()
+    const unsigned region_id()
     {
       return Region_id;
     }

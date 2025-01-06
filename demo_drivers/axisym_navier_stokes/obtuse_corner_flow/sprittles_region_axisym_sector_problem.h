@@ -124,7 +124,7 @@ namespace oomph
         dist = pow(dist, 0.5);
 
         // If the distance to the corner is within the "inner" region, ...
-        if (el_pt->get_region_id() ==
+        if (el_pt->region_id() ==
             TwoRegionRefinedSectorTriMesh<ELEMENT>::Inner_region_id)
         {
           // ... augment element
