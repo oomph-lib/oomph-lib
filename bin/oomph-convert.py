@@ -115,6 +115,7 @@ def main(argv):
 
     # Check python version. Bark at user if major is < 3
     major = sys.version_info[0]
+
     if major < 3:
         print("Python 2 is not supported by this script. Use oomph-convert.py2 instead", file=sys.stderr)
         sys.exit(3)
@@ -130,18 +131,23 @@ def main(argv):
     zero_pad_name_flag = False
     write_points_flag = False
     overwrite_flag = False
+
     for opt, arg in opts:
         if opt in ("-h"):
             usage()
             sys.exit()
+
         if opt in ("-z"):
             zero_pad_name_flag = True
+
         if opt in ("-p"):
             write_points_flag = True
             argdim = arg
+
             if argdim not in ("2","3"):    
                 usage()
                 sys.exit() 
+
         if opt in ("-o"):
             overwrite_flag = True
 
@@ -174,16 +180,19 @@ def main(argv):
 
 
     # Zero pad output names if requested
+
     if zero_pad_name_flag:
         ofilename = addTrailingZeros(ofilename, osuffix)
 
 
     # Check that we are allowed to write to the ofilename (allowed to
     # overwrite or nothing to overwrite).
+
     if ok_to_write_ofile(overwrite_flag, ifilename, ofilename):
         start = time.time()
 
         # Convert from oomph-lib Tecplot format to VTK XML format
+
         if isuffix == "dat" and osuffix == "vtu":
             tecplot_to_vtkxml(ifilename, ofilename)
 
@@ -214,14 +223,17 @@ def ok_to_write_ofile(flag, in_file_name, out_file_name):
     
     if flag:
         print("Overwriting regardless of modification times because of flag.")
+
         return True
     
     elif in_mtime > out_mtime:
         print("Overwriting because input file is newer than output file")
+
         return True
 
     else:
         print("Not overwriting.")
+
         return False
 
 
@@ -241,6 +253,7 @@ def addTrailingZeros(filename,osuffix):
     limit_digits = 11
     extension_len = 4
     digits = 0
+
     for i in range(1, limit_digits+1):
         try:
             dummy = int(filename[-extension_len-i:-extension_len])
@@ -257,6 +270,7 @@ def addTrailingZeros(filename,osuffix):
     # the second digits in "%05i.vtu" is 5 in os.rename
 
     lenBaseName = len(filename) - digits - extension_len
+
     if digits == 0:
         cifer = 0
     else:
@@ -285,6 +299,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     line = 0
     ignoredlines = 0
     zones = list()
+
     while 1:
         zone = None
         linetmp = line
@@ -300,10 +315,12 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         else:
             print("done")
             input.close() # Close input file
+
             break
 
     nbzones = len(zones)
     sys.stdout.write("* %d lines ignored\n" % ignoredlines)
+
     if nbzones == 0:
 
         #---------------------------------------------------------------------------
@@ -323,6 +340,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
     # Get the solution dimension (compute the maximum value)
     dimension=0
+
     for zone in zones:
         if (zone.dimension)[0] > dimension:
             dimension=(zone.dimension)[0]
@@ -333,6 +351,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     # Loop over the zones to get the number of nodes and cells
     nodesCount = 0
     cellsCount = 0
+
     for zone in zones:
         nodesCount += zone.nodesCount()
         cellsCount += zone.cellsCount[0]
@@ -359,6 +378,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     sys.stdout.write("Write nodal coordinates...................")
     sys.stdout.flush()
     output.write(VtkXml.pointsHeader)
+
     for zone in zones:
         for node in zone.nodes:
             output.write("%.15e %.15e %.15e\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
@@ -378,19 +398,24 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     pos = 0 # Current cell origin node index
 
     zoneCount=0
+
     for zone in zones:
 
         zoneCount+=1
+
         if zone.cellFormat[0] == 1:
 
             if zoneCount == 1: maxNode=0
 
             # dump connectivities
+
             for element in range (0, zone.cellsCount[0]):
                 conn=zone.connectivities[element]
+
                 for i in range(0, len(conn)):
                     dum=int(conn[i])
                     # renumber connectivity table if it belongs to zone > 1
+
                     if zoneCount > 1: dum+=maxNode+1
                     conn[i]=dum-1
                     output.write("%i " %(conn[i]))
@@ -398,11 +423,14 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
             # compute maximum node number for renumbering of next connectivity table
             maxNode=0
+
             for element in range (0, zone.cellsCount[0]):
                 conn=zone.connectivities[element]
+
                 for i in range(0, len(conn)):
                     conn[i]=int(conn[i])
                 dum=max(conn)
+
                 if dum > maxNode:
                     maxNode = dum
 
@@ -418,6 +446,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             if zone.dimension[0] == 2: # Quad
                 dimJ = zone.edges[1]
                 indexes = 4 * [0]
+
                 for j in range(dimJ - 1):
                     for i in range(dimI - 1):
                         # Unique face of the cell
@@ -437,6 +466,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
                 indexes = 8 * [0]
                 dimJ = zone.edges[1]
                 dimK = zone.edges[2]
+
                 for k in range(dimK - 1):
                     for j in range(dimJ - 1):
                         for i in range(dimI - 1):
@@ -470,16 +500,21 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     sys.stdout.flush()
     output.write(VtkXml.offsetsHeader)
     offset = 0
+
     for zone in zones:
         for i in range(1,zone.cellsCount[0]+1):
             if zone.cellType[0] == 3: # VTK_LINE
                 offset +=2
+
             if zone.cellType[0] == 5: # VTK_TRIANGLE
                 offset +=3
+
             if zone.cellType[0] == 9: # VTK_QUAD
                 offset +=4
+
             if zone.cellType[0] == 10: # VTK_TETRAHEDRON
                 offset +=4
+
             if zone.cellType[0] == 12: # VTK_HEXAHEDRON
                 offset +=8
             output.write(str(offset) + "\n")
@@ -495,15 +530,20 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     
     cellType0 = zones[0].cellType[0]
     warn = 0
+
     for zone in zones:
         if zone.cellType[0] == 3: # VTK_LINE
             cellType = "3"
+
         if zone.cellType[0] == 5: # VTK_TRIANGLE
             cellType = "5"
+
         if zone.cellType[0] == 9: # VTK_QUAD
             cellType = "9"
+
         if zone.cellType[0] == 10: # VTK_TETRAHEDRON
             cellType = "10"
+
         if zone.cellType[0] == 12: # VTK_HEXAHEDRON
             cellType = "12"
 
@@ -513,6 +553,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
     output.write(VtkXml.typesFooter)
     print("done")
+
     if warn == 1:
         sys.stdout.write("Warning: Different types of elements \n")
     output.write(VtkXml.cellsFooter)
@@ -521,10 +562,12 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     # Fields
     #---------------------------------------------------------------------------
     output.write(VtkXml.pointDataHeader)
+
     for fieldIndex in range(fieldsCount):
         sys.stdout.write("Write field %02d/%02d........................." % (fieldIndex + 1, fieldsCount))
         sys.stdout.flush()
         output.write(VtkXml.fieldHeader % (fieldIndex + 1))
+
         for zone in zones:
             for node in zone.nodes:
                 output.write("%e\n" % node.fields[fieldIndex])
@@ -551,6 +594,7 @@ def error(message):
     """ Write an error message
     """
     sys.stderr.write("\nCONVERSION FAILED\n")
+
     for line in message.split("\n"):
         sys.stderr.write("*** %s\n" % line)
     sys.exit(2)
@@ -609,6 +653,7 @@ class TecplotZone:
     def nodesCount(self):
         """ :return: The number of nodes in this zone
         """
+
         return len(self.nodes)
 
     @staticmethod
@@ -633,10 +678,12 @@ class TecplotZone:
 
             if not header:
                 # We reach the end of the file
+
                 return (None, line)
 
             if len(header) > 3 and header[0:4] == "ZONE":
                 # We got a zone !
+
                 break
 
         #-----------------------------------------------------------------------
@@ -704,8 +751,10 @@ class TecplotZone:
 
             if dim == 1:
                 cell = 3 # VTK_LINE
+
             if dim == 2:
                 cell = 9 # VTK_QUAD
+
             if dim == 3:
                 cell = 12 # VTK_HEXAHEDRON
 
@@ -716,8 +765,10 @@ class TecplotZone:
 
             # extract information from string
             labels = ["I", "J", "K"]
+
             for (index, edge) in enumerate(edges):
                 edge = edge.strip()
+
                 if len(edge) < 2 or edge[0] != labels[index]:
                     raise TecplotParsingError("Invalid zone header",\
                                               "wrong edges format (%s). Try to convert with -p option" % edges,\
@@ -734,6 +785,7 @@ class TecplotZone:
             # Node count in cell
             #-------------------------------------------------------------------
             nodesCount = 1
+
             for edge in zone.edges:
                 nodesCount *= edge
                 
@@ -741,6 +793,7 @@ class TecplotZone:
             # Cell count in zone
             #-------------------------------------------------------------------
             cellsCount = 1
+
             for edge in zone.edges:
                 cellsCount *= edge - 1
             zone.cellsCount.append(cellsCount)
@@ -748,6 +801,7 @@ class TecplotZone:
         #-----------------------------------------------------------------------
         # Parse nodes
         #-----------------------------------------------------------------------
+
         for nodeIndex in range(nodesCount):
             data = file.readline()
             line += 1
@@ -756,10 +810,12 @@ class TecplotZone:
                 data = file.readline() # ...in case of empty line
 
             data = data.strip().split(" ")
+
             if len(data) < dim:
                 raise TecplotParsingError("Invalid zone", "not enough values for this node ! Try to convert with -p option", line)
 
             node = TecplotNode()
+
             for i, value in enumerate(data):
                 try:
                     if i < dim:
@@ -775,6 +831,7 @@ class TecplotZone:
         #-----------------------------------------------------------------------
         # Parse connectivities (format == 1)
         #-----------------------------------------------------------------------
+
         if format == 1:
             for cellIndex in range(cellsCount):
                 data = file.readline()
@@ -784,10 +841,15 @@ class TecplotZone:
                     data = file.readline() # ...in case of empty line
 
                 data = data.strip().split(" ")
+
                 if cell == 3:  cellNodes = 2 # VTK_LINE
+
                 if cell == 5:  cellNodes = 3 # VTK_TRIANGLE
+
                 if cell == 9:  cellNodes = 4 # VTK_QUAD
+
                 if cell == 10: cellNodes = 4 # VTK_TETRAHEDRON
+
                 if cell == 12: cellNodes = 8 # VTK_HEXAHEDRON
 
                 if len(data) != cellNodes:
@@ -862,15 +924,18 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     count=0
     nzone=1
     points = list()
+
     while 1:
         point = None
         try:
             (point, line) = InputPoints.parse(input, line, dim)
             #print "line %d %d is..." % (line, prev_line)
+
             if line != prev_line+1 :
                 #print "...normal point"
                 #else:
                 #print "...start point"
+
                 if prev_line !=0: 
                     offset_list.append(count)
                     nzone+=1
@@ -886,6 +951,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
         else:
             print("done")
             input.close() # Close input file
+
             break
 
     offset_list.append(count-1)
@@ -921,6 +987,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     sys.stdout.write("Write points coordinates...................")
     sys.stdout.flush()
     output.write(VtpXml.pointsHeader)
+
     for point in points:
         output.write("%.15e %.15e %.15e\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
     output.write(VtpXml.pointsFooter)
@@ -930,10 +997,12 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     # Fields
     #---------------------------------------------------------------------------
     output.write(VtpXml.pointDataHeader)
+
     for fieldIndex in range(fieldsCount):
         sys.stdout.write("Write field %02d/%02d........................." % (fieldIndex + 1, fieldsCount))
         sys.stdout.flush()
         output.write(VtpXml.fieldHeader % (fieldIndex + 1))
+
         for point in points:
             output.write("%e\n" % point.fields[fieldIndex])
 
@@ -951,10 +1020,12 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     output.write(VtpXml.linesHeader)
     #Prepare line information:
     output.write(VtkXml.connectivityHeader)
+
     for i in range(0,nbpoints):
         output.write("%i "%i)
     output.write(VtkXml.connectivityFooter)
     output.write(VtkXml.offsetsHeader)
+
     for offset in offset_list:
          output.write("%i "%offset)
     output.write(VtkXml.offsetsFooter)
@@ -1000,12 +1071,14 @@ class InputPoints:
         #-----------------------------------------------------------------------
         # Seek to the next point
         #-----------------------------------------------------------------------
+
         while 1:
             pointline = file.readline()
             line += 1
 
             if not pointline:
                 # We reach the end of the file
+
                 return (None, line)
 
             # Boolean indicating that the line contains only numerical data
@@ -1016,26 +1089,32 @@ class InputPoints:
             values = pointline.strip().split(" ")
             
             # Check that all entries are floating points numbers
+
             for i, value in enumerate(values):
                 
                 # Define regular expression for floating point number
-                float_point_re=re.compile('[-+]?[0-9]*\.?[0-9]*([e,E][-+]?[0-9]+)?') 
+                float_point_re=re.compile(r"[-+]?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?")
                 
                 match_index=re.match(float_point_re,value)
+
                 if match_index is not None:
                     if len(match_index.group()) != len(value):
                         is_fp_line=0
+
                         break
                 else:
                     is_fp_line=0
+
                     break
                 
             # If it's a line containing only floating point numbers: 
             # Extract coordinates and values
+
             if is_fp_line > 0:
                 for i, value in enumerate(values):
                     try:
                         # Coordinate
+
                         if i < dim:
                             point.coordinates[i] = float(value)
                         # Value
