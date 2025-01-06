@@ -1,0 +1,16 @@
+
+\section weak-no-correction Weak equations
+
+$r$ momentum equation, associated with $u_r$
+\f[
+    \int_V p r \phi^f_l
+    + p r \frac{\partial \phi^f_l}{\partial r} 
+    - r \left(1 + \Gamma_r\right) \frac{\partial u_r}{\partial r} \frac{\partial \phi^f_l}{\partial r}
+    - r \left(\frac{\partial u_r}{\partial z} + \Gamma_r  \frac{\partial u_z}{\partial r}\right) \frac{\partial \phi^f_l}{\partial z} 
+    - \frac{1}{r} \left(1 + \Gamma_r\right) u_r \phi^f_l \ dr\ dz 
+    - \int_{S_0} \frac{1}{l}(\vec{u} - \vec{U}) \cdot (I - \vec{n}\otimes \vec{n}) \cdot \vec{e}_r \phi^f_l \ dS_0 
+    + \int_{S_0} \lambda_0 n_r \phi^f_l \ dS_0 
+    + \int_{S_2} \lambda_1 n_r \phi^f_l \ dS_2 
+    = 0
+\f]
+
