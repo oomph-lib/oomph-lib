@@ -4804,6 +4804,9 @@ namespace oomph
       return Face_to_bulk_coordinate_fct_pt;
     }
 
+    // Allow access to the base finite element class's functions also
+    using FiniteElement::face_to_bulk_coordinate_fct_pt;
+
     /// Return the pointer to the function that returns the derivatives
     /// of the bulk coordinates wrt the face coordinates
     BulkCoordinateDerivativesFctPt& bulk_coordinate_derivatives_fct_pt()
@@ -4817,6 +4820,9 @@ namespace oomph
     {
       return Bulk_coordinate_derivatives_fct_pt;
     }
+
+    // Allow access to the base finite element class's functions also
+    using FiniteElement::bulk_coordinate_derivatives_fct_pt;
 
 #ifdef __clang__
 #pragma clang diagnostic pop
