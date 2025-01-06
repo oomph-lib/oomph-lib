@@ -882,6 +882,57 @@ namespace oomph
         }
       }
 
+      // If the edge has been visited exactly twice, then we are on an internal
+      // boundary.
+      if (edge_count[current_edge] == 2)
+      {
+        if (doc)
+        {
+          outfile << "Current edge is on internal boundary " << bound << endl;
+        }
+
+        // Count the edges that are on the same element and on the same boundary
+        face_count(static_cast<unsigned>(bound), it->second.FE_pt) =
+          face_count(static_cast<unsigned>(bound), it->second.FE_pt) + 1;
+
+        // If such edges exist, let store the corresponding element
+        if (face_count(bound, it->second.FE_pt) > 1)
+        {
+          // Update edge's infos
+          TriangleBoundaryHelper::BCInfo info;
+          info.Face_id = it->second.Face_id;
+          info.FE_pt = it->second.FE_pt;
+          info.Boundary = it->second.Boundary;
+
+          // Add it to FIinfo, that stores infos of problematic elements
+          face_info.insert(std::make_pair(current_edge, info));
+
+          // How many edges on which boundary have to be added
+          bonus[bound]++;
+        }
+        else
+        {
+          // Add element and face to the appropriate vectors
+          // Does the pointer already exits in the vector
+          Vector<FiniteElement*>::iterator b_el_it = std::find(
+            vector_of_boundary_element_pt[static_cast<unsigned>(bound)].begin(),
+            vector_of_boundary_element_pt[static_cast<unsigned>(bound)].end(),
+            it->second.FE_pt);
+
+          // Only insert if we have not found it (i.e. got to the end)
+          if (b_el_it ==
+              vector_of_boundary_element_pt[static_cast<unsigned>(bound)].end())
+          {
+            vector_of_boundary_element_pt[static_cast<unsigned>(bound)]
+              .push_back(it->second.FE_pt);
+          }
+
+          // set_of_boundary_element_pt[static_cast<unsigned>(bound)].insert(
+          // it->second.FE_pt);
+          face_identifier(static_cast<unsigned>(bound), it->second.FE_pt) =
+            it->second.Face_id;
+        }
+      }
     } // End of "adding-boundaries"-loop
 
 
