@@ -92,7 +92,7 @@ namespace oomph
       create_no_penetration1_elements();
       create_no_penetration2_elements();
 
-      create_axisym_flux_elements();
+      // create_axisym_flux_elements();
     }
 
     void delete_nonrefineable_elements()
@@ -263,7 +263,7 @@ namespace oomph
     void create_no_penetration2_elements();
     void create_axisym_flux_elements()
     {
-        cout << "create_axisym_flux_elements" << endl;
+      cout << "create_axisym_flux_elements" << endl;
       AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
       InfoElement* info_element_pt = new InfoElement;
       Data* net_flux_data_pt = info_element_pt->new_internal_data_pt();
@@ -572,25 +572,25 @@ namespace oomph
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 
-    sprintf(filename,
-            "%s/axisym_flux%i.csv",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
-    output_stream.open(filename);
-    output_stream << "x y u v" << std::endl;
-    this->mesh_pt(AxisymFluxComputeMeshIndex)->output(output_stream);
-    output_stream.close();
+    // sprintf(filename,
+    //         "%s/axisym_flux%i.csv",
+    //         Doc_info.directory().c_str(),
+    //         Doc_info.number());
+    // output_stream.open(filename);
+    // output_stream << "x y u v" << std::endl;
+    // this->mesh_pt(AxisymFluxComputeMeshIndex)->output(output_stream);
+    // output_stream.close();
 
-    sprintf(filename,
-            "%s/total_flux%i.csv",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
-    output_stream.open(filename);
-    output_stream << "Q" << std::endl;
-    dynamic_cast<InfoElement*>(
-      this->mesh_pt(AxisymFluxOutputMeshIndex)->element_pt(0))
-      ->output(output_stream);
-    output_stream.close();
+    // sprintf(filename,
+    //         "%s/total_flux%i.csv",
+    //         Doc_info.directory().c_str(),
+    //         Doc_info.number());
+    // output_stream.open(filename);
+    // output_stream << "Q" << std::endl;
+    // dynamic_cast<InfoElement*>(
+    //   this->mesh_pt(AxisymFluxOutputMeshIndex)->element_pt(0))
+    //   ->output(output_stream);
+    // output_stream.close();
 
     Doc_info.number()++;
   }
