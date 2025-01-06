@@ -2928,7 +2928,8 @@ namespace oomph
         switch (n)
         {
           case 1:
-            file_out << " 0" << " 0" << std::endl;
+            file_out << " 0"
+                     << " 0" << std::endl;
             break;
 
           case 2:
