@@ -1408,7 +1408,7 @@ namespace oomph
     void set_n_node(const unsigned& n)
     {
       // This should only be done once, in a Node constructor
-      //#ifdef PARANOID
+      // #ifdef PARANOID
       // if(Node_pt)
       // {
       //  OomphLibWarning(
@@ -1416,7 +1416,7 @@ namespace oomph
       //   "FiniteElement::set_n_node()",
       //   OOMPH_EXCEPTION_LOCATION);
       // }
-      //#endif
+      // #endif
       // Delete any previous storage to avoid memory leaks
       // This will only happen in very special cases
       delete[] Node_pt;
@@ -2928,8 +2928,7 @@ namespace oomph
         switch (n)
         {
           case 1:
-            file_out << " 0"
-                     << " 0" << std::endl;
+            file_out << " 0" << " 0" << std::endl;
             break;
 
           case 2:
@@ -4804,7 +4803,6 @@ namespace oomph
     {
       return Face_to_bulk_coordinate_fct_pt;
     }
-
 
     /// Return the pointer to the function that returns the derivatives
     /// of the bulk coordinates wrt the face coordinates
