@@ -8,6 +8,7 @@
 
 /// Local headers
 #include "region_sector_problem.h"
+#include "two_region_refined_sector_tri_mesh.template.h"
 
 
 namespace oomph
