@@ -401,7 +401,7 @@ namespace oomph
         // Build the corresponding slip element
         ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
           new ImposeImpenetrabilityElement<ELEMENT>(
-            bulk_elem_pt, face_index, Slip_boundary_id);
+            bulk_elem_pt, face_index, b);
 
         // Add the prescribed-flux element to the surface mesh
         No_penetration_boundary_mesh1_pt->add_element_pt(
@@ -436,7 +436,7 @@ namespace oomph
         // Build the corresponding slip element
         ImposeImpenetrabilityElement<ELEMENT>* no_penetration_element_pt =
           new ImposeImpenetrabilityElement<ELEMENT>(
-            bulk_elem_pt, face_index, Free_surface_boundary_id);
+            bulk_elem_pt, face_index, b);
 
         // Add the prescribed-flux element to the surface mesh
         No_penetration_boundary_mesh2_pt->add_element_pt(
