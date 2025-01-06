@@ -445,13 +445,13 @@ namespace oomph
     }
 
     /// Function to return Jacobian_setup_time;
-    double jacobian_setup_time()
+    double jacobian_setup_time() const
     {
       return Jacobian_setup_time;
     }
 
     /// Function to return Linear_solver_solution_time
-    double linear_solver_solution_time()
+    double linear_solver_solution_time() const
     {
       return Linear_solver_solution_time;
     }
