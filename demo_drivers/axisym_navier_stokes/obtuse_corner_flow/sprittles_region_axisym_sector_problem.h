@@ -5,6 +5,7 @@
 #include "navier_stokes.h"
 #include "fluid_interface.h"
 #include "meshes/triangle_mesh.h"
+#include "utility_functions.h"
 
 /// Local headers
 #include "region_axisym_sector_problem.h"
@@ -65,8 +66,13 @@ namespace oomph
       this->doc_info_pt()->set_directory("RESLT_axi_sprittles_region");
 
       add_singular_sub_meshes();
-
       this->rebuild_global_mesh();
+    }
+
+    void actions_after_newton_step()
+    {
+      debug_jacobian<SprittlesRegionAxisymSectorProblem<
+        ELEMENT>*>(this);
     }
 
     void setup()
@@ -233,7 +239,28 @@ namespace oomph
                                unsigned& element_index,
                                unsigned& node_index);
 
-    void setup_mesh_interaction();
+    void setup_mesh_interaction()
+    {
+      oomph_info << "setup_mesh_interaction" << std::endl;
+
+      SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
+        dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
+          Singularity_scaling_mesh_pt->element_pt(0));
+
+      // Loop over the augmented bulk elements
+      unsigned n_aug_bulk = Augmented_bulk_element_number.size();
+      for (unsigned e = 0; e < n_aug_bulk; e++)
+      {
+        // Augment elements
+        // Upcast from GeneralisedElement to the present element
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
+
+        // Set the pointer to the element that determines the amplitude
+        // of the singular fct
+        el_pt->add_c_equation_element_pt(singular_el_pt);
+      }
+    }
 
     void fix_c(const double& value)
     {
@@ -265,23 +292,20 @@ namespace oomph
       ELEMENT* bulk_elem_pt =
         dynamic_cast<ELEMENT*>(this->bulk_mesh_pt()->boundary_element_pt(b, e));
 
-      if (bulk_elem_pt->is_augmented())
-      {
-        // Find the index of the face of element e along boundary b
-        int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
+      // Find the index of the face of element e along boundary b
+      int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
 
-        // Create new element
-        SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
-          new SingularAxisymNavierStokesTractionElement<ELEMENT>(
-            bulk_elem_pt,
-            face_index,
-            Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
+      // Create new element
+      SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
+        new SingularAxisymNavierStokesTractionElement<ELEMENT>(
+          bulk_elem_pt,
+          face_index,
+          Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
-        el_pt->set_traction_fct(Eigensolution_slip_function);
+      el_pt->set_traction_fct(Eigensolution_slip_function);
 
-        // Add it to the mesh
-        Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
-      }
+      // Add it to the mesh
+      Eigensolution_slip_mesh_pt->add_element_pt(el_pt);
     }
   }
 
@@ -305,23 +329,20 @@ namespace oomph
         ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
           this->bulk_mesh_pt()->boundary_element_pt(b, e));
 
-        if (bulk_elem_pt->is_augmented())
-        {
-          // Find the index of the face of element e along boundary b
-          int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
+        // Find the index of the face of element e along boundary b
+        int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
 
-          // Create new element
-          SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
-            new SingularAxisymNavierStokesTractionElement<ELEMENT>(
-              bulk_elem_pt,
-              face_index,
-              Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
+        // Create new element
+        SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
+          new SingularAxisymNavierStokesTractionElement<ELEMENT>(
+            bulk_elem_pt,
+            face_index,
+            Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
-          el_pt->set_traction_fct(Eigensolution_traction_function);
+        el_pt->set_traction_fct(Eigensolution_traction_function);
 
-          // Add it to the mesh
-          Eigensolution_traction_mesh_pt->add_element_pt(el_pt);
-        }
+        // Add it to the mesh
+        Eigensolution_traction_mesh_pt->add_element_pt(el_pt);
       }
     }
   }
@@ -402,30 +423,6 @@ namespace oomph
     oomph_info << "Warning: No corner node found!" << std::endl;
 
     return;
-  }
-
-  template<class ELEMENT>
-  void SprittlesRegionAxisymSectorProblem<ELEMENT>::setup_mesh_interaction()
-  {
-    oomph_info << "setup_mesh_interaction" << std::endl;
-
-    SingularNavierStokesSolutionElement<ELEMENT>* singular_el_pt =
-      dynamic_cast<SingularNavierStokesSolutionElement<ELEMENT>*>(
-        Singularity_scaling_mesh_pt->element_pt(0));
-
-    // Loop over the augmented bulk elements
-    unsigned n_aug_bulk = Augmented_bulk_element_number.size();
-    for (unsigned e = 0; e < n_aug_bulk; e++)
-    {
-      // Augment elements
-      // Upcast from GeneralisedElement to the present element
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
-        this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
-
-      // Set the pointer to the element that determines the amplitude
-      // of the singular fct
-      el_pt->add_c_equation_element_pt(singular_el_pt);
-    }
   }
 
   template<class ELEMENT>
