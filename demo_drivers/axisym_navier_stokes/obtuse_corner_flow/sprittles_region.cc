@@ -36,9 +36,14 @@ int main(int argc, char** argv)
     problem;
   problem.setup();
 
+  // problem.linear_solver_pt() = new FD_LU;
+  // debug_jacobian<SprittlesRegionAxisymSectorProblem<
+  //   SingularAxisymNavierStokesElement<MyElement>>*>(&problem);
+
   // Steady problem
   problem.steady_newton_solve();
   problem.doc_solution();
+
 
   // Finalise MPI after all computations are complete
 #ifdef OOMPH_HAS_MPI
