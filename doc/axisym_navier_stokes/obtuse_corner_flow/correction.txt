@@ -1,0 +1,35 @@
+\section correction With correction
+
+We include the singular eigensolution through an additional degree of freedom, \f$c\f$, which determines its scaling.
+\f[ u = c \bar{u} + \tilde{u} \f]
+\f[ p = \tilde{p} \f]
+\f[ \tau = c \bar{\tau} + \tilde{\tau} \f]
+Noting that \f$\bar{p} = 0\f$.
+The system of equations, now expressed in terms of \f$c, \bar{*}, \tilde{*}\f$ is given by:
+In the bulk \f$\Omega\f$, we have the Stokes equations,
+\f[c \nabla\bar{u} + \nabla \cdot \tilde{u} = 0,\ c \nabla \cdot \bar{\tau} + \nabla \cdot \tilde{\tau} = 0.\f]
+(By include the \f$c \nabla \cdot \bar{\tau}\f$ within the bulk,  the natural boundary condition becomes \f$c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}\f$ which matches \f${t} \cdot {\tau} \cdot {n}\f$ at the interior boundary.)
+The expressions for the additional terms are given by the [[axisymmetric Navier-Stokes equations]] with the bars substituted in.
+And the total velocity equations,
+\f[ u = c \bar{u} + \tilde{u} \f]
+On the vertical boundary, \f$S_0\f$,
+\f[\tilde{u} \cdot n                 = 0,\ c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = \frac{1}{l} \left(\tilde{u}\cdot {t} - 1\right) + \frac{c}{l} \bar{u}\cdot {t}.\f]
+where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
+
+On the diagonal boundary, \f$S_2\f$, we have no penetration and pure slip, or equivalently, a tangential stress free condition.
+\f[\tilde{u} \cdot {n}                 = 0 , c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = 0.\f]
+On the curved far field boundary, \f$S_1\f$, we employ the following condition,
+\f[c (\bar{\tau} \cdot n) + \tilde{\tau} \cdot {n} = 0.\f]
+The pressure at the top of the sector is set to zero, at \f$x = 0, z = R\f$,
+\f[\tilde{p} = 0.\f]
+
+Additionally we would like to impose  \f$\lim_{\rho \to 0} \partial{p}/\partial{\theta} = 0\f$, however due the discrete mesh coordinates we impose the following instead,
+\f[p(\epsilon,0) = p(\epsilon,\alpha)\f]
+where \f$\epsilon \ll 1\f$ and polar coordinates are used.
+
+\section lagrange2 Lagrange multipliers
+
+The Lagrange multipliers remain the same but are imposed on \f$\tilde{u}\f$ instead of \f$u\f$.
+
+<HR>
+<HR>
