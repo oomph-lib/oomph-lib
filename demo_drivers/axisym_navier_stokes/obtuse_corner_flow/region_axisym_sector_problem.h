@@ -327,7 +327,7 @@ namespace oomph
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new TwoRegionRefinedSectorTriMesh<ELEMENT>(
       My_params.n_radial,
-      10,
+      2,
       My_params.geometric_base,
       My_params.n_azimuthal,
       My_params.sector_radius,
