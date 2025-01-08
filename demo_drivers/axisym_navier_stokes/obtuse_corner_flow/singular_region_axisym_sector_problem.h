@@ -9,6 +9,7 @@
 /// Local headers
 #include "region_axisym_sector_problem.h"
 #include "two_region_refined_sector_tri_mesh.template.h"
+#include "utility_functions.h"
 
 
 namespace oomph
@@ -70,6 +71,11 @@ namespace oomph
       this->rebuild_global_mesh();
     }
 
+    // void actions_after_newton_step()
+    //{
+    //   debug_jacobian<SingularRegionAxisymSectorProblem<ELEMENT>*>(this);
+    // }
+
     void setup()
     {
       // Augment the bulk elements
@@ -95,6 +101,7 @@ namespace oomph
       create_singular_elements();
 
       // fix_c(1.0);
+      // fix_c(0.0);
 
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
@@ -477,7 +484,7 @@ namespace oomph
     oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
 
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,3);
+      new PointPressureEvaluationElement(node_pt, 3);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
@@ -517,7 +524,7 @@ namespace oomph
     oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << std::endl;
 
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,3);
+      new PointPressureEvaluationElement(node_pt, 3);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));

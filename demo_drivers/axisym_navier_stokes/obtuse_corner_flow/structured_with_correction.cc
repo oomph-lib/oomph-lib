@@ -35,6 +35,8 @@ int main(int argc, char** argv)
       SingularAxisymNavierStokesElement<MyElement>>;
   problem->setup();
 
+  //problem->linear_solver_pt() = new FD_LU;
+
   // Steady problem
   problem->steady_newton_solve();
   problem->doc_solution();

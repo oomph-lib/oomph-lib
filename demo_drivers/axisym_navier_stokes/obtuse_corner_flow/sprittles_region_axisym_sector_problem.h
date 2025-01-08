@@ -69,11 +69,11 @@ namespace oomph
       this->rebuild_global_mesh();
     }
 
-    void actions_after_newton_step()
-    {
-      debug_jacobian<SprittlesRegionAxisymSectorProblem<
-        ELEMENT>*>(this);
-    }
+    // void actions_after_newton_step()
+    //{
+    //   debug_jacobian<SprittlesRegionAxisymSectorProblem<
+    //     ELEMENT>*>(this);
+    // }
 
     void setup()
     {
