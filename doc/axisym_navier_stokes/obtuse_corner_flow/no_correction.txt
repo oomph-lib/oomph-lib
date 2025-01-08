@@ -1,7 +1,13 @@
 \section no-correction Without correction
 
-We define our sector domain so that it has radius \f$R\f$ and interior angle \f$\alpha\f$. One straight side is aligned with the vertical with the azimuthal angle varying counter clockwise through to \f$\alpha\f$. The corner is located at (x,y) = (1,0) and \f$R < 1\f$.
-In the bulk \f$\Omega\f$, we have the Stokes equations,
+@I w 0.71\textwidth figure1 "The sector domain."
+
+
+We define our sector domain so that it has radius \f$R\f$ and interior angle \f$\alpha\f$.
+One straight side is aligned with the vertical with the azimuthal angle varying counter clockwise through to \f$\alpha\f$.
+The corner is located at (x,y) = (1,0) and \f$R < 1\f$, so that the line of rotation does not cross through the domain.
+
+In the bulk \f$\Omega\f$, we have the Stokes equations in axisymmetric coordinates, written here in stress tensor form,
 \f[\nabla \cdot u = 0,\ \nabla \cdot \tau = 0.\f]
 where \f$\tau = -p I + \nabla \otimes u + (\nabla \otimes u)^T\f$.
 These are implemented in the <A HREF="classoomph_1_1MyElement.html"> MyElement </A> class.
@@ -9,39 +15,16 @@ These are implemented in the <A HREF="classoomph_1_1MyElement.html"> MyElement <
 On the vertical boundary, \f$S_0\f$,
 \f[u \cdot n                 = 0,\ {t} \cdot {\tau} \cdot {n}  = \frac{1}{l} \left({u}\cdot {t} - 1\right).\f]
 where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
-The no penetration condition is imposed through a Lagrange multiplier, \f$\lambda_1\f$, using <A HREF="classoomph_1_1ImposeImpenetrabilityElement.html"> ImposeImpenetrabilityElement </A>s. 
-
+The no penetration condition is imposed through a Lagrange multiplier, \f$\lambda_1\f$, using <A HREF="classoomph_1_1ImposeImpenetrabilityElement.html"> ImposeImpenetrabilityElement</A>s. 
+<A HREF="classoomph_1_1AxisymmetricNavierStokesSlipElement.html"> AxisymmetricNavierStokesSlipElement</A>s are used to impose the slip condition. 
 On the diagonal boundary, \f$S_2\f$, we have no penetration and pure slip, or equivalently, a tangential stress free condition.
 \f[{u} \cdot {n}                 = 0 , {t} \cdot {\tau} \cdot {n}  = 0.\f]
+Again, <A HREF="classoomph_1_1ImposeImpenetrabilityElement.html"> ImposeImpenetrabilityElement</A>s are used to impose the no penetration condition.
 
 On the curved far field boundary, \f$S_1\f$, we employ the natural boundary condition to give a free stress constraint,
 \f[ {\tau} \cdot {n}  = 0.\f]
 The pressure at the top of the sector is set to zero, at \f$x = 0, z = R\f$,
 \f[p = 0.\f]
-
-<A HREF="../../../../doc/the_data_structure/html/classoomph_1_1AxisymmetricNavierStokesEquations.html"> AxisymmetricNavierStokesEquations </A>
-
-\section lagrange Lagrange multipliers
-
-The no-penetration conditions are imposed via Lagrange multipliers.
-On the vertical boundary, \f$S_0\f$,
-\f[\tau \cdot n = \lambda_1 n\f]
-On the diagonal boundary, \f$S_2\f$,
-\f[\tau \cdot n = \lambda_2 n\f]
-
-\section weak Weak equations
-
-
-\section implementation Implementation
-
-The equations in the bulk are implemented with using `TTaylorHoodElement<2>`s.
-The no-penetration conditions are imposed through `ImposeImpenetrabilityElement`s.
-The far field conditions are imposed through new `FarFieldElement`s.
-The slip condition is imposed through `NavierStokesSlipElement`s.
-
-I am using a separate submesh for each of the conditions on the different boundaries.
-The Lagrange multipliers get stored by adding additional dofs to the nodes and using the velocities interpolation strategy.
-This is done in a way such that there can be multiple distinct Lagrange multipliers at corner nodes e.g. \f$\lambda_1\f$ and \f$\lambda_2\f$.
 
 <HR>
 <HR>

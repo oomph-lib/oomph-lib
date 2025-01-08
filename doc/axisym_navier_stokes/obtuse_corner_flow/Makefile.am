@@ -8,3 +8,9 @@ obtuse_corner_flow.txt: intro.txt no_correction.txt sprittles.txt correction.txt
 
 view: html/index.html
 	open html/index.html
+
+figures/%.gif: figures/%.pdf
+	magick -density 576 $< -resize 25% $@
+
+figures/%.eps: figures/%.pdf
+	magick -density 576 $< $@
