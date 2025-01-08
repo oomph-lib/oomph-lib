@@ -4,9 +4,12 @@ We define our sector domain so that it has radius \f$R\f$ and interior angle \f$
 In the bulk \f$\Omega\f$, we have the Stokes equations,
 \f[\nabla \cdot u = 0,\ \nabla \cdot \tau = 0.\f]
 where \f$\tau = -p I + \nabla \otimes u + (\nabla \otimes u)^T\f$.
+These are implemented in the <A HREF="classoomph_1_1MyElement.html"> MyElement </A> class.
+
 On the vertical boundary, \f$S_0\f$,
 \f[u \cdot n                 = 0,\ {t} \cdot {\tau} \cdot {n}  = \frac{1}{l} \left({u}\cdot {t} - 1\right).\f]
 where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
+The no penetration condition is imposed through a Lagrange multiplier, \f$\lambda_1\f$, using <A HREF="classoomph_1_1ImposeImpenetrabilityElement.html"> ImposeImpenetrabilityElement </A>s. 
 
 On the diagonal boundary, \f$S_2\f$, we have no penetration and pure slip, or equivalently, a tangential stress free condition.
 \f[{u} \cdot {n}                 = 0 , {t} \cdot {\tau} \cdot {n}  = 0.\f]
@@ -16,6 +19,7 @@ On the curved far field boundary, \f$S_1\f$, we employ the natural boundary cond
 The pressure at the top of the sector is set to zero, at \f$x = 0, z = R\f$,
 \f[p = 0.\f]
 
+<A HREF="../../../../doc/the_data_structure/html/classoomph_1_1AxisymmetricNavierStokesEquations.html"> AxisymmetricNavierStokesEquations </A>
 
 \section lagrange Lagrange multipliers
 

@@ -1,4 +1,21 @@
 \section sprittles Sprittles
 
+As with the 2D case, here we include the same eigensolution through a scaling variable \f$c\f$.
+The same eigensolution can be used as this is the correct behaviour of the singularity in the limit as we approach the problematic corner.
+The eigensolution will not satisfy the bulk equations however and so we must account for this too.
+
+Previously <A HREF="classoomph_1_1MyElement.html"> MyElement </A> were used within the bulk to include the axisymmetric Navier-Stokes equations, store the estimate of the error and region id and override the output function. 
+
+These are upgraded to <A HREF="classoomph_1_1SingularAxisymNavierStokesElement.html"> SingularAxisymNavierStokesElement<MyElement> </A> to allow them to be augmented to include the singularity component.
+The augmented equations are given by the following:
+
+\f[ u = c \bar{u} + \tilde{u} \f]
+
+
+
+
+
+
+
 <HR>
 <HR>
