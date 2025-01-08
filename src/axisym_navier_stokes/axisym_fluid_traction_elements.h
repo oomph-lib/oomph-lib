@@ -589,7 +589,7 @@ namespace oomph
           if (local_eqn >= 0)
           {
             // Add the loading terms to the residuals
-            residuals[local_eqn] -=
+            residuals[local_eqn] +=
               traction[i] * psi(l) * interpolated_x[0] * W;
           }
         }
