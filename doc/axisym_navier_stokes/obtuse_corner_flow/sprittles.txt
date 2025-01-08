@@ -1,21 +1,32 @@
 \section sprittles Sprittles
 
-As with the 2D case, here we include the same eigensolution through a scaling variable \f$c\f$.
-The same eigensolution can be used as this is the correct behaviour of the singularity in the limit as we approach the problematic corner.
-The eigensolution will not satisfy the bulk equations however and so we must account for this too.
-
-Previously <A HREF="classoomph_1_1MyElement.html"> MyElement </A> were used within the bulk to include the axisymmetric Navier-Stokes equations, store the estimate of the error and region id and override the output function. 
-
-These are upgraded to <A HREF="classoomph_1_1SingularAxisymNavierStokesElement.html"> SingularAxisymNavierStokesElement<MyElement> </A> to allow them to be augmented to include the singularity component.
-The augmented equations are given by the following:
-
+We include the singular eigensolution through an additional degree of freedom, \f$c\f$, which determines its scaling.
+This introduces the following additional equations in the bulk, \f$\Omega\f$,
 \f[ u = c \bar{u} + \tilde{u} \f]
+\f[ p = c \bar{p} + \tilde{p} \f]
+The eigensolution matches the singularity in the limit as we approach the corner, however the eigensolution will not satisfy the bulk equations.
+The Sprittles' approach is to include the eigensolution within the continuity equation as an additional source term, but only add additional terms to the momentum equations around the boundary of the augmented domain.
+The augmented Stokes equations are then given by,
+\f[c \nabla\bar{u} + \nabla \cdot \tilde{u} = 0,\ \nabla \cdot \tilde{\tau} = 0.\f]
 
+These are implemented in the upgraded <A HREF="classoomph_1_1MyElement.html"> MyElement </A> classes using <A HREF="classoomph_1_1SingularAxisymNavierStokesElement.html"> SingularAxisymNavierStokesElement<MyElement> </A> to allow them to be augmented to include the singularity component.
 
+Where there is a boundary condition on the surface stress, there is also an additional stress contribution.
+See the example below for the free stress boundary condition.
+\f[c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = 0.\f]
+This additional stress is implemented using the <A HREF="classoomph_1_1SingularAxisymNavierStokesTractionElement.html">SingularAxisymNavierStokesTractionElement</A>s, where the traction is given by the stress contribution.
 
+On the vertical boundary, \f$S_0\f$, there is an additional contribution from the eigensolution,
+\f[c {t} \cdot \bar{\tau} \cdot {n} + {t} \cdot \tilde{\tau} \cdot {n}  = \frac{1}{l} \left(\tilde{u}\cdot {t} - 1\right) + \frac{c}{l} \bar{u}\cdot {t}.\f]
+where \f$l\f$ is the slip length and we have non-dimensionalised the system such that the wall velocity is unity.
+This additional wall velocity term is also implemented using the <A HREF="classoomph_1_1SingularAxisymNavierStokesTractionElement.html">SingularAxisymNavierStokesTractionElement</A>s however here the traction is given by the wall velocity contribution.
 
+Additionally we would like to impose  \f$\lim_{\rho \to 0} \partial{p}/\partial{\theta} = 0\f$, however due the discrete mesh coordinates we impose the following instead,
+\f[p(\epsilon,0) = p(\epsilon,\alpha)\f]
+where \f$\epsilon \ll 1\f$ and polar coordinates are used.
+The pressure contribution is implemented in <A HREF="classoomph_1_1PointPressureEvaluationElement.html">PointPressureEvaluationElement</A> and the constraint and scaling coefficient are stored in <A HREF="classoomph_1_1SingularNavierStokesSolutionElement.html">SingularNavierStokesSolutionElement</A>.
 
-
+The Lagrange multipliers remain the same but are imposed on \f$\tilde{u}\f$ instead of \f$u\f$.
 
 <HR>
 <HR>
