@@ -232,8 +232,8 @@ namespace oomph
           const unsigned pressure_index = 3;
           node_pt->pin(pressure_index);
           node_pt->set_value(pressure_index, 0.0);
-          oomph_info << node_pt->x(0) << ", " << node_pt->x(1) << " "
-                     << std::endl;
+          oomph_info << "Pressure pinned at: " << node_pt->x(0) << ", "
+                     << node_pt->x(1) << " " << std::endl;
           has_node_been_found = true;
         }
         else
@@ -327,7 +327,7 @@ namespace oomph
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = new TwoRegionRefinedSectorTriMesh<ELEMENT>(
       My_params.n_radial,
-      2,
+      4,
       My_params.geometric_base,
       My_params.n_azimuthal,
       My_params.sector_radius,
