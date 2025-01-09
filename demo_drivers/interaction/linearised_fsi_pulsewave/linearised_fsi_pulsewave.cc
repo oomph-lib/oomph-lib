@@ -118,7 +118,7 @@ namespace Global_Physical_Variables
    }
   //oomph_info << "ramp factor: " << ramp_factor << std::endl;
   result[0]=0.0;
-  result[1]=P_inlet_const*ramp_factor;
+  result[1]=-P_inlet_const*ramp_factor;
   result[2]=0;
  }
 
