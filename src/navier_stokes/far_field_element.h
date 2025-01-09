@@ -1,5 +1,5 @@
-#ifndef FAR_FIELD_ELEMENT_HEADER
-#define FAR_FIELD_ELEMENT_HEADER
+#ifndef OOMPH_FAR_FIELD_ELEMENT_HEADER
+#define OOMPH_FAR_FIELD_ELEMENT_HEADER
 
 #include "generic.h"
 #include "fluid_interface.h"
@@ -7,8 +7,16 @@
 
 namespace oomph
 {
-  // My free surface element, overloads the sigma function to remove the
-  // surface tension term
+  //======================================================================
+  /// Face elements that implement a far field condition, such that
+  /// the velocity gradient in the normal direction is zero at the boundary.
+  /// \f[ (n \cdot \nabla) u  = 0 \f]
+  ///
+  /// Implemented in weak form as:
+  /// \f[ R^{\lambda}_j} = \int_S  n_i \frac{\partial u_j}{\partial x_i} \psi^f dS \f]
+  /// With lagrange multiplier contributions to the momentum equation given by:
+  /// \f[ (R_j^M)_S = \int_S  \lambda_j n_i \frac{\partial \psi^f}{\partial x_i} dS \f]
+  //======================================================================
   template<class ELEMENT>
   class FarFieldElement : public virtual NavierStokesFaceElement,
                           public virtual FaceGeometry<ELEMENT>
@@ -17,12 +25,18 @@ namespace oomph
     /// Lagrange multiplier id
     const unsigned Lagrange_id;
 
+    /// Helper function to return the index at which the velocity
+    /// component is stored at the n-th node
     virtual double nst_u(const unsigned& j, const unsigned& i)
     {
       return nodal_value(j, u_index_nst(j, i));
     }
 
   public:
+    /// Constructor
+    /// \param element_pt Pointer to the bulk element
+    /// \param face_index Index of the face
+    /// \param id Id of the Lagrange multiplier for the constraint
     FarFieldElement(FiniteElement* const& element_pt,
                     const int& face_index,
                     const unsigned& id = 0)
@@ -55,7 +69,7 @@ namespace oomph
              i;
     }
 
-    // Fix the lagrange multiplier at node i_node in the given direction
+    /// Fix the lagrange multiplier at node i_node in the given direction
     void pin_lagrange_multiplier(const unsigned& i_node,
                                  const unsigned& direction)
     {
@@ -63,7 +77,7 @@ namespace oomph
       this->node_pt(i_node)->pin(value_index);
     }
 
-    // Free the lagrange multiplier at node i_node in the given direction
+    /// Free the lagrange multiplier at node i_node in the given direction
     void unpin_lagrange_multiplier(const unsigned& i_node,
                                    const unsigned& direction)
     {
@@ -71,15 +85,15 @@ namespace oomph
       this->node_pt(i_node)->unpin(value_index);
     }
 
-    // Return the lagrange multiplier at node i_node in the given direction
+    /// Return the lagrange multiplier at node i_node in the given direction
     double lagrange_multiplier(const unsigned& i_node,
                                const unsigned& direction)
     {
       return this->node_pt(i_node)->value(lagrange_index(i_node, direction));
     }
 
-    // Equation number of the Lagrange multiplier associated with node i_node
-    // in the given direction.
+    /// Equation number of the Lagrange multiplier associated with node i_node
+    /// in the given direction.
     inline int lagrange_local_eqn(const unsigned& i_node,
                                   const unsigned& direction)
     {
@@ -95,16 +109,13 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    // Fill in contribution from Jacobian
+    /// Fill in contribution from Jacobian
     void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                           DenseMatrix<double>& jacobian)
     {
+      // The jacobian contributions are not implemented yet so we rely on the
+      // finite differenced one
       FiniteElement::fill_in_contribution_to_jacobian(residuals, jacobian);
-      // Call the generic routine with the flag set to 1
-      // fill_in_generic_contribution_to_residuals(residuals, jacobian, 1);
-
-      // fill_in_jacobian_from_internal_by_fd(residuals, jacobian, true);
-      // fill_in_jacobian_from_external_by_fd(residuals, jacobian, true);
     }
 
     /// Specify the value of nodal zeta from the face geometry
@@ -118,7 +129,6 @@ namespace oomph
     {
       return FaceElement::zeta_nodal(n, k, i);
     }
-
 
     /// Overload the output function
     void output(std::ostream& outfile)

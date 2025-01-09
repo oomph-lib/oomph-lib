@@ -41,8 +41,10 @@
 namespace oomph
 {
   //======================================================================
-  /// Template-free base class for Navier-Stokes equations to avoid
-  /// casting problems
+  /// A class to store the equation and unknown numbering system for the
+  /// Axisymmetric Navier Stokes elements. This is needed as we assign the
+  /// unknowns to different equations when solving for problems with
+  /// singularities. See the obtuse sector flow demo.
   //======================================================================
   class AxisymmetricNavierStokesEquationNumberingElement
     : public virtual NavierStokesEquationNumberingElement

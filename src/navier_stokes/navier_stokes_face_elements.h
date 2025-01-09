@@ -17,11 +17,9 @@
 namespace oomph
 {
   //======================================================================
-  /// A class for elements that allow the imposition of an applied traction
-  /// to the Navier--Stokes equations
-  /// The geometrical information can be read from the
-  /// FaceGeometry<NavierStokesEquationNumberingElement> class and and thus, we
-  /// can be generic enough without the need to have a separate equations class
+  /// A base class for all the Navier Stokes face elements so that we can easily
+  /// pass information from the bulk Navier Stokes element and reduce code
+  /// duplication.
   //======================================================================
   class NavierStokesFaceElement : public virtual FaceElement
   {

@@ -45,6 +45,13 @@ namespace oomph
   /// higher-dimensional "bulk" elements. They are used on
   /// boundaries where we would like to impose parallel outflow and
   /// impose the pressure.
+  ///
+  /// Weak form of the constraint:
+  /// \f[ R_{\lambda_l} = \int_{S} u_i t_i^l \psi^f dS \f]
+  ///
+  /// Weak from of the forcing contribution to the momentum equations:
+  /// \f$ R_j^M = \int_{S} \lambda_l t_i^l \psi^f - P n_i \psi^f dS \f$
+  ///
   //========================================================================
   template<class ELEMENT>
   class ImposeParallelOutflowElement : public virtual FaceGeometry<ELEMENT>,

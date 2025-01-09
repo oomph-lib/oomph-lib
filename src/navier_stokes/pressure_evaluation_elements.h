@@ -1,19 +1,22 @@
-#ifndef PRESSURE_EVALUATION_ELEMENTS_HEADER
-#define PRESSURE_EVALUATION_ELEMENTS_HEADER
+#ifndef OOMPH_PRESSURE_EVALUATION_ELEMENTS_HEADER
+#define OOMPH_PRESSURE_EVALUATION_ELEMENTS_HEADER
 
 #include "generic.h"
 
 namespace oomph
 {
-  //==================CLASS FOR THE PRESSURE CONTRIBUTION================
+  //=====================================================================
   /// This class adds the finite element pressure at the evaluation point
   /// to the residual for the singular eigensolution function.
   ///
-  /// R_C += +- p_FE (Evaluation_point)
+  /// \f$ R_C += \pm \left( p|_x + Fr \ x \cdot G \right) \f$
   ///
-  /// and thus regularises the FE solution by matching the pressure at
-  /// two locations. If the amplitude of the  singular solution is known,
-  /// pin C.
+  /// where \f$ x \f$ is the evaluation point and is the pressure is interpolated.
+  /// \f$ Fr \f$ is the Froude number.
+  ///
+  /// This then is used to regularise the FE solution by matching the pressure
+  /// at two locations, taking the gravitational pressure gradient into account.
+  /// If the amplitude of the  singular solution is known, pin C.
   //=====================================================================
   template<class ELEMENT>
   class PressureEvaluationElement : public virtual FaceGeometry<ELEMENT>,

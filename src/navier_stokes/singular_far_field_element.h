@@ -1,11 +1,20 @@
-#ifndef SINGULAR_FAR_FIELD_ELEMENT_HEADER
-#define SINGULAR_FAR_FIELD_ELEMENT_HEADER
+#ifndef OOMPH_SINGULAR_FAR_FIELD_ELEMENT_HEADER
+#define OOMPH_SINGULAR_FAR_FIELD_ELEMENT_HEADER
 
+#include "generic.h"
 
 namespace oomph
 {
-  // My free surface element, overloads the sigma function to remove the
-  // surface tension term
+  //======================================================================
+  /// Face elements that implement the singular functions contribution to the
+  /// far field condition, such that the velocity gradient in the normal
+  /// direction is zero at the boundary.
+  /// \f[ (n \cdot \nabla) u  = 0 \f]
+  ///
+  /// \f[ R^{\lambda}_j} = \int_S  c n_i \frac{\partial u^*_j}{\partial x_i} \psi^f dS \f]
+  /// where \f$ u^* \f$ is the singular velocity.
+  ///
+  //======================================================================
   template<class ELEMENT>
   class SingularFarFieldElement : public virtual NavierStokesFaceElement,
                                   public virtual FaceGeometry<ELEMENT>

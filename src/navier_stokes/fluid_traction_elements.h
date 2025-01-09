@@ -46,10 +46,13 @@ namespace oomph
 {
   //======================================================================
   /// A class for elements that allow the imposition of an applied traction
-  /// to the Navier--Stokes equations
-  /// The geometrical information can be read from the FaceGeometry<ELEMENT>
-  /// class and and thus, we can be generic enough without the need to have
-  /// a separate equations class
+  /// to the Navier--Stokes equations which is scaled by an external dof.
+  ///
+  /// Weak form:
+  /// \f$ { R_j^M = \int_{S} c T_i \psi^f dS } \f$
+  /// where \f$ T_i \f$ is the traction function, \f$ \psi^f \f$ is the
+  /// test function and \f$c\f$ is the scaling.
+  ///
   //======================================================================
   template<class ELEMENT>
   class NavierStokesTractionElement : public virtual FaceGeometry<ELEMENT>,

@@ -1,15 +1,17 @@
-#ifndef POINT_PRESSURE_EVALUATION_ELEMENTS_HEADER
-#define POINT_PRESSURE_EVALUATION_ELEMENTS_HEADER
+#ifndef OOMPH_POINT_PRESSURE_EVALUATION_ELEMENTS_HEADER
+#define OOMPH_POINT_PRESSURE_EVALUATION_ELEMENTS_HEADER
 
 #include "generic.h"
 
 namespace oomph
 {
-  //==================CLASS FOR THE PRESSURE CONTRIBUTION================
+  //=====================================================================
   /// This class adds the finite element pressure at the evaluation point
   /// to the residual for the singular eigensolution function.
   ///
-  /// R_C += +- p_FE (Evaluation_point)
+  /// \f$ R_C += \pm p|_x \f$
+  ///
+  /// where \f$ x \f$ is the evaluation point and is a node.
   ///
   /// and thus regularises the FE solution by matching the pressure at
   /// two locations. If the amplitude of the  singular solution is known,

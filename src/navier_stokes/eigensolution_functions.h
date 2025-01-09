@@ -1,5 +1,5 @@
-#ifndef EIGENSOLUTION_FUNCTIONS_HEADER
-#define EIGENSOLUTION_FUNCTIONS_HEADER
+#ifndef OOMPH_EIGENSOLUTION_FUNCTIONS_HEADER
+#define OOMPH_EIGENSOLUTION_FUNCTIONS_HEADER
 
 // Generic includes
 #include "generic.h"
@@ -35,8 +35,7 @@ namespace oomph
     u_cart[1] = u_polar[0] * cos(theta) - u_polar[1] * sin(theta);
   }
 
-  /// Function that computes the fitting pressure solution near the corner
-  /// (0,0)
+  /// Function that computes the singular pressure solution
   double pressure_singular_fct(const Vector<double>& x)
   {
     double p = 0.0;
@@ -44,8 +43,7 @@ namespace oomph
     return p;
   }
 
-  /// Function that computes the gradient of the fitting pressure solution
-  /// near the corner (0,0)
+  /// Function that computes the gradient of the singular pressure solution
   Vector<double> grad_pressure_singular_fct(const Vector<double>& coord)
   {
     // Initialise the gradient vector
@@ -82,16 +80,16 @@ namespace oomph
 
       // return the velocity vector
       return u;
-    };
+    }; // End of lambda function 
   }
 
   /// Function that returns the gradient of the singular velocity function with
   /// the appropriate parameters
   std::function<Vector<Vector<double>>(const Vector<double>&)> grad_velocity_singular_function_factory(
     const double& contact_angle, Node*& x_centre_node_pt)
-  /// Function that computes the gradient of the singular velocity
-  /// near the corner x_centre_node_pt: \f$grad[i][j] = du_i/dx_j\f$
   {
+    /// Function that computes the gradient of the singular velocity
+    /// near the corner x_centre_node_pt: \f$grad[i][j] = du_i/dx_j\f$
     return [contact_angle,
             x_centre_node_pt](const Vector<double>& x) -> Vector<Vector<double>>
     {
@@ -144,7 +142,7 @@ namespace oomph
       grad_u[1][1] = du1dr * drdy + du1dtheta * dthetady;
 
       return grad_u;
-    }; // End of function
+    }; // End of lambda function
   }
 
   /// Function that returns an eigensolution traction function with the

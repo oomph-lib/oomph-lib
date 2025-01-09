@@ -354,12 +354,6 @@ namespace oomph
       const unsigned& which_one = 0) = 0;
   };
 
-
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////
-
-
   //======================================================================
   /// A class for elements that solve the cartesian Navier--Stokes equations,
   /// templated by the dimension DIM.
@@ -377,6 +371,11 @@ namespace oomph
   /// We also provide all functions required to use this element
   /// in FSI problems, by deriving it from the FSIFluidElement base
   /// class.
+  ///
+  /// Weak form:
+  ///
+  ///   \f$ { \int_V F_i \phi^f_l + \frac{Re}{Fr} G_i \phi^f_l + p \frac{\partial \phi^f_l}{\partial x_i} - \sum_{k=0}^N \frac{\mu_2}{\mu_1} \left( \frac{\partial u_i}{\partial x_k} + \Gamma_i \frac{\partial u_k}{\partial x_i} \right) \frac{\partial \phi^f_l}{\partial x_k} - Re\ St\ \frac{\partial u_i}{\partial t} \phi^f_l - \left( Re\ u_i - \gamma Re\ St\ u^{mesh}_i \right) \frac{\partial u_i}{\partial x_k} \phi^f_l \ dx dy = 0 } \f$
+  ///
   //======================================================================
   template<unsigned DIM>
   class NavierStokesEquations

@@ -40,10 +40,16 @@
 namespace oomph
 {
   //========================================================================
-  ///  ImposeImpenetrabilityElement
-  /// are elements that coincide with the faces of
+  /// ImposeImpenetrabilityElement are elements that coincide with the faces of
   /// higher-dimensional "bulk" elements. They are used on
   /// boundaries where we would like to impose impenetrability.
+  ///
+  /// Weak form of the constraint:
+  /// \f[ R_\lambda = \int_{S} u_i n_i \psi^f dS \f]
+  ///
+  /// Weak from of the forcing contribution to the momentum equations:
+  /// \f[ R_j^M = \int_{S} \lambda n_i \psi^f dS \f]
+  ///
   //========================================================================
   template<class ELEMENT>
   class ImposeImpenetrabilityElement : public virtual FaceGeometry<ELEMENT>,
@@ -54,10 +60,9 @@ namespace oomph
     unsigned Id;
 
   public:
-    /// Constructor takes a "bulk" element, the
-    /// index that identifies which face the
-    /// ImposeImpenetrabilityElement is supposed
-    /// to be attached to, and the face element ID
+    /// Constructor takes a "bulk" element, the index that identifies which face
+    /// the ImposeImpenetrabilityElement is supposed to be attached to, and the
+    /// face element ID, which controls which lagrange multiplier is used.
     ImposeImpenetrabilityElement(FiniteElement* const& element_pt,
                                  const int& face_index,
                                  const unsigned& id = 0)

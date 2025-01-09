@@ -34,6 +34,8 @@
 #include <oomph-lib-config.h>
 #endif
 
+// STD includes
+#include <functional>
 
 // OOMPH-LIB headers
 #include "navier_stokes_face_elements.h"
@@ -41,17 +43,26 @@
 namespace oomph
 {
   //======================================================================
-  /// A class for elements that allow the imposition of an applied slip
+  /// A class for elements that allow the imposition of a slip condition
   /// in the Navier Stokes eqns.
   /// The geometrical information can be read from the FaceGeometry<ELEMENT>
   /// class and and thus, we can be generic enough without the need to have
   /// a separate equations class.
+  ///
+  /// Weak form:
+  /// \f[ R_j^M = \int_{S} \frac{1}{l_j} ((u_i- U_i) - ((u_k - U_k) n_k) n_i) \psi^f dS \f]
+  /// where \f$ l_j \f$ is the slip length, \f$ U_i \f$ is the wall velocity, and
+  /// \f$ \psi^f \f$ is the test function.
+  /// If the slip length is zero or negative, the slip condition is not applied.
+  /// This means we can impose the slip length in one direction only, for
+  /// example.
   //======================================================================
   template<class ELEMENT>
   class NavierStokesSlipElement : public virtual NavierStokesFaceElement,
                                   public virtual FaceGeometry<ELEMENT>
   {
   private:
+    /// Index at which the external data is stored
     unsigned Contact_line_data_index;
 
   protected:
@@ -123,13 +134,14 @@ namespace oomph
       element_pt->build_face_element(face_index, this);
     }
 
+    /// If the element has a dependence on the contact line node, then wee need
+    /// to add it as external data to compute the jacobian correctly.
     void add_dependence_on_contact_line_node(
       SolidNode* const& contact_line_node_pt)
     {
       Contact_line_data_index =
         add_external_data(contact_line_node_pt->variable_position_pt());
     }
-
 
     /// Reference to the slip function pointer
     void set_slip_function(
@@ -151,8 +163,7 @@ namespace oomph
       Wall_velocity_function = wall_velocity_function;
     }
 
-
-    /// Return the residuals
+    /// Fill in the contribution to the residuals
     void fill_in_contribution_to_residuals(Vector<double>& residuals)
     {
       fill_in_contribution_to_residuals_nst_slip(
