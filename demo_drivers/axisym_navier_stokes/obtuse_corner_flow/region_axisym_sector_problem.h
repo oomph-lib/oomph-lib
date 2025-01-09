@@ -263,7 +263,7 @@ namespace oomph
     void create_no_penetration2_elements();
     void create_axisym_flux_elements()
     {
-      cout << "create_axisym_flux_elements" << endl;
+        std::cout << "create_axisym_flux_elements" << std::endl;
       AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
       InfoElement* info_element_pt = new InfoElement;
       Data* net_flux_data_pt = info_element_pt->new_internal_data_pt();
@@ -272,7 +272,7 @@ namespace oomph
       AxisymFluxComputeMeshIndex = add_sub_mesh(new Mesh);
       const unsigned n_element =
         Bulk_mesh_pt->nboundary_element(Inner_boundary_id);
-      cout << "n_element: " << n_element << endl;
+      std::cout << "n_element: " << n_element << std::endl;
       for (unsigned e = 0; e < n_element; e++)
       {
         ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(

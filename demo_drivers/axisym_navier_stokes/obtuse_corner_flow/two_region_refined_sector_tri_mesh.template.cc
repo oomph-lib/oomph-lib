@@ -886,7 +886,7 @@ namespace oomph
       {
         if (doc)
         {
-          outfile << "Current edge is on internal boundary " << bound << endl;
+          outfile << "Current edge is on internal boundary " << bound << std::endl;
         }
 
         // Count the edges that are on the same element and on the same boundary

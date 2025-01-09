@@ -89,7 +89,6 @@ namespace oomph
   template<class PROBLEM_PT>
   void debug_jacobian(const PROBLEM_PT& problem_pt)
   {
-    cout << "Debugging jacobian" << endl;
     std::ofstream out_stream;
 
     DoubleVector dummy_residuals;
