@@ -1495,6 +1495,14 @@ namespace oomph
       }
     }
 
+    /// Compute vector of FE interpolated velocity u at local coordinate s
+    virtual Vector<double> interpolated_u_nst(const Vector<double>& s) const
+    {
+      Vector<double> velocity(DIM, 0.0);
+      interpolated_u_nst(s, velocity);
+      return velocity;
+    }
+
     /// Return FE interpolated velocity u[i] at local coordinate s
     virtual double interpolated_u_nst(const Vector<double>& s,
                                       const unsigned& i) const
