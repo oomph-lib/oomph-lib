@@ -6,6 +6,7 @@
 
 namespace oomph
 {
+  /// function to return radial distance from a point
   double get_radial_distance(const Vector<double>& x,
                              const Vector<double>& x_centre)
   {
@@ -34,14 +35,9 @@ namespace oomph
     u_cart[1] = u_polar[0] * cos(theta) - u_polar[1] * sin(theta);
   }
 
-  // Corner singularities at x=0 and x=1
-  //------------------------------------
-
-
   /// Function that computes the fitting pressure solution near the corner
   /// (0,0)
   double pressure_singular_fct(const Vector<double>& x)
-  // const Vector<double>& x_centre)
   {
     double p = 0.0;
 
@@ -56,46 +52,16 @@ namespace oomph
     Vector<double> grad_p(2, 0.0);
 
     return grad_p;
-  } // End of function
+  }
 
-
-  // /// Function that computes the fitting velocity solution near the corner
-  // /// (0,0)
-  // Vector<double> boundary_condition_velocity_fct(const Vector<double>& x)
-  // // const Vector<double>& x_centre)
-  // {
-  //   // Initialise velocity vector to return
-  //   Vector<double> u(2, 0.0);
-
-  //   // Find radial distance of polar coordinates centered at the point
-  //   // x_centre
-  //   Vector<double> x_centre = x_centre_node_pt->position();
-  //   double r = get_radial_distance(x, x_centre);
-  //   // Find angle of polar coordinates centered at the point x_centre
-  //   double theta = get_azimuthal_angle(x, x_centre);
-
-  //   // Compute lambda, the ratio of
-  //   double lambda = MathematicalConstants::Pi / parameters::contact_angle;
-
-  //   if (r > 1e-3)
-  //   {
-  //     u[0] = sin((lambda - 1) * theta);
-  //     u[1] = cos((lambda - 1) * theta);
-  //   }
-
-  //   // return the velocity vector
-  //   return u;
-  // }
-
-
+  /// Function that return the singular velocity function
   std::function<Vector<double>(const Vector<double>&)> velocity_singular_function_factory(
     const double& contact_angle, Node*& x_centre_node_pt)
   {
-    /// Function that computes the fitting velocity solution near the corner
-    /// (0,0)
+    /// Function that computes the singular velocity solution near the corner at
+    /// x_centre_node_pt for a given contact angle
     return [contact_angle,
             x_centre_node_pt](const Vector<double>& x) -> Vector<double>
-    // const Vector<double>& x_centre)
     {
       // Initialise velocity vector to return
       Vector<double> u(3, 0.0);
@@ -119,14 +85,15 @@ namespace oomph
     };
   }
 
+  /// Function that returns the gradient of the singular velocity function with
+  /// the appropriate parameters
   std::function<Vector<Vector<double>>(const Vector<double>&)> grad_velocity_singular_function_factory(
     const double& contact_angle, Node*& x_centre_node_pt)
-  /// Function that computes the gradient of the fitting velocity solution
-  /// near the corner (0,0): grad[i][j] = du_i/dx_j
+  /// Function that computes the gradient of the singular velocity
+  /// near the corner x_centre_node_pt: \f$grad[i][j] = du_i/dx_j\f$
   {
     return [contact_angle,
             x_centre_node_pt](const Vector<double>& x) -> Vector<Vector<double>>
-    //, const Vector<double>& x_centre)
     {
       // Initialise the gradient matrix to return
       Vector<Vector<double>> grad_u(2);
@@ -180,7 +147,8 @@ namespace oomph
     }; // End of function
   }
 
-
+  /// Function that returns an eigensolution traction function with the
+  /// appropriate parameters.
   std::function<void(const double&,
                      const Vector<double>&,
                      const Vector<double>&,
@@ -191,6 +159,15 @@ namespace oomph
     const std::function<Vector<Vector<double>>(const Vector<double>&)>&
       grad_velocity_singular_fct)
   {
+    // Return a lambda function that captures the contact angle, the node
+    // x_centre_node_pt and the gradient of the singular velocity function
+    // grad_velocity_singular_fct
+    // and takes 't', 'x', 'n' and 'result' as arguments
+    // The lambda function computes the traction at a point x with normal n
+    // using the gradient of the singular velocity function
+    // grad_velocity_singular_fct
+    // The traction is computed as - (grad u + grad u ^ T) dot n
+    // where u is the singular velocity function
     return [contact_angle, x_centre_node_pt, grad_velocity_singular_fct](
              const double& t,
              const Vector<double>& x,
@@ -198,7 +175,6 @@ namespace oomph
              Vector<double>& result) -> void
     {
       Vector<Vector<double>> grad_u = grad_velocity_singular_fct(x);
-      // traction = - (grad u + grad u ^ T) dot unit normal
       const unsigned dim = x.size();
       for (unsigned i = 0; i < dim; i++)
       {
@@ -210,6 +186,9 @@ namespace oomph
     };
   }
 
+
+  /// Function that returns an eigensolution slip function with the
+  /// appropriate parameters.
   std::function<void(const double&,
                      const Vector<double>&,
                      const Vector<double>&,
@@ -220,6 +199,8 @@ namespace oomph
       velocity_singular_fct)
   {
     // Return a lambda that captures 's' and takes 't' and 'x' as arguments
+    // The lambda function computes the eigensolution's  contribuiton to the
+    // slip condition.
     return [slip_length, velocity_singular_fct](const double& t,
                                                 const Vector<double>& x,
                                                 const Vector<double>& n,
