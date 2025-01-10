@@ -31,7 +31,7 @@
 #include "navier_stokes.h"
 
 #include "meshes/simple_rectangular_quadmesh.h"
-#include "navier_stokes_elements_with_singularity.h"
+#include "pressure_gradient_singular_navier_stokes_solution_elements.h"
 
 using namespace std;
 
@@ -133,6 +133,11 @@ public:
       }
       outfile << std::endl;
     }
+  }
+
+  double get_error()
+  {
+    return 0;
   }
 };
 
@@ -1246,12 +1251,12 @@ public:
 private:
   /// Pointer to the element defining the unknown C1 (Note: eqn element is
   /// templated by the wrapped element!)
-  SingularNavierStokesSolutionElement<ELEMENT>*
+  PressureGradientSingularNavierStokesSolutionElement<ELEMENT>*
     Singular_navier_stokes_solution1_element_pt;
 
   /// Pointer to the element defining the unknown C2 (Note: eqn element is
   /// templated by the wrapped element!)
-  SingularNavierStokesSolutionElement<ELEMENT>*
+  PressureGradientSingularNavierStokesSolutionElement<ELEMENT>*
     Singular_navier_stokes_solution2_element_pt;
 
   /// Pointer to the C mesh associated with the elements defining the
@@ -1648,7 +1653,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Create a pointer to a C1EquationElement object
   Singular_navier_stokes_solution1_element_pt =
-    new SingularNavierStokesSolutionElement<ELEMENT>;
+    new PressureGradientSingularNavierStokesSolutionElement<ELEMENT>;
 
 
   if (CommandLineArgs::command_line_flag_has_been_set("--blend"))
@@ -1717,7 +1722,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Create a pointer to a C1EquationElement object
   Singular_navier_stokes_solution1_element_pt =
-    new SingularNavierStokesSolutionElement<ELEMENT>;
+    new PressureGradientSingularNavierStokesSolutionElement<ELEMENT>;
 
   // Set the pointer to the first velocity singularity function for this
   // element, defined in Global_parameters namespace
@@ -1762,7 +1767,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
 
   // Create a pointer to a C2EquationElement object
   Singular_navier_stokes_solution2_element_pt =
-    new SingularNavierStokesSolutionElement<ELEMENT>;
+    new PressureGradientSingularNavierStokesSolutionElement<ELEMENT>;
 
   // Set the pointer to the second velocity singularity function for
   // this element, defined in Global_parameters namespace
@@ -1845,6 +1850,9 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem()
     }
 
 #ifndef DONT_USE_SINGULARITY
+
+    // Augment this element
+    el_pt->augment();
 
     // Set the pointer to the element that determines the amplitude
     // of the first singular fct
@@ -2241,7 +2249,7 @@ int main(int argc, char** argv)
 
   // Build the problem with singular QTaylorHoodElements
   RectangularDrivenCavityProblem<
-    NavierStokesElementWithSingularity<MyTaylorHoodElement>>
+    SingularNavierStokesElement<MyTaylorHoodElement>>
     problem;
 
 #endif

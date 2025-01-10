@@ -46,9 +46,9 @@ namespace PerturbationSolution
   }
 
   /// function to convert velocity vectors from polar to Cartesian coords
-  void polar_to_cartesian_velocity(const Vector<double> u_polar,
-                                   const double phi,
-                                   Vector<double>& u_cart)
+  void polar_to_cartesian_velocity_local(const Vector<double> u_polar,
+                                         const double phi,
+                                         Vector<double>& u_cart)
   {
     u_cart[0] = u_polar[0] * cos(phi) - u_polar[1] * sin(phi);
     u_cart[1] = u_polar[0] * sin(phi) + u_polar[1] * cos(phi);
@@ -243,7 +243,7 @@ namespace PerturbationSolution
       veloc_and_pressure_term_pt[i](r, phi, u_polar, p_i);
 
       // convert coordinates to Cartesians
-      polar_to_cartesian_velocity(u_polar, phi, u_i);
+      polar_to_cartesian_velocity_local(u_polar, phi, u_i);
 
       // multiply by appropriate power of Re and add it to the solution
       u[0] -= pow(Re, i) * u_i[0];
@@ -292,7 +292,7 @@ namespace PerturbationSolution
     veloc_and_pressure_term_pt[0](r, phi, u_polar, p_i);
 
     // convert coordinates to Cartesians
-    polar_to_cartesian_velocity(u_polar, phi, u_i);
+    polar_to_cartesian_velocity_local(u_polar, phi, u_i);
 
     // multiply by appropriate power of Re and add it to the solution
     soln[0] = -u_i[0];
@@ -331,7 +331,7 @@ namespace PerturbationSolution
     veloc_and_pressure_term_pt[1](r, phi, u_polar, p_i);
 
     // convert coordinates to Cartesians
-    polar_to_cartesian_velocity(u_polar, phi, u_i);
+    polar_to_cartesian_velocity_local(u_polar, phi, u_i);
 
     // multiply by appropriate power of Re and add it to the solution
     soln[0] = -u_i[0];
