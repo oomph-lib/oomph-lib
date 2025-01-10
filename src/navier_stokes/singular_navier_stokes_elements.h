@@ -22,6 +22,43 @@ namespace oomph
   /// Dirichlet BCs are applied in hijacking manner and must be imposed
   /// from each element that shares a boundary node that is subject to
   /// a Dirichlet condition.
+  ///
+  /// Let the actual, or total, velocity be denoted \f$ u \f$, the singular velocity
+  /// be \f$ \bar{u} \f$ and the additional finite element correction velocity be
+  /// \f$ \tilde{u} \f$.
+  /// These elements store the total velocity and the finite element correction
+  /// velocity, with the singular velocity being stored in the associated
+  /// SingularNavierStokesSolutionElement.
+  ///
+  /// Weak form of the equations imposed:
+  /// - Singular contribution to the momentum equations, if not all the singular
+  /// functions satisfy the Stokes equation
+  /// \f$ (R^M_i)_{\text{singular}} = \int{\Omega} \bar{p} \frac{\partial \psi^f}{\partial x_i} - \frac{\mu_2}{\mu_1}\left( \frac{\partial u_i}{\partial x_k} + \Gamma_i \frac{\partial u_i}{\partial x_k} \right) \frac{\partial \psi^f}{\partial x_k} \ d\Omega \f$
+  /// - Singular contribution to the momentum equations, if Re > 0
+  /// \f$ (R^M_i)_{\text{singular}} = - \int{\Omega} Re \left( \bar{u} \left(\frac{\partial \bar{u}_i}{\partial x_k} + \frac{\partial \tilde{u}_i}{\partial x_k}\right) + \tilde{u} \frac{\partial \bar{u}_i}{\partial x_k} \right) \psi^f \ d\Omega \f$
+  ///
+  /// - Singular contribution to the continuity equation
+  /// \f$ (R^C)_{\text{singular}} = \int{\Omega} \frac{\partial \bar{u}_i}{\partial x_i} \psi^f \ d\Omega \f$
+  ///
+  /// - Total velocity equation
+  /// \f$ R_i^u = u_i - \bar{u}_i - \tilde{u}_i \f$
+  ///
+  /// - Total pressure equation
+  /// \f$ R^p = p - \bar{p} - \tilde{p} \f$
+  ///
+  /// - If there is a dirichlet BC on the velocity component, the residual
+  /// is modified to
+  /// \f$ R^u_i = \bar{u}_i + \tilde{u}_i - u^{\text{dirichlet}}_i \f$
+  /// where \f$ u^{\text{dirichlet}} \f$ is the imposed value of the velocity
+  /// component at the node.
+  ///
+  /// - If there is a dirichlet BC on the pressure dof, the residual is modified
+  /// to
+  /// \f$ R^p = \bar{p} + \tilde{p} - p_{\text{dirichlet}} \f$
+  /// where \f$ p_{\text{dirichlet}} \f$ is the imposed value of the pressure
+  /// dof.
+  ///
+  ///
   //=======================================================================
   template<class BASIC_NAVIER_STOKES_ELEMENT>
   class SingularNavierStokesElement
