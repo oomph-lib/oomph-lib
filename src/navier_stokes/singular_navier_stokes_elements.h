@@ -1989,10 +1989,6 @@ namespace oomph
               }
             } /*End of Jacobian calculation*/
           }
-          else
-          {
-            cout << "pressure dof is subject to dirichlet bc" << endl;
-          }
         } // End of loop over l
       } // End of loop over integration points
         //
