@@ -359,7 +359,7 @@ namespace oomph
     el_pt->pressure_singular_fct_pt() = &pressure_singular_fct;
 
     // The singular function satisfies the Stokes equation
-    el_pt->singular_function_satisfies_stokes_equation() = false;
+    el_pt->singular_function_satisfies_stokes_equation() = true;
 
     // el_pt->pin_c();
     el_pt->set_c(0.0);
