@@ -80,7 +80,7 @@ namespace oomph
 
       // return the velocity vector
       return u;
-    }; // End of lambda function 
+    }; // End of lambda function
   }
 
   /// Function that returns the gradient of the singular velocity function with
