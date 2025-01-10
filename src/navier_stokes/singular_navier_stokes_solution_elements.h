@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2022 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -24,13 +24,8 @@
 // LIC//
 // LIC//====================================================================
 // Header file for Navier Stokes elements with singularity
-#ifndef SINGULAR_NAVIER_STOKES_SOLUTION_ELEMENTS_HEADER
-#define SINGULAR_NAVIER_STOKES_SOLUTION_ELEMENTS_HEADER
-
-
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
-/// ////////////////////////////////////////////////////////////////////
+#ifndef OOMPH_SINGULAR_NAVIER_STOKES_SOLUTION_ELEMENTS_HEADER
+#define OOMPH_SINGULAR_NAVIER_STOKES_SOLUTION_ELEMENTS_HEADER
 
 namespace oomph
 {
@@ -63,6 +58,14 @@ namespace oomph
   {
   public:
     /// Function pointer to the velocity singular function:
+    typedef Vector<double> (*NavierStokesVelocitySingularFctPt)(
+      const Vector<double>& x);
+
+    /// Function pointer to the gradient of the velocity singular function:
+    typedef Vector<Vector<double>> (*NavierStokesGradVelocitySingularFctPt)(
+      const Vector<double>& x);
+
+    /// Function pointer to the velocity singular function:
     typedef std::function<Vector<double>(const Vector<double>&)>
       NavierStokesVelocitySingularFct;
 
@@ -79,6 +82,16 @@ namespace oomph
       const Vector<double>& x);
 
   private:
+    /// Pointer to wrapped Navier-Stokes element
+    WRAPPED_NAVIER_STOKES_ELEMENT* Wrapped_navier_stokes_el_pt;
+
+    /// Pointer to velocity singular function
+    NavierStokesVelocitySingularFctPt Velocity_singular_fct_pt;
+
+    /// Pointer to gradient of velocity singular function;
+    /// grad[i][j] = du_i/dx_j
+    NavierStokesGradVelocitySingularFctPt Grad_velocity_singular_fct_pt;
+
     /// Pointer to velocity singular function
     NavierStokesVelocitySingularFct Velocity_singular_fct;
 
@@ -105,6 +118,13 @@ namespace oomph
     /// Constructor
     SingularNavierStokesSolutionElement()
     {
+      // Initialise Function pointer to velocity singular function to NULL
+      Velocity_singular_fct_pt = 0;
+
+      // Initialise Function pointer to gradient of velocity singular
+      // function to NULL
+      Grad_velocity_singular_fct_pt = 0;
+
       // Initialise Function pointer to pressure singular function to NULL
       Pressure_singular_fct_pt = 0;
 
@@ -112,12 +132,16 @@ namespace oomph
       // function to NULL
       Grad_pressure_singular_fct_pt = 0;
 
+      // Initalise pointer to the wrapped Navier-Stokes element which will be
+      // used to compute the residual and which includes the point O
+      Wrapped_navier_stokes_el_pt = 0;
+
       // Initialise the pointer to the direction of the derivative used
       // for the residual of this element
       Direction_pt = 0;
 
       // Safe assumption: Singular fct does not satisfy Stokes eqn
-      Singular_function_satisfies_stokes_equation = true;
+      Singular_function_satisfies_stokes_equation = false;
 
       // Create a single item of internal Data, storing one unknown which
       // represents the unknown C.
@@ -161,6 +185,74 @@ namespace oomph
       return internal_data_pt(0)->unpin(0);
     }
 
+    /// Set pointer to associated wrapped Navier-Stokes element which
+    /// contains the singularity (at local coordinate s). Also specify the
+    /// direction in which the slope of the FE part of the pressure is
+    /// set to zero. (Could also set a velocity derivative to zero but this
+    /// needs to be done with a separate function. Write it if you need it...)
+    void set_wrapped_navier_stokes_element_pt(
+      WRAPPED_NAVIER_STOKES_ELEMENT* wrapped_navier_stokes_el_pt,
+      const Vector<double>& s,
+      unsigned* dir_pt)
+    {
+      // Assign the pointer to the variable Wrapped_navier_stokes_el_pt
+      Wrapped_navier_stokes_el_pt = wrapped_navier_stokes_el_pt;
+
+      // Find number of nodes in the element
+      unsigned nnod = wrapped_navier_stokes_el_pt->nnode();
+
+      // Loop over the nodes of the element
+      for (unsigned j = 0; j < nnod; j++)
+      {
+        // Add the node as external data in the
+        // SingularNavierStokesSolutionElement class. Note that this
+        // assumes that the pressure is stored at the nodes (Taylor Hood type
+        // NSt elements, which is assumed elsewhere too...)
+        add_external_data(Wrapped_navier_stokes_el_pt->node_pt(j));
+      }
+
+      // Assign the pointer to the local coordinate at which the residual
+      // will be computed
+      S_in_wrapped_navier_stokes_element = s;
+
+      // Assign the pointer to the direction at which the derivative used
+      // in the residual will be computed
+      Direction_pt = dir_pt;
+    }
+
+    /// Access function for the wrapped element pointer
+    WRAPPED_NAVIER_STOKES_ELEMENT* wrapped_navier_stokes_el_pt()
+    {
+      return Wrapped_navier_stokes_el_pt;
+    }
+
+    /// Access function for the local coordinate of the singularity in the
+    /// wrapped Navier-Stokes element.
+    Vector<double> s_in_wrapped_navier_stokes_element()
+    {
+      return S_in_wrapped_navier_stokes_element;
+    }
+
+    /// Access function for the direction of the derivative used for the
+    /// residual of this element. The direction is given by the pointer to the
+    /// unsigned Direction_pt.
+    unsigned* direction_pt()
+    {
+      return Direction_pt;
+    }
+
+    /// Access function to pointer to velocity singular function
+    NavierStokesVelocitySingularFctPt& velocity_singular_fct_pt()
+    {
+      return Velocity_singular_fct_pt;
+    }
+
+    /// Access function to pointer to gradient of velocity singular function
+    NavierStokesGradVelocitySingularFctPt& grad_velocity_singular_fct_pt()
+    {
+      return Grad_velocity_singular_fct_pt;
+    }
+
     /// Access function to pointer to velocity singular function
     NavierStokesVelocitySingularFct& velocity_singular_fct()
     {
@@ -188,17 +280,24 @@ namespace oomph
     /// Evaluate velocity singular function at Eulerian position x
     Vector<double> velocity_singular_function(const Vector<double>& x) const
     {
-#ifdef PARANOID
       if (Velocity_singular_fct == 0)
       {
-        std::stringstream error_stream;
-        error_stream
-          << "Pointer to velocity singular function hasn't been defined!"
-          << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        if (Velocity_singular_fct_pt == 0)
+        {
+          std::stringstream error_stream;
+          error_stream
+            << "Pointer to velocity singular function hasn't been defined!"
+            << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+        else
+        {
+          // Evaluate velocity singular function
+          return (*Velocity_singular_fct_pt)(x);
+        }
       }
-#endif
 
       // Evaluate velocity singular function
       return Velocity_singular_fct(x);
@@ -212,11 +311,20 @@ namespace oomph
 #ifdef PARANOID
       if (Grad_velocity_singular_fct == 0)
       {
-        std::stringstream error_stream;
-        error_stream << "Pointer to gradient of velocity singular function "
-                     << "hasn't been defined!" << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+        if (Grad_velocity_singular_fct_pt == 0)
+        {
+          std::stringstream error_stream;
+          error_stream << "Pointer to gradient of velocity singular function "
+                       << "hasn't been defined!" << std::endl;
+          throw OomphLibError(error_stream.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+        else
+        {
+          // Evaluate gradient of velocity singular function
+          return (*Grad_velocity_singular_fct_pt)(x);
+        }
       }
 #endif
 
@@ -274,6 +382,10 @@ namespace oomph
 
       // Find the dimension of the problem
       unsigned cached_dim = 2;
+      if (Wrapped_navier_stokes_el_pt)
+      {
+        cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      }
 
       // Multiply the components of the velocity vector by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)
@@ -299,6 +411,10 @@ namespace oomph
 
       // Find the dimension of the problem
       unsigned cached_dim = 2;
+      if (Wrapped_navier_stokes_el_pt)
+      {
+        cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      }
 
       // Multiply the components of the gradient of velocity by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)
@@ -337,6 +453,10 @@ namespace oomph
 
       // Find the dimension of the problem
       unsigned cached_dim = 2;
+      if (Wrapped_navier_stokes_el_pt)
+      {
+        cached_dim = Wrapped_navier_stokes_el_pt->dim();
+      }
 
       // Multiply the components of the gradient of pressure by the unknown C
       for (unsigned d = 0; d < cached_dim; d++)

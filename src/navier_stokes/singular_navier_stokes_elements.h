@@ -736,11 +736,19 @@ namespace oomph
         // ---------------------------------------------------------------------
         // Total velocity
         Vector<double> velocity(cached_dim, 0.0);
+        Vector<double> velocity_bar(cached_dim, 0.0);
         double pressure = 0;
         if (this->is_augmented())
         {
-          velocity = interpolated_u_reconstructed(s);
-          pressure = this->interpolated_total_p(s);
+          // velocity = interpolated_u_reconstructed(s);
+          this->interpolated_u_nst(s, velocity);
+          velocity_bar = u_bar(x);
+          for (unsigned i = 0; i < cached_dim; i++)
+          {
+            velocity[i] += velocity_bar[i];
+          }
+          // pressure = this->interpolated_total_p(s);
+          pressure = this->interpolated_p_nst(s) + p_bar(x);
         }
         else
         {
@@ -849,13 +857,10 @@ namespace oomph
         } // End of augmented
 
         // Output the stored error
-        outfile << this->get_error() << " ";
+        // outfile << this->get_error() << " ";
 
         // Output the element size
-        outfile << this->size() << " ";
-
-        // Output the continuity residual
-        outfile << continuity_residual(s) << " ";
+        // outfile << this->size() << " ";
 
         outfile << std::endl;
       }
@@ -1152,6 +1157,40 @@ namespace oomph
       return stress_tensor;
     }
 
+    /// Derivative of pressure in direction indicated by pointer to unsigned
+    double dpdx_fe_only(Vector<double> s, const unsigned* direction_pt)
+    {
+      // Find the number of pressure dofs in the wrapped Navier-Stokes
+      // element pointed by
+      // the SingularNavierStokesSolutionElement class
+      unsigned n_pres = this->npres_nst();
+
+      // Find the dimension of the problem
+      unsigned cached_dim = this->dim();
+
+      // Set up memory for the pressure shape functions and their derivatives
+      Shape psip(n_pres), testp(n_pres);
+      DShape dpsipdx(n_pres, cached_dim), dtestpdx(n_pres, cached_dim);
+
+      // Compute the pressure shape functions and their derivatives
+      // at the local coordinate S_in_wrapped_navier_stokes_element
+      // (Test fcts not really needed but nobody's got around to writing
+      // a fct that only picks out the basis fcts.
+      this->dpshape_and_dptest_eulerian_nst(s, psip, dpsipdx, testp, dtestpdx);
+
+      // Initialise the derivative used for the residual
+      double interpolated_dpdx_fe_only = 0.0;
+
+      // Compute the derivative used for the residual. The direction of the
+      // derivative is given by *Direction_pt
+      for (unsigned j = 0; j < n_pres; j++)
+      {
+        interpolated_dpdx_fe_only += this->p_nst(j) * dpsipdx(j, *direction_pt);
+      }
+
+      return interpolated_dpdx_fe_only;
+    }
+
     double continuity_residual(const Vector<double>& s)
     {
       // Find the dimension of the problem
@@ -1346,6 +1385,9 @@ namespace oomph
       // Find the dimension of the problem
       unsigned cached_dim = this->dim();
 
+      // Do all the singular functions satisfy the Stokes eqn?
+      bool all_singular_functions_satisfy_stokes_equation = true;
+
       // Find the number of singularities
       unsigned n_sing = C_equation_elements_pt.size();
 
@@ -1354,6 +1396,11 @@ namespace oomph
       for (unsigned i = 0; i < n_sing; i++)
       {
         local_equation_number_C[i] = this->external_local_eqn(i, 0);
+        if (!(C_equation_elements_pt[i]
+                ->singular_function_satisfies_stokes_equation()))
+        {
+          all_singular_functions_satisfy_stokes_equation = false;
+        }
       }
 
       // Find out how many nodes there are
@@ -1473,40 +1520,47 @@ namespace oomph
               // If it is not a Dirichlet BC
               if (not(Node_is_subject_to_velocity_dirichlet_bcs[l][i]))
               {
-                // Stress contribution
-                // -------------------
-                residuals[local_eqn] += p_bar_local * dtestfdx(l, i) * W;
-                for (unsigned k = 0; k < cached_dim; k++)
+                // Linear terms only needed if singular solution doesn't
+                // satisfy
+                //--------------------------------------------------------------
+                // Stokes eqn
+                //-----------
+                if (!all_singular_functions_satisfy_stokes_equation)
                 {
-                  residuals[local_eqn] -=
-                    visc_ratio *
-                    (grad_u_bar_local[i][k] +
-                     this->Gamma[i] * grad_u_bar_local[k][i]) *
-                    dtestfdx(l, k) * W;
-                }
-
-                // Jacobian
-                if (flag)
-                {
-                  for (unsigned ss = 0; ss < n_sing; ss++)
+                  // Stress contribution
+                  // -------------------
+                  residuals[local_eqn] += p_bar_local * dtestfdx(l, i) * W;
+                  for (unsigned k = 0; k < cached_dim; k++)
                   {
-                    const int local_unknown = local_equation_number_C[ss];
-                    if (local_unknown >= 0)
+                    residuals[local_eqn] -=
+                      visc_ratio *
+                      (grad_u_bar_local[i][k] +
+                       this->Gamma[i] * grad_u_bar_local[k][i]) *
+                      dtestfdx(l, k) * W;
+                  }
+
+                  // Jacobian
+                  if (flag)
+                  {
+                    for (unsigned ss = 0; ss < n_sing; ss++)
                     {
-                      jacobian(local_eqn, local_unknown) +=
-                        p_hat_local[ss] * dtestfdx(l, i) * W;
-                      for (unsigned k = 0; k < cached_dim; k++)
+                      const int local_unknown = local_equation_number_C[ss];
+                      if (local_unknown >= 0)
                       {
-                        jacobian(local_eqn, local_unknown) -=
-                          visc_ratio *
-                          (grad_u_hat_local[ss][i][k] +
-                           this->Gamma[i] * grad_u_hat_local[ss][k][i]) *
-                          dtestfdx(l, k) * W;
+                        jacobian(local_eqn, local_unknown) +=
+                          p_hat_local[ss] * dtestfdx(l, i) * W;
+                        for (unsigned k = 0; k < cached_dim; k++)
+                        {
+                          jacobian(local_eqn, local_unknown) -=
+                            visc_ratio *
+                            (grad_u_hat_local[ss][i][k] +
+                             this->Gamma[i] * grad_u_hat_local[ss][k][i]) *
+                            dtestfdx(l, k) * W;
+                        }
                       }
                     }
                   }
                 }
-
 
                 // Nonlinear term. Always add (unless Re=0)
                 //-----------------------------------------
@@ -1635,161 +1689,6 @@ namespace oomph
           } // End of if not boundary condition
         } // End of loop over l
       } // End of loop over integration points
-
-
-      // VELOCITY DIRICHLET BCS
-      //-----------------------
-      Vector<double> u_bar_at_node(cached_dim);
-      Vector<Vector<double>> u_hat_at_node(n_sing);
-      for (unsigned i = 0; i < n_sing; i++)
-      {
-        u_hat_at_node[i].resize(cached_dim);
-      }
-
-      // Loop over the nodes
-      for (unsigned l = 0; l < n_node; l++)
-      {
-        // Find the global coordinate of the node
-        Vector<double> global_coordinate(cached_dim);
-        for (unsigned d = 0; d < cached_dim; d++)
-        {
-          global_coordinate[d] = this->raw_nodal_position(l, d);
-        }
-
-        // Get singular velocity at node
-        u_bar_at_node = this->u_bar(global_coordinate);
-        for (unsigned i = 0; i < n_sing; i++)
-        {
-          u_hat_at_node[i] = velocity_singular_function(i, global_coordinate);
-        }
-
-        // Loop over the velocity components
-        for (unsigned d = 0; d < cached_dim; d++)
-        {
-          // Find its local equation number
-          local_eqn = this->momentum_local_eqn(l, d);
-
-          // If it is not pinned
-          if (local_eqn >= 0)
-          {
-            // If it is a Dirichlet boundary condition
-            if (Node_is_subject_to_velocity_dirichlet_bcs[l][d])
-            {
-              // Initialise the residual
-              residuals[local_eqn] = 0.0;
-
-              // Add the contribution of the nodal value
-              residuals[local_eqn] += this->u_nst(l, d);
-
-              // Add the contribution of the singularities (all of them,
-              // summed)
-              residuals[local_eqn] += u_bar_at_node[d];
-
-              // Substract the imposed Dirichlet value
-              residuals[local_eqn] -= Imposed_velocity_values_at_node[l][d];
-
-              if (flag)
-              {
-                // Wipe the existing entries
-                unsigned n_dof = this->ndof();
-                for (unsigned j = 0; j < n_dof; j++)
-                {
-                  jacobian(local_eqn, j) = 0.0;
-                }
-
-                // Add diagonal entry
-                jacobian(local_eqn, local_eqn) += 1.0;
-
-
-                // Add derivative w.r.t. the Cs
-                for (unsigned i = 0; i < n_sing; i++)
-                {
-                  // Find the contribution of the additional unknowns to
-                  // the jacobian
-                  local_unknown = local_equation_number_C[i];
-                  if (local_unknown >= 0)
-                  {
-                    jacobian(local_eqn, local_unknown) += u_hat_at_node[i][d];
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-
-      // PRESSURE DIRICHLET BCS
-      //-----------------------
-
-      // Loop over the pressure dofs
-      for (unsigned l = 0; l < n_pres; l++)
-      {
-        // Find its local equation number
-        local_eqn = this->p_local_eqn(l);
-
-        // If it is not pinned
-        if (local_eqn >= 0)
-        {
-          // If it is subject to a Dirichlet BC
-          if (Pressure_dof_is_subject_to_dirichlet_bc[l])
-          {
-            // Find its global coordinate
-            // This conversionly works for Taylor Hood type elements
-            // but there's not much point assigning pressure dofs
-            Node* p_nod_pt = this->node_pt(this->Pconv[l]);
-
-            oomph_info << "Constrained pressure node: " << this->Pconv[l]
-                       << " at: ";
-
-            Vector<double> global_coordinate(cached_dim, 0.0);
-            for (unsigned d = 0; d < cached_dim; d++)
-            {
-              global_coordinate[d] = p_nod_pt->x(d);
-              oomph_info << global_coordinate[d] << " ";
-            }
-            oomph_info << std::endl;
-
-            // Initialise its residual component
-            residuals[local_eqn] = 0.0;
-
-            // Add the contribution of the pressure unknown
-            residuals[local_eqn] += this->p_nst(l);
-
-            // Add singular contributions
-            residuals[local_eqn] += p_bar(global_coordinate);
-
-            // Substract the imposed pressure value
-            residuals[local_eqn] -= Imposed_value_at_pressure_dof[l];
-
-            if (flag)
-            {
-              // Wipe the existing entries
-              unsigned n_dof = this->ndof();
-              for (unsigned j = 0; j < n_dof; j++)
-              {
-                jacobian(local_eqn, j) = 0.0;
-              }
-
-              // Add diagonal entry
-              jacobian(local_eqn, local_eqn) += 1.0;
-
-              // Add derivative w.r.t. the Cs
-              for (unsigned i = 0; i < n_sing; i++)
-              {
-                // Find the contribution of the additional unknowns to
-                // the jacobian
-                local_unknown = local_equation_number_C[i];
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) +=
-                    pressure_singular_function(i, global_coordinate);
-                }
-              }
-            }
-          }
-        }
-      }
     }
 
     void fill_in_generic_residual_contribution_total_velocity(
@@ -2010,53 +1909,211 @@ namespace oomph
           if (local_eqn >= 0)
           {
             // If not subject to Dirichlet BC
-            if (not(Pressure_dof_is_subject_to_dirichlet_bc[l]))
+            Vector<double> pos_n(2, 0.0);
+            for (unsigned k = 0; k < 2; k++)
             {
-              Vector<double> pos_n(2, 0.0);
-              for (unsigned k = 0; k < 2; k++)
+              pos_n[k] = this->nodal_position(this->Pconv[l], k);
+            }
+
+            // residuals[local_eqn] += (interpolated_p_total - (interpolated_p
+            // + p_bar(interpolated_x))) *testp[l] * W;
+            residuals[local_eqn] +=
+              (nodal_value(this->Pconv[l], total_p_nodal_index_nst()) -
+               (nodal_value(this->Pconv[l], p_nodal_index_nst()) +
+                p_bar(pos_n)));
+
+            /*CALCULATE THE JACOBIAN*/
+            if (flag)
+            {
+              // Loop over the singularities and add the
+              // contributions of the additional
+              // unknowns associated with them to the
+              // jacobian if they are not pinned
+              for (unsigned ss = 0; ss < n_sing; ss++)
               {
-                pos_n[k] = this->nodal_position(l, k);
+                local_unknown = local_equation_number_C[ss];
+                if (local_unknown >= 0)
+                {
+                  jacobian(local_eqn, local_unknown) +=
+                    this->pressure_singular_function(ss, pos_n);
+                }
               }
 
-              // residuals[local_eqn] += (interpolated_p_total - (interpolated_p
-              // + p_bar(interpolated_x))) *testp[l] * W;
-              residuals[local_eqn] +=
-                (nodal_value(l, total_p_nodal_index_nst()) -
-                 (nodal_value(l, p_nodal_index_nst()) + p_bar(pos_n)));
-
-              /*CALCULATE THE JACOBIAN*/
-              if (flag)
+              local_unknown = total_p_local_unknown(l);
+              if (local_unknown >= 0)
               {
-                // Loop over the singularities and add the
-                // contributions of the additional
-                // unknowns associated with them to the
-                // jacobian if they are not pinned
-                for (unsigned ss = 0; ss < n_sing; ss++)
-                {
-                  local_unknown = local_equation_number_C[ss];
-                  if (local_unknown >= 0)
-                  {
-                    jacobian(local_eqn, local_unknown) +=
-                      this->pressure_singular_function(ss, pos_n);
-                  }
-                }
+                jacobian(local_eqn, local_unknown) += 1.0;
+              }
 
-                local_unknown = total_p_local_unknown(l);
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) += 1.0;
-                }
-
-                local_unknown = p_local_unknown(l);
-                if (local_unknown >= 0)
-                {
-                  jacobian(local_eqn, local_unknown) -= 1.0;
-                }
-              } /*End of Jacobian calculation*/
-            }
-          } // End of if not boundary condition
+              local_unknown = p_local_unknown(l);
+              if (local_unknown >= 0)
+              {
+                jacobian(local_eqn, local_unknown) -= 1.0;
+              }
+            } /*End of Jacobian calculation*/
+          }
+          else
+          {
+            cout << "pressure dof is subject to dirichlet bc" << endl;
+          }
         } // End of loop over l
       } // End of loop over integration points
+        //
+
+
+      // VELOCITY DIRICHLET BCS
+      //-----------------------
+      Vector<double> u_bar_at_node(cached_dim);
+      Vector<Vector<double>> u_hat_at_node(n_sing);
+      for (unsigned i = 0; i < n_sing; i++)
+      {
+        u_hat_at_node[i].resize(cached_dim);
+      }
+
+      // Loop over the nodes
+      for (unsigned l = 0; l < n_node; l++)
+      {
+        // Find the global coordinate of the node
+        Vector<double> global_coordinate(cached_dim);
+        for (unsigned d = 0; d < cached_dim; d++)
+        {
+          global_coordinate[d] = this->raw_nodal_position(l, d);
+        }
+
+        // Get singular velocity at node
+        u_bar_at_node = this->u_bar(global_coordinate);
+        for (unsigned i = 0; i < n_sing; i++)
+        {
+          u_hat_at_node[i] = velocity_singular_function(i, global_coordinate);
+        }
+
+        // Loop over the velocity components
+        for (unsigned d = 0; d < cached_dim; d++)
+        {
+          // Find its local equation number
+          local_eqn = this->momentum_local_eqn(l, d);
+
+          // If it is not pinned
+          if (local_eqn >= 0)
+          {
+            // If it is a Dirichlet boundary condition
+            if (Node_is_subject_to_velocity_dirichlet_bcs[l][d])
+            {
+              // Initialise the residual
+              residuals[local_eqn] = 0.0;
+
+              // Add the contribution of the nodal value
+              residuals[local_eqn] += this->u_nst(l, d);
+
+              // Add the contribution of the singularities (all of them,
+              // summed)
+              residuals[local_eqn] += u_bar_at_node[d];
+
+              // Substract the imposed Dirichlet value
+              residuals[local_eqn] -= Imposed_velocity_values_at_node[l][d];
+
+              if (flag)
+              {
+                // Wipe the existing entries
+                unsigned n_dof = this->ndof();
+                for (unsigned j = 0; j < n_dof; j++)
+                {
+                  jacobian(local_eqn, j) = 0.0;
+                }
+
+                // Add diagonal entry
+                jacobian(local_eqn, local_eqn) += 1.0;
+
+
+                // Add derivative w.r.t. the Cs
+                for (unsigned i = 0; i < n_sing; i++)
+                {
+                  // Find the contribution of the additional unknowns to
+                  // the jacobian
+                  local_unknown = local_equation_number_C[i];
+                  if (local_unknown >= 0)
+                  {
+                    jacobian(local_eqn, local_unknown) += u_hat_at_node[i][d];
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+      // PRESSURE DIRICHLET BCS
+      //-----------------------
+
+      // Loop over the pressure dofs
+      for (unsigned l = 0; l < n_pres; l++)
+      {
+        // Find its local equation number
+        local_eqn = this->p_local_eqn(l);
+
+        // If it is not pinned
+        if (local_eqn >= 0)
+        {
+          // If it is subject to a Dirichlet BC
+          if (Pressure_dof_is_subject_to_dirichlet_bc[l])
+          {
+            // Find its global coordinate
+            // This conversionly works for Taylor Hood type elements
+            // but there's not much point assigning pressure dofs
+            Node* p_nod_pt = this->node_pt(this->Pconv[l]);
+
+            oomph_info << "Constrained pressure node: " << this->Pconv[l]
+                       << " at: ";
+
+            Vector<double> global_coordinate(cached_dim, 0.0);
+            for (unsigned d = 0; d < cached_dim; d++)
+            {
+              global_coordinate[d] = p_nod_pt->x(d);
+              oomph_info << global_coordinate[d] << " ";
+            }
+            oomph_info << std::endl;
+
+            // Initialise its residual component
+            residuals[local_eqn] = 0.0;
+
+            // Add the contribution of the pressure unknown
+            residuals[local_eqn] += this->p_nst(l);
+
+            // Add singular contributions
+            residuals[local_eqn] += p_bar(global_coordinate);
+
+            // Substract the imposed pressure value
+            residuals[local_eqn] -= Imposed_value_at_pressure_dof[l];
+
+            if (flag)
+            {
+              // Wipe the existing entries
+              unsigned n_dof = this->ndof();
+              for (unsigned j = 0; j < n_dof; j++)
+              {
+                jacobian(local_eqn, j) = 0.0;
+              }
+
+              // Add diagonal entry
+              jacobian(local_eqn, local_eqn) += 1.0;
+
+              // Add derivative w.r.t. the Cs
+              for (unsigned i = 0; i < n_sing; i++)
+              {
+                // Find the contribution of the additional unknowns to
+                // the jacobian
+                local_unknown = local_equation_number_C[i];
+                if (local_unknown >= 0)
+                {
+                  jacobian(local_eqn, local_unknown) +=
+                    pressure_singular_function(i, global_coordinate);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     /// Overloaded fill-in function
@@ -2071,11 +2128,8 @@ namespace oomph
 
       if (this->IsAugmented)
       {
-        if (this->IsAddingAdditionalTerms)
-        {
-          fill_in_generic_residual_contribution_additional_terms(
-            residuals, jacobian, flag);
-        }
+        fill_in_generic_residual_contribution_additional_terms(
+          residuals, jacobian, flag);
         fill_in_generic_residual_contribution_total_velocity(
           residuals, jacobian, flag);
       }
