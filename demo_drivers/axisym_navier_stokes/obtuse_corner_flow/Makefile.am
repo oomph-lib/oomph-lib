@@ -37,6 +37,8 @@ check_PROGRAMS= \
 	structured_no_correction_region \
 	structured_with_correction \
 	structured_with_correction_region \
+	unstructured_no_correction \
+	unstructured_with_correction \
 	sprittles_region
 
 # Sources for second executable
@@ -44,6 +46,8 @@ structured_no_correction_SOURCES = structured_no_correction.cc
 structured_no_correction_region_SOURCES = structured_no_correction_region.cc
 structured_with_correction_SOURCES = structured_with_correction.cc
 structured_with_correction_region_SOURCES = structured_with_correction_region.cc
+unstructured_no_correction_SOURCES = unstructured_no_correction.cc
+unstructured_with_correction_SOURCES = unstructured_with_correction.cc
 sprittles_region_SOURCES = sprittles_region.cc
 
 # Required libraries: 
