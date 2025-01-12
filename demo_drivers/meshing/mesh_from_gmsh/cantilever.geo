@@ -1,17 +1,20 @@
+// Variables for setting the points
 lx = 0.20;
 ly = 0.02;
 lz = 0.02;
 
+// Number of cells/Quads along y,z abd x axis
 nyz = 3;
 nx = 20;
-//+
+
+//+ Points
 Point(1) = {0.0, 0.0, 0.0, 1.0};
 Point(2) = {0.0, ly, 0.0, 1.0};
 Point(3) = {0.0, ly, lz, 1.0};
 Point(4) = {0.0, 0.0, lz, 1.0};
 
 
-//+
+//+ Lines
 Line(1) = {1, 2};
 Line(2) = {2, 3};
 Line(3) = {3, 4};

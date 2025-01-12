@@ -29,13 +29,15 @@
 
 namespace oomph
 {
+    /// Hexaheadral constituents where each Hexa is consit of 8 nodes
+    /// 6 faces/quads and 12 edges.
     enum Hexaheadral{
         nNodes = 8,
         nFaces = 6,
         nEdges = 12
     };
     //======================================================================
-    /// Constructor: Pass the filename of the hexahedral file
+    /// Constructor: Pass the filename of the hexahedral *.msh file
     /// The assumptions are that the nodes have been assigned boundary
     /// information which is used in the nodal construction to make sure
     /// that BoundaryNodes are constructed. Any additional boundaries are
@@ -62,9 +64,13 @@ namespace oomph
 
 
         if (dim ==2){
-            std::cout<< "Mesh is 2D!" <<std::endl;
-            exit(-1);
+            std::ostringstream error_stream;
+            error_stream << "Mesh is 2D!" <<std::endl;
+            
+            throw OomphLibError(
+                    error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
         }
+        
         // Read in number of elements
         unsigned n_element = bricks.size();
 
@@ -72,8 +78,9 @@ namespace oomph
         unsigned n_local_node = rg.getNodesPerElement();
 
 
-        // Throw an error if we have anything other than [Hexas or Quads] but linear simplices
-        if (n_local_node != Hexaheadral::nNodes && n_local_node != 4)
+        // Throw an error if we have anything other than [Hexas or Quads] but 
+        // linear simplices
+        if ((n_local_node != Hexaheadral::nNodes) && (n_local_node != 4))
         {
             std::ostringstream error_stream;
             error_stream
@@ -138,7 +145,9 @@ namespace oomph
 
             bound[i].resize(nodes[i].boundaries.size());
             int c = 0;
-            for (auto it = nodes[i].boundaries.begin(); it != nodes[i].boundaries.end(); ++it) {
+            for (auto it = nodes[i].boundaries.begin(); 
+                 it != nodes[i].boundaries.end(); ++it) 
+	    {
                 bound[i][c] = *it;
                 c++;
             }
@@ -224,34 +233,45 @@ namespace oomph
                 if (!done[global_node_number])
                 {
                     // If we're on a boundary
-                    // [gmsh convention 1 or greater is a boundary, 0 not a boundary]
+                    // [gmsh convention 1 or greater is a boundary, 
+                    // 0 not a boundary]
                     for (int i = 0; i < bound[global_node_number].size(); ++i)
                     {
                         if (bound[global_node_number][i] > 0)
                         {
                             // Construct the boundary node
-                            Node_pt[global_node_number] = finite_element_pt(e)->construct_boundary_node(gmsh_to_oomph_node[j]);
+                            Node_pt[global_node_number] = 
+                            finite_element_pt(e)->construct_boundary_node(
+                                                        gmsh_to_oomph_node[j]);
 
                             // Add to the boundary lookup scheme.
-                            // bound[global_node_number]-1 because vector indexing starts from 0
-                            add_boundary_node(bound[global_node_number][i] - 1 ,Node_pt[global_node_number]);
+                            // bound[global_node_number]-1 because vector 
+                            // indexing starts from 0
+                            add_boundary_node(bound[global_node_number][i] - 1,
+                                                  Node_pt[global_node_number]);
                         }
                         else
                         {
-                            Node_pt[global_node_number] = finite_element_pt(e)->construct_node(gmsh_to_oomph_node[j]);
+                            Node_pt[global_node_number] = 
+                            finite_element_pt(e)->construct_node(
+                                                        gmsh_to_oomph_node[j]);
                         }
 
                         done[global_node_number] = true;
-                        Node_pt[global_node_number]->x(0) = x_node[global_node_number];
-                        Node_pt[global_node_number]->x(1) = y_node[global_node_number];
-                        Node_pt[global_node_number]->x(2) = z_node[global_node_number];
+                        Node_pt[global_node_number]->x(0) = 
+                        			  x_node[global_node_number];
+                        Node_pt[global_node_number]->x(1) = 
+                                                  y_node[global_node_number];
+                        Node_pt[global_node_number]->x(2) = 
+                                                  z_node[global_node_number];
                     }
 
                 }
                 else
                 {
                     // Otherwise copy the pointer over
-                    finite_element_pt(e)->node_pt(gmsh_to_oomph_node[j]) = Node_pt[global_node_number];
+                    finite_element_pt(e)->node_pt(gmsh_to_oomph_node[j]) = 
+                    				Node_pt[global_node_number];
                 }
                 counter++;
             }
@@ -288,7 +308,7 @@ namespace oomph
         // of each edge
 
         // Loop over the elements
-        for (unsigned e = 0; e < bricks.size(); e++)
+        for (unsigned e = 0; e < n_element; e++)
         {
             // Each element has six faces
             Face_boundary[e].resize(n_local_face);
@@ -318,8 +338,10 @@ namespace oomph
             // in Face_index[i]
 
             GMSH::Hexa& brick = bricks[e];
+            unsigned n_local_faces = brick.quadsTag.size();
+            
             // Loop over the local faces in the element
-            for (unsigned i = 0; i < brick.quadsTag.size(); ++i)
+            for (unsigned i = 0; i < n_local_faces; ++i)
             {
                 //std::vector<int> facesTags = brick.quadsTag;
 
@@ -355,7 +377,8 @@ namespace oomph
 
             Edge_index[e].resize(n_local_edge);
 
-            // Loop over the element edges and assign global edge numbers // we have 12 edges on 1 hexa element
+            // Loop over the element edges and assign global edge numbers 
+            // we have 12 edges on 1 hexa element
             for (unsigned i = 0; i < brick.edgesTag.size(); ++i)
             {
                 std::vector<int> edgesTags = brick.edgesTag;

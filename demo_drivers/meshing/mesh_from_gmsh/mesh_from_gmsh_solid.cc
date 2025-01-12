@@ -59,23 +59,23 @@ namespace Input
 
     /// Pointer to constitutive law
     ConstitutiveLaw* Constitutive_law_pt= nullptr;
-    double density = 2500;
-    /// Non-dim gravity
+    
+    /// Density
+    double Density = 2500;
+    
+    /// Gravity
     double Gravity=9.81;
 
-    /// Non-dimensional gravity as body force
+    /// Gravity as body force
     void body_force(const double& time,
                     const Vector<double> &xi,
                     Vector<double> &b)
     {
         b[0]=0.0;
         b[1]=0.0;
-        b[2]=-Gravity*density;
+        b[2]=-Gravity*Density;
     }
-
-
 }
-
 
 
 template<class ELEMENT>
@@ -87,8 +87,10 @@ public:
     /// Constructor:
     CantileverProblem(const string& mesh_file)
     {
+        /// Verbose to print all Gmsh info/entities/elements.
+        bool Verbose = false;
 
-        Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(mesh_file, false);
+        Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(mesh_file, Verbose);
 
 
         // Complete build of elements
@@ -103,8 +105,9 @@ public:
 
             // Set the body force
             el_pt->body_force_fct_pt() = Input::body_force;
+            
             // Set density
-            el_pt->lambda_sq_pt() = &Input::density;
+            el_pt->lambda_sq_pt() = &Input::Density;
 
         } // done build of elements
 
@@ -166,9 +169,7 @@ public:
 
         // Increment label for output files
         Doc_info.number()++;
-
     };
-
 
 
     /// Access function for the mesh
@@ -180,12 +181,9 @@ public:
 
     void solve()
     {
-
         // Set output directory
         char dirname[100];
-
         sprintf(dirname,"RESLT");
-
 
         // Prepare output
         Doc_info.set_directory(dirname);
@@ -193,32 +191,29 @@ public:
         // Doc solution
         doc_solution();
 
-
         //Parameter incrementation
-        unsigned nstep=5;
+        unsigned nstep=2;
 
-        double g_increment=1.0e-1;
+        double g_increment=25.0e-2;
         for(unsigned i=0;i<nstep;i++)
         {
             // Increment load
             Input::Gravity+=g_increment;
 
-
             // Solve it
             newton_solve();
 
-
             // Doc solution
             doc_solution();
-
         }
-
     };
 
 private:
 
     /// DocInfo object for output
     DocInfo Doc_info;
+    
+    /// Bulk mesh pointer
     SolidGmshBrickMesh<ELEMENT>* Solid_mesh_pt;
 };
 

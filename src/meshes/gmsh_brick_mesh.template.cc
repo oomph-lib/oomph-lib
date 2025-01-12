@@ -56,16 +56,10 @@ namespace oomph
         // Set number of boundaries
         unsigned nbound = Tmp_mesh_pt->nboundary();
         set_nboundary(nbound);
+        
         Boundary_element_pt.resize(nbound);
         Face_index_at_boundary.resize(nbound);
 
-        // If we have different regions, then resize the region
-        // information
-        /*if (use_attributes)
-        {
-            Boundary_region_element_pt.resize(nbound);
-            Face_index_region_at_boundary.resize(nbound);
-        }*/
 
         // Build elements
         for (unsigned e = 0; e < nelem; e++)
@@ -92,7 +86,8 @@ namespace oomph
             for (unsigned j = 0; j < nnod_el; j++)
             {
                 // Pointer to node in the scaffold mesh
-                Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+                Node* scaffold_node_pt = 
+                		Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
                 // Get the (pseudo-)global node number in scaffold mesh
                 // (It's zero [=default] if not visited this one yet)
@@ -110,7 +105,8 @@ namespace oomph
                     if (boundaries_pt != nullptr)
                     {
                         // Create new boundary node
-                        Node* new_node_pt = finite_element_pt(e)->construct_boundary_node(j, time_stepper_pt);
+                        Node* new_node_pt = 
+                           finite_element_pt(e)->construct_boundary_node(j,time_stepper_pt);
 
                         // Give it a number (not necessarily the global node
                         // number in the scaffold mesh -- we just need something
@@ -156,35 +152,7 @@ namespace oomph
                     finite_element_pt(e)->node_pt(j) = Node_pt[j_global - 1];
                 }
             }
-
-            // Store the attributes in the map
-            /*if (false)
-            {
-                element_attribute_map[Tmp_mesh_pt->element_attribute(e)].push_back(
-                        finite_element_pt(e));
-            }*/
         }
-
-        // Now let's construct lists
-        // Find the number of attributes
-        /*if (use_attributes)
-        {
-            unsigned n_attribute = element_attribute_map.size();
-            // There are n_attribute different regions
-            Region_element_pt.resize(n_attribute);
-            Region_attribute.resize(n_attribute);
-            // Copy the vectors in the map over to our internal storage
-            unsigned count = 0;
-            for (std::map<double, Vector<FiniteElement*>>::iterator it =
-                    element_attribute_map.begin();
-                 it != element_attribute_map.end();
-                 ++it)
-            {
-                Region_attribute[count] = it->first;
-                Region_element_pt[count] = it->second;
-                ++count;
-            }
-        }*/
 
         // At this point we've created all the elements and
         // created their vertex nodes. Now we need to create
@@ -196,11 +164,11 @@ namespace oomph
         unsigned n_node_1d = finite_element_pt(0)->nnode_1d();
 
         // At the moment we're only able to deal with nnode_1d=2 or 3.
-        if ((n_node_1d != 2) && (n_node_1d != 3))
+        if (n_node_1d != 2)
         {
             std::ostringstream error_message;
-            error_message << "Mesh generation from tetgen currently only works\n";
-            error_message << "for nnode_1d = 2 or 3. You're trying to use it\n";
+            error_message << "Mesh generation from gmsh currently only works\n";
+            error_message << "for nnode_1d = 2. You're trying to use it\n";
             error_message << "for nnode_1d=" << n_node_1d << std::endl;
 
             throw OomphLibError(
@@ -234,9 +202,6 @@ namespace oomph
         // set of pointers to vertex nodes in scaffold mesh
         // std::map<std::set<Node*>,Node*> central_face_node_pt;
         // std::set<Node*> face_nodes_pt;
-
-        // Mapping of Tetgen faces to face nodes in the enriched element
-         unsigned face_map[4] = {1, 0, 2, 3};
 
         // Storage for the faces shared by the edges
          const unsigned faces_on_edge[6][2] = {{0, 1}, {0, 2},{1, 2},
@@ -328,8 +293,10 @@ namespace oomph
 
                             // Add the newly created node to the global node list
                             Node_pt.push_back(new_node_pt);
+                            
                             // Add to the edge index
                             nodes_on_global_edge[edge_index].push_back(new_node_pt);
+                            
                             // Increment the local node number
                             ++n;
                         } // end of loop over edge nodes
@@ -355,83 +322,6 @@ namespace oomph
                     }
                 } // End of loop over edges
 
-                // Deal with enriched elements
-                if (n_node == 15)
-                {
-                    // Now loop over the faces
-                    for (unsigned j = 0; j < 4; ++j)
-                    {
-                        // Find the boundary id of the face (need to map between node
-                        // numbers and the face)
-                        boundary_id = Tmp_mesh_pt->face_boundary(e, face_map[j]);
-
-                        // Find the global face index (need to map between node numbers and
-                        // the face)
-                        unsigned face_index = Tmp_mesh_pt->face_index(e, face_map[j]);
-
-                        // If the nodes on the face have not been allocated
-                        if (nodes_on_global_face[face_index].size() == 0)
-                        {
-                            // Storage for the new node
-                            Node* new_node_pt = 0;
-
-                            // If the face is on a boundary, construct a boundary node
-                            if (boundary_id > 0)
-                            {
-                                new_node_pt =
-                                        elem_pt->construct_boundary_node(n, time_stepper_pt);
-                                // Add it to the boundary
-                                this->add_boundary_node(boundary_id - 1, new_node_pt);
-                            }
-                                // Otherwise construct a normal node
-                            else
-                            {
-                                new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
-                            }
-
-                            // Find the local coordinates of the node
-                            elem_pt->local_coordinate_of_node(n, s);
-
-                            // Find the coordinates of the new node from the exiting and
-                            // fully-functional element in the scaffold mesh
-                            for (unsigned i = 0; i < dim; ++i)
-                            {
-                                new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
-                            }
-
-                            // Add the newly created node to the global node list
-                            Node_pt.push_back(new_node_pt);
-                            // Add to the face index
-                            nodes_on_global_face[face_index].push_back(new_node_pt);
-                            // Increment the local node number
-                            ++n;
-                        }
-                            // Otherwise just set the single node from the face element
-                        else
-                        {
-                            elem_pt->node_pt(n) = nodes_on_global_face[face_index][0];
-                            ++n;
-                        }
-                    } // end of loop over faces
-
-                    // Construct the element's central node, which is not on a boundary
-                    {
-                        Node* new_node_pt =
-                                finite_element_pt(e)->construct_node(n, time_stepper_pt);
-                        Node_pt.push_back(new_node_pt);
-
-                        // Find the local coordinates of the node
-                        elem_pt->local_coordinate_of_node(n, s);
-
-                        // Find the coordinates of the new node from the existing
-                        // and fully-functional element in the scaffold mesh
-                        for (unsigned i = 0; i < dim; i++)
-                        {
-                            new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
-                        }
-                    }
-                } // End of enriched case
-
             } // End of case for edge nodes
 
 
@@ -447,7 +337,7 @@ namespace oomph
                 {
                     Boundary_element_pt[boundary_id - 1].push_back(elem_pt);
 
-                    // This face indexing is not correct hope oomph-lib dev can help here!
+                    // Face indexing 
                     Vector<unsigned > gmsh_face_map(6,0);
                     gmsh_face_map[0] = -3;
                     gmsh_face_map[1] = 3;
@@ -456,28 +346,7 @@ namespace oomph
                     gmsh_face_map[4] =  2;
                     gmsh_face_map[5] = -1;
 
-                    // Tetgen Face 0 is our Face 3
-                    // Tetgen Face 1 is our Face 2
-                    // Tetgen Face 2 is our Face 1
-                    // Tetgen Face 3 is our Face 0
-
                     Face_index_at_boundary[boundary_id - 1].push_back(gmsh_face_map[j]);
-
-                    // If using regions set up the boundary information
-                    /*if (use_attributes)
-                    {
-                        // Element adjacent to boundary
-                        Boundary_region_element_pt[boundary_id - 1]
-                        [static_cast<unsigned>(
-                                Tmp_mesh_pt->element_attribute(e))]
-                                .push_back(elem_pt);
-                        // Need to put a shift in here because of an inconsistent naming
-                        // convention between triangle and face elements
-                        Face_index_region_at_boundary[boundary_id - 1]
-                        [static_cast<unsigned>(
-                                Tmp_mesh_pt->element_attribute(e))]
-                                .push_back(3 - j);
-                    }*/
                 }
             } // End of loop over faces
 
@@ -485,9 +354,7 @@ namespace oomph
             // Lookup scheme has now been setup
             Lookup_for_elements_next_boundary_is_setup = true;
 
-
         } // end for e
-
 
     } // end function
 
