@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -292,11 +292,10 @@ namespace oomph
       return (interpolated_w);
     }
 
-    /// Compute in-plane stresses. Return boolean to indicate success
-    /// (false if attempt to evaluate stresses at zero radius)
-    bool interpolated_stress(const Vector<double>& s,
+    /// Compute in-plane stresses.
+    void interpolated_stress(const Vector<double>& s,
                              double& sigma_r_r,
-                             double& sigma_phi_phi);
+                             double& sigma_phi_phi) const;
 
 
     /// Self-test: Return 0 for OK
@@ -373,9 +372,9 @@ namespace oomph
   };
 
 
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -542,9 +541,9 @@ namespace oomph
   }
 
 
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
-  /// ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -883,14 +882,11 @@ namespace oomph
         // Get stress
         double sigma_r_r = 0.0;
         double sigma_phi_phi = 0.0;
-        bool success = this->interpolated_stress(s, sigma_r_r, sigma_phi_phi);
-        if (success)
-        {
-          outfile << this->interpolated_x(s, 0) << " "
-                  << this->interpolated_w_fvk(s) << " " << drdt[0] << " "
-                  << drdt[1] << " " << sigma_r_r << " " << sigma_phi_phi
-                  << std::endl;
-        }
+        this->interpolated_stress(s, sigma_r_r, sigma_phi_phi);
+        outfile << this->interpolated_x(s, 0) << " "
+                << this->interpolated_w_fvk(s) << " " << drdt[0] << " "
+                << drdt[1] << " " << sigma_r_r << " " << sigma_phi_phi
+                << std::endl;
       }
     }
 

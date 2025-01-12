@@ -4,7 +4,7 @@
 #
 #   https://www.gnu.org/software/automake/manual/html_node/Subdirectories.html
 #
-SUBDIRS = . oomph_hsl oomph_crbond_bessel oomph_arpack
+SUBDIRS = . oomph_hsl oomph_crbond_bessel 
 
 
 # Build malloc.h in parmetis directory if needed (do it from here and

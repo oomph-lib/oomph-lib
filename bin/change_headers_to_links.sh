@@ -2,7 +2,7 @@
 
 #---------------------------------------------------------------------------
 # Little helper script to turn include header files into symbolic
-# links -- needed because we need to prefix the sources for ln -s [in 
+# links -- needed because we need to prefix the sources for ln -sf [in 
 # its $(LN_S) incarnation] with their full directory.
 #
 # The script takes the source directory (e.g. ~/oomph-lib-0.0/src/poisson)
@@ -11,7 +11,7 @@
 # writes the full filenames into include_files.list.aux
 #
 # Note: In principle we could perform the entire "replace copies by links"-
-#       operation in a shell script but ln -s is (apparently) not portable
+#       operation in a shell script but ln -sf is (apparently) not portable
 #       so we use $(LN_S) in the Makefile.am to force autoconf/automake
 #       to insert the correct version.
 #---------------------------------------------------------------------------

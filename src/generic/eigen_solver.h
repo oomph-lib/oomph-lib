@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,23 +73,6 @@ namespace oomph
 
     /// Empty destructor
     virtual ~EigenSolver() {}
-
-    /// Eigensolver. This takes a pointer to a problem and returns
-    /// a vector of complex numbers representing the eigenvalues
-    /// and a corresponding vector of eigenvectors. n_eval specifies the min.
-    /// number of eigenvalues/vectors required. This is primarily used in
-    /// Arnoldi type implementations; direct solvers such as QZ compute all the
-    /// eigenvalues/vectors.
-    /// Note: this is a legacy version of this function that stores re & imag
-    /// parts of eigenvectors in some solver-specific collection of real
-    /// vectors.
-    virtual void solve_eigenproblem_legacy(
-      Problem* const& problem_pt,
-      const int& n_eval,
-      Vector<std::complex<double>>& eigenvalue,
-      Vector<DoubleVector>& eigenvector,
-      const bool& do_adjoint_problem = false) = 0;
-
 
     /// Solve the real eigenproblem that is assembled by elements in
     /// a mesh in a Problem object. Note that the assembled matrices include the
@@ -164,149 +147,6 @@ namespace oomph
     }
   };
 
-  ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
-
-
-  //=====================================================================
-  /// Class for the ARPACK eigensolver
-  //=====================================================================
-  class ARPACK : public EigenSolver
-  {
-  private:
-    /// Pointer to a linear solver
-    LinearSolver* Linear_solver_pt;
-
-    /// Pointer to a default linear solver
-    LinearSolver* Default_linear_solver_pt;
-
-    /// Integer to set whether the real, imaginary or magnitude is
-    /// required
-    /// to be small or large.
-    int Spectrum;
-
-    /// Number of Arnoldi vectors to compute
-    int NArnoldi;
-
-    /// Boolean to set which part of the spectrum left (default) or right
-    /// of the shifted value.
-    bool Small;
-
-    /// Boolean to indicate whether or not to compute the eigenvectors
-    bool Compute_eigenvectors;
-
-
-  public:
-    /// Constructor
-    ARPACK();
-
-    /// Empty copy constructor
-    ARPACK(const ARPACK&) {}
-
-    /// Destructor, delete the linear solver
-    virtual ~ARPACK();
-
-    /// Access function for the number of Arnoldi vectors
-    int& narnoldi()
-    {
-      return NArnoldi;
-    }
-
-    /// Access function for the number of Arnoldi vectors (const version)
-    const int& narnoldi() const
-    {
-      return NArnoldi;
-    }
-
-    /// Set to enable the computation of the eigenvectors (default)
-    void enable_compute_eigenvectors()
-    {
-      Compute_eigenvectors = true;
-    }
-
-    /// Set to disable the computation of the eigenvectors
-    void disable_compute_eigenvectors()
-    {
-      Compute_eigenvectors = false;
-    }
-
-    /// Solve the eigen problem
-    void solve_eigenproblem_legacy(Problem* const& problem_pt,
-                                   const int& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector,
-                                   const bool& do_adjoint_problem = false);
-
-
-    /// Solve the real eigenproblem that is assembled by elements in
-    /// a mesh in a Problem object. Note that the assembled matrices include the
-    /// shift and are real. The eigenvalues and eigenvectors are,
-    /// in general, complex. Eigenvalues may be infinite and are therefore
-    /// returned as
-    /// \f$ \lambda_i = \alpha_i / \beta_i \f$ where \f$ \alpha_i \f$ is complex
-    /// while \f$ \beta_i \f$ is real. The actual eigenvalues may then be
-    /// computed by doing the division, checking for zero betas to avoid NaNs.
-    /// There's a convenience wrapper to this function that simply computes
-    /// these eigenvalues regardless. That version may die in NaN checking is
-    /// enabled (via the fenv.h header and the associated feenable function).
-    /// At least n_eval eigenvalues are computed.
-    void solve_eigenproblem(Problem* const& problem_pt,
-                            const int& n_eval,
-                            Vector<std::complex<double>>& alpha,
-                            Vector<double>& beta,
-                            Vector<DoubleVector>& eigenvector_real,
-                            Vector<DoubleVector>& eigenvector_imag,
-                            const bool& do_adjoint_problem = false)
-    {
-      oomph_info << "Broken, but then don't we want arpack to go anyway?\n";
-      abort();
-    }
-
-    /// Set the desired eigenvalues to be left of the shift
-    void get_eigenvalues_left_of_shift()
-    {
-      Small = true;
-    }
-
-    /// Set the desired eigenvalues to be right of the shift
-    void get_eigenvalues_right_of_shift()
-    {
-      Small = false;
-    }
-
-    /// Set the real part to be the quantity of interest (default)
-    void track_eigenvalue_real_part()
-    {
-      Spectrum = 1;
-    }
-
-    /// Set the imaginary part fo the quantity of interest
-    void track_eigenvalue_imaginary_part()
-    {
-      Spectrum = -1;
-    }
-
-    /// Set the magnitude to be the quantity of interest
-    void track_eigenvalue_magnitude()
-    {
-      Spectrum = 0;
-    }
-
-    /// Return a pointer to the linear solver object
-    LinearSolver*& linear_solver_pt()
-    {
-      return Linear_solver_pt;
-    }
-
-    /// Return a pointer to the linear solver object (const version)
-    LinearSolver* const& linear_solver_pt() const
-    {
-      return Linear_solver_pt;
-    }
-  };
-
-
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
@@ -328,21 +168,6 @@ namespace oomph
 
     /// Empty desctructor
     virtual ~LAPACK_QZ() {}
-
-    /// Use LAPACK QZ to solve the real eigenproblem that is assembled
-    /// by elements in a mesh in a Problem object. Note that the assembled
-    /// matrices include the shift and are real. The eigenvalues and
-    /// eigenvectors are, in general, complex.
-    /// This is a legacy version of this function that stores re & imag parts of
-    /// eigenvectors in some solver-specific collection of real vectors;
-    /// they are disentangled in the alternative version of this function
-    /// that returns Vectors of complex Vectors.
-    /// At least n_eval eigenvalues are computed.
-    void solve_eigenproblem_legacy(Problem* const& problem_pt,
-                                   const int& n_eval,
-                                   Vector<std::complex<double>>& eigenvalue,
-                                   Vector<DoubleVector>& eigenvector,
-                                   const bool& do_adjoint_problem = false);
 
     /// Solve the real eigenproblem that is assembled by elements in
     /// a mesh in a Problem object. Note that the assembled matrices include the
@@ -389,7 +214,7 @@ namespace oomph
     }
 
   private:
-    /// Helper function called from legacy and updated version from "raw" lapack
+    /// Helper function called from "raw" lapack
     /// code
     void solve_eigenproblem_helper(Problem* const& problem_pt,
                                    const int& n_eval,
