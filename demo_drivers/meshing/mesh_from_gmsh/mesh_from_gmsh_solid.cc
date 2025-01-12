@@ -236,7 +236,7 @@ int main(int argc, char* argv[])
         error_message +=
             "Must specify the following file name  \n";
         error_message += 
-            "cantilever.msh\n";
+            "file.msh\n";
 
    throw OomphLibError(error_message,
                        OOMPH_CURRENT_FUNCTION,
