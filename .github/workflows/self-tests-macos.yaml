@@ -1,24 +1,41 @@
 name: macOS self-tests
 
-on: push
+# IMPORTANT: A schedule workflow action *must* be placed on the default branch
+# of the repository. Only then will it run as scheduled. It is also placed in a
+# queue when scheduled, so it may not run exactly at the requested time.
+on:
+  push: # Run when the branch is pushed to
+  schedule:
+    - cron: '0 0 1 * *'  # Every month on the first at midnight UTC
+  # Calculated using crontab.guru. See here: https://crontab.guru/#1_0_1_1_*.
 
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install requirements
         run: brew install make automake libtool autoconf doxygen && brew reinstall gfortran
 
-      - name: Extra config
-        run:
-          printf '%s\n' '--enable-suppress-cgal-build --disable-shared' >> config/configure_options/default \
-          && ( export LC_ALL=C; sort -o config/configure_options/default config/configure_options/default )
+      # PM: Temporary patch to handle deprecation of Python 2.7 by GitHub runners. Should be removed
+      # as soon as we have moved to a more recent version of Trilinos. N.B. we install Python 3
+      # again after installing Python 2.7, as the installation of the latter forces the former to
+      # be unlinked, and thus Python 3 won't be found by other programs. Installing it again doesn't
+      # overwrite the Python 2 installation.
+      - name: Install Python 2.7
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "2.7"
+
+      - name: Install Python 3.13
+        uses: LizardByte/setup-python-action@master
+        with:
+          python-version: "3.13"
 
       - name: Build
-        run: ./non_interactive_autogen.sh -s -j$(sysctl -n hw.logicalcpu)
+        run: ./non_interactive_autogen.sh -c config/configure_options/default_macos -s -j$(sysctl -n hw.logicalcpu)
 
       # Continue running even if the test fails so that the validation.log can be
       # uploaded and reviewed later on
@@ -28,7 +45,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload validation log file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: validation-${{ runner.os }}.log
           path: ./validation.log

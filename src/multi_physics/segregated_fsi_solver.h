@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -140,18 +140,36 @@ namespace oomph
   //=======================================================================
   /// A class to handle errors in the Segregated solver
   //=======================================================================
-  class SegregatedSolverError
+  class SegregatedSolverError : public OomphLibError
   {
   public:
     /// Default constructor, does nothing
-    SegregatedSolverError(const bool& ran_out_of_iterations = false)
+    SegregatedSolverError(const std::string& error_description,
+                          const std::string& function_name,
+                          const char* location)
+      : OomphLibError(error_description, function_name, location)
     {
-      Ran_out_of_iterations = ran_out_of_iterations;
     }
+  };
 
-    /// Boolean indicating if the error occured because
-    /// we ran out of iterations
-    bool Ran_out_of_iterations;
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+
+  //=======================================================================
+  /// A class to handle errors in the Segregated solver
+  //=======================================================================
+  class RanOutOfIterationsInSegregatedSolverError : public SegregatedSolverError
+  {
+  public:
+    /// Default constructor, does nothing
+    RanOutOfIterationsInSegregatedSolverError(
+      const std::string& error_description,
+      const std::string& function_name,
+      const char* location)
+      : SegregatedSolverError(error_description, function_name, location)
+    {
+    }
   };
 
 
