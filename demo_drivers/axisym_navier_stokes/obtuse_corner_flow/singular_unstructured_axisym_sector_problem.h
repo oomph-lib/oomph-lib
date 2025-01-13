@@ -1,5 +1,5 @@
-#ifndef SINGULAR_AXISYM_SECTOR_PROBLEM_HEADER
-#define SINGULAR_AXISYM_SECTOR_PROBLEM_HEADER
+#ifndef SINGULAR_UNSTRUCTURED_AXISYM_SECTOR_PROBLEM_HEADER
+#define SINGULAR_UNSTRUCTURED_AXISYM_SECTOR_PROBLEM_HEADER
 
 #include "generic.h"
 #include "navier_stokes.h"
@@ -9,7 +9,6 @@
 
 /// Local headers
 #include "unstructured_axisym_sector_problem.h"
-
 
 namespace oomph
 {
