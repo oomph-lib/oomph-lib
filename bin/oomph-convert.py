@@ -570,7 +570,10 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 
         for zone in zones:
             for node in zone.nodes:
-                output.write("%e\n" % node.fields[fieldIndex])
+                if node.fields[fieldIndex]<1e-99:
+                    output.write("%e\n" % 0.0)
+                else:
+                    output.write("%e\n" % node.fields[fieldIndex] )
 
         print("done")
         output.write(VtkXml.fieldFooter)
