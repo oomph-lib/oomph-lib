@@ -1971,7 +1971,7 @@ namespace oomph
                 local_unknown = local_equation_number_C[ss];
                 if (local_unknown >= 0)
                 {
-                  jacobian(local_eqn, local_unknown) +=
+                  jacobian(local_eqn, local_unknown) -=
                     this->pressure_singular_function(ss, pos_n);
                 }
               }
@@ -2096,16 +2096,11 @@ namespace oomph
             // but there's not much point assigning pressure dofs
             Node* p_nod_pt = this->node_pt(this->Pconv[l]);
 
-            oomph_info << "Constrained pressure node: " << this->Pconv[l]
-                       << " at: ";
-
             Vector<double> global_coordinate(cached_dim, 0.0);
             for (unsigned d = 0; d < cached_dim; d++)
             {
               global_coordinate[d] = p_nod_pt->x(d);
-              oomph_info << global_coordinate[d] << " ";
             }
-            oomph_info << std::endl;
 
             // Initialise its residual component
             residuals[local_eqn] = 0.0;
