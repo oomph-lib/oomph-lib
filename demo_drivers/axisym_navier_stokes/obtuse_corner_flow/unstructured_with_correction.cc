@@ -32,15 +32,12 @@ int main(int argc, char** argv)
 
   // Create problem
   SingularUnstructuredAxisymSectorProblem<SingularAxisymNavierStokesElement<
-    ProjectableAxisymmetricTaylorHoodElement<MyElement>>> problem;
+    ProjectableAxisymmetricTaylorHoodElement<MyElement>>>
+    problem;
   problem.setup();
 
-  // debug_jacobian<
-  //   SingularUnstructuredSectorProblem<SingularNavierStokesElement<MyElement>>*>(
-  //   &problem);
-
   // Steady problem
-  problem.steady_newton_solve();
+  problem.steady_newton_solve(1);
   problem.doc_solution();
 
   // Finalise MPI after all computations are complete

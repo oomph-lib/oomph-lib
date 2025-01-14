@@ -36,7 +36,7 @@ int main(int argc, char** argv)
   problem.setup();
 
   // Steady problem
-  problem.steady_newton_solve();
+  problem.steady_newton_solve(1);
   problem.doc_solution();
 
 // Finalise MPI after all computations are complete
