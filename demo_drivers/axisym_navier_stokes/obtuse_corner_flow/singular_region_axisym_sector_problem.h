@@ -118,7 +118,7 @@ namespace oomph
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
-        create_slip_eigen_elements();
+        //create_slip_eigen_elements();
         // create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes

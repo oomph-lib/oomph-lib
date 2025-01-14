@@ -106,8 +106,8 @@ namespace oomph
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
-        create_slip_eigen_elements();
-        create_far_field_eigen_elements();
+        // create_slip_eigen_elements();
+        // create_far_field_eigen_elements();
         // create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
@@ -502,7 +502,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,2);
+      new PointPressureEvaluationElement(node_pt, 2);
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
@@ -536,7 +536,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,2);
+      new PointPressureEvaluationElement(node_pt, 2);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));

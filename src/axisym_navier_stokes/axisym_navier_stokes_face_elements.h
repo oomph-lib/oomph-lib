@@ -26,8 +26,33 @@ namespace oomph
   //======================================================================
   class AxisymmetricNavierStokesFaceElement : public virtual FaceElement
   {
+  private:
+    /// Storage for whether the element is using bulk element indexing or the
+    /// standard indexing
+    bool Is_using_bulk_indexing;
+
   public:
-    AxisymmetricNavierStokesFaceElement() {}
+    /// Constructor
+    /// Initialise the boolean flag to false
+    AxisymmetricNavierStokesFaceElement() : Is_using_bulk_indexing(false) {}
+
+    /// Switch flag to true for using bulk element indexing
+    void use_bulk_element_indexing()
+    {
+      Is_using_bulk_indexing = true;
+    }
+
+    /// Switch flag to using standart indexing i.e. u = 0, v = 1, w = 2, p = 3
+    void use_standard_indexing()
+    {
+      Is_using_bulk_indexing = false;
+    }
+
+    /// Return whether the element is using bulk element indexing or standard
+    bool is_using_bulk_indexing() const
+    {
+      return Is_using_bulk_indexing;
+    }
 
     /// Return the index at which the i-th unknown velocity component
     /// is stored for node n. The default value, i, is appropriate for
@@ -35,19 +60,33 @@ namespace oomph
     virtual inline unsigned u_index_axi_nst(const unsigned& n,
                                             const unsigned& i) const
     {
-      AxisymmetricNavierStokesEquationNumberingElement* el_pt =
-        dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
-          this->bulk_element_pt());
-      return el_pt->u_index_axi_nst(this->bulk_node_number(n), i);
+      if (this->Is_using_bulk_indexing)
+      {
+        AxisymmetricNavierStokesEquationNumberingElement* el_pt =
+          dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
+            this->bulk_element_pt());
+        return el_pt->u_index_axi_nst(this->bulk_node_number(n), i);
+      }
+      else
+      {
+        return i;
+      }
     }
 
     /// Which nodal value represents the pressure?
     virtual int p_nodal_index_axi_nst() const
     {
-      AxisymmetricNavierStokesEquationNumberingElement* el_pt =
-        dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
-          this->bulk_element_pt());
-      return el_pt->p_nodal_index_axi_nst();
+      if (this->Is_using_bulk_indexing)
+      {
+        AxisymmetricNavierStokesEquationNumberingElement* el_pt =
+          dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
+            this->bulk_element_pt());
+        return el_pt->p_nodal_index_axi_nst();
+      }
+      else
+      {
+        return 3;
+      }
     }
 
     /// Return the local equation number for the i-th momentum equation
@@ -55,10 +94,17 @@ namespace oomph
     virtual inline unsigned axi_momentum_index_nst(const unsigned& n,
                                                    const unsigned& i) const
     {
-      AxisymmetricNavierStokesEquationNumberingElement* el_pt =
-        dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
-          this->bulk_element_pt());
-      return el_pt->axi_momentum_index_nst(this->bulk_node_number(n), i);
+      if (this->Is_using_bulk_indexing)
+      {
+        AxisymmetricNavierStokesEquationNumberingElement* el_pt =
+          dynamic_cast<AxisymmetricNavierStokesEquationNumberingElement*>(
+            this->bulk_element_pt());
+        return el_pt->axi_momentum_index_nst(this->bulk_node_number(n), i);
+      }
+      else
+      {
+        return i;
+      }
     }
   };
 
