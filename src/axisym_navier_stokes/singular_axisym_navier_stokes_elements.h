@@ -369,6 +369,31 @@ namespace oomph
     // Make element un-augmented
     void unaugment()
     {
+      // Remove extra data
+      // const unsigned n_node = this->nnode();
+      // for (unsigned n = 0; n < n_node; n++)
+      //{
+      //  unsigned n_value = this->node_pt(n)->nvalue();
+      //  if (this->is_pressure_node(n))
+      //  {
+      //    if (n_value != this->n_u_nst() + 1)
+      //    {
+      //      n_value = this->n_u_nst() + 1;
+      //      this->node_pt(n)->resize(n_value);
+      //    }
+      //  }
+      //  else
+      //  {
+      //    if (n_value != this->n_u_nst())
+      //    {
+      //      n_value = this->n_u_nst();
+      //      this->node_pt(n)->resize(n_value);
+      //    }
+      //  }
+      //}
+      C_equation_elements_pt.clear();
+      C_equation_elements_pt.resize(0);
+      this->flush_external_data();
       IsAugmented = false;
     }
 
