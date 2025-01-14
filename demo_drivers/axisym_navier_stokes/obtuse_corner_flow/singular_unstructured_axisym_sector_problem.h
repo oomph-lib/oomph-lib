@@ -146,8 +146,8 @@ namespace oomph
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
-        //create_slip_eigen_elements();
-        // create_traction_eigen_elements();
+        // create_slip_eigen_elements();
+        //  create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();
@@ -513,23 +513,24 @@ namespace oomph
     find_corner_bulk_element_and_face_index(
       Slip_boundary_id, Free_surface_boundary_id, element_pt, face_index);
 
-    // PressureEvaluationElement<ELEMENT>* el_pt =
-    //   new PressureEvaluationElement<ELEMENT>(
-    //     element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt));
-    // el_pt->set_boundary_number_in_bulk_mesh(Slip_boundary_id);
+    PressureEvaluationElement<ELEMENT>* el_pt =
+      new PressureEvaluationElement<ELEMENT>(
+        element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt), 0);
+    el_pt->set_boundary_number_in_bulk_mesh(Slip_boundary_id);
 
-    Node* node_pt = 0;
-    for (unsigned n = 0; n < 3; n++)
-    {
-      node_pt = element_pt->node_pt(n);
-      if (node_pt->is_on_boundary(Slip_boundary_id) &&
-          !node_pt->is_on_boundary(Free_surface_boundary_id))
-      {
-        break;
-      }
-    }
-    PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt, 3);
+    // Node* node_pt = 0;
+    // for (unsigned n = 0; n < 3; n++)
+    //{
+    //   node_pt = element_pt->node_pt(n);
+    //   if (node_pt->is_on_boundary(Slip_boundary_id) &&
+    //       !node_pt->is_on_boundary(Free_surface_boundary_id))
+    //   {
+    //     break;
+    //   }
+    // }
+    // PointPressureEvaluationElement* el_pt =
+    //   new PointPressureEvaluationElement(node_pt, 3);
+
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
@@ -547,23 +548,23 @@ namespace oomph
     find_corner_bulk_element_and_face_index(
       Free_surface_boundary_id, Slip_boundary_id, element_pt, face_index);
 
-    // PressureEvaluationElement<ELEMENT>* el_pt =
-    //   new PressureEvaluationElement<ELEMENT>(
-    //     element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt));
-    // el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
+    PressureEvaluationElement<ELEMENT>* el_pt =
+      new PressureEvaluationElement<ELEMENT>(
+        element_pt, face_index, dynamic_cast<Node*>(Contact_line_node_pt), 0);
+    el_pt->set_boundary_number_in_bulk_mesh(Free_surface_boundary_id);
 
-    Node* node_pt = 0;
-    for (unsigned n = 0; n < 3; n++)
-    {
-      node_pt = element_pt->node_pt(n);
-      if (!node_pt->is_on_boundary(Slip_boundary_id) &&
-          node_pt->is_on_boundary(Free_surface_boundary_id))
-      {
-        break;
-      }
-    }
-    PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt, 3);
+    // Node* node_pt = 0;
+    // for (unsigned n = 0; n < 3; n++)
+    //{
+    //   node_pt = element_pt->node_pt(n);
+    //   if (!node_pt->is_on_boundary(Slip_boundary_id) &&
+    //       node_pt->is_on_boundary(Free_surface_boundary_id))
+    //   {
+    //     break;
+    //   }
+    // }
+    // PointPressureEvaluationElement* el_pt =
+    //   new PointPressureEvaluationElement(node_pt, 3);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
