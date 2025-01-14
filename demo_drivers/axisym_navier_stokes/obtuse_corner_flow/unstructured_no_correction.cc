@@ -30,7 +30,9 @@ int main(int argc, char** argv)
   oomph_info << "unstructured_no_correction" << std::endl;
 
   // Create problem
-  UnstructuredAxisymSectorProblem<MyElement> problem;
+  UnstructuredAxisymSectorProblem<
+    ProjectableAxisymmetricTaylorHoodElement<MyElement>>
+    problem;
   problem.setup();
 
   // Steady problem

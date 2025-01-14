@@ -97,6 +97,45 @@ namespace oomph
                  << std::endl;
     }
 
+    void actions_before_adapt()
+    {
+      delete_singular_elements();
+      unaugment_bulk_elements();
+      UnstructuredAxisymSectorProblem<ELEMENT>::actions_before_adapt();
+    }
+
+    void actions_after_adapt()
+    {
+      // Augment the bulk elements
+      setup_and_augment_bulk_elements();
+
+      UnstructuredAxisymSectorProblem<ELEMENT>::actions_after_adapt();
+
+      set_contact_line_node_pt();
+      Velocity_singular_function = velocity_singular_function_factory(
+        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        Contact_line_node_pt);
+      Grad_velocity_singular_function = grad_velocity_singular_function_factory(
+        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        Contact_line_node_pt);
+      Eigensolution_slip_function = eigensolution_slip_function_factory(
+        this->my_parameters().slip_length, Velocity_singular_function);
+
+      Eigensolution_traction_function = eigensolution_traction_function_factory(
+        this->my_parameters().sector_angle,
+        Contact_line_node_pt,
+        Grad_velocity_singular_function);
+
+      create_singular_elements();
+
+      // fix_c(1.0);
+
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
+                 << std::endl;
+    }
+
+
     void create_singular_elements()
     {
       // Create the other meshes
@@ -113,6 +152,15 @@ namespace oomph
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();
       }
+    }
+
+    void delete_singular_elements()
+    {
+      this->delete_elements(Singularity_scaling_mesh_pt);
+      this->delete_elements(Pressure_contribution_mesh_1_pt);
+      this->delete_elements(Pressure_contribution_mesh_2_pt);
+      this->delete_elements(Eigensolution_slip_mesh_pt);
+      this->delete_elements(Eigensolution_traction_mesh_pt);
     }
 
     void add_singular_sub_meshes()
@@ -178,6 +226,20 @@ namespace oomph
       }
       oomph_info << Augmented_bulk_element_number.size()
                  << " augmented elements" << std::endl;
+    }
+
+    void unaugment_bulk_elements()
+    {
+      // Loop over augmented elements and unaugment them
+      for (unsigned e = 0; e < Augmented_bulk_element_number.size(); e++)
+      {
+        ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+          this->bulk_mesh_pt()->element_pt(Augmented_bulk_element_number[e]));
+
+        el_pt->unaugment();
+      }
+      Augmented_bulk_element_number.clear();
+      Augmented_bulk_element_number.resize(0);
     }
 
     void set_contact_line_node_pt()
@@ -322,8 +384,7 @@ namespace oomph
           int face_index = this->bulk_mesh_pt()->face_index_at_boundary(b, e);
 
           // Create new element
-          SingularAxisymNavierStokesTractionElement<
-            ELEMENT>* el_pt =
+          SingularAxisymNavierStokesTractionElement<ELEMENT>* el_pt =
             new SingularAxisymNavierStokesTractionElement<ELEMENT>(
               bulk_elem_pt,
               face_index,

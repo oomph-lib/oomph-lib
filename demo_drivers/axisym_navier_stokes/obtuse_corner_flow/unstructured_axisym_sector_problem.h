@@ -21,7 +21,7 @@ namespace oomph
   {
   private:
     /// Private variables
-    TriangleMesh<ELEMENT>* Bulk_mesh_pt;
+    RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
 
     Mesh* No_penetration_boundary_mesh1_pt;
     Mesh* No_penetration_boundary_mesh2_pt;
@@ -73,6 +73,21 @@ namespace oomph
       create_nonrefineable_elements();
       set_boundary_conditions();
 
+      this->rebuild_global_mesh();
+      oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
+                 << std::endl;
+    }
+
+    void actions_before_adapt()
+    {
+      delete_nonrefineable_elements();
+    }
+
+    void actions_after_adapt()
+    {
+      this->setup_bulk_elements();
+      create_nonrefineable_elements();
+      set_boundary_conditions();
       this->rebuild_global_mesh();
       oomph_info << "Number of unknowns: " << this->assign_eqn_numbers()
                  << std::endl;
@@ -139,6 +154,7 @@ namespace oomph
       }
     }
 
+  public:
     // Delete the created elements
     void delete_elements(Mesh* local_mesh_pt)
     {
@@ -160,7 +176,7 @@ namespace oomph
       return &Doc_info;
     }
 
-    TriangleMesh<ELEMENT>*& bulk_mesh_pt()
+    RefineableTriangleMesh<ELEMENT>*& bulk_mesh_pt()
     {
       return Bulk_mesh_pt;
     }
@@ -168,7 +184,6 @@ namespace oomph
 
     void add_bulk_mesh();
 
-  public:
     void pin_no_penetration_conditions()
     {
       unsigned n_el = No_penetration_boundary_mesh1_pt->nelement();
@@ -295,6 +310,8 @@ namespace oomph
       My_params.sector_radius,
       My_params.n_azimuthal,
       My_params.sector_radius / My_params.n_radial);
+
+    Bulk_mesh_pt->spatial_error_estimator_pt() = Z2_error_estimator_pt;
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);

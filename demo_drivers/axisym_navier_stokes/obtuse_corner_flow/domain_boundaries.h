@@ -7,7 +7,7 @@
 namespace oomph
 {
   template<class ELEMENT>
-  TriangleMesh<ELEMENT>* create_sector_mesh(double contact_angle,
+  RefineableTriangleMesh<ELEMENT>* create_sector_mesh(double contact_angle,
                                             double radius,
                                             unsigned nsegment,
                                             double element_area)
@@ -81,7 +81,7 @@ namespace oomph
     // For some reason the vertices are 1.7e-13 apart!?
     ToleranceForVertexMismatchInPolygons::Tolerable_error = 2e-13;
 
-    return new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
+    return new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters);
   }
 } // namespace oomph
 #endif
