@@ -37,7 +37,7 @@ test_script()
         echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
     else
         ../../../bin/fpdiff.py validata/$2.dat.gz  \
-           Validation/$2.dat >> $LOG
+           Validation/$2.dat 0.1 2e-14 >> $LOG
     fi
 }
 

@@ -9,6 +9,7 @@
 #include "meshes/triangle_mesh.h"
 
 /// Local headers
+#include "base_problem.h"
 #include "parameter_functions.h"
 #include "parameter_struct.h"
 #include "domain_boundaries.h"
@@ -17,7 +18,7 @@ namespace oomph
 {
   // Problem class
   template<class ELEMENT>
-  class UnstructuredAxisymSectorProblem : public Problem
+  class UnstructuredAxisymSectorProblem : public BaseProblem
   {
   private:
     /// Private variables
@@ -27,10 +28,7 @@ namespace oomph
     Mesh* No_penetration_boundary_mesh2_pt;
     Mesh* Slip_boundary_mesh_pt;
 
-    DocInfo Doc_info;
     Z2ErrorEstimator* Z2_error_estimator_pt;
-
-    Params My_params;
 
     std::function<void(const double&,
                        const Vector<double>&,
@@ -54,12 +52,10 @@ namespace oomph
       add_time_stepper_pt(new BDF<2>);
 
       // Assign doc info pointer
-      Doc_info.set_directory("RESLT_axi_no_fix_unstr");
-      Doc_info.number() = 0;
+      doc_info_pt()->set_directory("RESLT_axi_no_fix_unstr");
 
       /// Create parameters from parameters file.
-      My_params = create_parameters_from_file("parameters.dat");
-      Slip_function = slip_function_factory(My_params.slip_length);
+      Slip_function = slip_function_factory(parameters().slip_length);
 
       // Create an empty mesh
       add_bulk_mesh();
@@ -126,16 +122,11 @@ namespace oomph
         ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
         // Set the Reynolds number
-        el_pt->re_pt() = &My_params.reynolds_number;
+        el_pt->re_pt() = &parameters().reynolds_number;
 
         // Set the Reynolds Strouhal number
-        el_pt->re_st_pt() = &My_params.strouhal_reynolds_number;
+        el_pt->re_st_pt() = &parameters().strouhal_reynolds_number;
       }
-    }
-
-    Params& my_parameters()
-    {
-      return My_params;
     }
 
     // Destructor
@@ -170,11 +161,6 @@ namespace oomph
     }
 
     void doc_solution();
-
-    DocInfo* doc_info_pt()
-    {
-      return &Doc_info;
-    }
 
     RefineableTriangleMesh<ELEMENT>*& bulk_mesh_pt()
     {
@@ -306,10 +292,10 @@ namespace oomph
 
     // Generate the mesh using the template ELEMENT
     Bulk_mesh_pt = create_sector_mesh<ELEMENT>(
-      My_params.sector_angle * MathematicalConstants::Pi / 180.0,
-      My_params.sector_radius,
-      My_params.n_azimuthal,
-      My_params.sector_radius / My_params.n_radial);
+      parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+      parameters().sector_radius,
+      parameters().n_azimuthal,
+      parameters().sector_radius / parameters().n_radial);
 
     Bulk_mesh_pt->spatial_error_estimator_pt() = Z2_error_estimator_pt;
 
@@ -458,7 +444,7 @@ namespace oomph
   template<class ELEMENT>
   void UnstructuredAxisymSectorProblem<ELEMENT>::doc_solution()
   {
-    unsigned doc_number = Doc_info.number();
+    unsigned doc_number = doc_info_pt()->number();
 
     oomph_info << "Doc Number: " << doc_number << std::endl;
 
@@ -491,8 +477,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/soln%i.dat",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
+            doc_info_pt()->directory().c_str(),
+            doc_info_pt()->number());
     output_stream.open(filename);
     output_stream.precision(15);
     Bulk_mesh_pt->output(output_stream, npts);
@@ -500,8 +486,8 @@ namespace oomph
 
     //    sprintf(filename,
     //            "%s/pressure_1_%i.csv",
-    //            Doc_info.directory().c_str(),
-    //            Doc_info.number());
+    //            doc_info_pt()->directory().c_str(),
+    //            doc_info_pt()->number());
     //    output_stream.open(filename);
     //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_1_pt->output(output_stream, npts);
@@ -509,8 +495,8 @@ namespace oomph
     //
     //    sprintf(filename,
     //            "%s/pressure_2_%i.csv",
-    //            Doc_info.directory().c_str(),
-    //            Doc_info.number());
+    //            doc_info_pt()->directory().c_str(),
+    //            doc_info_pt()->number());
     //    output_stream.open(filename);
     //    output_stream << "x,y,p," << std::endl;
     //    Pressure_contribution_mesh_2_pt->output(output_stream, npts);
@@ -518,8 +504,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/slip_surface%i.csv",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
+            doc_info_pt()->directory().c_str(),
+            doc_info_pt()->number());
     output_stream.open(filename);
     output_stream << "x y l_x l_y l_z n_x n_y u_w v_w z_w u v w p" << std::endl;
     Slip_boundary_mesh_pt->output(output_stream, npts);
@@ -527,8 +513,8 @@ namespace oomph
 
     sprintf(filename,
             "%s/no_penetration_surface%i.csv",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
+            doc_info_pt()->directory().c_str(),
+            doc_info_pt()->number());
     output_stream.open(filename);
     output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh1_pt->output(output_stream, 3);
@@ -536,14 +522,14 @@ namespace oomph
 
     sprintf(filename,
             "%s/no_penetration_surface2_%i.csv",
-            Doc_info.directory().c_str(),
-            Doc_info.number());
+            doc_info_pt()->directory().c_str(),
+            doc_info_pt()->number());
     output_stream.open(filename);
     output_stream << "x y u v p lagrange_multiplier nx ny " << std::endl;
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 
-    Doc_info.number()++;
+    doc_info_pt()->number()++;
   }
 } // namespace oomph
 #endif

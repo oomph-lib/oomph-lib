@@ -84,16 +84,16 @@ namespace oomph
 
       set_contact_line_node_pt();
       Velocity_singular_function = velocity_singular_function_factory(
-        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        this->parameters().sector_angle * MathematicalConstants::Pi / 180.0,
         Contact_line_node_pt);
       Grad_velocity_singular_function = grad_velocity_singular_function_factory(
-        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        this->parameters().sector_angle * MathematicalConstants::Pi / 180.0,
         Contact_line_node_pt);
       Eigensolution_slip_function = eigensolution_slip_function_factory(
-        this->my_parameters().slip_length, Velocity_singular_function);
+        this->parameters().slip_length, Velocity_singular_function);
 
       Eigensolution_traction_function = eigensolution_traction_function_factory(
-        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
+        this->parameters().sector_angle * MathematicalConstants::Pi / 180.0,
         Contact_line_node_pt,
         Grad_velocity_singular_function);
 
