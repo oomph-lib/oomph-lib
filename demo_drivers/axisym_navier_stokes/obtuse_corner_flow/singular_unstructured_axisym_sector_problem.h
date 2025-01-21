@@ -55,8 +55,10 @@ namespace oomph
     };
 
     // Constructor
-    SingularUnstructuredAxisymSectorProblem()
-      : UnstructuredAxisymSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
+    SingularUnstructuredAxisymSectorProblem(
+      std::string parameter_file = "parameters.dat")
+      : UnstructuredAxisymSectorProblem<ELEMENT>(parameter_file),
+        Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer
       this->doc_info_pt()->set_directory("RESLT_axi_fix_unstr");

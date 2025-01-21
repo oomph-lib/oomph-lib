@@ -65,6 +65,17 @@ namespace oomph
       this->rebuild_global_mesh();
     }
 
+    SingularAxisymSectorProblem(Params& params)
+      : AxisymSectorProblem<ELEMENT>(params), Contact_line_node_pt(0)
+    {
+      // Re-assign doc info pointer
+      this->doc_info_pt()->set_directory("RESLT_axi_fix");
+
+      add_singular_sub_meshes();
+
+      this->rebuild_global_mesh();
+    }
+
     void setup()
     {
       // Augment the bulk elements

@@ -71,6 +71,17 @@ namespace oomph
       this->rebuild_global_mesh();
     }
 
+    SingularRegionAxisymSectorProblem(Params& params)
+      : RegionAxisymSectorProblem<ELEMENT>(params), Contact_line_node_pt(0)
+    {
+      // Re-assign doc info pointer
+      this->doc_info_pt()->set_directory("RESLT_axi_fix_region");
+
+      add_singular_sub_meshes();
+
+      this->rebuild_global_mesh();
+    }
+
     // void actions_after_newton_step()
     //{
     //   debug_jacobian<SingularRegionAxisymSectorProblem<ELEMENT>*>(this);
@@ -118,8 +129,8 @@ namespace oomph
         create_pressure_contribution_1_elements();
         create_pressure_contribution_2_elements();
 
-        //create_slip_eigen_elements();
-        // create_traction_eigen_elements();
+        // create_slip_eigen_elements();
+        //  create_traction_eigen_elements();
 
         // Setup the mesh interaction between the bulk and singularity meshes
         setup_mesh_interaction();

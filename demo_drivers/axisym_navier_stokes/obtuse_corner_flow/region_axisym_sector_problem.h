@@ -71,6 +71,24 @@ namespace oomph
       build_global_mesh();
     }
 
+    RegionAxisymSectorProblem(Params& params)
+      : BaseProblem(params), Z2_error_estimator_pt(new Z2ErrorEstimator)
+    {
+      // Create and add the timestepper
+      add_time_stepper_pt(new BDF<2>);
+
+      // Assign doc info pointer
+      doc_info_pt()->set_directory("RESLT_axi_no_fix_region");
+
+      /// Create parameters from parameters file.
+      Slip_function = slip_function_factory(parameters().slip_length);
+
+      // Create an empty mesh
+      add_bulk_mesh();
+      add_non_adaptive_sub_meshes();
+      build_global_mesh();
+    }
+
     virtual void setup()
     {
       this->setup_bulk_elements();
@@ -249,7 +267,7 @@ namespace oomph
     void create_no_penetration2_elements();
     void create_axisym_flux_elements()
     {
-        std::cout << "create_axisym_flux_elements" << std::endl;
+      std::cout << "create_axisym_flux_elements" << std::endl;
       AxisymFluxOutputMeshIndex = add_sub_mesh(new Mesh);
       InfoElement* info_element_pt = new InfoElement;
       Data* net_flux_data_pt = info_element_pt->new_internal_data_pt();

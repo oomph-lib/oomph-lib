@@ -63,6 +63,25 @@ namespace oomph
       build_global_mesh();
     }
 
+    // Constructor
+    AxisymSectorProblem(Params& params)
+      : BaseProblem(params), Z2_error_estimator_pt(new Z2ErrorEstimator)
+    {
+      // Create and add the timestepper
+      add_time_stepper_pt(new BDF<2>);
+
+      // Assign doc info pointer
+      doc_info_pt()->set_directory("RESLT_axi_no_fix");
+
+      /// Create parameters from parameters file.
+      Slip_function = slip_function_factory(parameters().slip_length);
+
+      // Create an empty mesh
+      add_bulk_mesh();
+      add_non_adaptive_sub_meshes();
+      build_global_mesh();
+    }
+
     virtual void setup()
     {
       this->setup_bulk_elements();

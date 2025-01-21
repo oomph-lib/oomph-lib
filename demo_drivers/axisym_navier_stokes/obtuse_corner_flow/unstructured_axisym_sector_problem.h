@@ -45,8 +45,9 @@ namespace oomph
     };
 
     // Constructor
-    UnstructuredAxisymSectorProblem()
-      : Z2_error_estimator_pt(new Z2ErrorEstimator)
+    UnstructuredAxisymSectorProblem(
+      std::string parameter_file = "parameters.dat")
+      : BaseProblem(parameter_file), Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);
@@ -298,6 +299,7 @@ namespace oomph
       parameters().sector_radius / parameters().n_radial);
 
     Bulk_mesh_pt->spatial_error_estimator_pt() = Z2_error_estimator_pt;
+    Bulk_mesh_pt->min_element_size() = 1e-12;
 
     // Add mesh to problem
     add_sub_mesh(Bulk_mesh_pt);

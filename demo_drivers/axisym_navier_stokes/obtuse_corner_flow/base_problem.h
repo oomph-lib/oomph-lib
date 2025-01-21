@@ -25,6 +25,15 @@ namespace oomph
       Doc_info.number() = 0;
     }
 
+    BaseProblem(Params& params) : Parameters(params)
+    {
+      // Create and add the timestepper
+      add_time_stepper_pt(new BDF<2>);
+
+      // Assign doc info pointer
+      Doc_info.number() = 0;
+    }
+
     virtual void setup() = 0;
 
     DocInfo* doc_info_pt()
