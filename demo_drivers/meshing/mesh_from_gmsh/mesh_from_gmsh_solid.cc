@@ -88,7 +88,7 @@ public:
     CantileverProblem(const string& mesh_file)
     {
         /// Verbose to print all Gmsh info/entities/elements.
-        bool Verbose = false;
+        bool verbose = false;
 
         Problem::mesh_pt() = new SolidGmshBrickMesh<ELEMENT>(mesh_file, Verbose);
 
