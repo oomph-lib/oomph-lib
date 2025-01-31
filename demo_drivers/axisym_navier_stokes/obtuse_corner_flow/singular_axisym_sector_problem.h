@@ -210,7 +210,7 @@ namespace oomph
     {
       char filename[100];
       sprintf(filename,
-              "%s/eigenslip_surface%i.csv",
+              "%s/eigenslip_surface%i.dat",
               this->doc_info_pt()->directory().c_str(),
               this->doc_info_pt()->number());
       std::ofstream output_stream;
@@ -221,7 +221,7 @@ namespace oomph
       output_stream.close();
 
       sprintf(filename,
-              "%s/scaling%i.csv",
+              "%s/scaling%i.dat",
               this->doc_info_pt()->directory().c_str(),
               this->doc_info_pt()->number());
       output_stream.open(filename);

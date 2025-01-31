@@ -487,7 +487,7 @@ namespace oomph
     output_stream.close();
 
     //    sprintf(filename,
-    //            "%s/pressure_1_%i.csv",
+    //            "%s/pressure_1_%i.dat",
     //            doc_info_pt()->directory().c_str(),
     //            doc_info_pt()->number());
     //    output_stream.open(filename);
@@ -496,7 +496,7 @@ namespace oomph
     //    output_stream.close();
     //
     //    sprintf(filename,
-    //            "%s/pressure_2_%i.csv",
+    //            "%s/pressure_2_%i.dat",
     //            doc_info_pt()->directory().c_str(),
     //            doc_info_pt()->number());
     //    output_stream.open(filename);
@@ -505,7 +505,7 @@ namespace oomph
     //    output_stream.close();
 
     sprintf(filename,
-            "%s/slip_surface%i.csv",
+            "%s/slip_surface%i.dat",
             doc_info_pt()->directory().c_str(),
             doc_info_pt()->number());
     output_stream.open(filename);
@@ -514,7 +514,7 @@ namespace oomph
     output_stream.close();
 
     sprintf(filename,
-            "%s/no_penetration_surface%i.csv",
+            "%s/no_penetration_surface%i.dat",
             doc_info_pt()->directory().c_str(),
             doc_info_pt()->number());
     output_stream.open(filename);
@@ -523,7 +523,7 @@ namespace oomph
     output_stream.close();
 
     sprintf(filename,
-            "%s/no_penetration_surface2_%i.csv",
+            "%s/no_penetration_surface2_%i.dat",
             doc_info_pt()->directory().c_str(),
             doc_info_pt()->number());
     output_stream.open(filename);

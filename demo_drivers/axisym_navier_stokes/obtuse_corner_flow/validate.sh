@@ -32,7 +32,7 @@ test_script()
     echo "  " `pwd` >> $LOG
     echo " " >> $LOG
     # Sorting here as the MPI runs have a different mesh ordering for some reason...
-    sort Validation/$1/slip_surface0.csv > Validation/$2.dat
+    sort Validation/$1/slip_surface0.dat > Validation/$2.dat
     if test "$1" = "no_fpdiff"; then
         echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
     else
