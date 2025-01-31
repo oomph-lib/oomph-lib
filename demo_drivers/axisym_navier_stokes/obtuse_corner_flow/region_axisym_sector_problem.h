@@ -596,7 +596,7 @@ namespace oomph
     //   ->output(output_stream);
     // output_stream.close();
 
-    doc_info_pt()->number()++;
+    BaseProblem::doc_solution();
   }
 } // namespace oomph
 #endif

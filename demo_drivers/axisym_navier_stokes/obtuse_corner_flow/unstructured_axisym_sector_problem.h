@@ -531,7 +531,7 @@ namespace oomph
     No_penetration_boundary_mesh2_pt->output(output_stream, 3);
     output_stream.close();
 
-    doc_info_pt()->number()++;
+    BaseProblem::doc_solution();
   }
 } // namespace oomph
 #endif
