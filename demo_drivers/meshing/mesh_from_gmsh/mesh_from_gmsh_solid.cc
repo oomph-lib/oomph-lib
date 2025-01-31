@@ -234,9 +234,11 @@ int main(int argc, char* argv[])
         std::string error_message =
             "Wrong number of command line arguments.\n";
         error_message +=
-            "Must specify the following file name  \n";
-        error_message += 
-            "file.msh\n";
+            "This code requires a single command line argument \n";
+        error_message +=
+             "which specifies the name of the gmsh-generated .msh file \n";
+        error_message +=
+             "that defines the mesh  \n";
 
    throw OomphLibError(error_message,
                        OOMPH_CURRENT_FUNCTION,
