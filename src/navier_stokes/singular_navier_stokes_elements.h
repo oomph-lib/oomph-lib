@@ -1883,7 +1883,7 @@ namespace oomph
                   interpolated_u_reconstructed[i] -
                   (interpolated_u_tilde[i] + u_bar_local[i]) * testf[l] * W;
                 oomph_info << "error: total equations Jac not implemented."
-                          << std::endl;
+                           << std::endl;
               }
               else
               {
