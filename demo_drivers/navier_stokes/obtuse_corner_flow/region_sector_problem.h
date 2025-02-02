@@ -355,7 +355,7 @@ namespace oomph
   {
     oomph_info << "create_slip_elements" << std::endl;
 
-    std::array boundary_ids = {Inner_slip_boundary_id, Slip_boundary_id};
+    std::array<int> boundary_ids = {Inner_slip_boundary_id, Slip_boundary_id};
     for (unsigned b : boundary_ids)
     {
       // How many bulk elements are adjacent to boundary b?
