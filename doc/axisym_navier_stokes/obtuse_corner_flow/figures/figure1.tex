@@ -1,0 +1,30 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}
+    % sector
+	\draw (3.0,0) -- (3.0, 3.0);
+	\draw ({3.0*(1- sin(135))},{3.0*cos(135)}) -- (3.0,0.0);
+	\draw (3.0, 3.0) arc (90:90+135:3.0);
+    
+	\draw (3.0, 0.3) arc (90:90+135:0.3);
+    
+	\draw[fill] (3.0, 0.0) circle (0.07);
+    
+	% Labels
+	\draw (3.0 - 0.3, 0.3) node[left]{$\alpha$};
+	\draw (3.0-1, -1) node[below,right]{$S_0$};
+	\draw (3.0, 1.5) node[right]{$S_1$};
+	\draw (0.4, 1.5) node[left]{$S_2$};
+	\draw (1.5, 0.8) node{$\Omega$};
+	\draw (3.0, 3.0) node[right]{$(1,R)$};
+	\draw (3.0, -0.3) node[right]{$(1,0)$};
+
+	% Axis rotation and coordinates
+	\draw[dashed] (-2,-3) -- (-2,3);
+	\draw[->] (-2,0) -- (-1.7,0) node[right]{$x$};
+	\draw[->] (-2,0) -- (-2,0.3) node[left]{$z$};
+	\draw (-2.0, -0.3) node[left]{$(0,0)$};
+
+\end{tikzpicture}
+\end{document}
