@@ -308,7 +308,6 @@ namespace oomph
     Vector<Vector<double>> grad_velocity_singular_function(
       const Vector<double>& x) const
     {
-#ifdef PARANOID
       if (Grad_velocity_singular_fct == 0)
       {
         if (Grad_velocity_singular_fct_pt == 0)
@@ -326,7 +325,6 @@ namespace oomph
           return (*Grad_velocity_singular_fct_pt)(x);
         }
       }
-#endif
 
       // Evaluate gradient of velocity singular function
       return Grad_velocity_singular_fct(x);
@@ -335,7 +333,6 @@ namespace oomph
     /// Evaluate pressure singular function at Eulerian position x
     double pressure_singular_function(const Vector<double>& x) const
     {
-#ifdef PARANOID
       if (Pressure_singular_fct_pt == 0)
       {
         std::stringstream error_stream;
@@ -345,7 +342,6 @@ namespace oomph
         throw OomphLibError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
-#endif
 
       // Evaluate pressure singular function
       return (*Pressure_singular_fct_pt)(x);

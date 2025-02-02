@@ -1882,7 +1882,7 @@ namespace oomph
                 residuals[local_eqn] +=
                   interpolated_u_reconstructed[i] -
                   (interpolated_u_tilde[i] + u_bar_local[i]) * testf[l] * W;
-                std::cout << "error: total equations Jac not implemented."
+                oomph_info << "error: total equations Jac not implemented."
                           << std::endl;
               }
               else
