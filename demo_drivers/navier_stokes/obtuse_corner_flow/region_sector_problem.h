@@ -393,7 +393,7 @@ namespace oomph
   {
     oomph_info << "create_no_penetration1_elements" << std::endl;
 
-    std::array boundary_ids = {Inner_slip_boundary_id, Slip_boundary_id};
+    std::array<int> boundary_ids = {Inner_slip_boundary_id, Slip_boundary_id};
     for (unsigned b : boundary_ids)
     {
       // How many bulk elements are adjacent to boundary b?
@@ -427,7 +427,7 @@ namespace oomph
   {
     oomph_info << "create_no_penetration2_elements" << std::endl;
 
-    std::array boundary_ids = {Inner_free_surface_boundary_id,
+    std::array<int> boundary_ids = {Inner_free_surface_boundary_id,
                                Free_surface_boundary_id};
     for (unsigned b : boundary_ids)
     {

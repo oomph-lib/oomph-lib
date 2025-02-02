@@ -18,7 +18,7 @@ cd Validation
 
 echo "Running rectangular driven cavity validation with subtracted singularity"
 mkdir RESLT
-gdb --batch ../driven_cavity -ex r -ex bt >> validation.log
+../driven_cavity >> validation.log
 echo "done"
 echo " " >> validation.log
 echo "Rectangular driven cavity with subtracted singularity validation" >> validation.log
@@ -48,7 +48,7 @@ mv RESLT RESLT_driven_cavity
 
 echo "Running circular couette validation with subtracted pseudo-singularity"
 mkdir RESLT
-gdb --batch -ex r -ex bt --args ../circular_couette --re 10.0  >> validation.log
+../circular_couette --re 10.0  >> validation.log
 echo "done"
 echo " " >> validation.log
 echo "Circular couette validation with subtracted pseudo-singularity validation" >> validation.log
