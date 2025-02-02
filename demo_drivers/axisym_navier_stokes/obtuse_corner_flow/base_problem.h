@@ -70,28 +70,36 @@ namespace oomph
       // Open the trace file
       std::string trace_filename = Doc_info.directory() + "/trace.dat";
       std::ofstream trace_file;
-      // If the file does not exist, create it and add the header
+      // If the file has not been created, add the header
+      trace_file.open(trace_filename, std::ios::app);
       if (!Is_trace_file_created)
       {
-        trace_file.open(trace_filename, std::ios::app);
-        trace_file << "doc_number ";
-        trace_file << "n_element ";
-        trace_file << "dofs ";
-        trace_file << "min_error ";
-        trace_file << "max_error ";
-        trace_file << "min_element_size ";
-        trace_file << "max_element_size ";
+        add_trace_header(trace_file);
         // Next line
         trace_file << "\n";
         Is_trace_file_created = true;
       }
-      else
-      {
-        trace_file.open(trace_filename, std::ios::app);
-      }
+      add_trace(trace_file);
+      // End the line and print to file
+      trace_file << std::endl;
 
-      // Assume submesh 0 has the bulk mesh.
+      // Close the trace file
+      trace_file.close();
+    }
 
+    virtual void add_trace_header(std::ofstream& trace_file)
+    {
+      trace_file << "doc_number ";
+      trace_file << "n_element ";
+      trace_file << "dofs ";
+      trace_file << "min_error ";
+      trace_file << "max_error ";
+      trace_file << "min_element_size ";
+      trace_file << "max_element_size ";
+    }
+
+    virtual void add_trace(std::ofstream& trace_file)
+    {
       // Compute info required
       double max_error = 0.0;
       double min_error = 0.0;
@@ -105,6 +113,7 @@ namespace oomph
         min_element_size = 1e6;
 
         // Number of elements
+        // Assume submesh 0 has the bulk mesh.
         n_element = this->mesh_pt(0)->nelement();
 
         // Compute and set the elemental error
@@ -131,12 +140,6 @@ namespace oomph
       trace_file << max_error << " ";
       trace_file << min_element_size << " ";
       trace_file << max_element_size << " ";
-
-      // End the line and print to file
-      trace_file << std::endl;
-
-      // Close the trace file
-      trace_file.close();
     }
   };
 } // namespace oomph

@@ -288,6 +288,21 @@ namespace oomph
       UnstructuredAxisymSectorProblem<ELEMENT>::doc_solution();
     }
 
+    virtual void add_trace_header(std::ofstream& trace_file) override
+    {
+      BaseProblem::add_trace_header(trace_file);
+      trace_file << "augmented_radius ";
+      trace_file << "augmented_elements ";
+    }
+
+    virtual void add_trace(std::ofstream& trace_file) override
+    {
+      BaseProblem::add_trace(trace_file);
+      trace_file << this->parameters().inner_radius << " ";
+      trace_file << Augmented_bulk_element_number.size() << " ";
+    }
+
+
   private:
     void create_slip_eigen_elements();
     void create_traction_eigen_elements();
