@@ -59,8 +59,8 @@ LDADD = -L@libdir@ \
 		-lsolid \
 		-lconstitutive \
 		-lgeneric \
-		$(EXTERNAL_LIBS) $(FLIBS) \
-		-lgcov 
+		$(EXTERNAL_LIBS) $(FLIBS)
+# -lgcov 
 
 # Add the paranoid and range checking flags
-AM_CPPFLAGS += -O0 --coverage -Wno-misleading-indentation #-ggdb -DPARANOID  -DRANGE_CHECKING 
+AM_CPPFLAGS += -O0 -Wno-misleading-indentation #--coverage -ggdb -DPARANOID  -DRANGE_CHECKING 
