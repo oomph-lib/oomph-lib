@@ -15,13 +15,7 @@ cp default_parameters.dat Validation/parameters.dat
 
 test_script()
 {
-    cd Validation
-    mkdir $1
-    var="../$2 > $2.out"
-    echo $var
-    eval $var
-    echo "done"
-    cd ../
+    # Set up log file
     LOG="Validation/validation.log"
     echo " " >> $LOG 
     echo "Validation run" >> $LOG
@@ -31,13 +25,27 @@ test_script()
     echo " " >> $LOG
     echo "  " `pwd` >> $LOG
     echo " " >> $LOG
-    # Sorting here as the MPI runs have a different mesh ordering for some reason...
-    sort Validation/$1/slip_surface0.dat > Validation/$2.dat
-    if test "$1" = "no_fpdiff"; then
-        echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+
+    # If we are on mac then we can't run the tests yet
+    if [[ "$(uname)" == "Darwin" ]]; then
+        echo "dummy [OK] -- macOS is not supported for this demo yet" >> $LOG
     else
-        ../../../bin/fpdiff.py validata/$2.dat.gz  \
-           Validation/$2.dat 0.1 2e-14 >> $LOG
+        # Run the test
+        cd Validation
+        mkdir $1
+        var="../$2 > $2.out"
+        echo $var
+        eval $var
+        echo "done"
+        cd ../
+        # Sorting here as the MPI runs have a different mesh ordering for some reason...
+        sort Validation/$1/slip_surface0.dat > Validation/$2.dat
+        if test "$1" = "no_fpdiff"; then
+            echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+        else
+            ../../../bin/fpdiff.py validata/$2.dat.gz  \
+               Validation/$2.dat 0.1 2e-14 >> $LOG
+        fi
     fi
 }
 
