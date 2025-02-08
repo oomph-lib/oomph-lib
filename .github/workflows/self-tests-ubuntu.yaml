@@ -107,20 +107,20 @@ jobs:
       # -------------------
       # BUILD MAIN PROJECT:
       # -------------------
-      - name: Configure
+      - name: Configure main project
         run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
-      - name: Build
+      - name: Build main project
         run: cmake --build build
 
-      - name: Install
+      - name: Install main project
         run: cmake --install build
 
       # -------------------
       # DEMO DRIVERS:
       # -------------------
       - name: Configure demo drivers
-        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
+        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build -DCMAKE_BUILD_TYPE=Release --log-level=VERBOSE
 
       - name: Run demo driver self-tests
         id: demo_drivers

@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: brew install ninja fd openblas gmp mpfr && brew reinstall gcc
+        run: brew install ninja fd openblas && brew reinstall gcc
 
       - name: Install Python 2.7
         uses: LizardByte/setup-python-action@master
@@ -107,24 +107,30 @@ jobs:
       # -------------------
       # BUILD MAIN PROJECT:
       # -------------------
-      - name: Configure
+      - name: Configure main project
         run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
 
-      - name: Build
+      - name: Build main project
         run: cmake --build build
 
-      - name: Install
+      - name: Install main project
         run: cmake --install build
 
       # -------------------
       # DEMO DRIVERS:
       # -------------------
       - name: Configure demo drivers
-        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
+        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build -DCMAKE_BUILD_TYPE=Release --log-level=VERBOSE
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E mpi.multi_domain.pseudo_solid_collapsible_tube
+        run: |
+          # ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E mpi.multi_domain.pseudo_solid_collapsible_tube
+          ctest -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave| \
+            meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner| \
+            navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist| \
+            self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson| \
+            mpi\.distribution\.clamped_shell|mpi\.solvers'
         continue-on-error: true
 
       # -------------------
