@@ -73,7 +73,7 @@ Library    | Version
 `Boost`    | 1.83.0
 `CGAL`     | 5.6
 `MUMPS`    | 5.6.2
-`HYPRE`    | 2.29.0
+`HYPRE`    | 2.32.0
 `Trilinos` | 14.4.0
 
 ## Example

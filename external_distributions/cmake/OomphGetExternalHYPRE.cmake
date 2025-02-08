@@ -22,7 +22,7 @@
 include_guard()
 
 set(HYPRE_TARBALL_URL
-    https://github.com/hypre-space/hypre/archive/refs/tags/v2.29.0.tar.gz)
+    https://github.com/hypre-space/hypre/archive/refs/tags/v2.32.0.tar.gz)
 set(HYPRE_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/hypre")
 
 # Hypre build options
