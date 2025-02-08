@@ -71,12 +71,11 @@ function(oomph_add_test)
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
     message(FATAL_ERROR "No TEST_NAME argument supplied.")
-  elseif(NOT DEPENDS_ON)
-    message(VERBOSE "No DEPENDS_ON argument supplied. Can't create a test.")
+  endif()
+
+  if(NOT DEPENDS_ON)
+    message(WARNING "No DEPENDS_ON argument supplied. Can't create a test.")
     return()
-  elseif(NOT LABELS)
-    message(WARNING "No LABELS supplied. These are helpful for running CTest\
-    with subsets of the tests. We recommend that you set this!")
   endif()
 
   find_program(BASH_PROGRAM bash)
@@ -84,23 +83,10 @@ function(oomph_add_test)
     message(STATUS "You don't have 'bash', so I can't construct any tests!")
   endif()
 
-  # ----------------------------------------------------------------------------
-  # Grab the validate.sh script if we have one
-  set(REQUIREMENTS_WITH_PATHS)
-  set(TEST_BYPRODUCTS)
-
-  # Add on the extra requirements
-  foreach(REQUIREMENT IN LISTS TEST_FILES)
-    set(FILENAME ${REQUIREMENT})
-    if(IS_ABSOLUTE ${REQUIREMENT})
-      list(APPEND REQUIREMENTS_WITH_PATHS ${REQUIREMENT})
-      cmake_path(GET REQUIREMENT FILENAME FILENAME)
-    else()
-      list(APPEND REQUIREMENTS_WITH_PATHS
-           "${CMAKE_CURRENT_LIST_DIR}/${REQUIREMENT}")
-    endif()
-    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
-  endforeach()
+  if(NOT LABELS)
+    message(WARNING "No LABELS supplied. These are helpful for running CTest\
+    with subsets of the tests. We recommend that you set this!")
+  endif()
 
   # We *nearly* always need validata, so warn if we don't have it, just in case
   # the user's forgotten to provide it
@@ -121,7 +107,6 @@ function(oomph_add_test)
         ")
     endif()
   endif()
-  # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Hash the path to create a unique ID for our targets but shorten it to the
@@ -132,93 +117,111 @@ function(oomph_add_test)
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
-  # Declare a copy_... target to copy the required files to the build directory
-  if(NOT TARGET copy_${PATH_HASH})
-    add_custom_target(copy_${PATH_HASH} ALL
-                      WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-  endif()
+  # Grab the validate.sh script if we have one
+  set(REQUIREMENTS_WITH_PATHS "")
+  set(TEST_BYPRODUCTS "")
 
-  # Flag used to control whether files are symlinked instead of copied; keeping
-  # the option to copy files around just in case we need it later on (but I
-  # doubt it)
+  # Add on the extra requirements
+  foreach(REQUIREMENT IN LISTS TEST_FILES)
+    cmake_path(ABSOLUTE_PATH REQUIREMENT BASE_DIRECTORY
+               "${CMAKE_CURRENT_LIST_DIR}")
+    cmake_path(GET REQUIREMENT FILENAME FILENAME)
+    list(APPEND REQUIREMENTS_WITH_PATHS "${REQUIREMENT}")
+    list(APPEND TEST_BYPRODUCTS "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+  endforeach()
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # Flag used to control whether files are symlinked instead of copied
   set(SYMLINK_TEST_FILES_INSTEAD_OF_COPY TRUE)
 
-  # Add each requirement to the copy target as a file-copy command or as a
-  # directory-copy command. All of these commands will be executed when the
-  # copy_<path-hash> target is called
-  foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
-    if(SYMLINK_TEST_FILES_INSTEAD_OF_COPY)
-      add_custom_command(
-        TARGET copy_${PATH_HASH}
-        POST_BUILD
-        COMMAND ln -sf "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
-    else()
-      if(IS_DIRECTORY "${REQUIREMENT}")
-        add_custom_command(
-          TARGET copy_${PATH_HASH}
-          POST_BUILD
-          COMMAND cp -ur "${REQUIREMENT}" "${CMAKE_CURRENT_BINARY_DIR}")
-      else()
-        add_custom_command(
-          TARGET copy_${PATH_HASH}
-          POST_BUILD
-          COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
-                  "${CMAKE_CURRENT_BINARY_DIR}")
-      endif()
-    endif()
-  endforeach()
+  # Copy/symlink test files
+  if(NOT TARGET copy_${PATH_HASH})
+    # Declare a copy_... target to copy/symlink the required files to the build
+    # directory
+    add_custom_target(copy_${PATH_HASH} ALL)
 
-  # Identify the files that we'll copy as by-products so that they can be
-  # cleaned up by running "make clean" if the user uses Makefile Generators
-  add_custom_command(
-    TARGET copy_${PATH_HASH}
-    POST_BUILD
-    BYPRODUCTS ${TEST_BYPRODUCTS})
+    # Add each requirement to the copy target as a file-copy command or as a
+    # directory-copy command. All of these commands will be executed when the
+    # copy_<path-hash> target is called
+    foreach(REQUIREMENT IN LISTS REQUIREMENTS_WITH_PATHS)
+      cmake_path(GET REQUIREMENT FILENAME FILENAME)
+      if(SYMLINK_TEST_FILES_INSTEAD_OF_COPY)
+        add_custom_command(
+          TARGET copy_${PATH_HASH}
+          POST_BUILD
+          COMMAND ${CMAKE_COMMAND} -E create_symlink "${REQUIREMENT}"
+                  "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+      else()
+        if(IS_DIRECTORY "${REQUIREMENT}")
+          add_custom_command(
+            TARGET copy_${PATH_HASH}
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory "${REQUIREMENT}"
+                    "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+        else()
+          add_custom_command(
+            TARGET copy_${PATH_HASH}
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${REQUIREMENT}"
+                    "${CMAKE_CURRENT_BINARY_DIR}/${FILENAME}")
+        endif()
+      endif()
+    endforeach()
+
+    # To silence the warning about a missing COMMAND key in the
+    # add_custom_command(...) command below. We're going to just enable the
+    # policy locally (by pushing to the policy stack then popping after)
+    cmake_policy(PUSH)
+    cmake_policy(SET CMP0175 OLD)
+
+    # Identify the files that we'll copy as by-products so that they can be
+    # cleaned up by running "make clean" if the user uses Makefile Generators
+    add_custom_command(
+      TARGET copy_${PATH_HASH}
+      POST_BUILD
+      BYPRODUCTS ${TEST_BYPRODUCTS})
+
+    # Remove the above enabled policy
+    cmake_policy(POP)
+  endif()
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Create a target to build the targets we're going to test with validate.sh.
   # We need to build from the top-level build directory as this is where the
   # Makefile/build.ninja file (which contains the build recipes) lives
-  add_custom_target(build_targets_${PATH_HASH}
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+  add_custom_target(build_targets_${PATH_HASH} ALL)
 
   # Add on commands to build the targets we need
   foreach(TARGET_DEPENDENCY IN LISTS DEPENDS_ON)
-    add_custom_command(
-      TARGET build_targets_${PATH_HASH}
-      POST_BUILD
-      COMMAND ${CMAKE_MAKE_PROGRAM} ${TARGET_DEPENDENCY}_${PATH_HASH}
-      WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+    add_dependencies(build_targets_${PATH_HASH}
+                     ${TARGET_DEPENDENCY}_${PATH_HASH})
   endforeach()
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
   # Create a target to wipe the Validation/ directory if it exists
   if(NOT TARGET clean_validation_dir_${PATH_HASH})
-    add_custom_target(clean_validation_dir_${PATH_HASH}
-                      COMMAND rm -rf "${CMAKE_CURRENT_BINARY_DIR}/Validation")
+    add_custom_target(
+      clean_validation_dir_${PATH_HASH}
+      COMMAND ${CMAKE_COMMAND} -E remove_directory
+              "${CMAKE_CURRENT_BINARY_DIR}/Validation")
   endif()
   # ----------------------------------------------------------------------------
 
+  # ----------------------------------------------------------------------------
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
   # have Python
   if(NOT Python3_FOUND)
     list(APPEND COMMAND "no_fpdiff")
   endif()
+  # ----------------------------------------------------------------------------
 
-  # TODO: Try rewriting with POST_BUILD actions:
-  # https://cmake.org/cmake/help/latest/command/add_custom_command.html?highlight=add_custom_command#build-events
-  # It will simply append the new command (with &&; check build.ninja) and not
-  # overwrite the previous ones
-
+  # ----------------------------------------------------------------------------
   # TODO: Try simplifying things with
   # https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html#using-ctest-to-drive-complex-tests
 
-  # FIXME: If we move away from validate.sh scripts, we need to run executables
-  # with our own mpirun command if needed
-
-  # ----------------------------------------------------------------------------
   # Run the dependencies to copy the test data, build the (sub)project(s)
   # targets then run the validate.sh script and pass the location of the
   # oomph-lib root directory so they have access to the scripts they require,
@@ -232,9 +235,7 @@ function(oomph_add_test)
       # Check for the validation.log file. Stop here if we can't
       COMMAND
         ${BASH_PROGRAM} -c
-        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
-          printf \"\\nUnable to locate validation log file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
-          exit 0 )"
+        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( printf \"\\nUnable to locate validation log file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && exit 0 )"
       # Append the validation.log to the top-level validation.log
       COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
               "${CMAKE_BINARY_DIR}/validation.log"
@@ -253,9 +254,7 @@ function(oomph_add_test)
       # Check for the validation.log file
       COMMAND
         ${BASH_PROGRAM} -c
-        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( \
-          printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && \
-          exit 1 )"
+        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && exit 1 )"
       # Append validation.log to top-level validation.log
       COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
               "${CMAKE_BINARY_DIR}/validation.log"
