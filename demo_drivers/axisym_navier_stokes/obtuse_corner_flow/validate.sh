@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=7
+NUM_TESTS=8
 
 # Setup validation directory
 #---------------------------
@@ -51,6 +51,24 @@ test_script RESLT_axi_fix_region structured_with_correction_region
 test_script RESLT_axi_sprittles_region sprittles_region
 test_script RESLT_axi_no_fix_unstr unstructured_no_correction 
 test_script RESLT_axi_fix_unstr unstructured_with_correction
+
+LOG="Validation/validation.log"
+echo " " >> $LOG 
+echo "Validation run" >> $LOG
+echo "---------------------------------------------" >> $LOG
+echo " " >> $LOG
+echo "Validation directory: " >> $LOG
+echo " " >> $LOG
+echo "  " `pwd` >> $LOG
+echo " " >> $LOG
+echo "./test_parameters"
+if ./test_parameters -eq 0; then
+    echo "done"
+    echo "[OK] -- test_parameters passed" >> $LOG
+else
+    echo "done"
+    echo "[FAILED] -- test_parameters failed" >> $LOG
+fi
 
 #######################################################################
 
