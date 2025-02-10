@@ -1730,21 +1730,21 @@ namespace oomph
 
     /// Number of integration points of the scheme
     unsigned nweight() const
-      {
-	return Npts;
-      }
+    {
+      return Npts;
+    }
 
     /// Return coordinate s[j] of integration point i
     double knot(const unsigned& i, const unsigned& j) const
-      {
-	return Knot[i][j];
-      }
+    {
+      return Knot[i][j];
+    }
 
     /// Return weight of integration point i
     double weight(const unsigned& i) const
-      {
-	return Weight[i];
-      }
+    {
+      return Weight[i];
+    }
   };
 #endif
 

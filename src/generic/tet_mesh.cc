@@ -416,7 +416,7 @@ namespace oomph
   /// to a new region, or to add a new element to a new region
   //========================================================================
   void TetMeshBase::add_element_in_region_pt(FiniteElement* const& elem_pt,
-					     const unsigned& region_id)
+                                             const unsigned& region_id)
   {
     // the index of the requested region in our vector of region IDs;
     // this is either the index of an existing region, or the index of
@@ -426,11 +426,11 @@ namespace oomph
     // look for this region in our current list
     Vector<double>::iterator region_it =
       std::find(Region_attribute.begin(),
-		Region_attribute.end(),
-		static_cast<double>(region_id));
+                Region_attribute.end(),
+                static_cast<double>(region_id));
 
     // did we find it?
-    if(region_it != Region_attribute.end())
+    if (region_it != Region_attribute.end())
     {
       // if so get the vector index
       region_index = region_it - Region_attribute.begin();
@@ -444,9 +444,8 @@ namespace oomph
     }
 
     // is this an element already in the mesh?
-    if(std::find(this->Element_pt.begin(),
-		 this->Element_pt.end(),
-		 elem_pt) == this->Element_pt.end())
+    if (std::find(this->Element_pt.begin(), this->Element_pt.end(), elem_pt) ==
+        this->Element_pt.end())
     {
       // if it isn't, then we'll first add it
       this->add_element_pt(elem_pt);
@@ -472,9 +471,8 @@ namespace oomph
       {
         // for each region, search the vector of elements in this region for the
         // original corner element
-        region_element_it = std::find(Region_element_pt[r].begin(),
-                                      Region_element_pt[r].end(),
-                                      elem_pt);
+        region_element_it = std::find(
+          Region_element_pt[r].begin(), Region_element_pt[r].end(), elem_pt);
 
         // if the iterator hasn't reached the end then we've found it
         if (region_element_it != Region_element_pt[r].end())
@@ -491,17 +489,18 @@ namespace oomph
       }
 
       // if it was previously assigned to a region, then remove it
-      if(found)
+      if (found)
       {
-	// Now update the basic region lookup. The iterator will still point to
-	// the original corner element in the lookup, so we can delete this easily
-	Region_element_pt[original_region_index].erase(region_element_it);
+        // Now update the basic region lookup. The iterator will still point to
+        // the original corner element in the lookup, so we can delete this
+        // easily
+        Region_element_pt[original_region_index].erase(region_element_it);
       }
     }
 
     // if we're adding a new region then the new index will be
     // equal to the length of the current vector of region elements
-    if(region_index == Region_element_pt.size())
+    if (region_index == Region_element_pt.size())
     {
       // add the new element as a new entry
       Vector<FiniteElement*> elem_vector(1, elem_pt);
