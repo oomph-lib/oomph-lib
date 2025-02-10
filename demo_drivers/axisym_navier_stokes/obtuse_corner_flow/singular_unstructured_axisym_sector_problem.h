@@ -56,8 +56,8 @@ namespace oomph
 
     // Constructor
     SingularUnstructuredAxisymSectorProblem(
-      std::string parameter_file = "parameters.dat")
-      : UnstructuredAxisymSectorProblem<ELEMENT>(parameter_file),
+            Params& parameters)
+      : UnstructuredAxisymSectorProblem<ELEMENT>(parameters),
         Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer

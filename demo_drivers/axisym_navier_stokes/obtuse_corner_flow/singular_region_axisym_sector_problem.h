@@ -58,19 +58,8 @@ namespace oomph
       Inner_slip_boundary_id,
       Inner_boundary_id,
     };
-
+    
     // Constructor
-    SingularRegionAxisymSectorProblem()
-      : RegionAxisymSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
-    {
-      // Re-assign doc info pointer
-      this->doc_info_pt()->set_directory("RESLT_axi_fix_region");
-
-      add_singular_sub_meshes();
-
-      this->rebuild_global_mesh();
-    }
-
     SingularRegionAxisymSectorProblem(Params& params)
       : RegionAxisymSectorProblem<ELEMENT>(params), Contact_line_node_pt(0)
     {

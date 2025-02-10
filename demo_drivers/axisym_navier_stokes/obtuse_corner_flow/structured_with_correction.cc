@@ -30,9 +30,10 @@ int main(int argc, char** argv)
   oomph_info << "structured_with_correction" << std::endl;
 
   // Create problem
+  Params params = create_parameters_from_file("parameters.dat");
   SingularAxisymSectorProblem<SingularAxisymNavierStokesElement<MyElement>>*
     problem = new SingularAxisymSectorProblem<
-      SingularAxisymNavierStokesElement<MyElement>>;
+      SingularAxisymNavierStokesElement<MyElement>>(params);
   problem->setup();
 
   //problem->linear_solver_pt() = new FD_LU;

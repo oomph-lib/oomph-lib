@@ -30,9 +30,10 @@ int main(int argc, char** argv)
   oomph_info << "unstructured_no_correction" << std::endl;
 
   // Create problem
+  Params params = create_parameters_from_file("parameters.dat");
   UnstructuredAxisymSectorProblem<
     ProjectableAxisymmetricTaylorHoodElement<MyElement>>
-    problem;
+    problem(params);
   problem.setup();
 
   // Steady problem

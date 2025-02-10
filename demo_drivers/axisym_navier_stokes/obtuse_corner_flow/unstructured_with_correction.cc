@@ -31,9 +31,10 @@ int main(int argc, char** argv)
   oomph_info << "unstructured_with_correction_regions" << std::endl;
 
   // Create problem
+  Params params = create_parameters_from_file("parameters.dat");
   SingularUnstructuredAxisymSectorProblem<SingularAxisymNavierStokesElement<
     ProjectableAxisymmetricTaylorHoodElement<MyElement>>>
-    problem;
+    problem(params);
   problem.setup();
 
   // Steady problem

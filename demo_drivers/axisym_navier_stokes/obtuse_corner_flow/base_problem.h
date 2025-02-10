@@ -17,17 +17,7 @@ namespace oomph
     bool Is_trace_file_created;
 
   public:
-    BaseProblem(std::string parameter_filename = "parameters.dat")
-      : Parameters(create_parameters_from_file(parameter_filename)),
-        Is_trace_file_created(false)
-    {
-      // Create and add the timestepper
-      add_time_stepper_pt(new BDF<2>);
-
-      // Assign doc info pointer
-      Doc_info.number() = 0;
-    }
-
+    // Constructor
     BaseProblem(Params& params) : Parameters(params)
     {
       // Create and add the timestepper

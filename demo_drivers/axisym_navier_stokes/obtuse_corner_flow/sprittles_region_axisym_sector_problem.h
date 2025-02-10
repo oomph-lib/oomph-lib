@@ -59,8 +59,8 @@ namespace oomph
     };
 
     // Constructor
-    SprittlesRegionAxisymSectorProblem()
-      : RegionAxisymSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
+    SprittlesRegionAxisymSectorProblem(            Params& parameters)
+      : RegionAxisymSectorProblem<ELEMENT>(parameters), Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer
       this->doc_info_pt()->set_directory("RESLT_axi_sprittles_region");
