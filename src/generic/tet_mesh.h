@@ -1041,6 +1041,17 @@ namespace oomph
       }
     }
 
+    /// Add an element to a particular region; this helper checks if the
+    /// specified element and region ID already exist, so can be used to move
+    /// an existing element to an existing region, to add an existing element
+    /// to a new region, or to add a new element to a new region
+    void add_element_in_region_pt(FiniteElement* const& elem_pt,
+				  const unsigned& region_id);
+
+
+    /// Clear and regenerate the lookup schemes for bulk elements and their
+    /// corresponding face indices which are adjacent to mesh boundaries
+    void regenerate_region_boundary_lookups();
 
     /// Return the number of regions specified by attributes
     unsigned nregion()

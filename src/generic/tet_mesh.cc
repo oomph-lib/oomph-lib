@@ -365,6 +365,155 @@ namespace oomph
     Lookup_for_elements_next_boundary_is_setup = true;
   }
 
+  //========================================================================
+  /// Clear and regenerate the lookup schemes for bulk elements and their
+  /// corresponding face indices which are adjacent to mesh boundaries
+  //========================================================================
+  void TetMeshBase::regenerate_region_boundary_lookups()
+  {
+    Face_index_region_at_boundary.clear();
+    Boundary_region_element_pt.clear();
+
+    Face_index_region_at_boundary.resize(nboundary());
+    Boundary_region_element_pt.resize(nboundary());
+
+    for (unsigned b = 0; b < nboundary(); b++)
+    {
+      // Loop over elements next to that boundary
+      unsigned nel = this->nboundary_element(b);
+      for (unsigned e = 0; e < nel; e++)
+      {
+        FiniteElement* el_pt = boundary_element_pt(b, e);
+
+        // now search for it in each region
+        for (unsigned r_index = 0; r_index < Region_attribute.size(); r_index++)
+        {
+          unsigned region_id = static_cast<unsigned>(Region_attribute[r_index]);
+
+          Vector<FiniteElement*>::iterator it =
+            std::find(Region_element_pt[r_index].begin(),
+                      Region_element_pt[r_index].end(),
+                      el_pt);
+
+          // if we find this element in the current region, then update our
+          // lookups
+          if (it != Region_element_pt[r_index].end())
+          {
+            Boundary_region_element_pt[b][region_id].push_back(el_pt);
+
+            unsigned face_index = face_index_at_boundary(b, e);
+            Face_index_region_at_boundary[b][region_id].push_back(face_index);
+          }
+        }
+      }
+    }
+  }
+
+  //========================================================================
+  /// Add an element to a particular region; this helper checks if the
+  /// specified element and region ID already exist, so can be used to move
+  /// an existing element to an existing region, to add an existing element
+  /// to a new region, or to add a new element to a new region
+  //========================================================================
+  void TetMeshBase::add_element_in_region_pt(FiniteElement* const& elem_pt,
+					     const unsigned& region_id)
+  {
+    // the index of the requested region in our vector of region IDs;
+    // this is either the index of an existing region, or the index of
+    // a new region which is to be added
+    unsigned region_index = 0;
+
+    // look for this region in our current list
+    Vector<double>::iterator region_it =
+      std::find(Region_attribute.begin(),
+		Region_attribute.end(),
+		static_cast<double>(region_id));
+
+    // did we find it?
+    if(region_it != Region_attribute.end())
+    {
+      // if so get the vector index
+      region_index = region_it - Region_attribute.begin();
+    }
+    else
+    {
+      // otherwise we're making a new one; the index is the
+      // current size of the vector, and then we'll add the ID to the end
+      region_index = Region_attribute.size();
+      Region_attribute.push_back(static_cast<double>(region_id));
+    }
+
+    // is this an element already in the mesh?
+    if(std::find(this->Element_pt.begin(),
+		 this->Element_pt.end(),
+		 elem_pt) == this->Element_pt.end())
+    {
+      // if it isn't, then we'll first add it
+      this->add_element_pt(elem_pt);
+    }
+    else
+    {
+      // if this element already exists then we'll search for it
+      // in the region element list - regions can't overlap, so we
+      // must remove this element from its original region in addition to
+      // adding it to the newly requested region
+
+      unsigned original_region_index = 0;
+
+      // has this element already been assigned to a region?
+      bool found = false;
+
+      Vector<FiniteElement*>::iterator region_element_it;
+
+      // loop over the regions and look for this original corner element to find
+      // out which region it used to be in, so we can add the new elements to
+      // the same region.
+      for (unsigned r = 0; r < Region_element_pt.size(); r++)
+      {
+        // for each region, search the vector of elements in this region for the
+        // original corner element
+        region_element_it = std::find(Region_element_pt[r].begin(),
+                                      Region_element_pt[r].end(),
+                                      elem_pt);
+
+        // if the iterator hasn't reached the end then we've found it
+        if (region_element_it != Region_element_pt[r].end())
+        {
+          // save the region index we're at
+          original_region_index = r;
+
+          // update the paranoid flag
+          found = true;
+
+          // regions can't overlap, so once we've found one we're done
+          break;
+        }
+      }
+
+      // if it was previously assigned to a region, then remove it
+      if(found)
+      {
+	// Now update the basic region lookup. The iterator will still point to
+	// the original corner element in the lookup, so we can delete this easily
+	Region_element_pt[original_region_index].erase(region_element_it);
+      }
+    }
+
+    // if we're adding a new region then the new index will be
+    // equal to the length of the current vector of region elements
+    if(region_index == Region_element_pt.size())
+    {
+      // add the new element as a new entry
+      Vector<FiniteElement*> elem_vector(1, elem_pt);
+      Region_element_pt.push_back(elem_vector);
+    }
+    else
+    {
+      // otherwise just add the element to an existing vector
+      Region_element_pt[region_index].push_back(elem_pt);
+    }
+  }
+
 
   //======================================================================
   /// Assess mesh quality: Ratio of max. edge length to min. height,
