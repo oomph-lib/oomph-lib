@@ -238,6 +238,18 @@ namespace oomph
       Jacobian_ordering_flag = Metis_ordering;
     }
 
+    // tell MUMPS to use the METIS package for the ordering
+    void use_parmetis_ordering()
+    {
+      Jacobian_ordering_flag = Parmetis_ordering;
+    }
+
+    // tell MUMPS to use the parallel Scotch package for the ordering
+    void use_ptscotch_ordering()
+      {
+	Jacobian_ordering_flag = Ptscotch_ordering;
+    }
+
     // tell MUMPS to use the SCOTCH package for the ordering
     void use_scotch_ordering()
     {
@@ -310,9 +322,18 @@ namespace oomph
     /// magic numbers as defined by MUMPS documentation
     enum MumpsJacobianOrderingFlags
     {
+      Ptscotch_ordering = 1,
+      Parmetis_ordering = 2,
       Scotch_ordering = 3,
       Pord_ordering = 4,
       Metis_ordering = 5
+    };
+
+    enum MumpsErrorCodes
+    {
+      Structurally_singular_jacobian = -6,
+      Numerically_singular_jacobian  = -10,
+      Workspace_too_small            = -19
     };
 
     /// symmetry of the Jacobian matrix we're solving;
