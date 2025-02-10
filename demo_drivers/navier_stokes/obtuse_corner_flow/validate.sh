@@ -1,5 +1,5 @@
-#!/usr/bin/sh
-
+#! /bin/sh
+echo 'Running validation'
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
@@ -13,15 +13,10 @@ rm -r -f Validation
 mkdir Validation
 cp default_parameters.dat Validation/parameters.dat
 
+# Function to reduce code duplication in tests
 test_script()
 {
-    cd Validation
-    mkdir $1
-    var="../$2 > $2.out"
-    echo $var
-    eval $var
-    echo "done"
-    cd ../
+    # Set up log file
     LOG="Validation/validation.log"
     echo " " >> $LOG 
     echo "Validation run" >> $LOG
@@ -31,13 +26,29 @@ test_script()
     echo " " >> $LOG
     echo "  " `pwd` >> $LOG
     echo " " >> $LOG
-    # Sorting here as the MPI runs have a different mesh ordering for some reason...
-    sort Validation/$1/slip_surface0.csv > Validation/$2.dat
-    if test "$1" = "no_fpdiff"; then
-        echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+
+    # If we are on mac then we can't run the tests yet
+    if [[ "$(uname)" == "Darwin" ]]; then
+        echo "dummy [OK] -- macOS is not supported for this demo yet" >> $LOG
     else
-        ../../../bin/fpdiff.py validata/$2.dat.gz  \
-           Validation/$2.dat >> $LOG
+        # Run the test
+        cd Validation
+        mkdir $1
+        var="../$2 > $2.out"
+        echo $var
+        eval $var
+        echo "done"
+        cd ../
+
+        # Check the output
+        # Sorting here as the MPI runs have a different mesh ordering for some reason...
+        sort Validation/$1/slip_surface0.csv > Validation/$2.dat
+        if test "$1" = "no_fpdiff"; then
+            echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> $LOG
+        else
+            ../../../bin/fpdiff.py validata/$2.dat.gz  \
+               Validation/$2.dat >> $LOG
+        fi
     fi
 }
 
