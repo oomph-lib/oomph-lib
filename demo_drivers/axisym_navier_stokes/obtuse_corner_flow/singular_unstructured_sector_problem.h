@@ -55,8 +55,8 @@ namespace oomph
     };
 
     // Constructor
-    SingularUnstructuredSectorProblem()
-      : UnstructuredSectorProblem<ELEMENT>(), Contact_line_node_pt(0)
+    SingularUnstructuredSectorProblem(Params& parameters)
+      : UnstructuredSectorProblem<ELEMENT>(parameters), Contact_line_node_pt(0)
     {
       // Re-assign doc info pointer
       this->doc_info_pt()->set_directory("RESLT_fix_unstr");

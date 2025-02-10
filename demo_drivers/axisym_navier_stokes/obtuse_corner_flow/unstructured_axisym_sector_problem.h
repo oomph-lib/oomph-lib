@@ -45,9 +45,8 @@ namespace oomph
     };
 
     // Constructor
-    UnstructuredAxisymSectorProblem(
-      std::string parameter_file = "parameters.dat")
-      : BaseProblem(parameter_file), Z2_error_estimator_pt(new Z2ErrorEstimator)
+    UnstructuredAxisymSectorProblem(Params& params)
+      : BaseProblem(params), Z2_error_estimator_pt(new Z2ErrorEstimator)
     {
       // Create and add the timestepper
       add_time_stepper_pt(new BDF<2>);

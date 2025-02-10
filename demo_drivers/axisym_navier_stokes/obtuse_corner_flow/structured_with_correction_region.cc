@@ -24,9 +24,10 @@ int main(int argc, char** argv)
   oomph_info << "structured_with_correction_regions" << std::endl;
 
   // Create problem
+  Params params = create_parameters_from_file("parameters.dat");
   SingularRegionAxisymSectorProblem<
     SingularAxisymNavierStokesElement<MyElement>>
-    problem;
+    problem(params);
   problem.setup();
 
   // Steady problem

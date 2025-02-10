@@ -39,16 +39,18 @@ check_PROGRAMS= \
 	structured_with_correction_region \
 	unstructured_no_correction \
 	unstructured_with_correction \
-	sprittles_region
+	sprittles_region \
+	test_parameters
 
 # Sources for second executable
-structured_no_correction_SOURCES = structured_no_correction.cc
-structured_no_correction_region_SOURCES = structured_no_correction_region.cc
-structured_with_correction_SOURCES = structured_with_correction.cc
-structured_with_correction_region_SOURCES = structured_with_correction_region.cc
-unstructured_no_correction_SOURCES = unstructured_no_correction.cc
-unstructured_with_correction_SOURCES = unstructured_with_correction.cc
-sprittles_region_SOURCES = sprittles_region.cc
+structured_no_correction_SOURCES = structured_no_correction.cc parameter_struct.cc
+structured_no_correction_region_SOURCES = structured_no_correction_region.cc parameter_struct.cc
+structured_with_correction_SOURCES = structured_with_correction.cc parameter_struct.cc
+structured_with_correction_region_SOURCES = structured_with_correction_region.cc parameter_struct.cc
+unstructured_no_correction_SOURCES = unstructured_no_correction.cc parameter_struct.cc
+unstructured_with_correction_SOURCES = unstructured_with_correction.cc parameter_struct.cc
+sprittles_region_SOURCES = sprittles_region.cc parameter_struct.cc
+test_parameters_SOURCES = test_parameters.cc parameter_struct.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

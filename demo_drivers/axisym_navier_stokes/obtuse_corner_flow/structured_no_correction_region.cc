@@ -18,7 +18,8 @@ int main(int argc, char** argv)
   oomph_info << "structured_no_correction_region" << std::endl;
 
   // Create problem
-  RegionAxisymSectorProblem<MyElement> problem;
+  Params params = create_parameters_from_file("parameters.dat");
+  RegionAxisymSectorProblem<MyElement> problem(params);
   problem.setup();
 
   // Steady problem

@@ -24,9 +24,10 @@ int main(int argc, char** argv)
   oomph_info << "sprittles" << std::endl;
 
   // Create problem
+  Params params = create_parameters_from_file("parameters.dat");
   SprittlesRegionAxisymSectorProblem<
     SingularAxisymNavierStokesElement<MyElement>>
-    problem;
+    problem(params);
   problem.setup();
 
   // problem.linear_solver_pt() = new FD_LU;
