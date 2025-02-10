@@ -122,7 +122,7 @@ namespace oomph
     Mumps_struc_pt->ICNTL(5) = 0;
 
     // are we doing parallel ordering?
-    if(Jacobian_ordering_flag == Ptscotch_ordering)
+    if (Jacobian_ordering_flag == Ptscotch_ordering)
     {
       // set parallel computation
       Mumps_struc_pt->ICNTL(28) = 2;
@@ -130,7 +130,7 @@ namespace oomph
       // PT-SCOTCH magic number
       Mumps_struc_pt->ICNTL(29) = 1;
     }
-    else if(Jacobian_ordering_flag == Parmetis_ordering)
+    else if (Jacobian_ordering_flag == Parmetis_ordering)
     {
       // set parallel computation
       Mumps_struc_pt->ICNTL(28) = 2;
@@ -140,8 +140,8 @@ namespace oomph
     }
     else
     {
-    // set the package to use for ordering during (sequential) analysis
-    Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
+      // set the package to use for ordering during (sequential) analysis
+      Mumps_struc_pt->ICNTL(7) = Jacobian_ordering_flag;
     }
 
     // Distributed problem with user-specified distribution
@@ -407,46 +407,46 @@ namespace oomph
             << "Time for mumps analysis stage in MumpsSolver            : "
             << TimingHelpers::convert_secs_to_formatted_string(t_end_analyse -
                                                                t_start_analyse)
-	    << "\n(Ordering generated ";
+            << "\n(Ordering generated ";
 
-	  // did MUMPS select parallel analysis?
-	  if(Mumps_struc_pt->INFOG(32) == 2)
-	  {
-	    oomph_info << "in parallel using: ";
-	    switch (Mumps_struc_pt->INFOG(7))
-	    {
-	      case MumpsJacobianOrderingFlags::Ptscotch_ordering:
-		oomph_info << "PT-SCOTCH";
-		break;
-
-	      case MumpsJacobianOrderingFlags::Parmetis_ordering:
-		oomph_info << "ParMETIS";
-		break;
-	    }
-	  }
-	  else
-	  {
-	    oomph_info << "sequentially using: ";
-
-	    // options for sequential analysis
-          switch (Mumps_struc_pt->INFOG(7))
+          // did MUMPS select parallel analysis?
+          if (Mumps_struc_pt->INFOG(32) == 2)
           {
-            case MumpsJacobianOrderingFlags::Scotch_ordering:
-              oomph_info << "SCOTCH";
-              break;
+            oomph_info << "in parallel using: ";
+            switch (Mumps_struc_pt->INFOG(7))
+            {
+              case MumpsJacobianOrderingFlags::Ptscotch_ordering:
+                oomph_info << "PT-SCOTCH";
+                break;
 
-            case MumpsJacobianOrderingFlags::Pord_ordering:
-              oomph_info << "PORD";
-              break;
-
-            case MumpsJacobianOrderingFlags::Metis_ordering:
-              oomph_info << "METIS";
-              break;
-
-            default:
-              oomph_info << Mumps_struc_pt->INFOG(7);
+              case MumpsJacobianOrderingFlags::Parmetis_ordering:
+                oomph_info << "ParMETIS";
+                break;
+            }
           }
-	  }
+          else
+          {
+            oomph_info << "sequentially using: ";
+
+            // options for sequential analysis
+            switch (Mumps_struc_pt->INFOG(7))
+            {
+              case MumpsJacobianOrderingFlags::Scotch_ordering:
+                oomph_info << "SCOTCH";
+                break;
+
+              case MumpsJacobianOrderingFlags::Pord_ordering:
+                oomph_info << "PORD";
+                break;
+
+              case MumpsJacobianOrderingFlags::Metis_ordering:
+                oomph_info << "METIS";
+                break;
+
+              default:
+                oomph_info << Mumps_struc_pt->INFOG(7);
+            }
+          }
 
           oomph_info << ")" << std::endl;
         }
@@ -492,49 +492,49 @@ namespace oomph
           {
             if (!Suppress_mumps_info_during_solve)
             {
-              oomph_info << "Error during mumps factorisation!\n";              
+              oomph_info << "Error during mumps factorisation!\n";
             }
 
-	    std::ostringstream error_message_stream;
+            std::ostringstream error_message_stream;
 
-	    switch(Mumps_struc_pt->INFOG(1))
-	    {
-	      case MumpsErrorCodes::Structurally_singular_jacobian:
-
-		error_message_stream << "Structurally singular matrix\n";
-
-		throw OomphLibError(error_message_stream.str(),
-				    OOMPH_CURRENT_FUNCTION,
-				    OOMPH_EXCEPTION_LOCATION);
-
-	      case MumpsErrorCodes::Numerically_singular_jacobian:
-
-		error_message_stream << "Numerically singular matrix\n";
-
-		throw OomphLibError(error_message_stream.str(),
-				    OOMPH_CURRENT_FUNCTION,
-				    OOMPH_EXCEPTION_LOCATION);
-
-	      case MumpsErrorCodes::Workspace_too_small:
-
-            // Increase scaling factor for workspace and run again
-            Workspace_scaling_factor *= 2;
-
-            if (!Suppress_mumps_info_during_solve)
+            switch (Mumps_struc_pt->INFOG(1))
             {
-              oomph_info << "Increasing workspace_scaling_factor to "
-                         << Workspace_scaling_factor << std::endl;
-		}
-		break;
+              case MumpsErrorCodes::Structurally_singular_jacobian:
 
-	      default:
-		error_message_stream
-		  << "MUMPS error codes: " << Mumps_struc_pt->INFO(1) << " "
-		  << Mumps_struc_pt->INFO(2) << std::endl;
+                error_message_stream << "Structurally singular matrix\n";
 
-		throw OomphLibError(error_message_stream.str(),
-				    OOMPH_CURRENT_FUNCTION,
-				    OOMPH_EXCEPTION_LOCATION);
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
+
+              case MumpsErrorCodes::Numerically_singular_jacobian:
+
+                error_message_stream << "Numerically singular matrix\n";
+
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
+
+              case MumpsErrorCodes::Workspace_too_small:
+
+                // Increase scaling factor for workspace and run again
+                Workspace_scaling_factor *= 2;
+
+                if (!Suppress_mumps_info_during_solve)
+                {
+                  oomph_info << "Increasing workspace_scaling_factor to "
+                             << Workspace_scaling_factor << std::endl;
+                }
+                break;
+
+              default:
+                error_message_stream
+                  << "MUMPS error codes: " << Mumps_struc_pt->INFO(1) << " "
+                  << Mumps_struc_pt->INFO(2) << std::endl;
+
+                throw OomphLibError(error_message_stream.str(),
+                                    OOMPH_CURRENT_FUNCTION,
+                                    OOMPH_EXCEPTION_LOCATION);
             }
           }
           else

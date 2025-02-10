@@ -1046,7 +1046,7 @@ namespace oomph
     /// an existing element to an existing region, to add an existing element
     /// to a new region, or to add a new element to a new region
     void add_element_in_region_pt(FiniteElement* const& elem_pt,
-				  const unsigned& region_id);
+                                  const unsigned& region_id);
 
 
     /// Clear and regenerate the lookup schemes for bulk elements and their

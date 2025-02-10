@@ -246,8 +246,8 @@ namespace oomph
 
     // tell MUMPS to use the parallel Scotch package for the ordering
     void use_ptscotch_ordering()
-      {
-	Jacobian_ordering_flag = Ptscotch_ordering;
+    {
+      Jacobian_ordering_flag = Ptscotch_ordering;
     }
 
     // tell MUMPS to use the SCOTCH package for the ordering
@@ -332,8 +332,8 @@ namespace oomph
     enum MumpsErrorCodes
     {
       Structurally_singular_jacobian = -6,
-      Numerically_singular_jacobian  = -10,
-      Workspace_too_small            = -19
+      Numerically_singular_jacobian = -10,
+      Workspace_too_small = -19
     };
 
     /// symmetry of the Jacobian matrix we're solving;
