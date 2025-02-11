@@ -232,12 +232,6 @@ namespace oomph
         multiplier = -1.0;
       }
 
-      // Find out how many pressure dofs there are in the bulk element
-      unsigned n_pres = Cast_bulk_element_pt->npres_nst();
-
-      // Set up memory for pressure shape and test functions
-      // Shape psip(n_pres);
-
       // Find the coordinate in the bulk element
       compute_s(corner_node_pt);
       Vector<double> s_bulk(dim() + 1);
