@@ -7,7 +7,7 @@ former/current project/MSc/PhD students and collaborators who made (or are still
 making) significant contributions to the development of the library. The key maintainers are
 listed below; a complete list of contributors can be found at
 
-      http://oomph-lib.org/doc/people/html/index.html
+      https://oomph-lib.github.io/oomph-lib/doc/people/html/index.html
       
      
 We're always looking for more help! Get in touch if you're interested in joining the team.
