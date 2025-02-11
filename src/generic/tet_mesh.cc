@@ -374,10 +374,14 @@ namespace oomph
     Face_index_region_at_boundary.clear();
     Boundary_region_element_pt.clear();
 
-    Face_index_region_at_boundary.resize(nboundary());
-    Boundary_region_element_pt.resize(nboundary());
+    // cache number of boundaries and regions
+    const unsigned nbound  = nboundary();
+    const unsigned nregion = Region_attribute.size();
 
-    for (unsigned b = 0; b < nboundary(); b++)
+    Face_index_region_at_boundary.resize(nbound);
+    Boundary_region_element_pt.resize(nbound);
+
+    for (unsigned b = 0; b < nbound; b++)
     {
       // Loop over elements next to that boundary
       unsigned nel = this->nboundary_element(b);
@@ -386,7 +390,7 @@ namespace oomph
         FiniteElement* el_pt = boundary_element_pt(b, e);
 
         // now search for it in each region
-        for (unsigned r_index = 0; r_index < Region_attribute.size(); r_index++)
+        for (unsigned r_index = 0; r_index < nregion; r_index++)
         {
           unsigned region_id = static_cast<unsigned>(Region_attribute[r_index]);
 
@@ -418,6 +422,9 @@ namespace oomph
   void TetMeshBase::add_element_in_region_pt(FiniteElement* const& elem_pt,
 					     const unsigned& region_id)
   {
+    // number of regions
+    const unsigned nregion = Region_element_pt.size();
+
     // the index of the requested region in our vector of region IDs;
     // this is either the index of an existing region, or the index of
     // a new region which is to be added
@@ -465,13 +472,13 @@ namespace oomph
 
       Vector<FiniteElement*>::iterator region_element_it;
 
-      // loop over the regions and look for this original corner element to find
-      // out which region it used to be in, so we can add the new elements to
-      // the same region.
-      for (unsigned r = 0; r < Region_element_pt.size(); r++)
+      // loop over the regions and look for this original corner element to
+      // find out which region it used to be in, so we can add the new elements
+      // to the same region.
+      for (unsigned r = 0; r < nregion; r++)
       {
-        // for each region, search the vector of elements in this region for the
-        // original corner element
+        // for each region, search the vector of elements in this region for
+	// the original corner element
         region_element_it = std::find(Region_element_pt[r].begin(),
                                       Region_element_pt[r].end(),
                                       elem_pt);
@@ -493,15 +500,16 @@ namespace oomph
       // if it was previously assigned to a region, then remove it
       if(found)
       {
-	// Now update the basic region lookup. The iterator will still point to
-	// the original corner element in the lookup, so we can delete this easily
+	// Now update the basic region lookup. The iterator will still
+	// point to the original corner element in the lookup, so we can
+	// delete this easily
 	Region_element_pt[original_region_index].erase(region_element_it);
       }
     }
 
     // if we're adding a new region then the new index will be
     // equal to the length of the current vector of region elements
-    if(region_index == Region_element_pt.size())
+    if(region_index == nregion)
     {
       // add the new element as a new entry
       Vector<FiniteElement*> elem_vector(1, elem_pt);
