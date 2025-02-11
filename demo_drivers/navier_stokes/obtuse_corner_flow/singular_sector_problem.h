@@ -81,8 +81,6 @@ namespace oomph
         this->my_parameters().slip_length, Velocity_singular_function);
 
       Eigensolution_traction_function = eigensolution_traction_function_factory(
-        this->my_parameters().sector_angle * MathematicalConstants::Pi / 180.0,
-        Contact_line_node_pt,
         Grad_velocity_singular_function);
 
       create_singular_elements();
@@ -496,7 +494,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,2);
+      new PointPressureEvaluationElement(node_pt, 2);
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
 
@@ -529,7 +527,7 @@ namespace oomph
       }
     }
     PointPressureEvaluationElement* el_pt =
-      new PointPressureEvaluationElement(node_pt,2);
+      new PointPressureEvaluationElement(node_pt, 2);
 
     el_pt->set_pressure_data_pt(
       Singularity_scaling_mesh_pt->element_pt(0)->internal_data_pt(0));
