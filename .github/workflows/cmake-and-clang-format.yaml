@@ -31,10 +31,10 @@ jobs:
       # Format all files in the src/ directory except cfortran.h, lapack_qz.h,
       # superlu.c, superlu_dist.c, which sit in the src/generic/ subdirectory.
       - name: Format oomph-lib sources
-        uses: puneetmatharu/clang-format-lint-action@v0.17
+        uses: puneetmatharu/clang-format-lint-action@v0.19
         with:
-          files: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
-          clangFormatVersion: 16.0.3
+          regex: ^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|hpp|cc|cpp|tpp)$
+          version: 16.0.3
           style: file
           inplace: True
 
