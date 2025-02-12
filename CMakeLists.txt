@@ -212,6 +212,9 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
+  if(NOT OOMPH_USE_MUMPS_FROM)
+    message(FATAL_ERROR "MPI build requires MUMPS parallel solver.")
+  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
