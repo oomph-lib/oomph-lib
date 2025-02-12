@@ -124,13 +124,7 @@ jobs:
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: |
-          # ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E mpi.multi_domain.pseudo_solid_collapsible_tube
-          ctest -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave| \
-            meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner| \
-            navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist| \
-            self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson| \
-            mpi\.distribution\.clamped_shell|mpi\.solvers'
+        run: ctest -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave|meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner|navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist|self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson|mpi\.distribution\.clamped_shell|mpi\.solvers'
         continue-on-error: true
 
       # -------------------
