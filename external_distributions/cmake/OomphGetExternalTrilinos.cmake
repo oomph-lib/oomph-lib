@@ -21,7 +21,7 @@
 include_guard()
 
 set(TRILINOS_TARBALL_URL
-    https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-14-4-0.tar.gz
+    https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-16-0-0.tar.gz
 )
 set(TRILINOS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/trilinos")
 

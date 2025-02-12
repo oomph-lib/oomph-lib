@@ -151,7 +151,7 @@ endif()
 
 # HYPRE
 if(OOMPH_USE_HYPRE_FROM)
-  find_package(HYPRE 2.29.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
+  find_package(HYPRE 2.32.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
   if(TARGET HYPRE::HYPRE)
     message(STATUS "Hurray! The target HYPRE::HYPRE is defined!")
   else()
@@ -163,7 +163,7 @@ endif()
 
 # Trilinos
 if(OOMPH_USE_TRILINOS_FROM)
-  find_package(Trilinos 14.4.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  find_package(Trilinos 16.0.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
   if(TARGET Trilinos::all_libs)
     message(STATUS "Hurray! The target Trilinos::all_libs is defined!")
   else()

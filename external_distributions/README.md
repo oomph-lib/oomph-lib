@@ -74,7 +74,7 @@ Library    | Version
 `CGAL`     | 5.6
 `MUMPS`    | 5.6.2
 `HYPRE`    | 2.32.0
-`Trilinos` | 14.4.0
+`Trilinos` | 16.0.0
 
 ## Example
 
