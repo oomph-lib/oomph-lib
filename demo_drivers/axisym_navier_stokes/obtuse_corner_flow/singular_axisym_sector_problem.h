@@ -82,8 +82,6 @@ namespace oomph
         this->parameters().slip_length, Velocity_singular_function);
 
       Eigensolution_traction_function = eigensolution_traction_function_factory(
-        this->parameters().sector_angle,
-        Contact_line_node_pt,
         Grad_velocity_singular_function);
 
       create_singular_elements();

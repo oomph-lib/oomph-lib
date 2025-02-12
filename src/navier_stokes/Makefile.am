@@ -4,12 +4,13 @@
 
 # Define the sources
 sources =  \
-Tnavier_stokes_elements.cc \
-lagrange_enforced_flow_preconditioner.cc \
-navier_stokes_elements.cc \
-navier_stokes_preconditioners.cc \
-refineable_navier_stokes_elements.cc \
-vorticity_smoother.cc
+	Tnavier_stokes_elements.cc \
+	eigensolution_functions.cc \
+	lagrange_enforced_flow_preconditioner.cc \
+	navier_stokes_elements.cc \
+	navier_stokes_preconditioners.cc \
+	refineable_navier_stokes_elements.cc \
+	vorticity_smoother.cc
 
 # fluid_traction_elements.cc 
 
