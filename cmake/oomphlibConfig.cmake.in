@@ -221,14 +221,14 @@ endif()
 # HYPRE
 # -------------------
 if(OOMPH_HAS_HYPRE AND (NOT HYPRE_FOUND))
-  find_dependency(HYPRE 2.29.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
+  find_dependency(HYPRE 2.32.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_HYPRE_FROM} NO_DEFAULT_PATH)
 endif()
 
 # -------------------
 # Trilinos
 # -------------------
 if(OOMPH_HAS_TRILINOS AND (NOT Trilinos_FOUND))
-  find_dependency(Trilinos 14.4.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
+  find_dependency(Trilinos 16.0.0 REQUIRED GLOBAL PATHS ${OOMPH_USE_TRILINOS_FROM} NO_DEFAULT_PATH)
 endif()
 
 # cmake-format: on
