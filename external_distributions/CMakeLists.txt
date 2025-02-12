@@ -45,8 +45,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
 if((NOT CMAKE_BUILD_TYPE) OR (NOT DEFINED ENV{CMAKE_BUILD_TYPE}))
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING
-      "Build in Release mode for improved runtime performance.")
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance.")
 endif()
 
 # Select level of verbosity (e.g. STATUS, VERBOSE, etc.)
@@ -122,19 +121,16 @@ include(OomphGetExternalProjectHelper)
 # --------------------------------[ GENERAL ]----------------------------------
 
 # Decide on number of jobs to use for building projects
-ProcessorCount(NUM_PROCESSOR)
-set(NUM_JOBS 1)
-if(NUM_PROCESSOR EQUAL 0)
-  message(
-    WARNING
-      "Encountered error trying to determine the number of available CPU cores. Will build Makefile-based projects with just 1 job."
-  )
+ProcessorCount(NUM_JOBS)
+if(NUM_JOBS EQUAL 0)
+  set(NUM_JOBS 1)
+  message(WARNING "Could not determine CPU cores. Using single job.")
 else()
-  set(NUM_JOBS ${NUM_PROCESSOR})
   message(STATUS "Number of jobs for parallel make: ${NUM_JOBS}")
 endif()
 
-# Where to download files from and where to install to
+# Where to download files from and where to install to TODO: Upload HYPRE and
+# Trilinos here
 set(OOMPH_THIRD_PARTY_TAR_FILE_URL
     "https://github.com/puneetmatharu/oomph-lib/releases/download/v3.0.0.pre-alpha"
 )
@@ -160,6 +156,12 @@ if(OpenBLAS_LIBRARIES)
   cmake_path(GET OpenBLAS_LIBRARIES PARENT_PATH OpenBLAS_LIBDIR)
   cmake_path(GET OpenBLAS_LIBDIR PARENT_PATH OpenBLAS_ROOT)
   set(OpenBLAS_ROOT "${OpenBLAS_ROOT}" CACHE PATH "" FORCE)
+endif()
+
+if(NOT OpenBLAS_LIBRARIES)
+  if(OOMPH_BUILD_HYPRE OR OOMPH_BUILD_TRILINOS)
+    message(FATAL_ERROR "Refusing to build HYPRE or Trilinos without OpenBLAS!")
+  endif()
 endif()
 
 # -------------------------------[ SUPERLUDIST ]-------------------------------
@@ -222,17 +224,20 @@ endif()
 
 # If we're given CGAL or need to build it
 if(OOMPH_BUILD_CGAL)
-  # If we're given GMP
+  # Search for GMP (if given) with our own version of FindGMP.cmake which will
+  # search under 'OOMPH_USE_GMP_FROM'
   if(OOMPH_USE_GMP_FROM)
     find_package(GMP REQUIRED)
   endif()
 
-  # If we're given MPFR
+  # Search for MPFR (if given) with our own version of FindMPFR.cmake which will
+  # search under 'OOMPH_USE_MPFR_FROM'
   if(OOMPH_USE_MPFR_FROM)
     find_package(MPFR REQUIRED)
   endif()
 
-  # If we're given Boost
+  # If we're given Boost. This form of find_package(...) will search for the
+  # BoostConfig.cmake shipped with Boost
   if(OOMPH_USE_BOOST_FROM)
     find_package(
       Boost 1.83.0 REQUIRED
@@ -240,15 +245,15 @@ if(OOMPH_BUILD_CGAL)
       NO_DEFAULT_PATH)
   endif()
 
-  # If we're given CGAL
+  # Get CGAL
   include(OomphGetExternalCGAL)
   set(GMP_FOUND TRUE)
   set(MPFR_FOUND TRUE)
   set(BOOST_FOUND TRUE)
   set(CGAL_FOUND TRUE)
 else()
-  # If we haven't been asked to build CGAL but the user (bizarrely) told us
-  # where to find GMP, MPFR and/or Boost...
+  # If we haven't been asked to get CGAL but the user told us where to find GMP,
+  # MPFR and/or Boost...
   set(OOMPH_PASSED_CGAL_DEPS)
   if(OOMPH_USE_GMP_FROM)
     list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_GMP_FROM'")
@@ -277,18 +282,12 @@ endif()
 # ----------------------------------[ HYPRE ]----------------------------------
 
 if(OOMPH_BUILD_HYPRE)
-  if(NOT OpenBLAS_LIBRARIES)
-    message(FATAL_ERROR "Refusing to build HYPRE without OpenBLAS!")
-  endif()
   include(OomphGetExternalHYPRE)
 endif()
 
 # ---------------------------------[ TRILINOS ]--------------------------------
 
 if(OOMPH_BUILD_TRILINOS)
-  if(NOT OpenBLAS_LIBRARIES)
-    message(FATAL_ERROR "Refusing to build Trilinos without OpenBLAS!")
-  endif()
   include(OomphGetExternalTrilinos)
 endif()
 
