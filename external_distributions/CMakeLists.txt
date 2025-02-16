@@ -30,6 +30,9 @@ project(
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
 
+# There is no 'install' step here; just configure and build!
+set(CMAKE_SKIP_INSTALL_RULES ON)
+
 # Handle warning about timestamps when downloading archives via ExternalProject
 if(POLICY CMP0135)
   cmake_policy(SET CMP0135 OLD)
