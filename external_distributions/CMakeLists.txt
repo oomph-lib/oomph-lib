@@ -92,14 +92,6 @@ oomph_path_option(
   DOCSTRING "The path to a preinstalled version of ParMETIS."
 )
 oomph_path_option(
-  FLAG OOMPH_USE_GMP_FROM
-  DOCSTRING "The path to a preinstalled version of GMP."
-)
-oomph_path_option(
-  FLAG OOMPH_USE_MPFR_FROM
-  DOCSTRING "The path to a preinstalled version of MPFR."
-)
-oomph_path_option(
   FLAG OOMPH_USE_BOOST_FROM
   DOCSTRING "The path to a preinstalled version of Boost."
 )
@@ -227,18 +219,6 @@ endif()
 
 # If we're given CGAL or need to build it
 if(OOMPH_BUILD_CGAL)
-  # Search for GMP (if given) with our own version of FindGMP.cmake which will
-  # search under 'OOMPH_USE_GMP_FROM'
-  if(OOMPH_USE_GMP_FROM)
-    find_package(GMP REQUIRED)
-  endif()
-
-  # Search for MPFR (if given) with our own version of FindMPFR.cmake which will
-  # search under 'OOMPH_USE_MPFR_FROM'
-  if(OOMPH_USE_MPFR_FROM)
-    find_package(MPFR REQUIRED)
-  endif()
-
   # If we're given Boost. This form of find_package(...) will search for the
   # BoostConfig.cmake shipped with Boost
   if(OOMPH_USE_BOOST_FROM)
@@ -250,30 +230,14 @@ if(OOMPH_BUILD_CGAL)
 
   # Get CGAL
   include(OomphGetExternalCGAL)
-  set(GMP_FOUND TRUE)
-  set(MPFR_FOUND TRUE)
   set(BOOST_FOUND TRUE)
   set(CGAL_FOUND TRUE)
-else()
-  # If we haven't been asked to get CGAL but the user told us where to find GMP,
-  # MPFR and/or Boost...
-  set(OOMPH_PASSED_CGAL_DEPS)
-  if(OOMPH_USE_GMP_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_GMP_FROM'")
-  endif()
-  if(OOMPH_USE_MPFR_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_MPFR_FROM'")
-  endif()
-  if(OOMPH_USE_BOOST_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_BOOST_FROM'")
-  endif()
-  if(OOMPH_PASSED_CGAL_DEPS)
-    string(JOIN " and " OOMPH_PASSED_CGAL_DEPS_AS_STR ${OOMPH_PASSED_CGAL_DEPS})
-    message(
-      WARNING
-        "\nYou specified ${OOMPH_PASSED_CGAL_DEPS_AS_STR} but did not enable the build of CGAL. Did you forget to pass '-DOOMPH_BUILD_CGAL=ON'?"
-    )
-  endif()
+elseif(OOMPH_USE_BOOST_FROM)
+  # ...then why did the user tell us where to find Boost?
+  message(
+    WARNING
+      "\nYou specified 'OOMPH_USE_BOOST_FROM' but did not enable the build of CGAL. Did you forget to pass '-DOOMPH_BUILD_CGAL=ON'?"
+  )
 endif()
 
 # ----------------------------------[ MUMPS ]----------------------------------

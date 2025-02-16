@@ -26,7 +26,7 @@ set(HYPRE_TARBALL_URL
 set(HYPRE_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/hypre")
 
 # Hypre build options
-set(HYPRE_CMAKE_BUILD_ARGS
+set(HYPRE_CMAKE_CONFIGURE_ARGS
     -DCMAKE_BUILD_TYPE=Release
     -DHYPRE_ENABLE_SHARED=OFF
     -DHYPRE_ENABLE_BIGINT=OFF
@@ -55,8 +55,8 @@ oomph_get_external_project_helper(
   URL "${HYPRE_TARBALL_URL}"
   INSTALL_DIR "${HYPRE_INSTALL_DIR}"
   CONFIGURE_COMMAND
-    ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> ${HYPRE_CMAKE_BUILD_ARGS}
-    -G=${CMAKE_GENERATOR} -S=src -B=src/cmbuild
+    ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR>
+    ${HYPRE_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -S=src -B=src/cmbuild
   BUILD_COMMAND cmake --build src/cmbuild -j ${NUM_JOBS}
   INSTALL_COMMAND cmake --install src/cmbuild)
 # TEST_COMMAND ./src/cmbuild/test/ij)

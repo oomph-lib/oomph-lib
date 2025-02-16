@@ -127,14 +127,6 @@ oomph_path_option(
   DOCSTRING "Path to MPI installation"
 )
 oomph_path_option(
-  FLAG OOMPH_USE_GMP_FROM
-  DOCSTRING "Path to GMP installation"
-)
-oomph_path_option(
-  FLAG OOMPH_USE_MPFR_FROM
-  DOCSTRING "Path to MPFR installation"
-)
-oomph_path_option(
   FLAG OOMPH_USE_BOOST_FROM
   DOCSTRING "Path to Boost installation"
 )

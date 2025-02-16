@@ -37,6 +37,7 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
   # SuperLU_DIST. They will internally read the variables OOMPH_USE_GKLIB_FROM, OOMPH_USE_METIS_FROM,
   # OOMPH_USE_PARMETIS_FROM and OOMPH_USE_SUPERLU_DIST_FROM, respectively. The CMake code for
   # SuperLU itself has been written properly so we can import it like a normal version CMake library
+  # TODO: GKlib is found but we don't explicitly use it anywhere...
   find_package(GKlib REQUIRED GLOBAL)
   find_package(METIS REQUIRED GLOBAL)
   find_package(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
@@ -45,33 +46,19 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
     find_package(SuperLU_DIST REQUIRED GLOBAL)
   endif()
 
-  if(TARGET GKlib::GKlib)
-    message(STATUS "Hurray! The target GKlib::GKlib is defined!")
-  else()
-    message(FATAL_ERROR "Target GKlib::GKlib is not defined!")
-  endif()
-  if(TARGET METIS::METIS)
-    message(STATUS "Hurray! The target METIS::METIS is defined!")
-  else()
-    message(FATAL_ERROR "Target METIS::METIS is not defined!")
-  endif()
-  if(TARGET superlu::superlu)
-    message(STATUS "Hurray! The target superlu::superlu is defined!")
-  else()
-    message(FATAL_ERROR "Target superlu::superlu is not defined!")
-  endif()
+  set(OOMPH_REQUIRED_TARGETS GKlib::GKlib METIS::METIS superlu::superlu)
   if(OOMPH_USE_SUPERLU_DIST_FROM)
-    if(TARGET ParMETIS::ParMETIS)
-      message(STATUS "Hurray! The target ParMETIS::ParMETIS is defined!")
-    else()
-      message(FATAL_ERROR "Target ParMETIS::ParMETIS is not defined!")
-    endif()
-    if(TARGET SuperLU_DIST::SuperLU_DIST)
-      message(STATUS "Hurray! The target SuperLU_DIST::SuperLU_DIST is defined!")
-    else()
-      message(FATAL_ERROR "Target SuperLU_DIST::SuperLU_DIST is not defined!")
-    endif()
+    list(APPEND REQUIRED_TARGETS ParMETIS::ParMETIS SuperLU_DIST::SuperLU_DIST)
   endif()
+
+  # Verify the targets are available
+  foreach(TARGET IN LISTS OOMPH_REQUIRED_TARGETS)
+    if(TARGET ${TARGET})
+      message(STATUS "Hurray! The target ${TARGET} is defined!")
+    else()
+      message(FATAL_ERROR "Target ${TARGET} is not defined!")
+    endif()
+  endforeach()
 
   list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_GKLIB OOMPH_HAS_METIS OOMPH_HAS_SUPERLU)
   if(OOMPH_USE_SUPERLU_DIST_FROM)
@@ -88,34 +75,22 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
 endif()
 
 # CGAL
-if(OOMPH_USE_GMP_FROM OR OOMPH_USE_MPFR_FROM OR OOMPH_USE_BOOST_FROM OR OOMPH_USE_CGAL_FROM)
-  if(NOT (OOMPH_USE_GMP_FROM AND OOMPH_USE_MPFR_FROM AND OOMPH_USE_BOOST_FROM AND OOMPH_USE_CGAL_FROM))
+if(OOMPH_USE_BOOST_FROM OR OOMPH_USE_CGAL_FROM)
+  if(NOT (OOMPH_USE_BOOST_FROM AND OOMPH_USE_CGAL_FROM))
     message(
       FATAL_ERROR
-        "If you want CGAL, you need to specify 'OOMPH_USE_GMP_FROM', 'OOMPH_USE_MPFR_FROM', 'OOMPH_USE_BOOST_FROM' *AND* 'OOMPH_USE_CGAL_FROM'!"
+        "If you want CGAL, you need to specify 'OOMPH_USE_BOOST_FROM' *AND* 'OOMPH_USE_CGAL_FROM'!"
     )
   endif()
 
   set(REQUIRED_BOOST_COMPONENTS thread system program_options)
+  set(CGAL_CMAKE_EXACT_NT_BACKEND BOOST_BACKEND CACHE STRING "Use Boost.Multiprecision for the CGAL backend.")
+  set(CGAL_DISABLE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
+  set(CMAKE_DISABLE_FIND_PACKAGE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
 
-  # NOTE: We wrote a custom FindGMP.cmake and FindMPFR.cmake script to search
-  # for GMP and MPFR. They will internally read the variables OOMPH_USE_GMP_FROM
-  # and OOMPH_USE_MPFR_FROM, respectively
-  find_package(GMP REQUIRED GLOBAL)
-  find_package(MPFR REQUIRED GLOBAL)
   find_package(Boost 1.83.0 REQUIRED CONFIG COMPONENTS ${REQUIRED_BOOST_COMPONENTS} GLOBAL PATHS ${OOMPH_USE_BOOST_FROM} NO_DEFAULT_PATH)
-  find_package(CGAL 5.6 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
+  find_package(CGAL 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
 
-  if(TARGET GMP::GMP)
-    message(STATUS "Hurray! The target GMP::GMP is defined!")
-  else()
-    message(FATAL_ERROR "Target GMP::GMP is not defined!")
-  endif()
-  if(TARGET MPFR::MPFR)
-    message(STATUS "Hurray! The target MPFR::MPFR is defined!")
-  else()
-    message(FATAL_ERROR "Target MPFR::MPFR is not defined!")
-  endif()
   foreach(BOOST_COMPONENT IN LISTS REQUIRED_BOOST_COMPONENTS)
     if(TARGET Boost::${BOOST_COMPONENT})
       message(STATUS "Hurray! The target Boost::${BOOST_COMPONENT} is defined!")
@@ -123,15 +98,14 @@ if(OOMPH_USE_GMP_FROM OR OOMPH_USE_MPFR_FROM OR OOMPH_USE_BOOST_FROM OR OOMPH_US
       message(FATAL_ERROR "Target Boost::${BOOST_COMPONENT} is not defined!")
     endif()
   endforeach()
+
   if(TARGET CGAL::CGAL)
     message(STATUS "Hurray! The target CGAL::CGAL is defined!")
   else()
     message(FATAL_ERROR "Target CGAL::CGAL is not defined!")
   endif()
 
-  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_GMP OOMPH_HAS_MPFR OOMPH_HAS_BOOST OOMPH_HAS_CGAL)
-  set(OOMPH_HAS_GMP TRUE CACHE INTERNAL "")
-  set(OOMPH_HAS_MPFR TRUE CACHE INTERNAL "")
+  list(APPEND EXTERNAL_DIST_CXX_DEFINITIONS OOMPH_HAS_BOOST OOMPH_HAS_CGAL)
   set(OOMPH_HAS_BOOST TRUE CACHE INTERNAL "")
   set(OOMPH_HAS_CGAL TRUE CACHE INTERNAL "")
 endif()

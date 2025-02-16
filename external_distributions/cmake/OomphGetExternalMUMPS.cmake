@@ -33,10 +33,10 @@ if(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS)
 endif()
 
 # MUMPS build options
-set(MUMPS_CMAKE_BUILD_ARGS
+set(MUMPS_CMAKE_CONFIGURE_ARGS
     -DMUMPS_UPSTREAM_VERSION=5.6.2
     -Dparallel=${OOMPH_ENABLE_MPI}
-    # -Dfind_static=ON # FIXME: Doesn't work on macOS(?!)
+    # -Dfind_static=ON # FIXME: Doesn't work on macOS!
     -Dgemmt=ON
     -Dintsize64=OFF
     -Dscotch=OFF
@@ -61,7 +61,7 @@ oomph_get_external_project_helper(
   URL "${MUMPS_TARBALL_URL}"
   INSTALL_DIR "${MUMPS_INSTALL_DIR}"
   CONFIGURE_COMMAND ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR>
-                    ${MUMPS_CMAKE_BUILD_ARGS} -G=${CMAKE_GENERATOR} -B=build
+                    ${MUMPS_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -B=build
   BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${NUM_JOBS}
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
   TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${NUM_JOBS}

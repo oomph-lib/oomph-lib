@@ -91,8 +91,6 @@ set(OOMPH_USE_METIS_FROM "@OOMPH_USE_METIS_FROM@")
 set(OOMPH_USE_SUPERLU_FROM "@OOMPH_USE_SUPERLU_FROM@")
 set(OOMPH_USE_PARMETIS_FROM "@OOMPH_USE_PARMETIS_FROM@")
 set(OOMPH_USE_SUPERLU_DIST_FROM "@OOMPH_USE_SUPERLU_DIST_FROM@")
-set(OOMPH_USE_GMP_FROM "@OOMPH_USE_GMP_FROM@")
-set(OOMPH_USE_MPFR_FROM "@OOMPH_USE_MPFR_FROM@")
 set(OOMPH_USE_BOOST_FROM "@OOMPH_USE_BOOST_FROM@")
 set(OOMPH_USE_CGAL_FROM "@OOMPH_USE_CGAL_FROM@")
 set(OOMPH_USE_MUMPS_FROM "@OOMPH_USE_MUMPS_FROM@")
@@ -186,24 +184,20 @@ endif()
 # CGAL
 # -------------------
 if(OOMPH_HAS_CGAL AND (NOT CGAL_FOUND))
-  # NOTE: We wrote a custom FindGMP.cmake and FindMPFR.cmake script to search
-  # for GMP and MPFR. Internally, they will read the variables OOMPH_USE_GMP_FROM
-  # and OOMPH_USE_MPFR_FROM, respectively, that we defined earlier
-  set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
-  set(CMAKE_PREFIX_PATH "${OOMPH_USE_GMP_FROM};${OOMPH_USE_MPFR_FROM}" CACHE INTERNAL "" FORCE)
-  find_dependency(GMP REQUIRED GLOBAL)
-  find_dependency(MPFR REQUIRED GLOBAL)
-  set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
-
   # Boost. If the user wants, they can inspect the value of OOMPH_REQUIRED_BOOST_COMPONENTS
   # after calling find_package(oomphlib)
   set(OOMPH_REQUIRED_BOOST_COMPONENTS thread system program_options)
   find_dependency(Boost 1.83.0 REQUIRED COMPONENTS ${OOMPH_REQUIRED_BOOST_COMPONENTS} GLOBAL PATHS ${OOMPH_USE_BOOST_FROM} NO_DEFAULT_PATH)
 
+  # Make sure we just use Boost for the backend
+  set(CGAL_CMAKE_EXACT_NT_BACKEND BOOST_BACKEND CACHE STRING "Use Boost.Multiprecision for the CGAL backend.")
+  set(CGAL_DISABLE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
+  set(CMAKE_DISABLE_FIND_PACKAGE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
+
   # CGAL has a tendency to spit out an annoying warning if you don't build in Release mode.
   # The flag below is used to silence that warning
   set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE ON)
-  find_dependency(CGAL 5.6 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
+  find_dependency(CGAL 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)
 endif()
 
 # -------------------
