@@ -125,11 +125,22 @@ endif()
 set(TRILINOS_TESTS_TO_EXCLUDE TeuchosCore_TypeConversions_UnitTest Epetra_ImportExport_test_LL_MPI_4)
 string(JOIN "|" CTEST_EXCLUDE_REGEX_STRING ${TRILINOS_TESTS_TO_EXCLUDE})
 
+set(PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Patch-packages-amesos-test-Test_Basic-Amesos_TestDri.patch)
+
+# Look for 'patch'
+find_program(PATCH_EXECUTABLE patch)
+
+# Throw an error if it's not found
+if(NOT PATCH_EXECUTABLE)
+  message(FATAL_ERROR "Error: 'patch' command not found! Please install patch (e.g., 'apt install patch' or 'brew install patch').")
+endif()
+
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(
   PROJECT_NAME trilinos
   URL "${TRILINOS_TARBALL_URL}"
   INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
+  PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 -i ${PATCH_FILE}
   CONFIGURE_COMMAND ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${TRILINOS_CMAKE_CONFIGURE_ARGS} -B=build
   BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${NUM_JOBS}
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
