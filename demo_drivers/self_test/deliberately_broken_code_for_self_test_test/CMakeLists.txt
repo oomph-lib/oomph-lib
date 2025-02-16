@@ -6,7 +6,7 @@ message(VERBOSE
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(deliberately_broken_code_for_self_test_test C CXX Fortran)
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
 include(CTest)
 

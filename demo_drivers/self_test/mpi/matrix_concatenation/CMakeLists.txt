@@ -5,7 +5,7 @@ message(VERBOSE "Entered matrix_concatenation subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(matrix_concatenation C CXX Fortran)
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
 

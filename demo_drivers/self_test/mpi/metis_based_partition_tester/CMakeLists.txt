@@ -5,11 +5,7 @@ message(VERBOSE "Entered metis_based_partition_tester subdirectory")
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(metis_based_partition_tester C CXX Fortran)
 if(NOT oomphlib_FOUND)
-  # hierher the path to install needs to be updated on a case by case basis,
-  # right? Puneet's answer Yep! This tells CMake where the install/ subdirectory
-  # is inside the root oomph-lib directory
-
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
 include(CTest)
 
