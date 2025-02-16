@@ -285,12 +285,29 @@ oomph_target_silence_warnings(
 # propagated to the user. If a user pulls in the oomph-lib library they should
 # automatically get access to the third-party libraries; they shouldn't have to
 # manually link against all of those libraries themselves to use them.
-target_link_libraries(${LIBNAME} PUBLIC GKlib::GKlib METIS::METIS
-                                        superlu::superlu)
+
+# We need METIS for the partioning code. NOTE: There's subtlety to this choice
+# of linking. We don't want to link generic directly to the METIS lib; we just
+# need the metis.h header (in partitioning.h). We also want users who build
+# source code/demo drivers with the generic library to be able to find metis.h
+# when the generic library is used, so we have to make sure the linking type is
+# PUBLIC. If we used PRIVATE linking, the sources of generic would inherit the
+# include path to metis.h, but when we try to compile sources outside of the
+# library, relying on generic, they wouldn't be able to find metis.h. If we use
+# IMPORTED, the sources of generic won't inherit the include path. If we linked
+# to METIS::METIS (the one that knows where the metis library is too) PUBLIC-ly,
+# the linker would warn us about duplicate symbols because SuperLU provides the
+# metis lib symbols. If we used INTERFACE linking instead, we wouldn't find the
+# include directories again. That leaves PRIVATE linking, which we can't do with
+# an "UNKNOWN IMPORTED" library.
+target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
+
+# We need SuperLU for the solver
+target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS
-                                          SuperLU_DIST::SuperLU_DIST)
+  target_link_libraries(SuperLU_DIST::SuperLU_DIST INTERFACE ParMETIS::ParMETIS)
+  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST)
 endif()
 
 if(OOMPH_HAS_CGAL)
