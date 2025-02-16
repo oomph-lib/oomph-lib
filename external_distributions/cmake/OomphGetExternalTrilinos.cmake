@@ -3,9 +3,9 @@
 # DESCRIPTION:
 # ------------
 #
-# NOTE: The OpenBLAS installation automatically runs self-tests but it's hard
-# to extract stats from them (partly because I don't know how a failed test
-# would be reported; there's no executive summary.
+# NOTE: The OpenBLAS installation automatically runs self-tests but it's hard to
+# extract stats from them (partly because I don't know how a failed test would
+# be reported; there's no executive summary.
 #
 # USAGE:
 # ------
@@ -43,15 +43,6 @@ set(TRILINOS_CMAKE_BUILD_ARGS
     -DTrilinos_ENABLE_EXAMPLES=OFF
     -DTrilinos_ENABLE_ALL_PACKAGES=OFF
     -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF
-    -DTrilinos_ENABLE_Amesos=ON
-    -DTrilinos_ENABLE_Anasazi=ON
-    -DTrilinos_ENABLE_AztecOO=ON
-    -DTrilinos_ENABLE_Epetra=ON
-    -DTrilinos_ENABLE_EpetraExt=ON
-    -DTrilinos_ENABLE_Ifpack=ON
-    -DTrilinos_ENABLE_ML=ON
-    -DTrilinos_ENABLE_Teuchos=ON
-    -DTrilinos_ENABLE_Triutils=ON
     -DTrilinos_INSTALL_LIBRARIES_AND_HEADERS=ON
     -DTrilinos_ENABLE_INSTALL_CMAKE_CONFIG_FILES=ON
     -DKOKKOS_USE_CXX_EXTENSIONS=ON
@@ -60,6 +51,30 @@ set(TRILINOS_CMAKE_BUILD_ARGS
     -DTPL_BLAS_LIBRARIES=${OpenBLAS_LIBRARIES}
     -DTPL_LAPACK_LIBRARIES=${OpenBLAS_LIBRARIES}
     -DTPL_ENABLE_MPI=${OOMPH_ENABLE_MPI})
+
+set(DESIRED_TRILINOS_PACKAGES
+    Amesos
+    Anasazi
+    AztecOO
+    Epetra
+    EpetraExt
+    Ifpack
+    ML
+    Teuchos
+    Triutils)
+
+# TODO: Handle deprecated packages more gracefully
+message(
+  WARNING
+    "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 without making the necessary oomph-lib changes to handle this."
+)
+
+# Enable the package but disable the deprecated warning
+foreach(TPL_PACKAGE IN LISTS DESIRED_TRILINOS_PACKAGES)
+  list(APPEND TRILINOS_CMAKE_BUILD_ARGS -DTrilinos_ENABLE_${TPL_PACKAGE}=ON)
+  list(APPEND TRILINOS_CMAKE_BUILD_ARGS
+       -D${TPL_PACKAGE}_SHOW_DEPRECATED_WARNINGS=OFF)
+endforeach()
 
 if(OOMPH_ENABLE_MPI)
   if(NOT MPI_CXX_INCLUDE_DIRS)
