@@ -52,7 +52,8 @@ set(
   CGAL_CMAKE_CONFIGURE_ARGS
   -DCMAKE_BUILD_TYPE=Release
   -DCGAL_CMAKE_EXACT_NT_BACKEND=BOOST_BACKEND # New: Use Boost.Multiprecision instead of GMP/MPFR
-  -DCMAKE_VERBOSE_MAKEFILE=ON)
+  -DCGAL_DISABLE_GMP=ON
+  -DCMAKE_DISABLE_FIND_PACKAGE_GMP=ON)
 
 set(
   CGAL_CMAKE_CONFIGURE_ARGS_FOR_SELF_TEST
@@ -62,6 +63,9 @@ set(
   -DBoost_ROOT=${BOOST_INSTALL_DIR}
   -DWITH_CGAL_Qt5=OFF
 )
+
+# TODO: If we're certain about sticking with CGAL v6.0.1, remove the patch command; it's no longer
+# needed.
 oomph_get_external_project_helper(
   PROJECT_NAME cgal
   URL "${CGAL_TARBALL_URL}"
