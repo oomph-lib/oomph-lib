@@ -1824,7 +1824,8 @@ namespace oomph
     std::string rank_string = "";
     if (comm_pt != 0)
     {
-      rank_string = "_on_proc_" + comm_pt->my_rank();
+      rank_string =
+        std::string("_on_proc_") + std::to_string(comm_pt->my_rank());
     }
 
     // Setup output files
