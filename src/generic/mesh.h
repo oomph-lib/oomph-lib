@@ -187,7 +187,7 @@ namespace oomph
 
     /// Vector of boolean data that indicates whether the boundary
     /// coordinates have been set for the boundary
-    std::vector<bool> Boundary_coordinate_exists;
+    Vector<bool> Boundary_coordinate_exists;
 
     /// A function that upgrades an ordinary node to a boundary node
     /// We shouldn't ever really use this, but it does make life that
