@@ -302,7 +302,7 @@ void superlu_dist_distributed_matrix(int opt_flag,
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NATURAL;
+      options->RowPerm = NOROWPERM;
     }
 
     /*    printf("\n\n\nSWITCHING OFF EQUILIBRATION\n\n\n"); */
@@ -1450,7 +1450,7 @@ void superlu_dist_global_matrix(int opt_flag,
     if (allow_permutations == 0)
     {
       options->ColPerm = NATURAL;
-      options->RowPerm = NATURAL;
+      options->RowPerm = NOROWPERM;
     }
 
     /* Iterative refinement (essential as far as I can tell).*/
