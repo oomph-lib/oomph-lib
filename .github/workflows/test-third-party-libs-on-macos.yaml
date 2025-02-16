@@ -47,14 +47,7 @@ jobs:
         run: cmake --version
 
       - name: Configure
-        run: |
-          cmake -G Ninja \
-            -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
-            -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
-            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.mpi }} \
-            -DOOMPH_USE_GMP_FROM=$(brew --prefix gmp) \
-            -DOOMPH_USE_MPFR_FROM=$(brew --prefix mpfr) \
-            -B build
+        run: cmake -G Ninja -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -B build
         working-directory: ./external_distributions/
 
       - name: Build/install
