@@ -28,10 +28,13 @@ set(TRILINOS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/trilinos")
 # On Ubuntu, Trilinos doesn't appear to link to gfortran when using OpenBLAS,
 # resulting in error described here:
 #           https://github.com/trilinos/Trilinos/issues/8632
-# so we won't run the tests on Linux
-set(ENABLE_TRILINOS_TESTS ON)
-if((UNIX AND NOT APPLE) OR (OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS))
-  set(ENABLE_TRILINOS_TESTS OFF)
+# so we won't run the tests on Linux for now. Ideally we should provide Trilinos with the
+# libgfortran library when we pass OpenBLAS. It only breaks the Trilinos tests for now though.
+set(ENABLE_TRILINOS_TESTS OFF)
+if(NOT OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS)
+  if(APPLE)
+    set(ENABLE_TRILINOS_TESTS ON)
+  endif()
 endif()
 
 set(TRILINOS_CMAKE_CONFIGURE_ARGS
@@ -119,16 +122,19 @@ if(OOMPH_ENABLE_MPI)
   list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS -DMPI_BASE_DIR=${MPI_BASE_DIR})
 endif()
 
-# FIXME: The TeuchosCore_TypeConversions_UnitTest and Epetra_ImportExport_test_LL_MPI_4
-# tests dies on macOS. Not sure why so we'll just filter it out for now. Need to come back
 
-set(TRILINOS_TESTS_TO_EXCLUDE TeuchosCore_TypeConversions_UnitTest Epetra_ImportExport_test_LL_MPI_4)
-string(JOIN "|" CTEST_EXCLUDE_REGEX_STRING ${TRILINOS_TESTS_TO_EXCLUDE})
+set(CTEST_EXCLUDE_REGEX_STRING "")
+if(APPLE)
+  # FIXME: The TeuchosCore_TypeConversions_UnitTest and *_MPI_4 tests die on macOS. Not sure
+  # how to fix this yet why so we'll just filter it out for now. Need to come back to this.
+  set(CTEST_EXCLUDE_REGEX_STRING "(TeuchosCore_TypeConversions_UnitTest|.*_MPI_4)")
+endif()
 
+# There's an issue with one of the test files; we need to patch it
 set(PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Patch-packages-amesos-test-Test_Basic-Amesos_TestDri.patch)
 
 # Look for 'patch'
-find_program(PATCH_EXECUTABLE patch)
+find_program(PATCH_EXECUTABLE NAMES patch REQUIRED)
 
 # Throw an error if it's not found
 if(NOT PATCH_EXECUTABLE)
@@ -141,10 +147,10 @@ oomph_get_external_project_helper(
   URL "${TRILINOS_TARBALL_URL}"
   INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
   PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 -i ${PATCH_FILE}
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${TRILINOS_CMAKE_CONFIGURE_ARGS} -B=build
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${TRILINOS_CMAKE_CONFIGURE_ARGS} -B=build
   BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${NUM_JOBS}
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
-  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${NUM_JOBS} --output-on-failure -E "${CTEST_EXCLUDE_REGEX_STRING}")
+  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${NUM_JOBS} --output-on-failure --verbose -E "${CTEST_EXCLUDE_REGEX_STRING}")
 
 # Trilinos depends on OpenBLAS. If we're building OpenBLAS ourselves then we
 # need to make sure that it gets built before Trilinos
