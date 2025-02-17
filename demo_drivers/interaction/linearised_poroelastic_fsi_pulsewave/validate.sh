@@ -14,17 +14,17 @@ mkdir Validation
 
 cd Validation
 
-# Validation for poroelastic linearised FSI pulswave
+# Validation for poroelastic linearised FSI pulsewave
 #---------------------------------------------------
 
-echo "Running porelastic linearised FSI pulswave"
+echo "Running porelastic linearised FSI pulsewave"
 mkdir RESLT
 
 # Run in validation mode
 ../linearised_poroelastic_fsi_pulsewave --validation > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "Linearised poroelastic FSI pulswave" >> validation.log
+echo "Linearised poroelastic FSI pulsewave" >> validation.log
 echo "-----------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

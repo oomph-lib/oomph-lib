@@ -265,7 +265,7 @@ for code in ${code_stem[@]}; do
 					if test "$2" = "no_fpdiff"; then
 						echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 					else
-						$compare_data ../$store$validata_file_1 $result_dir$file_1 >>validation.log
+						$compare_data ../$store$validata_file_1 $result_dir$file_1 1.0e-13 0.1 >>validation.log
 					fi
 
 					# Move the result directory into storage

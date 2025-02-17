@@ -72,7 +72,7 @@ namespace Flags
  unsigned Convergence_criterion=0;
 
  /// Convergence tolerance
- double Convergence_tolerance=1.0e-9;
+ double Convergence_tolerance=5.0e-11;
 
  /// Timestep
  double Dt=0.1;
