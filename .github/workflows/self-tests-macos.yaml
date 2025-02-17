@@ -83,9 +83,9 @@ jobs:
           cmake -G Ninja \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
+            -DOOMPH_BUILD_CGAL=ON \
             -DOOMPH_BUILD_MUMPS=ON \
             -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
@@ -122,7 +122,8 @@ jobs:
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave|meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner|navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist|self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson|mpi\.distribution\.clamped_shell|mpi\.solvers'
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
+        # run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave|meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner|navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist|self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson|mpi\.distribution\.clamped_shell|mpi\.solvers'
         continue-on-error: true
 
       # -------------------
