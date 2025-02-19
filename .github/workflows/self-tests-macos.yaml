@@ -43,16 +43,10 @@ jobs:
 
     name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
     runs-on: macos-latest
-
     steps:
       # -------------------
       # INITIAL SETUP:
       # -------------------
-      - name: Set output artifact names
-        run: |
-          echo "TPL_BUILD_LOGS=tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}" >> "$GITHUB_ENV"
-          echo "VALIDATION_LOG=validation-${{ runner.os }}-TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log" >> "$GITHUB_ENV"
-
       - name: Check out oomph-lib repository
         uses: actions/checkout@v4
 
@@ -103,13 +97,13 @@ jobs:
         working-directory: ./external_distributions/
 
       - name: Rename third-party libraries build logs
-        run: mv ./external_distributions/build/logs ./${TPL_BUILD_LOGS}
+        run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Upload third-party libraries build logs
         uses: actions/upload-artifact@v4
         with:
-          name: ${TPL_BUILD_LOGS}
-          path: ./${TPL_BUILD_LOGS}
+          name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
+          path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}/
 
       # -------------------
       # BUILD MAIN PROJECT:
@@ -137,14 +131,17 @@ jobs:
       # -------------------
       # UPLOAD STUFF:
       # -------------------
+      - name: Summarise validation.log for GitHub
+        run: python3 .github/generate_summary.py validation.log >> $GITHUB_STEP_SUMMARY
+
       - name: Rename validation log file
-        run: mv ./validation.log ./${VALIDATION_LOG}
+        run: mv ./validation.log ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
 
       - name: Upload validation log file
         uses: actions/upload-artifact@v4
         with:
-          name: ${VALIDATION_LOG}
-          path: ./${VALIDATION_LOG}
+          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
+          path: ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
 
       - name: Propagate CTest test status
         if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'

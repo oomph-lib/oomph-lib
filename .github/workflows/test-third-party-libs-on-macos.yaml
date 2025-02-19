@@ -10,6 +10,13 @@ on:
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
 
+# Print the output of a test if it fails
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+  # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
+  # more processors than are available
+  OMPI_MCA_rmaps_base_oversubscribe: 1
+
 # ------------------------------------------------------------------------------
 
 jobs:
@@ -21,9 +28,6 @@ jobs:
 
     runs-on: macos-latest
     steps:
-      - name: Set output artifact name
-        run: echo "TPL_BUILD_LOGS=tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}" >> "$GITHUB_ENV"
-
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -43,35 +47,23 @@ jobs:
         run: cmake --version
 
       - name: Configure
-        run: |
-          cmake -G Ninja \
-          -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} \
-          -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
-          -DOOMPH_BUILD_MUMPS=OFF \
-          -DOOMPH_BUILD_SUPERLU=OFF \
-          -DOOMPH_BUILD_SUPERLU_DIST=OFF \
-          -DOOMPH_BUILD_CGAL=OFF \
-          -DOOMPH_BUILD_HYPRE=OFF \
-          -DOOMPH_BUILD_TRILINOS=ON \
-          -B build
+        run: cmake -G Ninja -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) -B build
         working-directory: ./external_distributions/
 
       - name: Build/install
         id: build
         run: cmake --build build
-        env:
-          CTEST_OUTPUT_ON_FAILURE: 1
         working-directory: ./external_distributions/
         continue-on-error: true
 
       - name: Rename build logs
-        run: mv ./external_distributions/build/logs ./${TPL_BUILD_LOGS}
+        run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}
 
       - name: Upload build logs
         uses: actions/upload-artifact@v4
         with:
-          name: ${TPL_BUILD_LOGS}
-          path: ./${TPL_BUILD_LOGS}
+          name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}
+          path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}/
 
       - name: Propagate build status
         if: steps.build.outcome == 'failure'
