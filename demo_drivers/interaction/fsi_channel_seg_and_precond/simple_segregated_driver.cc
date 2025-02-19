@@ -66,7 +66,7 @@ namespace Flags
  unsigned Convergence_criterion=0;
 
  /// Convergence tolerance
- double Convergence_tolerance=1.0e-8;
+ double Convergence_tolerance=1.0e-10;
 
 }
 

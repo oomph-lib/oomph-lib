@@ -316,6 +316,8 @@ private:
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
 {
+  // Override default solver tolerance
+  Newton_solver_tolerance = 1.0e-10;
 
  // Create timesteppers
  Solid_time_stepper_pt = new NewmarkBDF<2>;
