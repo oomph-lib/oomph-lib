@@ -250,6 +250,8 @@ PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
     Element_size(element_size),
     Domain_configuration(domain_configuration)
 {
+  // Override default Newton solver tolerance
+  Newton_solver_tolerance = 1.0e-10;
  
  // Setup parameters for exact tanh solution
  
