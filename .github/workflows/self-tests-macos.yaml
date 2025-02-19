@@ -43,10 +43,16 @@ jobs:
 
     name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
     runs-on: macos-latest
+
     steps:
       # -------------------
       # INITIAL SETUP:
       # -------------------
+      - name: Set output artifact names
+        run: |
+          echo "TPL_BUILD_LOGS=tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}" >> "$GITHUB_ENV"
+          echo "VALIDATION_LOG=validation-${{ runner.os }}-TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log" >> "$GITHUB_ENV"
+
       - name: Check out oomph-lib repository
         uses: actions/checkout@v4
 
@@ -96,11 +102,14 @@ jobs:
         run: cmake --build build
         working-directory: ./external_distributions/
 
+      - name: Rename third-party libraries build logs
+        run: mv ./external_distributions/build/logs ./${TPL_BUILD_LOGS}
+
       - name: Upload third-party libraries build logs
         uses: actions/upload-artifact@v4
         with:
-          name: tpl_build_logs-${{ runner.os }}-ALL_TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}
-          path: ./external_distributions/build/logs
+          name: ${TPL_BUILD_LOGS}
+          path: ./${TPL_BUILD_LOGS}
 
       # -------------------
       # BUILD MAIN PROJECT:
@@ -123,17 +132,19 @@ jobs:
       - name: Run demo driver self-tests
         id: demo_drivers
         run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
-        # run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu) -E 'interaction\.fsi_channel_seg_and_precond|interaction\.linearised_poroelastic_fsi_pulsewave|meshing\.quadratic_vmtk_tetgen|multigrid\.scalar_multigrid|navier_stokes\.lagrange_enforced_flow_preconditioner|navier_stokes\.vorticity_smoother|navier_stokes\.unstructured_adaptive_3d_ALE|self_test\.mpi\.three_d_mesh_dist|self_test\.mpi\.two_d_mesh_dist|shell\.clamped_shell|mpi\.distribution\.two_d_unstructured_adaptive_poisson|mpi\.distribution\.clamped_shell|mpi\.solvers'
         continue-on-error: true
 
       # -------------------
       # UPLOAD STUFF:
       # -------------------
+      - name: Rename validation log file
+        run: mv ./validation.log ./${VALIDATION_LOG}
+
       - name: Upload validation log file
         uses: actions/upload-artifact@v4
         with:
-          name: validation-${{ runner.os }}-TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
-          path: ./validation.log
+          name: ${VALIDATION_LOG}
+          path: ./${VALIDATION_LOG}
 
       - name: Propagate CTest test status
         if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'
