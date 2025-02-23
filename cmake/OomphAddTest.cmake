@@ -63,7 +63,7 @@ function(oomph_add_test)
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
-  set(COMMAND ${${PREFIX}_COMMAND})
+  set(VALIDATE_SH_COMMAND ${${PREFIX}_COMMAND})
   set(DEPENDS_ON ${${PREFIX}_DEPENDS_ON})
   set(TEST_FILES ${${PREFIX}_TEST_FILES})
   set(LABELS ${${PREFIX}_LABELS})
@@ -219,55 +219,48 @@ function(oomph_add_test)
   # Command-line arguments for validate.sh. We can't run fpdiff.py if we don't
   # have Python
   if(NOT Python3_FOUND)
-    list(APPEND COMMAND "no_fpdiff")
+    list(APPEND VALIDATE_SH_COMMAND "no_fpdiff")
   endif()
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
-  # TODO: Try simplifying things with
-  # https://cmake.org/cmake/help/book/mastering-cmake/chapter/Testing%20With%20CMake%20and%20CTest.html#using-ctest-to-drive-complex-tests
+  # cmake-format: off
+  set(TEST_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/run_test.sh")
 
-  # Run the dependencies to copy the test data, build the (sub)project(s)
-  # targets then run the validate.sh script and pass the location of the
-  # oomph-lib root directory so they have access to the scripts they require,
-  # like fpdiff.py and validate_ok_count, and so it knows where to place the
-  # validation.log output. The VERBATIM argument is absolutely necessary here to
-  # ensure that the "mpirun ..." commands are correctly escaped.
-  if(NOT NO_VALIDATE_SH)
-    add_custom_target(
-      check_${PATH_HASH}
-      COMMAND ${BASH_PROGRAM} ${COMMAND}
-      # Check for the validation.log file. Stop here if we can't
-      COMMAND
-        ${BASH_PROGRAM} -c
-        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( printf \"\\nUnable to locate validation log file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && exit 0 )"
-      # Append the validation.log to the top-level validation.log
-      COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
-              "${CMAKE_BINARY_DIR}/validation.log"
-      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
-              clean_validation_dir_${PATH_HASH}
-      VERBATIM)
-  else()
-    # Run all of the dependent targets and then append the validation.log output
-    # to the global one.
+  file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
+
+  if(NO_VALIDATE_SH)
+    # Run all of the dependent targets
     list(JOIN DEPENDS_ON " ./" RUN_DEPENDENCIES_STRING)
-    add_custom_target(
-      check_${PATH_HASH}
-      # Run each executable
-      COMMAND ${BASH_PROGRAM} -c ./${RUN_DEPENDENCIES_STRING}
-      # Check for the validation.log file
-      COMMAND
-        ${BASH_PROGRAM} -c
-        "test -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" || ( printf \"\\nUnable to locate file:\\n\\n\\t${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\\n\\nStopping here...\\n\\n\" && exit 1 )"
-      # Append validation.log to top-level validation.log
-      COMMAND cat "${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log" >>
-              "${CMAKE_BINARY_DIR}/validation.log"
-      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-      DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
-              clean_validation_dir_${PATH_HASH}
-      VERBATIM)
+    file(APPEND "${TEST_SCRIPT}" "./${RUN_DEPENDENCIES_STRING}\n\n")
+  else()
+    # Run the command
+    list(JOIN VALIDATE_SH_COMMAND " " VALIDATE_SH_COMMAND_STRING)
+    file(APPEND "${TEST_SCRIPT}" "${VALIDATE_SH_COMMAND_STRING}\n\n")
   endif()
+
+  # Check for the validation.log file
+  file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" ]; then\n")
+  file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' '\"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\"' 'Stopping here...'\n")
+  file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
+  file(APPEND "${TEST_SCRIPT}" "fi\n\n")
+
+  # Append validation.log to top-level validation.log
+  file(APPEND "${TEST_SCRIPT}" "cat \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" >> \"${CMAKE_BINARY_DIR}/validation.log\"\n")
+
+  # Make the script executable
+  file(CHMOD "${TEST_SCRIPT}" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+  # cmake-format: on
+  # ----------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # Define the custom target that runs the script
+  add_custom_target(
+    check_${PATH_HASH}
+    COMMAND "${TEST_SCRIPT}"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+    DEPENDS copy_${PATH_HASH} build_targets_${PATH_HASH}
+            clean_validation_dir_${PATH_HASH})
   # ----------------------------------------------------------------------------
 
   # Create a test target that depends on the check_${PATH_HASH} target. When the

@@ -144,7 +144,7 @@ function(oomph_add_executable)
   if(CXX_STANDARD)
     target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_${CXX_STANDARD})
   else()
-    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_14)
+    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_17)
   endif()
 
   # General oomph-lib specific compiler definitions
