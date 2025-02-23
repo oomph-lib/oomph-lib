@@ -13,8 +13,7 @@
 #                    LABELS                <string-list-of-labels>
 #                    COMMAND               <command-to-run-test>
 #                    [TEST_FILES           <files-required-by-test>]
-#                    [SILENCE_MISSING_VALIDATA_WARNING]
-#                    [NO_VALIDATE_SH])
+#                    [SILENCE_MISSING_VALIDATA_WARNING])
 #
 # By default we assume that a validata/ and a validate.sh script are always
 # required for a test. Here, TEST_FILES is provided so that the user can
@@ -49,7 +48,7 @@ include_guard()
 function(oomph_add_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS NO_VALIDATE_SH SILENCE_MISSING_VALIDATA_WARNING)
+  set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
   set(SINGLE_VALUE_ARGS TEST_NAME)
   set(MULTI_VALUE_ARGS TEST_FILES LABELS DEPENDS_ON COMMAND)
 
@@ -59,7 +58,6 @@ function(oomph_add_test)
                         "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
 
   # Redefine the variables in this scope without a prefix for clarity
-  set(NO_VALIDATE_SH ${${PREFIX}_NO_VALIDATE_SH})
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
@@ -227,17 +225,16 @@ function(oomph_add_test)
   # cmake-format: off
   set(TEST_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/run_test.sh")
 
+  # The shebang
   file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
 
-  if(NO_VALIDATE_SH)
-    # Run all of the dependent targets
-    list(JOIN DEPENDS_ON " ./" RUN_DEPENDENCIES_STRING)
-    file(APPEND "${TEST_SCRIPT}" "./${RUN_DEPENDENCIES_STRING}\n\n")
-  else()
-    # Run the command
-    list(JOIN VALIDATE_SH_COMMAND " " VALIDATE_SH_COMMAND_STRING)
-    file(APPEND "${TEST_SCRIPT}" "${VALIDATE_SH_COMMAND_STRING}\n\n")
-  endif()
+  # Run the command
+  list(JOIN VALIDATE_SH_COMMAND " " VALIDATE_SH_COMMAND_STRING)
+  file(APPEND "${TEST_SCRIPT}" "${VALIDATE_SH_COMMAND_STRING}\n\n")
+
+  # Check exit code of test command and exit if nonzero
+  file(APPEND "${TEST_SCRIPT}" "EXIT_CODE=$?\n")
+  file(APPEND "${TEST_SCRIPT}" "if [ $EXIT_CODE -ne 0 ]; then\n  echo \"Test stopped with exit code $EXIT_CODE!\"\n  exit $EXIT_CODE\nfi\n\n")
 
   # Check for the validation.log file
   file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" ]; then\n")
@@ -278,9 +275,8 @@ function(oomph_add_test)
   # copied to the build directory, and the targets the test depends on to get
   # built. Once the data is in place and the executables have been built, the
   # check_... commands will run, which will cause the validate.sh script or
-  # individual executables to be run (depending on whether 'NO_VALIDATE_SH' was
-  # specified). Finally, the output validation.log file will be appended to the
-  # global validation.log file in the oomph-lib root directory.
+  # individual executables to be run. Finally, the test validation.log file will
+  # be appended to the root build directory validation.log file.
   add_test(
     NAME ${TEST_NAME}
     COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
