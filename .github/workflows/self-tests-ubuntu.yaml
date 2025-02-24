@@ -60,10 +60,10 @@ jobs:
         with:
           python-version: "2.7"
 
-      - name: Install Python 3.10
+      - name: Install Python 3.13
         uses: LizardByte/setup-python-action@master
         with:
-          python-version: "3.10"
+          python-version: "3.13"
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
@@ -133,7 +133,7 @@ jobs:
       # UPLOAD STUFF:
       # -------------------
       - name: Summarise validation.log for GitHub
-        run: python3 .github/generate_summary.py validation.log >> $GITHUB_STEP_SUMMARY
+        run: python3 .github/generate_validation_log_summary.py validation.log >> $GITHUB_STEP_SUMMARY
 
       - name: Rename validation log file
         run: mv ./validation.log ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
