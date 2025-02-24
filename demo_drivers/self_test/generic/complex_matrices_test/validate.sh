@@ -7,7 +7,7 @@ OOMPH_ROOT_DIR=$1
 MPI_RUN_COMMAND="$2"
 
 # Set the number of tests to be checked
-if [ "$MPI_RUN_COMMAND" == "" ]; then
+if [ "$MPI_RUN_COMMAND" != "" ]; then
     NUM_TESTS=3
 else
     NUM_TESTS=2

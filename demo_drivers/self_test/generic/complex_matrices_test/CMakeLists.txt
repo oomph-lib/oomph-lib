@@ -40,8 +40,5 @@ oomph_add_test(
   TEST_FILES validate.sh validata
   LABELS complex matrix ${EXTRA_FLAGS})
 
-set_tests_properties(self_test.generic.complex_matrices_test PROPERTIES DISABLED
-                                                                        TRUE)
-
 message(VERBOSE "Leaving complex_matrices_test subdirectory")
 # ------------------------------------------------------------------------------
