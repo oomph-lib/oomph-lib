@@ -522,6 +522,11 @@ int main(int argc, char **argv)
     some_file.close();
    }
  }
+
+   // Finalise MPI
+ #ifdef OOMPH_HAS_MPI
+   MPI_Helpers::finalize();
+ #endif
 };
 
 
