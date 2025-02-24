@@ -4,44 +4,26 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Grep for all TODOs and FIXMEs and fix!
+* [ ] Add feature summary to oomphlibConfig.cmake.in so users know which variables they have access to(!)
 * [ ] Update doc/FAQ/...
   * [ ] E.g. "The oomph-lib distribution includes some third-party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?"
 * [ ] Kill all scripts that will no longer be required, e.g. `move_external_libraries_and_distributions_to_permanent_location.bash`
-* [ ] Discuss switching to OpenBLAS only (need to change OOMPH_USE_BLAS/LAPACK_FROM)
-
 * [ ] Go through all new commits to the main repository in the last 1-2 years and make sure any changes in Makefiles have been reflected in their corresponding CMakeLists.txt file
+
 * [ ] Possibly change `oomphlib` -> `oomph_lib`? (carefully(!) avoid changing headers/sources)
   * **CHANGE IT**
-
-* [ ] Test with `OOMPH_TRANSITION_TO_VERSION_3`
-* [ ] Add demo driver test target to "all" so `ninja` in the build directory will also cause required test files to be copied over
-  * **YES DO THIS!**
 
 ### Improvements
 
 * [ ] Discuss the Doxygen search engine; `SEARCHENGINE=NO` at the moment...
-* [ ] *Optional:* Convert `oomph_gzip` library to single source file?
-
-### GitHub-y
-
-* [ ] Add a `destruct_test.yaml` to test lots of different configurations (e.g. with and without MPI, w/ and w/o Hypre, etc.)
 
 ### Pure-CMake
 
 * [ ] Propagate compiler flags to users executables
 * [ ] Patch the use of shared libs
 * [ ] Update MPI tests to specify [PROCESSORS](https://cmake.org/cmake/help/latest/prop_test/PROCESSORS.html#prop_test:PROCESSORS) rather than forcing everything to run sequentially
-* [x] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
-  * Should help make things transparent and easier for users to control
-* [ ] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
 * [ ] Patch `ninja oomph_uninstall` command for Ninja Multi-Config
-* [ ] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
-* [ ] *Add presets:*
-  * [ ] For MPI configuration
-  * [ ] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
-    * Should just need to define `CMAKE_APPLE_SILICON_PROCESSOR="arm64"` for the latter
-* [ ] *Optional:* Update all demo drivers to stop piping output to `validation.log`; use `ctest --o validation.log --output-on-failure`
-  * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
 
 ### Features to check, add or patch
 
@@ -54,35 +36,53 @@ Include tasks here that likely need some collaboration with Matthias
 * [ ] Update `doc/the_distribution/`:
   * [ ] Remove "how to link against oomph-lib from outside the automake/autoconf framework"
   * [ ] Update third-party library version numbers or remove their information entirely
-* [ ] Update instructions for how to run demo drivers
-  * [ ] macOS info:
-    * [ ] Add warning that the user might need to set `CMAKE_APPLE_SILICON_PROCESSOR`
-    * [ ] Ask users to `brew uninstall coreutils` if it is not required (over)
-    * [ ] Add documentation on how users can also just set the `CMAKE_APPLE_SILICON_PROCESSOR` environment variable (see [CMake GitLab](https://gitlab.kitware.com/cmake/cmake/-/blob/master/Modules/CMakeDetermineSystem.cmake#L35))
-* [ ] Adding *MPI* demo drivers (special flags)
-  * [ ] Document additional `validate.sh` arg (mpi run command)
-* [ ] Document how to use `CMakePresets.json` and `CMakeUserPresets.json` file
-* [ ] Doc. how users can build both a `Debug` and `Release` version and easily switch between the two
-  * Very simple; just build and install both build types and set `CMAKE_BUILD_TYPE` when configuring a project that runs `find_package(oomphlib)`
-* [ ] Write a breakdown of what has been completed and what features are missing for:
-  * [ ] `src/`
-    * [ ] `src/meshes/`
-      * New build format for `src/meshes`
-      * Headers and template headers ONLY; no library artefact! (So no linking to `oomph::meshes` needed)
-      * We can automatically find meshes by `#include`-ing `meshes/<mesh-header>`; the `target_include_directories()` command in `OomphLibraryConfig.cmake` has been set up cleverly for that
-  * [ ] `external_src/`
-    * [ ] New `oomph_gzip` folder
-    * [ ] BLAS and LAPACK build can be skipped with `find_package(BLAS)` and `find_package(LAPACK)`
-  * [ ] `demo_drivers/`
-  * [ ] `private/`
-* [ ] Write info on how to debug issue:
-  * [ ] Run commands for MPI tests (e.g. `mpiexec -np 2`)
-* [ ] Write a breakdown of all new features and important changes, e.g.
-  * [ ] C++ implementation of `fpdiff.py`
-  * [ ] `validate.sh` scripts now take the path to the root directory
 * [ ] Incrementing version number (**recommend using `bumpversion.cfg` to keep git version and cmake version in sync; can make a makefile command for this 'make bump major' or 'make bump minor' or 'make bump patch'**)
 
 ## Finished
+
+* [x] ~~Discuss switching to OpenBLAS only (need to change `OOMPH_USE_BLAS`/`OOMPH_USE_LAPACK_FROM`)~~
+* [x] ~~Add a `destruct_test.yaml` to test lots of different configurations (e.g. with and without MPI, w/ and w/o Hypre, etc.)~~
+* [x] Update `oomph_add_test()` to take args for `validate.sh` and explicitly pass e.g. "${OOMPH_ROOT_DIR}" and "${OOMPH_MPI_RUN_COMMAND}"
+  * Should help make things transparent and easier for users to control
+* [x] Update every test name to be the path to the demo driver; e.g. `mpi.distribution.adaptive_driven_cavity`
+* [x] Update build system to make sure building a demo driver target without `ctest` also runs the `check_...` target to build the target and copy files over
+* [x] ~~*Optional:* Update all demo drivers to stop piping output to `validation.log`; use `ctest --o validation.log --output-on-failure`~~
+  * Ideally we'd still output `validation.log` info to this file even if the test doesn't fail... (Just incase there's a bug where a test fails but CTest doesn't catch it)
+* [x] *Add presets:*
+  * [x] For MPI configuration
+  * [x] For Intel-based Macs (`--preset macos`) and Arm-based (`--preset macos_arm64`)
+    * Should just need to define `CMAKE_APPLE_SILICON_PROCESSOR="arm64"` for the latter
+* [x] Write info on how to debug issue:
+  * [x] Run commands for MPI tests (e.g. `mpiexec -np 2`)
+* [x] Write a breakdown of what has been completed and what features are missing for:
+  * [x] `src/`
+    * [x] `src/meshes/`
+      * New build format for `src/meshes`
+      * Headers and template headers ONLY; no library artifact! (So no linking to `oomph::meshes` needed)
+      * We can automatically find meshes by `#include`-ing `meshes/<mesh-header>`; the `target_include_directories()` command in `OomphLibraryConfig.cmake` has been set up cleverly for that
+  * [x] `demo_drivers/`
+  * [x] ~~`private/`~~
+* [x] Document how to use `CMakePresets.json` and `CMakeUserPresets.json` file
+* [x] Doc. how users can build both a `Debug` and `Release` version and easily switch between the two
+  * Very simple; just build and install both build types and set `CMAKE_BUILD_TYPE` when configuring a project that runs `find_package(oomphlib)`
+* [x] Write a breakdown of all new features and important changes, e.g.
+  * [x] ~~C++ implementation of `fpdiff.py`~~
+  * [x] ~~`validate.sh` scripts now take the path to the root directory~~
+* [x] Write a breakdown of what has been completed and what features are missing for:
+  * [x] `external_src/`
+    * [x] ~~New `oomph_gzip` folder~~
+    * [x] ~~BLAS and LAPACK build can be skipped with `find_package(BLAS)` and `find_package(LAPACK)`~~
+* [x] Adding *MPI* demo drivers (special flags)
+  * [x] Document additional `validate.sh` arg (mpi run command)
+* [x] Update instructions for how to run demo drivers
+  * [x] macOS info:
+    * [x] ~~Add warning that the user might need to set `CMAKE_APPLE_SILICON_PROCESSOR`~~
+    * [x] ~~Ask users to `brew uninstall coreutils` if it is not required (over)~~
+    * [x] ~~Add documentation on how users can also just set the `CMAKE_APPLE_SILICON_PROCESSOR` environment variable (see [CMake GitLab](https://gitlab.kitware.com/cmake/cmake/-/blob/master/Modules/CMakeDetermineSystem.cmake#L35))~~
+* [x] ~~*Optional:* Convert `oomph_gzip` library to single source file?~~
+* [x] ~~Test with `OOMPH_TRANSITION_TO_VERSION_3`~~
+* [x] Add demo driver test target to "all" so `ninja` in the build directory will also cause required test files to be copied over
+  * **YES DO THIS!**
 
 * [x] Add constraints to when we should run the self-tests (e.g. when CMakeLists.txt, .h, .c, .cc files have been edited)
 * [ ] ~~Add Intel MKL BLAS support~~
