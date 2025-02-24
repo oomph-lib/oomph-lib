@@ -83,7 +83,7 @@ endif()
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)
   set(OOMPH_MPI_RUN_COMMAND
-      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}")
+      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC}'")
   message(STATUS "oomph-lib MPI run command: '${OOMPH_MPI_RUN_COMMAND}'")
 endif()
 
@@ -92,7 +92,7 @@ endif()
 # number of processes they wish to use
 if(NOT DEFINED OOMPH_MPI_VARIABLENP_RUN_COMMAND)
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND
-      "${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ")
+      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP '")
   message(
     STATUS
       "oomph-lib MPI run command (variable NP): '${OOMPH_MPI_VARIABLENP_RUN_COMMAND}'"
