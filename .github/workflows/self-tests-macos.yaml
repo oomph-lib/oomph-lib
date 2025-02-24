@@ -23,9 +23,10 @@ on:
 # Environment variables that can be read during jobs
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  # # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
-  # # more processors than are available
-  # OMPI_MCA_rmaps_base_oversubscribe: 1
+  # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
+  # more processors than are available
+  OMPI_MCA_rmaps_base_oversubscribe: 1
+  OMPI_MCA_pmix_base_async_modex: 1
 
 # ------------------------------------------------------------------------------
 
