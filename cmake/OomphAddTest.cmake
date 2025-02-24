@@ -222,6 +222,10 @@ function(oomph_add_test)
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
+  # Create run_test.sh to run the validate.sh script and handle the correct
+  # propagation of the exit code, as well as appending to the "global"
+  # validation.log file.
+  #
   # cmake-format: off
   set(TEST_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/run_test.sh")
 
