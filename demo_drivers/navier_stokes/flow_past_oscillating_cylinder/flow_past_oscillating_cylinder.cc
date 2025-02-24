@@ -1007,4 +1007,9 @@ int main(int argc, char **argv)
   oomph_info << "\nUnsteady simulation complete!"
              << "\nTotal time for full simulation [sec]: "
              << TimingHelpers::timer()-timer_s << "\n" << std::endl;
+
+#ifdef OOMPH_HAS_MPI
+  // Finalise MPI
+  MPI_Helpers::finalize();
+#endif
 }

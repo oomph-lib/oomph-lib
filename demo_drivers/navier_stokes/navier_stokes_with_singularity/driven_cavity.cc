@@ -1862,8 +1862,12 @@ int main(int argc, char **argv)
  
  // Step number
  doc_info.number()++;
- 
 
+#ifdef OOMPH_HAS_MPI
+
+ MPI_Helpers::finalize();
+ 
+#endif
 } // end_of_main
 
 

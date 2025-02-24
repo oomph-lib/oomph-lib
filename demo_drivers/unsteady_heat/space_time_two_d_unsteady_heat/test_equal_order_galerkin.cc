@@ -1102,4 +1102,9 @@ int main(int argc, char *argv[])
   oomph_info << "\n3D space-time simulation complete!"
              << "\nTotal time for simulation [sec]: "
              << TimingHelpers::timer()-timer_s << "\n" << std::endl;
+
+#ifdef OOMPH_HAS_MPI
+  // Finalise MPI
+  MPI_Helpers::finalize();
+#endif
 } // End of main

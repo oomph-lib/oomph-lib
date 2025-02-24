@@ -678,4 +678,9 @@ int main(int argc, char **argv)
   // Tell the user we're done
   oomph_info << "\nSimulation complete!\nTotal time for simulation [sec]: "
              << TimingHelpers::timer()-timer_s << "\n" << std::endl;
+
+#ifdef OOMPH_HAS_MPI
+  // Finalise MPI
+  MPI_Helpers::finalize();
+#endif
 }

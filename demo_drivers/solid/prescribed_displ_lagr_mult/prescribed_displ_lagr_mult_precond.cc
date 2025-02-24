@@ -795,7 +795,11 @@ int main(int argc, char* argv[])
    problem.solid_mesh_pt()->set_lagrangian_nodal_coordinates();
    
   }
- 
+
+#ifdef OOMPH_HAS_MPI
+  // Finalise MPI
+  MPI_Helpers::finalize();
+#endif
 } //end of main
 
 
