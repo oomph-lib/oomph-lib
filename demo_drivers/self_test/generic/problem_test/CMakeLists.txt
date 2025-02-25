@@ -20,12 +20,8 @@ oomph_add_test(
   TEST_NAME self_test.generic.problem_test
   DEPENDS_ON solve_eigenproblem_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
+  TEST_FILES validate.sh validata random_test_matrix.dat
   LABELS problem)
-
-# FIXME: Currently fails because the eigenvectors are different in sign in some
-# places
-set_tests_properties(self_test.generic.problem_test PROPERTIES DISABLED TRUE)
 
 message(VERBOSE "Leaving problem_test subdirectory")
 # ------------------------------------------------------------------------------

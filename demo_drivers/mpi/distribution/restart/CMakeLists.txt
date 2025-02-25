@@ -29,9 +29,10 @@ oomph_add_test(
              partitioning.dat
   LABELS mpi restart)
 
-# Don't run this test alongside any other tests
-set_tests_properties(mpi.distribution.restart PROPERTIES PROCESSORS
-                                                         ${OOMPH_MPI_NUM_PROC})
+# Tell CTest how many processors the test is likely to use and don't let it run
+# for longer than 10 minutes
+set_tests_properties(mpi.distribution.restart
+                     PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC} TIMEOUT 600)
 
 message(VERBOSE "Leaving restart subdirectory")
 # ------------------------------------------------------------------------------

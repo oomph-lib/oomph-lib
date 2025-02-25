@@ -12,7 +12,7 @@ NUM_TESTS=3
 
 # Doc what we're using to run tests on two processors
 echo " " 
-echo "Running mpi tests with mpi run command: " $MPI_RUN_COMMAND
+echo "Running mpi tests with mpi run command: '$MPI_RUN_COMMAND'" 
 echo " " 
 
 # Setup validation directory

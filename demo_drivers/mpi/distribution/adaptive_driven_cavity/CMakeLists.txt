@@ -30,13 +30,9 @@ oomph_add_test(
              prune_and_balance.mcr
   LABELS mpi adaptive_driven_cavity adapt)
 
-# Don't run this test alongside any other tests
+# Tell CTest how many processors the test is likely to use
 set_tests_properties(mpi.distribution.adaptive_driven_cavity
                      PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})
-if(APPLE)
-  set_tests_properties(mpi.distribution.adaptive_driven_cavity
-                       PROPERTIES DISABLED FALSE)
-endif()
 
 message(VERBOSE "Leaving adaptive_driven_cavity subdirectory")
 # ------------------------------------------------------------------------------

@@ -371,8 +371,9 @@ void parallel_test(const unsigned& n_refine_first,
               << "]: " << t_tot << std::endl;
  
    n_dof=problem_pt->ndof();
-   sprintf(
+   snprintf(
     filename,
+    sizeof(filename),
     "%s/three_d_initial_refinement_nrefinement_%i_ndofbefore_%i_ndofafter_%i.dat",
     doc_info.directory().c_str(),
     n_refine_first,
@@ -446,8 +447,9 @@ void parallel_test(const unsigned& n_refine_first,
    oomph_info << "Time for problem distribution [ndof=" << problem_pt->ndof() 
               << "]: " << t_tot << std::endl;
 
-   sprintf(
+   snprintf(
     filename,
+    sizeof(filename),
     "%s/three_d_initial_distr_np_%i_nrefinement_%i_ndof_%i.dat",
     doc_info.directory().c_str(),
     n_proc,
@@ -557,8 +559,9 @@ void parallel_test(const unsigned& n_refine_first,
      string snippet="";
      if (!redistribute) snippet="out";
 
-     sprintf(
+     snprintf(
       filename,
+      sizeof(filename),
       "%s/three_d_distributed_refinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i_with%sredistribution.dat",
       doc_info.directory().c_str(),
       n_proc,
@@ -605,8 +608,8 @@ void parallel_test(const unsigned& n_refine_first,
                    << min_efficiency << " " 
                    << max_efficiency << " " 
                    << std::endl;
-        sprintf(
-         filename,
+        snprintf(
+         filename,sizeof(filename),
          "%s/three_d_redistribution_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
          doc_info.directory().c_str(),
          n_proc,
@@ -714,8 +717,9 @@ void parallel_test(const unsigned& n_refine_first,
      // Number of dofs after unrefinement
      n_dof=problem_pt->ndof();
      
-     sprintf(
+     snprintf(
       filename,
+      sizeof(filename),
       "%s/three_d_distributed_unrefinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
       doc_info.directory().c_str(),
       n_proc,
