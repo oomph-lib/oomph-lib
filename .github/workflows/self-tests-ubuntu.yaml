@@ -86,7 +86,7 @@ jobs:
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
             -DOOMPH_BUILD_OPENBLAS=ON \
             -DOOMPH_BUILD_CGAL=ON \
-            -DOOMPH_BUILD_MUMPS=ON \
+            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
             -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
             -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \

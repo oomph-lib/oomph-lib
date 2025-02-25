@@ -572,7 +572,11 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
+#ifdef OOMPH_HAS_MUMPS
       linear_solver_pt() = Mumps_solver_pt;
+#else
+      linear_solver_pt() = SuperLU_solver_pt;
+#endif
     }
     else
     {

@@ -40,7 +40,9 @@
 #include "mesh.h"
 
 #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MUMPS
 #include "mumps_solver.h"
+#endif
 #endif
 
 
@@ -59,7 +61,7 @@ namespace oomph
   {
   public:
     // Empty constructor
-    DummyMesh(){};
+    DummyMesh() {};
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -99,7 +101,9 @@ namespace oomph
     SolidICProblem() : IC_pt(0)
     {
 #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MUMPS
       Mumps_solver_pt = new MumpsSolver;
+#endif
 #endif
       SuperLU_solver_pt = new SuperLUSolver;
 
@@ -114,7 +118,9 @@ namespace oomph
     ~SolidICProblem()
     {
 #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MUMPS
       delete Mumps_solver_pt;
+#endif
 #endif
       delete SuperLU_solver_pt;
     }
@@ -220,8 +226,10 @@ namespace oomph
     double Max_residual_after_consistent_newton_ic;
 
 #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MUMPS
     /// Pointer to mumps solver
     MumpsSolver* Mumps_solver_pt;
+#endif
 #endif
 
     /// Pointer to mumps solver
@@ -284,10 +292,15 @@ namespace oomph
     setup_problem();
 
     // Choose the right linear solver
+
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
+#ifdef OOMPH_HAS_MUMPS
       linear_solver_pt() = Mumps_solver_pt;
+#else
+      linear_solver_pt() = SuperLU_solver_pt;
+#endif
     }
     else
     {
@@ -445,7 +458,11 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
+#ifdef OOMPH_HAS_MUMPS
       linear_solver_pt() = Mumps_solver_pt;
+#else
+      linear_solver_pt() = SuperLU_solver_pt;
+#endif
     }
     else
     {
@@ -608,7 +625,11 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
+#ifdef OOMPH_HAS_MUMPS
       lin_solver_pt = Mumps_solver_pt;
+#else
+      lin_solver_pt = SuperLU_solver_pt;
+#endif
     }
     else
     {

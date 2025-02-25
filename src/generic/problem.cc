@@ -47,7 +47,9 @@
 #include "spines.h"
 
 #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MUMPS
 #include "mumps_solver.h"
+#endif
 #endif
 
 namespace oomph
@@ -149,10 +151,15 @@ namespace oomph
     Time_stepper_pt.resize(0);
 
     // Set the linear solvers, eigensolver and assembly handler
+    Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
+#ifdef OOMPH_HAS_MUMPS
       Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
+#else
+      Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+#endif
     }
     else
     {
