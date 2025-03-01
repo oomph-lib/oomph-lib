@@ -229,7 +229,7 @@ endif()
 
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory
-set(HEADERS_NO_COMBINE cfortran.h frontal.h arpack.h lapack_qz.h mumps.h)
+set(HEADERS_NO_COMBINE cfortran.h frontal.h lapack_qz.h mumps.h)
 
 # Template-only files: Need to be installed to include directory but should not
 # be listed in combined header file

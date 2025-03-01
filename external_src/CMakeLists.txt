@@ -18,7 +18,6 @@ add_subdirectory(oomph_zlib)
 # Add HSL, C.R. Bond Bessel functions, and ARPACK
 add_subdirectory(oomph_hsl)
 add_subdirectory(oomph_crbond_bessel)
-add_subdirectory(oomph_arpack)
 
 # Add Triangle
 if(NOT OOMPH_SUPPRESS_TRIANGLE_LIB)

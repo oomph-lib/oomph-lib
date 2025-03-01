@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -63,7 +63,7 @@ namespace oomph
     BiharmonicEquations() : Source_fct_pt(0) {}
 
 
-    ~BiharmonicEquations(){};
+    ~BiharmonicEquations() {};
 
     /// Access function: Nodal function value at local node n
     /// Uses suitably interpolated value for hanging nodes.
@@ -538,7 +538,7 @@ namespace oomph
     BiharmonicElement() : QHermiteElement<DIM>(), BiharmonicEquations<DIM>() {}
 
 
-    ~BiharmonicElement(){};
+    ~BiharmonicElement() {};
 
 
     ///  Required  # of `values' (pinned or dofs)

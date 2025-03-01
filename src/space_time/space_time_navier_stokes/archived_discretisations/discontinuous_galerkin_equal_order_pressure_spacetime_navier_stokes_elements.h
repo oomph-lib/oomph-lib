@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -365,11 +365,11 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
+    TemplateFreeSpaceTimeNavierStokesEquationsBase() {};
 
 
     /// Virtual destructor (empty)
-    virtual ~TemplateFreeSpaceTimeNavierStokesEquationsBase(){};
+    virtual ~TemplateFreeSpaceTimeNavierStokesEquationsBase() {};
 
 
     /// Compute the residuals for the associated pressure advection

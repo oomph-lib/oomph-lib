@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    Integral(){};
+    Integral() {};
 
     /// Broken copy constructor
     Integral(const Integral& dummy) = delete;
@@ -58,7 +58,7 @@ namespace oomph
     void operator=(const Integral&) = delete;
 
     /// Virtual destructor (empty)
-    virtual ~Integral(){};
+    virtual ~Integral() {};
 
     /// Return the number of integration points of the scheme.
     virtual unsigned nweight() const = 0;
@@ -89,7 +89,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    PointIntegral(){};
+    PointIntegral() {};
 
     /// Broken copy constructor
     PointIntegral(const PointIntegral& dummy) = delete;
@@ -165,7 +165,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -211,7 +211,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -257,7 +257,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -303,7 +303,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -349,7 +349,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -396,7 +396,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -442,7 +442,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -488,7 +488,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -534,7 +534,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss(){};
+    Gauss() {};
 
     /// Broken copy constructor
     Gauss(const Gauss& dummy) = delete;
@@ -575,7 +575,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    Gauss_Rescaled(){};
+    Gauss_Rescaled() {};
 
     /// Broken copy constructor
     Gauss_Rescaled(const Gauss_Rescaled& dummy) = delete;
@@ -647,7 +647,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -693,7 +693,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -740,7 +740,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -779,7 +779,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -827,7 +827,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -873,7 +873,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -920,7 +920,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -964,7 +964,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1009,7 +1009,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1055,9 +1055,37 @@ namespace oomph
     /// Array to hold the weights and knots (defined in cc file)
     static const double Knot[52][2], Weight[52];
 
+#ifdef PARANOID
+    /// A flag to track whether we have warned the user about the exterior knots
+    /// and negative weights in this scheme.
+    static bool User_has_been_warned;
+#endif
+
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss()
+    {
+#ifdef PARANOID
+      // If the user has not been warned about the exterior knots and negative
+      // weights that this integration scheme uses then do so and set the static
+      // flag so that it does not happen again.
+      if (!User_has_been_warned)
+      {
+        std::string warning_string =
+          "The TGauss<2,16> integration scheme uses a high order Dunavant\n"
+          "scheme which results in a couple of knots (slightly) outside of\n"
+          "the element as well as some negative weights. These may be\n"
+          "undesirable features depending on the use case and may also break\n"
+          "some oomph-lib routines which expect points to be within the\n"
+          "bounds of an element (locate_zeta). Please ensure that the\n"
+          "integrand can be evaluated just outside the boundary of this\n"
+          "element.";
+        User_has_been_warned = true;
+        OomphLibWarning(
+          warning_string, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    };
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1101,7 +1129,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1147,7 +1175,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1195,7 +1223,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;
@@ -1243,7 +1271,7 @@ namespace oomph
 
   public:
     /// Default constructor (empty)
-    TGauss(){};
+    TGauss() {};
 
     /// Broken copy constructor
     TGauss(const TGauss& dummy) = delete;

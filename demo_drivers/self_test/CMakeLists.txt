@@ -16,7 +16,8 @@ set(SUBDIRS
     matrix_matrix_multiply
     line_visualiser
     deliberately_broken_code_for_self_test_test
-    locate_zeta)
+    locate_zeta
+    faceted_surface_vtu_output)
 
 if(OOMPH_HAS_MPI)
   list(APPEND SUBDIRS mpi)

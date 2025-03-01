@@ -20,23 +20,23 @@ cd Validation
 echo "Running eigensolver validation "
 mkdir RESLT
 cp ../random_test_matrix.dat .
-../solve_eigenproblem_test > OUTPUT
+../solve_eigenproblem_test >OUTPUT
 echo "done"
-echo " " >> validation.log
-echo "Complex eigensolver validation" >> validation.log
-echo "--------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/* > solve_eigenproblem_test.dat
+echo " " >>validation.log
+echo "Complex eigensolver validation" >>validation.log
+echo "--------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/* >solve_eigenproblem_test.dat
 
 if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/solve_eigenproblem_test.dat.gz  \
-         solve_eigenproblem_test.dat >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/solve_eigenproblem_test.dat.gz \
+    solve_eigenproblem_test.dat >>validation.log
 fi
 rm -rf RESLT
 
@@ -45,7 +45,7 @@ rm -rf RESLT
 #-----------------------------------------
 
 # Append log to main validation log
-cat validation.log >> $OOMPH_ROOT_DIR/validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 

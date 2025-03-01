@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -80,7 +80,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    PMLMappingAndTransformedCoordinate(){};
+    PMLMappingAndTransformedCoordinate() {};
 
     /// Pure virtual to return PML mapping gamma, where gamma is the
     /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$
@@ -110,7 +110,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    BermudezPMLMappingAndTransformedCoordinate(){};
+    BermudezPMLMappingAndTransformedCoordinate() {};
 
     /// Overwrite the pure PML mapping coefficient function to return the
     /// mapping function proposed by Bermudez et al

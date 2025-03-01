@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -69,7 +69,7 @@ namespace oomph
     this->set_nboundary(4);
 
     // Allocate the store for the elements
-    unsigned n_element = (Nx) * (Ny)*2;
+    unsigned n_element = (Nx) * (Ny) * 2;
     Element_pt.resize(n_element, 0);
 
     // Create first element

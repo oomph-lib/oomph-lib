@@ -43,8 +43,6 @@ cat validation.log >> $OOMPH_ROOT_DIR/validation.log
 
 cd ..
 
-
-
 #######################################################################
 
 

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -109,7 +109,7 @@ namespace oomph
   {
   public:
     /// Default (empty) constructor
-    MapMatrixMixed(){};
+    MapMatrixMixed() {};
 
     /// Broken assignment operator
     void operator=(const MapMatrixMixed&) = delete;
@@ -508,7 +508,7 @@ namespace oomph
   {
   public:
     /// Default (empty) constructor
-    MapMatrix(){};
+    MapMatrix() {};
 
     /// Typedef to keep the code more readable
     typedef std::map<KEY_TYPE, VALUE_TYPE> InnerMap;

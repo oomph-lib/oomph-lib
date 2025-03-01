@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -281,7 +281,7 @@ namespace oomph
     /// Constructor: Pass the pointer to the domain and the macro
     /// element's number within this domain
     QMacroElement(Domain* domain_pt, const unsigned& macro_element_number)
-      : MacroElement(domain_pt, macro_element_number){};
+      : MacroElement(domain_pt, macro_element_number) {};
 
 
     /// Default constructor (empty and broken)
@@ -299,7 +299,7 @@ namespace oomph
     void operator=(const QMacroElement&) = delete;
 
     /// Empty destructor
-    virtual ~QMacroElement(){};
+    virtual ~QMacroElement() {};
 
     /// Plot: x,y in tecplot format at time level t (t=0: current;
     /// t>0: previous)
@@ -375,7 +375,7 @@ namespace oomph
     /// Constructor: Pass the pointer to the domain and the macro
     /// element's number within this domain
     QMacroElement(Domain* domain_pt, const unsigned& macro_element_number)
-      : MacroElement(domain_pt, macro_element_number){};
+      : MacroElement(domain_pt, macro_element_number) {};
 
     /// Default constructor (empty and broken)
     QMacroElement()
@@ -392,7 +392,7 @@ namespace oomph
     void operator=(const QMacroElement&) = delete;
 
     /// Empty destructor
-    virtual ~QMacroElement(){};
+    virtual ~QMacroElement() {};
 
 
     /// Plot: x,y in tecplot format at time level t (t=0: current;

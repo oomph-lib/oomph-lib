@@ -19,23 +19,23 @@ cd Validation
 echo "Running eigensolver validation "
 mkdir RESLT_lapack
 cp ../random_test_matrix.dat .
-../eigen_solver_test > OUTPUT
+../eigen_solver_test >OUTPUT
 echo "done"
-echo " " >> validation.log
-echo "Eigensolver validation" >> validation.log
-echo "--------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT_lapack/* > eigen_solver_test_lapack.dat
+echo " " >>validation.log
+echo "Eigensolver validation" >>validation.log
+echo "--------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT_lapack/* >eigen_solver_test_lapack.dat
 
 if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz  \
-         eigen_solver_test_lapack.dat >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/eigen_solver_test_lapack.dat.gz \
+    eigen_solver_test_lapack.dat >>validation.log
 fi
 rm -rf RESLT_lapack
 #-----------------------------------------
@@ -44,30 +44,30 @@ rm -rf RESLT_lapack
 #-----------------------------------------
 echo "Running find eigenvalues validation "
 mkdir RESLT
-../lapack_qz_find_eigenvalues_test > OUTPUT
+../lapack_qz_find_eigenvalues_test >OUTPUT
 echo "done"
-echo " " >> validation.log
-echo "Find eigenvalues validation" >> validation.log
-echo "--------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/* > lapack_qz_find_eigenvalues_test.dat
+echo " " >>validation.log
+echo "Find eigenvalues validation" >>validation.log
+echo "--------------------------" >>validation.log
+echo " " >>validation.log
+echo "Validation directory: " >>validation.log
+echo " " >>validation.log
+echo "  " $(pwd) >>validation.log
+echo " " >>validation.log
+cat RESLT/* >lapack_qz_find_eigenvalues_test.dat
 
 if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz  \
-         lapack_qz_find_eigenvalues_test.dat >> validation.log
+  $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/lapack_qz_find_eigenvalues_test.dat.gz \
+    lapack_qz_find_eigenvalues_test.dat >>validation.log
 fi
 rm -rf RESLT
 #-----------------------------------------
 
 #-----------------------------------------
 # Append log to main validation log
-cat validation.log >> $OOMPH_ROOT_DIR/validation.log
+cat validation.log >>$OOMPH_ROOT_DIR/validation.log
 
 cd ..
 

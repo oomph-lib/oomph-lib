@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -553,10 +553,10 @@ namespace oomph
     // Bail out?
     if (n_mesh == 0) return;
 
-      // Multi-domain setup will not work for elements with
-      // nonuniformly spaced nodes
-      // Must check type of elements in the mesh and in the external mesh
-      //(assume element type is the same for all elements in each mesh)
+    // Multi-domain setup will not work for elements with
+    // nonuniformly spaced nodes
+    // Must check type of elements in the mesh and in the external mesh
+    //(assume element type is the same for all elements in each mesh)
 
 #ifdef PARANOID
 

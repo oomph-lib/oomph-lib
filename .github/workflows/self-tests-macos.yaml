@@ -3,6 +3,14 @@
 name: oomph-lib self-tests (macOS)
 
 on:
+  # IMPORTANT: A schedule workflow action *must* be placed on the default branch
+  # of the repository. Only then will it run as scheduled. It is also placed in a
+  # queue when scheduled, so it may not run exactly at the requested time.
+  schedule:
+    # Calculated using crontab.guru. See here:
+    #     https://crontab.guru/#1_0_1_1_*.
+    # Every month on the first at midnight UTC
+    - cron: "0 0 1 * *"
   push:
     paths:
       # Only run the self-tests if we edited the demo drivers, sources, third-party
