@@ -351,7 +351,8 @@ def run_as_script(argv):
         # and python3+.
 
         # Write the message
-        sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
+        # sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
+        sys.stdout.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
                          % (err.errno, err.strerror, err.filename))
 
         return 5

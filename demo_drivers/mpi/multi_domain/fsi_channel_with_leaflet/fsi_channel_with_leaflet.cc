@@ -489,9 +489,19 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
    // Build iterative linear solver
    //------------------------------
+#ifdef OOMPH_HAS_TRILINOS
+   
+   TrilinosAztecOOSolver* iterative_linear_solver_pt = new
+    TrilinosAztecOOSolver;
+   iterative_linear_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+   
+#else
+   
    GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
     new GMRES<CRDoubleMatrix>;
-
+   
+#endif
+   
    // Set maximum number of iterations
    iterative_linear_solver_pt->max_iter() = 200;
 
@@ -531,7 +541,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_2D_poisson_problem(p_preconditioner_pt);
 
    // Pass to preconditioner
-   //prec_pt->set_p_preconditioner(p_preconditioner_pt);
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_p_preconditioner(p_preconditioner_pt);
 
 
    // Create internal preconditioner used on momentum block
@@ -547,7 +558,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_navier_stokes_momentum_block(f_preconditioner_pt);
 
    // Use Hypre for momentum block
-   //prec_pt->set_f_preconditioner(f_preconditioner_pt);
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_f_preconditioner(f_preconditioner_pt);
 
 #endif
 
@@ -961,6 +973,9 @@ int main(int argc, char* argv[])
  //--------------------------
 
  // Limit the number of adaptations during unsteady run to one per timestep
+ max_adapt=0; // hierher this works for unsteady solves; otherwise seg
+              // fault during adaptation when run in non-validation mode.
+              // MH to sort out.
  max_adapt=1;
 
  // Don't re-set the initial conditions when adapting the mesh

@@ -30,7 +30,7 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-grep iterations OUTPUT_two_d_fp | awk '{print $NF}' > iter_two_d.dat
+grep 'Linear solver iterations' OUTPUT_two_d_fp | awk '{print $NF}' > iter_two_d.dat
 
 cat \
 RESLT/soln0.dat   RESLT/soln16.dat RESLT/soln4.dat \
@@ -92,7 +92,7 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-grep iterations OUTPUT_three_d_fp | awk '{print $NF}' > iter_three_d.dat
+grep 'Linear solver iterations' OUTPUT_three_d_fp | awk '{print $NF}' > iter_three_d.dat
 
 cat \
 RESLT/soln0.dat   RESLT/soln4.dat \
