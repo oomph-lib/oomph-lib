@@ -370,7 +370,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
       }
 #else
-      int ierr = 0;
+      int i_err = 0;
       i_err = HYPRE_IJMatrixCreate(
         MPI_COMM_WORLD, lower, upper, lower, upper, &hypre_ij_matrix);
       if (i_err)
