@@ -111,6 +111,14 @@ namespace oomph
 
   namespace HypreHelpers
   {
+
+    //========================================================================
+    /// Number of active Hypre solvers (smart pointer like behaviuor
+    /// to make sure that the initialise/finalize functions are only
+    /// called the required number of times
+    //========================================================================
+    unsigned Number_of_active_hypre_solvers = 0;
+
     //========================================================================
     /// Default for AMG strength (0.25 recommended for 2D problems;
     /// larger (0.5-0.75, say) for 3D
@@ -348,19 +356,46 @@ namespace oomph
       unsigned upper = lower + dist_pt->nrow_local() - 1;
 
 #ifdef OOMPH_HAS_MPI
-      HYPRE_IJMatrixCreate(dist_pt->communicator_pt()->mpi_comm(),
-                           lower,
-                           upper,
-                           lower,
-                           upper,
-                           &hypre_ij_matrix);
+      int i_err = 0;
+      i_err = HYPRE_IJMatrixCreate(dist_pt->communicator_pt()->mpi_comm(),
+                                   lower,
+                                   upper,
+                                   lower,
+                                   upper,
+                                   &hypre_ij_matrix);
+      if (i_err)
+      {
+        throw OomphLibError("Error in HYPRE_IJMatrixCreate()",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #else
-      HYPRE_IJMatrixCreate(
+      int ierr = 0;
+      i_err = HYPRE_IJMatrixCreate(
         MPI_COMM_WORLD, lower, upper, lower, upper, &hypre_ij_matrix);
+      if (i_err)
+      {
+        throw OomphLibError("Error in HYPRE_IJMatrixCreate()",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-      HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
-      HYPRE_IJMatrixInitialize(hypre_ij_matrix);
 
+      i_err = HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
+      if (i_err)
+      {
+        throw OomphLibError("Error in HYPRE_IJMatrixSetObjectType()",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      i_err = HYPRE_IJMatrixInitialize(hypre_ij_matrix);
+      if (i_err)
+      {
+        throw OomphLibError("Error in HYPRE_IJMatrixInitialize()",
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
       // set up a row map
       // and first row / nrow_local
       const unsigned hypre_nrow_local = dist_pt->nrow_local();
@@ -536,9 +571,8 @@ namespace oomph
       int err = HypreHelpers::check_HYPRE_error_flag(message);
       if (err)
       {
-        OomphLibWarning(message.str(),
-                        "HypreSolver::hypre_matrix_setup()",
-                        OOMPH_EXCEPTION_LOCATION);
+        throw OomphLibError(
+          message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
     }
 
@@ -585,6 +619,7 @@ namespace oomph
         // set up BoomerAMG
         HYPRE_BoomerAMGCreate(&Preconditioner);
         HYPRE_BoomerAMGSetPrintLevel(Preconditioner, AMG_print_level);
+        HYPRE_BoomerAMGSetOldDefault(Preconditioner);
         HYPRE_BoomerAMGSetMaxLevels(Preconditioner, AMG_max_levels);
         HYPRE_BoomerAMGSetMaxIter(Preconditioner, 1);
         HYPRE_BoomerAMGSetTol(Preconditioner, 0.0);
@@ -596,20 +631,31 @@ namespace oomph
         if (AMG_using_simple_smoothing)
         {
           HYPRE_BoomerAMGSetRelaxType(Preconditioner, AMG_simple_smoother);
+
+          // New parameter. From HYPRE_parcsr_ls.h:
+          //  (Optional) Defines in which order the points are relaxed. There
+          //  are the following options for \e relax_order:
+          //
+          //    - 0 : the points are relaxed in natural or lexicographic order
+          //    on each processor
+          //    - 1 : CF-relaxation is used, i.e on the fine grid and the down
+          //    cycle the
+          //          coarse points are relaxed first, followed by the fine
+          //          points; on the up cycle the F-points are relaxed first,
+          //          followed by the C-points. On the coarsest level, if an
+          //          iterative scheme is used, the points are relaxed in
+          //          lexicographic order.
+          //
+          //   The default is 0.
+          // NOTE: Using option causes non-convergence in parallel mode.
+          HYPRE_BoomerAMGSetRelaxOrder(Preconditioner, 1);
+
+          // Number of smoother iterations
           HYPRE_BoomerAMGSetNumSweeps(Preconditioner, AMG_smoother_iterations);
 
-          // This one gives a memory leak
-          // double * relaxweight = new double[AMG_max_levels];
 
-          // This is how they do it in a hypre demo code
-          double* relaxweight =
-            hypre_CTAlloc(double, AMG_max_levels, HYPRE_MEMORY_HOST);
-
-          for (unsigned i = 0; i < AMG_max_levels; i++)
-          {
-            relaxweight[i] = AMG_damping;
-          }
-          HYPRE_BoomerAMGSetRelaxWeight(Preconditioner, relaxweight);
+          // Relax weight/damping for all levels
+          HYPRE_BoomerAMGSetRelaxWt(Preconditioner, AMG_damping);
         }
         else
         {
@@ -704,6 +750,7 @@ namespace oomph
       // set up BoomerAMG
       HYPRE_BoomerAMGCreate(&Solver);
       HYPRE_BoomerAMGSetPrintLevel(Solver, AMG_print_level);
+      HYPRE_BoomerAMGSetOldDefault(Solver);
       HYPRE_BoomerAMGSetMaxLevels(Solver, AMG_max_levels);
       HYPRE_BoomerAMGSetMaxIter(Solver, Max_iter);
       HYPRE_BoomerAMGSetTol(Solver, Tolerance);
@@ -715,20 +762,31 @@ namespace oomph
       if (AMG_using_simple_smoothing)
       {
         HYPRE_BoomerAMGSetRelaxType(Solver, AMG_simple_smoother);
+
+        // New parameter. From HYPRE_parcsr_ls.h:
+        //  (Optional) Defines in which order the points are relaxed. There are
+        //  the following options for \e relax_order:
+        //
+        //    - 0 : the points are relaxed in natural or lexicographic order on
+        //    each processor
+        //    - 1 : CF-relaxation is used, i.e on the fine grid and the down
+        //    cycle the
+        //          coarse points are relaxed first, followed by the fine
+        //          points; on the up cycle the F-points are relaxed first,
+        //          followed by the C-points. On the coarsest level, if an
+        //          iterative scheme is used, the points are relaxed in
+        //          lexicographic order.
+        //
+        //   The default is 0.
+        // NOTE: Using option causes non-convergence in parallel mode.
+        HYPRE_BoomerAMGSetRelaxOrder(Solver, 1);
+
+        // Number of smoother iterations
         HYPRE_BoomerAMGSetNumSweeps(Solver, AMG_smoother_iterations);
 
-        // This one gives a memory leak
-        // double * relaxweight = new double[AMG_max_levels];
 
-        // This is how they do it in a hypre demo code
-        double* relaxweight =
-          hypre_CTAlloc(double, AMG_max_levels, HYPRE_MEMORY_HOST);
-
-        for (unsigned i = 0; i < AMG_max_levels; i++)
-        {
-          relaxweight[i] = AMG_damping;
-        }
-        HYPRE_BoomerAMGSetRelaxWeight(Solver, relaxweight);
+        // Relax weight/damping for all levels
+        HYPRE_BoomerAMGSetRelaxWt(Solver, AMG_damping);
       }
       else
       {
@@ -1078,6 +1136,9 @@ namespace oomph
     {
       oomph_info << "time for setup [s] : " << solver_setup_time << std::endl;
     }
+
+    // doc parameters
+    // doc_hypre_parameters();
   }
 
 

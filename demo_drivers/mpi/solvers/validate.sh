@@ -7,7 +7,7 @@ OOMPH_ROOT_DIR=$1
 MPI_RUN_COMMAND="$2"
 
 #Set the number of tests to be checked
-NUM_TESTS=46
+NUM_TESTS=42 # hierher when superlu_dist is re-enabled, revert this to 46
 
 # Threshold for number of iterations in comparison of convergence histories
 # for multi_poisson
@@ -627,19 +627,23 @@ echo " " >>validation.log
 if test "$3" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else
-    echo "SuperLU_dist matrix based solve w/ global CRDoubleMatrixSolver" >>validation.log
-    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz \
-        RESLT/SuperLU_dist_CRDoubleMatrix_global.dat >>validation.log
-    echo "SuperLU_dist matrix based solve w/ dist CRDoubleMatrixSolver" >>validation.log
-    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz \
-        RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat >>validation.log
-    echo "SuperLU_dist global problem based solve" >>validation.log
-    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz \
-        RESLT/soln_direct_solver_1.dat >>validation.log
-    echo "SuperLU_dist global problem based solve" >>validation.log
-    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz \
-        RESLT/soln_direct_solver_2.dat >>validation.log
-
+    echo " " >>validation.log
+    echo "SuperLU_dist matrix based solve w/ global CRDoubleMatrixSolver hierher commented out" >>validation.log
+    #$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz \
+        #    RESLT/SuperLU_dist_CRDoubleMatrix_global.dat >>validation.log
+    echo " " >>validation.log
+    echo "SuperLU_dist matrix based solve w/ dist CRDoubleMatrixSolver hierher commented out" >>validation.log
+    #$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz \
+    #    RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat >>validation.log
+    echo " " >>validation.log
+    echo "SuperLU_dist global problem based solve hierher commented out" >>validation.log
+    #$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz \
+    #    RESLT/soln_direct_solver_1.dat >>validation.log
+    echo " " >>validation.log
+    echo "SuperLU_dist global problem based solve hierher commented out" >>validation.log
+    #$OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz \
+    #    RESLT/soln_direct_solver_2.dat >>validation.log
+    echo " " >>validation.log
     echo "MUMPS-based global problem based solve" >>validation.log
     if [ -f RESLT/dummy_mumps.dat ]; then
         echo "Using dummy data for MUMPS self-test (don't have mumps!)"
