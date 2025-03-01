@@ -9,7 +9,8 @@ set(HEADERS elasticity_tensor.h linear_elasticity_elements.h
 
 # Define the sources
 set(SOURCES elasticity_tensor.cc linear_elasticity_elements.cc
-    refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc)
+    refineable_linear_elasticity_elements.cc Tlinear_elasticity_elements.cc
+    linear_elasticity_traction_elements.cc)
 
 # Set the name of the library
 set(LIBNAME linear_elasticity)
