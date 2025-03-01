@@ -305,9 +305,9 @@ target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
 # We need SuperLU for the solver
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
-if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(SuperLU_DIST::SuperLU_DIST INTERFACE ParMETIS::ParMETIS)
-  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST)
+if(OOMPH_HAS_MPI AND OOMPH_HAS_SUPERLU_DIST)
+  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST
+                                          ParMETIS::ParMETIS)
 endif()
 
 if(OOMPH_HAS_CGAL)
