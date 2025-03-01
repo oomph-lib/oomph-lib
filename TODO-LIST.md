@@ -4,6 +4,7 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Handle building shared libs!
 * [ ] Go through all MPI demo drivers and ONLY enable the test if MPI is enabled
 * [ ] Grep for all TODOs and FIXMEs and fix!
 * [ ] Add feature summary to oomphlibConfig.cmake.in so users know which variables they have access to(!)
