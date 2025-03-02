@@ -302,13 +302,15 @@ oomph_target_silence_warnings(
 # an "UNKNOWN IMPORTED" library.
 
 # Handle linking against METIS depending on whether we have SuperLU_DIST
-target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
+if(NOT OOMPH_HAS_SUPERLU_DIST)
+  target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
+endif()
 
 # We need SuperLU as the default linear solver
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(ParMETIS::ParMETIS INTERFACE METIS::METIS)
+  target_link_libraries(${LIBNAME} PUBLIC METIS::METIS)
   target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS)
   target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST)
 endif()
