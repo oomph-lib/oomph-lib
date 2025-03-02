@@ -38,6 +38,10 @@ function(oomph_print_third_party_libraries_usage)
   set(OOMPH_CONFIGURE_FLAGS_LIST)
   set(OOMPH_JSON_PRESET_FLAGS_LIST)
 
+  # What's the build type?
+  list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
+  list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"CMAKE_BUILD_TYPE\": \"${CMAKE_BUILD_TYPE}\"")
+
   # Do we also need to build the main project with MPI?
   if (OOMPH_ENABLE_MPI)
     list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_ENABLE_MPI=ON")
