@@ -300,14 +300,17 @@ oomph_target_silence_warnings(
 # metis lib symbols. If we used INTERFACE linking instead, we wouldn't find the
 # include directories again. That leaves PRIVATE linking, which we can't do with
 # an "UNKNOWN IMPORTED" library.
+
+# Handle linking against METIS depending on whether we have SuperLU_DIST
 target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
 
-# We need SuperLU for the solver
+# We need SuperLU as the default linear solver
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
-if(OOMPH_HAS_MPI AND OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(${LIBNAME} PUBLIC METIS::METIS ParMETIS::ParMETIS
-                                          SuperLU_DIST::SuperLU_DIST)
+if(OOMPH_HAS_SUPERLU_DIST)
+  target_link_libraries(ParMETIS::ParMETIS INTERFACE METIS::METIS)
+  target_link_libraries(${LIBNAME} PUBLIC ParMETIS::ParMETIS)
+  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST)
 endif()
 
 if(OOMPH_HAS_CGAL)

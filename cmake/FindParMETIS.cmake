@@ -10,16 +10,6 @@
 
 include(FindPackageHandleStandardArgs)
 
-# Check if METIS was found
-if(NOT METIS_FOUND)
-  # Find METIS using the existing FindMETIS.cmake
-  find_package(METIS REQUIRED)
-  message(
-    STATUS
-      "Found METIS: ${METIS_LIBRARIES}, includes: ${METIS_INCLUDE_DIRS}, version: ${METIS_VERSION}"
-  )
-endif()
-
 # cmake-format: off
 # See if the user specified a custom PARMETIS installation location using OOMPH_USE_PARMETIS_FROM or PARMETISDIR
 find_library(PARMETIS_LIBRARIES NAMES parmetis PATHS "${OOMPH_USE_PARMETIS_FROM}/lib" NO_DEFAULT_PATH DOC "PARMETIS libraries")
