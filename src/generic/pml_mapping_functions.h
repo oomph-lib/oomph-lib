@@ -46,7 +46,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    PMLMapping(){};
+    PMLMapping() {};
 
     /// Pure virtual to return Pml mapping gamma, where gamma is the
     /// \f$d\tilde x / d x\f$ as  function of \f$\nu\f$ where \f$\nu = x - h\f$
@@ -66,7 +66,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    BermudezPMLMapping(){};
+    BermudezPMLMapping() {};
 
     /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al
@@ -91,7 +91,7 @@ namespace oomph
   {
   public:
     /// Default constructor (empty)
-    ContinuousBermudezPMLMapping(){};
+    ContinuousBermudezPMLMapping() {};
 
     /// Overwrite the pure Pml mapping coefficient function to return the
     /// coeffcients proposed by Bermudez et al

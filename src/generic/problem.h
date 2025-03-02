@@ -846,12 +846,9 @@ namespace oomph
     /// communication)
     ///  3 - Uniform - each processor holds as close to N/P matrix rows as
     /// possible. (very well load balanced)
-    enum Distributed_problem_matrix_distribution
-    {
-      Default_matrix_distribution,
-      Problem_matrix_distribution,
-      Uniform_matrix_distribution
-    };
+    enum Distributed_problem_matrix_distribution{Default_matrix_distribution,
+                                                 Problem_matrix_distribution,
+                                                 Uniform_matrix_distribution};
 
     /// accesss function to the distributed matrix distribution method
     ///  1 - Automatic - the Problem distribution is employed, unless any

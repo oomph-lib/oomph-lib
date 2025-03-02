@@ -49,10 +49,10 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    MatrixBasedDiagPreconditioner(){};
+    MatrixBasedDiagPreconditioner() {};
 
     /// Destructor (empty)
-    ~MatrixBasedDiagPreconditioner(){};
+    ~MatrixBasedDiagPreconditioner() {};
 
     /// Broken copy constructor
     MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner&) =
@@ -269,10 +269,10 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    ILUZeroPreconditioner(){};
+    ILUZeroPreconditioner() {};
 
     /// Destructor (empty)
-    ~ILUZeroPreconditioner(){};
+    ~ILUZeroPreconditioner() {};
 
 
     /// Broken copy constructor
@@ -313,7 +313,7 @@ namespace oomph
   {
   public:
     /// Constructor (empty)
-    ILUZeroPreconditioner(){};
+    ILUZeroPreconditioner() {};
 
 
     /// Broken copy constructor
@@ -323,7 +323,7 @@ namespace oomph
     void operator=(const ILUZeroPreconditioner&) = delete;
 
     /// Destructor (empty)
-    ~ILUZeroPreconditioner(){};
+    ~ILUZeroPreconditioner() {};
 
     /// Apply preconditioner to r
     void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
