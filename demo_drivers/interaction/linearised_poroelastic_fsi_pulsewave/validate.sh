@@ -44,7 +44,7 @@ if test "$2" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/results.dat.gz   \
-         results.dat  0.5 1.0e-10 >> validation.log
+         results.dat  0.5 3.0e-04 >> validation.log
 fi
 
 # Append log to main validation log

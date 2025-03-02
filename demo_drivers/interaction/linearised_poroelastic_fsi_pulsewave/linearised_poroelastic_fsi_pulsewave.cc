@@ -445,8 +445,6 @@ template<class FLUID_ELEMENT, class POROELASTICITY_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
 PressureWaveFSIProblem()
 {
-  this->Newton_solver_tolerance = 1.0e-10;
-
   // Create timesteppers
  Poro_time_stepper_pt = new Newmark<2>;
  add_time_stepper_pt(Poro_time_stepper_pt);

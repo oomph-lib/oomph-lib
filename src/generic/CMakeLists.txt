@@ -300,17 +300,14 @@ oomph_target_silence_warnings(
 # metis lib symbols. If we used INTERFACE linking instead, we wouldn't find the
 # include directories again. That leaves PRIVATE linking, which we can't do with
 # an "UNKNOWN IMPORTED" library.
-
 target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
 
 # Link to SuperLU. NOTE: SuperLU propagates its dependency on METIS
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(ParMETIS::ParMETIS INTERFACE METIS::METIS)
-  target_link_libraries(SuperLU_DIST::SuperLU_DIST INTERFACE ParMETIS::ParMETIS)
   target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST
-                                          ParMETIS::ParMETIS)
+                                          ParMETIS::ParMETIS METIS::METIS)
 else()
 
 endif()
