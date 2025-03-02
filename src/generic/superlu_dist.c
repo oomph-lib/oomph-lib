@@ -21,14 +21,7 @@
 */
 #include <math.h>
 #include <superlu_ddefs.h>
-// #include <slu_Cnames.h>
-// #include <machines.h>
-// #include <psymbfact.h>
-// #include <supermatrix.h>
-// // #include <old_colamd.h>
-// #include <superlu_dist_config.h>
 #include <superlu_enum_consts.h>
-// #include <util_dist.h>
 
 
 /* ================================================= */
