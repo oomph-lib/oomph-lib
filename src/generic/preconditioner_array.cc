@@ -2456,7 +2456,7 @@ namespace oomph
 #endif
 
     // the local r vector
-    DoubleVector local_r(Preconditioner_pt->distribution_pt(), 0.0);
+    DoubleVector local_r(r[Color].distribution_pt(), 0.0);
 
     // number of processors
     unsigned nproc = Global_communicator_pt->nproc();
