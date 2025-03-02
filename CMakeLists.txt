@@ -57,6 +57,11 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
 endif()
 
+# Flag that we'll use to enable Debug-specific options
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(HAVE_DEBUG_BUILD TRUE)
+endif()
+
 # Sort out config files
 include(OomphConfigureCMakeInfoForProject)
 
@@ -80,8 +85,8 @@ option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the
 # General options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
-oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
-oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
+oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -209,6 +214,10 @@ if(OOMPH_ENABLE_MPI)
   #   message(FATAL_ERROR "MPI build requires MUMPS parallel solver.")
   # endif()
   # ~~~
+else()
+  if(OOMPH_USE_SUPERLU_DIST_FROM)
+    message(FATAL_ERROR "You can only enable SuperLU_DIST when MPI is enabled!")
+  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
