@@ -58,6 +58,7 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Flag that we'll use to enable Debug-specific options
+set(HAVE_DEBUG_BUILD FALSE)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(HAVE_DEBUG_BUILD TRUE)
 endif()
