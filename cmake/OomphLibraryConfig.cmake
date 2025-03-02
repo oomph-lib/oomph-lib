@@ -182,10 +182,6 @@ function(oomph_library_config)
                                   CXX_COMPILE_FLAGS -Wno-undefined-var-template)
   endif()
 
-  if(APPLE)
-    target_link_options(${LIBNAME} ${LINK_TYPE} -Wl,-no_compact_unwind)
-  endif()
-
   # ----------------------------------------------------------------------------
   # The install rules: we want to do the following
   #

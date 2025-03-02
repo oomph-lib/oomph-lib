@@ -930,13 +930,13 @@ namespace oomph
               {
                 el_pt->check_jacobian(J);
               }
-              catch (OomphLibQuietException& error)
+              catch (const OomphLibQuietException& error)
               {
                 is_inverted = true;
               }
 #endif
             }
-            catch (OomphLibQuietException& error)
+            catch (const OomphLibQuietException& error)
             {
               is_inverted = true;
             }
