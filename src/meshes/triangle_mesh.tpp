@@ -6224,7 +6224,7 @@ namespace oomph
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
                   1,
-                  MPI_DOUBLE,
+                  MPI_UNSIGNED,
                   send_proc,
                   3,
                   comm_pt->mpi_comm(),
@@ -6233,7 +6233,7 @@ namespace oomph
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
                  1,
-                 MPI_DOUBLE,
+                 MPI_UNSIGNED,
                  receive_proc,
                  3,
                  comm_pt->mpi_comm(),
@@ -6455,7 +6455,7 @@ namespace oomph
         unsigned nflat_double_send = flat_double_send_packed_data.size();
         MPI_Isend(&nflat_double_send,
                   1,
-                  MPI_DOUBLE,
+                  MPI_UNSIGNED,
                   send_proc,
                   3,
                   comm_pt->mpi_comm(),
@@ -6464,7 +6464,7 @@ namespace oomph
         unsigned nflat_double_receive = 0;
         MPI_Recv(&nflat_double_receive,
                  1,
-                 MPI_DOUBLE,
+                 MPI_UNSIGNED,
                  receive_proc,
                  3,
                  comm_pt->mpi_comm(),
@@ -17426,7 +17426,7 @@ namespace oomph
         // Get the size of the package to communicate to the iproc
         // processor
         const unsigned n_udata_send = flat_package_unsigned_send.size();
-        int n_udata_send_int = n_udata_send;
+        unsigned n_udata_send_int = n_udata_send;
 
         // Send/receive data to/from iproc processor
         MPI_Isend(&n_udata_send_int,
@@ -17437,7 +17437,7 @@ namespace oomph
                   comm_pt->mpi_comm(),
                   &request);
 
-        int n_udata_received_int = 0;
+        unsigned n_udata_received_int = 0;
         MPI_Recv(&n_udata_received_int,
                  1,
                  MPI_UNSIGNED,
@@ -17484,7 +17484,7 @@ namespace oomph
         // Get the size of the package to communicate to the iproc
         // processor
         const unsigned n_ddata_send = flat_package_double_send.size();
-        int n_ddata_send_int = n_ddata_send;
+        unsigned n_ddata_send_int = n_ddata_send;
 
         // Send/receive data to/from iproc processor
         MPI_Isend(&n_ddata_send_int,
@@ -17495,7 +17495,7 @@ namespace oomph
                   comm_pt->mpi_comm(),
                   &request);
 
-        int n_ddata_received_int = 0;
+        unsigned n_ddata_received_int = 0;
         MPI_Recv(&n_ddata_received_int,
                  1,
                  MPI_UNSIGNED,
@@ -18977,10 +18977,10 @@ namespace oomph
               comm_pt->mpi_comm(),
               &request);
 
-    int receive_count_double_values = 0;
+    unsigned receive_count_double_values = 0;
     MPI_Recv(&receive_count_double_values,
              1,
-             MPI_INT,
+             MPI_UNSIGNED,
              recv_proc,
              1,
              comm_pt->mpi_comm(),
@@ -19039,10 +19039,10 @@ namespace oomph
               comm_pt->mpi_comm(),
               &request);
 
-    int receive_count_unsigned_values = 0;
+    unsigned receive_count_unsigned_values = 0;
     MPI_Recv(&receive_count_unsigned_values,
              1,
-             MPI_INT,
+             MPI_UNSIGNED,
              recv_proc,
              14,
              comm_pt->mpi_comm(),
