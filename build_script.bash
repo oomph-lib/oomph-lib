@@ -16,6 +16,11 @@ oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$oomph_root"
 
 
+
+
+
+
+
 #######################################################################################
 # Get settings from json files: 
 #######################################################################################
@@ -38,7 +43,7 @@ if [ -e cmake_build_options/customised_options.json ]; then
    .value | 
    to_entries | 
    map("\(.key)=" + @sh "\(.value)") | .[]
-' ccmake_build_options/ustomised_options.json)
+'  cmake_build_options/customised_options.json)
 else
   echo "No customised options specified in customised_options.json, so sticking with defaults"
 fi
@@ -92,6 +97,7 @@ echo "- OOMPH_USE_BOOST_FROM                          : " $OOMPH_USE_BOOST_FROM
 echo "- OOMPH_USE_CGAL_FROM                           : " $OOMPH_USE_CGAL_FROM
 echo "- OOMPH_USE_MUMPS_FROM                          : " $OOMPH_USE_MUMPS_FROM
 echo "- OOMPH_USE_TRILINOS_FROM                       : " $OOMPH_USE_TRILINOS_FROM
+echo "- OOMPH_USE_HYPRE_FROM                          : " $OOMPH_USE_HYPRE_FROM
 
 
 #######################################################################################
@@ -148,8 +154,51 @@ fi
 #######################################################################################
 # Oomph-lib build
 #######################################################################################
+cd "$oomph_root"
+
+echo " "
+echo "========================================================================== "
+echo " " 
+echo "Starting oomph-lib build:"
+echo "-------------------------"
+
+cmake_flags="-DOOMPH_ENABLE_MPI=$OOMPH_ENABLE_MPI"
+cmake_flags=$cmake_flags" -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE"
+cmake_flags=$cmake_flags" -DOOMPH_DONT_SILENCE_USELESS_WARNINGS=$OOMPH_DONT_SILENCE_USELESS_WARNINGS" 
+cmake_flags=$cmake_flags" -DOOMPH_MPI_NUM_PROC=$OOMPH_MPI_NUM_PROC" 
+cmake_flags=$cmake_flags" -DOOMPH_ENABLE_PARANOID=$OOMPH_ENABLE_PARANOID" 
+cmake_flags=$cmake_flags" -DOOMPH_ENABLE_RANGE_CHECKING=$OOMPH_ENABLE_RANGE_CHECKING" 
+cmake_flags=$cmake_flags" -DOOMPH_SUPPRESS_TRIANGLE_LIB=$OOMPH_SUPPRESS_TRIANGLE_LIB" 
+cmake_flags=$cmake_flags" -DOOMPH_SUPPRESS_TETGEN_LIB=$OOMPH_SUPPRESS_TETGEN_LIB" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_OPENBLAS_FROM=$OOMPH_USE_OPENBLAS_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_GKLIB_FROM=$OOMPH_USE_GKLIB_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_METIS_FROM=$OOMPH_USE_METIS_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_SUPERLU_FROM=$OOMPH_USE_SUPERLU_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_PARMETIS_FROM=$OOMPH_USE_PARMETIS_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_BOOST_FROM=$OOMPH_USE_BOOST_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_CGAL_FROM=$OOMPH_USE_CGAL_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_MUMPS_FROM=$OOMPH_USE_MUMPS_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_USE_TRILINOS_FROM=$OOMPH_USE_TRILINOS_FROM"
+cmake_flags=$cmake_flags" -DOOMPH_USE_HYPRE_FROM=$OOMPH_USE_HYPRE_FROM" 
+
+if [ $OOMPH_ENABLE_MPI == "ON" ]; then
+    cmake_flags=$cmake_flags" -DOOMPH_USE_SUPERLU_DIST_FROM=$OOMPH_USE_SUPERLU_DIST_FROM"
+fi
+
+# hierher what if we dont have the (other) third party libraries?
 
 
+
+echo $cmake_flags > .junk.txt
+sed -i "s|<oomph_root>|$oomph_root|g" .junk.txt
+cmake_flags=`cat .junk.txt`
+echo "cmake flags: "  $cmake_flags
+rm .junk.txt
+
+
+cmake -G Ninja -B build $cmake_flags
+cmake --build build
+cmake --install build
 
 
 
