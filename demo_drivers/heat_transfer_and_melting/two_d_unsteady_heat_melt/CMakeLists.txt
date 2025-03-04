@@ -121,7 +121,7 @@ oomph_add_test(
 # This test contains a huge number of subtests and as such needs a larger amount
 # of time than the default to complete
 set_tests_properties(heat_transfer_and_melting.two_d_unsteady_heat_melt
-                     PROPERTIES TIMEOUT 10000)
+                     PROPERTIES TIMEOUT 3600)
 
 message(VERBOSE "Leaving two_d_unsteady_heat_melt subdirectory")
 # ------------------------------------------------------------------------------

@@ -36,7 +36,7 @@ oomph_add_test(
   LABELS meshing quadratic_vmtk_tetgen)
 
 # This test needs more than the default allotted time to complete
-set_tests_properties(meshing.quadratic_vmtk_tetgen PROPERTIES TIMEOUT 10000)
+set_tests_properties(meshing.quadratic_vmtk_tetgen PROPERTIES TIMEOUT 3600)
 
 message(VERBOSE "Leaving quadratic_vmtk_tetgen subdirectory")
 # ------------------------------------------------------------------------------
