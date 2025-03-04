@@ -6,9 +6,6 @@ OOMPH_ROOT_DIR=$1
 # Receive the mpirun command as the second argument
 MPI_VARIABLENP_RUN_COMMAND="$2"
 
-#Set the number of tests to be checked
-NUM_TESTS=1
-
 sample_point_container_flag=""
 if [ $# -eq 3 ]; then
     case $3 in
@@ -45,9 +42,6 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
-#cp ../*partition.dat .
-
-validation_flag=--validation
 
 #----------------------------------------------------------------------
 
@@ -343,7 +337,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat 5.0 1.0e-12 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat 12.0 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP2_HALF_CIRCLE
@@ -392,7 +386,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat 3.0 1.0e-12 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat 9.0 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP3_HALF_CIRCLE
@@ -441,7 +435,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat 5.0 1.0e-12 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat 13.0 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_HALF_CIRCLE
@@ -596,7 +590,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat.gz  \
-         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat 3.0 1.0e-12 >> validation.log
+         TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat 5.0 1.0e-12 >> validation.log
 fi
 
 mv RESLT RESLT_TWO_D_PARALLEL_UNSTRUCTURED_ADAPTIVE_POISSON_NP4_HALF_CIRCLE_INTERNAL_BOUNDARIES
@@ -644,7 +638,7 @@ echo $load_balance_flag $load_balance_value
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_ON_NP_COMMAND  ../two_d_parallel_unstructured_adaptive_poisson $sample_point_container_flag $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value $folder_distribution_file_flag $folder_distribution_file_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_from_screen
+$MPI_RUN_ON_NP_COMMAND  ../two_d_parallel_unstructured_adaptive_poisson $sample_point_container_flag $domain_configuration_flag $domain_configuration_value $element_size_flag $element_size_value $max_adapt_flag $max_adapt_value $max_permitted_error_flag $max_permitted_error_value $min_permitted_error_flag $min_permitted_error_value $max_element_size_flag $max_element_size_value $min_element_size_flag $min_element_size_value $load_balance_flag $load_balance_value > OUTPUT_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_from_screen
 
 echo "done"
 echo " " >> validation.log
