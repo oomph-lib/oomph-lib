@@ -308,6 +308,10 @@ void superlu_dist_distributed_matrix(opt_flag_t opt_flag,
     /* Can be "NO" or "DOUBLE"*/
     options->IterRefine = SLU_DOUBLE;
 
+    /* Specifies whether to replace the tiny diagonals by sqrt(eps)*||A|| during
+     * LU factorization. */
+    options->ReplaceTinyPivot = YES;
+
     /* Print stats during solve? */
     if (doc == 0)
     {

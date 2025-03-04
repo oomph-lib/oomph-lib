@@ -232,21 +232,37 @@ function(oomph_add_test)
   # The shebang
   file(WRITE "${TEST_SCRIPT}" "#!/bin/bash\n\n")
 
+  # Jump to the directory of the script
+  file(APPEND "${TEST_SCRIPT}" "# Entering directory where this bash script lives\n")
+  file(APPEND "${TEST_SCRIPT}" "DIR=\"$(cd \"$(dirname \"\$\{BASH_SOURCE\[0\]\}\")\" && pwd)\"\n")
+  file(APPEND "${TEST_SCRIPT}" "cd \"\$\{DIR\}\"\n\n")
+
   # Run the command
+  file(APPEND "${TEST_SCRIPT}" "# Run the validation command\n")
   list(JOIN VALIDATE_SH_COMMAND " " VALIDATE_SH_COMMAND_STRING)
   file(APPEND "${TEST_SCRIPT}" "${VALIDATE_SH_COMMAND_STRING}\n\n")
 
-  # Check exit code of test command and exit if nonzero
-  file(APPEND "${TEST_SCRIPT}" "EXIT_CODE=$?\n")
+  # Check exit code of test command
+  file(APPEND "${TEST_SCRIPT}" "# Store the exit code\n")
+  file(APPEND "${TEST_SCRIPT}" "EXIT_CODE=$?\n\n")
+
+  # Jump to the original directory
+  file(APPEND "${TEST_SCRIPT}" "# Jump back to the original calling directory\n")
+  file(APPEND "${TEST_SCRIPT}" "cd - > /dev/null\n\n")
+
+  # Now exit if nonzero
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if we exited with a non-zero exit code\n")
   file(APPEND "${TEST_SCRIPT}" "if [ $EXIT_CODE -ne 0 ]; then\n  echo \"Test stopped with exit code $EXIT_CODE!\"\n  exit $EXIT_CODE\nfi\n\n")
 
   # Check for the validation.log file
+  file(APPEND "${TEST_SCRIPT}" "# Stop here if there's no validation log file\n")
   file(APPEND "${TEST_SCRIPT}" "if [ ! -e \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" ]; then\n")
   file(APPEND "${TEST_SCRIPT}" "  printf '\\n%s:\\n\\t%s\\n%s\\n' 'Unable to locate validation log file:' '\"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\"' 'Stopping here...'\n")
   file(APPEND "${TEST_SCRIPT}" "  exit 1\n")
   file(APPEND "${TEST_SCRIPT}" "fi\n\n")
 
   # Append validation.log to top-level validation.log
+  file(APPEND "${TEST_SCRIPT}" "# Append the validation log file to the 'global' log file\n")
   file(APPEND "${TEST_SCRIPT}" "cat \"${CMAKE_CURRENT_BINARY_DIR}/Validation/validation.log\" >> \"${CMAKE_BINARY_DIR}/validation.log\"\n")
 
   # Make the script executable

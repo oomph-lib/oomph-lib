@@ -291,8 +291,6 @@ int main(int argc, char **argv)
  // SuperLU_dist Test
  //////////////////////////////////////////////////////////////////////////////
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (global)
- if (false) // hierher bypassing while superlu_dist is disabled
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -318,8 +316,6 @@ int main(int argc, char **argv)
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_global.dat");
  }
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (distributed)
- if (false) // hierher bypassing while superlu_dist is broken
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -347,8 +343,6 @@ int main(int argc, char **argv)
  }
 
  // PROBLEM BASED SOLVE (global)
- doc_info.number()++; // hierher remove
- if (false) // hierher bypassing while superlu_dist is broken
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -372,8 +366,6 @@ int main(int argc, char **argv)
  }
 
  // PROBLEM BASED SOLVE (distributed)
- doc_info.number()++; // hierher remove
- if (false) // hierher bypassing while superlu_dist is broken
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"

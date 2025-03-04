@@ -26,12 +26,18 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
+set(EXTRA_FLAG --non_ref_bin)
+if(OOMPH_HAS_CGAL)
+  set(EXTRA_FLAG --cgal)
+endif()
+
 oomph_add_test(
   TEST_NAME mpi.distribution.two_d_unstructured_adaptive_poisson
   DEPENDS_ON two_d_parallel_unstructured_adaptive_poisson
              unstructured_adaptive_mesh_two_outer_boundaries
              unstructured_adaptive_mesh_two_outer_boundaries_crossed
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
+          ${EXTRA_FLAG}
   TEST_FILES validate.sh validata
   LABELS mpi two_d_unstructured_adaptive_poisson adapt)
 
