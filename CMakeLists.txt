@@ -54,7 +54,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance." FORCE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance."
+      FORCE)
 endif()
 
 # Flag that we'll use to enable Debug-specific options

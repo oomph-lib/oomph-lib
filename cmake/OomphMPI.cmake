@@ -76,7 +76,8 @@ message(STATUS "MPIEXEC_PREFLAGS: '${MPIEXEC_PREFLAGS}'")
 
 # Define a cache variable that can be overriden by the user from the
 # command-line
-set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL "Number of processes to use with MPI-enabled tests")
+set(OOMPH_MPI_NUM_PROC 2 CACHE INTERNAL
+    "Number of processes to use with MPI-enabled tests")
 
 # Sanity check
 if(NOT OOMPH_MPI_NUM_PROC MATCHES "^[0-9]+$")
@@ -89,7 +90,8 @@ endif()
 # Set the command used to run MPI-enabled self-tests
 if(NOT DEFINED OOMPH_MPI_RUN_COMMAND)
   set(OOMPH_MPI_RUN_COMMAND
-      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC} ${MPIEXEC_PREFLAGS} '")
+      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${OOMPH_MPI_NUM_PROC} ${MPIEXEC_PREFLAGS} '"
+  )
 endif()
 message(STATUS "oomph-lib MPI run command: ${OOMPH_MPI_RUN_COMMAND}")
 
@@ -98,9 +100,13 @@ message(STATUS "oomph-lib MPI run command: ${OOMPH_MPI_RUN_COMMAND}")
 # number of processes they wish to use
 if(NOT DEFINED OOMPH_MPI_VARIABLENP_RUN_COMMAND)
   set(OOMPH_MPI_VARIABLENP_RUN_COMMAND
-      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ${MPIEXEC_PREFLAGS} '")
+      "'${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} OOMPHNP ${MPIEXEC_PREFLAGS} '"
+  )
 endif()
-message(STATUS "oomph-lib MPI run command (variable NP): ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}")
+message(
+  STATUS
+    "oomph-lib MPI run command (variable NP): ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}"
+)
 
 # Add a preprocessor definition and a CMake cache variable to indicate that MPI
 # is available and works (if oomph_check_mpi() ran)
