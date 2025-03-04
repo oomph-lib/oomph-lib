@@ -9,6 +9,7 @@
 #   include(OomphPrintProjectConfiguration)
 #   oomph_print_project_configuration()
 # =============================================================================
+include_guard()
 
 # ------------------------------------------------------------------------------
 function(oomph_print_project_configuration)
@@ -18,6 +19,9 @@ function(oomph_print_project_configuration)
   set(SINGLE_VALUE_ARGS)
   set(MULTI_VALUE_ARGS)
   cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}" "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
+
+  # Combine the literal and the list variable into one list.
+  list(PREPEND OOMPH_CONFIG_VARS CMAKE_BUILD_TYPE)
 
   # Colourising
   if(NOT WIN32)
