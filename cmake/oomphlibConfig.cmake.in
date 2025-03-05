@@ -172,6 +172,28 @@ find_dependency(METIS REQUIRED GLOBAL)
 set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
 find_dependency(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
 
+# Fix SuperLU METIS linking
+if(TARGET superlu::superlu)
+  # Get the list of libraries SuperLU links to
+  get_target_property(SUPERLU_LIBS superlu::superlu INTERFACE_LINK_LIBRARIES)
+  set(FILTERED_SUPERLU_LIBS "")
+
+  # ...now exclude the hardcoded METIS lib
+  foreach(lib ${SUPERLU_LIBS})
+    if(NOT lib MATCHES ".*metis.*\\.(a|so|dylib|lib|dll)$")
+      list(APPEND FILTERED_SUPERLU_LIBS ${lib})
+    endif()
+  endforeach()
+
+  # Add in the "proper" CMake METIS::METIS target (defined by FindMETIS.cmake)
+  list(APPEND FILTERED_SUPERLU_LIBS "METIS::METIS")
+
+  # Update SuperLU link library property
+  set_target_properties(superlu::superlu PROPERTIES INTERFACE_LINK_LIBRARIES "${FILTERED_SUPERLU_LIBS}")
+else()
+  message(WARNING "Found SuperLU library but target superlu::superlu is not defined!")
+endif()
+
 if(OOMPH_USE_SUPERLU_DIST_FROM)
   set(BACKUP_CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}")
   set(CMAKE_PREFIX_PATH "${OOMPH_USE_PARMETIS_FROM};${OOMPH_USE_SUPERLU_DIST_FROM}" CACHE INTERNAL "" FORCE)

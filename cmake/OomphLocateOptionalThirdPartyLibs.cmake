@@ -46,6 +46,28 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
     find_package(SuperLU_DIST REQUIRED GLOBAL)
   endif()
 
+  # ---------------------------------
+  # Handle duplicate linking to METIS
+  # ---------------------------------
+  # Ensure METIS is linked correctly for SuperLU
+  get_target_property(SUPERLU_LIBS superlu::superlu INTERFACE_LINK_LIBRARIES)
+  set(FILTERED_SUPERLU_LIBS "")
+
+  # Remove any hardcoded METIS paths
+  foreach(lib ${SUPERLU_LIBS})
+    if(NOT lib MATCHES ".*metis.*\\.(a|so|dylib|lib|dll)$")
+      list(APPEND FILTERED_SUPERLU_LIBS ${lib})
+    endif()
+  endforeach()
+
+  # Append METIS::METIS
+  list(APPEND FILTERED_SUPERLU_LIBS "METIS::METIS")
+
+  # Override INTERFACE_LINK_LIBRARIES to fix METIS linking
+  set_target_properties(superlu::superlu PROPERTIES INTERFACE_LINK_LIBRARIES
+                                                    "${FILTERED_SUPERLU_LIBS}")
+  # ---------------------------------
+
   set(OOMPH_REQUIRED_TARGETS GKlib::GKlib METIS::METIS superlu::superlu)
   if(OOMPH_USE_SUPERLU_DIST_FROM)
     list(APPEND REQUIRED_TARGETS ParMETIS::ParMETIS SuperLU_DIST::SuperLU_DIST)
