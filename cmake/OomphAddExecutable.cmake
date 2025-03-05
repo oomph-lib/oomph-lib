@@ -37,63 +37,68 @@
 # require a -D prefix (as is usually required to indicate that it is a
 # preprocessor definition), but you can supply it if you wish.
 # =============================================================================
-# cmake-format: on
 include_guard()
 
 function(oomph_add_executable)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS SILENCE_NO_LIBS_SUPPLIED_WARNING)
-  set(SINGLE_VALUE_ARGS NAME CXX_STANDARD)
-  set(MULTI_VALUE_ARGS SOURCES LIBRARIES CXX_DEFINITIONS CXX_OPTIONS
-      LINK_OPTIONS)
+  set(SINGLE_VALUE_ARGS
+    NAME
+    CXX_STANDARD
+  )
+  set(MULTI_VALUE_ARGS
+    SOURCES
+    LIBRARIES
+    CXX_DEFINITIONS
+    CXX_OPTIONS
+    LINK_OPTIONS
+  )
 
   # Process the arguments passed in
   include(CMakeParseArguments)
-  cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
-                        "${SINGLE_VALUE_ARGS}" "${MULTI_VALUE_ARGS}")
+  cmake_parse_arguments(
+    PARSE_ARGV 0
+    ${PREFIX}
+    "${FLAGS}"
+    "${SINGLE_VALUE_ARGS}"
+    "${MULTI_VALUE_ARGS}"
+  )
 
   # Redefine the variables in this scope without a prefix for clarity
-  set(SILENCE_NO_LIBS_SUPPLIED_WARNING
-      ${${PREFIX}_SILENCE_NO_LIBS_SUPPLIED_WARNING})
-  set(NAME ${${PREFIX}_NAME})
-  set(SOURCES ${${PREFIX}_SOURCES})
-  set(LIBRARIES ${${PREFIX}_LIBRARIES})
-  set(CXX_STANDARD ${${PREFIX}_CXX_STANDARD})
-  set(CXX_DEFINITIONS ${${PREFIX}_CXX_DEFINITIONS})
-  set(CXX_OPTIONS ${${PREFIX}_CXX_OPTIONS})
-  set(LINK_OPTIONS ${${PREFIX}_LINK_OPTIONS})
+  set(SILENCE_NO_LIBS_SUPPLIED_WARNING "${ARG_SILENCE_NO_LIBS_SUPPLIED_WARNING}")
+  set(NAME             "${ARG_NAME}")
+  set(SOURCES          "${ARG_SOURCES}")
+  set(LIBRARIES        "${ARG_LIBRARIES}")
+  set(CXX_STANDARD     "${ARG_CXX_STANDARD}")
+  set(CXX_DEFINITIONS  "${ARG_CXX_DEFINITIONS}")
+  set(CXX_OPTIONS      "${ARG_CXX_OPTIONS}")
+  set(LINK_OPTIONS     "${ARG_LINK_OPTIONS}")
 
-  # Make sure the arguments are valid
+  # Validate arguments
   if(NOT NAME)
     message(FATAL_ERROR "No NAME argument supplied.")
   elseif(NOT SOURCES)
     message(FATAL_ERROR "No SOURCES argument supplied.")
   elseif(NOT LIBRARIES)
     if(NOT DEFINED SILENCE_NO_LIBS_SUPPLIED_WARNING)
-      message(
-        WARNING
-          "\n\
-          -------------------------------------------------------------------\n\
-          No LIBRARIES argument supplied for the executable \"${NAME}\" in:\n\
-          \n\
-          ${CMAKE_CURRENT_LIST_DIR}\n\
-          \n\
-          If you definitely meant to do this then you can disable the warning\n\
-          by adding the flag:\n\
-          \n\
-          SILENCE_NO_LIBS_SUPPLIED_WARNING\n\
-          \n\
-          to your call to oomph_add_executable(...).\n\
-          -------------------------------------------------------------------\n\
-          ")
+      message(WARNING
+        "\n-------------------------------------------------------------------"
+        "\nNo LIBRARIES argument supplied for the executable \"${NAME}\" in:\n"
+        "\n  ${CMAKE_CURRENT_LIST_DIR}\n"
+        "\nIf you definitely meant to do this then you can disable the warning"
+        "\nby adding the flag:\n"
+        "\n  SILENCE_NO_LIBS_SUPPLIED_WARNING\n"
+        "\nto your call to oomph_add_executable(...).\n"
+        "-------------------------------------------------------------------\n"
+      )
     endif()
   elseif(CXX_STANDARD)
     set(SUPPORTED_CMAKE_STANDARDS 14 17 20)
     if(NOT CXX_STANDARD IN_LIST SUPPORTED_CMAKE_STANDARDS)
-      message(
-        FATAL_ERROR
-          "Supplied invalid argument ${CXX_STANDARD} to CXX_STANDARD. Valid arguments: ${SUPPORTED_CMAKE_STANDARDS}."
+      message(FATAL_ERROR
+        "Supplied invalid argument ${CXX_STANDARD} to CXX_STANDARD. "
+        "Valid arguments: ${SUPPORTED_CMAKE_STANDARDS}."
       )
     endif()
   endif()
@@ -117,28 +122,13 @@ function(oomph_add_executable)
   # Specify the name of the executable that the user will see
   set_target_properties(${NAME}_${PATH_HASH} PROPERTIES OUTPUT_NAME ${NAME})
 
-  # Link to the specified libraries
-  target_link_libraries(${NAME}_${PATH_HASH} PUBLIC ${LIBRARIES})
-
-  # ~~~
-  # # FIXME: XCode 15.0 problems :(
-  # if(APPLE)
-  #   include(CheckLinkerFlag)
-  #   foreach(FLAG IN ITEMS -no_warn_duplicate_libraries -ld_classic)
-  #     check_linker_flag(CXX FLAG IS_CXX_FLAG)
-  #     if(IS_CXX_FLAG)
-  #       target_link_options(${NAME}_${PATH_HASH} PRIVATE LINKER:${FLAG})
-  #     else()
-  #       message(STATUS "C++ linker flag ${FLAG} is not supported.")
-  #     endif()
-  #   endforeach()
-  # endif()
-  # ~~~
-
   # Provide access to the MPI libraries if we've built oomph-lib with MPI
   if(OOMPH_HAS_MPI)
     target_link_libraries(${NAME}_${PATH_HASH} PUBLIC MPI::MPI_CXX)
   endif()
+
+  # Link to the specified libraries
+  target_link_libraries(${NAME}_${PATH_HASH} PUBLIC ${LIBRARIES})
 
   # Set the C++ standard
   if(CXX_STANDARD)
@@ -148,8 +138,7 @@ function(oomph_add_executable)
   endif()
 
   # General oomph-lib specific compiler definitions
-  target_compile_definitions(${NAME}_${PATH_HASH}
-                             PUBLIC ${OOMPH_COMPILE_DEFINITIONS})
+  target_compile_definitions(${NAME}_${PATH_HASH} PUBLIC ${OOMPH_COMPILE_DEFINITIONS})
 
   # Add any user-supplied compiler definitions
   if(CXX_DEFINITIONS)
@@ -166,17 +155,16 @@ function(oomph_add_executable)
     target_link_options(${NAME}_${PATH_HASH} PUBLIC ${LINK_OPTIONS})
   endif()
 
-  # Should we try to colourise the command output?
+  # Optionally colorize compiler output
   option(FORCE_COLORED_OUTPUT "Produce ANSI-colored output (GNU/Clang)." ON)
-
-  # Apply the compile options. The Apple-provided Cl
   if(FORCE_COLORED_OUTPUT)
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      target_compile_options(${NAME}_${PATH_HASH}
-                             PRIVATE -fdiagnostics-color=always)
+      target_compile_options("${NAME}_${PATH_HASH}" PRIVATE -fdiagnostics-color=always)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-      target_compile_options(${NAME}_${PATH_HASH} PRIVATE -fcolor-diagnostics)
+      target_compile_options("${NAME}_${PATH_HASH}" PRIVATE -fcolor-diagnostics)
     endif()
   endif()
 endfunction()
+
+# cmake-format: on
 # ------------------------------------------------------------------------------
