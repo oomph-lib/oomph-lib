@@ -103,7 +103,7 @@ echo "- OOMPH_USE_HYPRE_FROM                          : " $OOMPH_USE_HYPRE_FROM
 #######################################################################################
 # Third Party build
 #######################################################################################
-if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
+if [ $BUILD_THIRD_PARTY_LIBRARIES == "ONhierher" ]; then
     echo " "
     echo "========================================================================== "
     echo " " 
@@ -143,12 +143,10 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     #-DOOMPH_USE_BOOST_FROM=$OOMPH_USE_BOOST_FROM 
     
 else
-    echo" "
+    echo " "
     echo "Bypassing third party library build:"
     echo " "
 fi
-
-
 
 
 #######################################################################################
@@ -162,6 +160,9 @@ echo " "
 echo "Starting oomph-lib build:"
 echo "-------------------------"
 
+
+# Default flags
+#--------------
 cmake_flags="-DOOMPH_ENABLE_MPI=$OOMPH_ENABLE_MPI"
 cmake_flags=$cmake_flags" -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE"
 cmake_flags=$cmake_flags" -DOOMPH_DONT_SILENCE_USELESS_WARNINGS=$OOMPH_DONT_SILENCE_USELESS_WARNINGS" 
@@ -169,8 +170,48 @@ cmake_flags=$cmake_flags" -DOOMPH_MPI_NUM_PROC=$OOMPH_MPI_NUM_PROC"
 cmake_flags=$cmake_flags" -DOOMPH_ENABLE_PARANOID=$OOMPH_ENABLE_PARANOID" 
 cmake_flags=$cmake_flags" -DOOMPH_ENABLE_RANGE_CHECKING=$OOMPH_ENABLE_RANGE_CHECKING" 
 cmake_flags=$cmake_flags" -DOOMPH_SUPPRESS_TRIANGLE_LIB=$OOMPH_SUPPRESS_TRIANGLE_LIB" 
-cmake_flags=$cmake_flags" -DOOMPH_SUPPRESS_TETGEN_LIB=$OOMPH_SUPPRESS_TETGEN_LIB" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_OPENBLAS_FROM=$OOMPH_USE_OPENBLAS_FROM" 
+cmake_flags=$cmake_flags" -DOOMPH_SUPPRESS_TETGEN_LIB=$OOMPH_SUPPRESS_TETGEN_LIB"
+
+
+# Optional libraries:
+#--------------------
+
+# Which libraries do we have:
+# -- Either the default ones, specified in the json file
+#    for the default settings, and then built by us in the external
+#    distribution directory. We skip them if they don't exist.
+# -- Or any third party ones, explicitly specified in the customised json
+#    file; again skipped and warned about if they don't exist.
+third_party_library_list="OPENBLAS GKLIB METIS SUPERLU PARMETIS BOOST CGAL MUMPS TRILINOS HYPRE"
+
+# Add SuperLU_dist only if we're in mpi mode
+if [ $OOMPH_ENABLE_MPI == "ON" ]; then
+    third_party_library_list=$third_party_library_list" SUPERLU_DIST "
+fi
+
+# Check if the libraries exist, replacing the "<oomph_root>" placeholder
+# for where we've actually installed them.
+for third_party_library in `echo $third_party_library_list`; do
+    full_var="OOMPH_USE_"$third_party_library"_FROM"
+    #echo "no  ! : "${full_var}"
+    #echo "yes ! : "${!full_var}"
+    lib_dir_name=`echo ${!full_var} | sed "s|<oomph_root>|$oomph_root|g"`
+    if [ -e $lib_dir_name ]; then
+        cmake_flags=$cmake_flags" -DOOMPH_USE_"$third_party_library"_FROM="$lib_dir_name
+    else
+        echo "Library "$lib_dir_name" doesn't exist."
+        echo "Not using library "$third_party_library" in oomph-lib build."
+    fi
+done
+
+    
+echo "cmake flags: "  $cmake_flags
+
+
+# hierher
+echo "hierher check install dir; the above probably won't quite work if we're specifying another install dir: "$OOMPH_THIRD_PARTY_INSTALL_DIR
+    
+exit
 cmake_flags=$cmake_flags" -DOOMPH_USE_GKLIB_FROM=$OOMPH_USE_GKLIB_FROM" 
 cmake_flags=$cmake_flags" -DOOMPH_USE_METIS_FROM=$OOMPH_USE_METIS_FROM" 
 cmake_flags=$cmake_flags" -DOOMPH_USE_SUPERLU_FROM=$OOMPH_USE_SUPERLU_FROM" 
@@ -189,11 +230,6 @@ fi
 
 
 
-echo $cmake_flags > .junk.txt
-sed -i "s|<oomph_root>|$oomph_root|g" .junk.txt
-cmake_flags=`cat .junk.txt`
-echo "cmake flags: "  $cmake_flags
-rm .junk.txt
 
 
 cmake -G Ninja -B build $cmake_flags
