@@ -185,22 +185,15 @@ function(oomph_library_config)
   # ----------------------------------------------------------------------------
   # The install rules: we want to do the following
   #
-  # 1. Install ${LIBNAME} in <INSTALL-DIR>/lib,
-  # 2. Install ${LIBNAME}.h in <INSTALL-DIR>/include, and
-  # 3. Install ${HEADERS} in <INSTALL-DIR>/include/${LIBNAME}
+  # 1. Install ${LIBNAME} in <INSTALL-DIR>/lib/${PROJECT_NAME},
+  # 2. Install ${LIBNAME}.h in <INSTALL-DIR>/include/${PROJECT_NAME}, and
+  # 3. Install ${HEADERS} in <INSTALL-DIR>/include/${PROJECT_NAME}/${LIBNAME}
   #
   # The header ${LIBNAME}.h in <INSTALL-DIR>/include will include the relevant
   # headers from <INSTALL-DIR>/include/${LIBNAME}/. This allows us to group
   # associated headers together.
   # ----------------------------------------------------------------------------
   # ~~~
-  # TODO: Add a note somewhere that the library directory should either match
-  # the library name or be set
-  # TODO: The <SUBDIR> value should NOT be the path from src/ as this would
-  # break for the build.
-  # FIXME: We should, for good practice, include the full path from the root
-  # source directory...
-  #
   # When headers get installed to "<INSTALL-PATH>/oomphlib/include/<SUBDIR>/",
   # we provide a combined header in the ".../include/" directory that can be
   # included by the user to include all files shipped with a library. The
@@ -211,12 +204,34 @@ function(oomph_library_config)
   # The "<SUBDIR>" is simply the folder that encloses it.
   # Therefore we need to the correct "<SUBDIR>" value. In most cases, this is
   # obvious -- it is just the name of the library itself, e.g. the <SUBDIR> of
-  # the "generic" library src/generic/ contains the
-  # definition of
+  # the "generic" library, src/generic/, contains the header files.
+  #
+  # TODO: Add a note somewhere that the library directory should either match
+  # the library name or be set
+  # TODO: The <SUBDIR> value should NOT be the path from src/ as this would
+  # break for the build.
+  # FIXME: We should, for good practice, include the full path from the root
+  # project directory to preserve the folder structure. E.g. for the
+  # 'space_time_block_preconditioner' library defined in
+  #             src/space_time/space_time_block_preconditioner/
+  # we install the combined header to
+  #                 <INSTALL-DIR>/include/${PROJECT_NAME}/
+  # and the files to
+  #    <INSTALL-DIR>/include/${PROJECT_NAME}/space_time_block_preconditioner/
+  # instead of
+  #  <INSTALL-DIR>/include/${PROJECT_NAME}/space_time/space_time_block_preconditioner/
+  # This could be problematic if we create libraries with the same name. Ideally
+  # we would install the combined header to
+  #             <INSTALL-DIR>/include/${PROJECT_NAME}/space_time/
+  # so the user gets access to all the files with the following include:
+  #         #include "space_time/space_time_block_preconditioner.h"
+  # instead of
+  #             #include "space_time_block_preconditioner.h"
+  # as is currently done.
   # ~~~
   #
   # We want to provide a combined header above the level of a library directory
-  # which includes the path to files in the livrary The include paths we provide
+  # which includes the path to files in the library The include paths we provide
   # for #headers In general, the name of the folder that encloses the definition
   # of a library is the same as the name of the library, e.g. src/generic/
   # contains the definition of the "generic" library. However, in some cases the
@@ -248,7 +263,6 @@ function(oomph_library_config)
     LIBRARY DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
     ARCHIVE DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
     RUNTIME DESTINATION "${OOMPH_INSTALL_BIN_DIR}")
-  # INCLUDES DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
 
   # Install the combined header
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
