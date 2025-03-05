@@ -7,16 +7,20 @@ OOMPH_ROOT_DIR=$1
 MPI_VARIABLENP_RUN_COMMAND="$2"
 
 sample_point_container_flag=""
-if [ $# -eq 3 ]; then
+if [ $# -eq 3 ] || [ $# -eq 4 ]; then
     case $3 in
-        --ref_bin ) sample_point_container_flag=" --ref_bin "
-            ;;
-        --non_ref_bin ) sample_point_container_flag=" --non_ref_bin "
-            ;;
-        --cgal ) sample_point_container_flag=" --cgal "
-            ;;
+        --ref_bin ) sample_point_container_flag=" --ref_bin " ;;
+        --non_ref_bin ) sample_point_container_flag=" --non_ref_bin " ;;
+        --cgal ) sample_point_container_flag=" --cgal " ;;
         * ) echo "Wrong command line argument: $3"; exit 1
     esac
+    
+    if [ $# -eq 4 ]; then
+        if [ "$4" != "no_fpdiff" ]; then
+            echo "Wrong command line argument: $4"; exit 1
+        fi
+        no_fpdiff_flag="no_fpdiff"
+    fi
 elif [ $# -gt 3 ]; then
     echo "Can only run this with three command line arguments; the "
     echo " third of which is assumed to be sample point container flag: "
@@ -67,7 +71,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > TRACE_unstructured_adaptive_mesh_two_outer_boundaries_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_unstructured_adaptive_mesh_two_outer_boundaries_results.dat.gz  \
@@ -100,7 +104,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat > TRACE_unstructured_adaptive_mesh_two_outer_boundaries_crossed_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_unstructured_adaptive_mesh_two_outer_boundaries_crossed_results.dat.gz  \
@@ -168,7 +172,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_square_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_square_results.dat.gz  \
@@ -216,7 +220,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_square_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_square_results.dat.gz  \
@@ -264,7 +268,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_square_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_square_results.dat.gz  \
@@ -333,7 +337,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_results.dat.gz  \
@@ -382,7 +386,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_results.dat.gz  \
@@ -431,7 +435,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_results.dat.gz  \
@@ -496,7 +500,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_half_circle_internal_boundaries_results.dat.gz  \
@@ -541,7 +545,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_half_circle_internal_boundaries_results.dat.gz  \
@@ -586,7 +590,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_half_circle_internal_boundaries_results.dat.gz  \
@@ -651,7 +655,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np2_complex_holes_results.dat.gz  \
@@ -696,7 +700,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np3_complex_holes_results.dat.gz  \
@@ -741,7 +745,7 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace_proc0.dat > TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes_results.dat
 
-if test "$1" = "no_fpdiff"; then
+if test "$4" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/TRACE_two_d_parallel_unstructured_adaptive_poisson_np4_complex_holes_results.dat.gz  \
