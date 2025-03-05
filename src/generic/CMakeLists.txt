@@ -306,8 +306,9 @@ target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST
-                                          ParMETIS::ParMETIS METIS::METIS)
+  target_link_libraries(
+    ${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST ParMETIS::ParMETIS
+                      METIS::METIS GKlib::GKlib)
 else()
 
 endif()

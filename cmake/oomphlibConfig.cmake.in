@@ -172,21 +172,22 @@ find_dependency(METIS REQUIRED GLOBAL)
 set(CMAKE_PREFIX_PATH "${BACKUP_CMAKE_PREFIX_PATH}" CACHE INTERNAL "" FORCE)
 find_dependency(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)
 
-# Fix SuperLU METIS linking
+# Fix SuperLU METIS/GKlib linking
 if(TARGET superlu::superlu)
   # Get the list of libraries SuperLU links to
   get_target_property(SUPERLU_LIBS superlu::superlu INTERFACE_LINK_LIBRARIES)
   set(FILTERED_SUPERLU_LIBS "")
 
-  # ...now exclude the hardcoded METIS lib
+  # ...now exclude the hardcoded METIS/GKlib libs
   foreach(lib ${SUPERLU_LIBS})
-    if(NOT lib MATCHES ".*metis.*\\.(a|so|dylib|lib|dll)$")
+    if(NOT lib MATCHES ".*(metis|GKlib).*\\.(a|so|dylib|lib|dll)$")
       list(APPEND FILTERED_SUPERLU_LIBS ${lib})
     endif()
   endforeach()
 
-  # Add in the "proper" CMake METIS::METIS target (defined by FindMETIS.cmake)
-  list(APPEND FILTERED_SUPERLU_LIBS "METIS::METIS")
+  # Add in the "proper" CMake METIS::METIS/GKlib::GKlib targets (defined by FindMETIS.cmake
+  # and FindGKlib.cmake)
+  list(APPEND FILTERED_SUPERLU_LIBS "METIS::METIS" "GKlib::GKlib")
 
   # Update SuperLU link library property
   set_target_properties(superlu::superlu PROPERTIES INTERFACE_LINK_LIBRARIES "${FILTERED_SUPERLU_LIBS}")
