@@ -51,13 +51,15 @@ fi
 
 # Tell us what you got:
 echo " " 
-echo "Default settings:"
-echo "-----------------"
+echo "Build settings:"
+echo "---------------"
 echo " " 
 echo "General settings:"
 echo "-----------------"
-echo "- OOMPH_ENABLE_MPI                          : "$OOMPH_ENABLE_MPI
 echo "- CMAKE_BUILD_TYPE                          : "$CMAKE_BUILD_TYPE
+echo "- OOMPH_ENABLE_MPI                          : "$OOMPH_ENABLE_MPI
+echo "- OOMPH_USE_OPENBLAS_FROM                   : "$OOMPH_USE_OPENBLAS_FROM " <--- hierher puneet: do we absolutely have to insist on open blas or can it be any blas?"
+echo "- OOMPH_USE_BOOST_FROM                      : "$OOMPH_USE_BOOST_FROM 
 
 echo " " 
 echo "Third party library settings:"
@@ -73,8 +75,6 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     echo "- OOMPH_BUILD_TRILINOS                      : "$OOMPH_BUILD_TRILINOS
     echo "- OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING : "$OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING
     echo "- OOMPH_THIRD_PARTY_INSTALL_DIR             : "$OOMPH_THIRD_PARTY_INSTALL_DIR
-    echo "- OOMPH_USE_OPENBLAS_FROM                   : "$OOMPH_USE_OPENBLAS_FROM   " <-- hierher test this (this is needed by third parties if blas  isn't built, right?)"
-    echo "- OOMPH_USE_BOOST_FROM                      : "$OOMPH_USE_BOOST_FROM      " <-- hierher test this (this is needed by third parties if boost isn't built, right?)"
 else
     echo " Not building third-party libraries!"
 fi
@@ -100,10 +100,57 @@ echo "- OOMPH_USE_TRILINOS_FROM                       : " $OOMPH_USE_TRILINOS_FR
 echo "- OOMPH_USE_HYPRE_FROM                          : " $OOMPH_USE_HYPRE_FROM
 
 
+
+# OpenBlas and Boost are absolutely required, so check that
+# we're either going to build it via our own third party
+# build machinery or that the libraries have been specified
+echo " "
+echo "Checking spec of essential libraries, openblas and boost:"
+echo " " 
+third_party_library_list="OPENBLAS BOOST"
+for third_party_library in `echo $third_party_library_list`; do
+    full_var="OOMPH_USE_"$third_party_library"_FROM"
+
+    # We're planning to use the third-party library built by us
+    if [ `echo ${!full_var} | grep "<oomph_third_party_install_dir_if_it_exists>" | wc -c` != 0 ]; then
+        # ... we we'd better make sure that we actually build it
+        if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
+            echo "Third party library "$third_party_library" will be built by us."
+        else
+            echo "ERROR: "${full_var}" = "${!full_var}" but third-party "
+            echo "       libraries will not be built by us! Please change"
+            echo "       the setting of BUILD_THIRD_PARTY_LIBRARIES in in the file"
+            echo " "
+            echo "          cmake_build_options/customised_options.json"
+            echo " "
+            exit
+        fi
+    # otherwise the specified library must exist
+    else
+        echo "Third party library "$third_party_library" will not be built by us, so has to exist."
+        if [ -e ${!full_var} ]; then
+            echo "OK; great. The third party library "${full_var}" = "${!full_var} " exists!"
+        else
+            echo "ERROR: The third party library "${!full_var} " does not exist!"
+            echo "       Please correct the setting of "${full_var}" in the file"
+            echo " "
+            echo "          cmake_build_options/customised_options.json"
+            echo " "
+            echo "       or omit it and enable us to build the library for you by setting"
+            echo "       BUILD_THIRD_PARTY_LIBRARIES=\"ON\"."
+            echo " "
+            exit
+        fi
+    fi
+
+done
+
+
+
 #######################################################################################
 # Third Party build
 #######################################################################################
-if [ $BUILD_THIRD_PARTY_LIBRARIES == "ONhierher" ]; then
+if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     echo " "
     echo "========================================================================== "
     echo " " 
@@ -126,22 +173,21 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ONhierher" ]; then
         cmake_flags=$cmake_flags" -DOOMPH_BUILD_SUPERLU_DIST=OFF"
     fi
 
-    echo "Installing third party libraries in $OOMPH_THIRD_PARTY_INSTALL_DIR"
     if [ $OOMPH_THIRD_PARTY_INSTALL_DIR == "<oomph_root>/external_distributions/install/" ]; then
-        echo "no need to set directory..."
+        echo "Installing third-party libraries into "$oomph_root"/external_distributions/install/"
     else
-       cmake_flags=$cmake_flags" -DOOMPH_THIRD_PARTY_INSTALL_DIR=$OOMPH_THIRD_PARTY_INSTALL_DIR"
+        # hierher check this
+        cmake_flags=$cmake_flags" -DOOMPH_THIRD_PARTY_INSTALL_DIR=$OOMPH_THIRD_PARTY_INSTALL_DIR"
+        echo "Installing third-party libraries into "$OOMPH_THIRD_PARTY_INSTALL_DIR
     fi
-    echo "cmake flags: "  $cmake_flags
-    
+    echo " "
+    echo "cmake flags for third-party library build: "  $cmake_flags
+    echo " "
+    echo "Let the build commence!"
+    echo " " 
     cd external_distributions
     cmake -G Ninja -B build $cmake_flags
-    cmake --build build
-
-    # hierher test these
-    #-DOOMPH_USE_OPENBLAS_FROM=$OOMPH_USE_OPENBLAS_FROM \ 
-    #-DOOMPH_USE_BOOST_FROM=$OOMPH_USE_BOOST_FROM 
-    
+    cmake --build build    
 else
     echo " "
     echo "Bypassing third party library build:"
@@ -193,105 +239,47 @@ fi
 # for where we've actually installed them.
 for third_party_library in `echo $third_party_library_list`; do
     full_var="OOMPH_USE_"$third_party_library"_FROM"
-    #echo "no  ! : "${full_var}"
-    #echo "yes ! : "${!full_var}"
-    lib_dir_name=`echo ${!full_var} | sed "s|<oomph_root>|$oomph_root|g"`
+    # Replace any placeholders for our own built libraries; this will do nothing if we've specified some other existing library
+    lib_dir_name=`echo ${!full_var} | sed "s|<oomph_third_party_install_dir_if_it_exists>|$oomph_root/external_distributions/install|g"`
     if [ -e $lib_dir_name ]; then
         cmake_flags=$cmake_flags" -DOOMPH_USE_"$third_party_library"_FROM="$lib_dir_name
+        echo "Yay! Library "$lib_dir_name" does exist; we're using it for oomph-lib build."
+
     else
         echo "Library "$lib_dir_name" doesn't exist."
         echo "Not using library "$third_party_library" in oomph-lib build."
     fi
 done
 
-    
-echo "cmake flags: "  $cmake_flags
 
-
-# hierher
-echo "hierher check install dir; the above probably won't quite work if we're specifying another install dir: "$OOMPH_THIRD_PARTY_INSTALL_DIR
-    
-exit
-cmake_flags=$cmake_flags" -DOOMPH_USE_GKLIB_FROM=$OOMPH_USE_GKLIB_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_METIS_FROM=$OOMPH_USE_METIS_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_SUPERLU_FROM=$OOMPH_USE_SUPERLU_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_PARMETIS_FROM=$OOMPH_USE_PARMETIS_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_BOOST_FROM=$OOMPH_USE_BOOST_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_CGAL_FROM=$OOMPH_USE_CGAL_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_MUMPS_FROM=$OOMPH_USE_MUMPS_FROM" 
-cmake_flags=$cmake_flags" -DOOMPH_USE_TRILINOS_FROM=$OOMPH_USE_TRILINOS_FROM"
-cmake_flags=$cmake_flags" -DOOMPH_USE_HYPRE_FROM=$OOMPH_USE_HYPRE_FROM" 
-
-if [ $OOMPH_ENABLE_MPI == "ON" ]; then
-    cmake_flags=$cmake_flags" -DOOMPH_USE_SUPERLU_DIST_FROM=$OOMPH_USE_SUPERLU_DIST_FROM"
-fi
-
-# hierher what if we dont have the (other) third party libraries?
-
-
-
-
+echo " "
+echo "cmake flags for oomph-lib build: "  $cmake_flags
+echo " "
+echo "Let the build commence!"
+echo " "
 
 cmake -G Ninja -B build $cmake_flags
 cmake --build build
 cmake --install build
 
 
-
-exit
-
-
-#############################################################################
-
-# General build flags
-#--------------------
-
-# Build directory
-build_dir="build"
-
-# Build type
-build_type="Debug"
-
-# Configure flags
-general_cmake_config_flags="-G Ninja -B $build_dir -DCMAKE_BUILD_TYPE=\"$build_type\""
-
-
-echo "General build flag: "
 echo " "
-echo "   "$general_cmake_config_flags
+echo "done; doing a quick serial test:"
 echo " "
+cd $oomph_root/demo_drivers/poisson/one_d_poisson
+cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
+cmake --build build
+cd build/
+ctest
 
 
-# Third party library flags:
-#---------------------------
-build_third_party_libraries=1
-
-third_party_libraries_cmake_config_flags=$general_cmake_config_flags" -DOOMPH_ENABLE_MPI=ON"
-
-if [ $build_third_party_libraries -eq 1 ]; then
-    echo "Third party library build flag: "
+if [ $OOMPH_ENABLE_MPI == "ON" ]; then
     echo " "
-    echo "   "$third_party_libraries_cmake_config_flags
+    echo "...and a parallel one:"
     echo " "
+    cd $oomph_root/demo_drivers/mpi/solvers
+    cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
+    cmake --build build
+    cd build/
+    ctest
 fi
-
-
-##############################################################################
-
-
-
-# Build external libraries
-if [ $build_third_party_libraries -eq 1 ]; then
-    echo " "
-    echo "Building third party libraries"
-    echo " "    
-    cd external_distributions
-    cmake $third_party_libraries_cmake_config_flags
-    cmake --build $build_dir
-    echo " "
-    echo "Done building third party libraries"
-    echo " "    
-fi
-
-
-

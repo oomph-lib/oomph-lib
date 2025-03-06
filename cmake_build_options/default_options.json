@@ -1,7 +1,9 @@
 {"general_settings":
  {
+     "CMAKE_BUILD_TYPE" :                           "Release",
      "OOMPH_ENABLE_MPI" :                           "OFF",
-     "CMAKE_BUILD_TYPE" :                           "Release" 
+     "OOMPH_USE_OPENBLAS_FROM" :                    "<oomph_third_party_install_dir_if_it_exists>/openblas",
+     "OOMPH_USE_BOOST_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/boost"
  },
  "third_party_settings":
  {
@@ -14,9 +16,7 @@
      "OOMPH_BUILD_HYPRE" :                          "ON",
      "OOMPH_BUILD_TRILINOS" :                       "ON",
      "OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING" :  "OFF",
-     "OOMPH_THIRD_PARTY_INSTALL_DIR" :              "<oomph_root>/external_distributions/install/",
-     "OOMPH_USE_OPENBLAS_FROM" :                    "\"\"",
-     "OOMPH_USE_BOOST_FROM" :                       "\"\""
+     "OOMPH_THIRD_PARTY_INSTALL_DIR" :              "<oomph_root>/external_distributions/install/"
  },
  "oomph-lib_settings":
  {
@@ -26,8 +26,6 @@
      "OOMPH_ENABLE_RANGE_CHECKING" :                "OFF",
      "OOMPH_SUPPRESS_TRIANGLE_LIB" :   	            "OFF",
      "OOMPH_SUPPRESS_TETGEN_LIB" :	            "OFF",
-     "OOMPH_USE_OPENBLAS_FROM" :                    "<oomph_third_party_install_dir_if_it_exists>/openblas",
-     "OOMPH_USE_BOOST_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/boost",
      "OOMPH_USE_GKLIB_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/gklib",
      "OOMPH_USE_METIS_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/metis",
      "OOMPH_USE_SUPERLU_FROM" :                     "<oomph_third_party_install_dir_if_it_exists>/superlu",
