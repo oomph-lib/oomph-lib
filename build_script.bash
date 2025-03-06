@@ -1,10 +1,33 @@
 #! /bin/bash
 
+
 # Crash if any sub command crashes
 set -o errexit
 
 # Crash if any unset variables are used
 set -o nounset
+
+
+# Default: verbose mode is off
+verbose=off
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+    # Enable verbose mode
+    --verbose) verbose=true ;; 
+    -h|--help)
+      echo "Usage: $0 [--verbose]"
+      exit 0
+      ;;
+    *) 
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+  shift
+done
+
 
 # Get the directory that autogen.sh is in (stolen from stackoverflow:
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
@@ -16,7 +39,72 @@ oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$oomph_root"
 
 
+# Customisation options
+#----------------------
 
+# Get all files in the directory
+FILES=(cmake_build_options/*)
+
+if [ ! -e cmake_build_options/customised_options.json ]; then
+    echo " "
+    echo "We're currently building with the default options. Would you like to customise these?"
+    echo " "
+    echo "Here are various customised option files. (Note that you can add your own by"
+    echo "adding a suitable json file to the cmake_build_options directory):"
+    echo " "
+else
+    echo "We're currently building with the customised options specified "
+    echo "in the file"
+    echo " "
+    echo "       cmake_build_options/customised_options.json"
+    echo " "
+    echo "which contains: "
+    echo " "
+    cat cmake_build_options/customised_options.json
+    echo " "
+    echo "Note that these overwrite the relevant default settings specified"
+    echo "in the file "
+    echo " " 
+    echo "       cmake_build_options/default_options.json"
+    echo " " 
+    echo "Here are various alternative customised option files. (Note that you can add your own by"
+    echo "adding a suitable json file to the cmake_build_options directory):"
+    echo " "
+fi
+
+
+choice_made=n
+while [ $choice_made != "y" ]; do
+    # List files with enumeration
+    echo "Customised options in cmake_build_options:"
+    for i in "${!FILES[@]}"; do
+        echo "$((i+1)): $(basename "${FILES[$i]}")"
+    done
+    echo " "
+    
+    # Prompt user for selection
+    read -p "Which one would you like?: " CHOICE
+    
+    # Validate input
+    if [[ ! "$CHOICE" =~ ^[0-9]+$ ]] || (( CHOICE < 1 || CHOICE > ${#FILES[@]} )); then
+        echo "Invalid choice. Exiting."
+        exit 1
+    fi
+    
+    # Show selected file
+    SELECTED_FILE="${FILES[$((CHOICE-1))]}"
+    echo "Here are the customised options from the selected file ($SELECTED_FILE)"
+    echo " " 
+    cat "$SELECTED_FILE"
+    echo " "
+    read -p "Is this OK? [y,n]" choice_made
+    if [[  "$choice_made" != "y" && "$choice_made" != "n" ]]; then
+        echo "Illegal response; doing it again."
+        choice_made=n
+    fi
+
+done
+cp "$SELECTED_FILE"  cmake_build_options/customised_options.json
 
 
 
@@ -186,8 +274,23 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     echo "Let the build commence!"
     echo " " 
     cd external_distributions
-    cmake -G Ninja -B build $cmake_flags
-    cmake --build build    
+    if [ "$verbose" == true ]; then 
+        echo " "
+        echo "Note: You can hide the full log by running the script without --verbose"
+        echo " "
+        cmake -G Ninja -B build $cmake_flags
+        cmake --build build    
+    else
+        echo " "
+        echo "Note I'm writing full log of the configure/build/install process to "
+        echo " "
+        echo "        oomph_lib_third_party_library_build.log"
+        echo " " 
+        echo "You can make it visible by running the script with --verbose"
+        echo " "
+        cmake -G Ninja -B build $cmake_flags > oomph_lib_third_party_library_build.log
+        cmake --build build >> oomph_lib_third_party_library_build.log
+    fi
 else
     echo " "
     echo "Bypassing third party library build:"
@@ -258,9 +361,29 @@ echo " "
 echo "Let the build commence!"
 echo " "
 
-cmake -G Ninja -B build $cmake_flags
-cmake --build build
-cmake --install build
+if [ "$verbose" == true ]; then 
+   echo " "
+   echo "Note: You can hide the full log by running the script without --verbose"
+   echo " "
+   cmake -G Ninja -B build $cmake_flags
+   cmake --build build 
+   cmake --install build 
+else
+   echo " "
+   echo "Note I'm writing full log of the configure/build/install to "
+   echo " "
+   echo "     oomph_lib_build.log"
+   echo " " 
+   echo "You can make it visible by running the script with --verbose"
+   echo " "
+   cmake -G Ninja -B build $cmake_flags > oomph_lib_build.log 2>&1
+   cmake --build build  >> oomph_lib_build.log 2>&1
+   cmake --install build >> oomph_lib_build.log 2>&1
+fi
+
+
+
+
 
 
 echo " "
