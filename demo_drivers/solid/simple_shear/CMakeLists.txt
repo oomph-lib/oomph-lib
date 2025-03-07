@@ -11,24 +11,21 @@ include(CTest)
 
 # Precompile the mesh as an OBJECT library
 add_library(precompiled_mesh OBJECT precompiled_mesh.cc)
-target_link_libraries(precompiled_mesh oomph::solid)
-if(CMAKE_CXX_STANDARD)
-  target_compile_features(precompiled_mesh PUBLIC cxx_std_${CMAKE_CXX_STANDARD})
-else()
-  target_compile_features(precompiled_mesh PUBLIC cxx_std_17)
-endif()
+target_link_libraries(precompiled_mesh PRIVATE oomph::solid)
+target_compile_features(precompiled_mesh
+                        PRIVATE cxx_std_${OOMPH_CMAKE_CXX_STANDARD})
 
 oomph_add_executable(
   NAME simple_shear
   SOURCES simple_shear.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
-            precompiled_mesh)
+  LIBRARIES precompiled_mesh oomph::meshes oomph::generic oomph::solid
+            oomph::constitutive)
 
 oomph_add_executable(
   NAME refineable_simple_shear
   SOURCES refineable_simple_shear.cc
-  LIBRARIES oomph::solid oomph::constitutive oomph::meshes oomph::generic
-            precompiled_mesh)
+  LIBRARIES precompiled_mesh oomph::meshes oomph::generic oomph::solid
+            oomph::constitutive)
 
 # ---------------------------------- TESTING ----------------------------------
 
@@ -41,9 +38,6 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 3600)
-
-# TODO: Needs to be patched
-set_tests_properties(solid.simple_shear PROPERTIES DISABLED YES)
 
 message(VERBOSE "Leaving simple_shear subdirectory")
 # ------------------------------------------------------------------------------
