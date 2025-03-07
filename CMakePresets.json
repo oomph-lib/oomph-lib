@@ -52,14 +52,12 @@
       "name": "ci-base",
       "hidden": true,
       "inherits": "base",
-      "generator": "Ninja",
-      "cacheVariables": {}
+      "generator": "Ninja"
     },
     {
       "name": "ci",
       "inherits": "ci-base",
-      "displayName": "Build Config for CI/CD",
-      "cacheVariables": {}
+      "displayName": "Build Config for CI/CD"
     },
     {
       "name": "ci-mpi",
@@ -69,6 +67,9 @@
         "OOMPH_ENABLE_MPI": "ON",
         "OOMPH_ENABLE_MPI_OVERSUBSCRIPTION": "ON"
       }
+    },
+    {
+      "name": "dummy-for-ci-demo-drivers"
     }
   ],
   "buildPresets": [
@@ -104,7 +105,7 @@
     },
     {
       "name": "ci",
-      "configurePreset": "dummy",
+      "configurePreset": "dummy-for-ci-demo-drivers",
       "inherits": "test-base"
     }
   ]
