@@ -370,7 +370,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
   solid_mesh_pt()->element_pt());
 
  //Attach the boundary conditions to the mesh
- cout << assign_eqn_numbers() << std::endl; 
+  oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
 
  // Open trace file
  char filename[100];   
