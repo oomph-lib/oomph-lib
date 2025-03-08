@@ -39,6 +39,7 @@
 # =============================================================================
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_add_executable)
   # Define the supported set of keywords
   set(PREFIX ARG)
@@ -124,35 +125,35 @@ function(oomph_add_executable)
 
   # Provide access to the MPI libraries if we've built oomph-lib with MPI
   if(OOMPH_HAS_MPI)
-    target_link_libraries(${NAME}_${PATH_HASH} PUBLIC MPI::MPI_CXX)
+    target_link_libraries(${NAME}_${PATH_HASH} PRIVATE MPI::MPI_CXX)
   endif()
 
   # Link to the specified libraries
-  target_link_libraries(${NAME}_${PATH_HASH} PUBLIC ${LIBRARIES})
+  target_link_libraries(${NAME}_${PATH_HASH} PRIVATE ${LIBRARIES})
 
   # Set the C++ standard
   if(CXX_STANDARD)
-    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_${CXX_STANDARD})
+    target_compile_features(${NAME}_${PATH_HASH} PRIVATE cxx_std_${CXX_STANDARD})
   else()
-    target_compile_features(${NAME}_${PATH_HASH} PUBLIC cxx_std_17)
+    target_compile_features(${NAME}_${PATH_HASH} PRIVATE cxx_std_17)
   endif()
 
   # General oomph-lib specific compiler definitions
-  target_compile_definitions(${NAME}_${PATH_HASH} PUBLIC ${OOMPH_COMPILE_DEFINITIONS})
+  target_compile_definitions(${NAME}_${PATH_HASH} PRIVATE ${OOMPH_COMPILE_DEFINITIONS})
 
   # Add any user-supplied compiler definitions
   if(CXX_DEFINITIONS)
-    target_compile_definitions(${NAME}_${PATH_HASH} PUBLIC ${CXX_DEFINITIONS})
+    target_compile_definitions(${NAME}_${PATH_HASH} PRIVATE ${CXX_DEFINITIONS})
   endif()
 
   # Add any compiler flags
   if(CXX_OPTIONS)
-    target_compile_options(${NAME}_${PATH_HASH} PUBLIC ${CXX_OPTIONS})
+    target_compile_options(${NAME}_${PATH_HASH} PRIVATE ${CXX_OPTIONS})
   endif()
 
   # Add any linker flags
   if(LINK_OPTIONS)
-    target_link_options(${NAME}_${PATH_HASH} PUBLIC ${LINK_OPTIONS})
+    target_link_options(${NAME}_${PATH_HASH} PRIVATE ${LINK_OPTIONS})
   endif()
 
   # Optionally colorize compiler output
@@ -165,6 +166,5 @@ function(oomph_add_executable)
     endif()
   endif()
 endfunction()
-
-# cmake-format: on
 # ------------------------------------------------------------------------------
+# cmake-format: on
