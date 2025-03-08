@@ -1,0 +1,51 @@
+---
+# .clang-tidy configuration file
+#
+# Enable a broad set of checks while disabling a few that might be too strict.
+Checks: >
+  -*,
+  mpi-*,
+  # clang-analyzer-*,
+  # bugprone-*,
+  # performance-*,
+  # portability-*,
+  # readability-*,
+  # modernize-*,
+  # cppcoreguidelines-*,
+  # Disable some specific checks that are known to be overly strict or not desired
+  # -cppcoreguidelines-avoid-magic-numbers,
+  # -readability-magic-numbers,
+  # -modernize-use-auto
+
+# Treat warnings as errors (empty means none will be forced as errors)
+WarningsAsErrors: ""
+
+# Limit analysis to files that match the regex (adjust as needed)
+HeaderFilterRegex: "^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$"
+
+# Do not analyze the dtor of temporaries (improves performance)
+AnalyzeTemporaryDtors: false
+
+# Don't change your code style on the fly; use your project's formatting style
+FormatStyle: none
+
+# Custom options for specific checks
+CheckOptions:
+  - key: modernize-use-nullptr.NullMacros
+    value: "NULL"
+  - key: cppcoreguidelines-pro-type-member-init.HonorInMemberInitialization
+    value: "true"
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.ClassMemberCase
+    value: Leading_upper_snake_case
+  - key: readability-identifier-naming.FunctionCase
+    value: lower_case
+  - key: readability-identifier-naming.MethodCase
+    value: lower_case
+  - key: readability-identifier-naming.PointerParameterSuffix
+    value: _pt
+  - key: readability-identifier-naming.TemplateParameterCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.VariableCase
+    value: lower_case

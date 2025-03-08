@@ -91,13 +91,14 @@ oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy support for static analysis" OFF)
 
 # Choose the default linear solver
 oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
-# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
+# TODO: Discuss with MH; do we actually want these options anymore?
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
@@ -216,11 +217,6 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
-  # ~~~
-  # if(NOT OOMPH_USE_MUMPS_FROM)
-  #   message(FATAL_ERROR "MPI build requires MUMPS parallel solver.")
-  # endif()
-  # ~~~
 else()
   if(OOMPH_USE_SUPERLU_DIST_FROM)
     message(FATAL_ERROR "You can only enable SuperLU_DIST when MPI is enabled!")
@@ -251,6 +247,12 @@ if(OOMPH_ENABLE_SANITISER_SUPPORT)
   include(OomphAddSanitizerSupport)
 endif()
 
+# Enable Clang Tidy
+if(OOMPH_ENABLE_CLANG_TIDY)
+  include(OomphAddClangTidySupport)
+endif()
+
+# Do we want Mumps to override SuperLU as the default solver?
 if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
   oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
 endif()
@@ -272,19 +274,10 @@ endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
 
-message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
-
-# Configure the external sources (i.e. third-party libraries that oomph-lib
-# always ships with)
-add_subdirectory(external_src)
-
 # FIXME: Having to duplicate CXX definitions for C code to make SuperLUDist code
 # work...
 
-# Add C++ definitions for all of the defined third-party sources that we build
-# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
-oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
-oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Locate the third-party libraries that the user has provided via the
 # OOMPH_USE_<LIBRARY>_FROM flags
@@ -295,10 +288,45 @@ include(OomphLocateOptionalThirdPartyLibs)
 oomph_add_c_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 
+# Configure the external sources (i.e. third-party libraries that oomph-lib
+# always ships with)
+add_subdirectory(external_src)
+
+# Add C++ definitions for all of the defined third-party sources that we build
+# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+
 # Configure all of the main oomph-lib library sources
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
+
+# ------------------[ DISABLE CLANG TIDY FOR NON-SRC/ FILES ]-------------------
+
+if(OOMPH_ENABLE_CLANG_TIDY)
+  # Make sure clang-tidy is only enabled for *our* C++ sources
+
+  # Locate all C/C++ files
+  file(
+    GLOB_RECURSE
+    PROJECT_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.h"
+    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.c"
+    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/*.h"
+    "${CMAKE_CURRENT_LIST_DIR}/src/*.c"
+    "${CMAKE_CURRENT_LIST_DIR}/src/*.cc"
+    "${CMAKE_CURRENT_LIST_DIR}/src/*.tpp")
+
+  # Our source files are only in src/, but ignore cfortran.h and lapack_qz.h
+  foreach(FILE IN LISTS PROJECT_SOURCES)
+    if(NOT ("${FILE}" MATCHES "${CMAKE_CURRENT_LIST_DIR}/src/.*\\.(h|cc|tpp)$")
+       OR ("${FILE}" MATCHES ".*(cfortran|lapack_qz).*"))
+      set_source_files_properties(${FILE} PROPERTIES CMAKE_CXX_CLANG_TIDY "")
+    endif()
+  endforeach()
+endif()
 
 # --------------------------------[ EXPORTING ]---------------------------------
 
