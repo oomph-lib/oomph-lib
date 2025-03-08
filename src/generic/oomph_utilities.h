@@ -122,7 +122,8 @@ namespace oomph
     // has global visibility because it's a macro.
 #define OOMPH_DEBUG(msg) \
   oomph_info << DebugHelpers::debug_string( \
-    __FILE__, __LINE__, msg, false, true);
+                  __FILE__, __LINE__, msg, false, true) \
+             << std::flush;
 
   } // namespace DebugHelpers
 
