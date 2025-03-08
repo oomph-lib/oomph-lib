@@ -84,7 +84,22 @@ jobs:
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
+      # Cache the external distributions. We'll use a unique cache key based on whether
+      # we enabled MPI or TPLs. NOTE: It's very important that the CMake files in
+      # external_distributions/ grab packages based on a specific tarball or GitHub tag/SHA.
+      # They must NOT just pull from main/development otherwise the hash key won't change
+      # and thus neither will the cache.
+      - name: Cache third-party libraries artifacts
+        uses: actions/cache@v4
+        id: tpl-cache
+        with:
+          path: |
+            external_distributions/install
+            external_distributions/build/cmake_flags_for_oomph_lib.txt
+          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ hashFiles('external_distributions/**') }}
+
       - name: Configure desired third-party libraries
+        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
         run: |
           cmake -G Ninja \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
@@ -99,13 +114,16 @@ jobs:
         working-directory: ./external_distributions/
 
       - name: Build desired third-party libraries
+        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
         run: cmake --build build
         working-directory: ./external_distributions/
 
       - name: Rename third-party libraries build logs
+        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
         run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Upload third-party libraries build logs
+        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
