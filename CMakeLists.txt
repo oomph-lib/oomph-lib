@@ -243,9 +243,11 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
+# Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
 if(OOMPH_ENABLE_SANITISER_SUPPORT)
   include(OomphAddSanitizerSupport)
 endif()
+
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
