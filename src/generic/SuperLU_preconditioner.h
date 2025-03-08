@@ -200,7 +200,8 @@ namespace oomph
     ExactPreconditioner()
     {
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       Mumps_preconditioner_pt = new MumpsPreconditioner;
       Mumps_preconditioner_pt->disable_doc_time();
 #endif
@@ -213,7 +214,8 @@ namespace oomph
     ~ExactPreconditioner()
     {
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       delete Mumps_preconditioner_pt;
 #endif
 #endif
@@ -235,7 +237,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->setup();
 #else
         SuperLU_preconditioner_pt->setup();
@@ -258,7 +261,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->Preconditioner::setup(matrix_pt);
 #else
         SuperLU_preconditioner_pt->Preconditioner::setup(matrix_pt);
@@ -281,7 +285,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->preconditioner_solve(r, z);
 #else
         SuperLU_preconditioner_pt->preconditioner_solve(r, z);
@@ -304,7 +309,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->clean_up_memory();
 #else
         SuperLU_preconditioner_pt->clean_up_memory();
@@ -326,7 +332,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->enable_doc_time();
 #else
         SuperLU_preconditioner_pt->enable_doc_time();
@@ -347,7 +354,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       if (MPI_Helpers::mpi_has_been_initialised())
       {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         Mumps_preconditioner_pt->disable_doc_time();
 #else
         SuperLU_preconditioner_pt->disable_doc_time();
@@ -364,7 +372,8 @@ namespace oomph
 
   private:
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
     /// Pointer to mumps solver
     MumpsPreconditioner* Mumps_preconditioner_pt;
 #endif

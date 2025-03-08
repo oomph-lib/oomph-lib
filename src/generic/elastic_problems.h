@@ -101,7 +101,8 @@ namespace oomph
     SolidICProblem() : IC_pt(0)
     {
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       Mumps_solver_pt = new MumpsSolver;
 #endif
 #endif
@@ -118,7 +119,8 @@ namespace oomph
     ~SolidICProblem()
     {
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       delete Mumps_solver_pt;
 #endif
 #endif
@@ -226,7 +228,8 @@ namespace oomph
     double Max_residual_after_consistent_newton_ic;
 
 #ifdef OOMPH_HAS_MPI
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
     /// Pointer to mumps solver
     MumpsSolver* Mumps_solver_pt;
 #endif
@@ -296,7 +299,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       linear_solver_pt() = Mumps_solver_pt;
 #else
       linear_solver_pt() = SuperLU_solver_pt;
@@ -458,7 +462,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       linear_solver_pt() = Mumps_solver_pt;
 #else
       linear_solver_pt() = SuperLU_solver_pt;
@@ -625,7 +630,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       lin_solver_pt = Mumps_solver_pt;
 #else
       lin_solver_pt = SuperLU_solver_pt;

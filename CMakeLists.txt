@@ -84,13 +84,16 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
-# General options
+# General build options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
+
+# Choose the default linear solver
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -246,6 +249,10 @@ endif()
 # Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
 if(OOMPH_ENABLE_SANITISER_SUPPORT)
   include(OomphAddSanitizerSupport)
+endif()
+
+if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+  oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
 endif()
 
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------

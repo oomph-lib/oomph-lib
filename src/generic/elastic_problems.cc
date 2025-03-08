@@ -569,10 +569,13 @@ namespace oomph
     setup_problem();
 
     // Choose the right linear solver
+    // FIXME: Eventually we'll be able to use Mumps as a serial solver so we
+    // won't need to check for MPI...
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       linear_solver_pt() = Mumps_solver_pt;
 #else
       linear_solver_pt() = SuperLU_solver_pt;

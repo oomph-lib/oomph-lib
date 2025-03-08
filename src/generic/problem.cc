@@ -156,7 +156,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
     if (MPI_Helpers::mpi_has_been_initialised())
     {
-#ifdef OOMPH_HAS_MUMPS
+#if defined(OOMPH_HAS_MUMPS) && \
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
 #else
       Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
