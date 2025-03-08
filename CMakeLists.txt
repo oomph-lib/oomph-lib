@@ -54,7 +54,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance." FORCE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance."
+      FORCE)
 endif()
 
 # Flag that we'll use to enable Debug-specific options
@@ -89,6 +90,7 @@ oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OF
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
@@ -241,6 +243,9 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
+if(OOMPH_ENABLE_SANITISER_SUPPORT)
+  include(OomphAddSanitizerSupport)
+endif()
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
