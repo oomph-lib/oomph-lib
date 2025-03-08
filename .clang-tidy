@@ -9,7 +9,7 @@ Checks: >
   # bugprone-*,
   # performance-*,
   # portability-*,
-  # readability-*,
+  readability-*,
   # modernize-*,
   # cppcoreguidelines-*,
   # Disable some specific checks that are known to be overly strict or not desired
@@ -21,10 +21,7 @@ Checks: >
 WarningsAsErrors: ""
 
 # Limit analysis to files that match the regex (adjust as needed)
-HeaderFilterRegex: "^(src)\/(?!.*(cfortran|lapack_qz))(.+)\.(h|cc)$"
-
-# Do not analyze the dtor of temporaries (improves performance)
-AnalyzeTemporaryDtors: false
+HeaderFilterRegex: '^(?!src/generic/(?:cfortran\.h|lapack_qz\.h)$)src/.*\.(h|cc|tpp)$'
 
 # Don't change your code style on the fly; use your project's formatting style
 FormatStyle: none

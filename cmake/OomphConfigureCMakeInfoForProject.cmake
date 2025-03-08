@@ -34,6 +34,9 @@ if(PROJECT_IS_TOP_LEVEL)
   set(OOMPH_IS_MAIN_PROJECT TRUE)
 endif()
 
+# Emit a compile_commands.json; can be used by clang-tidy for code analysis
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 # ------------------------------------------------------------------------------
 # Configuration variables; create custom variables to avoid issues with regular
 # variables being overriden by third-party libraries or by parties that import

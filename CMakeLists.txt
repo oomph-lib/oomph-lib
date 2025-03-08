@@ -91,7 +91,6 @@ oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
-oomph_option(OOMPH_ENABLE_CLANG_TIDY "Enable clang-tidy support for static analysis" OFF)
 
 # Choose the default linear solver
 oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
@@ -247,11 +246,6 @@ if(OOMPH_ENABLE_SANITISER_SUPPORT)
   include(OomphAddSanitizerSupport)
 endif()
 
-# Enable Clang Tidy
-if(OOMPH_ENABLE_CLANG_TIDY)
-  include(OomphAddClangTidySupport)
-endif()
-
 # Do we want Mumps to override SuperLU as the default solver?
 if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
   oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
@@ -301,32 +295,6 @@ oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 add_subdirectory(src)
 
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
-
-# ------------------[ DISABLE CLANG TIDY FOR NON-SRC/ FILES ]-------------------
-
-if(OOMPH_ENABLE_CLANG_TIDY)
-  # Make sure clang-tidy is only enabled for *our* C++ sources
-
-  # Locate all C/C++ files
-  file(
-    GLOB_RECURSE
-    PROJECT_SOURCES
-    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.h"
-    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.c"
-    "${CMAKE_CURRENT_LIST_DIR}/external_src/*.cc"
-    "${CMAKE_CURRENT_LIST_DIR}/src/*.h"
-    "${CMAKE_CURRENT_LIST_DIR}/src/*.c"
-    "${CMAKE_CURRENT_LIST_DIR}/src/*.cc"
-    "${CMAKE_CURRENT_LIST_DIR}/src/*.tpp")
-
-  # Our source files are only in src/, but ignore cfortran.h and lapack_qz.h
-  foreach(FILE IN LISTS PROJECT_SOURCES)
-    if(NOT ("${FILE}" MATCHES "${CMAKE_CURRENT_LIST_DIR}/src/.*\\.(h|cc|tpp)$")
-       OR ("${FILE}" MATCHES ".*(cfortran|lapack_qz).*"))
-      set_source_files_properties(${FILE} PROPERTIES CMAKE_CXX_CLANG_TIDY "")
-    endif()
-  endforeach()
-endif()
 
 # --------------------------------[ EXPORTING ]---------------------------------
 
