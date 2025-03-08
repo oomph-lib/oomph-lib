@@ -2,8 +2,9 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Provides a simple patch command; this command is implemented mainly for use
-# in calls to FetchContent and ExternalProject.
+# Provides a simple patch command; this command is implemented mainly for
+# use in calls to FetchContent and ExternalProject. After being called,
+# the PATCH_COMMAND variable will be set for the user to use.
 #
 # USAGE:
 # ------
@@ -47,7 +48,7 @@ function(oomph_git_patch_command)
     message(FATAL_ERROR "Patch file does not exist!")
   endif()
 
-  # FIXME: Need to update the "git checkout <SOURCE_DIR>/CMakeLists.txt" line
+  # Set PATCH_COMMAND for the user
   # cmake-format: off
   set(PATCH_COMMAND
       ${CMAKE_COMMAND} -E copy_if_different ${PATH_TO_PATCH_FILE} <SOURCE_DIR>

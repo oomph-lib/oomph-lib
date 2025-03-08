@@ -1,5 +1,5 @@
 # cmake-format: off
-# ~~~
+# ------------------------------------------------------------------------------
 # Tries to find an installion of GKlib
 #
 # Once done this will define:
@@ -8,7 +8,8 @@
 # GKLIB_INCLUDE_DIRS - LIST: The GKlib include directories
 # GKLIB_C_LIBRARIES - LIST: The libraries needed to use GKlib via it's C interface
 # GKLIB_CXX_LIBRARIES - LIST: The libraries needed to use GKlib via it's C++ interface
-# ~~~
+#
+# ------------------------------------------------------------------------------
 
 include(FindPackageHandleStandardArgs)
 
@@ -22,8 +23,7 @@ find_path(GKLIB_C_INCLUDES NAMES gmp.h PATHS /usr/local /usr /opt/homebrew/opt /
 
 # Handle QUIET and REQUIRED and check the necessary variables were set and if so
 # set ``GKLIB_FOUND``
-find_package_handle_standard_args(GKlib REQUIRED_VARS GKLIB_C_LIBRARIES
-                                                      GKLIB_C_INCLUDES)
+find_package_handle_standard_args(GKlib REQUIRED_VARS GKLIB_C_LIBRARIES GKLIB_C_INCLUDES)
 
 if(GKLIB_FOUND)
   set(GKLIB_INCLUDE_DIRS "${GKLIB_C_INCLUDES}")
@@ -46,4 +46,5 @@ if(GKLIB_FOUND)
                  IMPORTED_LOCATION "${GKLIB_C_LIBRARIES}")
   endif()
 endif()
+# ------------------------------------------------------------------------------
 # cmake-format: on

@@ -1,11 +1,14 @@
-# ~~~
+# cmake-format: off
+# ------------------------------------------------------------------------------
 # Tries to find an installation of ParMETIS
 #
 # Defines:
 #   PARMETIS_FOUND - BOOL: System has the ParMETIS library installed
 #   PARMETIS_INCLUDE_DIRS - LIST: The ParMETIS include directories
 #   PARMETIS_LIBRARIES - LIST: The libraries needed to use ParMETIS
-# ~~~
+#
+# ------------------------------------------------------------------------------
+# cmake-format: on
 
 include(FindPackageHandleStandardArgs)
 
@@ -68,3 +71,5 @@ if(PARMETIS_FOUND)
                  INTERFACE_INCLUDE_DIRECTORIES "${PARMETIS_INCLUDES}")
   endif()
 endif()
+
+# ------------------------------------------------------------------------------
