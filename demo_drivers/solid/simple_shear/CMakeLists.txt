@@ -9,23 +9,15 @@ if(NOT oomphlib_FOUND)
 endif()
 include(CTest)
 
-# Precompile the mesh as an OBJECT library
-add_library(precompiled_mesh OBJECT precompiled_mesh.cc)
-target_link_libraries(precompiled_mesh PRIVATE oomph::solid)
-target_compile_features(precompiled_mesh
-                        PRIVATE cxx_std_${OOMPH_CMAKE_CXX_STANDARD})
-
 oomph_add_executable(
   NAME simple_shear
-  SOURCES simple_shear.cc
-  LIBRARIES precompiled_mesh oomph::meshes oomph::generic oomph::solid
-            oomph::constitutive)
+  SOURCES simple_shear.cc precompiled_mesh.cc
+  LIBRARIES oomph::solid oomph::constitutive oomph::generic oomph::meshes)
 
 oomph_add_executable(
   NAME refineable_simple_shear
-  SOURCES refineable_simple_shear.cc
-  LIBRARIES precompiled_mesh oomph::meshes oomph::generic oomph::solid
-            oomph::constitutive)
+  SOURCES refineable_simple_shear.cc precompiled_mesh.cc
+  LIBRARIES oomph::solid oomph::constitutive oomph::generic oomph::meshes)
 
 # ---------------------------------- TESTING ----------------------------------
 
