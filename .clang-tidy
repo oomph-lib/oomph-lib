@@ -4,12 +4,12 @@
 # Enable a broad set of checks while disabling a few that might be too strict.
 Checks: >
   -*,
-  mpi-*,
+  # mpi-*,
   # clang-analyzer-*,
   # bugprone-*,
   # performance-*,
   # portability-*,
-  readability-*,
+  readability-identifier-naming*,
   # modernize-*,
   # cppcoreguidelines-*,
   # Disable some specific checks that are known to be overly strict or not desired
@@ -44,5 +44,5 @@ CheckOptions:
     value: _pt
   - key: readability-identifier-naming.TemplateParameterCase
     value: UPPER_CASE
-  - key: readability-identifier-naming.VariableCase
-    value: lower_case
+  # - key: readability-identifier-naming.VariableCase
+  #   value: lower_case
