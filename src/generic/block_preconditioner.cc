@@ -1613,7 +1613,7 @@ namespace oomph
 
             // and recv
             MPI_Request req;
-            MPI_Isend(dof_number_sparse_send[p],
+            MPI_Isend(dof_number_sparse_send,
                       1,
                       send_type,
                       p,
