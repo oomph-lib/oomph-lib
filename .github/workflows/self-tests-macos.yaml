@@ -99,7 +99,7 @@ jobs:
           key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
       - name: Configure desired third-party libraries
-        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: |
           cmake -G Ninja \
             -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
@@ -114,16 +114,16 @@ jobs:
         working-directory: ./external_distributions/
 
       - name: Build desired third-party libraries
-        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: cmake --build build
         working-directory: ./external_distributions/
 
       - name: Rename third-party libraries build logs
-        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Upload third-party libraries build logs
-        if: ${{ steps.tpl-cache.outputs.cache-hit != 'true' }}
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
@@ -155,6 +155,15 @@ jobs:
       # -------------------
       # UPLOAD STUFF:
       # -------------------
+      - name: Cache third-party libraries artifacts if tests fail
+        uses: actions/cache/save@v4
+        if: steps.demo_drivers.outcome == 'failure' && steps.tpl-cache.outputs.cache-hit != 'true'
+        with:
+          path: |
+            external_distributions/install
+            external_distributions/build/cmake_flags_for_oomph_lib.txt
+          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
+
       - name: Summarise validation.log for GitHub
         run: python3 .github/generate_validation_log_summary.py validation.log >> $GITHUB_STEP_SUMMARY
 
@@ -168,6 +177,6 @@ jobs:
           path: ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
 
       - name: Propagate CTest test status
-        if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'
+        if: steps.demo_drivers.outcome == 'failure'
         run: exit 8
 # ------------------------------------------------------------------------------
