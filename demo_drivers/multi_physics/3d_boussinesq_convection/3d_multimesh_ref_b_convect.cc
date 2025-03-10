@@ -372,7 +372,6 @@ switch_to_iterative_linear_solver()
    HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
    Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
     static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
-   //ExactPreconditioner* Temperature_prec_pt =new ExactPreconditioner;
    prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
    
    //Set up the internal preconditioners

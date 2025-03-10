@@ -163,7 +163,8 @@ namespace oomph
         retain_all_blocks = false;
         Sub_preconditioner_1_pt =
           new ExactSubBiharmonicPreconditioner(this, retain_all_blocks);
-        Sub_preconditioner_2_pt = new ExactPreconditioner;
+        Sub_preconditioner_2_pt =
+         ExactPreconditionerFactory::create_exact_preconditioner();
         oomph_info << "Using exact BBD\n";
         break;
 
@@ -194,8 +195,8 @@ namespace oomph
         retain_all_blocks = true;
         Sub_preconditioner_1_pt =
           new ExactSubBiharmonicPreconditioner(this, retain_all_blocks);
-        Sub_preconditioner_2_pt = new ExactPreconditioner;
-
+        Sub_preconditioner_2_pt =
+         ExactPreconditionerFactory::create_exact_preconditioner();
         oomph_info << "Using exact BD\n";
         break;
 
@@ -321,7 +322,7 @@ namespace oomph
       this->get_concatenated_block(required_blocks);
 
     // setup the preconditioner
-    Sub_preconditioner_pt = new ExactPreconditioner;
+    Sub_preconditioner_pt = ExactPreconditionerFactory::create_exact_preconditioner();
     Sub_preconditioner_pt->setup(&preconditioner_matrix);
 
     // preconditioner_matrix will now go out of scope (and is destroyed).
@@ -427,7 +428,7 @@ namespace oomph
     }
     else
     {
-      S_00_preconditioner_pt = new ExactPreconditioner;
+      S_00_preconditioner_pt = ExactPreconditionerFactory::create_exact_preconditioner();
     }
 
     // setup the preconditioner

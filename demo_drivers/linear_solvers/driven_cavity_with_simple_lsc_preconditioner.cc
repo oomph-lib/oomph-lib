@@ -320,7 +320,8 @@ private:
   delete bt_pt;
   
   // If the P preconditioner has not been setup
-  P_preconditioner_pt = new ExactPreconditioner;
+  P_preconditioner_pt =
+   ExactPreconditionerFactory::create_exact_preconditioner();
   P_preconditioner_pt->setup(p_matrix_pt,comm_pt());
   delete p_matrix_pt;
   p_matrix_pt=0;
@@ -328,7 +329,8 @@ private:
   // Set up solver for solution of system with momentum matrix
   // ----------------------------------------------------------
   
-  F_preconditioner_pt = new ExactPreconditioner;
+  F_preconditioner_pt =
+   ExactPreconditionerFactory::create_exact_preconditioner();
   Using_default_f_preconditioner = true;
 
   

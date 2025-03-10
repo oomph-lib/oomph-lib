@@ -345,7 +345,8 @@ namespace oomph
     if (P_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      P_preconditioner_pt = new ExactPreconditioner;
+      P_preconditioner_pt = 
+       ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_p_preconditioner = true;
@@ -364,7 +365,8 @@ namespace oomph
     if (F_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      F_preconditioner_pt = new ExactPreconditioner;
+      F_preconditioner_pt = 
+       ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_f_preconditioner = true;

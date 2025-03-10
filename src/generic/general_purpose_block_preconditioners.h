@@ -56,7 +56,7 @@ namespace oomph
     /// GeneralPurposeBlockPreconditioners).
     inline Preconditioner* create_exact_preconditioner()
     {
-      return new ExactPreconditioner;
+     return ExactPreconditionerFactory::create_exact_preconditioner();
     }
   } // namespace PreconditionerCreationFunctions
 

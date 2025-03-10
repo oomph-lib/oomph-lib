@@ -44,6 +44,8 @@
 #include "Vector.h"
 #include "double_vector.h"
 #include "matrices.h"
+#include "matrices.h"
+#include "preconditioner.h"
 
 namespace oomph
 {
@@ -868,5 +870,28 @@ namespace oomph
 
 #endif
   }; // end of SuperLUSolver
+
+
+
+
+ /////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////
+
+
+ /// Namespace containing functions required to create exact preconditioner
+ namespace ExactPreconditionerFactory
+ {
+
+  /// Factory function to create suitable exact preconditioner
+  extern Preconditioner* create_exact_preconditioner();
+  
+ }
+
+
+
+
+
+ 
 } // namespace oomph
 #endif

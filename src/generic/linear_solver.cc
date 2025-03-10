@@ -39,6 +39,8 @@
 #include "linear_solver.h"
 #include "matrices.h"
 #include "problem.h"
+#include "mumps_solver.h"
+#include "SuperLU_preconditioner.h"
 
 
 namespace oomph
@@ -2829,5 +2831,45 @@ namespace oomph
     }
 #endif
   }
+
+
+
+ /////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////
+
+
+ /// Namespace containing functions required to create exact preconditioner
+ namespace ExactPreconditionerFactory
+ {
+
+  /// Factory function to create suitable exact preconditioner
+  Preconditioner* create_exact_preconditioner()
+  {
+
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::mpi_has_been_initialised())
+    {
+#ifdef OOMPH_HAS_MUMPS
+     return new MumpsPreconditioner;
+#else
+     return new SuperLUPreconditioner;
+#endif
+    }
+#endif
+
+   // This is essential an else since all the other ifs would have returned already
+   return new SuperLUPreconditioner;
+  }
+   
+  }
+
+
+
+
+
+
+
+ 
 
 } // namespace oomph
