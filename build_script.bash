@@ -147,7 +147,9 @@ echo "-----------------"
 echo "- CMAKE_BUILD_TYPE                          : "$CMAKE_BUILD_TYPE
 echo "- OOMPH_ENABLE_MPI                          : "$OOMPH_ENABLE_MPI
 echo "- OOMPH_USE_OPENBLAS_FROM                   : "$OOMPH_USE_OPENBLAS_FROM " <--- hierher puneet: do we absolutely have to insist on open blas or can it be any blas?"
-echo "- OOMPH_USE_BOOST_FROM                      : "$OOMPH_USE_BOOST_FROM 
+echo "- OOMPH_USE_BOOST_FROM                      : "$OOMPH_USE_BOOST_FROM
+echo "- OOMPH_ENABLE_SANITISER_SUPPORT            : "$OOMPH_ENABLE_SANITISER_SUPPORT
+
 
 echo " " 
 echo "Third party library settings:"
@@ -161,7 +163,7 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     echo "- OOMPH_BUILD_MUMPS                         : "$OOMPH_BUILD_MUMPS
     echo "- OOMPH_BUILD_HYPRE                         : "$OOMPH_BUILD_HYPRE
     echo "- OOMPH_BUILD_TRILINOS                      : "$OOMPH_BUILD_TRILINOS
-    echo "- OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING : "$OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING
+    echo "- OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS   : "$OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS
     echo "- OOMPH_THIRD_PARTY_INSTALL_DIR             : "$OOMPH_THIRD_PARTY_INSTALL_DIR
 else
     echo " Not building third-party libraries!"
@@ -247,13 +249,14 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
 
     cmake_flags="-DOOMPH_ENABLE_MPI=$OOMPH_ENABLE_MPI"
     cmake_flags=$cmake_flags" -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE"
+# not used in third party libraries hierher puneet: true?    cmake_flags=$cmake_flags" -DOOMPH_ENABLE_SANITISER_SUPPORT=$OOMPH_ENABLE_SANITISER_SUPPORT"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_OPENBLAS=$OOMPH_BUILD_OPENBLAS"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_SUPERLU=$OOMPH_BUILD_SUPERLU"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_CGAL=$OOMPH_BUILD_CGAL"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_MUMPS=$OOMPH_BUILD_MUMPS"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_HYPRE=$OOMPH_BUILD_HYPRE"
     cmake_flags=$cmake_flags" -DOOMPH_BUILD_TRILINOS=$OOMPH_BUILD_TRILINOS"
-    cmake_flags=$cmake_flags" -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING=$OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING"
+    cmake_flags=$cmake_flags" -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=$OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS"
 
     if [ $OOMPH_ENABLE_MPI == "ON" ]; then
         cmake_flags=$cmake_flags" -DOOMPH_BUILD_SUPERLU_DIST=$OOMPH_BUILD_SUPERLU_DIST"
@@ -314,6 +317,7 @@ echo "-------------------------"
 #--------------
 cmake_flags="-DOOMPH_ENABLE_MPI=$OOMPH_ENABLE_MPI"
 cmake_flags=$cmake_flags" -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE"
+cmake_flags=$cmake_flags" -DOOMPH_ENABLE_SANITISER_SUPPORT=$OOMPH_ENABLE_SANITISER_SUPPORT"
 cmake_flags=$cmake_flags" -DOOMPH_DONT_SILENCE_USELESS_WARNINGS=$OOMPH_DONT_SILENCE_USELESS_WARNINGS" 
 cmake_flags=$cmake_flags" -DOOMPH_MPI_NUM_PROC=$OOMPH_MPI_NUM_PROC" 
 cmake_flags=$cmake_flags" -DOOMPH_ENABLE_PARANOID=$OOMPH_ENABLE_PARANOID" 
