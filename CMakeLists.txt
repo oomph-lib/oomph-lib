@@ -96,11 +96,11 @@ oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug b
 # and MPI is enabled. The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=OFF
 # to override it
 if(OOMPH_ENABLE_MPI AND OOMPH_USE_MUMPS_FROM)
-  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER ON)
+  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER ON)
 else()
-  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER OFF)
+  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER OFF)
 endif()
-oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER})
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${OOMPH_DEFAULT_TO_MUMPS_SOLVER})
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
