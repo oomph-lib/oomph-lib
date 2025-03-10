@@ -1,7 +1,9 @@
 {"general_settings":
  {
+     "CMAKE_BUILD_TYPE" :                           "Release",
      "OOMPH_ENABLE_MPI" :                           "OFF",
-     "CMAKE_BUILD_TYPE" :                           "Release" 
+     "OOMPH_USE_OPENBLAS_FROM" :                    "<oomph_third_party_install_dir_if_it_exists>/openblas",
+     "OOMPH_USE_BOOST_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/boost"
  },
  "third_party_settings":
  {
@@ -14,9 +16,7 @@
      "OOMPH_BUILD_HYPRE" :                          "ON",
      "OOMPH_BUILD_TRILINOS" :                       "ON",
      "OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING" :  "OFF",
-     "OOMPH_THIRD_PARTY_INSTALL_DIR" :              "<oomph_root>/external_distributions/install/",
-     "OOMPH_USE_OPENBLAS_FROM" :                    "\"\"",
-     "OOMPH_USE_BOOST_FROM" :                       "\"\""
+     "OOMPH_THIRD_PARTY_INSTALL_DIR" :              "<oomph_root>/external_distributions/install/"
  },
  "oomph-lib_settings":
  {
@@ -26,16 +26,14 @@
      "OOMPH_ENABLE_RANGE_CHECKING" :                "OFF",
      "OOMPH_SUPPRESS_TRIANGLE_LIB" :   	            "OFF",
      "OOMPH_SUPPRESS_TETGEN_LIB" :	            "OFF",
-     "OOMPH_USE_OPENBLAS_FROM" :                    "<oomph_root>/external_distributions/install/openblas",
-     "OOMPH_USE_GKLIB_FROM" :                       "<oomph_root>/external_distributions/install/gklib",
-     "OOMPH_USE_METIS_FROM" :                       "<oomph_root>/external_distributions/install/metis",
-     "OOMPH_USE_SUPERLU_FROM" :                     "<oomph_root>/external_distributions/install/superlu",
-     "OOMPH_USE_PARMETIS_FROM" :                    "<oomph_root>/external_distributions/install/parmetis",
-     "OOMPH_USE_SUPERLU_DIST_FROM" :                "<oomph_root>/external_distributions/install/superlu_dist",
-     "OOMPH_USE_BOOST_FROM" :                       "<oomph_root>/external_distributions/install/boost",
-     "OOMPH_USE_CGAL_FROM" :                        "<oomph_root>/external_distributions/install/cgal",
-     "OOMPH_USE_MUMPS_FROM" :                       "<oomph_root>/external_distributions/install/mumps",
-     "OOMPH_USE_TRILINOS_FROM" :                    "<oomph_root>/external_distributions/install/trilinos",
-     "OOMPH_USE_HYPRE_FROM" :                       "<oomph_root>/external_distributions/install/hypre"
+     "OOMPH_USE_GKLIB_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/gklib",
+     "OOMPH_USE_METIS_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/metis",
+     "OOMPH_USE_SUPERLU_FROM" :                     "<oomph_third_party_install_dir_if_it_exists>/superlu",
+     "OOMPH_USE_PARMETIS_FROM" :                    "<oomph_third_party_install_dir_if_it_exists>/parmetis",
+     "OOMPH_USE_SUPERLU_DIST_FROM" :                "<oomph_third_party_install_dir_if_it_exists>/superlu_dist",
+     "OOMPH_USE_CGAL_FROM" :                        "<oomph_third_party_install_dir_if_it_exists>/cgal",
+     "OOMPH_USE_MUMPS_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/mumps",
+     "OOMPH_USE_TRILINOS_FROM" :                    "<oomph_third_party_install_dir_if_it_exists>/trilinos",
+     "OOMPH_USE_HYPRE_FROM" :                       "<oomph_third_party_install_dir_if_it_exists>/hypre"
  }
 }
