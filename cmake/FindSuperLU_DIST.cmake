@@ -1,11 +1,14 @@
-# ~~~
+# cmake-format: off
+# ------------------------------------------------------------------------------
 # Tries to find an installation of SuperLU_Dist
 #
 # Once done, this will define:
 #   SUPERLU_DIST_FOUND - BOOL: System has the SuperLU_Dist library installed
 #   SUPERLU_DIST_INCLUDE_DIRS - LIST: The SuperLU_Dist include directories
 #   SUPERLU_DIST_LIBRARIES - LIST: The libraries needed to use SuperLU_Dist
-# ~~~
+#
+# ------------------------------------------------------------------------------
+# cmake-format: on
 include(FindPackageHandleStandardArgs)
 
 # Define search paths for libraries and headers, adding common locations for

@@ -16,6 +16,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_create_combined_header)
   # Define the supported set of keywords
   set(PREFIX ARG)
@@ -52,3 +53,4 @@ function(oomph_create_combined_header)
   # Write to file
   file(WRITE ${TARGET} ${COMBINED_HEADER_FILE})
 endfunction()
+# ------------------------------------------------------------------------------

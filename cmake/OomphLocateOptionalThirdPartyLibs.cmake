@@ -46,6 +46,27 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
     find_package(SuperLU_DIST REQUIRED GLOBAL)
   endif()
 
+  # ----------------------------------------
+  # Handle duplicate linking to METIS/GKlib
+  # ----------------------------------------
+  get_target_property(SUPERLU_LIBS superlu::superlu INTERFACE_LINK_LIBRARIES)
+  set(FILTERED_SUPERLU_LIBS "")
+
+  # Remove any hardcoded METIS paths
+  foreach(lib ${SUPERLU_LIBS})
+    if(NOT lib MATCHES ".*(metis|GKlib).*\\.(a|so|dylib|lib|dll)$")
+      list(APPEND FILTERED_SUPERLU_LIBS ${lib})
+    endif()
+  endforeach()
+
+  # Append correct CMake targets instead of hardcoded paths
+  list(APPEND FILTERED_SUPERLU_LIBS "METIS::METIS" "GKlib::GKlib")
+
+  # Override INTERFACE_LINK_LIBRARIES to fix METIS linking
+  set_target_properties(superlu::superlu PROPERTIES INTERFACE_LINK_LIBRARIES
+                                                    "${FILTERED_SUPERLU_LIBS}")
+  # ---------------------------------
+
   set(OOMPH_REQUIRED_TARGETS GKlib::GKlib METIS::METIS superlu::superlu)
   if(OOMPH_USE_SUPERLU_DIST_FROM)
     list(APPEND REQUIRED_TARGETS ParMETIS::ParMETIS SuperLU_DIST::SuperLU_DIST)
@@ -87,6 +108,7 @@ if(OOMPH_USE_BOOST_FROM OR OOMPH_USE_CGAL_FROM)
   set(CGAL_CMAKE_EXACT_NT_BACKEND BOOST_BACKEND CACHE STRING "Use Boost.Multiprecision for the CGAL backend.")
   set(CGAL_DISABLE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
   set(CMAKE_DISABLE_FIND_PACKAGE_GMP ON CACHE BOOL "Don't look for GMP or MPFR in CGAL")
+  set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE ON)
 
   find_package(Boost 1.83.0 REQUIRED CONFIG COMPONENTS ${REQUIRED_BOOST_COMPONENTS} GLOBAL PATHS ${OOMPH_USE_BOOST_FROM} NO_DEFAULT_PATH)
   find_package(CGAL 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_CGAL_FROM} NO_DEFAULT_PATH)

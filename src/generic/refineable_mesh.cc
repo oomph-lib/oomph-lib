@@ -4082,8 +4082,12 @@ namespace oomph
     // Sum n_refine across all processors
     if (this->is_mesh_distributed())
     {
-      MPI_Allreduce(
-        &n_refine, &total_n_refine, 1, MPI_INT, MPI_SUM, Comm_pt->mpi_comm());
+      MPI_Allreduce(&n_refine,
+                    &total_n_refine,
+                    1,
+                    MPI_UNSIGNED,
+                    MPI_SUM,
+                    Comm_pt->mpi_comm());
     }
     else
     {
@@ -4109,7 +4113,7 @@ namespace oomph
       MPI_Allreduce(&n_unrefine,
                     &total_n_unrefine,
                     1,
-                    MPI_INT,
+                    MPI_UNSIGNED,
                     MPI_SUM,
                     Comm_pt->mpi_comm());
     }

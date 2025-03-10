@@ -45,7 +45,7 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_channel_seg_and_precond PROPERTIES TIMEOUT
-                                                                        10000)
+                                                                        3600)
 
 message(VERBOSE "Leaving fsi_channel_seg_and_precond subdirectory")
 # ------------------------------------------------------------------------------

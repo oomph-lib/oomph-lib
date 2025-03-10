@@ -25,7 +25,7 @@ oomph_add_test(
 
 # This test contains a huge number of subtests and as such needs a larger amount
 # of time than the default to complete
-set_tests_properties(shell.plate PROPERTIES TIMEOUT 10000)
+set_tests_properties(shell.plate PROPERTIES TIMEOUT 3600)
 
 message(VERBOSE "Leaving plate subdirectory")
 # ------------------------------------------------------------------------------

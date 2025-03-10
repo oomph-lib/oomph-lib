@@ -1009,8 +1009,7 @@ namespace oomph
           if (nreq_sparse[p] == 0)
           {
             MPI_Request req1;
-            MPI_Isend(
-              &zero, 1, MPI_UNSIGNED, p, 31, comm_pt()->mpi_comm(), &req1);
+            MPI_Isend(&zero, 1, MPI_INT, p, 31, comm_pt()->mpi_comm(), &req1);
             send_requests_sparse.push_back(req1);
           }
 

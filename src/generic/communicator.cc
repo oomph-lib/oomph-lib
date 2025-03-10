@@ -59,8 +59,8 @@ namespace oomph
     }
 
     // Broadcast to everybody how many entries to expect
-    MPI_Bcast(&nrow, 1, MPI_UNSIGNED_LONG, source, this->mpi_comm());
-    MPI_Bcast(&ncol, 1, MPI_UNSIGNED_LONG, source, this->mpi_comm());
+    MPI_Bcast(&nrow, 1, MPI_UNSIGNED, source, this->mpi_comm());
+    MPI_Bcast(&ncol, 1, MPI_UNSIGNED, source, this->mpi_comm());
 
     if (ncol != 0 && nrow != 0)
     {

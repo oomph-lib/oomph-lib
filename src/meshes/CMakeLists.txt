@@ -124,9 +124,6 @@ set(NON_MESH_HEADERS
     annular_domain.h
     rectangle_with_hole_domain.h)
 
-# The meshes library relies on the generic
-set(LINKLIBS generic)
-
 # Set the name of the library
 set(LIBNAME meshes)
 
@@ -137,6 +134,11 @@ oomph_library_config(
   HEADERS ${TEMPLATE_HEADERS} ${NON_MESH_HEADERS}
   HEADERS_NO_COMBINE ${TEMPLATE_IMPL_HEADERS}
   LINKLIBS ${LINKLIBS})
+
+# The meshes library relies on the generic
+target_include_directories(
+  ${LIBNAME}
+  INTERFACE $<TARGET_PROPERTY:oomph::generic,INTERFACE_INCLUDE_DIRECTORIES>)
 
 message(VERBOSE "Leaving meshes subdirectory")
 # ------------------------------------------------------------------------------

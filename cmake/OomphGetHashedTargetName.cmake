@@ -32,6 +32,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_get_hashed_target_name EXECUTABLE_NAME HASHED_TARGET_NAME)
   string(SHA1 PATH_HASH "${CMAKE_CURRENT_SOURCE_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)

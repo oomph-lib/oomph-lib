@@ -1,7 +1,4 @@
-# ==============================================================================
-# Modified version of the file here:
-# https://github.com/pablospe/cmake-example-library/blob/master/cmake/SetEnv.cmake
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # Print the logo
 file(READ "${CMAKE_CURRENT_LIST_DIR}/AsciiLogo.txt" ASCII_OOMPH_LIB_LOGO)
 message("${ASCII_OOMPH_LIB_LOGO}")
@@ -36,6 +33,9 @@ set(OOMPH_IS_MAIN_PROJECT FALSE)
 if(PROJECT_IS_TOP_LEVEL)
   set(OOMPH_IS_MAIN_PROJECT TRUE)
 endif()
+
+# Emit a compile_commands.json; can be used by clang-tidy for code analysis
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 # ------------------------------------------------------------------------------
 # Configuration variables; create custom variables to avoid issues with regular
@@ -92,7 +92,7 @@ set(PROJECT_NAMESPACE oomph)
 # Storage for the list of libraries exported by oomph-lib
 set(OOMPHLIB_LIBRARIES CACHE INTERNAL "" FORCE)
 
-# Storage for the list of libraries exported by oomph-lib
+# Storage for key configuration variables used by oomph-lib
 set(OOMPH_CONFIG_VARS
     CMAKE_BUILD_TYPE
     BUILD_SHARED_LIBS
@@ -112,6 +112,5 @@ set(CMAKE_MINSIZEREL_POSTFIX "mr")
 
 # Set the export target for libraries built by oomph-lib
 set(TARGETS_EXPORT_NAME ${PROJECT_NAME}Exports)
-
-# cmake-format: on
 # ------------------------------------------------------------------------------
+# cmake-format: on

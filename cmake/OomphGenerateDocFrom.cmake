@@ -6,15 +6,13 @@
 #
 # USAGE:
 # ------
+#
 #     include(OomphGenerateDocFrom)
 #     oomph_generate_doc_from(<docfile>)
 #
 # =============================================================================
 # cmake-format: on
 include_guard()
-
-# FIXME: Switch to using add_custom_command(...) instead of target to avoid
-# constantly rebuilding...
 
 # ------------------------------------------------------------------------------
 function(oomph_generate_doc_from)

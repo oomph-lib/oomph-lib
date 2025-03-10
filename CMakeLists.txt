@@ -54,7 +54,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance." FORCE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance."
+      FORCE)
 endif()
 
 # Flag that we'll use to enable Debug-specific options
@@ -83,16 +84,27 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
-# General options
+# General build options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
+
+# Choose the default linear solver. By default, we'll enable Mumps if it is provided
+# and MPI is enabled. The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=OFF
+# to override it
+if(OOMPH_ENABLE_MPI AND OOMPH_USE_MUMPS_FROM)
+  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER ON)
+else()
+  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER OFF)
+endif()
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER})
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work
-# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
+# TODO: Discuss with MH; do we actually want these options anymore?
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
@@ -211,11 +223,6 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
-  # ~~~
-  # if(NOT OOMPH_USE_MUMPS_FROM)
-  #   message(FATAL_ERROR "MPI build requires MUMPS parallel solver.")
-  # endif()
-  # ~~~
 else()
   if(OOMPH_USE_SUPERLU_DIST_FROM)
     message(FATAL_ERROR "You can only enable SuperLU_DIST when MPI is enabled!")
@@ -241,6 +248,16 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
+# Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
+if(OOMPH_ENABLE_SANITISER_SUPPORT)
+  include(OomphAddSanitizerSupport)
+endif()
+
+# Do we want Mumps to override SuperLU as the default solver?
+if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+  oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+endif()
+
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -258,19 +275,10 @@ endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
 
-message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
-
-# Configure the external sources (i.e. third-party libraries that oomph-lib
-# always ships with)
-add_subdirectory(external_src)
-
 # FIXME: Having to duplicate CXX definitions for C code to make SuperLUDist code
 # work...
 
-# Add C++ definitions for all of the defined third-party sources that we build
-# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
-oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
-oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Locate the third-party libraries that the user has provided via the
 # OOMPH_USE_<LIBRARY>_FROM flags
@@ -280,6 +288,15 @@ include(OomphLocateOptionalThirdPartyLibs)
 # e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.
 oomph_add_c_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+
+# Configure the external sources (i.e. third-party libraries that oomph-lib
+# always ships with)
+add_subdirectory(external_src)
+
+# Add C++ definitions for all of the defined third-party sources that we build
+# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 
 # Configure all of the main oomph-lib library sources
 add_subdirectory(src)

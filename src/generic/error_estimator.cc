@@ -1025,7 +1025,8 @@ namespace oomph
                     MPI_UNSIGNED,
                     MPI_MAX,
                     comm_pt->mpi_comm());
-      MPI_Allreduce(&dim_local, &dim, 1, MPI_INT, MPI_MAX, comm_pt->mpi_comm());
+      MPI_Allreduce(
+        &dim_local, &dim, 1, MPI_UNSIGNED, MPI_MAX, comm_pt->mpi_comm());
       MPI_Allreduce(&recovery_order_local,
                     &recovery_order,
                     1,

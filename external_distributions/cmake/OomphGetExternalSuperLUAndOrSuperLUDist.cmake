@@ -57,7 +57,7 @@ if(NOT OOMPH_USE_GKLIB_FROM)
   ExternalProject_Add(
     gklib
     GIT_REPOSITORY ${GKLIB_GIT_URL}
-    GIT_TAG master
+    GIT_TAG 8bd6bad750b2b0d90800c632cf18e8ee93ad72d7
     GIT_SHALLOW TRUE
     INSTALL_DIR "${GKLIB_INSTALL_DIR}"
     LOG_DIR "${CMAKE_BINARY_DIR}/logs"
@@ -94,7 +94,7 @@ if(NOT OOMPH_USE_METIS_FROM)
   ExternalProject_Add(
     metis
     GIT_REPOSITORY ${METIS_GIT_URL}
-    GIT_TAG master
+    GIT_TAG e0f1b88b8efcb24ffa0ec55eabb78fbe61e58ae7
     GIT_SHALLOW TRUE
     INSTALL_DIR "${METIS_INSTALL_DIR}"
     LOG_DIR "${CMAKE_BINARY_DIR}/logs"
@@ -190,7 +190,7 @@ if (OOMPH_ENABLE_MPI)
     ExternalProject_Add(
       parmetis
       GIT_REPOSITORY ${PARMETIS_GIT_URL}
-      GIT_TAG main
+      GIT_TAG 8ee6a372ca703836f593e3c450ca903f04be14df
       GIT_SHALLOW TRUE
       INSTALL_DIR "${PARMETIS_INSTALL_DIR}"
       LOG_DIR "${CMAKE_BINARY_DIR}/logs"

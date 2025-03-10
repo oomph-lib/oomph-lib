@@ -236,8 +236,8 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible)
  //PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
  // mesh_pt()->element_pt());
 
- //Attach the boundary conditions to the mesh
- cout << assign_eqn_numbers() << std::endl; 
+  // Attach the boundary conditions to the mesh
+  oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
 } 
 
 

@@ -103,7 +103,7 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_collapsible_channel PROPERTIES TIMEOUT
-                                                                    10000)
+                                                                    3600)
 
 message(VERBOSE "Leaving fsi_collapsible_channel subdirectory")
 # ------------------------------------------------------------------------------

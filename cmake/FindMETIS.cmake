@@ -1,4 +1,5 @@
-# ~~~
+# cmake-format: off
+# ------------------------------------------------------------------------------
 # Tries to find an installation of METIS
 #
 # Once done, this will define:
@@ -7,8 +8,8 @@
 # METIS_INCLUDE_DIRS - LIST: The METIS include directories
 # METIS_LIBRARIES - LIST: The libraries needed to use METIS
 # METIS_VERSION - STRING: Version of METIS (if found)
-# ~~~
-
+# ------------------------------------------------------------------------------
+# cmake-format: on
 include(FindPackageHandleStandardArgs)
 
 # Define common search paths
@@ -85,3 +86,4 @@ if(METIS_FOUND)
 else()
   message(FATAL_ERROR "Could not find METIS")
 endif()
+# ------------------------------------------------------------------------------

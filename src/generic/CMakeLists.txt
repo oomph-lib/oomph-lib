@@ -227,19 +227,18 @@ if(OOMPH_HAS_MUMPS)
   list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
 endif()
 
+# TODO: Do we need to install these? Or are they never used by the user?
+#
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory
-set(HEADERS_NO_COMBINE cfortran.h frontal.h lapack_qz.h mumps.h)
+set(HEADERS_NO_INSTALL cfortran.h frontal.h lapack_qz.h mumps.h)
 
 # Template-only files: Need to be installed to include directory but should not
 # be listed in combined header file
 set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
 
-# The generic library relies on the external sources and possibly MPI
-set(LINKLIBS ${OpenBLAS_LIBRARIES} ${EXTERNAL_SRC_LIBS})
-if(OOMPH_HAS_MPI)
-  list(APPEND LINKLIBS MPI::MPI_C MPI::MPI_CXX)
-endif()
+# The generic library relies on the external sources
+set(LINKLIBS ${EXTERNAL_SRC_LIBS})
 
 # Set the name of the library
 set(LIBNAME generic)
@@ -259,7 +258,7 @@ oomph_library_config(
   HEADERS ${HEADERS}
   SOURCES ${SOURCES}
   SOURCES_NO_BUILD ${TEMPLATES}
-  HEADERS_NO_INSTALL ${HEADERS_NO_COMBINE}
+  HEADERS_NO_INSTALL ${HEADERS_NO_INSTALL}
   LINKLIBS ${LINKLIBS})
 
 # Headers in external_src are typically #include-ed by files in src/generic/
@@ -281,6 +280,16 @@ oomph_target_silence_warnings(
 # ------------------------------------------------------------------------------
 # Handle third-party library stuff:
 # ------------------------------------------------------------------------------
+# If oomph-lib needs MPI, link it publically so that executables using the
+# library also inherit MPI
+if(OOMPH_HAS_MPI)
+  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX)
+endif()
+
+# FIXME: BLAS/LAPACK are just implementation details; do we actually need it for
+# anything other than SuperLU?
+target_link_libraries(${LIBNAME} PUBLIC ${OpenBLAS_LIBRARIES})
+
 # NOTE: We publicly link to third-party libraries so that these libraries get
 # propagated to the user. If a user pulls in the oomph-lib library they should
 # automatically get access to the third-party libraries; they shouldn't have to
@@ -306,10 +315,9 @@ target_link_libraries(${LIBNAME} PUBLIC METIS::METIS_HEADER_ONLY)
 target_link_libraries(${LIBNAME} PUBLIC superlu::superlu)
 
 if(OOMPH_HAS_SUPERLU_DIST)
-  target_link_libraries(${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST
-                                          ParMETIS::ParMETIS METIS::METIS)
-else()
-
+  target_link_libraries(
+    ${LIBNAME} PUBLIC SuperLU_DIST::SuperLU_DIST ParMETIS::ParMETIS
+                      METIS::METIS GKlib::GKlib)
 endif()
 
 if(OOMPH_HAS_CGAL)

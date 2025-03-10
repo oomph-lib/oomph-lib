@@ -32,7 +32,7 @@ oomph_add_test(
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(generalised_newtonian_navier_stokes.vibrating_shell
-                     PROPERTIES TIMEOUT 10000)
+                     PROPERTIES TIMEOUT 3600)
 
 message(VERBOSE "Leaving vibrating_shell subdirectory")
 # ------------------------------------------------------------------------------

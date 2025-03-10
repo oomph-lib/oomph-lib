@@ -11,6 +11,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 # Use built-in CMake module to search for headers
 include(CheckIncludeFiles)
 
@@ -40,3 +41,4 @@ endif()
 if(OOMPH_HAS_MALLOCH)
   oomph_add_cxx_compile_definitions(OOMPH_HAS_MALLOCH)
 endif()
+# ------------------------------------------------------------------------------
