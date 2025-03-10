@@ -1175,7 +1175,7 @@ namespace oomph
         if (Navier_stokes_preconditioner_pt == 0)
         {
           Navier_stokes_preconditioner_pt =
-           ExactPreconditionerFactory::create_exact_preconditioner();
+            ExactPreconditionerFactory::create_exact_preconditioner();
         }
       }
       else

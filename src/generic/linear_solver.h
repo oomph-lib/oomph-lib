@@ -872,26 +872,20 @@ namespace oomph
   }; // end of SuperLUSolver
 
 
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
 
- /////////////////////////////////////////////////////////////////////////
- /////////////////////////////////////////////////////////////////////////
- /////////////////////////////////////////////////////////////////////////
+  /// Namespace containing functions required to create exact preconditioner
+  namespace ExactPreconditionerFactory
+  {
+
+    /// Factory function to create suitable exact preconditioner
+    extern Preconditioner* create_exact_preconditioner();
+
+  } // namespace ExactPreconditionerFactory
 
 
- /// Namespace containing functions required to create exact preconditioner
- namespace ExactPreconditionerFactory
- {
-
-  /// Factory function to create suitable exact preconditioner
-  extern Preconditioner* create_exact_preconditioner();
-  
- }
-
-
-
-
-
- 
 } // namespace oomph
 #endif

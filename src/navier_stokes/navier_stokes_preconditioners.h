@@ -760,8 +760,8 @@ namespace oomph
     {
       if (!Using_default_p_preconditioner)
       {
-        P_preconditioner_pt = 
-         ExactPreconditionerFactory::create_exact_preconditioner();
+        P_preconditioner_pt =
+          ExactPreconditionerFactory::create_exact_preconditioner();
         Using_default_p_preconditioner = true;
       }
     }
@@ -797,8 +797,8 @@ namespace oomph
     {
       if (!Using_default_f_preconditioner)
       {
-        F_preconditioner_pt = 
-         ExactPreconditionerFactory::create_exact_preconditioner();
+        F_preconditioner_pt =
+          ExactPreconditionerFactory::create_exact_preconditioner();
         Using_default_f_preconditioner = true;
       }
     }

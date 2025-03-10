@@ -82,7 +82,7 @@ namespace oomph
 
       // using Schur complement preconditioner for NS
       Navier_stokes_preconditioner_pt =
-       ExactPreconditionerFactory::create_exact_preconditioner(); 
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Navier_stokes_schur_complement_preconditioner_pt =
         new NavierStokesSchurComplementPreconditioner(problem_pt);
 
@@ -90,8 +90,8 @@ namespace oomph
       Using_default_solid_preconditioner = true;
 
       // default super lu
-      Solid_preconditioner_pt = 
-       ExactPreconditionerFactory::create_exact_preconditioner();
+      Solid_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // create the matrix vector product operatrs
       Solid_fluid_matvec_pt = new MatrixVectorProduct;

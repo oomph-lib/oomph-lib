@@ -567,7 +567,7 @@ namespace oomph
     if (P_preconditioner_pt == 0)
     {
       P_preconditioner_pt =
-       ExactPreconditionerFactory::create_exact_preconditioner();
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Using_default_p_preconditioner = true;
     }
 
@@ -605,8 +605,8 @@ namespace oomph
     // if the F preconditioner has not been setup
     if (F_preconditioner_pt == 0)
     {
-      F_preconditioner_pt = 
-       ExactPreconditionerFactory::create_exact_preconditioner();
+      F_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Using_default_f_preconditioner = true;
     }
 
