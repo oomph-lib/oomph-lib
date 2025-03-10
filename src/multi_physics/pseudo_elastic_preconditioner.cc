@@ -477,7 +477,8 @@ namespace oomph
       // else use default superlu preconditioner
       else
       {
-        Lagrange_multiplier_preconditioner_pt[d] = new ExactPreconditioner;
+        Lagrange_multiplier_preconditioner_pt[d] =
+          ExactPreconditionerFactory::create_exact_preconditioner();
       }
 
       // and setup
@@ -735,7 +736,8 @@ namespace oomph
       // else use default superlu preconditioner
       else
       {
-        Lagrange_multiplier_preconditioner_pt[d] = new ExactPreconditioner;
+        Lagrange_multiplier_preconditioner_pt[d] =
+          ExactPreconditionerFactory::create_exact_preconditioner();
       }
 
       // and setup
@@ -885,7 +887,8 @@ namespace oomph
     }
     else
     {
-      Preconditioner_pt = new ExactPreconditioner;
+      Preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
     }
     Preconditioner_pt->setup(&s_prec_pt);
   }

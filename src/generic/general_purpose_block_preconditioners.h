@@ -56,12 +56,7 @@ namespace oomph
     /// GeneralPurposeBlockPreconditioners).
     inline Preconditioner* create_exact_preconditioner()
     {
-#if defined(OOMPH_HAS_MPI) && defined(OOMPH_HAS_MUMPS) && \
-  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      return new MumpsPreconditioner;
-#else
-      return new SuperLUPreconditioner;
-#endif
+      return ExactPreconditionerFactory::create_exact_preconditioner();
     }
   } // namespace PreconditionerCreationFunctions
 

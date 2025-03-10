@@ -993,7 +993,7 @@ namespace SubsidiaryPreconditionerHelper
   Preconditioner* get_new_preconditioner()
   {
     // Return a new instance of SuperLU
-    return new ExactPreconditioner;
+    return ExactPreconditionerFactory::create_exact_preconditioner();
   } // End of get_new_preconditioner
 } // End of namespace SubsidiaryPreconditionerHelper
 

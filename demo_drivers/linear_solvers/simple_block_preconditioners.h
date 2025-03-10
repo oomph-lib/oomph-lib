@@ -170,7 +170,8 @@ namespace oomph
   // Create the subsidiary preconditioners
   for (unsigned i=0;i<nblock_types;i++)
    {
-    Diagonal_block_preconditioner_pt[i] = new ExactPreconditioner;
+    Diagonal_block_preconditioner_pt[i] =
+     ExactPreconditionerFactory::create_exact_preconditioner();
    }
 
   // Get the diagonal matrix blocks

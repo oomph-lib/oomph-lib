@@ -670,7 +670,8 @@ public :
     new NavierStokesSchurComplementPreconditioner(problem_pt);
 
    // Create the Solid preconditioner
-   Solid_preconditioner_pt = new ExactPreconditioner;
+   Solid_preconditioner_pt =
+    ExactPreconditionerFactory::create_exact_preconditioner();
 
    // Create the matrix-vector product operator
    Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;
