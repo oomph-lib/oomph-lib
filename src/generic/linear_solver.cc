@@ -39,7 +39,9 @@
 #include "linear_solver.h"
 #include "matrices.h"
 #include "problem.h"
+#ifdef OOMPH_HAS_MUMPS
 #include "mumps_solver.h"
+#endif
 #include "SuperLU_preconditioner.h"
 
 

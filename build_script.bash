@@ -274,7 +274,7 @@ if [ $BUILD_THIRD_PARTY_LIBRARIES == "ON" ]; then
     echo " "
     echo "cmake flags for third-party library build: "  $cmake_flags
     echo " "
-    echo "Let the build commence!"
+    echo "Let the third-party library build commence!"
     echo " " 
     cd external_distributions
     if [ "$verbose" == true ]; then 
@@ -346,15 +346,21 @@ fi
 # for where we've actually installed them.
 for third_party_library in `echo $third_party_library_list`; do
     full_var="OOMPH_USE_"$third_party_library"_FROM"
-    # Replace any placeholders for our own built libraries; this will do nothing if we've specified some other existing library
-    lib_dir_name=`echo ${!full_var} | sed "s|<oomph_third_party_install_dir_if_it_exists>|$oomph_root/external_distributions/install|g"`
-    if [ -e $lib_dir_name ]; then
-        cmake_flags=$cmake_flags" -DOOMPH_USE_"$third_party_library"_FROM="$lib_dir_name
-        echo "Yay! Library "$lib_dir_name" does exist; we're using it for oomph-lib build."
-
+    
+    # Is it the empty string? If so, don't use it!
+    if [ "`echo ${!full_var}`" == "" ]; then
+        echo "We're not using " `echo ${full_var}`
     else
-        echo "Library "$lib_dir_name" doesn't exist."
-        echo "Not using library "$third_party_library" in oomph-lib build."
+        # Replace any placeholders for our own built libraries; this will do nothing if we've specified some other existing library
+        lib_dir_name=`echo ${!full_var} | sed "s|<oomph_third_party_install_dir_if_it_exists>|$oomph_root/external_distributions/install|g"`
+        if [ -e $lib_dir_name ]; then
+            cmake_flags=$cmake_flags" -DOOMPH_USE_"$third_party_library"_FROM="$lib_dir_name
+            echo "Yay! Library "$lib_dir_name" does exist; we're using it for oomph-lib build."
+            
+        else
+            echo "Library "$lib_dir_name" doesn't exist."
+            echo "Not using library "$third_party_library" in oomph-lib build."
+        fi
     fi
 done
 
@@ -362,8 +368,9 @@ done
 echo " "
 echo "cmake flags for oomph-lib build: "  $cmake_flags
 echo " "
-echo "Let the build commence!"
+echo "Let the oomph-lib build commence!"
 echo " "
+
 
 if [ "$verbose" == true ]; then 
    echo " "
