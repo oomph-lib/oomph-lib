@@ -478,7 +478,7 @@ namespace oomph
       else
       {
         Lagrange_multiplier_preconditioner_pt[d] =
-         ExactPreconditionerFactory::create_exact_preconditioner();
+          ExactPreconditionerFactory::create_exact_preconditioner();
       }
 
       // and setup
@@ -737,7 +737,7 @@ namespace oomph
       else
       {
         Lagrange_multiplier_preconditioner_pt[d] =
-         ExactPreconditionerFactory::create_exact_preconditioner();
+          ExactPreconditionerFactory::create_exact_preconditioner();
       }
 
       // and setup
@@ -887,8 +887,8 @@ namespace oomph
     }
     else
     {
-      Preconditioner_pt = 
-       ExactPreconditionerFactory::create_exact_preconditioner();
+      Preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
     }
     Preconditioner_pt->setup(&s_prec_pt);
   }

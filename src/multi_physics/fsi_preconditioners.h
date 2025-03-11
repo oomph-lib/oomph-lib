@@ -76,7 +76,7 @@ namespace oomph
 
       // Create the Solid preconditioner
       Solid_preconditioner_pt =
-       ExactPreconditionerFactory::create_exact_preconditioner();
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Preconditioner hasn't been set up yet.
       Preconditioner_has_been_setup = false;
@@ -754,7 +754,8 @@ namespace oomph
     CRDoubleMatrix P_matrix = this->get_concatenated_block(selected_blocks);
 
     // Setup preconditioner (i.e. inexact solver) -- does the LU decomposition
-    Preconditioner_pt = ExactPreconditionerFactory::create_exact_preconditioner();
+    Preconditioner_pt =
+      ExactPreconditionerFactory::create_exact_preconditioner();
     Preconditioner_pt->setup(&P_matrix);
   }
 

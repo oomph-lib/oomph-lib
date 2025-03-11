@@ -43,9 +43,9 @@ cd "$oomph_root"
 #----------------------
 
 # Get all files in the directory
-FILES=(cmake_build_options/*)
+FILES=(config/cmake_build_options/*)
 
-if [ ! -e cmake_build_options/customised_options.json ]; then
+if [ ! -e config/cmake_build_options/customised_options.json ]; then
     echo " "
     echo "We're currently building with the default options. Would you like to customise these?"
     echo " "
@@ -56,19 +56,19 @@ else
     echo "We're currently building with the customised options specified "
     echo "in the file"
     echo " "
-    echo "       cmake_build_options/customised_options.json"
+    echo "       config/cmake_build_options/customised_options.json"
     echo " "
     echo "which contains: "
     echo " "
-    cat cmake_build_options/customised_options.json
+    cat config/cmake_build_options/customised_options.json
     echo " "
     echo "Note that these overwrite the relevant default settings specified"
     echo "in the file "
     echo " " 
-    echo "       cmake_build_options/default_options.json"
+    echo "       config/cmake_build_options/default_options.json"
     echo " " 
     echo "Here are various alternative customised option files. (Note that you can add your own by"
-    echo "adding a suitable json file to the cmake_build_options directory):"
+    echo "adding a suitable json file to the config/cmake_build_options directory):"
     echo " "
 fi
 
@@ -76,7 +76,7 @@ fi
 choice_made=n
 while [ $choice_made != "y" ]; do
     # List files with enumeration
-    echo "Customised options in cmake_build_options:"
+    echo "Customised options in config/cmake_build_options:"
     for i in "${!FILES[@]}"; do
         echo "$((i+1)): $(basename "${FILES[$i]}")"
     done
@@ -104,7 +104,7 @@ while [ $choice_made != "y" ]; do
     fi
 
 done
-cp "$SELECTED_FILE"  cmake_build_options/customised_options.json
+cp "$SELECTED_FILE"  config/cmake_build_options/customised_options.json
 
 
 
@@ -119,19 +119,19 @@ eval $(jq -r '
   .value | 
   to_entries | 
   map("\(.key)=" + @sh "\(.value)") | .[]
-' cmake_build_options/default_options.json)
+' config/cmake_build_options/default_options.json)
 
 
 # hierher list options and loop until one is accepted
 
 # Assign value/key from customised options to shell variables of the same name.
-if [ -e cmake_build_options/customised_options.json ]; then
+if [ -e config/cmake_build_options/customised_options.json ]; then
   eval $(jq -r '
    to_entries[] | 
    .value | 
    to_entries | 
    map("\(.key)=" + @sh "\(.value)") | .[]
-'  cmake_build_options/customised_options.json)
+'  config/cmake_build_options/customised_options.json)
 else
   echo "No customised options specified in customised_options.json, so sticking with defaults"
 fi
@@ -211,7 +211,7 @@ for third_party_library in `echo $third_party_library_list`; do
             echo "       libraries will not be built by us! Please change"
             echo "       the setting of BUILD_THIRD_PARTY_LIBRARIES in in the file"
             echo " "
-            echo "          cmake_build_options/customised_options.json"
+            echo "          config/cmake_build_options/customised_options.json"
             echo " "
             exit
         fi
@@ -224,7 +224,7 @@ for third_party_library in `echo $third_party_library_list`; do
             echo "ERROR: The third party library "${!full_var} " does not exist!"
             echo "       Please correct the setting of "${full_var}" in the file"
             echo " "
-            echo "          cmake_build_options/customised_options.json"
+            echo "          config/cmake_build_options/customised_options.json"
             echo " "
             echo "       or omit it and enable us to build the library for you by setting"
             echo "       BUILD_THIRD_PARTY_LIBRARIES=\"ON\"."

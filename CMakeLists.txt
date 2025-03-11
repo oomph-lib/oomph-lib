@@ -90,17 +90,17 @@ oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OF
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
-oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
 
 # Choose the default linear solver. By default, we'll enable Mumps if it is provided
 # and MPI is enabled. The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=OFF
 # to override it
 if(OOMPH_ENABLE_MPI AND OOMPH_USE_MUMPS_FROM)
-  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER ON)
+  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER ON)
 else()
-  set(_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER OFF)
+  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER OFF)
 endif()
-oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${_OOMPH_DEFAULT_ENABLE_MUMPS_SOLVER})
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${OOMPH_DEFAULT_TO_MUMPS_SOLVER})
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work

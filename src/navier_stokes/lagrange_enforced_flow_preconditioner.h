@@ -292,7 +292,7 @@ namespace oomph
       {
         delete Navier_stokes_preconditioner_pt;
         Navier_stokes_preconditioner_pt =
-         ExactPreconditionerFactory::create_exact_preconditioner(); 
+          ExactPreconditionerFactory::create_exact_preconditioner();
         Using_superlu_ns_preconditioner = true;
       }
     }
