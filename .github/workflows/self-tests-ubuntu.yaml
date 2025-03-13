@@ -121,22 +121,16 @@ jobs:
       - name: Configure desired third-party libraries
         if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: |
-          cmake -G Ninja \
-            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_OPENBLAS=ON \
-            -DOOMPH_BUILD_CGAL=ON \
-            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
-            -B build
-        working-directory: ./external_distributions/
-
-      - name: Build third-party libraries
-        if: steps.tpl-cache.outputs.cache-hit != 'true'
-        run: cmake --build build
-        working-directory: ./external_distributions/
+          python3 oomph_build.py \
+             --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_BUILD_OPENBLAS=ON \
+             --ext-OOMPH_BUILD_CGAL=ON \
+             --ext-OOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+             --verbose
 
       - name: Rename third-party libraries build logs
         if: steps.tpl-cache.outputs.cache-hit != 'true'
@@ -148,18 +142,6 @@ jobs:
         with:
           name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
           path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}/
-
-      # -------------------
-      # BUILD MAIN PROJECT:
-      # -------------------
-      - name: Configure main project
-        run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
-
-      - name: Build main project
-        run: cmake --build build
-
-      - name: Install main project
-        run: cmake --install build
 
       # -------------------
       # DEMO DRIVERS:
