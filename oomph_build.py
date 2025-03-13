@@ -304,6 +304,7 @@ if __name__ == "__main__":
     root_build = project_root / "build"
     external_dist_dir = project_root / "external_distributions"
     external_dist_build_dir = external_dist_dir / "build"
+    external_dist_json_path = external_dist_build_dir / "cmake_flags_for_oomph_lib.json"
 
     # Create build directories
     external_dist_build_dir.mkdir(parents=True, exist_ok=True)
@@ -320,13 +321,12 @@ if __name__ == "__main__":
         print_progress(">>> Skipping third-party libraries build")
 
     # Attempt to locate 'cmake_flags_for_oomph_lib.json'
-    external_json_path = external_dist_build_dir / "cmake_flags_for_oomph_lib.json"
-    if not external_json_path.is_file():
+    if not external_dist_json_path.is_file():
         print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
         sys.exit(1)
 
     # 2. Read external JSON file to get flags to pass to root project
-    ext_flags = read_external_json_file(external_json_path)
+    ext_flags = read_external_json_file(external_dist_json_path)
 
     # 3. Configure, build, and install root (main) project
     if not args.just_build_tpl:
