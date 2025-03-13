@@ -144,7 +144,11 @@ jobs:
       # BUILD MAIN PROJECT:
       # -------------------
       - name: Configure, build and install main project
-        run: python3 oomph_build.py --skip-tpl-build --verbose
+        run: |
+          python3 oomph_build.py \
+            --root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
+            --skip-tpl-build \
+            --verbose
 
       # -------------------
       # DEMO DRIVERS:
