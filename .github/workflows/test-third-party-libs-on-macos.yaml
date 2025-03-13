@@ -9,8 +9,6 @@ on:
       - ".github/workflows/test-third-party-libs-on-macos.yaml"
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
-  # Allow manual triggering of the workflow from GitHub
-  workflow_dispatch:
 
 # Print the output of a test if it fails
 env:
@@ -40,21 +38,6 @@ jobs:
         if: matrix.mpi == 'ON'
         run: brew install open-mpi
 
-      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
-      # that we won't need to rebuild if, e.g. ninja changes
-      - name: Get dependency versions
-        id: deps
-        run: |
-          brew list --versions openblas >> deps.txt
-          brew list --versions gcc >> deps.txt
-          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
-            brew list --versions open-mpi >> deps.txt
-          fi
-          echo "Dependency versions:"
-          cat deps.txt
-          HASH=$(shasum -a 256 deps.txt | awk '{print $1}')
-          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
-
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
         with:
@@ -67,20 +50,11 @@ jobs:
         id: build
         run: |
           python3 oomph_build.py \
-             --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+             --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
              --just-build-tpl \
              --verbose
         continue-on-error: true
-
-      - name: Cache third-party libraries artifacts
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            external_distributions/install
-            external_distributions/build/cmake_flags_for_oomph_lib.txt
-            external_distributions/build/cmake_flags_for_oomph_lib.json
-          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
       - name: Rename build logs
         run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}

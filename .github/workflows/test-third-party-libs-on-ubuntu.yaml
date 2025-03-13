@@ -9,8 +9,6 @@ on:
       - ".github/workflows/test-third-party-libs-on-ubuntu.yaml"
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
-  # Allow manual triggering of the workflow from GitHub
-  workflow_dispatch:
 
 # Print the output of a test if it fails
 env:
@@ -40,23 +38,6 @@ jobs:
         if: matrix.mpi == 'ON'
         run: sudo apt-get install openmpi-bin libopenmpi-dev
 
-      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
-      # that we won't need to rebuild if, e.g. ninja changes
-      - name: Get dependency versions
-        id: deps
-        run: |
-          dpkg -s gfortran | grep Version | awk '{print "gfortran="$2}' > deps.txt
-          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
-            dpkg -s openmpi-bin | grep Version | awk '{print "openmpi-bin="$2}' >> deps.txt
-            dpkg -s libopenmpi-dev | grep Version | awk '{print "libopenmpi-dev="$2}' >> deps.txt
-          fi
-          echo "Dependency versions:"
-          cat deps.txt
-
-          # Compute a hash from the dependency versions
-          HASH=$(sha256sum deps.txt | cut -d ' ' -f1)
-          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
-
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
         with:
@@ -67,22 +48,8 @@ jobs:
 
       - name: Configure, build, and install
         id: build
-        run: |
-          python3 oomph_build.py \
-             --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
-             --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
-             --just-build-tpl \
-             --verbose
+        run: python3 oomph_build.py --OOMPH_ENABLE_MPI=${{ matrix.mpi }} --just-build-tpl --verbose
         continue-on-error: true
-
-      - name: Cache third-party libraries artifacts
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            external_distributions/install
-            external_distributions/build/cmake_flags_for_oomph_lib.txt
-            external_distributions/build/cmake_flags_for_oomph_lib.json
-          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
       - name: Rename build logs
         run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.mpi }}
