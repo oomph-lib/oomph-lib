@@ -4,6 +4,7 @@
 
 Include tasks here that likely need some collaboration with Matthias
 
+* [ ] Update TPL testing workflow to build and cache libs but allow a manual trigger
 * [ ] Handle building shared libs!
 * [ ] Go through all MPI demo drivers and ONLY enable the test if MPI is enabled
 * [ ] Grep for all TODOs and FIXMEs and fix!
