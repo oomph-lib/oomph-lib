@@ -40,12 +40,12 @@ function(oomph_print_third_party_libraries_usage)
 
   # What's the build type?
   list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
-  list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"CMAKE_BUILD_TYPE\": \"${CMAKE_BUILD_TYPE}\"")
+  list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"CMAKE_BUILD_TYPE\": \"${CMAKE_BUILD_TYPE}\",")
 
   # Do we also need to build the main project with MPI?
   if (OOMPH_ENABLE_MPI)
     list(APPEND OOMPH_CONFIGURE_FLAGS_LIST "-DOOMPH_ENABLE_MPI=ON")
-    list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_ENABLE_MPI\": \"ON\"")
+    list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_ENABLE_MPI\": \"ON\",")
   endif()
 
   # OpenBLAS
@@ -140,23 +140,52 @@ function(oomph_print_third_party_libraries_usage)
     list(APPEND OOMPH_JSON_PRESET_FLAGS_LIST "\"OOMPH_USE_TRILINOS_FROM\": \"${TRILINOS_INSTALL_DIR}\",")
   endif()
 
+  # The text to use a single long CMake command
   string(JOIN " " OOMPH_CONFIGURE_FLAGS ${OOMPH_CONFIGURE_FLAGS_LIST})
-  string(JOIN "\n       " OOMPH_JSON_PRESET_TEXT ${OOMPH_JSON_PRESET_FLAGS_LIST})
 
-  # Log to file
-  set(CMAKE_FLAGS_FOR_OOMPH_LIB_FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake_flags_for_oomph_lib.txt")
-  file(WRITE "${CMAKE_FLAGS_FOR_OOMPH_LIB_FILE}" "${OOMPH_CONFIGURE_FLAGS}")
+  # The text to add to the top-level CMakeUserPreset.json
+  message("${OOMPH_JSON_PRESET_TEXT}")
+  list(TRANSFORM OOMPH_JSON_PRESET_FLAGS_LIST PREPEND "       ")
+  string(JOIN "\n" OOMPH_JSON_PRESET_TEXT ${OOMPH_JSON_PRESET_FLAGS_LIST})
+
+
+  # Output files
+  set(OOMPH_THIRD_PARTY_LIBARIES_USAGE_FILE "${CMAKE_CURRENT_BINARY_DIR}/usage.txt")
+  set(CMAKE_FLAGS_FOR_OOMPH_LIB_TXT_FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake_flags_for_oomph_lib.txt")
+  set(CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake_flags_for_oomph_lib.json")
+
+  file(WRITE "${CMAKE_FLAGS_FOR_OOMPH_LIB_TXT_FILE}" "${OOMPH_CONFIGURE_FLAGS}")
+
+  #
+  set(CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_TEXT "{" "${OOMPH_JSON_PRESET_TEXT}" "}")
+  string(JOIN "\n" CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_TEXT ${CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_TEXT})
+  file(WRITE "${CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_FILE}" "${CMAKE_FLAGS_FOR_OOMPH_LIB_JSON_TEXT}")
 
   # Dump the usage instructions to file so we can just print the contents at the end of the build step
-  file(RELATIVE_PATH RELPATH_TO_CMAKE_FLAGS_TXT_FILE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_FLAGS_FOR_OOMPH_LIB_FILE})
+  file(RELATIVE_PATH RELPATH_TO_CMAKE_FLAGS_TXT_FILE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_FLAGS_FOR_OOMPH_LIB_TXT_FILE})
   set(
-    OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE "\n${BOLD_MAGENTA}Now the libraries have been built, you can use the following command to configure the main oomph-lib project:\n\n \tcmake -G Ninja ${OOMPH_CONFIGURE_FLAGS} -B build\n\nAlternatively, if you're using a preset file, place the following under the \"cacheVariables\" key:\n
-       ${OOMPH_JSON_PRESET_TEXT}\n\nI've also printed these values to the file:\n\n\t${RELPATH_TO_CMAKE_FLAGS_TXT_FILE}\n\nso you could simply jump up to the root oomph-lib directory and run:\n\n\tcmake -G Ninja $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build\n\nClever, I know!${RESET}")
-  list(JOIN "" OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE}")
+    OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE
+    "\nNow the libraries have been built, you can use the following command to configure the main oomph-lib project:\n\n"
+    " \tcmake -G Ninja ${OOMPH_CONFIGURE_FLAGS} -B build\n\n"
+    "Alternatively, if you're using a preset file, place the following under the \"cacheVariables\" key:\n\n"
+    "${OOMPH_JSON_PRESET_TEXT}\n\n"
+    "I've also printed these values to the file:\n\n"
+    "\t${RELPATH_TO_CMAKE_FLAGS_TXT_FILE}\n\n"
+    "so you could simply jump up to the root oomph-lib directory and run:\n\n"
+    "\tcmake -G Ninja $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build\n\n"
+    "Clever, I know!"
+  )
+
+  # Turn OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE from a list of strings to a single string
+  list(JOIN "" OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE "${OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE}")
+
+  # Remove the semicolon CMake adds
+  string(REPLACE ";" "" OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE "${OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE}")
+
+  # Dump the usage to a file
+  file(WRITE "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_FILE}" "${BOLD_MAGENTA}${OOMPH_THIRD_PARTY_LIBRARIES_USAGE_MESSAGE}${RESET}")
 
   # Create a target to print the usage instructions AFTER we've built everything
-  set(OOMPH_THIRD_PARTY_LIBARIES_USAGE_FILE "${CMAKE_CURRENT_BINARY_DIR}/usage.txt")
-  file(WRITE "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_FILE}" "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_MESSAGE}")
   add_custom_target(
     print_usage_message_after_build ALL
     ${CMAKE_COMMAND} -E cat "${OOMPH_THIRD_PARTY_LIBARIES_USAGE_FILE}")
