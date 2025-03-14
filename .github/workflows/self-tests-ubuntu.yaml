@@ -163,12 +163,7 @@ jobs:
 
       - name: Run demo driver self-tests
         id: demo_drivers
-        run: |
-          cd demo_drivers/build/
-          ninja navier_stokes.bretherton
-          cd navier_stokes/bretherton/
-          mkdir RESLT
-          ./bretherton lalala
+        run: ctest --preset ci --test-dir demo_drivers/build -j $(nproc)
         continue-on-error: true
 
       # -------------------
@@ -181,6 +176,7 @@ jobs:
           path: |
             external_distributions/install
             external_distributions/build/cmake_flags_for_oomph_lib.txt
+            external_distributions/build/cmake_flags_for_oomph_lib.json
           key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
 
       - name: Summarise validation.log for GitHub

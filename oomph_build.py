@@ -297,6 +297,7 @@ def parse_args():
         setattr(args, "root_OOMPH_ENABLE_MPI", args.OOMPH_ENABLE_MPI)
     return args
 
+
 if __name__ == "__main__":
     args = parse_args()
 
