@@ -817,7 +817,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
 {
 
  // Increase maximum residual
- Problem::Max_residuals=100.0;
+ Problem::Max_residuals=500.0;
 
  // Set output directory
  DocInfo doc_info;

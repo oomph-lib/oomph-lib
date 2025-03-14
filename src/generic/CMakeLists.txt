@@ -283,7 +283,8 @@ oomph_target_silence_warnings(
 # If oomph-lib needs MPI, link it publically so that executables using the
 # library also inherit MPI
 if(OOMPH_HAS_MPI)
-  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX)
+  target_link_libraries(${LIBNAME} PUBLIC MPI::MPI_C MPI::MPI_CXX
+                                          MPI::MPI_Fortran)
 endif()
 
 # FIXME: BLAS/LAPACK are just implementation details; do we actually need it for

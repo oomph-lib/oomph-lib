@@ -123,9 +123,13 @@ function(oomph_add_executable)
   # Specify the name of the executable that the user will see
   set_target_properties(${NAME}_${PATH_HASH} PROPERTIES OUTPUT_NAME ${NAME})
 
+  # FIXME: We should be able to get rid of below, assuming the user links
+  # to at least one oomph-lib library...
+  #
   # Provide access to the MPI libraries if we've built oomph-lib with MPI
   if(OOMPH_HAS_MPI)
-    target_link_libraries(${NAME}_${PATH_HASH} PRIVATE MPI::MPI_CXX)
+    target_link_libraries(${NAME}_${PATH_HASH} PRIVATE MPI::MPI_C MPI::MPI_CXX
+                                          MPI::MPI_Fortran)
   endif()
 
   # Link to the specified libraries

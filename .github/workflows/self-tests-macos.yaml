@@ -48,7 +48,7 @@ jobs:
         build_third_party_libs: ["OFF", "ON"]
 
     name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       # -------------------
       # INITIAL SETUP:
@@ -59,6 +59,26 @@ jobs:
       - name: Install dependencies
         run: brew install ninja fd openblas && brew reinstall gcc
 
+      - name: Install MPI dependencies (if required)
+        if: matrix.build_info.enable_mpi == 'ON'
+        run: brew install open-mpi
+
+      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
+      # that we won't need to rebuild if, e.g. ninja changes
+      - name: Get dependency versions
+        id: deps
+        run: |
+          brew list --versions openblas >> deps.txt
+          cc --version >> deps.txt
+          c++ --version >> deps.txt
+          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
+            brew list --versions open-mpi >> deps.txt
+          fi
+          echo "Dependency versions:"
+          cat deps.txt
+          HASH=$(shasum -a 256 deps.txt | awk '{print $1}')
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+
       - name: Install Python 2.7
         uses: LizardByte/setup-python-action@master
         with:
@@ -68,10 +88,6 @@ jobs:
         uses: LizardByte/setup-python-action@master
         with:
           python-version: "3.13"
-
-      - name: Install MPI dependencies (if required)
-        if: matrix.build_info.enable_mpi == 'ON'
-        run: brew install open-mpi
 
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
@@ -90,33 +106,29 @@ jobs:
       # They must NOT just pull from main/development otherwise the hash key won't change
       # and thus neither will the cache.
       - name: Cache third-party libraries artifacts
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         id: tpl-cache
         with:
           path: |
             external_distributions/install
             external_distributions/build/cmake_flags_for_oomph_lib.txt
-          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
+            external_distributions/build/cmake_flags_for_oomph_lib.json
+          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
-      - name: Configure desired third-party libraries
+      - name: Configure, build and install third-party libraries
         if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: |
-          cmake -G Ninja \
-            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
-            -DOOMPH_BUILD_CGAL=ON \
-            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
-            -B build
-        working-directory: ./external_distributions/
-
-      - name: Build desired third-party libraries
-        if: steps.tpl-cache.outputs.cache-hit != 'true'
-        run: cmake --build build
-        working-directory: ./external_distributions/
+          python3 oomph_build.py \
+             --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
+             --ext-OOMPH_BUILD_CGAL=ON \
+             --ext-OOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+             --just-build-tpl \
+             --verbose
 
       - name: Rename third-party libraries build logs
         if: steps.tpl-cache.outputs.cache-hit != 'true'
@@ -132,14 +144,12 @@ jobs:
       # -------------------
       # BUILD MAIN PROJECT:
       # -------------------
-      - name: Configure main project
-        run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
-
-      - name: Build main project
-        run: cmake --build build
-
-      - name: Install main project
-        run: cmake --install build
+      - name: Configure, build and install main project
+        run: |
+          python3 oomph_build.py \
+            --root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
+            --skip-tpl-build \
+            --verbose
 
       # -------------------
       # DEMO DRIVERS:
@@ -155,14 +165,15 @@ jobs:
       # -------------------
       # UPLOAD STUFF:
       # -------------------
-      - name: Cache third-party libraries artifacts if tests fail
+      - name: Cache third-party libraries artifacts manually if tests fail
         uses: actions/cache/save@v4
         if: steps.demo_drivers.outcome == 'failure' && steps.tpl-cache.outputs.cache-hit != 'true'
         with:
           path: |
             external_distributions/install
             external_distributions/build/cmake_flags_for_oomph_lib.txt
-          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
+            external_distributions/build/cmake_flags_for_oomph_lib.json
+          key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
 
       - name: Summarise validation.log for GitHub
         run: python3 .github/generate_validation_log_summary.py validation.log >> $GITHUB_STEP_SUMMARY

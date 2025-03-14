@@ -34,6 +34,10 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y gfortran ninja-build
 
+      - name: Install MPI dependencies (if required)
+        if: matrix.mpi == 'ON'
+        run: sudo apt-get install openmpi-bin libopenmpi-dev
+
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
         with:
@@ -42,18 +46,9 @@ jobs:
       - name: Check CMake version
         run: cmake --version
 
-      - name: Install MPI dependencies (if required)
-        if: matrix.mpi == 'ON'
-        run: sudo apt-get install openmpi-bin libopenmpi-dev
-
-      - name: Configure
-        run: cmake -G Ninja -DOOMPH_ENABLE_MPI=${{ matrix.mpi }} -B build
-        working-directory: ./external_distributions/
-
-      - name: Build/install
+      - name: Configure, build, and install
         id: build
-        run: cmake --build build
-        working-directory: ./external_distributions/
+        run: python3 oomph_build.py --OOMPH_ENABLE_MPI=${{ matrix.mpi }} --just-build-tpl --verbose
         continue-on-error: true
 
       - name: Rename build logs
