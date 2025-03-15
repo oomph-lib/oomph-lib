@@ -6,11 +6,26 @@ import sys
 import time
 from argparse import Namespace, ArgumentParser
 from pathlib import Path
+from typing import Optional
 
 
 # ANSI escape sequences for bold green text
+BOLD_RED = "\033[1;31m"
+BOLD_YELLOW = "\033[1;33m"
 BOLD_GREEN = "\033[1;32m"
 RESET_COLOR = "\033[0m"
+
+
+def bold_red(text: str):
+    return f"{BOLD_RED}{text}{RESET_COLOR}"
+
+
+def bold_yellow(text: str):
+    return f"{BOLD_YELLOW}{text}{RESET_COLOR}"
+
+
+def bold_green(text: str):
+    return f"{BOLD_GREEN}{text}{RESET_COLOR}"
 
 
 def read_external_json_file(json_path):
@@ -53,11 +68,7 @@ def run_command(cmd: list[str], cwd: Path, verbose: bool):
         sys.exit(result.returncode)
 
 
-def bold_green(text: str):
-    return f"{BOLD_GREEN}{text}{RESET_COLOR}"
-
-
-def print_progress(message, *args, pad_to: int | None = None, flush=True, **kwargs):
+def print_progress(message, *args, pad_to: Optional[int] = None, flush=True, **kwargs):
     """
     Print progress messages in bold green.
     """
@@ -74,7 +85,7 @@ def print_time(time_elapsed: float, *args, verbose: bool = False, flush=True, **
         print(bold_green(f"[{time_elapsed:.2f} s]"), *args, flush=flush, **kwargs)
 
 
-def write_presets_file(presets_dict, json_path):
+def write_presets_file(presets_dict: dict, json_path: Path):
     """
     Write the given presets_dict to json_path as CMakeUserPresets.json
     """
@@ -115,7 +126,7 @@ def generate_external_dist_preset(
 
 
 def generate_root_preset(
-    root_build: Path,
+    root_build_dir: Path,
     root_cache_vars: dict,
     generator = "Ninja",
 ) -> dict:
@@ -132,7 +143,7 @@ def generate_root_preset(
                 "displayName": "Main project",
                 "description": "Configure main project",
                 "generator": generator,
-                "binaryDir": str(root_build),
+                "binaryDir": str(root_build_dir),
                 "cacheVariables": root_cache_vars,
             }
         ],
@@ -159,10 +170,28 @@ def configure_build_and_install_external_libs(
     # Convert ext- arguments to a dict of {OOMPH_*: value}
     ext_cache = {}
     for (opt, val) in vars(args).items():
-        if (opt.startswith("ext_OOMPH")) and (val is not None):
+        if val is None:
+            continue
+        if opt.startswith("ext_OOMPH"):
             # Example: ext_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
             flag_name = opt.replace("ext_OOMPH", "OOMPH")
             ext_cache[flag_name] = val
+        elif opt.startswith("ext_CMAKE"):
+            # Example: ext_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
+            flag_name = opt.replace("ext_CMAKE", "CMAKE")
+            ext_cache[flag_name] = val
+
+    # Specify the build type; 'args.config' will always be set
+    ext_cache["CMAKE_BUILD_TYPE"] = args.config
+
+    # Do we need to add 'ccache' support?
+    if args.enable_ccache:
+        ext_cache["CMAKE_C_COMPILER_LAUNCHER"] = "ccache"
+        ext_cache["CMAKE_CXX_COMPILER_LAUNCHER"] = "ccache"
+
+    # Do we need to enable MPI?
+    if args.OOMPH_ENABLE_MPI:
+        ext_cache["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
     # Generate CMakeUserPresets.json for external project
     presets_dict = generate_external_dist_preset(external_dist_build_dir, ext_cache, args.generator)
@@ -191,7 +220,7 @@ def configure_build_and_install_external_libs(
 def configure_build_and_install_root(
     args: Namespace,
     root_dir: Path,
-    root_build: Path,
+    root_build_dir: Path,
     ext_flags: dict,
     verbose: bool
 ):
@@ -202,9 +231,28 @@ def configure_build_and_install_root(
     # Convert root- arguments to a dict
     root_cache_vars = {}
     for (opt, val) in vars(args).items():
-        if opt.startswith("root_OOMPH") and val is not None:
+        if val is None:
+            continue
+        if opt.startswith("root_OOMPH"):
+            # Example: root_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
             flag_name = opt.replace("root_OOMPH", "OOMPH")
             root_cache_vars[flag_name] = val
+        elif opt.startswith("root_CMAKE"):
+            # Example: root_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
+            flag_name = opt.replace("root_CMAKE", "CMAKE")
+            root_cache_vars[flag_name] = val
+
+    # Specify the build type; 'args.config' will always be set
+    root_cache_vars["CMAKE_BUILD_TYPE"] = args.config
+
+    # Do we need to add 'ccache' support?
+    if args.enable_ccache:
+        root_cache_vars["CMAKE_C_COMPILER_LAUNCHER"] = "ccache"
+        root_cache_vars["CMAKE_CXX_COMPILER_LAUNCHER"] = "ccache"
+
+    # Do we need to enable MPI?
+    if args.OOMPH_ENABLE_MPI:
+        root_cache_vars["OOMPH_ENABLE_MPI"] = args.OOMPH_ENABLE_MPI
 
     # Merge in ext_flags first, then user `root_OOMPH_*` flags override if duplicated
     final_cache = dict(ext_flags)
@@ -212,7 +260,7 @@ def configure_build_and_install_root(
         final_cache[k] = v
 
     # Generate root presets
-    presets_dict = generate_root_preset(root_build, final_cache, args.generator)
+    presets_dict = generate_root_preset(root_build_dir, final_cache, args.generator)
     preset_path = root_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
 
@@ -239,6 +287,7 @@ def parse_args():
     parser = ArgumentParser(description="Build automator.")
 
     parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output, show only high-level progress messages.")
+    parser.add_argument("-s", "--silence-warnings-about-existing-build-and-install-directories", action="store_true", help="Suppress warnings about existing build/install directories.")
 
     # Only want to build TPLs or root project?
     parser.add_argument("--skip-tpl-build", action="store_true", help="Skip building and installing the external_distributions/ libraries.")
@@ -246,69 +295,94 @@ def parse_args():
 
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
-    general_group.add_argument("-b", "--build-type", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release). Applies to both external and root.")
+    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
     general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use (default: Ninja). For example, 'Unix Makefiles' or 'Ninja'.")
+    general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
 
     # Flags common to both external_distributions and the root project
     common_group = parser.add_argument_group("common build flags")
-    common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", help="Enable MPI in both external distributions and root project.")
+    common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and root project.")
 
     # External distributions flags
     ext_group = parser.add_argument_group("external_distributions flags")
-    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", help="Build OpenBLAS in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", metavar="ON/OFF", help="Build SuperLU in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", metavar="ON/OFF", help="Build SuperLU_DIST in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", metavar="ON/OFF", help="Build CGAL in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_MUMPS", metavar="ON/OFF", help="Build MUMPS in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", metavar="ON/OFF", help="Build Hypre in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", metavar="ON/OFF", help="Build Trilinos in third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS", metavar="ON/OFF", help="Disable tests for third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_THIRD_PARTY_INSTALL_DIR", metavar="PATH", help="Custom install directory for third-party libraries")
-    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", metavar="PATH", help="Use a preinstalled OpenBLAS from the given path")
-    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", metavar="PATH", help="Use a preinstalled GKlib from the given path")
-    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", metavar="PATH", help="Use a preinstalled METIS from the given path")
-    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", metavar="PATH", help="Use a preinstalled ParMETIS from the given path")
-    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", metavar="PATH", help="Use a preinstalled Boost from the given path")
+    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", metavar="ON/OFF", choices=["ON", "OFF"], help="Build CGAL in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_MUMPS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build MUMPS in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Hypre in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Trilinos in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable tests for third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_THIRD_PARTY_INSTALL_DIR", metavar="PATH", help="Custom install directory for third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", metavar="PATH", help="Use a preinstalled OpenBLAS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", metavar="PATH", help="Use a preinstalled GKlib from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", metavar="PATH", help="Use a preinstalled METIS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", metavar="PATH", help="Use a preinstalled ParMETIS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", metavar="PATH", help="Use a preinstalled Boost from the given path.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE)")
+    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
 
     # Root project oomph-lib flags
     root_group = parser.add_argument_group("root project oomph-lib flags")
-    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", help="Don't silence certain warnings in oomph-lib")
-    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", help="Allow MPI oversubscription in oomph-lib")
-    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", help="Enable paranoid checks in oomph-lib")
-    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", help="Enable range checking in oomph-lib")
-    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", metavar="ON/OFF", help="Enable sanitizer support in oomph-lib")
-    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", help="Use MUMPS as the default solver in oomph-lib")
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", help="Suppress usage of Triangle library")
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", metavar="ON/OFF", help="Suppress usage of TetGen library")
+    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib.")
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library.")
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library.")
     # fmt: on
-
     args = parser.parse_args()
-
-    # Set the build type for both external_distributions and the root project
-    setattr(args, "ext_CMAKE_BUILD_TYPE", args.build_type)
-    setattr(args, "root_CMAKE_BUILD_TYPE", args.build_type)
-
-    # If the user specifies --OOMPH_ENABLE_MPI, override both ext- and root- settings to "ON"
-    if args.OOMPH_ENABLE_MPI:
-        setattr(args, "ext_OOMPH_ENABLE_MPI", args.OOMPH_ENABLE_MPI)
-        setattr(args, "root_OOMPH_ENABLE_MPI", args.OOMPH_ENABLE_MPI)
     return args
+
 
 if __name__ == "__main__":
     args = parse_args()
 
     project_root = Path(__file__).resolve().parent
-    root_build = project_root / "build"
     external_dist_dir = project_root / "external_distributions"
+
+    # Build directories
+    root_build_dir = project_root / "build"
     external_dist_build_dir = external_dist_dir / "build"
+
+    # Install directories
+    root_install_dir = project_root / "install"
+    external_dist_install_dir = external_dist_dir / "install"
+
+    # Where to inherit the flags output by external_distributions after we've built
+    # the third-party libraries that we want
     external_dist_json_path = external_dist_build_dir / "cmake_flags_for_oomph_lib.json"
 
-    # Create build directories
+    # Warn the user that the third-party libraries already exist. We can skip this warning if
+    # the user is skipping their build and just building the top level project, or if they've
+    # silenced the warnings
+    if not args.silence_warnings_about_existing_build_and_install_directories:
+        if not args.skip_tpl_build:
+            for d in (external_dist_build_dir, external_dist_install_dir):
+                if d.exists():
+                    print(bold_yellow("=" * 100))
+                    print(bold_yellow(f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"))
+                    print(bold_yellow("=" * 100))
+
+        # Warn the user that the root project build/install dirs already exist. We can skip this
+        # warning if the user is only building the third-party libraries, or if they've silenced
+        # the warnings
+        if not args.just_build_tpl:
+            for d in (root_build_dir, root_install_dir):
+                if d.exists():
+                    print(bold_yellow("=" * 100))
+                    print(bold_yellow(f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"))
+                    print(bold_yellow("=" * 100))
+
+        # Pause long enough for the user to see this warning
+        time.sleep(2)
+
+    # Make the directories if they don't exist (but it's okay if they already do)
     external_dist_build_dir.mkdir(parents=True, exist_ok=True)
-    root_build.mkdir(parents=True, exist_ok=True)
+    root_build_dir.mkdir(parents=True, exist_ok=True)
 
     # Let's go
     print_progress("\n>>> Starting project build...")
@@ -330,7 +404,7 @@ if __name__ == "__main__":
 
     # 3. Configure, build, and install root (main) project
     if not args.just_build_tpl:
-        configure_build_and_install_root(args, project_root, root_build, ext_flags, args.verbose)
+        configure_build_and_install_root(args, project_root, root_build_dir, ext_flags, args.verbose)
     else:
         print_progress(">>> Skipping root project build")
 

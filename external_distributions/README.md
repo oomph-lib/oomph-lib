@@ -99,7 +99,7 @@ Option                                      | Description                       
 `OOMPH_BUILD_MUMPS`                         | *Build MUMPS?*                                             | `ON` if MPI is enabled else `OFF`
 `OOMPH_BUILD_HYPRE`                         | *Build Hypre?*                                             | `ON`
 `OOMPH_BUILD_TRILINOS`                      | *Build Trilinos?*                                          | `ON`
-`OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTING` | *Disable testing when building the third-party libraries?* | `OFF`
+`OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS`    | *Enable testing when building the third-party libraries?*  | `OFF`
 `OOMPH_THIRD_PARTY_INSTALL_DIR`             | *Base installation directory for third-party libraries.*   | `<project_root>/install/`
 `OOMPH_USE_OPENBLAS_FROM`                   | *The path to a preinstalled version of OpenBLAS.*          | `""`
 `OOMPH_USE_BOOST_FROM`                      | *The path to a preinstalled version of Boost.*             | `""`
@@ -135,24 +135,24 @@ or, more simply
 
 ### Extended example
 
-**Example 1:** To build all of the third-party libraries without any testing (at your own peril!), run
+**Example 1:** To build all of the third-party libraries without any testing, run
 
 ```bash
->>> cmake -G Ninja -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON -B build
+>>> cmake -G Ninja -B build
 >>> cmake --build build
 ```
 
-**Example 2:** To enable MPI support but only build CGAL and OpenBLAS without any testing whatsoever, run
+**Example 2:** To enable MPI support and only build CGAL and OpenBLAS with any testing whatsoever, run
 
 ```bash
->>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -DOOMPH_BUILD_CGAL=ON -DOOMPH_BUILD_OPENBLAS=ON -DOOMPH_BUILD_MUMPS=OFF -DOOMPH_BUILD_HYPRE=OFF -DOOMPH_BUILD_TRILINOS=OFF -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON -B build
+>>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -DOOMPH_BUILD_CGAL=ON -DOOMPH_BUILD_OPENBLAS=ON -DOOMPH_BUILD_MUMPS=OFF -DOOMPH_BUILD_HYPRE=OFF -DOOMPH_BUILD_TRILINOS=OFF -DOOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON -B build
 >>> cmake --build build
 ```
 
-Since, by default, we want to build all of the third-party libraries, you can actually reduce the above commands to
+Since, by default, we build all of the third-party libraries, you can actually reduce the above commands to
 
 ```bash
->>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -DOOMPH_BUILD_MUMPS=OFF -DOOMPH_BUILD_HYPRE=OFF -DOOMPH_BUILD_TRILINOS=OFF -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON -B build
+>>> cmake -G Ninja -DOOMPH_ENABLE_MPI=ON -DOOMPH_BUILD_MUMPS=OFF -DOOMPH_BUILD_HYPRE=OFF -DOOMPH_BUILD_TRILINOS=OFF -DOOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=OFF -B build
 >>> cmake --build build
 ```
 

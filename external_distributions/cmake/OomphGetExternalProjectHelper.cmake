@@ -53,7 +53,7 @@ function(oomph_get_external_project_helper)
   endif()
 
   # If we want to disable tests, we just won't specify a test command to ExternalProject
-  if(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS)
+  if(NOT OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)
     set(TEST_COMMAND)
   endif()
 

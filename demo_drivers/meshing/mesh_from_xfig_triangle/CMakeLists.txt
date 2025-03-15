@@ -31,7 +31,7 @@ oomph_add_executable(
 add_custom_target(
   install_fig2poly COMMAND ln -sf "${CMAKE_BINARY_DIR}/fig2poly"
                            "${OOMPH_ROOT_DIR}/scripts/fig2poly")
-oomph_get_hashed_target_name(fig2poly FIG2POLY_HASHED_TARGET_NAME)
+oomph_get_target_name(fig2poly FIG2POLY_HASHED_TARGET_NAME)
 add_dependencies(install_fig2poly ${FIG2POLY_HASHED_TARGET_NAME})
 
 # ---------------------------------- TESTING ----------------------------------

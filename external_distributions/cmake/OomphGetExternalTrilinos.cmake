@@ -31,7 +31,7 @@ set(TRILINOS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/trilinos")
 # so we won't run the tests on Linux for now. Ideally we should provide Trilinos with the
 # libgfortran library when we pass OpenBLAS. It only breaks the Trilinos tests for now though.
 set(ENABLE_TRILINOS_TESTS OFF)
-if(NOT OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS)
+if(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS)
   if(APPLE)
     set(ENABLE_TRILINOS_TESTS ON)
   endif()

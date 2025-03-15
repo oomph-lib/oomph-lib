@@ -23,6 +23,7 @@ on:
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
       - "external_src/**"
+      - "oomph_build.py"
       - "scripts/**"
       - "src/**"
       - "!**/.gitignore"
@@ -47,8 +48,8 @@ jobs:
           ]
         build_third_party_libs: ["OFF", "ON"]
 
-    name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
-    runs-on: macos-latest
+    name: macOS self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
+    runs-on: macos-15
     steps:
       # -------------------
       # INITIAL SETUP:
@@ -57,36 +58,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: brew install ninja fd openblas && brew reinstall gcc
+        run: brew install ninja fd openblas ccache && brew reinstall gcc
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
         run: brew install open-mpi
 
-      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
-      # that we won't need to rebuild if, e.g. ninja changes
-      - name: Get dependency versions
-        id: deps
+      - name: Configure ccache
         run: |
-          brew list --versions openblas >> deps.txt
-          brew list --versions gcc >> deps.txt
-          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
-            brew list --versions open-mpi >> deps.txt
-          fi
-          echo "Dependency versions:"
-          cat deps.txt
-          HASH=$(shasum -a 256 deps.txt | awk '{print $1}')
-          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+          echo "CCACHE_DIR=${{ github.workspace }}/.oomph-build-cache" >> "$GITHUB_ENV"
+          echo "CCACHE_MAXSIZE=500M" >> "$GITHUB_ENV"
+          echo "CCACHE_COMPRESS=true" >> "$GITHUB_ENV"
+          ccache -z  # Reset statistics
 
-      - name: Install Python 2.7
-        uses: LizardByte/setup-python-action@master
+      - name: Restore CCache
+        id: ccache-cache
+        uses: actions/cache/restore@v4
         with:
-          python-version: "2.7"
-
-      - name: Install Python 3.13
-        uses: LizardByte/setup-python-action@master
-        with:
-          python-version: "3.13"
+          path: ${{ github.workspace }}/.oomph-build-cache
+          key: ccache-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
@@ -95,6 +85,22 @@ jobs:
 
       - name: Check CMake version
         run: cmake --version
+
+      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
+      # that we won't need to rebuild if, e.g. ninja changes
+      - name: Get dependency versions
+        id: deps
+        run: |
+          brew list --versions openblas >> deps.txt
+          cc --version >> deps.txt
+          c++ --version >> deps.txt
+          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
+            brew list --versions open-mpi >> deps.txt
+          fi
+          echo "Dependency versions:"
+          cat deps.txt
+          HASH=$(shasum -a 256 deps.txt | awk '{print $1}')
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
 
       # -------------------
       # THIRD-PARTY LIBS:
@@ -118,6 +124,8 @@ jobs:
         if: steps.tpl-cache.outputs.cache-hit != 'true'
         run: |
           python3 oomph_build.py \
+             -c Release \
+             --enable-ccache \
              --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
              --ext-OOMPH_BUILD_CGAL=ON \
@@ -125,7 +133,6 @@ jobs:
              --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
-             --ext-OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
              --just-build-tpl \
              --verbose
 
@@ -146,6 +153,7 @@ jobs:
       - name: Configure, build and install main project
         run: |
           python3 oomph_build.py \
+            --enable-ccache \
             --root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
             --skip-tpl-build \
             --verbose
@@ -154,23 +162,47 @@ jobs:
       # DEMO DRIVERS:
       # -------------------
       - name: Configure demo drivers
-        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build -DCMAKE_BUILD_TYPE=Release --log-level=VERBOSE
+        run: |
+          cmake -G Ninja \
+            -S demo_drivers \
+            -B demo_drivers/build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            --log-level=VERBOSE
 
       - name: Run demo driver self-tests
         id: demo_drivers
         run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
+      - name: Dump navier stokes bretherton output
+        run: |
+          cat demo_drivers/build/navier_stokes/bretherton/Validation/OUTPUT
+          cat demo_drivers/build/navier_stokes/bretherton/Validation/validation.log
+        continue-on-error: true
+
       # -------------------
       # UPLOAD STUFF:
       # -------------------
-      - name: Cache third-party libraries artifacts manually if tests fail
+      - name: Print CCache stats
+        run: ccache -s
+
+      - name: Cache CCache artifacts
+        if: always()
         uses: actions/cache/save@v4
-        if: steps.demo_drivers.outcome == 'failure' && steps.tpl-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ github.workspace }}/.oomph-build-cache
+          key: ${{ steps.ccache-cache.outputs.cache-primary-key }}
+
+      - name: Cache third-party libraries artifacts if we built them
+        uses: actions/cache/save@v4
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         with:
           path: |
             external_distributions/install
             external_distributions/build/cmake_flags_for_oomph_lib.txt
+            external_distributions/build/cmake_flags_for_oomph_lib.json
           key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
 
       - name: Summarise validation.log for GitHub

@@ -13,7 +13,7 @@ include(CTest)
 # Make sure we get warned about unused variables
 oomph_add_executable(NAME code_with_warning SOURCES code_with_warning.cc)
 set(CODE_WITH_WARNING_TARGET)
-oomph_get_hashed_target_name(code_with_warning CODE_WITH_WARNING_TARGET)
+oomph_get_target_name(code_with_warning CODE_WITH_WARNING_TARGET)
 target_compile_options(${CODE_WITH_WARNING_TARGET} PRIVATE -Wunused-variable)
 
 # Define the executable the normal way but just make sure we avoid building the

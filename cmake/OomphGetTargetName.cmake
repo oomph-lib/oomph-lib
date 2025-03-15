@@ -12,9 +12,10 @@
 #
 # USAGE:
 # ------
-#     oomph_get_hashed_target_name(<EXECUTABLE_NAME> <OUTPUT_VARIABLE>)
+#     oomph_get_target_name(<EXECUTABLE_NAME> <OUTPUT_VARIABLE>)
 #
-# Example:
+# EXAMPLE:
+# --------
 #
 #     # Define executable
 #     oomph_add_executable(NAME one_d_poisson
@@ -22,20 +23,17 @@
 #                          LIBRARIES oomph::poisson)
 #
 #     # Modify the target C++ standard
-#     oomph_get_hashed_target_name(one_d_poisson HASHED_TARGET_NAME)
-#     set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
+#     oomph_get_target_name(one_d_poisson OOMPH_TARGET_NAME)
+#     set_target_properties(${OOMPH_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 #
-# It is worth noting that the argument supplied to CXX_DEFINITIONS does not
-# require a -D prefix (as is usually required to indicate that it is a
-# preprocessor definition), but you can supply it if you wish.
 # =============================================================================
-# cmake-format: on
 include_guard()
 
 # ------------------------------------------------------------------------------
-function(oomph_get_hashed_target_name EXECUTABLE_NAME HASHED_TARGET_NAME)
-  string(SHA1 PATH_HASH "${CMAKE_CURRENT_SOURCE_DIR}")
+function(oomph_get_target_name EXEC_NAME OOMPH_TARGET_NAME)
+  string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")
   string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)
-  set(${HASHED_TARGET_NAME} ${EXECUTABLE_NAME}_${PATH_HASH} PARENT_SCOPE)
+  set(${OOMPH_TARGET_NAME} ${EXEC_NAME}_${PATH_HASH} PARENT_SCOPE)
 endfunction()
 # ------------------------------------------------------------------------------
+# cmake-format: on

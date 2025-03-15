@@ -282,7 +282,7 @@ message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Locate the third-party libraries that the user has provided via the
 # OOMPH_USE_<LIBRARY>_FROM flags
-include(OomphLocateOptionalThirdPartyLibs)
+include(OomphLocateThirdPartyLibs)
 
 # Add C++ definitions for all of the defined (optional) third-party libraries,
 # e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.

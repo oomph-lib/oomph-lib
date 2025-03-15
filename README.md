@@ -1446,23 +1446,23 @@ oomph_add_executable(NAME <executable-name> ...)
 # Construct target name
 string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")      # Create hash
 string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)            # Shorten to 7 characters
-set(HASHED_TARGET_NAME <executable-name>_${PATH_HASH})  # Append hash
+set(OOMPH_TARGET_NAME <executable-name>_${PATH_HASH})  # Append hash
 
 # Do something to the target...
-set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
+set_target_properties(${OOMPH_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 ```
 
-Alternatively, you can use the `oomph_get_hashed_target_name(...)` function provided by `oomph-lib`:
+Alternatively, you can use the `oomph_get_target_name(...)` function provided by `oomph-lib`:
 
 ```cmake
 # Test definition
 oomph_add_executable(NAME <executable-name> ...)
 
-# Get the hashed target name and store it in HASHED_TARGET_NAME
-oomph_get_hashed_target_name(one_d_poisson HASHED_TARGET_NAME)
+# Get the hashed target name and store it in OOMPH_TARGET_NAME
+oomph_get_target_name(one_d_poisson OOMPH_TARGET_NAME)
 
 # Do something to the target...
-set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
+set_target_properties(${OOMPH_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 ```
 
 **Note:** You do not need to append the path hash to test names as, unlike
