@@ -442,9 +442,7 @@ $MPI_RUN_COMMAND ../airy_cantilever 0 >OUTPUT_airy_0
 echo "done"
 echo ""
 echo "Running Airy Cantilever with BlockDiagonalPreconditioner with two level parallelisation"
-# $MPI_RUN_COMMAND ../airy_cantilever 1 >OUTPUT_airy_1
-echo "WARNING: Two-level parallelisation is currently broken."
-echo "[OK] (DUMMY FOR BROKEN TWO-LEVEL PARALLELISATION!)" >>validation.log
+$MPI_RUN_COMMAND ../airy_cantilever 1 >OUTPUT_airy_1
 echo "done"
 echo ""
 echo "Running Airy Cantilever with BlockTriangularPreconditioner (Upper)"
@@ -469,12 +467,12 @@ else
     $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/airy_soln.dat.gz \
         RESLT/airy_soln0.dat 0.1 10e-6 >>validation.log
 fi
-# if test "$3" = "no_fpdiff"; then
-#     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
-# else
-#     $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/airy_soln.dat.gz \
-#         RESLT/airy_soln1.dat 0.1 10e-6 >>validation.log
-# fi
+if test "$3" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
+else
+    $OOMPH_ROOT_DIR/scripts/fpdiff.py ../validata/airy_soln.dat.gz \
+        RESLT/airy_soln1.dat 0.1 10e-6 >>validation.log
+fi
 if test "$3" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >>validation.log
 else

@@ -2009,10 +2009,6 @@ namespace oomph
           cr_matrix_pt->clear();
         }
 
-        // // hierher
-        // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-        // abort();
-
         // Factorize
         superlu_dist_distributed_matrix(
           1,
@@ -2065,11 +2061,6 @@ namespace oomph
         {
           cr_matrix_pt->clear();
         }
-
-
-        // // hierher
-        // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-        // abort();
 
         // do the factorization
         superlu_dist_global_matrix(
@@ -2143,10 +2134,6 @@ namespace oomph
       {
         serial_matrix_pt->clean_up_memory();
       }
-
-      // // hierher
-      // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-      // abort();
 
       // do the factorization
       superlu_dist_global_matrix(
@@ -2453,10 +2440,6 @@ namespace oomph
     // Do the backsubsitition phase
     if (Dist_distributed_solve_data_allocated)
     {
-      // // hierher
-      // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-      // abort();
-
       // Call distributed solver
       superlu_dist_distributed_matrix(
         2,
@@ -2478,10 +2461,6 @@ namespace oomph
     }
     else if (Dist_global_solve_data_allocated)
     {
-      // // hierher
-      // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-      // abort();
-
       // Call global solver
       superlu_dist_global_matrix(
         2,
@@ -2771,10 +2750,6 @@ namespace oomph
 
       if (Dist_distributed_solve_data_allocated)
       {
-        // // hierher
-        // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-        // abort();
-
         superlu_dist_distributed_matrix(
           3,
           -1,
@@ -2796,10 +2771,6 @@ namespace oomph
       }
       if (Dist_global_solve_data_allocated)
       {
-        // // hierher
-        // oomph_info << "SuperLU_dist is currently disabled" << std::endl;
-        // abort();
-
         superlu_dist_global_matrix(
           3,
           -1,
@@ -2851,7 +2822,7 @@ namespace oomph
       if (MPI_Helpers::mpi_has_been_initialised())
       {
 #if defined(OOMPH_HAS_MUMPS) && \
-  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+    defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         return new MumpsPreconditioner;
 #else
         return new SuperLUPreconditioner;

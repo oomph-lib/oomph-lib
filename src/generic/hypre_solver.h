@@ -498,7 +498,7 @@ namespace oomph
     unsigned Euclid_print_level;
 
 
-    // hierher comment, write access functions
+    // If these are used comment and write access functions
     bool AMGEuclidSmoother_use_block_jacobi;
     bool AMGEuclidSmoother_use_row_scaling;
     bool AMGEuclidSmoother_use_ilut;
@@ -605,55 +605,6 @@ namespace oomph
                  << std::endl;
       oomph_info << "      feel free to document these if you use thes solvers"
                  << std::endl;
-
-      // /// ParaSails symmetry flag, used to inform ParaSails of
-      // /// Symmetry of definitenss of problem and type of ParaSails
-      // /// preconditioner:
-      // /// 0 = nonsymmetric and/or indefinite problem, nonsymmetric
-      // preconditioner
-      // /// 1 = SPD problem, and SPD (factored preconditioner)
-      // /// 2 = nonsymmetric, definite problem and SDP (factored preconditoner)
-      // int ParaSails_symmetry;
-
-      // /// ParaSails nlevel parameter
-      // int ParaSails_nlevel;
-
-      // /// ParaSails thresh parameter
-      // double ParaSails_thresh;
-
-      // /// ParaSails filter parameter
-      // double ParaSails_filter;
-
-      // /// Euclid drop tolerance for ILU(k) and ILUT factorization
-      // double Euclid_droptol;
-
-      // /// Flag to switch on Euclid row scaling
-      // bool Euclid_rowScale;
-
-      // /// Flag to determine if ILUT (if true) or ILU(k) is used in Euclid
-      // bool Euclid_using_ILUT;
-
-      // /// Flag to determine if Block Jacobi is used instead of PILU
-      // bool Euclid_using_BJ;
-
-      // /// Euclid level parameter for ILU(k) factorization
-      // int Euclid_level;
-
-      // /// Flag to set the level of printing from Euclid
-      // /// when the Euclid destructor is called
-      // /// 0: no printing (default)
-      // /// 1: prints summary of runtime settings and timings
-      // /// 2: as 1 plus prints memory usage
-      // unsigned Euclid_print_level;
-
-
-      //  // hierher comment, write access functions
-      //  bool AMGEuclidSmoother_use_block_jacobi;
-      //  bool AMGEuclidSmoother_use_row_scaling;
-      //  bool AMGEuclidSmoother_use_ilut;
-      //  unsigned AMGEuclidSmoother_level;
-      //  double AMGEuclidSmoother_drop_tol;
-      //  unsigned AMGEuclidSmoother_print_level;
 
       oomph_info << "- Flag to control the Hypre printing level for the Krylov"
                  << std::endl;
