@@ -336,16 +336,14 @@ namespace oomph
   //====================================================================
   class MumpsPreconditioner : virtual public Preconditioner
   {
-   
   public:
-   
     /// Constructor.
     MumpsPreconditioner()
     {
-     Solver.disable_doc_stats();
-     Solver.disable_doc_time();
+      Solver.disable_doc_stats();
+      Solver.disable_doc_time();
     }
-   
+
     /// Destructor.
     ~MumpsPreconditioner() {}
 
