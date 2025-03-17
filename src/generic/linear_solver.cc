@@ -2822,7 +2822,7 @@ namespace oomph
       if (MPI_Helpers::mpi_has_been_initialised())
       {
 #if defined(OOMPH_HAS_MUMPS) && \
-    defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+  defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         return new MumpsPreconditioner;
 #else
         return new SuperLUPreconditioner;
