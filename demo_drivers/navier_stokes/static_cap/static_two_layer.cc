@@ -655,7 +655,7 @@ public:
    //Add the nodes on the interface to the boundary 6
    //Storage for boundary coordinates (x-coordinate)
    b_coord.resize(1);
-   this->Boundary_coordinate_exists[6];
+   this->Boundary_coordinate_exists[6]=true;
    //Starting index of the nodes
    unsigned n_start=0;
    for(unsigned e=0;e<nx;e++)

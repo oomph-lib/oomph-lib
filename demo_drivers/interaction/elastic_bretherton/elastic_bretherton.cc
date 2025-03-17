@@ -2148,7 +2148,7 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
  double fraction = 0.45;*/
 
  // Open trace file
- char filename[100], dumpfile[100];   
+ char filename[100], dumpfile[500];   
  snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 
