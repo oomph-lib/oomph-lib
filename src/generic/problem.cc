@@ -24,6 +24,7 @@
 // LIC//
 // LIC//====================================================================
 
+#include <cmath>
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
@@ -3881,12 +3882,16 @@ namespace oomph
       {
         // Get the pointer to the element
         GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
+
         // Find number of dofs in the element
         unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
+
         // Set up an array
         Vector<double> element_residuals(n_element_dofs);
+
         // Fill the array
         assembly_handler_pt->get_residuals(elem_pt, element_residuals);
+
         // Now loop over the dofs and assign values to global Vector
         for (unsigned l = 0; l < n_element_dofs; l++)
         {

@@ -854,7 +854,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
    // a certain tolerance: This is cheaper to check than restarting
    // the Newton method after divergence (we'd also need to back up
    // the previous solution)
-   double maxres=100.0;
+   double maxres = Problem::Max_residuals;
    while (true)
     {
      cout << "Checking max. res for Ca = " 

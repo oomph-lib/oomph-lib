@@ -51,6 +51,7 @@ jobs:
         run: |
           python3 oomph_build.py \
              --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
+             --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
              --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
              --just-build-tpl \
              --verbose

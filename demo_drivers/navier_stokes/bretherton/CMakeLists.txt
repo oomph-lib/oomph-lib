@@ -27,7 +27,7 @@ oomph_add_test(
 # This sometimes (rather bizarrely) just times out on macOS. It shouldn't take
 # more than 10 seconds to run though...
 if(APPLE)
-  set_tests_properties(navier_stokes.bretherton PROPERTIES TIMEOUT 60)
+  set_tests_properties(navier_stokes.bretherton PROPERTIES TIMEOUT 120)
 endif()
 
 message(VERBOSE "Leaving bretherton subdirectory")
