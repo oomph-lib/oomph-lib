@@ -1456,7 +1456,7 @@ Alternatively, you can use the `oomph_get_target_name(...)` function provided by
 
 ```cmake
 # Test definition
-oomph_add_executable(NAME <executable-name> ...)
+oomph_add_executable(NAME one_d_poisson ...)
 
 # Get the hashed target name and store it in OOMPH_TARGET_NAME
 oomph_get_target_name(one_d_poisson OOMPH_TARGET_NAME)
