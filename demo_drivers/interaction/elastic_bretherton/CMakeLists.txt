@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.elastic_bretherton
   DEPENDS_ON elastic_bretherton
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction elastic_bretherton)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving elastic_bretherton subdirectory")
 # ------------------------------------------------------------------------------

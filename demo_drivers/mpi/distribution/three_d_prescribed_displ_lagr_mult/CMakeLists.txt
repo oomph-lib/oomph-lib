@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME mpi.distribution.three_d_prescribed_displ_lagr_mult
   DEPENDS_ON three_d_prescribed_displ_lagr_mult
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata distr_block_prescr.mcr
-  LABELS mpi three_d_prescribed_displ_lagr_mult)
+  TEST_FILES validate.sh validata distr_block_prescr.mcr)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.three_d_prescribed_displ_lagr_mult

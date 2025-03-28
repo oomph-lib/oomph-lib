@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME spherical_navier_stokes.spherical_couette
   DEPENDS_ON spherical_couette
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS spherical_navier_stokes spherical_couette)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spherical_couette subdirectory")
 # ------------------------------------------------------------------------------

@@ -13,7 +13,6 @@
 #  oomph_add_pure_cpp_test(TEST_NAME           <executable-name>
 #                          DEPENDS_ON          <executable/target-required-by-test>
 #                          LOG_FILE            <output-log-file>
-#                          LABELS              <labels>
 #                          [RUN_WITH           <command-to-run-executable>]
 #                          [TEST_ARGS          <arguments-for-executable>]
 #                          [SILENCE_MISSING_VALIDATA_WARNING])
@@ -38,8 +37,7 @@
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
 #                           DEPENDS_ON melt
-#                           TEST_ARGS --disable_melting --validate
-#                           LABELS heat_transfer_and_melting solid unsteady_heat)
+#                           TEST_ARGS --disable_melting --validate)
 #
 # (2) Run with MPI
 #
@@ -52,16 +50,14 @@
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
 #                           DEPENDS_ON melt
-#                           RUN_WITH mpirun -np 2
-#                           LABELS heat_transfer_and_melting solid unsteady_heat)
+#                           RUN_WITH mpirun -np 2)
 #
 # NOTE: You can also specify the MPI run command by setting
 #
 #   # Define test
 #   oomph_add_pure_cpp_test(TEST_NAME heat_transfer_and_melting.melt
 #                           DEPENDS_ON melt
-#                           RUN_WITH ${OOMPH_MPI_RUN_COMMAND}
-#                           LABELS heat_transfer_and_melting solid unsteady_heat)
+#                           RUN_WITH ${OOMPH_MPI_RUN_COMMAND})
 # =============================================================================
 # cmake-format: on
 include_guard()
@@ -72,7 +68,7 @@ function(oomph_add_pure_cpp_test)
   set(PREFIX ARG)
   set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
   set(SINGLE_VALUE_ARGS TEST_NAME DEPENDS_ON LOG_FILE)
-  set(MULTI_VALUE_ARGS LABELS RUN_WITH TEST_ARGS)
+  set(MULTI_VALUE_ARGS RUN_WITH TEST_ARGS)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -85,7 +81,6 @@ function(oomph_add_pure_cpp_test)
   set(LOG_FILE ${${PREFIX}_LOG_FILE})
   set(RUN_WITH ${${PREFIX}_RUN_WITH})
   set(TEST_ARGS ${${PREFIX}_TEST_ARGS})
-  set(LABELS ${${PREFIX}_LABELS})
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
 
@@ -96,9 +91,6 @@ function(oomph_add_pure_cpp_test)
     message(FATAL_ERROR "No DEPENDS_ON argument supplied.")
   elseif(NOT LOG_FILE)
     message(FATAL_ERROR "No LOG_FILE argument supplied.")
-  elseif(NOT LABELS)
-    message(WARNING "No LABELS supplied. These are helpful for running CTest\
-    with subsets of the tests. We recommend that you set this!")
   endif()
 
   # Check that we can run the test
@@ -173,9 +165,5 @@ function(oomph_add_pure_cpp_test)
     NAME ${TEST_NAME}
     COMMAND ${CMAKE_MAKE_PROGRAM} check_${TEST_NAME}_${PATH_HASH}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  # Add the user-provided test labels to the test so that it can be used by
-  # CTest to filter tests
-  set_tests_properties(${TEST_NAME} PROPERTIES LABELS "${LABELS}")
 endfunction()
 # ------------------------------------------------------------------------------

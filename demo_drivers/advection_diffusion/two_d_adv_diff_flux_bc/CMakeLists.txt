@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME advection_diffusion.two_d_adv_diff_flux_bc
   DEPENDS_ON two_d_adv_diff_flux_bc
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS advection_diffusion two_d_adv_diff_flux_bc)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_d_adv_diff_flux_bc subdirectory")
 # ------------------------------------------------------------------------------

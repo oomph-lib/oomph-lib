@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.unstructured_adaptive_ALE
   DEPENDS_ON unstructured_adaptive_ALE
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes unstructured_adaptive_ALE adapt)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unstructured_adaptive_ALE subdirectory")
 # ------------------------------------------------------------------------------

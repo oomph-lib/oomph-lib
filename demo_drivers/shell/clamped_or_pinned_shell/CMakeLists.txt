@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME shell.clamped_or_pinned_shell
   DEPENDS_ON clamped_or_pinned_shell
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS shell clamped_or_pinned_shell)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving clamped_or_pinned_shell subdirectory")
 # ------------------------------------------------------------------------------

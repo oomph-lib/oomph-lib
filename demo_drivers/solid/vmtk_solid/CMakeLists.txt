@@ -21,8 +21,7 @@ oomph_add_test(
   DEPENDS_ON vmtk_solid
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata solid_iliac.1.ele solid_iliac.1.face
-             solid_iliac.1.node solid_iliac.poly
-  LABELS solid vmtk_solid)
+             solid_iliac.1.node solid_iliac.poly)
 
 message(VERBOSE "Leaving vmtk_solid subdirectory")
 # ------------------------------------------------------------------------------

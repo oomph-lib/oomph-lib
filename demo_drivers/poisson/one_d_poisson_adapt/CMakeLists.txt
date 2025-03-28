@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME poisson.one_d_poisson_adapt
   DEPENDS_ON one_d_poisson_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson one_d_poisson adapt)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving one_d_poisson_adapt subdirectory")
 # ------------------------------------------------------------------------------

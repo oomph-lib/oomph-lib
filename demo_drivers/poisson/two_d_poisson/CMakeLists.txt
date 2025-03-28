@@ -37,8 +37,7 @@ oomph_add_test(
   TEST_NAME poisson.two_d_poisson
   DEPENDS_ON two_d_poisson two_d_poisson2 two_d_poisson_compare_solvers
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson two_d_poisson)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_d_poisson subdirectory")
 # ------------------------------------------------------------------------------

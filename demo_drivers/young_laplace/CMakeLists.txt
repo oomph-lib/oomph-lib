@@ -42,8 +42,7 @@ oomph_add_test(
   DEPENDS_ON barrel refineable_t_junction refineable_young_laplace
              spherical_cap_in_cylinder young_laplace
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS young_laplace)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving young_laplace subdirectory")
 # ------------------------------------------------------------------------------

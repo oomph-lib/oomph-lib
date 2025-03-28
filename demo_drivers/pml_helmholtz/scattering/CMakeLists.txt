@@ -32,8 +32,7 @@ oomph_add_test(
   DEPENDS_ON unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
              unstructured_two_d_helmholtz_scattering
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS pml_helmholtz scattering)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving scattering subdirectory")
 # ------------------------------------------------------------------------------

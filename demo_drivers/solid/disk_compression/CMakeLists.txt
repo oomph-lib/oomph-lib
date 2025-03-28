@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME solid.disk_compression
   DEPENDS_ON disk_compression
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid disk_compression)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving disk_compression subdirectory")
 # ------------------------------------------------------------------------------

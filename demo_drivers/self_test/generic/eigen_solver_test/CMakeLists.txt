@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME self_test.generic.eigen_solver_test
   DEPENDS_ON eigen_solver_test lapack_qz_find_eigenvalues_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata random_test_matrix.dat
-  LABELS eigen_solver lapack)
+  TEST_FILES validate.sh validata random_test_matrix.dat)
 
 message(VERBOSE "Leaving eigen_solver_test subdirectory")
 # ------------------------------------------------------------------------------

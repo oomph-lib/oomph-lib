@@ -49,8 +49,7 @@ oomph_add_test(
   DEPENDS_ON refineable_two_layer_soluble_surfactant
              two_layer_soluble_surfactant refineable_unstructured_two_layer_ss
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics two_layer_soluble_surfactant)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_layer_soluble_surfactant subdirectory")
 # ------------------------------------------------------------------------------

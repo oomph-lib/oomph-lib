@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME biharmonic.two_d_biharmonic
   DEPENDS_ON two_d_biharmonic
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS biharmonic two_d_biharmonic)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_d_biharmonic subdirectory")
 # ------------------------------------------------------------------------------

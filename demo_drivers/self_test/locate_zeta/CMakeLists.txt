@@ -37,8 +37,7 @@ oomph_add_test(
              locate_zeta_tester_triangle locate_zeta_tester_tetgen
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata cube_hole.1.node cube_hole.1.ele
-             cube_hole.1.face
-  LABELS locate_zeta)
+             cube_hole.1.face)
 
 message(VERBOSE "Leaving locate_zeta subdirectory")
 # ------------------------------------------------------------------------------

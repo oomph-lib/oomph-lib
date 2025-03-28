@@ -26,8 +26,7 @@ oomph_add_test(
              fluid_iliac.1.face
              fluid_iliac.1.node
              fluid_iliac.poly
-             iliac.xda
-  LABELS navier_stokes vmtk_fluid)
+             iliac.xda)
 
 message(VERBOSE "Leaving vmtk_fluid subdirectory")
 # ------------------------------------------------------------------------------

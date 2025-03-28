@@ -27,8 +27,7 @@ oomph_add_test(
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata adaptive_cavity_1_partition.dat
              adaptive_cavity_2_partition.dat load_balance.mcr
-             prune_and_balance.mcr
-  LABELS mpi adaptive_driven_cavity adapt)
+             prune_and_balance.mcr)
 
 # Tell CTest how many processors the test is likely to use
 set_tests_properties(mpi.distribution.adaptive_driven_cavity

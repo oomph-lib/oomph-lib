@@ -41,8 +41,7 @@ oomph_add_test(
              rayleigh_instability_insoluble_surfactant
              rayleigh_instability_soluble_surfactant
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics rayleigh_instability_surfactant)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving rayleigh_instability_surfactant subdirectory")
 # ------------------------------------------------------------------------------

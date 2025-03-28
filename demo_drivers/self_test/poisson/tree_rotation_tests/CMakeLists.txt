@@ -26,7 +26,6 @@ oomph_add_test(
   DEPENDS_ON tree_2d tree_3d
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS poisson tree_rotation
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving tree_rotation_tests subdirectory")

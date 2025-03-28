@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME shell.oscillating_shell
   DEPENDS_ON oscillating_shell
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS shell oscillating_shell)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving oscillating_shell subdirectory")
 # ------------------------------------------------------------------------------

@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.lagrange_enforced_flow_preconditioner
   DEPENDS_ON two_d_tilted_square
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes lagrange_enforced_flow_preconditioner)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving lagrange_enforced_flow_preconditioner subdirectory")
 # ------------------------------------------------------------------------------

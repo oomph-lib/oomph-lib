@@ -40,8 +40,7 @@ oomph_add_test(
              steady_seg_paper.bash
              unsteady_precond.bash
              unsteady_seg.bash
-             unsteady_seg_paper.bash
-  LABELS interaction fsi_channel_seg_and_precond)
+             unsteady_seg_paper.bash)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_channel_seg_and_precond PROPERTIES TIMEOUT

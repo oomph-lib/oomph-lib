@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.two_fluid_spherical_cap
   DEPENDS_ON two_fluid_spherical_cap
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes two_fluid_spherical_cap)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_fluid_spherical_cap subdirectory")
 # ------------------------------------------------------------------------------

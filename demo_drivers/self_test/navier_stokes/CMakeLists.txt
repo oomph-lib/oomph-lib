@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.navier_stokes
   DEPENDS_ON circular_driven_cavity
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes driven_cavity)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving navier_stokes subdirectory")
 # ------------------------------------------------------------------------------

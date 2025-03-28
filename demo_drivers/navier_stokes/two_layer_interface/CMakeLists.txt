@@ -34,8 +34,7 @@ oomph_add_test(
   DEPENDS_ON elastic_two_layer_interface spine_two_layer_interface
              refineable_two_layer_interface
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes two_layer_interface)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_layer_interface subdirectory")
 # ------------------------------------------------------------------------------

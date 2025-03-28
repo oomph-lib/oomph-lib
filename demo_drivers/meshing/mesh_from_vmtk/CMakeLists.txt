@@ -29,8 +29,7 @@ oomph_add_test(
   DEPENDS_ON create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
              create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata iliac.xda replies.txt
-  LABELS meshing mesh_from_vmtk)
+  TEST_FILES validate.sh validata iliac.xda replies.txt)
 
 message(VERBOSE "Leaving mesh_from_vmtk subdirectory")
 # ------------------------------------------------------------------------------

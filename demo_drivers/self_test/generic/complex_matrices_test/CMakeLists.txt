@@ -37,8 +37,7 @@ oomph_add_test(
   DEPENDS_ON dense_complex_matrix_test cr_complex_matrix_test
              cc_complex_matrix_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata
-  LABELS complex matrix ${EXTRA_FLAGS})
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving complex_matrices_test subdirectory")
 # ------------------------------------------------------------------------------

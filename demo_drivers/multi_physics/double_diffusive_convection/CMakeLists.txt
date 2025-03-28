@@ -33,8 +33,7 @@ oomph_add_test(
   TEST_NAME multi_physics.double_diffusive_convection
   DEPENDS_ON dd_convection multimesh_dd_convection multimesh_ref_dd_convection
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics double_diffusive_convection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving double_diffusive_convection subdirectory")
 # ------------------------------------------------------------------------------

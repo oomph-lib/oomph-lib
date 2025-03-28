@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.counter_rotating_disks
   DEPENDS_ON counter_rotating_disks counter_rotating_disks_ref
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linearised_axisym_navier_stokes counter_rotating_disks)
+  TEST_FILES validate.sh validata)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(linearised_axisym_navier_stokes.counter_rotating_disks

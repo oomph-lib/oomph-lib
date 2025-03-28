@@ -28,8 +28,7 @@ if(CMAKE_CXX_STANDARD MATCHES 17|20|23|26)
   oomph_add_pure_cpp_test(
     TEST_NAME gzip.one_d_poisson
     DEPENDS_ON one_d_poisson_with_gzip_validation
-    LOG_FILE validation.log
-    LABELS gzip one_d_poisson)
+    LOG_FILE validation.log)
 endif()
 
 message(VERBOSE "Leaving one_d_poisson subdirectory")

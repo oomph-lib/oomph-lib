@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME womersley.one_d_womersley
   DEPENDS_ON one_d_womersley
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS womersley one_d_womersley)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving one_d_womersley subdirectory")
 # ------------------------------------------------------------------------------

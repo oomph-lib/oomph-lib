@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME pml_fourier_decomposed_helmholtz.oscillating_sphere
   DEPENDS_ON adaptive_oscillating_sphere oscillating_sphere
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS pml_fourier_decomposed_helmholtz oscillating_sphere)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving oscillating_sphere subdirectory")
 # ------------------------------------------------------------------------------

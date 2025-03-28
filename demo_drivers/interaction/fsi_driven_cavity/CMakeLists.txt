@@ -27,7 +27,6 @@ oomph_add_test(
   DEPENDS_ON fsi_driven_cavity_driver fsi_driven_cavity_segregated_driver
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS interaction fsi_driven_cavity
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving fsi_driven_cavity subdirectory")

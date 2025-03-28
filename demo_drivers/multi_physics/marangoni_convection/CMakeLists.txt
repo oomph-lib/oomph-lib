@@ -29,8 +29,7 @@ oomph_add_test(
   TEST_NAME multi_physics.marangoni_convection
   DEPENDS_ON marangoni_convection marangoni_convection_box
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics marangoni_convection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving marangoni_convection subdirectory")
 # ------------------------------------------------------------------------------

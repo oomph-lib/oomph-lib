@@ -22,8 +22,7 @@ oomph_add_test(
   TEST_NAME multi_physics.thermal_fibre
   DEPENDS_ON thermal_fibre
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics thermal_fibre)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving thermal_fibre subdirectory")
 # ------------------------------------------------------------------------------

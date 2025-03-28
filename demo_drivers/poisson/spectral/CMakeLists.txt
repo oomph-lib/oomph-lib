@@ -30,8 +30,7 @@ oomph_add_test(
   TEST_NAME poisson.spectral
   DEPENDS_ON one_d_spectral three_d_spectral_adapt two_d_spectral_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson spectral)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spectral subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.spin_up
   DEPENDS_ON spin_up
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes spin_up)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spin_up subdirectory")
 # ------------------------------------------------------------------------------

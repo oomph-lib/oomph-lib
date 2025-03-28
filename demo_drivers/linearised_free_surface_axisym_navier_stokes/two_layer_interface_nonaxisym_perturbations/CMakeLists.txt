@@ -24,9 +24,7 @@ oomph_add_test(
     linearised_free_surface_axisym_navier_stokes.two_layer_interface_nonaxisym_perturbations
   DEPENDS_ON two_layer_interface_nonaxisym_perturbations
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linearised_free_surface_axisym_navier_stokes
-         two_layer_interface_nonaxisym_perturbations)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE
         "Leaving two_layer_interface_nonaxisym_perturbations subdirectory")

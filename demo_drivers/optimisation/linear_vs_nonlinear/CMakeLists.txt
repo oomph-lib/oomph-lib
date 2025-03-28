@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME optimisation.linear_vs_nonlinear
   DEPENDS_ON two_d_poisson
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS optimisation linear_vs_nonlinear)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving linear_vs_nonlinear subdirectory")
 # ------------------------------------------------------------------------------

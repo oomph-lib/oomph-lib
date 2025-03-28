@@ -29,8 +29,7 @@ oomph_add_test(
   TEST_NAME multi_physics.b_convection_sphere
   DEPENDS_ON b_convection_sphere multi_domain_b_convect_sph
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics b_convection_sphere)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving b_convection_sphere subdirectory")
 # ------------------------------------------------------------------------------

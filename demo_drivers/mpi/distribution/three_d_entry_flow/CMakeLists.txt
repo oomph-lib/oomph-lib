@@ -21,8 +21,7 @@ oomph_add_test(
   DEPENDS_ON three_d_entry_flow
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata three_d_entry_flow_1_partition.dat
-             three_d_entry_flow_2_partition.dat
-  LABELS mpi three_d_entry_flow)
+             three_d_entry_flow_2_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.three_d_entry_flow

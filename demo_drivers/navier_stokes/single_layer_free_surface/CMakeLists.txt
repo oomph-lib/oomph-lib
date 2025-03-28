@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.single_layer_free_surface
   DEPENDS_ON elastic_single_layer spine_single_layer
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes single_layer_free_surface)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving single_layer_free_surface subdirectory")
 # ------------------------------------------------------------------------------

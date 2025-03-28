@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.single_layer_free_surface_axisym
   DEPENDS_ON single_layer_free_surface_axisym
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes single_layer_free_surface_axisym)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving single_layer_free_surface_axisym subdirectory")
 # ------------------------------------------------------------------------------

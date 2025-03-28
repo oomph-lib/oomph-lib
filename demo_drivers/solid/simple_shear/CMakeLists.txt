@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME solid.simple_shear
   DEPENDS_ON simple_shear refineable_simple_shear
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid simple_shear)
+  TEST_FILES validate.sh validata)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(solid.simple_shear PROPERTIES TIMEOUT 3600)

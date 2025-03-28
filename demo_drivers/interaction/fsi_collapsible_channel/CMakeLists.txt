@@ -98,8 +98,7 @@ oomph_add_test(
              fsi_pseudo_solid_collapsible_channel_CR
              fsi_pseudo_solid_collapsible_channel_TH
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction fsi_collapsible_channel)
+  TEST_FILES validate.sh validata)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(interaction.fsi_collapsible_channel PROPERTIES TIMEOUT

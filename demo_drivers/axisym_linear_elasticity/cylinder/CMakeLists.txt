@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME axisym_linear_elasticity.cylinder
   DEPENDS_ON cylinder
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_linear_elasticity cylinder)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving cylinder subdirectory")
 # ------------------------------------------------------------------------------

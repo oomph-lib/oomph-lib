@@ -35,8 +35,7 @@ oomph_add_test(
   TEST_NAME interaction.fsi_osc_ring
   DEPENDS_ON fsi_osc_ring fsi_osc_ring_compare_jacs osc_ring_alg osc_ring_macro
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction fsi_osc_ring)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving fsi_osc_ring subdirectory")
 # ------------------------------------------------------------------------------

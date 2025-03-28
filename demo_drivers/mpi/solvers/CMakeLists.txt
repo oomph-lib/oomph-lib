@@ -54,8 +54,7 @@ oomph_add_test(
   TEST_NAME mpi.solvers
   DEPENDS_ON ${TEST_TARGET_DEPS}
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata multi_poisson_partition.dat
-  LABELS mpi solvers)
+  TEST_FILES validate.sh validata multi_poisson_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.solvers PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})

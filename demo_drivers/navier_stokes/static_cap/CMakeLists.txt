@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.static_cap
   DEPENDS_ON static_single_layer static_two_layer
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes static_cap)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving static_cap subdirectory")
 # ------------------------------------------------------------------------------

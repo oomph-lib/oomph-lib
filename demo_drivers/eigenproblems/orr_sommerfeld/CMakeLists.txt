@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME eigenproblems.orr_sommerfeld
   DEPENDS_ON orr_sommerfeld
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS eigenproblems orr_sommerfeld)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving orr_sommerfeld subdirectory")
 # ------------------------------------------------------------------------------

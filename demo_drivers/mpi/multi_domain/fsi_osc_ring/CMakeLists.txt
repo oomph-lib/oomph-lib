@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME mpi.multi_domain.fsi_osc_ring
   DEPENDS_ON fsi_osc_ring
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata fsi_osc_ring_partition.dat
-  LABELS mpi fsi_osc_ring)
+  TEST_FILES validate.sh validata fsi_osc_ring_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.multi_domain.fsi_osc_ring

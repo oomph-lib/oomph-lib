@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.osc_ellipse
   DEPENDS_ON osc_quarter_ellipse
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes osc_ellipse)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving osc_ellipse subdirectory")
 # ------------------------------------------------------------------------------

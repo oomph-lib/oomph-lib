@@ -34,8 +34,7 @@ oomph_add_test(
   DEPENDS_ON test_mixed_order_galerkin_petrov test_equal_order_galerkin_petrov
              test_equal_order_galerkin
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS unsteady_heat space_time_two_d_unsteady_heat)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving space_time_two_d_unsteady_heat subdirectory")
 # ------------------------------------------------------------------------------

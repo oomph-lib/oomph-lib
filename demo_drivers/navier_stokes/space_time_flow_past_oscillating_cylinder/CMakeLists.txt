@@ -23,8 +23,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.space_time_oscillating_cylinder
   DEPENDS_ON space_time_oscillating_cylinder
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes space_time_oscillating_cylinder)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE
         "Leaving space_time_flow_past_oscillating_cylinder subdirectory")

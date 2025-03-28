@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME helmholtz.point_source
   DEPENDS_ON adaptive_helmholtz_point_source helmholtz_point_source
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS helmholtz point_source)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving point_source subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.falling_jet
   DEPENDS_ON falling_jet
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes falling_jet)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving falling_jet subdirectory")
 # ------------------------------------------------------------------------------

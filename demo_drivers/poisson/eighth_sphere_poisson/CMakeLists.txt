@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME poisson.eighth_sphere_poisson
   DEPENDS_ON eighth_sphere_poisson
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson eighth_sphere_poisson)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving eighth_sphere_poisson subdirectory")
 # ------------------------------------------------------------------------------

@@ -27,8 +27,7 @@ oomph_add_test(
   DEPENDS_ON mesh_from_inline_triangle_internal_boundaries
              mesh_from_inline_triangle_internal_boundaries_extra
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS meshing mesh_from_inline_triangle_internal_boundaries)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE
         "Leaving mesh_from_inline_triangle_internal_boundaries subdirectory")

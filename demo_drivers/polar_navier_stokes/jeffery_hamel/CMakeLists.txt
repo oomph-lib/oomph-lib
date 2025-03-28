@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME polar_navier_stokes.jeffery_hamel
   DEPENDS_ON jeffery_hamel
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS polar_navier_stokes jeffery_hamel)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving jeffery_hamel subdirectory")
 # ------------------------------------------------------------------------------

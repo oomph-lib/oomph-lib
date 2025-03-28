@@ -27,8 +27,7 @@ oomph_add_test(
              fluid.fig.1.ele
              fluid.fig.1.node
              fluid.fig.1.poly
-             fluid.fig.poly
-  LABELS navier_stokes unstructured_fluid)
+             fluid.fig.poly)
 
 message(VERBOSE "Leaving unstructured_fluid subdirectory")
 # ------------------------------------------------------------------------------

@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME steady_axisym_advection_diffusion.steady_axisym_advection_diffusion
   DEPENDS_ON steady_axisym_advection_diffusion
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS steady_axisym_advection_diffusion)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving steady_axisym_advection_diffusion subdirectory")
 # ------------------------------------------------------------------------------

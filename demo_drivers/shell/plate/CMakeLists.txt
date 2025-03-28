@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME shell.plate
   DEPENDS_ON plate
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS shell plate)
+  TEST_FILES validate.sh validata)
 
 # This test contains a huge number of subtests and as such needs a larger amount
 # of time than the default to complete

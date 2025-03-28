@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME solid.static_fish
   DEPENDS_ON static_fish
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid static_fish)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving static_fish subdirectory")
 # ------------------------------------------------------------------------------

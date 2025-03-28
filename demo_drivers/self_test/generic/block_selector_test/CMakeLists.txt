@@ -21,8 +21,7 @@ oomph_add_test(
   DEPENDS_ON block_selector_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata
-             compare_block_selector_nonnull_replacement_block_pt.sh
-  LABELS block_selector_test)
+             compare_block_selector_nonnull_replacement_block_pt.sh)
 
 message(VERBOSE "Leaving block_selector_test subdirectory")
 # ------------------------------------------------------------------------------

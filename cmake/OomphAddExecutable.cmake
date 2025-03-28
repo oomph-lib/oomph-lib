@@ -44,10 +44,7 @@ function(oomph_add_executable)
   # Define the supported set of keywords
   set(PREFIX ARG)
   set(FLAGS SILENCE_NO_LIBS_SUPPLIED_WARNING)
-  set(SINGLE_VALUE_ARGS
-    NAME
-    CXX_STANDARD
-  )
+  set(SINGLE_VALUE_ARGS NAME CXX_STANDARD)
   set(MULTI_VALUE_ARGS
     SOURCES
     LIBRARIES

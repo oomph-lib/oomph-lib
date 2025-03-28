@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.unstructured_adaptive_fsi
   DEPENDS_ON unstructured_adaptive_2d_fsi
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction unstructured_adaptive_fsi adapt)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unstructured_adaptive_fsi subdirectory")
 # ------------------------------------------------------------------------------

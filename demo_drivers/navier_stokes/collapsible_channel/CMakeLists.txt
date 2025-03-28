@@ -54,8 +54,7 @@ oomph_add_test(
              collapsible_channel_algebraic_bl_squash
              collapsible_channel_bl_squash
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes collapsible_channel)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving collapsible_channel subdirectory")
 # ------------------------------------------------------------------------------

@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME flux_transport.advection
   DEPENDS_ON one_d_advection two_d_advection
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS flux_transport advection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving advection subdirectory")
 # ------------------------------------------------------------------------------

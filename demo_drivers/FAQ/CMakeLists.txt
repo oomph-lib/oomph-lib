@@ -26,7 +26,6 @@ oomph_add_test(
   DEPENDS_ON broken_this_demo customising_output
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS FAQ
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving FAQ subdirectory")

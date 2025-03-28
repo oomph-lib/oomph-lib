@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME linear_elasticity.periodic_load
   DEPENDS_ON periodic_load refineable_periodic_load
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linear_elasticity periodic_load)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving periodic_load subdirectory")
 # ------------------------------------------------------------------------------

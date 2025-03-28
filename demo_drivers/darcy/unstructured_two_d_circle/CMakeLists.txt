@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME darcy.unstructured_two_d_circle
   DEPENDS_ON adaptive_unstructured_two_d_circle unstructured_two_d_circle
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS darcy unstructured_two_d_circle)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unstructured_two_d_circle subdirectory")
 # ------------------------------------------------------------------------------

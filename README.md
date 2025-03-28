@@ -712,8 +712,7 @@ oomph_add_test(
   TEST_NAME poisson.one_d_poisson
   DEPENDS_ON one_d_poisson
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson one_d_poisson)
+  TEST_FILES validate.sh validata)
 
 # NEW
 oomph_add_test(
@@ -721,7 +720,6 @@ oomph_add_test(
   DEPENDS_ON my_one_d_poisson # <-- name of the executable required for the test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} # <-- the arguments to pass to validate.sh ('OOMPH_ROOT_DIR' is set when 'find_package(oomphlib)' is called; it is required by the validate.sh scripts to find fpdiff.py and validate_ok_count)
   TEST_FILES validate.sh validata  # <-- any files that should be available to the build directory for the test
-  LABELS poisson my_one_d_poisson  # <-- optional labels to identify families of tests
 )
 ```
 
@@ -1057,10 +1055,7 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
     {
       "name": "macos_arm64",
       "inherits": "test-base",
-      "configurePreset": "macos_arm64",
-      "output": {
-        "labelSummary": true
-      }
+      "configurePreset": "macos_arm64"
     }
   ]
 }
@@ -1355,27 +1350,15 @@ cmake --install build<br>
 
 **TODO:** Add support for `self_test`.
 
-You can filter tests based on the values of `LABELS` or `TEST_NAME` in the `oomph_add_test()` test definition. To extract these values, open the `CMakeLists.txt` file in the directory of the test you wish to run. For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
+You can filter tests based on the values of `TEST_NAME` in the `oomph_add_test()` test definition. To extract these values, open the `CMakeLists.txt` file in the directory of the test you wish to run. For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
 
 ```cmake
 oomph_add_test(
   TEST_NAME poisson.one_d_poisson
   DEPENDS_ON one_d_poisson
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson one_d_poisson)
+  TEST_FILES validate.sh validata)
 ```
-
-### Filtering by label
-
-To run the `poisson.one_d_poisson` test based on the `LABELS` key, you can pass the `-L`/`--label-regex` flag to `ctest`, as follows:
-
-```bash
-ctest -L poisson -j4         # run all tests with "poisson" in their LABELS
-ctest -L one_d_poisson -j4   # run all tests with "one_d_poisson" in their LABELS
-```
-
-It is important to note that both of these commands will cause all other tests with similar `LABELS` to be run. This can, however, be particularly helpful when you wish to run a group of tests, e.g. all Poisson-based tests (assuming they have `poisson` under their `LABELS`).
 
 ### Filtering by regex
 

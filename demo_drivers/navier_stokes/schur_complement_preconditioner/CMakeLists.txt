@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.schur_complement_preconditioner
   DEPENDS_ON three_d_fp two_d_fp
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes schur_complement_preconditioner)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving schur_complement_preconditioner subdirectory")
 # ------------------------------------------------------------------------------

@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.channel_with_leaflet
   DEPENDS_ON channel_with_leaflet
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes channel_with_leaflet)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving channel_with_leaflet subdirectory")
 # ------------------------------------------------------------------------------

@@ -39,8 +39,7 @@ oomph_add_test(
              fourier_decomposed_acoustic_fsi
              unstructured_fourier_decomposed_acoustic_fsi
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction fourier_decomposed_acoustic_fsi)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving fourier_decomposed_acoustic_fsi subdirectory")
 # ------------------------------------------------------------------------------

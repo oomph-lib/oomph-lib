@@ -24,8 +24,7 @@ if(NUM_PROCESSORS GREATER_EQUAL 4)
     TEST_NAME self_test.mpi.vector_concatenation_without_communication
     DEPENDS_ON vector_concatenation_without_communication
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-    TEST_FILES validate.sh validata
-    LABELS mpi vector)
+    TEST_FILES validate.sh validata)
 
   # Don't run this test alongside any other tests
   set_tests_properties(self_test.mpi.vector_concatenation_without_communication

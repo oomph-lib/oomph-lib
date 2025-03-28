@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.generic.vector_matrix_test
   DEPENDS_ON vector_matrix_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS vector matrix)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving vector_matrix_test subdirectory")
 # ------------------------------------------------------------------------------

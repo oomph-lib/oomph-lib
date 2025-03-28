@@ -32,8 +32,7 @@ oomph_add_test(
              airy_cantilever_6_partition.dat
              airy_cantilever_7_partition.dat
              airy_cantilever_8_partition.dat
-             airy_cantilever_9_partition.dat
-  LABELS mpi airy_cantilever)
+             airy_cantilever_9_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.airy_cantilever

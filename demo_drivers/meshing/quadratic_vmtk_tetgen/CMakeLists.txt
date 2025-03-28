@@ -32,8 +32,7 @@ oomph_add_test(
   TEST_NAME meshing.quadratic_vmtk_tetgen
   DEPENDS_ON snap_mesh xda_to_poly_fsi
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata short_coarse_mesh_files
-  LABELS meshing quadratic_vmtk_tetgen)
+  TEST_FILES validate.sh validata short_coarse_mesh_files)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(meshing.quadratic_vmtk_tetgen PROPERTIES TIMEOUT 3600)

@@ -22,8 +22,7 @@ oomph_add_test(
     axisym_displ_based_foeppl_von_karman.axisym_displ_based_foeppl_von_karman
   DEPENDS_ON axisym_displ_based_fvk
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_displ_based_foeppl_von_karman)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving axisym_displ_based_foeppl_von_karman subdirectory")
 # ------------------------------------------------------------------------------

@@ -23,8 +23,7 @@ if(OOMPH_HAS_TRILINOS)
     TEST_NAME self_test.mpi.eigen_solver
     DEPENDS_ON eigen_solver
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-    TEST_FILES validate.sh validata random_test_matrix.dat
-    LABELS mpi matrix)
+    TEST_FILES validate.sh validata random_test_matrix.dat)
 endif()
 
 message(VERBOSE "Leaving eigen_solver subdirectory")

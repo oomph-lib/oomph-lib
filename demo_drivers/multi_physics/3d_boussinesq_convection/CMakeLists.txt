@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME multi_physics.3d_boussinesq_convection
   DEPENDS_ON 3d_multimesh_ref_b_convect 3d_ref_b_convect
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics 3d_boussinesq_convection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving 3d_boussinesq_convection subdirectory")
 # ------------------------------------------------------------------------------

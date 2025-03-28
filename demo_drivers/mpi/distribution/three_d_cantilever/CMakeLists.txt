@@ -31,8 +31,7 @@ oomph_add_test(
              three_d_cantilever_6_partition.dat
              three_d_cantilever_8_partition.dat
              three_d_cantilever_9_partition.dat
-             comp.mcr
-  LABELS mpi three_d_cantilever)
+             comp.mcr)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.three_d_cantilever

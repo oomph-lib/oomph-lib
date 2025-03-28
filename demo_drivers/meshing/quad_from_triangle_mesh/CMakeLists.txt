@@ -46,8 +46,7 @@ oomph_add_test(
              solid.1.ele
              solid.1.node
              solid.1.poly
-             solid.poly
-  LABELS meshing quad_from_triangle_mesh)
+             solid.poly)
 
 message(VERBOSE "Leaving quad_from_triangle_mesh subdirectory")
 # ------------------------------------------------------------------------------
