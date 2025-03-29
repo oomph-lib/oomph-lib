@@ -93,7 +93,7 @@ def parse_args() -> Namespace:
         Namespace: Parsed arguments.
     """
     # fmt: off
-    parser = ArgumentParser(description="Find OOMPH tests in demo_drivers subdirectories by searching for one or more keywords in C++ files.")
+    parser = ArgumentParser(description="Filters tests in demo_drivers/ based on one or more keywords in C++ files.")
     parser.add_argument("--root", required=True, help="Path to the 'demo_drivers' directory")
     parser.add_argument("keywords", nargs="+", help="One or more keywords to search for in C++ source files (OR match).")
     # fmt: on
@@ -110,7 +110,7 @@ def main() -> None:
     # Show which keywords we're searching for
     keyword_list_str = ", ".join(args.keywords)
     print(f"Searching for keywords: {keyword_list_str}")
-    print(f"Within directory: {demo_drivers_root}\n")
+    print(f"Within directory: {demo_drivers_root.relative_to(Path.cwd())}\n")
 
     # 1) Identify all directories that contain a file with the given keywords
     matching_dirs = find_matching_directories(demo_drivers_root, args.keywords)

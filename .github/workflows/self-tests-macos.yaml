@@ -176,12 +176,6 @@ jobs:
         run: ctest --preset ci --test-dir demo_drivers/build -j $(sysctl -n hw.logicalcpu)
         continue-on-error: true
 
-      - name: Dump navier stokes bretherton output
-        run: |
-          cat demo_drivers/build/navier_stokes/bretherton/Validation/OUTPUT
-          cat demo_drivers/build/navier_stokes/bretherton/Validation/validation.log
-        continue-on-error: true
-
       # -------------------
       # UPLOAD STUFF:
       # -------------------
@@ -193,7 +187,10 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: ${{ github.workspace }}/.oomph-build-cache
-          key: ${{ steps.ccache-cache.outputs.cache-primary-key }}
+          # We need to make the cache key unique for the run because we want to upload the
+          # updated artifacts each time and we can't overwrite a previous cache. The old
+          # caches will eventually expire after a week anyway.
+          key: ${{ steps.ccache-cache.outputs.cache-primary-key }}-${{ github.run_id }}
 
       - name: Cache third-party libraries artifacts if we built them
         uses: actions/cache/save@v4
