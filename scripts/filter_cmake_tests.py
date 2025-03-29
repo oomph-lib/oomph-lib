@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
-from pathlib import Path
-from argparse import ArgumentParser, Namespace
+import math
+import os
 import re
 import sys
-import math
+from argparse import ArgumentParser, Namespace, REMAINDER
+from pathlib import Path
+from subprocess import run
 from typing import Set, List
 
 
-def find_matching_directories(root_dir: Path, keywords: List[str]) -> Set[Path]:
+def find_matching_directories(root_dir: Path, keywords: List[str], verbose: bool = False) -> Set[Path]:
     """
     Recursively search for C++ files containing any of the given keywords
     and return their parent directories.
@@ -42,10 +44,11 @@ def find_matching_directories(root_dir: Path, keywords: List[str]) -> Set[Path]:
     if total_files == 0:
         return matching_dirs
 
-    for (i, cpp_file) in enumerate(all_files, start=1):
+    for i, cpp_file in enumerate(all_files, start=1):
         progress_fraction = i / total_files
         progress_percent = math.floor(progress_fraction * 100)
-        print(f"\rScanning files: {progress_percent}% ({i}/{total_files})", end="", flush=True)
+        if verbose:
+            print(f"\rScanning files: {progress_percent}% ({i}/{total_files})", end="", flush=True)
 
         try:
             # Read line by line to avoid loading entire file into memory
@@ -74,7 +77,7 @@ def extract_test_names(cmake_file: Path) -> List[str]:
     test_names: List[str] = []
     pattern = re.compile(
         r"oomph_add_(?:pure_cpp_)?test\s*\((?:[^()]*\n)*?[^()]*?TEST_NAME\s+([^\s)]+)",
-        re.DOTALL
+        re.DOTALL,
     )
     try:
         content = cmake_file.read_text(encoding="utf-8")
@@ -94,10 +97,21 @@ def parse_args() -> Namespace:
     """
     # fmt: off
     parser = ArgumentParser(description="Filters tests in demo_drivers/ based on one or more keywords in C++ files.")
-    parser.add_argument("--root", required=True, help="Path to the 'demo_drivers' directory")
-    parser.add_argument("keywords", nargs="+", help="One or more keywords to search for in C++ source files (OR match).")
+    parser.add_argument("--root", required=True, help="Path to the 'demo_drivers' (sub)directory to filter tests from.")
+    parser.add_argument("--keywords", nargs="+", help="One or more keywords to search for in C++ source files (OR match).")
+    parser.add_argument("--run-from", default=None, type=Path, help="Path to the build directory to run the tests from.")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Print helpful information to the screen.")
+    parser.add_argument('ctest_args', nargs="*", help="Extra arguments to pass to ctest (use '--' to separate them from other arguments).")
+    args = parser.parse_args()
     # fmt: on
-    return parser.parse_args()
+
+    # Sanity checks
+    if args.run_from is not None:
+        if not args.run_from.is_dir():
+            parser.error("Expected argument to '--run-from' to be a directory.")
+        if not (args.run_from / "CTestTestfile.cmake").exists():
+            parser.error("Directory passed to '--run-from' does not contain a 'CTestTestfile.cmake', therefore we cannot run 'ctest' from it.")
+    return args
 
 
 def main() -> None:
@@ -105,15 +119,16 @@ def main() -> None:
 
     demo_drivers_root = Path(args.root).resolve()
     if not demo_drivers_root.exists():
-        raise FileNotFoundError(f"Error: The specified directory '{demo_drivers_root}' does not exist.")
+        raise FileNotFoundError(f"[ERROR]: Directory '{demo_drivers_root}' does not exist.")
 
     # Show which keywords we're searching for
     keyword_list_str = ", ".join(args.keywords)
-    print(f"Searching for keywords: {keyword_list_str}")
-    print(f"Within directory: {demo_drivers_root.relative_to(Path.cwd())}\n")
+    if args.verbose:
+        print(f"Searching for keywords: {keyword_list_str}")
+        print(f"Within directory: {os.path.relpath(demo_drivers_root, Path.cwd())}\n")
 
     # 1) Identify all directories that contain a file with the given keywords
-    matching_dirs = find_matching_directories(demo_drivers_root, args.keywords)
+    matching_dirs = find_matching_directories(demo_drivers_root, args.keywords, args.verbose)
     if not matching_dirs:
         print("No directories found containing any of the specified keywords.")
         sys.exit(0)
@@ -124,12 +139,15 @@ def main() -> None:
         cmake_file = d / "CMakeLists.txt"
         if cmake_file.exists():
             tests_found = extract_test_names(cmake_file)
-            if tests_found:
-                rel_path = cmake_file.relative_to(demo_drivers_root)
+            if tests_found and args.verbose:
+                rel_path = os.path.relpath(cmake_file, demo_drivers_root)
                 print(f"Found tests in {rel_path}: {tests_found}")
             all_test_names += tests_found
 
-    if not all_test_names:
+    if all_test_names:
+        if args.verbose:
+            print(f"Found {len(all_test_names)} matching tests.")
+    else:
         print("No tests found in matched directories.")
         sys.exit(0)
 
@@ -139,9 +157,25 @@ def main() -> None:
     escaped_names = [re.escape(name) for name in all_test_names]
     or_pattern = "|".join(escaped_names)
     full_pattern = f"^({or_pattern})$"
+    run_command = f"ctest -R '{full_pattern}'"
 
-    print("\nTo run these tests, use the following command in your build/ directory:\n")
-    print(f"\tctest -R '{full_pattern}'\n")
+    # Append any extra arguments to the ctest command
+    if args.ctest_args:
+        extra = " ".join(args.ctest_args)
+        run_command += " " + extra
+
+    # [OPTIONAL] 4) Run tests from specified build directory
+    if args.run_from:
+        try:
+            if args.verbose:
+                print(f"\nRunning command:\n\t{run_command}\n")
+            run(run_command, cwd=args.run_from, shell=True)
+        except Exception as _:
+            print(f"[ERROR] Failed to run command: {run_command}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        print("\nTo run these tests, run the following command from your build/ directory:")
+        print(f"\n\t{run_command}\n")
 
 
 if __name__ == "__main__":
