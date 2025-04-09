@@ -2818,21 +2818,12 @@ namespace oomph
     /// Factory function to create suitable exact preconditioner
     Preconditioner* create_exact_preconditioner()
     {
-#ifdef OOMPH_HAS_MPI
-      if (MPI_Helpers::mpi_has_been_initialised())
-      {
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
         return new MumpsPreconditioner;
 #else
         return new SuperLUPreconditioner;
 #endif
-      }
-#endif
-
-      // This is essential an else since all the other ifs would have returned
-      // already
-      return new SuperLUPreconditioner;
     }
 
   } // namespace ExactPreconditionerFactory

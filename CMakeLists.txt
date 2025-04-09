@@ -92,15 +92,14 @@ oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DE
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
 
-# Choose the default linear solver. By default, we'll enable Mumps if it is provided
-# and MPI is enabled. The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=OFF
-# to override it
-if(OOMPH_ENABLE_MPI AND OOMPH_USE_MUMPS_FROM)
-  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER ON)
-else()
-  set(OOMPH_DEFAULT_TO_MUMPS_SOLVER OFF)
-endif()
-oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${OOMPH_DEFAULT_TO_MUMPS_SOLVER})
+# Choose the default linear solver. By default, we'll disable
+# Mumps because it not only requires mpi (which would be easy to
+# check) but also requires MPI to have been initialised in the driver
+# code before it can be used; not good for all the serial self-tests.
+# The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=ON
+# to override this setting.
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
+
 
 # Fine-grained control of build of external_srcs.
 # FIXME: Make sure the SUPPRESS variables below actually work

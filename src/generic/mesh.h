@@ -505,7 +505,17 @@ namespace oomph
     void set_nboundary(const unsigned& nbound)
     {
       Boundary_node_pt.resize(nbound);
-      Boundary_coordinate_exists.resize(nbound, false);
+
+      // ODD: this should work but causes problems...
+      //Boundary_coordinate_exists.resize(nbound, false);
+
+      // ...so rewrite manually 
+      unsigned nb_old=Boundary_coordinate_exists.size();
+      Boundary_coordinate_exists.resize(nbound);
+      for (unsigned b=nb_old;b<nbound;b++)
+       {
+         Boundary_coordinate_exists[b]=false;
+       }
     }
 
     /// Clear all pointers to boundary nodes

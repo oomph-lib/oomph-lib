@@ -39,10 +39,8 @@
 #include "frontal_solver.h"
 #include "mesh.h"
 
-#ifdef OOMPH_HAS_MPI
 #ifdef OOMPH_HAS_MUMPS
 #include "mumps_solver.h"
-#endif
 #endif
 
 
@@ -93,18 +91,18 @@ namespace oomph
   //======================================================================
   class SolidICProblem : public Problem
   {
+   
   public:
+   
     /// Constructor. Initialise pointer
     /// to IC object to NULL. Create a dummy mesh that can be deleted
     /// when static problem finally goes out of scope at end of
     /// program execution.
     SolidICProblem() : IC_pt(0)
     {
-#ifdef OOMPH_HAS_MPI
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       Mumps_solver_pt = new MumpsSolver;
-#endif
 #endif
       SuperLU_solver_pt = new SuperLUSolver;
 
@@ -118,11 +116,9 @@ namespace oomph
     /// Destructor
     ~SolidICProblem()
     {
-#ifdef OOMPH_HAS_MPI
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       delete Mumps_solver_pt;
-#endif
 #endif
       delete SuperLU_solver_pt;
     }
@@ -227,12 +223,10 @@ namespace oomph
     /// timescale ratio (non-dim density).
     double Max_residual_after_consistent_newton_ic;
 
-#ifdef OOMPH_HAS_MPI
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
     /// Pointer to mumps solver
     MumpsSolver* Mumps_solver_pt;
-#endif
 #endif
 
     /// Pointer to mumps solver
@@ -295,23 +289,11 @@ namespace oomph
     setup_problem();
 
     // Choose the right linear solver
-
-#ifdef OOMPH_HAS_MPI
-    if (MPI_Helpers::mpi_has_been_initialised())
-    {
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       linear_solver_pt() = Mumps_solver_pt;
 #else
       linear_solver_pt() = SuperLU_solver_pt;
-#endif
-    }
-    else
-    {
-      linear_solver_pt() = SuperLU_solver_pt;
-    }
-#else
-    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Store times at which we need to assign ic:
@@ -459,22 +441,11 @@ namespace oomph
     setup_problem();
 
     // Choose the right linear solver
-#ifdef OOMPH_HAS_MPI
-    if (MPI_Helpers::mpi_has_been_initialised())
-    {
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       linear_solver_pt() = Mumps_solver_pt;
 #else
       linear_solver_pt() = SuperLU_solver_pt;
-#endif
-    }
-    else
-    {
-      linear_solver_pt() = SuperLU_solver_pt;
-    }
-#else
-    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Number of history values
@@ -627,22 +598,11 @@ namespace oomph
 
     // Now do the linear solve
     LinearSolver* lin_solver_pt = 0;
-#ifdef OOMPH_HAS_MPI
-    if (MPI_Helpers::mpi_has_been_initialised())
-    {
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
       lin_solver_pt = Mumps_solver_pt;
 #else
       lin_solver_pt = SuperLU_solver_pt;
-#endif
-    }
-    else
-    {
-      lin_solver_pt = SuperLU_solver_pt;
-    }
-#else
-    lin_solver_pt = SuperLU_solver_pt;
 #endif
 
     (lin_solver_pt->*solver_mem_pt)(this, correction);
