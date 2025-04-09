@@ -100,8 +100,7 @@ oomph_add_test(
   TEST_NAME linear_solvers.linear_solvers
   DEPENDS_ON ${TEST_TARGET_DEPS}
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linear_solvers)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving linear_solvers subdirectory")
 # ------------------------------------------------------------------------------

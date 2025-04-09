@@ -34,8 +34,7 @@ oomph_add_test(
              solid.fig.1.ele
              solid.fig.1.node
              solid.fig.1.poly
-             solid.fig.poly
-  LABELS solid unstructured_solid)
+             solid.fig.poly)
 
 message(VERBOSE "Leaving unstructured_solid subdirectory")
 # ------------------------------------------------------------------------------

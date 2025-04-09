@@ -35,8 +35,7 @@ oomph_add_test(
   TEST_NAME spherical_navier_stokes.spin_up
   DEPENDS_ON refineable_spin_up refineable_spin_up_cyl spin_up spin_up_cyl
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS spherical_navier_stokes spin_up)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spin_up subdirectory")
 # ------------------------------------------------------------------------------

@@ -30,8 +30,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.spine_channel
   DEPENDS_ON simple_spine_channel spine_channel spine_channel2
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes spine_channel)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spine_channel subdirectory")
 # ------------------------------------------------------------------------------

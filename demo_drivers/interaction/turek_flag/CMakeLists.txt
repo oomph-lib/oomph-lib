@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.turek_flag
   DEPENDS_ON turek_flag
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction turek_flag)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving turek_flag subdirectory")
 # ------------------------------------------------------------------------------

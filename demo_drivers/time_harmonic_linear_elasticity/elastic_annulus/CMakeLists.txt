@@ -40,8 +40,7 @@ oomph_add_test(
              time_harmonic_elastic_annulus
              unstructured_time_harmonic_elastic_annulus
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS time_harmonic_linear_elasticity elastic_annulus)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving elastic_annulus subdirectory")
 # ------------------------------------------------------------------------------

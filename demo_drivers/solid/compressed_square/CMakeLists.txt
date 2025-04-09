@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME solid.compressed_square
   DEPENDS_ON compressed_square
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid compressed_square)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving compressed_square subdirectory")
 # ------------------------------------------------------------------------------

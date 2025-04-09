@@ -28,7 +28,6 @@ oomph_add_test(
   DEPENDS_ON c_style_output
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS optimisation C_style_output
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving C_style_output subdirectory")

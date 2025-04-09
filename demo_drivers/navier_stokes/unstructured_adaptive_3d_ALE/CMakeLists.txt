@@ -24,8 +24,7 @@ if(OOMPH_HAS_CGAL)
     TEST_NAME navier_stokes.unstructured_adaptive_3d_ALE
     DEPENDS_ON uns_adapt_3d
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-    TEST_FILES validate.sh validata
-    LABELS navier_stokes unstructured_adaptive_3d_ALE adapt)
+    TEST_FILES validate.sh validata)
 endif()
 
 message(VERBOSE "Leaving unstructured_adaptive_3d_ALE subdirectory")

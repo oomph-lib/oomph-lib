@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME solid.shock_disk
   DEPENDS_ON shock_disk
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid shock_disk)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving shock_disk subdirectory")
 # ------------------------------------------------------------------------------

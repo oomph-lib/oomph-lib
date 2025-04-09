@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.three_d_static_cap
   DEPENDS_ON 3d_static_cap 3d_static_cap_elastic
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes three_d_static_cap)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving three_d_static_cap subdirectory")
 # ------------------------------------------------------------------------------

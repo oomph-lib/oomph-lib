@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME optimisation.sparse_assemble
   DEPENDS_ON sparse_assemble_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS optimisation sparse_assemble)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving sparse_assemble subdirectory")
 # ------------------------------------------------------------------------------

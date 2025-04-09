@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.fibre
   DEPENDS_ON fibre
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes fibre)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving fibre subdirectory")
 # ------------------------------------------------------------------------------

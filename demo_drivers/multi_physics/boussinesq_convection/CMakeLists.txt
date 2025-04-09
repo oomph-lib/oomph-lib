@@ -67,8 +67,7 @@ oomph_add_test(
              multi_domain_ref_b_convection_fd_for_external_data
              refineable_b_convection
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics boussinesq_convection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving boussinesq_convection subdirectory")
 # ------------------------------------------------------------------------------

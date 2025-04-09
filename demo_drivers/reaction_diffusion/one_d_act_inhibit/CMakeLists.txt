@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME reaction_diffusion.one_d_act_inhibit
   DEPENDS_ON one_d_act_inhibit
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS reaction_diffusion one_d_act_inhibit)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving one_d_act_inhibit subdirectory")
 # ------------------------------------------------------------------------------

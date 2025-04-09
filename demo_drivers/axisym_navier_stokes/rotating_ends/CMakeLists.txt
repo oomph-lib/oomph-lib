@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.rotating_ends
   DEPENDS_ON rotating_ends
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes rotating_ends)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving rotating_ends subdirectory")
 # ------------------------------------------------------------------------------

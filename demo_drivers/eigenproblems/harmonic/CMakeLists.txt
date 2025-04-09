@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME eigenproblems.harmonic
   DEPENDS_ON harmonic complex_harmonic
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS eigenproblems harmonic)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving harmonic subdirectory")
 # ------------------------------------------------------------------------------

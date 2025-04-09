@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME generalised_newtonian_axisym_navier_stokes.axisym_vibrating_shell
   DEPENDS_ON axisym_vibrating_shell_non_newtonian
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS generalised_newtonian_axisym_navier_stokes axisym_vibrating_shell)
+  TEST_FILES validate.sh validata)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(

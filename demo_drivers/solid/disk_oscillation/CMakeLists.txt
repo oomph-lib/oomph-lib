@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME solid.disk_oscillation
   DEPENDS_ON disk_oscillation
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid disk_oscillation)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving disk_oscillation subdirectory")
 # ------------------------------------------------------------------------------

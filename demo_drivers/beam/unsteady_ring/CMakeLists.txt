@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME beam.unsteady_ring
   DEPENDS_ON lin_unsteady_ring unsteady_ring
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS beam unsteady_ring)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unsteady_ring subdirectory")
 # ------------------------------------------------------------------------------

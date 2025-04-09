@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME multi_physics.spherical_shell_convection
   DEPENDS_ON spherical_shell_convection
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics spherical_shell_convection)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving spherical_shell_convection subdirectory")
 # ------------------------------------------------------------------------------

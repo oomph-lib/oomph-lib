@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.adaptive_interface
   DEPENDS_ON adaptive_interface
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes adaptive_interface adapt)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving adaptive_interface subdirectory")
 # ------------------------------------------------------------------------------

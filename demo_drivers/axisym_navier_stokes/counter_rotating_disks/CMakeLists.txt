@@ -31,8 +31,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.counter_rotating_disks
   DEPENDS_ON counter_rotating_disks counter_rotating_disks_ref
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes counter_rotating_disks)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving counter_rotating_disks subdirectory")
 # ------------------------------------------------------------------------------

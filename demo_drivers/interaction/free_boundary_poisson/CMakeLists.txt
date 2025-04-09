@@ -71,8 +71,7 @@ oomph_add_test(
              macro_element_free_boundary_poisson_non_ref
              old_macro_element_free_boundary_poisson_for_doc
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction free_boundary_poisson)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving free_boundary_poisson subdirectory")
 # ------------------------------------------------------------------------------

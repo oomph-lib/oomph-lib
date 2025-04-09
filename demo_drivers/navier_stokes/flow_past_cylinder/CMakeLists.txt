@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.flow_past_cylinder
   DEPENDS_ON flow_past_cylinder
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes flow_past_cylinder)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving flow_past_cylinder subdirectory")
 # ------------------------------------------------------------------------------

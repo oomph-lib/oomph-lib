@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME mpi.distribution.two_d_poisson_flux_bc_adapt
   DEPENDS_ON two_d_poisson_flux_bc_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata two_d_poisson_flux_partition.dat
-  LABELS mpi two_d_poisson_flux_bc_adapt adapt)
+  TEST_FILES validate.sh validata two_d_poisson_flux_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.two_d_poisson_flux_bc_adapt

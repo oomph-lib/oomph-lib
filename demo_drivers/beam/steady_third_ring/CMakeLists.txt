@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME beam.steady_third_ring
   DEPENDS_ON steady_third_ring
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS beam steady_third_ring)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving steady_third_ring subdirectory")
 # ------------------------------------------------------------------------------

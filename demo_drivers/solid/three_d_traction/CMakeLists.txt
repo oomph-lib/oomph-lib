@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME solid.three_d_traction
   DEPENDS_ON three_d_traction three_d_traction_non_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid three_d_traction)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving three_d_traction subdirectory")
 # ------------------------------------------------------------------------------

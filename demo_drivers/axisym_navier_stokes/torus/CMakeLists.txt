@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.torus
   DEPENDS_ON torus
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes torus)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving torus subdirectory")
 # ------------------------------------------------------------------------------

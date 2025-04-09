@@ -63,8 +63,7 @@ oomph_add_test(
              pitchfork
              track_pitch
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata adapt_hopf_eigen.dat
-  LABELS bifurcation_tracking)
+  TEST_FILES validate.sh validata adapt_hopf_eigen.dat)
 
 # This test needs more than the default allotted time to complete
 set_tests_properties(bifurcation_tracking.bifurcation_tracking

@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME axisym_advection_diffusion.pipe
   DEPENDS_ON pipe pipe_variable_diff
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_advection_diffusion pipe)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving pipe subdirectory")
 # ------------------------------------------------------------------------------

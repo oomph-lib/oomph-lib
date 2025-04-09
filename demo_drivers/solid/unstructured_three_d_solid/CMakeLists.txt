@@ -26,8 +26,7 @@ oomph_add_test(
              fsi_bifurcation_solid.1.face
              fsi_bifurcation_solid.1.node
              fsi_bifurcation_solid.poly
-             three_d_unstructured_solid.mcr
-  LABELS solid unstructured_three_d_solid)
+             three_d_unstructured_solid.mcr)
 
 message(VERBOSE "Leaving unstructured_three_d_solid subdirectory")
 # ------------------------------------------------------------------------------

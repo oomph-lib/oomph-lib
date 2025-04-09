@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.generic.problem_test
   DEPENDS_ON solve_eigenproblem_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata random_test_matrix.dat
-  LABELS problem)
+  TEST_FILES validate.sh validata random_test_matrix.dat)
 
 message(VERBOSE "Leaving problem_test subdirectory")
 # ------------------------------------------------------------------------------

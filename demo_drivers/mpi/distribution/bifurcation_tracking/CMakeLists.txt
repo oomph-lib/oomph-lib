@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME mpi.distribution.bifurcation_tracking
   DEPENDS_ON pitchfork track_pitch
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata
-  LABELS mpi bifurcation_tracking)
+  TEST_FILES validate.sh validata)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.bifurcation_tracking

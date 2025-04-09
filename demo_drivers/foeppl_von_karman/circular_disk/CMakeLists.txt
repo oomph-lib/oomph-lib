@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME foeppl_von_karman.circular_disk
   DEPENDS_ON circular_disk
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS foeppl_von_karman circular_disk)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving circular_disk subdirectory")
 # ------------------------------------------------------------------------------

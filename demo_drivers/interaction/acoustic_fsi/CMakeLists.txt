@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME interaction.acoustic_fsi
   DEPENDS_ON acoustic_fsi unstructured_acoustic_fsi
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction acoustic_fsi)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving acoustic_fsi subdirectory")
 # ------------------------------------------------------------------------------

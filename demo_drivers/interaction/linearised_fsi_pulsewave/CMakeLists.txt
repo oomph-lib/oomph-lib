@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME interaction.linearised_fsi_pulsewave
   DEPENDS_ON linearised_fsi_pulsewave
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction linearised_fsi_pulsewave)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving linearised_fsi_pulsewave subdirectory")
 # ------------------------------------------------------------------------------

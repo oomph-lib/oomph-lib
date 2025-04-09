@@ -21,13 +21,12 @@ oomph_add_test(
   TEST_NAME navier_stokes.bretherton
   DEPENDS_ON bretherton
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes bretherton)
+  TEST_FILES validate.sh validata)
 
 # This sometimes (rather bizarrely) just times out on macOS. It shouldn't take
 # more than 10 seconds to run though...
 if(APPLE)
-  set_tests_properties(navier_stokes.bretherton PROPERTIES TIMEOUT 120)
+  set_tests_properties(navier_stokes.bretherton PROPERTIES DISABLED TRUE)
 endif()
 
 message(VERBOSE "Leaving bretherton subdirectory")

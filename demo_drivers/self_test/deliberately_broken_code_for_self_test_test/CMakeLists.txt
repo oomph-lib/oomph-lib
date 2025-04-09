@@ -32,8 +32,7 @@ oomph_add_test(
     self_test.deliberately_broken_code_for_self_test_test.code_with_warning
   DEPENDS_ON code_with_warning
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS deliberately_broken_code_for_self_test_test code_with_warning)
+  TEST_FILES validate.sh validata)
 
 # Just try to build the driver code
 add_test(

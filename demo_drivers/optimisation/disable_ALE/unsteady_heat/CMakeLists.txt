@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME optimisation.unsteady_heat
   DEPENDS_ON two_d_unsteady_heat two_d_unsteady_heat_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS optimisation unsteady_heat)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unsteady_heat subdirectory")
 # ------------------------------------------------------------------------------

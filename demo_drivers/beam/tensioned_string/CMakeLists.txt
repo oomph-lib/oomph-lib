@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME beam.tensioned_string
   DEPENDS_ON tensioned_string
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS beam tensioned_string)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving tensioned_string subdirectory")
 # ------------------------------------------------------------------------------

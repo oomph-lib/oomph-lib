@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME poisson.poisson_with_singularity
   DEPENDS_ON two_d_poisson two_d_poisson_without_singularity_subtracted_off
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS poisson poisson_with_singularity)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving poisson_with_singularity subdirectory")
 # ------------------------------------------------------------------------------

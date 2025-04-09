@@ -22,7 +22,6 @@ oomph_add_test(
   DEPENDS_ON free_surface_rotation
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh
-  LABELS navier_stokes free_surface_rotation
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving free_surface_rotation subdirectory")

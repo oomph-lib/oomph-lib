@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.unstructured_torus
   DEPENDS_ON pressure_driven_torus unstructured_torus
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes unstructured_torus)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving unstructured_torus subdirectory")
 # ------------------------------------------------------------------------------

@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME shell.clamped_shell
   DEPENDS_ON clamped_shell clamped_shell_with_arclength_cont
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS shell clamped_shell)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving clamped_shell subdirectory")
 # ------------------------------------------------------------------------------

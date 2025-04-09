@@ -23,8 +23,7 @@ if(OOMPH_HAS_TRILINOS)
     TEST_NAME mpi.distribution.eigenproblem
     DEPENDS_ON harmonic
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-    TEST_FILES validate.sh validata
-    LABELS mpi eigenproblem)
+    TEST_FILES validate.sh validata)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.distribution.eigenproblem

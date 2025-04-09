@@ -31,8 +31,7 @@ oomph_add_test(
              solid_iliac.1.ele
              solid_iliac.1.face
              solid_iliac.1.node
-             solid_iliac.poly
-  LABELS interaction vmtk_fsi)
+             solid_iliac.poly)
 
 message(VERBOSE "Leaving vmtk_fsi subdirectory")
 # ------------------------------------------------------------------------------

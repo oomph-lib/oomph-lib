@@ -29,8 +29,7 @@ oomph_add_test(
   TEST_NAME multi_physics.axisym_heat_sphere
   DEPENDS_ON axisym_heat_sphere multi_domain_axisym_heat_sphere
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS multi_physics axisym_heat_sphere)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving axisym_heat_sphere subdirectory")
 # ------------------------------------------------------------------------------

@@ -22,8 +22,7 @@ oomph_add_test(
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata fish_fully_automatic_partition.dat
              fish_incremental_partition.dat fish_selective_partition.dat
-             distributed_adapt.mcr
-  LABELS mpi fish_poisson)
+             distributed_adapt.mcr)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.fish_poisson

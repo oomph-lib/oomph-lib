@@ -25,8 +25,7 @@ if(OOMPH_HAS_HYPRE AND OOMPH_HAS_TRILINOS)
     DEPENDS_ON pseudo_solid_collapsible_tube
     COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
     TEST_FILES validate.sh validata pseudo_solid_collapsible_tube.mcr
-               make_dummy_solid_solns.bash
-    LABELS mpi pseudo_solid_collapsible_tube)
+               make_dummy_solid_solns.bash)
 
   # Don't run this test alongside any other tests
   set_tests_properties(mpi.multi_domain.pseudo_solid_collapsible_tube

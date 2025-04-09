@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME optimisation.stored_shape_fcts
   DEPENDS_ON two_d_poisson_stored_shape_fcts
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS optimisation stored_shape_fcts)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving stored_shape_fcts subdirectory")
 # ------------------------------------------------------------------------------

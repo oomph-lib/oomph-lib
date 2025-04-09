@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME navier_stokes.three_d_entry_flow
   DEPENDS_ON full_tube three_d_entry_flow
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes three_d_entry_flow)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving three_d_entry_flow subdirectory")
 # ------------------------------------------------------------------------------

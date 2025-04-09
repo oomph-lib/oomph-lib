@@ -26,8 +26,7 @@ oomph_add_test(
              show_dist.mcr
              prune_and_balance.mcr
              two_meshes.mcr
-             partitioning.dat
-  LABELS mpi restart)
+             partitioning.dat)
 
 # Tell CTest how many processors the test is likely to use and don't let it run
 # for longer than 10 minutes

@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME advection_diffusion.two_d_variable_diff
   DEPENDS_ON two_d_variable_diff_adapt
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS advection_diffusion two_d_variable_diff)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_d_variable_diff subdirectory")
 # ------------------------------------------------------------------------------

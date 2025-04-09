@@ -21,8 +21,7 @@ oomph_add_test(
   DEPENDS_ON circular_driven_cavity
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
   TEST_FILES validate.sh validata circular_cavity_1_partition.dat
-             circular_cavity_2_partition.dat
-  LABELS mpi circular_driven_cavity)
+             circular_cavity_2_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.circular_driven_cavity

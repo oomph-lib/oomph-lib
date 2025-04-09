@@ -32,8 +32,7 @@ oomph_add_test(
   DEPENDS_ON prescribed_displ_lagr_mult prescribed_displ_lagr_mult2
              prescribed_displ_lagr_mult_precond
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS solid prescribed_displ_lagr_mult)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving prescribed_displ_lagr_mult subdirectory")
 # ------------------------------------------------------------------------------

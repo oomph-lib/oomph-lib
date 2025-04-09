@@ -26,8 +26,7 @@ oomph_add_test(
   DEPENDS_ON extrude_triangle_generated_mesh
              extrude_with_macro_element_representation
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata triangle_meshes
-  LABELS extrude_quad_mesh_to_cube_mesh)
+  TEST_FILES validate.sh validata triangle_meshes)
 
 message(VERBOSE "Leaving extrude_quad_mesh_to_cube_mesh subdirectory")
 # ------------------------------------------------------------------------------

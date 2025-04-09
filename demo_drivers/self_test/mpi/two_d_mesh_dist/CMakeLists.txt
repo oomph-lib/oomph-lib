@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.mpi.two_d_mesh_dist
   DEPENDS_ON two_d_mesh_dist
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata two_d_mesh_dist_partition.dat
-  LABELS mpi two_d_mesh)
+  TEST_FILES validate.sh validata two_d_mesh_dist_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(self_test.mpi.two_d_mesh_dist

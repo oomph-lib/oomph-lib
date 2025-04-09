@@ -53,8 +53,7 @@ oomph_add_test(
   TEST_NAME meshing.adaptive_tet_meshes
   DEPENDS_ON "${TEST_TARGET_DEPS}"
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_GMSH_COMMAND}
-  TEST_FILES validate.sh validata
-  LABELS meshing adaptive_tet_meshes adapt cgal)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving adaptive_tet_meshes subdirectory")
 # ------------------------------------------------------------------------------

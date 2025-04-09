@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME linearised_axisym_navier_stokes.time_periodic_taylor_couette
   DEPENDS_ON time_periodic_taylor_couette
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linearised_axisym_navier_stokes time_periodic_taylor_couette)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving time_periodic_taylor_couette subdirectory")
 # ------------------------------------------------------------------------------

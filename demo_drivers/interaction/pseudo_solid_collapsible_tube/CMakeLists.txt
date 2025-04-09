@@ -27,8 +27,7 @@ oomph_add_test(
   TEST_NAME interaction.pseudo_solid_collapsible_tube
   DEPENDS_ON pseudo_solid_collapsible_tube pseudo_solid_collapsible_tube_work
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction pseudo_solid_collapsible_tube)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving pseudo_solid_collapsible_tube subdirectory")
 # ------------------------------------------------------------------------------

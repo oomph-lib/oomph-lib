@@ -37,8 +37,7 @@ oomph_add_test(
   DEPENDS_ON axisym_displ_based_fvk axisym_fvk circular_disk
              displacement_based_circular_disk
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS all_foeppl_von_karman)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving all_foeppl_von_karman subdirectory")
 # ------------------------------------------------------------------------------

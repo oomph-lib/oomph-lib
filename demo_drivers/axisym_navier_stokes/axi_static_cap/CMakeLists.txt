@@ -21,8 +21,7 @@ oomph_add_test(
   TEST_NAME axisym_navier_stokes.axi_static_cap
   DEPENDS_ON axi_static_cap
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS axisym_navier_stokes axi_static_cap)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving axi_static_cap subdirectory")
 # ------------------------------------------------------------------------------

@@ -29,8 +29,7 @@ oomph_add_test(
   TEST_NAME homogenisation.two_dim
   DEPENDS_ON two_dim two_dim_hex
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS homogenisation two_dim)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_dim subdirectory")
 # ------------------------------------------------------------------------------

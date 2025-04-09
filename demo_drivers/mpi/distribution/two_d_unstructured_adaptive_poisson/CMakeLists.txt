@@ -38,8 +38,7 @@ oomph_add_test(
              unstructured_adaptive_mesh_two_outer_boundaries_crossed
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
           ${EXTRA_FLAG}
-  TEST_FILES validate.sh validata
-  LABELS mpi two_d_unstructured_adaptive_poisson adapt)
+  TEST_FILES validate.sh validata)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.distribution.two_d_unstructured_adaptive_poisson

@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.poisson.octree_test
   DEPENDS_ON octree_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS octree poisson)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving octree_test subdirectory")
 # ------------------------------------------------------------------------------

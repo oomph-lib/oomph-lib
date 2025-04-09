@@ -21,7 +21,6 @@ oomph_add_test(
   DEPENDS_ON basic_ode
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh zeros
-  LABELS ode basic_ode
   SILENCE_MISSING_VALIDATA_WARNING)
 
 message(VERBOSE "Leaving basic_ode subdirectory")

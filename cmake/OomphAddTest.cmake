@@ -10,7 +10,6 @@
 # ------
 #     oomph_add_test(TEST_NAME             <name-of-test>
 #                    DEPENDS_ON            <executables/targets-required-by-test>
-#                    LABELS                <string-list-of-labels>
 #                    COMMAND               <command-to-run-test>
 #                    [TEST_FILES           <files-required-by-test>]
 #                    [SILENCE_MISSING_VALIDATA_WARNING])
@@ -29,14 +28,12 @@
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    DEPENDS_ON one_d_poisson
 #                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-#                    TEST_FILES validate.sh validata my_extra_data_file.dat
-#                    LABELS "poisson;one_d_poisson")
+#                    TEST_FILES validate.sh validata my_extra_data_file.dat)
 #
 #     oomph_add_test(TEST_NAME poisson.one_d_poisson
 #                    DEPENDS_ON one_d_poisson
 #                    COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_VARIABLENP_RUN_COMMAND}
-#                    TEST_FILES validate.sh validata my_extra_data_file.dat
-#                    LABELS "poisson;one_d_poisson")
+#                    TEST_FILES validate.sh validata my_extra_data_file.dat)
 #
 # NOTE 1: Arguments to DEPENDS_ON must be already-defined executables
 # or targets (i.e. defined via add_executable() or oomph_add_executable()).
@@ -50,7 +47,7 @@ function(oomph_add_test)
   set(PREFIX ARG)
   set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
   set(SINGLE_VALUE_ARGS TEST_NAME)
-  set(MULTI_VALUE_ARGS TEST_FILES LABELS DEPENDS_ON COMMAND)
+  set(MULTI_VALUE_ARGS TEST_FILES DEPENDS_ON COMMAND)
 
   # Process the arguments passed in
   include(CMakeParseArguments)
@@ -64,7 +61,6 @@ function(oomph_add_test)
   set(VALIDATE_SH_COMMAND ${${PREFIX}_COMMAND})
   set(DEPENDS_ON ${${PREFIX}_DEPENDS_ON})
   set(TEST_FILES ${${PREFIX}_TEST_FILES})
-  set(LABELS ${${PREFIX}_LABELS})
 
   # Make sure the arguments are valid
   if(NOT TEST_NAME)
@@ -79,11 +75,6 @@ function(oomph_add_test)
   find_program(BASH_PROGRAM bash)
   if(NOT BASH_PROGRAM)
     message(STATUS "You don't have 'bash', so I can't construct any tests!")
-  endif()
-
-  if(NOT LABELS)
-    message(WARNING "No LABELS supplied. These are helpful for running CTest\
-    with subsets of the tests. We recommend that you set this!")
   endif()
 
   # We *nearly* always need validata, so warn if we don't have it, just in case
@@ -301,9 +292,5 @@ function(oomph_add_test)
     NAME ${TEST_NAME}
     COMMAND ${CMAKE_MAKE_PROGRAM} check_${PATH_HASH}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
-
-  # Add the user-provided test labels to the test so that it can be used by
-  # CTest to filter tests
-  set_tests_properties(${TEST_NAME} PROPERTIES LABELS "${LABELS}")
 endfunction()
 # ------------------------------------------------------------------------------

@@ -25,8 +25,7 @@ oomph_add_test(
   TEST_NAME linear_wave.two_d_linear_wave
   DEPENDS_ON two_d_linear_wave two_d_linear_wave_flux
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS linear_wave two_d_linear_wave)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving two_d_linear_wave subdirectory")
 # ------------------------------------------------------------------------------

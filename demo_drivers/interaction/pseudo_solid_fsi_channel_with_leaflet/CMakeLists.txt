@@ -26,8 +26,7 @@ oomph_add_test(
   TEST_NAME interaction.pseudo_solid_fsi_channel_with_leaflet
   DEPENDS_ON fsi_channel_with_leaflet_precond
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS interaction pseudo_solid_fsi_channel_with_leaflet)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving pseudo_solid_fsi_channel_with_leaflet subdirectory")
 # ------------------------------------------------------------------------------

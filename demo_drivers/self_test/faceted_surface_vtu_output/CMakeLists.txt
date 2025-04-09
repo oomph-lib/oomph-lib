@@ -20,8 +20,7 @@ oomph_add_test(
   TEST_NAME self_test.faceted_surface_vtu_output
   DEPENDS_ON faceted_surface_vtu_output_tester
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata random_test_matrix.dat
-  LABELS eigen_solver lapack)
+  TEST_FILES validate.sh validata random_test_matrix.dat)
 
 message(VERBOSE "Leaving faceted_surface_vtu_output subdirectory")
 # ------------------------------------------------------------------------------

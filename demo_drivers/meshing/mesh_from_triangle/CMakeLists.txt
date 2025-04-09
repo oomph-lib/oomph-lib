@@ -58,8 +58,7 @@ oomph_add_test(
              flow_past_box_adapt.1.ele
              flow_past_box_adapt.1.node
              flow_past_box_adapt.1.poly
-             flow_past_box_adapt.poly
-  LABELS meshing mesh_from_triangle)
+             flow_past_box_adapt.poly)
 
 message(VERBOSE "Leaving mesh_from_triangle subdirectory")
 # ------------------------------------------------------------------------------
