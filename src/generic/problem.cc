@@ -154,9 +154,9 @@ namespace oomph
     // Set the linear solvers, eigensolver and assembly handler
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
+    Linear_solver_pt = Default_linear_solver_pt = new MumpsSolver;
 #else
-      Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+    Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
 #endif
 
     Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
