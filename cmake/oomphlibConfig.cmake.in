@@ -27,6 +27,40 @@
 
 @PACKAGE_INIT@
 
+# Build type used for oomph‑lib
+set(OOMPH_CMAKE_BUILD_TYPE @CMAKE_BUILD_TYPE@)
+set(OOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE ON)
+set(OOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE ON)
+
+# Detect whether we're in a multi‑config generator
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(NOT IS_MULTI_CONFIG)
+  if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+    if(OOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE)
+      message(
+        STATUS
+          "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but no build "
+          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'."
+          ""
+          "NOTE: You can disable this behaviour with -DOOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE=OFF."
+      )
+      set(CMAKE_BUILD_TYPE "${OOMPH_CMAKE_BUILD_TYPE}" CACHE STRING
+          "Build type" FORCE)
+    endif()
+  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}")
+    if(OOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE)
+      message(
+        STATUS
+          "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are "
+          "now configuring with the build type '${CMAKE_BUILD_TYPE}'. Did you mean to add "
+          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}?"
+          ""
+          "NOTE: You can silence this warning with -DOOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE=OFF."
+      )
+    endif()
+  endif()
+endif()
+
 # CMake module used to specify dependencies that should be propagated to
 # consumers of the package
 include(CMakeFindDependencyMacro)
@@ -37,8 +71,6 @@ include(CMakeFindDependencyMacro)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 # -------------------[ EXTRACT IMPORTANT DEFINED VARIABLES ]-------------------
-
-# FIXME: Tidy up file
 
 # Package root directory
 set(OOMPH_PROJECT_NAME "@PROJECT_NAME@")
@@ -102,18 +134,6 @@ set(OOMPH_USE_TRILINOS_FROM "@OOMPH_USE_TRILINOS_FROM@")
 
 # The gmsh executable
 set(OOMPH_GMSH_COMMAND "@OOMPH_GMSH_COMMAND@")
-
-# Add warning
-set(OOMPH_CMAKE_BUILD_TYPE @CMAKE_BUILD_TYPE@)
-set(OOMPH_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE OFF)
-if(NOT OOMPH_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE)
-  if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}"))
-    message(
-      WARNING
-        "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are now building a project that uses oomph-lib with the build type '${CMAKE_BUILD_TYPE}'! Did you remember to build the project with -DCMAKE_BUILD_TYPE=\"${OOMPH_CMAKE_BUILD_TYPE}\"?"
-    )
-  endif()
-endif()
 
 # ---------------------[ FORWARD DEPENDENCY REQUIREMENTS ]---------------------
 
