@@ -286,33 +286,33 @@ def parse_args():
     # fmt: off
     parser = ArgumentParser(description="Build automator.")
 
-    parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output, show only high-level progress messages.")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output; without this flag we only show high-level progress messages.")
     parser.add_argument("-s", "--silence-warnings-about-existing-build-and-install-directories", action="store_true", help="Suppress warnings about existing build/install directories.")
 
-    # Only want to build TPLs or root project?
-    parser.add_argument("--skip-tpl-build", action="store_true", help="Skip building and installing the external_distributions/ libraries.")
-    parser.add_argument("--just-build-tpl", action="store_true", help="Skip configuring/building/installing the root project.")
+    # Only want to build  or root (oomph-lib) project?
+    parser.add_argument("--skip-tpl-build", action="store_true", help="Skip building and installing the external (third party) distributions/libraries.")
+    parser.add_argument("--just-build-tpl", action="store_true", help="Skip configuring/building/installing the oomph-lib project, i.e. only build third-party libraries.")
 
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
-    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
+    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external (third party) libraries and oomph-lib.")
     general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use (default: Ninja). For example, 'Unix Makefiles' or 'Ninja'.")
     general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
 
     # Flags common to both external_distributions and the root project
     common_group = parser.add_argument_group("common build flags")
-    common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and root project.")
+    common_group.add_argument("--OOMPH_ENABLE_MPI", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external (third party) distributions and in oomph-lib; default: OFF")
 
     # External distributions flags
-    ext_group = parser.add_argument_group("external_distributions flags")
-    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", metavar="ON/OFF", choices=["ON", "OFF"], help="Build CGAL in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_MUMPS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build MUMPS in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Hypre in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Trilinos in third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable tests for third-party libraries.")
+    ext_group = parser.add_argument_group("Flags for building third party (external) distributions")
+    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries; default: ON.") # hierher does this get overwritten when we have no mpi?
+    ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build CGAL in third-party libraries; default: ON; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_MUMPS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build MUMPS in third-party libraries; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Hypre in third-party libraries; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Trilinos in third-party libraries; default: ON.")
+    ext_group.add_argument("--ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable tests for third-party libraries; default: ON.")
     ext_group.add_argument("--ext-OOMPH_THIRD_PARTY_INSTALL_DIR", metavar="PATH", help="Custom install directory for third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", metavar="PATH", help="Use a preinstalled OpenBLAS from the given path.")
     ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", metavar="PATH", help="Use a preinstalled GKlib from the given path.")
@@ -321,18 +321,19 @@ def parse_args():
     ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", metavar="PATH", help="Use a preinstalled Boost from the given path.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
+    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external (third party) distributions (e.g. -DXYZ=VALUE).")
 
     # Root project oomph-lib flags
-    root_group = parser.add_argument_group("root project oomph-lib flags")
-    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib.")
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library.")
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library.")
+    root_group = parser.add_argument_group("Flags for oomph-lib build:")
+    root_group.add_argument("--root-OOMPH_OOMPH_INSTALL_DIR", metavar="PATH", help="Custom install directory for oomph-lib libraries.") # hierher Puneet: help; I'm gettig lost where to use this.
+    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib; default=ON.") # hierher Puneet: double negative; and what are they? On or off by default?
+    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib; default=OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib; default=OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib; default=OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib; default=OFF.") # hierher Puneet: what does this do? On or off by default?
+    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib; default=OFF.") # hierher Puneet: Wouldn't"yes/no" be clearer? Can just swap?
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library; default=OFF.")
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library; default=OFF.")
     # fmt: on
     args = parser.parse_args()
     return args
@@ -396,7 +397,7 @@ if __name__ == "__main__":
 
     # Attempt to locate 'cmake_flags_for_oomph_lib.json'
     if not external_dist_json_path.is_file():
-        print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
+        print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external (third party) distributions.", file=sys.stderr)
         sys.exit(1)
 
     # 2. Read external JSON file to get flags to pass to root project
