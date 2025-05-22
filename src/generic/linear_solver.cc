@@ -2820,9 +2820,9 @@ namespace oomph
     {
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-        return new MumpsPreconditioner;
+      return new MumpsPreconditioner;
 #else
-        return new SuperLUPreconditioner;
+      return new SuperLUPreconditioner;
 #endif
     }
 

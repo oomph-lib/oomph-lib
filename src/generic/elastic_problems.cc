@@ -571,9 +571,9 @@ namespace oomph
     // Choose the right linear solver
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      linear_solver_pt() = Mumps_solver_pt;
+    linear_solver_pt() = Mumps_solver_pt;
 #else
-      linear_solver_pt() = SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Assign displacements

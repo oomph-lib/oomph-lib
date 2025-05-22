@@ -91,9 +91,7 @@ namespace oomph
   //======================================================================
   class SolidICProblem : public Problem
   {
-   
   public:
-   
     /// Constructor. Initialise pointer
     /// to IC object to NULL. Create a dummy mesh that can be deleted
     /// when static problem finally goes out of scope at end of
@@ -291,9 +289,9 @@ namespace oomph
     // Choose the right linear solver
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      linear_solver_pt() = Mumps_solver_pt;
+    linear_solver_pt() = Mumps_solver_pt;
 #else
-      linear_solver_pt() = SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Store times at which we need to assign ic:
@@ -443,9 +441,9 @@ namespace oomph
     // Choose the right linear solver
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      linear_solver_pt() = Mumps_solver_pt;
+    linear_solver_pt() = Mumps_solver_pt;
 #else
-      linear_solver_pt() = SuperLU_solver_pt;
+    linear_solver_pt() = SuperLU_solver_pt;
 #endif
 
     // Number of history values
@@ -600,9 +598,9 @@ namespace oomph
     LinearSolver* lin_solver_pt = 0;
 #if defined(OOMPH_HAS_MUMPS) && \
   defined(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
-      lin_solver_pt = Mumps_solver_pt;
+    lin_solver_pt = Mumps_solver_pt;
 #else
-      lin_solver_pt = SuperLU_solver_pt;
+    lin_solver_pt = SuperLU_solver_pt;
 #endif
 
     (lin_solver_pt->*solver_mem_pt)(this, correction);
