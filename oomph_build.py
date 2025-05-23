@@ -5,32 +5,35 @@ import shutil
 import subprocess
 import sys
 import time
-from argparse import Namespace, ArgumentParser
+from argparse import BooleanOptionalAction, Namespace, ArgumentParser
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
+
+
+# ANSI escape sequences for bold green text
+@dataclass
+class AnsiEscapeCodes:
+    BOLD_RED = "\033[1;31m"
+    BOLD_YELLOW = "\033[1;33m"
+    BOLD_GREEN = "\033[1;32m"
+    RESET_COLOR = "\033[0m"
 
 
 class DirectoryExistsError(Exception):
     pass
 
 
-# ANSI escape sequences for bold green text
-BOLD_RED = "\033[1;31m"
-BOLD_YELLOW = "\033[1;33m"
-BOLD_GREEN = "\033[1;32m"
-RESET_COLOR = "\033[0m"
-
-
 def bold_red(text: str):
-    return f"{BOLD_RED}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_RED}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def bold_yellow(text: str):
-    return f"{BOLD_YELLOW}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_YELLOW}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def bold_green(text: str):
-    return f"{BOLD_GREEN}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_GREEN}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def read_external_json_file(json_path):
@@ -133,7 +136,7 @@ def generate_external_dist_preset(
 def generate_root_preset(
     root_build_dir: Path,
     root_cache_vars: dict,
-    generator = "Ninja",
+    generator="Ninja",
 ) -> dict:
     """
     Create a dictionary representing CMakeUserPresets.json for the root oomph-lib project.
@@ -186,7 +189,6 @@ def configure_build_and_install_external_libs(
         if isinstance(val, Path):
             val = str(val)
         ext_cache[flag_name] = val
-
 
     # Specify the build type; 'args.config' will always be set
     ext_cache["CMAKE_BUILD_TYPE"] = args.config
@@ -289,6 +291,30 @@ def configure_build_and_install_root(
     print_time(time_elapsed, verbose=verbose)
 
 
+def configure_build_doc(
+    args: Namespace,
+    doc_dir: Path,
+    verbose: bool,
+):
+    """
+    Configure and build the docs.
+    """
+    # Configure
+    print_progress(">>> Configuring docs", pad_to=60, end="\n" if verbose else "")
+    config_cmd = ["cmake", "-G", args.generator, "-B", "build"]
+    start_time = time.perf_counter()
+    run_command(config_cmd, doc_dir, verbose)
+    time_elapsed = time.perf_counter() - start_time
+    print_time(time_elapsed, verbose=verbose)
+
+    # Build
+    print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
+    build_cmd = ["cmake", "--build", "build"]
+    start_time = time.perf_counter()
+    run_command(build_cmd, doc_dir, verbose)
+    time_elapsed = time.perf_counter() - start_time
+    print_time(time_elapsed, verbose=verbose)
+
 
 def parse_args():
     """
@@ -309,13 +335,16 @@ def parse_args():
     parser.add_argument("-s", "--silence-warnings-about-existing-build-and-install-directories", action="store_true", help="Suppress warnings about existing build/install directories.")
 
     # Only want to build TPLs or root project?
-    parser.add_argument("--skip-tpl-build", action="store_true", help="Skip building and installing the external_distributions/ libraries.")
-    parser.add_argument("--just-build-tpl", action="store_true", help="Skip configuring/building/installing the root project.")
+    parser.add_argument("--build-tpl", action=BooleanOptionalAction, default=True, help="Build and install the third-party libraries (default: '--build-tpl').")
+    parser.add_argument("--build-root", action=BooleanOptionalAction, default=True, help="Configure, build, and install the root project (default: '--build-root').")
+    parser.add_argument("--build-doc", action="store_true", default=False, help="Configure and build the docs (default: False).")
 
+    # If the third-party libraries build/install dirs already exist, do we reuse or wipe?
     tpl_working_dirs_group = parser.add_mutually_exclusive_group()
     tpl_working_dirs_group.add_argument("--wipe-tpl-working-dirs", action="store_true", help="Wipe the third-party libraries build/install directories if they already exist.")
     tpl_working_dirs_group.add_argument("--reuse-tpl-working-dirs", action="store_true", help="Don't stop running if the third-party libraries build/install directories already exist.")
 
+    # If the root project build/install dirs already exist, do we reuse or wipe?
     root_working_dirs_group = parser.add_mutually_exclusive_group()
     root_working_dirs_group.add_argument("--wipe-root-working-dirs", action="store_true", help="Wipe the root project build/install directories if they already exist.")
     root_working_dirs_group.add_argument("--reuse-root-working-dirs", action="store_true", help="Don't stop running if the root project build/install directories already exist.")
@@ -323,7 +352,7 @@ def parse_args():
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
     general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
-    general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use (default: Ninja). For example, 'Unix Makefiles' or 'Ninja'.")
+    general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use. For example, 'Unix Makefiles' or 'Ninja' (default: Ninja).")
     general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
 
     # Flags common to both external_distributions and the root project
@@ -371,6 +400,7 @@ if __name__ == "__main__":
 
     project_root = Path(__file__).resolve().parent
     external_dist_dir = project_root / "external_distributions"
+    doc_dir = project_root / "doc"
 
     # Third-party libraries working directories
     external_dist_build_dir = external_dist_dir / "build"
@@ -379,6 +409,9 @@ if __name__ == "__main__":
     # Root project working directories
     root_build_dir = project_root / "build"
     root_install_dir = project_root / "install"
+
+    # Root project working directories
+    doc_build_dir = project_root / "build"
 
     # If the user has provided custom install directories
     if args.ext_CMAKE_INSTALL_PREFIX:
@@ -408,7 +441,7 @@ if __name__ == "__main__":
         found_dirty_directory = False
 
         barrier = "=" * 100
-        if not args.skip_tpl_build:
+        if args.build_tpl:
             for d in (external_dist_build_dir, external_dist_install_dir):
                 if d.exists():
                     found_dirty_directory = True
@@ -418,12 +451,13 @@ if __name__ == "__main__":
                         print(bold_yellow(message))
                         print(bold_yellow(barrier))
                     else:
-                        raise DirectoryExistsError(f"{message}. You can bypass this error with the flag '--reuse-tpl-working-dirs'")
+                        raise DirectoryExistsError(
+                            f"{message}. You can bypass this error with the flag '--reuse-tpl-working-dirs'")
 
         # Warn the user that the root project build/install dirs already exist. We can skip this
         # warning if the user is only building the third-party libraries, or if they've silenced
         # the warnings
-        if not args.just_build_tpl:
+        if args.build_root:
             for d in (root_build_dir, root_install_dir):
                 if d.exists():
                     found_dirty_directory = True
@@ -433,7 +467,8 @@ if __name__ == "__main__":
                         print(bold_yellow(message))
                         print(bold_yellow(barrier))
                     else:
-                        raise DirectoryExistsError(f"{message}. You can bypass this error with the flag '--reuse-root-working-dirs'")
+                        raise DirectoryExistsError(
+                            f"{message}. You can bypass this error with the flag '--reuse-root-working-dirs'")
 
         # Pause long enough for the user to see this warning
         if found_dirty_directory:
@@ -447,27 +482,32 @@ if __name__ == "__main__":
     print_progress("\n>>> Starting project build...")
     start_time = time.perf_counter()
 
-    # 1. Configure, build and install external libraries, retrieving the JSON file path
-    if not args.skip_tpl_build:
+    # Configure, build and install external libraries, retrieving the JSON file path
+    if args.build_tpl:
         configure_build_and_install_external_libs(args, external_dist_dir, external_dist_build_dir, args.verbose)
     else:
-        print_progress(">>> Skipping third-party libraries build")
+        print_progress(">>> Skipping build of third-party libraries")
 
-    # Attempt to locate 'cmake_flags_for_oomph_lib.json'
-    if not external_dist_json_path.is_file():
-        print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
-        sys.exit(1)
+    # Configure, build, and install root (main) project
+    if args.build_root:
+        # Attempt to locate 'cmake_flags_for_oomph_lib.json'
+        if not external_dist_json_path.is_file():
+            print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
+            sys.exit(1)
 
-    # 2. Read external JSON file to get flags to pass to root project
-    ext_flags = read_external_json_file(external_dist_json_path)
+        # Read external JSON file to get flags to pass to root project
+        ext_flags = read_external_json_file(external_dist_json_path)
 
-    # 3. Configure, build, and install root (main) project
-    if not args.just_build_tpl:
         configure_build_and_install_root(args, project_root, root_build_dir, ext_flags, args.verbose)
     else:
-        print_progress(">>> Skipping root project build")
+        print_progress(">>> Skipping build of root project")
+
+    # Configure and build the docs
+    if args.build_doc:
+        configure_build_doc(args, doc_dir, args.verbose)
+    else:
+        print_progress(">>> Skipping build of docs")
 
     print_progress(">>> Build and installation complete!", pad_to=60, end="")
     total_time_elapsed = time.perf_counter() - start_time
     print_time(total_time_elapsed, verbose=args.verbose)
-

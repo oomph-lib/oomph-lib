@@ -2,25 +2,36 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered doc subdirectory")
 
+# Project meta & global options
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
-project(doc C CXX Fortran)
-set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../")
+project(doc LANGUAGES C CXX Fortran)
 
+# This doc build is *configure + build* only
+set(CMAKE_SKIP_INSTALL_RULES ON)
+
+# Root of the whole repo
+set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
+
+# Generate the top-level doc from doc.txt
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE doc.txt)
 
-# Get the list of index.html files that will be produced by
-# make_index_html_in_demo_driver_dirs.bash
-execute_process(
-  COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
-          --list-byproducts OUTPUT_VARIABLE INDEX_HTML_BYPRODUCTS)
-string(REPLACE "\n" ";" INDEX_HTML_BYPRODUCTS_AS_LIST ${INDEX_HTML_BYPRODUCTS})
+# Demo-driver index pages
+set(MAKE_INDEX_SCRIPT
+    "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash")
 
-# Target to generate index.html files for the demo drivers
+# Ask the helper script what by-products it will create
+execute_process(
+  COMMAND "${MAKE_INDEX_SCRIPT}" --list-byproducts
+  OUTPUT_VARIABLE _index_raw
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+string(REPLACE "\n" ";" INDEX_HTML_BYPRODUCTS "${_index_raw}")
+
 add_custom_target(
   make_index_html_in_demo_drivers ALL
-  COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
-  BYPRODUCTS ${INDEX_HTML_BYPRODUCTS_AS_LIST})
+  COMMAND "${MAKE_INDEX_SCRIPT}"
+  BYPRODUCTS ${INDEX_HTML_BYPRODUCTS}
+  COMMENT "Generating index.html files for demo drivers")
 
 # TODO: Update "the_distribution"; it's based on the soon-to-be-deprecated
 # Makefile.am stuff
