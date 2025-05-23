@@ -70,6 +70,11 @@ oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
 oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
 oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
 
+# Set the default installation path
+if(NOT CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install")
+endif()
+
 # Path-like flags
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
