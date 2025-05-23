@@ -45,9 +45,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 # cmake-format: off
 
 # The project directory; passed to consumers of the exported library in case they
-# need to use anything from there, e.g. the demo_drivers nearly all need the
-# fpdiff.py script from the scripts/ subdirectory.
-# FIXME: Change this as we will be installing the fpdiff.py file...
+# need to use anything from there
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 # Define the key files we need to install
