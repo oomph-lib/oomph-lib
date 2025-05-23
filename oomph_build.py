@@ -207,8 +207,11 @@ def configure_build_and_install_external_libs(
     preset_path = external_dist_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
 
+    # The ending of the string
+    end = "\n" if verbose else ""
+
     # Construct configuration command
-    print_progress(">>> Configuring third-party libraries", pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Configuring third-party libraries", pad_to=60, end=end)
     config_cmd = ["cmake", "--preset", "tpl"]
     if args.ext_extra_flags:
         config_cmd += args.ext_extra_flags
@@ -218,7 +221,7 @@ def configure_build_and_install_external_libs(
     print_time(time_elapsed, verbose=verbose)
 
     # Build and install external
-    print_progress(">>> Building and installing", pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Building and installing third-party libraries", pad_to=60, end=end)
     build_cmd = ["cmake", "--build", "--preset", "tpl"]
     start_time = time.perf_counter()
     run_command(build_cmd, external_dist_dir, verbose)
@@ -487,6 +490,12 @@ if __name__ == "__main__":
         configure_build_and_install_external_libs(args, external_dist_dir, external_dist_build_dir, args.verbose)
     else:
         print_progress(">>> Skipping build of third-party libraries")
+
+    # If we've *silently* built the third-party libs but the user isn't building the root
+    # project, we should dump the usage instructions incase they want to do it themselves
+    if args.build_tpl and not args.build_root and not args.verbose:
+        contents = (external_dist_build_dir / "usage.txt").read_text()
+        print(f"{contents}\n")
 
     # Configure, build, and install root (main) project
     if args.build_root:
