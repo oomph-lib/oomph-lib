@@ -125,7 +125,7 @@ endif()
 
 set(CTEST_EXCLUDE_REGEX_STRING "")
 if(APPLE)
-  # FIXME: The TeuchosCore_TypeConversions_UnitTest and *_MPI_4 tests die on macOS. Not sure
+  # TODO: The TeuchosCore_TypeConversions_UnitTest and *_MPI_4 tests die on macOS. Not sure
   # how to fix this yet why so we'll just filter it out for now. Need to come back to this.
   set(CTEST_EXCLUDE_REGEX_STRING "(TeuchosCore_TypeConversions_UnitTest|.*_MPI_4)")
 endif()
