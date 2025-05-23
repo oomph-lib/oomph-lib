@@ -352,6 +352,11 @@ def parse_args():
     root_working_dirs_group.add_argument("--wipe-root-working-dirs", action="store_true", help="Wipe the root project build/install directories if they already exist.")
     root_working_dirs_group.add_argument("--reuse-root-working-dirs", action="store_true", help="Don't stop running if the root project build/install directories already exist.")
 
+    # If the root project build/install dirs already exist, do we reuse or wipe?
+    doc_working_dirs_group = parser.add_mutually_exclusive_group()
+    doc_working_dirs_group.add_argument("--wipe-doc-working-dirs", action="store_true", help="Wipe the doc build directory if it already exists.")
+    doc_working_dirs_group.add_argument("--reuse-doc-working-dirs", action="store_true", help="Don't stop running if the doc build directory already exists.")
+
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
     general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
@@ -432,6 +437,8 @@ if __name__ == "__main__":
     if args.wipe_root_working_dirs:
         wipe_dir_if_found(root_build_dir)
         wipe_dir_if_found(root_install_dir)
+    if args.wipe_doc_working_dirs:
+        wipe_dir_if_found(doc_build_dir)
 
     # Where to inherit the flags output by external_distributions after we've built
     # the third-party libraries that we want
@@ -455,7 +462,7 @@ if __name__ == "__main__":
                         print(bold_yellow(barrier))
                     else:
                         raise DirectoryExistsError(
-                            f"{message}. You can bypass this error with the flag '--reuse-tpl-working-dirs'")
+                            f"{message}. You can bypass this error with the flag '--reuse-tpl-working-dirs' or wipe them with '--wipe-tpl-working-dirs'")
 
         # Warn the user that the root project build/install dirs already exist. We can skip this
         # warning if the user is only building the third-party libraries, or if they've silenced
@@ -471,15 +478,26 @@ if __name__ == "__main__":
                         print(bold_yellow(barrier))
                     else:
                         raise DirectoryExistsError(
-                            f"{message}. You can bypass this error with the flag '--reuse-root-working-dirs'")
+                            f"{message}. You can bypass this error with the flag '--reuse-root-working-dirs' or wipe them with '--wipe-root-working-dirs'")
+
+        # Warn the user that the root project build/install dirs already exist. We can skip this
+        # warning if the user is only building the third-party libraries, or if they've silenced
+        # the warnings
+        if args.build_doc:
+            if doc_build_dir.exists():
+                found_dirty_directory = True
+                message = f"\nWARNING: Directory:\n\n\t{doc_build_dir}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
+                if args.reuse_doc_working_dirs:
+                    print(bold_yellow(barrier))
+                    print(bold_yellow(message))
+                    print(bold_yellow(barrier))
+                else:
+                    raise DirectoryExistsError(
+                        f"{message}. You can bypass this error with the flag '--reuse-doc-working-dirs' or wipe them with '--wipe-doc-working-dirs'")
 
         # Pause long enough for the user to see this warning
         if found_dirty_directory:
             time.sleep(2)
-
-    # Make the directories if they don't exist (but it's okay if they already do)
-    external_dist_build_dir.mkdir(parents=True, exist_ok=True)
-    root_build_dir.mkdir(parents=True, exist_ok=True)
 
     # Let's go
     print_progress("\n>>> Starting project build...")
