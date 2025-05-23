@@ -24,7 +24,7 @@ include_guard()
 # Where to get the code from and where to install it to
 set(MUMPS_TARBALL_URL
     https://github.com/puneetmatharu/mumps/archive/refs/tags/v5.6.2.5.tar.gz)
-set(MUMPS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/mumps")
+set(MUMPS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/mumps")
 
 # Should we run the tests?
 set(ENABLE_MUMPS_TESTS OFF)

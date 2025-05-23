@@ -22,7 +22,7 @@ include_guard()
 
 # TODO: Upload to oomph-lib repo
 set(OPENBLAS_TARBALL_URL ${OOMPH_THIRD_PARTY_TAR_FILE_URL}/OpenBLAS-0.3.25.tar.gz)
-set(OPENBLAS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/openblas")
+set(OPENBLAS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/openblas")
 
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(

@@ -72,11 +72,6 @@ oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when buildi
 
 # Path-like flags
 oomph_path_option(
-  FLAG OOMPH_THIRD_PARTY_INSTALL_DIR
-  DEFAULT "${CMAKE_CURRENT_LIST_DIR}/install"
-  DOCSTRING "Base installation directory for third-party libraries."
-)
-oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
   DOCSTRING "The path to a preinstalled version of OpenBLAS."
 )

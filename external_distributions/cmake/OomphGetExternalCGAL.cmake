@@ -24,8 +24,8 @@ set(BOOST_TARBALL_URL ${OOMPH_THIRD_PARTY_TAR_FILE_URL}/boost_1_83_0.tar.gz)
 set(CGAL_TARBALL_URL https://github.com/CGAL/cgal/releases/download/v6.0.1/CGAL-6.0.1.tar.xz)
 
 # Set the default installation paths
-set(BOOST_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/boost")
-set(CGAL_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/cgal")
+set(BOOST_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/boost")
+set(CGAL_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/cgal")
 
 # If we've already been given Boost, we'll use the files from there
 if(OOMPH_USE_BOOST_FROM)
