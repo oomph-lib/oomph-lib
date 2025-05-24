@@ -390,6 +390,7 @@ def parse_args():
     # Root project oomph-lib flags
     root_group = parser.add_argument_group("root project oomph-lib flags")
     root_group.add_argument("--root-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
+    root_group.add_argument("--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set).")
     root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib.")
     root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
     root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")

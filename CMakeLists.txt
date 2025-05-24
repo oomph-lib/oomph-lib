@@ -84,6 +84,9 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
+# Control the installation path
+oomph_option(OOMPH_ALLOW_INSTALL_AS_SUPERUSER "Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set)" OFF)
+
 # General build options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
