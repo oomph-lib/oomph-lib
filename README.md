@@ -97,8 +97,7 @@
 - [CMake Presets](#cmake-presets)
   - [`CMakePresets.json`](#cmakepresetsjson)
   - [`CMakeUserPresets.json` example](#cmakeuserpresetsjson-example)
-- [Advanced testing](#advanced-testing)
-  - [Filtering by label](#filtering-by-label)
+- [Advanced testing](#advanced-testing)****
   - [Filtering by regex](#filtering-by-regex)
   - [Disabling a test](#disabling-a-test)
 - [Customising driver codes](#customising-driver-codes)
@@ -197,15 +196,17 @@ Note that, by default, the last step installs the headers and generated library 
 
 To uninstall the library simply delete the `build/` and `install/` directories in the `oomph-lib` root directory.
 
+Alternatively, you can use the provided Python build script (`oomph_build.py`) to perform the above configure, build, and install steps in one go. This script automates the process and uses the same defaults (creating a `build/` directory and installing to an `install/` subdirectory). New users may find it convenient to avoid typing multiple commands. (See the section [Building with `oomph_build.py`](#building-with-oomph_buildpy) below for more details.)
+
 ### Option 2: Specifying a custom installation location
 
-By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `--install-prefix=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
+By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `-DCMAKE_INSTALL_PREFIX=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
 
 ```bash
 # Configure and build (write build information into the
-# directory "joe_build") and use the install-prefix to
+# directory "joe_build") and use the install prefix to
 # declare where the library should ultimately be installed.
-cmake -G Ninja -B joe_build --install-prefix=/home/joe_cool/oomph_lib_install_dir
+cmake -G Ninja -B joe_build -DCMAKE_INSTALL_PREFIX=/home/joe_cool/oomph_lib_install_dir
 
 # Build the library; specify the directory created during the
 # configure stage (here "joe_build")
@@ -217,17 +218,19 @@ cmake --build joe_build
 cmake --install joe_build
 ```
 
-To make sure that the library can be found when building driver codes (see below) it is easiest to add the install directory to your `PATH` environment variable:
+To make sure that the library can be found when building driver codes (see below) it is easiest to set the `oomphlib_ROOT` environment variable:
 
 ```bash
 # Add the custom installation directory to the path
-export PATH="$PATH:/home/joe_cool/oomph_lib_install_dir"
+export oomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir
 ```
 
-This is, of course, only a temporary assigment for the current shell; add the command to your `.bashrc` file (or `.zshrc` file, if using Zsh) to reassign it automatically for every session. Alternatively, you can specify the location of the install directory with the `-DCMAKE_PREFIX_PATH` flag when configuring the driver codes; see [below](#testing-the-entire-installation).
+This is, of course, only a temporary assigment for the current shell; add the command to your `.bashrc` file (or `.zshrc` file, if using Zsh) to reassign it automatically for every session. Alternatively, you can specify the location of the install directory with the `-Doomphlib_ROOT` flag when configuring the driver codes; see [below](#testing-the-entire-installation).
 
 To uninstall the library, delete the `joe_build` directory in the `oomph-lib` root directory and the directory `/home/joe_cool/oomph_lib_install_dir`. Also remove the
 addition of the installation directory to the `PATH` from your `.bashrc` or `.zshrc` file (if you added it there).
+
+**Note:** The `oomph_build.py` script described in [Building with `oomph_build.py`](#building-with-oomph_buildpy) can also handle custom installation paths. For example, instead of the multi-step process above, you could run the Python build script with an option to specify the install location and achieve the same result.
 
 ### Option 3: Installation with root privileges
 
@@ -236,7 +239,7 @@ If you have root privileges on your computer, you can install `oomph-lib` in the
 ```bash
 # Configure; using a local build directory but prepare
 # for installation in /usr/local
-cmake -G Ninja -B build -DENABLE_INSTALL_AS_SUPERUSER=ON
+cmake -G Ninja -B build -DOOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON
 
 # Build (i.e. compile the sources and create the libraries)
 cmake --build build
@@ -257,6 +260,74 @@ sudo ninja oomph_uninstall
 ```
 
 where you again have to use your root privileges (`sudo`).
+
+Alternatively, the `oomph_build.py` script can facilitate a system-wide installation. You can either (i) pass `--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON` to the script or (ii) set the installation path explicitly using the `--root-CMAKE_INSTALL_PREFIX` option as `/usr/local` (and enable the necessary CMake flags for a root install). You would still need to run the install step with superuser privileges (the script will prompt or instruct you to do so). See [Building with `oomph_build.py`](#building-with-oomph_buildpy) for more information.
+
+## Building with `oomph_build.py`
+
+This section explains how to use the `oomph_build.py` script - a Python helper script located in the root of the repository – to configure, build, and install `oomph-lib` in an automated way.
+
+### When to use the build script
+
+The `oomph_build.py` script is provided as a convenient one-stop solution for building and installing `oomph-lib`. It essentially wraps the manual CMake steps (configuration, build, and installation) into a single command, with sensible defaults and additional helper options. New users are encouraged to use this script for a hassle-free installation, as it reduces the chance of missing a step or incorrectly specifying an option. Advanced users or those integrating `oomph-lib` into other build systems may still prefer the direct CMake approach (as in Options 1–3 above) for finer control, but the script covers the common use cases.
+
+**Prerequisites:** In addition to the standard requirements (CMake and Ninja, as described above), you will need a working Python 3 installation to run `oomph_build.py`. Ensure that `python3` is available in your `PATH`. If you plan to use the script's documentation-building feature (described below), make sure `doxygen` is installed as well.
+
+### Using the script
+
+To use the build script, change into the top-level `oomph-lib` directory (the same directory that contains `oomph_build.py`) and run it with Python. For example:
+
+```python
+python3 oomph_build.py
+```
+
+By default, this will configure the project, compile all the libraries, and install them to the local `install/` directory (within the `oomph-lib` repository folder). The script will create a build directory (named `build/` by default) if one does not exist, or reuse it if it does. It combines the equivalent of the `cmake -B build`, `cmake --build build`, and `cmake --install build` commands into one automated sequence.
+
+After running `oomph_build.py`, if it completes without errors, `oomph-lib` should be built and installed in the specified location. You can then proceed to test the installation as described in the next section.
+
+> **Tip:** On Unix-like systems, you can make the script directly executable by running `chmod +x oomph_build.py`, then invoke it with `./oomph_build.py`. Using `python3 ...` or making it executable are equivalent as long as it's run with Python 3.
+
+### Command-Line options
+
+The `oomph_build.py` script supports several command-line options to customize its behavior. You can see a summary by running
+
+```bash
+python3 oomph_build.py --help
+```
+
+Below is a comprehensive list of the options and their purposes:
+
+- **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will invoke the documentation build (using Doxygen and LaTeX) as part of the process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
+
+- **`--root-CMAKE_INSTALL_PREFIX`**: Use this option when you intend to provide a custom installation location.
+- **`--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (e.g. to `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches (such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`). (If you also specify `--root-CMAKE_INSTALL_PREFIX`, this flag will have no effect.)
+  > **Important:** When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It’s generally recommended to run oomph_build.py `--root-CMAKE_INSTALL_PREFIX` under a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.)
+- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
+
+  ```bash
+  # Wipe the default build/installation directories used when building
+  # the third-party libraries, root project, and documentation
+  python3 oomph_build.py --wipe-tpl --wipe-root --wipe-doc
+  ```
+
+  will delete the current `build/` directory and the `install/` directory (if they exist) before configuring a fresh build. `--wipe-doc` will remove the `doc/build/` directory.. These options are useful if you suspect a previous build is causing issues or if you want to reclaim space and rebuild from scratch. Warning: Wiping will permanently delete those directories (and all compiled files or installed files therein), so use these flags with caution.
+- **`--reuse-tpl`**, **`--reuse-root`**, **`--reuse-doc`**: These flags are the counterpart to the `--wipe-*` options, explicitly instructing the script to reuse existing directories. Using `--reuse-*` flag means the script will allow the existing build/installation directories and will instead update or rebuild files as needed. These options can save time on iterative builds, but be mindful that reusing directories might carry over old artifacts - if you run into strange problems, a wipe might be needed.
+
+In summary, by default the script uses a safe approach (an error is thrown if the build/installation directories already exist), requiring you to re-run `oomph_build.py` with `--wipe-*` or `--reuse-*` flags. If a completely fresh build environment is desired, use the `--wipe-*` options.
+
+### Running the script: example and output
+
+When you run `oomph_build.py`, it will print messages indicating its progress through the build stages. For example, you will see output from the CMake configure stage first. This includes messages about detecting compilers, configuring third-party libraries, and generating build files. If the configuration is successful, you should see a message like
+
+```bash
+-- Build files have been written to: .../build
+```
+
+If there are errors (e.g., a required tool is not found or a configuration check failed), CMake will report them; the script will stop and propagate that error.
+
+Next, the script invokes the build stage (equivalent to running Ninja). If you specified the `--verbose` flag you will see compiler output as the `oomph-lib` libraries compile. This stage may take some time, especially on first build. If it succeeds, all necessary library files will be produced in the build directory.
+
+Finally, the script runs the installation stage. You'll see messages about installing libraries and header files to the target directory.
 
 ## Testing the installation
 
@@ -300,7 +371,7 @@ cd ..
 rm -rf build_for_demo_drivers
 ```
 
-Again, remember that if you installed `oomph-lib` to a non-standard location (i.e. neither under `install/` in the `oomph-lib` root directory, nor in `/usr/local/`) you must have added the installation directory to your `PATH` variable (see above). Alternatively, you can specify it during the configure stage, by modifying the above procedure to:
+Again, remember that if you installed `oomph-lib` to a non-standard location (i.e. neither under `install/` in the `oomph-lib` root directory, nor in `/usr/local/`) you must have added the installation directory to your `oomphlib_ROOT` environment variable (see [Option 2: Specifying a custom installation location](#option-2-specifying-a-custom-installation-location)). Alternatively, you can specify it during the configure stage, by modifying the above procedure to:
 
 ```bash
 # Go to demo_drivers directory
@@ -308,7 +379,7 @@ cd demo_drivers
 
 # Configure. Specify the (non-standard) location of the
 # install directory
-cmake -G Ninja -B build -DCMAKE_PREFIX_PATH=/home/joe_cool/oomph_lib_install_dir
+cmake -G Ninja -B build -Doomphlib_ROOT=/home/joe_cool/oomph_lib_install_dir
 
 # Go into the build directory specified at the configure
 # stage
@@ -457,7 +528,7 @@ ninja my_code
 
 Now edit `my_code.cc` as you work your way through the exercises and rebuild the executable every time you change something using `ninja my_code`.
 
-_Note for emacs users:_
+*Note for emacs users:*
 
 If you're used to compiling from within emacs you've probably added something like this to your `.emacs` file:
 
@@ -562,7 +633,7 @@ cmake -G Ninja -B build
 
 # Option 2: Specify the oomph-lib installation directory during
 # the configure step
-cmake -G Ninja -B -DCMAKE_PREFIX_PATH=/home/joe_user/oomph_lib_install
+cmake -G Ninja -B -Doomphlib_ROOT=/home/joe_user/oomph_lib_install
 
 # Option 3: Open the CMakeLists.txt file and add the path to the
 # oomph-lib installation to the find_package(...) call by replacing
