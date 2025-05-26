@@ -166,10 +166,11 @@ endif()
 
 # If we're given SuperLUDist or need to build it
 if(OOMPH_BUILD_SUPERLU OR OOMPH_BUILD_SUPERLU_DIST)
-   if((OOMPH_BUILD_SUPERLU_DIST) AND (NOT OOMPH_ENABLE_MPI))
-     set(OOMPH_BUILD_SUPERLU_DIST "OFF")
-     message(WARNING "Not building SuperLUDist (despite request) because MPI is disabled!"
-    )
+  if((OOMPH_BUILD_SUPERLU_DIST) AND (NOT OOMPH_ENABLE_MPI))
+    set(OOMPH_BUILD_SUPERLU_DIST "OFF")
+    message(
+      WARNING
+        "Not building SuperLUDist (despite request) because MPI is disabled!")
   endif()
 
   # If we're given GKlib
