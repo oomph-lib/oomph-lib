@@ -83,8 +83,7 @@ set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddPureCppTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphDefineTestData.cmake"
-    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake"
-    "${OOMPH_ROOT_DIR}/scripts/fpdiff.py")
+    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 
 # Copy files to the build directory at configure-time
 foreach(MODULE IN LISTS OOMPH_FILES_TO_COPY_TO_BUILD_DIR)

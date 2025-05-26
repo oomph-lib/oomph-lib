@@ -1,31 +1,39 @@
 #!/usr/bin/env python3
 
 import json
+import shutil
 import subprocess
 import sys
 import time
-from argparse import Namespace, ArgumentParser
+from argparse import BooleanOptionalAction, Namespace, ArgumentParser
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
 
 # ANSI escape sequences for bold green text
-BOLD_RED = "\033[1;31m"
-BOLD_YELLOW = "\033[1;33m"
-BOLD_GREEN = "\033[1;32m"
-RESET_COLOR = "\033[0m"
+@dataclass
+class AnsiEscapeCodes:
+    BOLD_RED = "\033[1;31m"
+    BOLD_YELLOW = "\033[1;33m"
+    BOLD_GREEN = "\033[1;32m"
+    RESET_COLOR = "\033[0m"
+
+
+class DirectoryExistsError(Exception):
+    pass
 
 
 def bold_red(text: str):
-    return f"{BOLD_RED}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_RED}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def bold_yellow(text: str):
-    return f"{BOLD_YELLOW}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_YELLOW}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def bold_green(text: str):
-    return f"{BOLD_GREEN}{text}{RESET_COLOR}"
+    return f"{AnsiEscapeCodes.BOLD_GREEN}{text}{AnsiEscapeCodes.RESET_COLOR}"
 
 
 def read_external_json_file(json_path):
@@ -128,7 +136,7 @@ def generate_external_dist_preset(
 def generate_root_preset(
     root_build_dir: Path,
     root_cache_vars: dict,
-    generator = "Ninja",
+    generator="Ninja",
 ) -> dict:
     """
     Create a dictionary representing CMakeUserPresets.json for the root oomph-lib project.
@@ -167,19 +175,20 @@ def configure_build_and_install_external_libs(
     Generate external project presets, run cmake configure and build+install, then
     return the path to cmake_flags_for_oomph_lib.json (if found).
     """
-    # Convert ext- arguments to a dict of {OOMPH_*: value}
+    # Convert ext- arguments to a dict of {OOMPH_*: value, CMAKE_*: value}
+    # Example:
+    #           ext_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
+    #           ext_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
     ext_cache = {}
     for (opt, val) in vars(args).items():
         if val is None:
             continue
-        if opt.startswith("ext_OOMPH"):
-            # Example: ext_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
-            flag_name = opt.replace("ext_OOMPH", "OOMPH")
-            ext_cache[flag_name] = val
-        elif opt.startswith("ext_CMAKE"):
-            # Example: ext_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
-            flag_name = opt.replace("ext_CMAKE", "CMAKE")
-            ext_cache[flag_name] = val
+        if not (opt.startswith("ext_OOMPH") or opt.startswith("ext_CMAKE")):
+            continue
+        flag_name = opt.replace("ext_OOMPH", "OOMPH").replace("ext_CMAKE", "CMAKE")
+        if isinstance(val, Path):
+            val = str(val)
+        ext_cache[flag_name] = val
 
     # Specify the build type; 'args.config' will always be set
     ext_cache["CMAKE_BUILD_TYPE"] = args.config
@@ -198,8 +207,11 @@ def configure_build_and_install_external_libs(
     preset_path = external_dist_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
 
+    # The ending of the string
+    end = "\n" if verbose else ""
+
     # Construct configuration command
-    print_progress(">>> Configuring third-party libraries", pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Configuring third-party libraries", pad_to=60, end=end)
     config_cmd = ["cmake", "--preset", "tpl"]
     if args.ext_extra_flags:
         config_cmd += args.ext_extra_flags
@@ -209,7 +221,7 @@ def configure_build_and_install_external_libs(
     print_time(time_elapsed, verbose=verbose)
 
     # Build and install external
-    print_progress(">>> Building and installing", pad_to=60, end="\n" if verbose else "")
+    print_progress(">>> Building and installing third-party libraries", pad_to=60, end=end)
     build_cmd = ["cmake", "--build", "--preset", "tpl"]
     start_time = time.perf_counter()
     run_command(build_cmd, external_dist_dir, verbose)
@@ -228,19 +240,20 @@ def configure_build_and_install_root(
     Generate root project presets, run cmake configure and build+install.
     ext_flags is the dict of flags read from the external JSON file.
     """
-    # Convert root- arguments to a dict
+    # Convert root- arguments to a dict of {OOMPH_*: value, CMAKE_*: value}
+    # Example:
+    #           root_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
+    #           root_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
     root_cache_vars = {}
     for (opt, val) in vars(args).items():
         if val is None:
             continue
-        if opt.startswith("root_OOMPH"):
-            # Example: root_OOMPH_ENABLE_MPI -> OOMPH_ENABLE_MPI
-            flag_name = opt.replace("root_OOMPH", "OOMPH")
-            root_cache_vars[flag_name] = val
-        elif opt.startswith("root_CMAKE"):
-            # Example: root_CMAKE_BUILD_TYPE -> CMAKE_BUILD_TYPE
-            flag_name = opt.replace("root_CMAKE", "CMAKE")
-            root_cache_vars[flag_name] = val
+        if not (opt.startswith("root_OOMPH") or opt.startswith("root_CMAKE")):
+            continue
+        flag_name = opt.replace("root_OOMPH", "OOMPH").replace("root_CMAKE", "CMAKE")
+        if isinstance(val, Path):
+            val = str(val)
+        root_cache_vars[flag_name] = val
 
     # Specify the build type; 'args.config' will always be set
     root_cache_vars["CMAKE_BUILD_TYPE"] = args.config
@@ -281,22 +294,73 @@ def configure_build_and_install_root(
     print_time(time_elapsed, verbose=verbose)
 
 
+def configure_build_doc(
+    args: Namespace,
+    doc_dir: Path,
+    verbose: bool,
+):
+    """
+    Configure and build the docs.
+    """
+    # Configure
+    print_progress(">>> Configuring docs", pad_to=60, end="\n" if verbose else "")
+    config_cmd = ["cmake", "-G", args.generator, "-B", "build"]
+    start_time = time.perf_counter()
+    run_command(config_cmd, doc_dir, verbose)
+    time_elapsed = time.perf_counter() - start_time
+    print_time(time_elapsed, verbose=verbose)
+
+    # Build
+    print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
+    build_cmd = ["cmake", "--build", "build"]
+    start_time = time.perf_counter()
+    run_command(build_cmd, doc_dir, verbose)
+    time_elapsed = time.perf_counter() - start_time
+    print_time(time_elapsed, verbose=verbose)
+
+
 def parse_args():
-    """Parse and return command-line arguments via argparse."""
+    """
+    Parse and return command-line arguments via argparse.
+
+    NOTE: argparse automatically converts flags with hyphens inbetween to variables with underscores
+    in, e.g. '--enable-ccache' --> 'args.enable_ccache'.
+    """
+    def expanded_path(p):
+        if p is None:
+            return
+        return Path(p).resolve()
+
     # fmt: off
     parser = ArgumentParser(description="Build automator.")
 
-    parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output; without this flag we only show high-level progress messages.")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Don't suppress detailed output, show only high-level progress messages.")
     parser.add_argument("-s", "--silence-warnings-about-existing-build-and-install-directories", action="store_true", help="Suppress warnings about existing build/install directories.")
 
-    # Only want to build  or root (oomph-lib) project?
-    parser.add_argument("--skip-tpl-build", action="store_true", help="Skip building and installing the external (third party) distributions/libraries.")
-    parser.add_argument("--just-build-tpl", action="store_true", help="Skip configuring/building/installing the oomph-lib project, i.e. only build third-party libraries.")
+    # Only want to build TPLs or root project?
+    parser.add_argument("--build-tpl", action=BooleanOptionalAction, default=True, help="Build and install the third-party libraries (default: '--build-tpl').")
+    parser.add_argument("--build-root", action=BooleanOptionalAction, default=True, help="Configure, build, and install the root project (default: '--build-root').")
+    parser.add_argument("--build-doc", action="store_true", default=False, help="Configure and build the docs (default: False).")
+
+    # If the third-party libraries build/install dirs already exist, do we reuse or wipe?
+    tpl_group = parser.add_mutually_exclusive_group()
+    tpl_group.add_argument("--wipe-tpl", action="store_true", help="Wipe the third-party libraries build/install directories if they already exist.")
+    tpl_group.add_argument("--reuse-tpl", action="store_true", help="Don't stop running if the third-party libraries build/install directories already exist.")
+
+    # If the root project build/install dirs already exist, do we reuse or wipe?
+    root_group = parser.add_mutually_exclusive_group()
+    root_group.add_argument("--wipe-root", action="store_true", help="Wipe the root project build/install directories if they already exist.")
+    root_group.add_argument("--reuse-root", action="store_true", help="Don't stop running if the root project build/install directories already exist.")
+
+    # If the root project build/install dirs already exist, do we reuse or wipe?
+    doc_group = parser.add_mutually_exclusive_group()
+    doc_group.add_argument("--wipe-doc", action="store_true", help="Wipe the doc build directory if it already exists.")
+    doc_group.add_argument("--reuse-doc", action="store_true", help="Don't stop running if the doc build directory already exists.")
 
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
-    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external (third party) libraries and oomph-lib.")
-    general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use (default: Ninja). For example, 'Unix Makefiles' or 'Ninja'.")
+    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
+    general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use. For example, 'Unix Makefiles' or 'Ninja' (default: Ninja).")
     general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
 
     # Flags common to both external_distributions and the root project
@@ -304,36 +368,38 @@ def parse_args():
     common_group.add_argument("--OOMPH_ENABLE_MPI", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external (third party) distributions and in oomph-lib; default: OFF")
 
     # External distributions flags
-    ext_group = parser.add_argument_group("Flags for building third party (external) distributions")
+    ext_group = parser.add_argument_group("external_distributions flags")
+    ext_group.add_argument("--ext-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom install directory for third-party libraries.")
+
     ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries; default: ON.")
     ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries; default: ON.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries; default: ON.") # hierher does this get overwritten when we have no mpi?
+    ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries; default: ON. Becomes disabled if built without MPI.")
     ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build CGAL in third-party libraries; default: ON; default: ON.")
     ext_group.add_argument("--ext-OOMPH_BUILD_MUMPS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build MUMPS in third-party libraries; default: ON.")
     ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Hypre in third-party libraries; default: ON.")
     ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Trilinos in third-party libraries; default: ON.")
     ext_group.add_argument("--ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable tests for third-party libraries; default: ON.")
-    ext_group.add_argument("--ext-OOMPH_THIRD_PARTY_INSTALL_DIR", metavar="PATH", help="Custom install directory for third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", metavar="PATH", help="Use a preinstalled OpenBLAS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", metavar="PATH", help="Use a preinstalled GKlib from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", metavar="PATH", help="Use a preinstalled METIS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", metavar="PATH", help="Use a preinstalled ParMETIS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", metavar="PATH", help="Use a preinstalled Boost from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled OpenBLAS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled GKlib from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled METIS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled ParMETIS from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external (third party) distributions (e.g. -DXYZ=VALUE).")
+    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
 
     # Root project oomph-lib flags
-    root_group = parser.add_argument_group("Flags for oomph-lib build:")
-    root_group.add_argument("--root-OOMPH_OOMPH_INSTALL_DIR", metavar="PATH", help="Custom install directory for oomph-lib libraries.") # hierher Puneet: help; I'm gettig lost where to use this.
-    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", default="ON", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib; default=ON.") # hierher Puneet: double negative; and what are they? On or off by default?
-    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib; default=OFF.")
-    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib; default=OFF.")
-    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib; default=OFF.")
-    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib; default=OFF.") # hierher Puneet: what does this do? On or off by default?
-    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib; default=OFF.") # hierher Puneet: Wouldn't"yes/no" be clearer? Can just swap?
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library; default=OFF.")
-    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library; default=OFF.")
+    root_group = parser.add_argument_group("root project oomph-lib flags")
+    root_group.add_argument("--root-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
+    root_group.add_argument("--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set); default: OFF.")
+    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib; default OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib; default: OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib; default: OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib; default: OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib; default: OFF.")
+    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib; default: OFF.")
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library; default: OFF.")
+    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", default="OFF" , metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library; default: OFF.")
     # fmt: on
     args = parser.parse_args()
     return args
@@ -344,72 +410,138 @@ if __name__ == "__main__":
 
     project_root = Path(__file__).resolve().parent
     external_dist_dir = project_root / "external_distributions"
+    doc_dir = project_root / "doc"
 
-    # Build directories
-    root_build_dir = project_root / "build"
+    # Third-party libraries working directories
     external_dist_build_dir = external_dist_dir / "build"
-
-    # Install directories
-    root_install_dir = project_root / "install"
     external_dist_install_dir = external_dist_dir / "install"
+
+    # Root project working directories
+    root_build_dir = project_root / "build"
+    root_install_dir = project_root / "install"
+
+    # Root project working directories
+    doc_build_dir = doc_dir / "build"
+
+    # If the user has provided custom install directories
+    if args.ext_CMAKE_INSTALL_PREFIX:
+        external_dist_install_dir = args.ext_CMAKE_INSTALL_PREFIX
+    if args.root_CMAKE_INSTALL_PREFIX:
+        root_install_dir = args.root_CMAKE_INSTALL_PREFIX
+
+    def wipe_dir_if_found(p: Path):
+        if p.exists() and p.is_dir():
+            shutil.rmtree(p)
+
+    if args.wipe_tpl:
+        wipe_dir_if_found(external_dist_build_dir)
+        wipe_dir_if_found(external_dist_install_dir)
+    if args.wipe_root:
+        wipe_dir_if_found(root_build_dir)
+        wipe_dir_if_found(root_install_dir)
+    if args.wipe_doc:
+        wipe_dir_if_found(doc_build_dir)
+
+        # The doc/ directory does not place the documentation in the build/ directory so we have
+        # to handle the additional clean-up using 'git'
+        clean_up_cmd = ["git", "clean", "-xdf", "."]
+        run_command(clean_up_cmd, doc_dir, args.verbose)
 
     # Where to inherit the flags output by external_distributions after we've built
     # the third-party libraries that we want
-    external_dist_json_path = external_dist_build_dir / "cmake_flags_for_oomph_lib.json"
+    external_dist_json_path = external_dist_install_dir / "cmake_flags_for_oomph_lib.json"
 
     # Warn the user that the third-party libraries already exist. We can skip this warning if
     # the user is skipping their build and just building the top level project, or if they've
     # silenced the warnings
     if not args.silence_warnings_about_existing_build_and_install_directories:
-        if not args.skip_tpl_build:
+        found_dirty_directory = False
+
+        barrier = "=" * 100
+        if args.build_tpl:
             for d in (external_dist_build_dir, external_dist_install_dir):
                 if d.exists():
-                    print(bold_yellow("=" * 100))
-                    print(bold_yellow(f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"))
-                    print(bold_yellow("=" * 100))
+                    found_dirty_directory = True
+                    message = f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
+                    if args.reuse_tpl:
+                        print(bold_yellow(barrier))
+                        print(bold_yellow(message))
+                        print(bold_yellow(barrier))
+                    else:
+                        raise DirectoryExistsError(
+                            f"{message}. You can bypass this error with the flag '--reuse-tpl' or wipe them with '--wipe-tpl'")
 
         # Warn the user that the root project build/install dirs already exist. We can skip this
         # warning if the user is only building the third-party libraries, or if they've silenced
         # the warnings
-        if not args.just_build_tpl:
+        if args.build_root:
             for d in (root_build_dir, root_install_dir):
                 if d.exists():
-                    print(bold_yellow("=" * 100))
-                    print(bold_yellow(f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"))
-                    print(bold_yellow("=" * 100))
+                    found_dirty_directory = True
+                    message = f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
+                    if args.reuse_root:
+                        print(bold_yellow(barrier))
+                        print(bold_yellow(message))
+                        print(bold_yellow(barrier))
+                    else:
+                        raise DirectoryExistsError(
+                            f"{message}. You can bypass this error with the flag '--reuse-root' or wipe them with '--wipe-root'")
+
+        # Warn the user that the root project build/install dirs already exist. We can skip this
+        # warning if the user is only building the third-party libraries, or if they've silenced
+        # the warnings
+        if args.build_doc:
+            if doc_build_dir.exists():
+                found_dirty_directory = True
+                message = f"\nWARNING: Directory:\n\n\t{doc_build_dir}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
+                if args.reuse_doc:
+                    print(bold_yellow(barrier))
+                    print(bold_yellow(message))
+                    print(bold_yellow(barrier))
+                else:
+                    raise DirectoryExistsError(
+                        f"{message}. You can bypass this error with the flag '--reuse-doc' or wipe them with '--wipe-doc'")
 
         # Pause long enough for the user to see this warning
-        time.sleep(2)
-
-    # Make the directories if they don't exist (but it's okay if they already do)
-    external_dist_build_dir.mkdir(parents=True, exist_ok=True)
-    root_build_dir.mkdir(parents=True, exist_ok=True)
+        if found_dirty_directory:
+            time.sleep(2)
 
     # Let's go
     print_progress("\n>>> Starting project build...")
     start_time = time.perf_counter()
 
-    # 1. Configure, build and install external libraries, retrieving the JSON file path
-    if not args.skip_tpl_build:
+    # Configure, build and install external libraries, retrieving the JSON file path
+    if args.build_tpl:
         configure_build_and_install_external_libs(args, external_dist_dir, external_dist_build_dir, args.verbose)
     else:
-        print_progress(">>> Skipping third-party libraries build")
+        print_progress(">>> Skipping build of third-party libraries")
 
-    # Attempt to locate 'cmake_flags_for_oomph_lib.json'
-    if not external_dist_json_path.is_file():
-        print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external (third party) distributions.", file=sys.stderr)
-        sys.exit(1)
+    # If we've *silently* built the third-party libs but the user isn't building the root
+    # project, we should dump the usage instructions incase they want to do it themselves
+    if args.build_tpl and not args.build_root and not args.verbose:
+        contents = (external_dist_build_dir / "usage.txt").read_text()
+        print(f"{contents}\n")
 
-    # 2. Read external JSON file to get flags to pass to root project
-    ext_flags = read_external_json_file(external_dist_json_path)
+    # Configure, build, and install root (main) project
+    if args.build_root:
+        # Attempt to locate 'cmake_flags_for_oomph_lib.json'
+        if not external_dist_json_path.is_file():
+            print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
+            sys.exit(1)
 
-    # 3. Configure, build, and install root (main) project
-    if not args.just_build_tpl:
+        # Read external JSON file to get flags to pass to root project
+        ext_flags = read_external_json_file(external_dist_json_path)
+
         configure_build_and_install_root(args, project_root, root_build_dir, ext_flags, args.verbose)
     else:
-        print_progress(">>> Skipping root project build")
+        print_progress(">>> Skipping build of root project")
+
+    # Configure and build the docs
+    if args.build_doc:
+        configure_build_doc(args, doc_dir, args.verbose)
+    else:
+        print_progress(">>> Skipping build of docs")
 
     print_progress(">>> Build and installation complete!", pad_to=60, end="")
     total_time_elapsed = time.perf_counter() - start_time
     print_time(total_time_elapsed, verbose=args.verbose)
-

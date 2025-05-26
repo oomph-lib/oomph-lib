@@ -22,6 +22,7 @@ function(oomph_print_project_configuration)
 
   # Combine the literal and the list variable into one list.
   list(PREPEND OOMPH_CONFIG_VARS CMAKE_BUILD_TYPE)
+  list(PREPEND OOMPH_CONFIG_VARS CMAKE_INSTALL_PREFIX)
 
   # Colourising
   if(NOT WIN32)

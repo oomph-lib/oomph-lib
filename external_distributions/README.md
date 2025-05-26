@@ -89,20 +89,22 @@ Note that we do not need an install step; this is because we only build/install 
 
 The table below contains the flags that you can pass to the `cmake` command to control the build of the third-party libraries. Arguments to the `cmake` command must adhere to the format `-D<FLAG_1>=<VALUE_1>`. For examples on how to do this, see [Extended example](#extended-example).
 
-Option                                      | Description                                                | Default
---------------------------------------------|------------------------------------------------------------|----------------------------------
-`OOMPH_ENABLE_MPI`                          | *Enable MPI support?*                                      | `OFF`
-`OOMPH_BUILD_OPENBLAS`                      | *Build OpenBLAS?*                                          | `ON`
-`OOMPH_BUILD_SUPERLU`                       | *Build SuperLU?*                                           | `ON`
-`OOMPH_BUILD_SUPERLU_DIST`                  | *Build SuperLU DIST?*                                      | `ON` if MPI is enabled else `OFF`
-`OOMPH_BUILD_CGAL`                          | *Build CGAL (with dep.  Boost)?*                           | `ON`
-`OOMPH_BUILD_MUMPS`                         | *Build MUMPS?*                                             | `ON` if MPI is enabled else `OFF`
-`OOMPH_BUILD_HYPRE`                         | *Build Hypre?*                                             | `ON`
-`OOMPH_BUILD_TRILINOS`                      | *Build Trilinos?*                                          | `ON`
-`OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS`    | *Enable testing when building the third-party libraries?*  | `OFF`
-`OOMPH_THIRD_PARTY_INSTALL_DIR`             | *Base installation directory for third-party libraries.*   | `<project_root>/install/`
-`OOMPH_USE_OPENBLAS_FROM`                   | *The path to a preinstalled version of OpenBLAS.*          | `""`
-`OOMPH_USE_BOOST_FROM`                      | *The path to a preinstalled version of Boost.*             | `""`
+Option                                   | Description                                               | Default
+-----------------------------------------|-----------------------------------------------------------|----------------------------------
+`CMAKE_INSTALL_PREFIX`                   | *Base installation directory for third-party libraries.*  | `<project_root>/install/`
+`OOMPH_ENABLE_MPI`                       | *Enable MPI support?*                                     | `OFF`
+`OOMPH_BUILD_OPENBLAS`                   | *Build OpenBLAS?*                                         | `ON`
+`OOMPH_BUILD_SUPERLU`                    | *Build SuperLU?*                                          | `ON`
+`OOMPH_BUILD_SUPERLU_DIST`               | *Build SuperLU DIST?*                                     | `ON` if MPI is enabled else `OFF`
+`OOMPH_BUILD_CGAL`                       | *Build CGAL (with dep.  Boost)?*                          | `ON`
+`OOMPH_BUILD_MUMPS`                      | *Build MUMPS?*                                            | `ON` if MPI is enabled else `OFF`
+`OOMPH_BUILD_HYPRE`                      | *Build Hypre?*                                            | `ON`
+`OOMPH_BUILD_TRILINOS`                   | *Build Trilinos?*                                         | `ON`
+`OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS` | *Enable testing when building the third-party libraries?* | `OFF`
+`OOMPH_USE_OPENBLAS_FROM`                | *The path to a preinstalled version of OpenBLAS.*         | `""`
+`OOMPH_USE_BOOST_FROM`                   | *The path to a preinstalled version of Boost.*            | `""`
+
+> **Note:** `CMAKE_INSTALL_PREFIX` is a built-in variable that is typically used to control the installation directory, hence why it does not have an `OOMPH_` prefix.
 
 ### Remark on `OOMPH_USE_<LIBRARY>_FROM` variables
 

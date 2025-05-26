@@ -13,10 +13,10 @@ endif()
 
 # If the user hasn't specified a custom installation path, we're going to
 # install to the install/ subdirectory. However, if the user builds with the
-# flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
-# install path
+# flag -DOOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON to force us to use the default
+# system install path
 if(PROJECT_IS_TOP_LEVEL
-   AND (NOT ENABLE_INSTALL_AS_SUPERUSER)
+   AND (NOT OOMPH_ALLOW_INSTALL_AS_SUPERUSER)
    AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
       "Default installation path" FORCE)
@@ -45,9 +45,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 # cmake-format: off
 
 # The project directory; passed to consumers of the exported library in case they
-# need to use anything from there, e.g. the demo_drivers nearly all need the
-# fpdiff.py script from the scripts/ subdirectory.
-# FIXME: Change this as we will be installing the fpdiff.py file...
+# need to use anything from there
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 # Define the key files we need to install

@@ -133,7 +133,7 @@ jobs:
              --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
              --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
-             --just-build-tpl \
+             --no-build-root \
              --verbose
 
       - name: Rename third-party libraries build logs
@@ -155,7 +155,7 @@ jobs:
           python3 oomph_build.py \
             --enable-ccache \
             --root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
-            --skip-tpl-build \
+            --no-build-tpl \
             --verbose
 
       # -------------------

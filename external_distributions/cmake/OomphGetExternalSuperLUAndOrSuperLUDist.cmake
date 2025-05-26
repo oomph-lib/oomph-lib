@@ -19,11 +19,11 @@ set(SUPERLU_GIT_URL https://github.com/xiaoyeli/superlu.git)
 set(SUPERLU_DIST_GIT_URL https://github.com/xiaoyeli/superlu_dist.git)
 
 # Set the default installation paths
-set(GKLIB_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/gklib")
-set(METIS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/metis")
-set(PARMETIS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/parmetis")
-set(SUPERLU_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/superlu")
-set(SUPERLU_DIST_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/superlu_dist")
+set(GKLIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/gklib")
+set(METIS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/metis")
+set(PARMETIS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/parmetis")
+set(SUPERLU_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/superlu")
+set(SUPERLU_DIST_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/superlu_dist")
 
 # If we've already been given GKLIB, METIS and/or Boost, we'll use the files from
 # there
