@@ -174,7 +174,7 @@ def main() -> None:
             print(f"[ERROR] Failed to run command: {run_command}", file=sys.stderr)
             sys.exit(1)
     else:
-        print("\nTo run these tests, run the following command from your build/ directory:")
+        print("\nTo run these tests, run the following command from your demo_driver/build/ directory:")
         print(f"\n\t{run_command}\n")
 
 
