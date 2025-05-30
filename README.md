@@ -75,41 +75,45 @@
   - [Ninja](#ninja)
   - [Compilers](#compilers)
 - [Building, installing and uninstalling `oomph-lib`](#building-installing-and-uninstalling-oomph-lib)
-  - [Option 1: Default installation](#option-1-default-installation)
-  - [Option 2: Specifying a custom installation location](#option-2-specifying-a-custom-installation-location)
-  - [Option 3: Installation with root privileges](#option-3-installation-with-root-privileges)
+  - [Step 1: Installing the third-party libraries](#step-1-installing-the-third-party-libraries)
+  - [Step 2: Installing oomph-lib](#step-2-installing-oomph-lib)
+    - [Option 1: Default installation](#option-1-default-installation)
+    - [Option 2: Specifying a custom installation location](#option-2-specifying-a-custom-installation-location)
+    - [Option 3: Installation with root privileges](#option-3-installation-with-root-privileges)
+    - [Further build options](#further-build-options)
+- [Recommended alternative: Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy)
+  - [When to use the build script](#when-to-use-the-build-script)
+  - [Using the script](#using-the-script)
+  - [Command-Line options](#command-line-options)
+  - [Running the script: example and output](#running-the-script-example-and-output)
 - [Testing the installation](#testing-the-installation)
   - [Testing the entire installation](#testing-the-entire-installation)
+  - [How to analyse failed tests](#how-to-analyse-failed-tests)
   - [Testing specific demo driver codes](#testing-specific-demo-driver-codes)
-- [How to run demo driver codes (and how to modify them when working on coding exercises)](#how-to-run-demo-driver-codes-and-how-to-modify-them-when-working-on-coding-exercises)
-- [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alone-project-to-oomph-lib)
-- [Creating new demo driver directories](#creating-new-demo-driver-directories)
-  - [Step 1: Rename and edit the driver code](#step-1-rename-and-edit-the-driver-code)
-  - [Step 2: Update the CMakeLists.txt file](#step-2-update-the-cmakeliststxt-file)
-  - [Step 3: Run and develop your own code](#step-3-run-and-develop-your-own-code)
-  - [Step 4: Update the validation script and the validata](#step-4-update-the-validation-script-and-the-validata)
-  - [Step 5: Register the new directory so it is included in a top-level build](#step-5-register-the-new-directory-so-it-is-included-in-a-top-level-build)
-- [Creating a new library (or updating an existing one)](#creating-a-new-library-or-updating-an-existing-one)
-  - [Updating an existing library](#updating-an-existing-library)
-  - [Adding a new library](#adding-a-new-library)
-- [Make a new doc directory](#make-a-new-doc-directory)
-- [Build options](#build-options)
-- [CMake Presets](#cmake-presets)
-  - [`CMakePresets.json`](#cmakepresetsjson)
-  - [`CMakeUserPresets.json` example](#cmakeuserpresetsjson-example)
-- [Advanced testing](#advanced-testing)****
-  - [Filtering by regex](#filtering-by-regex)
+  - [Selective testing](#selective-testing)
+    - [Filtering by TEST_NAME](#filtering-by-test_name)
+    - [Filtering tests by keywords appearing in demo driver codes](#filtering-tests-by-keywords-appearing-in-demo-driver-codes)
   - [Disabling a test](#disabling-a-test)
-- [Customising driver codes](#customising-driver-codes)
-  - [Customising targets](#customising-targets)
-- [To be documented](#to-be-documented)
-- [A deeper dive into the build system](#a-deeper-dive-into-the-build-system)
-- [Helpful CMake resources](#helpful-cmake-resources)
-- [Additional instructions](#additional-instructions)
-  - [Building CMake](#building-cmake)
+- [How to run demo driver codes (and how to modify them when working on coding exercises, say)](#how-to-run-demo-driver-codes-and-how-to-modify-them-when-working-on-coding-exercises-say)
+- [Linking a stand-alone project to `oomph-lib`](#linking-a-stand-alone-project-to-oomph-lib)
+  - [Creating the `CMakeLists.txt` file](#creating-the-cmakeliststxt-file)
+  - [Customising driver codes](#customising-driver-codes)
+    - [Customising driver codes via the `oomph_add_executable()` function](#customising-driver-codes-via-the-oomph_add_executable-function)
+    - [Customising targets using native CMake commands; hashed target names](#customising-targets-using-native-cmake-commands-hashed-target-names)
+    - [Using native CMakeCommands throughout](#using-native-cmakecommands-throughout)
+- [Creating new oomph-lib demo driver directories](#creating-new-demo-driver-directories)
+- [Creating a new oomph-lib library (or updating an existing one)](#creating-a-new-library-or-updating-an-existing-one)
+  - [Updating an existing oomph-lib library](#updating-an-existing-library)
+  - [Adding a new oomph-lib library](#adding-a-new-library)
+- [The doc directory](#the-doc-directory)
+- [Cheat sheet: autotools vs. cmake](#cheat-sheet-autotools-vs-cmake)
+- [Appendix](#appendix)
+  - [CMake resources](#cmake-resources)
+  - [Building CMake](#building-cmake) 
     - [Ubuntu](#ubuntu)
     - [macOS](#macos)
-- [Community](#community)
+
+
 
 ## Overview
 
@@ -190,7 +194,7 @@ For everybody still reading, the two stages are:
 - [Installing oomh-lib](#Installing-oomph-lib)
 
 
-### Installing the third-party libraries
+### Step 1: Installing the third-party libraries
 When cloning the code from GitHub, the third-party libraries (required and optional) are contained in the directory `external_distributions`. By default we recommend installing all libraries which is as easy as
 ```bash
 # Go to the third-party distributions directory
@@ -257,7 +261,7 @@ drwxrwxr-x 4 matthias-heil matthias-heil 4096 May 27 11:53 lib
 Following the successful installation of the third-party libraries, we provide a summary of how to use them in the subsequent `oomph-lib` build. 
 
 
-### Installing oomph-lib
+### Step 2: Installing oomph-lib
 Now that the required third-party libraries are available, we proceed to the actual `oomph-lib` process. Again we stress that inexperienced (or lazy) users may prefer to use the `oomph_build.py` script, described [below](#Building-with-oomph_build.py). For those who want to do the installation manually, we discuss three different options. The process is obviously very similar to the generic CMake build process already used for the third-party libraries. The key here is to specify the location of the third-party libraries -- either those just built or those installed elsewhere. For simplicity we initially assume that the third-party libraries were built as described above. The install directory (irrespective of its location) then contains a file `cmake_flags_for_oomph_lib.txt` which contains all the relevant information about the location of the third-party libraries. It can be passed directly to the configure stage of the `oomph-lib` build. In fact, for convenience, we list the entire CMake command required to configure the `oomph-lib` build.
 
 
@@ -287,7 +291,7 @@ Note that, by default, the last step installs the headers and generated library 
 
 To uninstall the library simply delete the `build/` and `install/` directories in the `oomph-lib` root directory.
 
-### Option 2: Specifying a custom installation location
+#### Option 2: Specifying a custom installation location
 
 By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `-DCMAKE_INSTALL_PREFIX=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
 
@@ -321,7 +325,7 @@ addition of the installation directory to the `PATH` from your `.bashrc` or `.zs
 
 **Note:** The `oomph_build.py` script described in [Building with `oomph_build.py`](#building-with-oomph_buildpy) can also handle custom installation paths. For example, instead of the multi-step process above, you could run the Python build script with an option to specify the install location and achieve the same result.
 
-### Option 3: Installation with root privileges
+#### Option 3: Installation with root privileges
 
 If you have root privileges on your computer, you can install `oomph-lib` in the standard location `/usr/local/`:
 
@@ -355,7 +359,7 @@ Alternatively, the `oomph_build.py` script can facilitate a system-wide installa
 
 
 
-### Further build options
+#### Further build options
 
 You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of options that the user can control. The build and installation steps will remain the same.
 
@@ -407,7 +411,7 @@ double some_function(const double& x)
 ```
 The `RANGE_CHECKING` macro is mainly used within `oomph-lib`'s own containers but can/should also be used for any other newly-created objects where an array-like index has to be in a certain range.
 
-## Building with `oomph_build.py`
+## Recommended alternative: Building with `oomph_build.py`
 
 This section explains how to use the `oomph_build.py` script - a Python helper script located in the root of the repository – to configure, build, and install `oomph-lib` in an automated way.
 
@@ -536,6 +540,17 @@ cd build
 ctest -j4
 ```
 
+### How to analyse failed tests
+Following the completion of the self-tests we provide a summary of run/passed/failed tests. Further information can be found in the log file
+`demo_drivers/build/Testing/Temporary/LastTest.log` which provides a verbose log of all the tests built/run. Search for the string 'FAILED` to find the failed tests.
+
+To re-run only the failed tests with verbose output use the `--rerun-failed` and `--output-on-failure` flags:
+```bash
+cd demo_drivers/build
+ctest --rerun-failed --output-on-failure
+```
+To investigate/debug/fix the failed test, cd into the relevant demo_driver directory and follow the instructions in the next section.
+
 ### Testing specific demo driver codes
 
 It is also possible to test a single driver code (or rather all the demo drivers below a specific subdirectory of `demo_drivers`):
@@ -561,10 +576,10 @@ ctest
 
 
 ### Selective testing
-Developers regularly have to test if their latest changes to the library have broken specific driver driver codes. There are various mechanisms to identify potentially affected driver codes and to run the self-tests only on these. 
+Developers often wish to test if their latest changes to the library have broken specific driver driver codes. There are various mechanisms to identify potentially affected codes and to run the self-tests only on these:
 
 #### Filtering by TEST_NAME
-If you inspect the `CMakeLists.txt` files in the demo_driver directories you'll notice that each executable is associated with a `TEST_NAME`, specified in the `oomph_add_test(...)` function. The test name usually mirrors the name of the directory containing the driver code relative to he demo_drivers directory.  For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
+If you inspect the `CMakeLists.txt` files in the demo_driver directories you'll notice that each executable is associated with a `TEST_NAME`, specified in the `oomph_add_test(...)` function. The test name usually mirrors the name of the directory containing the driver code (relative to he demo_drivers directory).  For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
 
 ```cmake
 oomph_add_test(
@@ -573,23 +588,22 @@ oomph_add_test(
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata)
 ```
-The TEST_NAME can be specified as a regular expression to `ctest`, using the `-R`/`--tests-regex` flag. Only tests for which the `TEST_NAME` key contains the specified regular expression will be run. CMake has its own conventions for forming regular expressions and we suggest you consult the relevant CMake documentation. However, for simple cases this is exremely straightforward; for example
+The TEST_NAME can be specified as a regular expression to `ctest`, using the `-R`/`--tests-regex` flag. Only tests for which the `TEST_NAME` key contains the specified regular expression will be run. CMake has its own conventions for forming regular expressions and we suggest you consult the relevant CMake documentation. However, for simple cases this is extremely straightforward; for example
 
 ```bash
 cd demo_drivers/build
 ctest -R 'poisson.one_d_poisson'
 ```
-will run all the self tests whose TEST_NAME includes the string 'poisson.one_d_poisson'. This does, of course, assume that you know the relevant TEST_NAMEs. You could explore these for all the existing demo_driver codes by using the command
-
+will run all the self tests whose TEST_NAME includes the string 'poisson.one_d_poisson'. This approach does, of course, assume that you know the relevant TEST_NAMEs. You could explore these for all the existing demo_driver codes by using the command
 ```bash
 find . -name 'CMakeLists.txt' -exec grep -H TEST_NAME {} \;
 ```
 #### Filtering tests by keywords appearing in demo driver codes
-Searching for relevant demo driver codes by their associated TEST_NAME is useful but the test name rarely includes all the features of the relevant codes. A common scenario for developers is that, following changes to a specific class, we wish to test if all demo driver codes that explicitly use this class still work. To facilitate this we provide a helper script
+Searching for relevant demo driver codes by their associated TEST_NAME, as explained in the previous section, is useful but the test name rarely includes all the features of the relevant code. A common scenario for developers is that, following changes to a specific class, they wish to test if all demo driver codes that explicitly use this class still work. To facilitate this we provide a helper script
 ```bash
 scripts/filter_cmake_tests.py
 ```
-that generates the `ctest` command required to run the self tests in all demo_driver directories containing driver codes that contain a specified string. So, to generate the `ctest` command that tests all demo drivers that contain the string 'QAdvectionDiffusionElement' run the following command
+that generates the `ctest` command required to run the self tests in all demo_driver directories containing driver codes that contain a specified string. So, to generate the `ctest` command that tests all demo drivers that contain the string 'QAdvectionDiffusionElement', say, run the following command
 ```bash
 cd demo_drivers
 ../scripts/filter_cmake_tests.py --root . --keywords 'QAdvectionDiffusionElement'
@@ -613,7 +627,7 @@ Disabled tests are listed explicitly in the final summary provided when `ctest` 
 
 
 
-## How to run demo driver codes (and how to modify them when working on coding exercises)
+## How to run demo driver codes (and how to modify them when working on coding exercises, say)
 
 The best way to get started with `oomph-lib` is to explore some of the demo-driver codes. Many of these codes are explained in great detail in the associated [tutorials](https://oomph-lib.github.io/oomph-lib/doc/example_code_list/html/index.html) which typically end with a few exercises that encourage you to modify the code.
 
@@ -754,9 +768,25 @@ to your `.emacs` file will produce equivalent behaviour. You can now edit the so
 
 ## Linking a stand-alone project to `oomph-lib`
 
-### Creating the `CMakeLists.txt` file and building your driver code
 
-Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to begin by modifying an existing driver code. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further below. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't really a demo driver so it should really live somewhere else.
+Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to begin by modifying an existing driver code anyway. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further [below](Creating-new-demo-driver-directories). This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't really a demo driver so it should really live somewhere else. Of course, once you're outside the `oomph-lib` framework you'll have to provide all kinds of additional information, particulary the location of the `oomph-lib` libraries and associated third-party libraries. CMake helps with that. 
+
+To illustrate the advantage of this, assume that you have a stand-alone driver code `non_oomph_lib_one_d_poisson.cc` that does not require the `oomph-lib` library. Using `g++` as the compiler you may want to compile this code using
+```bash
+g++ -o non_oomph_lib_one_d_poisson non_oomph_lib_one_d_poisson.cc 
+```
+If the code has to be linked against an external library, e.g. `blas` which is installed in `/usr/local/blas` you'd specify this by adding
+```bash
+g++ -o non_oomph_lib_one_d_poisson non_oomph_lib_one_d_poisson.cc -I/usr/local/blas/include -L/usr/local/blas/lib -lblas 
+```
+`oomph-lib` contains a lot of libraries and third-party libraries, so the equivalent command for a driver code `one_d_poisson.cc` that uses `oomph-lib` becomes
+```bash
+
+g++ -O3 -DNDEBUG -DKOKKOS_DEPENDENCE CMakeFiles/one_d_poisson_1f4eea6.dir/one_d_poisson.cc.o -o one_d_poisson  -Wl,-rpath,/home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/openblas/lib  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/libpoisson.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/libgeneric.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/liboomph_zlib.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/liboomph_hsl.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/liboomph_crbond_bessel.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/liboomph_triangle.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/install/lib/oomphlib/liboomph_tetgen.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/superlu/lib/libsuperlu.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/metis/lib/libmetis.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/gklib/lib/libGKlib.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/hypre/lib/libHYPRE.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/openblas/lib/libopenblas.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libModeLaplace.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libanasaziepetra.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libanasazi.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libml.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libifpack.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libamesos.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libaztecoo.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libtrilinosss.a  -lm  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libepetraext.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libtriutils.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libepetra.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchoskokkoscomm.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchoskokkoscompat.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchosremainder.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchosnumerics.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/openblas/lib/libopenblas.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/openblas/lib/libopenblas.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchoscomm.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchosparameterlist.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchosparser.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libteuchoscore.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libkokkossimd.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libkokkosalgorithms.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libkokkoscontainers.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/trilinos/lib/libkokkoscore.a  /usr/lib/x86_64-linux-gnu/libdl.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/mumps/lib/libsmumps.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/mumps/lib/libdmumps.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/mumps/lib/libmumps_common.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/mumps/lib/libpord.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/mumps/lib/libmpiseq.a  /home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install/openblas/lib/libopenblas.so  -lgfortran  -lquadmath
+``` 
+This is not something you want to enter (or maintain) by hand, so the trick is to use CMake to automatically obtain the relevant information from the `oomph-lib` installation. 
+
+### Creating the `CMakeLists.txt` file
 
 To illustrate how this is done, assume you have a stand-alone directory that contains the driver codes and any associated header or include files needed to build the executable. Here's an example of such a project (checked out directly from its own GitHub repository)
 
@@ -779,9 +809,9 @@ The `CMakeLists.txt` file contains the following:
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
 # Name of the project, followed by languages used;
-# oomph-lib is written entirely in C++ so we assume your
-# code is too!
-project(mesh_gluing CXX)
+# oomph-lib is written entirely in C++ but includes
+# some third-party Fortran and C code
+project(mesh_gluing CXX C Fortran)
 
 # The find_package statement declares that:
 # -- the project needs oomphlib (obviously!)
@@ -864,20 +894,16 @@ mkdir RESLT
 
 which contains a suitable driver code and a heavily annotated CMakeLists.txt file to explain the process in much more detail.
 
+### Customising driver codes
 
-
-## Customising driver codes via the `oomph_add_executable` function
-
-You may wish to provide additional information to the build of your executable. For instance, if your code was a stand-alone code that does not not involve `oomph-lib` or any other third-party libraries, you could compile it using 
+#### Customising driver codes via the `oomph_add_executable()` function
+The `CMakeLists.txt` shows how to specify the sources and the name of the executable to be built via the arguments SOURCES and NAME, respectively. They provide the minimum information required by the compiler. You may, of course, wish to provide additional information to the compiler. For instance, if your code was a stand-alone code that does not not involve `oomph-lib` or any other third-party libraries, you could compile it using 
 ```bash
-g++ -o one_d_poisson -g -Wall -DREFINEABLE one_d_poisson.cc
+g++ -o non_oomph_lib_one_d_poisson -Wall -Werror -DREFINEABLE non_oomph_lib_one_d_poisson.cc
 ```
-The flags passed to the compiler (here assumed to be the g++ compiler from the gcc compiler suite) are of four types:
-- `-o` specifies the name of the executable, `one_d_poisson`.
-- `one_d_poisson.cc` is the name of the source code to be compiled.
-- `-g -Wall` are compiler flags that specify that (i) the code should be compiled with debugging information (so that it can be run in a debugger like ddd), and (ii) that all warnings should be shown. 
-- `-DREFINEABLE` passes the compiler macro REFINEABLE to the compiler.
-  This is typically used to activate/de-activate parts of the C++ code, as in this code fragment
+The aditional flags passed to the compiler are of two types:
+- `-Wall -Werror` are compiler flags that specify that the compiler should show all warnings and treat warnings as errors. 
+- `-DREFINEABLE` passes the compiler macro REFINEABLE to the compiler (or, technically, to the preprocessor). Such macros are typically used to activate/de-activate parts of the C++ code, as in this code fragment
   ```c++
 
   [...] 
@@ -904,11 +930,7 @@ The flags passed to the compiler (here assumed to be the g++ compiler from the g
   in the code.
 
 
-When building the code with CMake, the `CMakeLists.txt` file specifies the name of the executable via the NAME 
-argument to the `oomph_add_executable` function. Similarly, the source code(s) to be compiled are listed in the
-SOURCES variable. 
-
-The function also accepts the optional flags
+To accommodate such additional flags, the `oomph_add_exectutable()` function also accepts the optional flags
 
 - `CXX_OPTIONS`: this should be used for compiler flags (e.g. `-Wall`, `-g`). Note that these tend to be compiler specific (i.e. not every compiler will use -g to compile with debug information). 
 - `CXX_DEFINITIONS`: this should be used to define compiler macros such as `REFINEABLE`. Note that this keyword does not include the `-D` prefix; CMake will automatically prepend that for you (if this is what the compiler requires).
@@ -923,55 +945,65 @@ oomph_add_executable(
   CXX_OPTIONS -Wall -Werror
   CXX_DEFINITIONS REFINEABLE)
 ```
-will replicate the g++ command shown above (but also link the code against `oomph-lib` and any associated third-party libraries).
+will replicate the g++ command shown above (but also link the code against `oomph-lib` and any associated third-party libraries). 
+
+**NOTE:** Given that most compilers pass macros via the -D option, you could also add this flag `-DREFINEABLE` to the CXX_OPTIONS and omit the CXX_DEFINITIONS. It will achieve the same thing but may upset the Cmake purists.
 
 
+#### Customising targets using native CMake commands; hashed target names
 
-If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility that you require, you may wish to specify your own executable using the standard CMake functions. If so, you will need to make sure that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target, e.g.
+If you are comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file using native CMake commands. When doing this it is important to realise that the NAME specified in the call to `oomph_add_executable(...)` is not the name used by CMake itself. (The reason is technical: we create a modified, hashed version of the name which includes the path relative to the demo_drivers directory to avoid clashes between demo driver codes). 
 
-```cmake
-add_executable(<target-name> <source-1> ... <source-N>)
-target_compile_features(<target-name> INTERFACE cxx_std_17)
-target_link_libraries(<target-name> PRIVATE oomph::poisson)
-target_compile_definitions(<target-name> ${OOMPH_COMPILE_DEFINITIONS})
-```
-
-where `<target-name>` is the name of your executable. This imports the compile
-definitions defined by `oomph-lib` (during its build) that are needed to make
-sure all of the code required is available to your executable.
-
-### Customising targets
-
-For those of you comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file. You may also notice that you are unable to apply target-based CMake commands because CMake is unable to recognise the name of the target you have provided. The reason for this is that inside `oomph_add_executable(...)` we create a unique target name for each executable/test by appending the SHA1 hash of the path to the target. This allows us to provide a unified self-test build (from the base `demo_drivers` folder) that avoid clashes between target names. We do rely on the user never creating two targets with the same name in the same folder but this should always be the case. To use target-based commands on a particular target, create a (SHA1) hash of the path, shorten it to 7 characters, then append it to the original target name and use that name for your commands:
-
-```cmake
-# Test definition
-oomph_add_executable(NAME <executable-name> ...)
-
-# Construct target name
-string(SHA1 PATH_HASH "${CMAKE_CURRENT_LIST_DIR}")      # Create hash
-string(SUBSTRING ${PATH_HASH} 0 7 PATH_HASH)            # Shorten to 7 characters
-set(OOMPH_TARGET_NAME <executable-name>_${PATH_HASH})  # Append hash
-
-# Do something to the target...
-set_target_properties(${OOMPH_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
-```
-
-Alternatively, you can use the `oomph_get_target_name(...)` function provided by `oomph-lib`:
+To use native CMake commands to customise the properties of an executable, you first have to obtain the hashed name that is used by CMake. For this purpose
+we provide the `oomph_get_target_name(...)` function provided by `oomph-lib`:
 
 ```cmake
 # Test definition
 oomph_add_executable(NAME one_d_poisson ...)
 
-# Get the hashed target name and store it in OOMPH_TARGET_NAME
-oomph_get_target_name(one_d_poisson OOMPH_TARGET_NAME)
+# Get the hashed target name and store it in HASHED_TARGET_NAME
+oomph_get_target_name(one_d_poisson HASHED_TARGET_NAME)
 
-# Do something to the target...
-set_target_properties(${OOMPH_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
+# Do something to the target, referring to the executable via
+# the hashed name use by CMake. (Here we specify that the code
+# contains C++20 syntax.)
+set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 ```
 
-**Note:** You do not need to append the path hash to test names as, unlike
-targets, CMake allows tests to share the same name.
+
+#### Using native CMakeCommands throughout
+
+If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility you require, you may wish to define the build of your own executable using the native CMake functions. If so, you will need to make sure that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target -- this is what passes the required information about the `oomph-lib` installation to the compiler. 
+
+So the equivalent of 
+```cmake
+oomph_add_executable(
+  NAME one_d_poisson
+  SOURCES one_d_poisson.cc
+  LIBRARIES oomph::poisson
+  CXX_OPTIONS -Wall -Werror
+  CXX_DEFINITIONS REFINEABLE)
+```
+is the given by the following sequence of native CMake commands:
+```cmake
+# Specify the target name and source(s)
+add_executable(one_d_poisson one_d_poisson.cc)
+
+# Link against oomph-lib's poisson library
+target_link_libraries(one_d_poisson PRIVATE oomph::poisson)
+
+# Compiler options
+target_compile_options(one_d_poisson PRIVATE -Wall -Werror)
+
+# Preprocessor macros
+target_compile_definitions(one_d_poisson PRIVATE REFINEABLE)
+
+# Pull in the information about oomph-lib build
+target_compile_definitions(one_d_poisson PRIVATE ${OOMPH_COMPILE_DEFINITIONS})
+```
+
+hierher revisit when role of PRIVATE is clear, and the way I'm passing the oomph-lib compile definitions is fixed
+
 
 ## Creating new demo driver directories
 
@@ -1705,14 +1737,75 @@ cmake --install build<br>
 </table>
 
 
+## Appendix
+
+### CMake resources
+
+For those of you new to CMake, you may wish to consult the following resources:
+
+- The excellently-written "Professional CMake: A Practical Guide" by Scott Craig.
+- The [Awesome CMake](https://github.com/onqtam/awesome-cmake) repository.
+- [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/).
+- ...and the list goes on (so add more!).
+
+
+### Building CMake 
+
+If your computer doesn't have a sufficiently up-to-date version of CMake you will have to build it yourself. Here's how to do this:
+
+#### Ubuntu
+
+For Linux, CMake provides an installer script to help you download and install CMake:
+
+```bash
+# Pick version and installation location
+CMAKE_VERSION=3.24.4
+CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
+
+# Download installer script and run
+mkdir ${CMAKE_DEST_DIR}
+wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh -O cmake.sh
+bash cmake.sh --prefix=${CMAKE_DEST_DIR} --exclude-subdir
+
+# Update environment
+export PATH=${CMAKE_DEST_DIR}/bin:$PATH
+```
+
+### macOS
+
+To accommodate both Intel-based and Arm-based Macs, CMake provides a "universal binary". To download CMake via this approach, use the following commands:
+
+```bash
+# Pick version and download location
+CMAKE_VERSION=3.24.4
+CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
+
+# Download package and move to desired location
+wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-macos-universal.tar.gz
+tar xvfz cmake-${CMAKE_VERSION}-macos-universal.tar.gz
+mv cmake-${CMAKE_VERSION}-macos-universal ${CMAKE_DEST_DIR}
+rm -f cmake-${CMAKE_VERSION}-macos-universal.tar.gz
+
+# Update environment
+export PATH=~/${CMAKE_DEST_DIR}/CMake.app/Contents/bin:${PATH}
+```
+
+**Remark:** To make the changes to the `$PATH` variable permanent, add the `export PATH` commands to the end of your shell start-up script, e.g. `.bashrc` or `.zshrc`.
+
+
+
+---
+---
+END OF THE SHOW; MH IS HAPPY TO DROP EVERYTHING BELOW HERE
+---
+---
+
+
 ## To be documented
 
 **In progress**:
 
 - [ ] Document CTest usages:
-  - [ ] Reading output of failed tests: `cat build/Testing/Temporary/LastTest.log`
-  - [ ] List of failed tests: `cat build/Testing/Temporary/LastTestsFailed.log`
-  - [ ] Repeat failed test and log output: `--rerun-failed --output-on-failure`
   - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
   - [ ] Demand number of processors required by MPI programs:
     - Standard MPI run command: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})`
@@ -1736,61 +1829,6 @@ To describe:
 - [ ] ...
 - [ ] `OomphInstallLibrary.cmake`
 - [ ] External libraries...
-
-## Helpful CMake resources
-
-For those of you new to CMake, you may wish to consult the following resources:
-
-- The excellently-written "Professional CMake: A Practical Guide" by Scott Craig.
-- The [Awesome CMake](https://github.com/onqtam/awesome-cmake) repository.
-- [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/).
-- ...and the list goes on (so add more!).
-
-## Additional instructions
-
-### Building CMake
-
-If your computer doesn't have a sufficiently up-to-date version of CMake you will have to build it yourself. Here's how to do this:
-
-#### Ubuntu
-
-For Linux, CMake provides an installer script to help you download and install CMake:
-
-```bash
-# Pick version and installation location
-CMAKE_VERSION=3.24.4
-CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
-
-# Download installer script and run
-mkdir ${CMAKE_DEST_DIR}
-wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh -O cmake.sh
-bash cmake.sh --prefix=${CMAKE_DEST_DIR} --exclude-subdir
-
-# Update environment
-export PATH=${CMAKE_DEST_DIR}/bin:$PATH
-```
-
-#### macOS
-
-To accommodate both Intel-based and Arm-based Macs, CMake provides a "universal binary". To download CMake via this approach, use the following commands:
-
-```bash
-# Pick version and download location
-CMAKE_VERSION=3.24.4
-CMAKE_DEST_DIR=~/.cmake-${CMAKE_VERSION}
-
-# Download package and move to desired location
-wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-tar xvfz cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-mv cmake-${CMAKE_VERSION}-macos-universal ${CMAKE_DEST_DIR}
-rm -f cmake-${CMAKE_VERSION}-macos-universal.tar.gz
-
-# Update environment
-export PATH=~/${CMAKE_DEST_DIR}/CMake.app/Contents/bin:${PATH}
-```
-
-**Remark:** To make the changes to the `$PATH` variable permanent, add the `export PATH` commands to the end of your shell start-up script, e.g. `.bashrc` or `.zshrc`.
-
 
 **WORK IN PROGRESS**
 
@@ -1848,3 +1886,5 @@ We recommend that you can write your own `CMakeUserPresets.json` file. You can i
   ]
 }
 ```
+
+[def]: #Command-Line-options
