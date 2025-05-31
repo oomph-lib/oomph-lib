@@ -22,6 +22,7 @@ with section("parse"):
         "oomph_add_test": {
             "flags": [
                 "SILENCE_MISSING_VALIDATA_WARNING",
+                "ASSUME_PURE_CMAKE_TARGET_NAME",
             ],
             "kwargs": {
                 "TEST_NAME": 1,
