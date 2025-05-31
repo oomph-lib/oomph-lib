@@ -84,7 +84,7 @@
 - [Recommended alternative: Building with `oomph_build.py`](#recommended-alternative-building-with-oomph_buildpy)
   - [When to use the build script](#when-to-use-the-build-script)
   - [Using the script](#using-the-script)
-  - [Command-Line options](#command-line-options)
+  - [Command line options](#command-line-options)
   - [Running the script: example and output](#running-the-script-example-and-output)
 - [Testing the installation](#testing-the-installation)
   - [Testing the entire installation](#testing-the-entire-installation)
@@ -100,7 +100,7 @@
   - [Customising driver codes](#customising-driver-codes)
     - [Customising driver codes via the `oomph_add_executable()` function](#customising-driver-codes-via-the-oomph_add_executable-function)
     - [Customising targets using native CMake commands; hashed target names](#customising-targets-using-native-cmake-commands-hashed-target-names)
-    - [Using native CMakeCommands throughout](#using-native-cmakecommands-throughout)
+    - [Using native CMakeC ommands throughout](#using-native-cmake-commands-throughout)
 - [Creating new oomph-lib demo driver directories](#creating-new-demo-driver-directories)
 - [Creating a new oomph-lib library (or updating an existing one)](#creating-a-new-library-or-updating-an-existing-one)
   - [Updating an existing oomph-lib library](#updating-an-existing-library)
@@ -131,12 +131,12 @@ The [`oomph-lib` homepage](http://www.oomph-lib.org) provides much more detail o
 
 To learn more about contributing to `oomph-lib`, please see the document
 [`CONTRIBUTING.md`](CONTRIBUTING.md) which contains a detailed description of
-our GitHub-based workflow.
+our GitHub-based workflow for adding and maintaining code.
 
 
 ## Prerequisites
 
-We assume you have checked out `oomph-lib` from its [GitHub repository](https://github.com/oomph-lib/oomph-lib). The document [`CONTRIBUTING.md`](CONTRIBUTING.md) for detailed instructions, but to get started you should simply clone the repository onto your computer
+We assume you have checked out `oomph-lib` from its [GitHub repository](https://github.com/oomph-lib/oomph-lib). The document [`CONTRIBUTING.md`](CONTRIBUTING.md) provides detailed instructions for how to interact with GitHub, but to get started you can simply clone the repository onto your computer
 ```bash
 git clone git@github.com:oomph-lib/oomph-lib.git
 ```
@@ -160,7 +160,7 @@ or
 brew install cmake
 ```
 
-If your package manager does not provide a recent enough version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#building-cmake) and on the [CMake website](https://cmake.org/install/).
+If your package manager does not provide a sufficiently recent version of `cmake`, you will need to build it from source. You can find instructions on how to do this [below](#building-cmake) and on the [CMake website](https://cmake.org/install/).
 
 **NOTE:** we have heavily customised the CMake-based build process to facilitate the installation and usage of the library. Newcomers to CMake who wish to google details of the CMake syntax should note that any functions starting with the `oomph_` prefix are our own and are therefore not described in the native CMake documentation.
 
@@ -195,7 +195,7 @@ For everybody still reading, the two stages are:
 
 
 ### Step 1: Installing the third-party libraries
-When cloning the code from GitHub, the third-party libraries (required and optional) are contained in the directory `external_distributions`. By default we recommend installing all libraries which is as easy as
+When cloning the code from GitHub, the third-party libraries (required and optional) are contained in the directory `external_distributions`. We recommend installing all third-party libraries which is as easy as
 ```bash
 # Go to the third-party distributions directory
 cd external_distributions
@@ -210,12 +210,12 @@ cmake --build build
 ```
 **NOTE:** Make sure you delete the `build` directory if it already exists from a previous installation. Having it there can confuse `cmake`.
 
-Note that at the end of the configure step you get a summary of the (default) build options used, e.g. 
+At the end of the configure step you get a summary of the build options used, e.g. 
 ```bash
 ********************************************************************************
 OOMPH-LIB THIRD-PARTY LIBRARIES OPTIONS:
 ********************************************************************************
-  ⦿  CMAKE_INSTALL_PREFIX: '/home/matthias-heil/oomph-lib_cmake/oomph-lib/external_distributions/install'
+  ⦿  CMAKE_INSTALL_PREFIX: '/home/joe_cool/oomph-lib_cmake/oomph-lib/external_distributions/install'
   ⦿  CMAKE_BUILD_TYPE: 'Release'
   ⦿  OOMPH_ENABLE_MPI: 'OFF'
   ⦿  OOMPH_BUILD_OPENBLAS: 'ON'
@@ -233,28 +233,28 @@ OOMPH-LIB THIRD-PARTY LIBRARIES OPTIONS:
   ⦿  OOMPH_USE_BOOST_FROM: ''
 ********************************************************************************
 ```
-You'll see that by default we build the libraries in Release mode (i.e. with full optimisation) and in serial (i.e. without any MPI support), and then installed them in `external_distributions/install`.
+You'll see that by default we build the libraries in Release mode (i.e. with full optimisation) and in serial (i.e. without any MPI support), and then install them in `external_distributions/install`. This is done deliberately to make sure that even users who do not have root privileges on their computers can install the libraries.
 
 
-Given that these are third-party libraries it's unlikely that you'll want to build them in (slow) debug mode but you could do so by specifying the flag `-DCMAKE_BUILD_TYPE='Debug'` at the configure stage. If you have MPI installed on your machine and wish to use the parallel capabilities of some of the third-party libraries, specify `-DOOMPH_ENABLE_MPI='ON'`. You can also specify a different location for the install directory using `-DCMAKE_INSTALL_PREFIX='/home/matthias-heil/oomph-lib_third_party_libraries'`, say. Finally, if your computer already has some (possibly optimised) version of the third-party libraries installed, you can use them instead of rebuilding those libraries yourself. So, if you have an optimised installation of OpenBLAS installed at `/home/matthias-heil/super_fast_openblas`, say, you can use that by configuring with `-DOOMPH_USE_OPENBLAS_FROM=/home/matthias-heil/super_fast_openblas`:
+Given that these are third-party libraries it's unlikely that you'll want to build them in (slow) debug mode but you could do so by specifying the flag `-DCMAKE_BUILD_TYPE='Debug'` at the configure stage. If you have MPI installed on your machine and wish to use the parallel capabilities of some of the third-party libraries, specify `-DOOMPH_ENABLE_MPI='ON'`. You can also specify a different location for the install directory using `-DCMAKE_INSTALL_PREFIX='/home/joe_cool/oomph-lib_third_party_libraries'`, say. Finally, if your computer already has some (possibly optimised) version of the third-party libraries installed, you can use them instead of rebuilding those libraries yourself. So, if you have an optimised installation of OpenBLAS installed at `/home/joe_cool/super_fast_openblas`, say, you can use that by configuring with `-DOOMPH_USE_OPENBLAS_FROM=/home/joe_cool/super_fast_openblas`. Here's an example:
 ```bash
 # Configure in debug mode and with MPI support. Use an existing OpenBLAS 
-# installation and install the others in a different directory:
+# installation and install the others in a specific directory:
 cmake -G Ninja -B build \
    -DCMAKE_BUILD_TYPE='Debug' \
    -DOOMPH_ENABLE_MPI='ON' \
-   -DCMAKE_INSTALL_PREFIX='/home/matthias-heil/oomph-lib_third_party_libraries' \
-   -DOOMPH_USE_OPENBLAS_FROM='/home/matthias-heil/super_fast_openblas'
+   -DCMAKE_INSTALL_PREFIX='/home/joe_cool/oomph-lib_third_party_libraries' \
+   -DOOMPH_USE_OPENBLAS_FROM='/home/joe_cool/super_fast_openblas'
 
 # Now build/install it
 cmake --build build
 ```
-**NOTE:** When specifying the directory that contains an existing third-party library, make sure that it contains the `lib` and `include` directories of the library, so here
+**NOTE:** When specifying the directory that contains an existing third-party library, make sure that it contains the `lib` and `include` directories of the relevant library, so here
 ```bash
-ls -l /home/matthias-heil/super_fast_openblas
+ls -l /home/joe_cool/super_fast_openblas
 total 12
-drwxrwxr-x 2 matthias-heil matthias-heil 4096 May 27 11:53 include
-drwxrwxr-x 4 matthias-heil matthias-heil 4096 May 27 11:53 lib
+drwxrwxr-x 2 joe_cool  joe_cool  4096 May 27 11:53 include
+drwxrwxr-x 4 joe_cool  joe_cool  4096 May 27 11:53 lib
 
 ```
 
@@ -262,7 +262,7 @@ Following the successful installation of the third-party libraries, we provide a
 
 
 ### Step 2: Installing oomph-lib
-Now that the required third-party libraries are available, we proceed to the actual `oomph-lib` process. Again we stress that inexperienced (or lazy) users may prefer to use the `oomph_build.py` script, described [below](#Building-with-oomph_build.py). For those who want to do the installation manually, we discuss three different options. The process is obviously very similar to the generic CMake build process already used for the third-party libraries. The key here is to specify the location of the third-party libraries -- either those just built or those installed elsewhere. For simplicity we initially assume that the third-party libraries were built as described above. The install directory (irrespective of its location) then contains a file `cmake_flags_for_oomph_lib.txt` which contains all the relevant information about the location of the third-party libraries. It can be passed directly to the configure stage of the `oomph-lib` build. In fact, for convenience, we list the entire CMake command required to configure the `oomph-lib` build.
+Now that the required third-party libraries are available, we proceed to the actual `oomph-lib` build process. Again we stress that inexperienced (or lazy) users may prefer to use the `oomph_build.py` script, described [below](#Building-with-oomph_build.py). For those who want to do the installation manually, we discuss three different options. The process is obviously very similar to the generic CMake build process already used for the third-party libraries. The key here is to specify the location of the third-party libraries -- either those just built or those already pre-installed elsewhere. For simplicity we initially assume that the third-party libraries were built as described above. The install directory (irrespective of its location) then contains a file `cmake_flags_for_oomph_lib.txt` which contains all the relevant information about the location of the third-party libraries. It can be passed directly to the configure stage of the `oomph-lib` build. In fact, when the build process for the third-party libraries finishes it lists a variety of equivalent CMake commands that can be used to configure the subsequent `oomph-lib` build.
 
 
 #### Option 1: Default installation
@@ -279,7 +279,7 @@ cmake -G Ninja -B build $(cat external_distributions/install/cmake_flags_for_oom
 # Build the oomph-lib libraries (i.e. compile the sources
 # and turn them into libraries); specify the directory
 # that was created at the configure stage (here "build").
-# This takes a while
+# This takes a while...
 cmake --build build
 
 # Install, again specifying the build directory created above
@@ -287,13 +287,13 @@ cmake --build build
 cmake --install build
 ```
 
-Note that, by default, the last step installs the headers and generated library files into a directory named `install/` in the `oomph-lib` root directory. This is done deliberately to make sure that even users who do not have root privileges on their computers can install the library.
+Note that, by default, the last step installs the headers and the generated library files into a directory named `install/` in the `oomph-lib` root directory. This is done deliberately to make sure that even users who do not have root privileges on their computers can install the library.
 
 To uninstall the library simply delete the `build/` and `install/` directories in the `oomph-lib` root directory.
 
 #### Option 2: Specifying a custom installation location
 
-By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` folder. To specify a different installation location, pass `-DCMAKE_INSTALL_PREFIX=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
+By default, `oomph-lib` will be installed to the `install/` subdirectory of the root `oomph-lib` directory. To specify a different installation location, pass `-DCMAKE_INSTALL_PREFIX=<install-location>` to `cmake` during the configure step. Note that `<install-location>` must be an **absolute** path. Here's an example where we specify different build and install directories:
 
 ```bash
 # Configure and build (write build information into the
@@ -302,7 +302,7 @@ By default, `oomph-lib` will be installed to the `install/` subdirectory of the 
 cmake -G Ninja -B joe_build -DCMAKE_INSTALL_PREFIX=/home/joe_cool/oomph_lib_install_dir
 
 # Build the library; specify the directory created during the
-# configure stage (here "joe_build")
+# configure stage. 
 cmake --build joe_build
 
 # ...and install it; again specify the build directory created
@@ -323,7 +323,6 @@ This is, of course, only a temporary assigment for the current shell; add the co
 To uninstall the library, delete the `joe_build` directory in the `oomph-lib` root directory and the directory `/home/joe_cool/oomph_lib_install_dir`. Also remove the
 addition of the installation directory to the `PATH` from your `.bashrc` or `.zshrc` file (if you added it there).
 
-**Note:** The `oomph_build.py` script described in [Building with `oomph_build.py`](#building-with-oomph_buildpy) can also handle custom installation paths. For example, instead of the multi-step process above, you could run the Python build script with an option to specify the install location and achieve the same result.
 
 #### Option 3: Installation with root privileges
 
@@ -354,26 +353,22 @@ sudo ninja oomph_uninstall
 
 where you again have to use your root privileges (`sudo`).
 
-Alternatively, the `oomph_build.py` script can facilitate a system-wide installation. You can either (i) pass `--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON` to the script or (ii) set the installation path explicitly using the `--root-CMAKE_INSTALL_PREFIX` option as `/usr/local` (and enable the necessary CMake flags for a root install). You would still need to run the install step with superuser privileges (the script will prompt or instruct you to do so). See [Building with `oomph_build.py`](#building-with-oomph_buildpy) for more information.
-
-
-
 
 #### Further build options
 
-You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration/generation step. For reference, the table below contains a list of options that the user can control. The build and installation steps will remain the same.
+You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration stage. For reference, the table below contains a list of options that the user can control. The build and installation steps will remain the same.
 
 
 FLAG                                  | Description                                                                  | Default
 ----------------------------------------|------------------------------------------------------------------------------|----------
 `CMAKE_BUILD_TYPE`                      | The build type (`Debug`, `Release`, `RelWithDebInfo` or `MinSizeRel`)   | `Release`
-`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
-`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!]** | OFF
+`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!] hierher Puneet ** | OFF
+`BUILD_SHARED_LIBS`                     | Build using shared libraries; static otherwise  **["SHARED" DOESN'T WORK!] hierher Puneet ** | OFF
 `OOMPH_DONT_SILENCE_USELESS_WARNINGS`   | Display (harmless) warnings from external_src/ and src/ that are silenced    | OFF
 `OOMPH_ENABLE_MPI`                      | Enable the use of MPI for parallel processing                                | OFF
 `OOMPH_MPI_NUM_PROC`                    | Number of processes to use with MPI-enabled tests                            | 2
-`OOMPH_ENABLE_PARANOID`                 | Enable the PARANOID flag in Debug                                            | OFF
-`OOMPH_ENABLE_RANGE_CHECKING`           | Enable RANGE_CHECKING flag in Debug                                          | OFF
+`OOMPH_ENABLE_PARANOID`                 | Enable the PARANOID flag (should be used with Debug build type)              | OFF
+`OOMPH_ENABLE_RANGE_CHECKING`           | Enable RANGE_CHECKING flag (should be used with Debug build type)            | OFF
 `OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
 
@@ -382,7 +377,7 @@ For instance, to build `oomph-lib` with MPI support, use
 ```bash
 cmake -G Ninja -B build -DOOMPH_ENABLE_MPI='ON'
 ```
-Note that by default we build the library in Release mode, so the above command will built a version of the library that is compiled with full optimisation and no debug support. 
+Note that by default we build the library in Release mode, so the above command will build a version of the library that is compiled with full optimisation and no debug support. 
 
 Other options are used mainly when developing new code. In this case, we recommend building with range checking (which makes the code run very slowly but detects array overruns) and "paranoia" which activates many internal self-tests throughout the library. Both will issue explicit error messages if problems are detected. However, these only tend to be useful if you can then reconstruct how the offending line of code was reached. For this purpose, we recommend building the library in Debug mode to ensure that a debugger like ddd can be used to backtrace from the error. 
 
@@ -413,7 +408,7 @@ The `RANGE_CHECKING` macro is mainly used within `oomph-lib`'s own containers bu
 
 ## Recommended alternative: Building with `oomph_build.py`
 
-This section explains how to use the `oomph_build.py` script - a Python helper script located in the root of the repository – to configure, build, and install `oomph-lib` in an automated way.
+This section explains how to use the `oomph_build.py` script -- a Python helper script located in the root of the repository – to configure, build, and install `oomph-lib` in an automated way.
 
 ### When to use the build script
 
@@ -423,19 +418,19 @@ The `oomph_build.py` script is provided as a convenient one-stop solution for bu
 
 ### Using the script
 
-To use the build script, change into the top-level `oomph-lib` directory (the same directory that contains `oomph_build.py`) and run it with Python. For example:
+To use the build script, cd to the top-level `oomph-lib` directory (the same directory that contains `oomph_build.py`) and run it with Python. For example:
 
 ```python
 python3 oomph_build.py
 ```
 
-By default, this will build the third-party libraries, configure the `oomph-lib` project, compile its libraries, and install them to the local `install/` directory (within the `oomph-lib` repository folder). The script will create a build directory (named `build/` by default) if one does not exist, or reuse it if it does. It thus combines the equivalent of the `cmake -B build`, `cmake --build build`, and `cmake --install build` commands into one automated sequence.
+By default, this will build the third-party libraries, configure the `oomph-lib` project, compile its libraries, and install them to the local `install/` directory (within the `oomph-lib` root directory). The script will create a build directory (named `build/` by default) if one does not exist, or reuse it if it does. It thus combines the equivalent of the `cmake -B build`, `cmake --build build`, and `cmake --install build` commands into one automated sequence.
 
 After running `oomph_build.py`, if it completes without errors, `oomph-lib` should be built and installed in the specified location. You can then proceed to test the installation as described in the next section.
 
-> **Tip:** On Unix-like systems, you can make the script directly executable by running `chmod +x oomph_build.py`, then invoke it with `./oomph_build.py`. Using `python3 ...` or making it executable are equivalent as long as it's run with Python 3.
+> **NOTE:** On Unix-like systems, you can make the script directly executable by running `chmod +x oomph_build.py`, then invoke it with `./oomph_build.py`. Using `python3 ...` or making it executable are equivalent as long as it's run with Python 3.
 
-### Command-Line options
+### Command line options
 
 The `oomph_build.py` script supports several command-line options to customize its behavior. You can see a summary by running
 
@@ -445,12 +440,12 @@ python3 oomph_build.py --help
 
 Below is a comprehensive list of the options and their purposes:
 
-- **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will invoke the documentation build (using Doxygen and LaTeX) as part of the process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
+- **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will build the documentation (using Doxygen and LaTeX) as part of the build process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
 
 - **`--root-CMAKE_INSTALL_PREFIX`**: Use this option when you intend to provide a custom installation location.
-- **`--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it into `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches (such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`). (If you also specify `--root-CMAKE_INSTALL_PREFIX`, this flag will have no effect.)
-  > **Important:** When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run `oomph_build.py --root-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.)
-- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
+- **`--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it into `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`. If you also specify `--root-CMAKE_INSTALL_PREFIX`, this flag will have no effect.
+  > **Important:** When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run `oomph_build.py --root-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. Building as a non-root user helps avoid permission issues in the build directory.
+- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, the root project, and the documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
 
   ```bash
   # Wipe the default build/installation directories used when building
@@ -458,8 +453,8 @@ Below is a comprehensive list of the options and their purposes:
   python3 oomph_build.py --wipe-tpl --wipe-root --wipe-doc
   ```
 
-  will delete the current `build/` directory and the `install/` directory (if they exist) before configuring a fresh build. `--wipe-doc` will remove the `doc/build/` directory.. These options are useful if you suspect a previous build is causing issues or if you want to reclaim space and rebuild from scratch. Warning: Wiping will permanently delete those directories (and all compiled files or installed files therein), so use these flags with caution.
-- **`--reuse-tpl`**, **`--reuse-root`**, **`--reuse-doc`**: These flags are the counterpart to the `--wipe-*` options, explicitly instructing the script to reuse existing directories. Using `--reuse-*` flag means the script will allow the existing build/installation directories and will instead update or rebuild files as needed. These options can save time on iterative builds, but be mindful that reusing directories might carry over old artifacts - if you run into strange problems, a wipe might be needed.
+  will delete the current `build/` directory and the `install/` directory (if they exist) before configuring a fresh build. `--wipe-doc` will remove the `doc/build/` directory. These options are useful if you suspect a previous build is causing issues or if you want to reclaim space and rebuild from scratch. Warning: Wiping will permanently delete those directories (and all compiled files or installed files therein), so use these flags with caution.
+- **`--reuse-tpl`**, **`--reuse-root`**, **`--reuse-doc`**: These flags are the counterpart to the `--wipe-*` options, explicitly instructing the script to reuse existing directories. Using `--reuse-*` flag means the script will allow the existing build/installation directories and will update or rebuild files as needed. These options can save time on iterative builds, but be mindful that reusing directories might carry over old artifacts. **NOTE:** If you ever run into strange problems during the configuration/build process, a wipe might be needed.
 
 In summary, by default the script uses a safe approach (an error is thrown if the build/installation directories already exist), requiring you to re-run `oomph_build.py` with `--wipe-*` or `--reuse-*` flags. If a completely fresh build environment is desired, use the `--wipe-*` options.
 
@@ -467,7 +462,7 @@ In summary, by default the script uses a safe approach (an error is thrown if th
 
 When you run `oomph_build.py`, it will print a few high-level messages indicating its progress through the build stages. You can obtain (much) more detailed output by running `oomph_build.py` with the `--verbose` flag. 
 
-If the configuration is successful, you should see a message like
+If the configuration is successful, you should see the message
 
 ```bash
 -- Build files have been written to: .../build
@@ -475,7 +470,7 @@ If the configuration is successful, you should see a message like
 
 If there are errors (e.g., a required tool is not found or a configuration check failed), CMake will report them; the script will stop and propagate that error.
 
-Next, the script invokes the build stage (equivalent to running Ninja). If you specified the `--verbose` flag you will see compiler output as the `oomph-lib` libraries compile. This stage may take some time, especially on first build. If it succeeds, all necessary library files will be produced in the build directory.
+Next, the script invokes the build stage (equivalent to running Ninja). If you specified the `--verbose` flag you will see the compiler output as the `oomph-lib` libraries compile. This stage may take some time, especially on a first build. If it succeeds, all necessary library files will be produced in the build directory.
 
 Finally, the script runs the installation stage. You'll see messages about installing libraries and header files to the target directory.
 
@@ -483,7 +478,7 @@ Finally, the script runs the installation stage. You'll see messages about insta
 
 ### Testing the entire installation
 
-`oomph-lib` comes with an extensive list of well-documented example driver codes situated in the `demo_drivers/` directory. The driver codes in these folders are also used to validate the library.
+`oomph-lib` comes with an extensive list of well-documented example driver codes situated in the `demo_drivers/` directory. The driver codes in these directories are also used to validate the library.
 
 Once the library is installed you can (and should!) enter the `demo_drivers/` directory and run the self-tests as follows:
 
@@ -542,14 +537,14 @@ ctest -j4
 
 ### How to analyse failed tests
 Following the completion of the self-tests we provide a summary of run/passed/failed tests. Further information can be found in the log file
-`demo_drivers/build/Testing/Temporary/LastTest.log` which provides a verbose log of all the tests built/run. Search for the string 'FAILED` to find the failed tests.
+`demo_drivers/build/Testing/Temporary/LastTest.log` which provides a verbose log of all the tests built/run. Search for the string 'FAILED` within that file to find the failed tests.
 
 To re-run only the failed tests with verbose output use the `--rerun-failed` and `--output-on-failure` flags:
 ```bash
 cd demo_drivers/build
 ctest --rerun-failed --output-on-failure
 ```
-To investigate/debug/fix the failed test, cd into the relevant demo_driver directory and follow the instructions in the next section.
+To investigate/debug/fix the failed test, cd into the relevant demo_drivers directory and follow the instructions in the next section.
 
 ### Testing specific demo driver codes
 
@@ -559,8 +554,8 @@ It is also possible to test a single driver code (or rather all the demo drivers
 # Go to a specific sub-directory in demo_drivers
 cd demo_drivers/poisson/one_d_poisson/
 
-# Configure (specify directory in which tests will be run)
-# Here we assume that oomph-lib was installed in its
+# Configure (-B specifies the directory in which tests will be 
+# built/run). Here we assume that oomph-lib was installed in its
 # default location (the install directory in the oomph-lib 
 # root directory; if you specified a different directory
 # for the installation you have to specify it here, using the
@@ -576,10 +571,10 @@ ctest
 
 
 ### Selective testing
-Developers often wish to test if their latest changes to the library have broken specific driver driver codes. There are various mechanisms to identify potentially affected codes and to run the self-tests only on these:
+Developers often wish to test if their latest changes to the library have broken specific driver codes. There are various mechanisms to identify potentially affected codes and to run the self-tests only on these:
 
 #### Filtering by TEST_NAME
-If you inspect the `CMakeLists.txt` files in the demo_driver directories you'll notice that each executable is associated with a `TEST_NAME`, specified in the `oomph_add_test(...)` function. The test name usually mirrors the name of the directory containing the driver code (relative to he demo_drivers directory).  For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
+If you inspect the `CMakeLists.txt` files in the demo_drivers directories you'll notice that each executable is associated with a `TEST_NAME`, specified in the `oomph_add_test(...)` function. The test name usually mirrors the name of the directory containing the driver code (relative to the demo_drivers directory).  For example, in `demo_drivers/poisson/one_d_poisson/CMakeLists.txt` you will see the following:
 
 ```cmake
 oomph_add_test(
@@ -603,12 +598,12 @@ Searching for relevant demo driver codes by their associated TEST_NAME, as expla
 ```bash
 scripts/filter_cmake_tests.py
 ```
-that generates the `ctest` command required to run the self tests in all demo_driver directories containing driver codes that contain a specified string. So, to generate the `ctest` command that tests all demo drivers that contain the string 'QAdvectionDiffusionElement', say, run the following command
+that generates the `ctest` command required to run the self tests in all demo_drivers directories containing driver codes that contain a specified string. So, to generate the `ctest` command that tests all demo drivers that contain the string 'QAdvectionDiffusionElement', say, run the following command
 ```bash
 cd demo_drivers
 ../scripts/filter_cmake_tests.py --root . --keywords 'QAdvectionDiffusionElement'
 ```
-Note the `--root` argument which specifies the location of the demo_driver directory relative to the current directory. 
+Note the `--root` argument which specifies the location of the demo_drivers directory relative to the current directory. 
 
 
 #### Disabling a test
@@ -623,13 +618,13 @@ oomph_add_test(TEST_NAME poisson.one_d_poisson ...)
 # Disable
 set_tests_properties(poisson.one_d_poisson PROPERTIES DISABLED YES)
 ```
-Disabled tests are listed explicitly in the final summary provided when `ctest` is run on the entire demo_driver directory.
+Disabled tests are listed explicitly in the final summary provided when `ctest` is run on the entire demo_drivers directory.
 
 
 
 ## How to run demo driver codes (and how to modify them when working on coding exercises, say)
 
-The best way to get started with `oomph-lib` is to explore some of the demo-driver codes. Many of these codes are explained in great detail in the associated [tutorials](https://oomph-lib.github.io/oomph-lib/doc/example_code_list/html/index.html) which typically end with a few exercises that encourage you to modify the code.
+The best way to get started with `oomph-lib` is to explore some of the demo driver codes. Many of these codes are explained in great detail in the associated [tutorials](https://oomph-lib.github.io/oomph-lib/doc/example_code_list/html/index.html) which typically end with a few exercises that encourage you to modify the code.
 
 We will illustrate how to do this for the code in `demo_drivers/poisson/one_d_poisson_generic_only` which is the subject of [a specific tutorial](https://oomph-lib.github.io/oomph-lib/doc/quick_guide/html/index.html). When checked out of the GitHub repository, the directory contains the following files:
 
@@ -660,7 +655,7 @@ where we have omitted some boilerplate CMake code that is not relevant in the pr
 - the local source code it depends on, here `one_d_poisson_generic_only.cc`
 - the `oomph-lib` libraries used, here the `generic` library and `meshes` library (prefixed with the `oomph::` namespace identifier).
 
-The only thing to look out for the current task is the name of the executable.
+The only information required for the current task is the name of the executable.
 
 To build and run the executable, we start with the usual configure step which specifies a (local) build directory:
 
@@ -732,7 +727,7 @@ oomph_add_executable(
 [...]
 ```
 
-It is not necessary to reconfigure the build directory, so we can build and execute the new driver code straightaway:
+It is not necessary to reconfigure the build directory, so we can build and execute the new driver code straightaway (To be more precise: Ninja realises that the `CMakeLists.txt` has changed and therefore automatically triggers a reconfiguration.)
 
 ```bash
 # Jump back into the existing build directory
@@ -771,7 +766,7 @@ to your `.emacs` file will produce equivalent behaviour. You can now edit the so
 
 Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to begin by modifying an existing driver code anyway. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further [below](Creating-new-demo-driver-directories). This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't really a demo driver so it should really live somewhere else. Of course, once you're outside the `oomph-lib` framework you'll have to provide all kinds of additional information, particulary the location of the `oomph-lib` libraries and associated third-party libraries. CMake helps with that. 
 
-To illustrate the advantage of this, assume that you have a stand-alone driver code `non_oomph_lib_one_d_poisson.cc` that does not require the `oomph-lib` library. Using `g++` as the compiler you may want to compile this code using
+To illustrate the advantage of this approach, assume that you have a stand-alone driver code `non_oomph_lib_one_d_poisson.cc` that does not require the `oomph-lib` library. Using `g++` as the compiler you may want to compile this code using
 ```bash
 g++ -o non_oomph_lib_one_d_poisson non_oomph_lib_one_d_poisson.cc 
 ```
@@ -824,7 +819,10 @@ project(mesh_gluing CXX C Fortran)
 # Furthermore, we assume here that we've installed oomph-lib
 # either in a standard location (/usr/local/) or that the
 # install directory is available via the PATH
-# environment variable.
+# environment variable oomphlib_ROOT, or that it will be
+# be provided via the command line using the 
+# -Doomphlib_ROOT flag when configuring the project with
+# cmake.
 find_package(oomphlib CONFIG REQUIRED)
 
 # Now add the first executable: Specify the name of the
@@ -892,7 +890,7 @@ mkdir RESLT
 <a href="https://github.com/oomph-lib/stand_alone_oomph-lib_user_code">https://github.com/oomph-lib/stand_alone_oomph-lib_driver_code</a>
 </div>
 
-which contains a suitable driver code and a heavily annotated CMakeLists.txt file to explain the process in much more detail.
+which contains a different driver code and a heavily annotated `CMakeLists.txt` file to explain the process in much more detail.
 
 ### Customising driver codes
 
@@ -902,7 +900,7 @@ The `CMakeLists.txt` shows how to specify the sources and the name of the execut
 g++ -o non_oomph_lib_one_d_poisson -Wall -Werror -DREFINEABLE non_oomph_lib_one_d_poisson.cc
 ```
 The aditional flags passed to the compiler are of two types:
-- `-Wall -Werror` are compiler flags that specify that the compiler should show all warnings and treat warnings as errors. 
+- `-Wall -Werror` are compiler flags that specify that the compiler should show all warnings and treat warnings as errors, respectively.
 - `-DREFINEABLE` passes the compiler macro REFINEABLE to the compiler (or, technically, to the preprocessor). Such macros are typically used to activate/de-activate parts of the C++ code, as in this code fragment
   ```c++
 
@@ -947,7 +945,7 @@ oomph_add_executable(
 ```
 will replicate the g++ command shown above (but also link the code against `oomph-lib` and any associated third-party libraries). 
 
-**NOTE:** Given that most compilers pass macros via the -D option, you could also add this flag `-DREFINEABLE` to the CXX_OPTIONS and omit the CXX_DEFINITIONS. It will achieve the same thing but may upset the Cmake purists.
+**NOTE:** Given that most compilers pass macros via the -D option, you could also add the flag `-DREFINEABLE` to the CXX_OPTIONS and omit the CXX_DEFINITIONS. It will achieve the same thing but may upset the CMake purists.
 
 
 #### Customising targets using native CMake commands; hashed target names
@@ -959,23 +957,23 @@ we provide the `oomph_get_target_name(...)` function provided by `oomph-lib`:
 
 ```cmake
 # Test definition
-oomph_add_executable(NAME one_d_poisson ...)
+oomph_add_executable(NAME one_d_poisson [...])
 
 # Get the hashed target name and store it in HASHED_TARGET_NAME
 oomph_get_target_name(one_d_poisson HASHED_TARGET_NAME)
 
 # Do something to the target, referring to the executable via
-# the hashed name use by CMake. (Here we specify that the code
+# the hashed name actually used by CMake. (Here we specify that the code
 # contains C++20 syntax.)
 set_target_properties(${HASHED_TARGET_NAME} PROPERTIES CXX_STANDARD 20)
 ```
 
 
-#### Using native CMakeCommands throughout
+#### Using native CMake commands throughout
 
-If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility you require, you may wish to define the build of your own executable using the native CMake functions. If so, you will need to make sure that you add the compile definitions in `OOMPH_COMPILE_DEFINITIONS` to the target -- this is what passes the required information about the `oomph-lib` installation to the compiler. 
+If you are comfortable with CMake and feel the `oomph_add_executable()` command does not provide the flexibility you require, you may wish to define the build of your own executable using the native CMake functions. If so, you will need to make sure that you add the compile definitions contained in the variable `OOMPH_COMPILE_DEFINITIONS` to the target -- this is what passes the required information about the `oomph-lib` installation to the compiler. 
 
-So the equivalent of 
+To illustrate this, the equivalent of 
 ```cmake
 oomph_add_executable(
   NAME one_d_poisson
@@ -1002,14 +1000,14 @@ target_compile_definitions(one_d_poisson PRIVATE REFINEABLE)
 target_compile_definitions(one_d_poisson PRIVATE ${OOMPH_COMPILE_DEFINITIONS})
 ```
 
-hierher revisit when role of PRIVATE is clear, and the way I'm passing the oomph-lib compile definitions is fixed
+*** hierher Puneet:  PRIVATE (or some equivalent) seems to be required; also this doesn't work ! ***
 
 
 ## Creating new demo driver directories
 
 Next we consider how to create a new demo driver directory. This is mainly of interest for developers but, as already mentioned, you can also use this approach to create a directory in the `oomph-lib` directory tree to develop your own code.
 
-As always, it is easiest to copy an existing directory and then modify it. Here we demonstrate how to create a new directory and how to develop the associated self-tests in the `demo_driver/poisson` directory:
+As always, it is easiest to copy an existing directory and then modify it. Here we demonstrate how to create a new directory and how to develop the associated self-tests in the `demo_drivers/poisson` directory:
 
 ```bash
 # Go the relevant directory
@@ -1076,7 +1074,7 @@ cmake -G Ninja -B build -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE
 
 This can be helpful when building several demo drivers at the same time as you will be able to see which subprojects are entered.
 
-Next, update the project name to the name of the enclosing folder. (You can, of course, call the project anything you want but this is a sensible default that must be adopted for any demo driver directories to be added to `oomph-lib`.)
+Next, update the project name to the name of the enclosing directory. (You can, of course, call the project anything you want but this is a sensible default that must be adopted for any demo driver directories to be added to `oomph-lib`.)
 
 ```bash
 # OLD
@@ -1149,7 +1147,7 @@ oomph_add_test(
 
 ### Step 5: Register the new directory so it is included in a top-level build
 
-At the moment, the newly-created demo driver directory is not visited when the demo-drivers are built (or self-tested) from the top level. So if you build the demo drivers in the `demo_drivers/poisson` directory like this:
+At the moment, the newly-created demo driver directory is not visited when the demo drivers are built (or self-tested) from the top level. So if you build the demo drivers in the `demo_drivers/poisson` directory like this:
 
 ```bash
 cd demo_drivers/poisson
@@ -1427,7 +1425,7 @@ To add new tutorials to the doc directory, follow the same steps used for adding
 
 
 ## Cheat sheet: autotools vs. cmake
-Earlier releases of `oomph-lib` used the autotools to build/install the library. To ease the conversion to the new way of doing things, here's a side-by-side comparison of key operations.
+Earlier releases of `oomph-lib` used the autotools to build/install the library. To ease the conversion to the new way of doing things, the table below provides a side-by-side comparison of key operations. Note that we also provide a script, `scripts/***py`, ***hierher Puneet*** that (attempts to) converts an autotools `Makefile.am` into a corresponding `CMakeLists.txt`. It may need a bit work/checking but it tends to do most of the work.
 
 In all the examples shown below we assume that `$oomph_home_dir` is the `oomph-lib` home directory:
 <table>
@@ -1460,9 +1458,9 @@ cd $oomph_home_dir<br>
 # Use ./oomph_build.py --help 
 # to find out what's available. 
 # To do a default build (No MPI,
-# all third-party libraries, 
-# build in Release mode, local 
-# installation) do
+# build all third-party libraries, 
+# build in Release mode, do a 
+# local installation) do
 python3 ./oomph_build.py
 </pre>
 </td>
@@ -1498,7 +1496,7 @@ cd $oomph_home_dir<br>
 # install them locally; no separate
 # "install" step required.
 cd external_distributions
-cmake -G Ninja -B build $(cat external_distributions/install/make_flags_for_oomph_lib.txt)
+cmake -G Ninja -B build 
 cmake --build build<br>
 # Run manual config/build/install
 # sequence for oomph-lib itself
@@ -1558,7 +1556,7 @@ make check
 <td>
 <pre>
 # Go to demo driver directory
-cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+cd $oomph_home_dir/demo_drivers/one_d_poisson<br>
 # Configure
 cmake -G Ninja -B build<br>
 # Run the test
@@ -1577,7 +1575,7 @@ ctest
 <td>
 <pre>
 # Go to demo driver directory
-cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+cd $oomph_home_dir/demo_drivers/one_d_poisson<br>
 # Run the test
 make check<br>
 # Edit
@@ -1594,7 +1592,7 @@ make check<br>
 <td>
 <pre>
 # Go to demo driver directory
-cd $oomph_home_dir/demo_driver/one_d_poisson<br>
+cd $oomph_home_dir/demo_drivers/one_d_poisson<br>
 # Configure (note that switching on the
 # debug build only helps if the library
 # itself was compiled with that option too;
@@ -1741,7 +1739,7 @@ cmake --install build<br>
 
 ### CMake resources
 
-For those of you new to CMake, you may wish to consult the following resources:
+For more information on CMake you may wish to consult the following resources:
 
 - The excellently-written "Professional CMake: A Practical Guide" by Scott Craig.
 - The [Awesome CMake](https://github.com/onqtam/awesome-cmake) repository.
@@ -1806,7 +1804,6 @@ END OF THE SHOW; MH IS HAPPY TO DROP EVERYTHING BELOW HERE
 **In progress**:
 
 - [ ] Document CTest usages:
-  - [ ] Disable test: `set_tests_properties(<test-name> PROPERTIES DISABLED YES)`
   - [ ] Demand number of processors required by MPI programs:
     - Standard MPI run command: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})`
     - Variable NP: `set_tests_properties(FooWithBar PROPERTIES PROCESSORS <N>)`, where `N` is the maximum number of processors required
