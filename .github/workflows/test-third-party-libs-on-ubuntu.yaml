@@ -52,7 +52,7 @@ jobs:
           python3 oomph_build.py \
             --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
             --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
-            --no-build-root \
+            --no-build-oomph \
             --verbose
         continue-on-error: true
 
