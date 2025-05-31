@@ -40,7 +40,7 @@ if(NOT IS_MULTI_CONFIG)
       message(
         STATUS
           "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but no build "
-          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'."
+          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'. "
           ""
           "NOTE: You can disable this behaviour with -DOOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE=OFF."
       )
@@ -53,7 +53,7 @@ if(NOT IS_MULTI_CONFIG)
         STATUS
           "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are "
           "now configuring with the build type '${CMAKE_BUILD_TYPE}'. Did you mean to add "
-          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}?"
+          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}? "
           ""
           "NOTE: You can silence this warning with -DOOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE=OFF."
       )
