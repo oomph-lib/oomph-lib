@@ -34,8 +34,6 @@ function(oomph_generate_doc_from)
   set(SUPPRESS_LATEX_IN_THIS_DIRECTORY
       ${${PREFIX}_SUPPRESS_LATEX_IN_THIS_DIRECTORY})
 
-  # TODO: Add sanity checks to make sure the oomph-lib root is correct
-
   # Look for Doxygen (mandatory) and pdflatex (not mandatory)
   if(NOT Doxygen_FOUND)
     find_package(Doxygen 1.9.6 REQUIRED)
@@ -69,9 +67,6 @@ function(oomph_generate_doc_from)
   endif()
 
   # Generate doxygen-ified header from ${DOCFILE}
-  #
-  # FIXME: txt2h_new.sh has a hard reliance on the system having 'awk'; need to
-  # check for gawk, nawk or mawk if its missing
 
   # Add a link in the doxygen-ified header to the to-be-generated PDF doc
   if(NOT SUPPRESS_LATEX_IN_THIS_DIRECTORY)

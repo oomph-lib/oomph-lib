@@ -17,7 +17,6 @@
 # class, make sure to mark it as "inline" otherwise you may well get warnings
 # about duplicate symbols!
 # ==============================================================================
-# TODO: Add "include_guard()" to all CMakeLists.txt files
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered meshes subdirectory")
 

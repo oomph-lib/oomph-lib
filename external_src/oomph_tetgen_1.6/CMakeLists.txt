@@ -16,12 +16,6 @@ message(VERBOSE "Entered oomph_tetgen_1.6 subdirectory")
 # The problem may be to do with some strange initialisations within loops and
 # loop unrolling, but that could be a complete red herring.
 # ------------------------------------------------------------------------------
-# Snippet from predicates.cxx:
-#
-# "...Also be sure to turn on the optimizer when compiling this file."
-#
-# TODO: Hmm. Discuss this...
-# ------------------------------------------------------------------------------
 
 # Define the sources
 set(SOURCES tetgen.cxx predicates.cxx)

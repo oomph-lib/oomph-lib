@@ -227,8 +227,6 @@ if(OOMPH_HAS_MUMPS)
   list(APPEND SOURCES mumps_fortran_solver.F mumps_solver.cc)
 endif()
 
-# TODO: Do we need to install these? Or are they never used by the user?
-#
 # Need to worry about these for dependency but they shouldn't be included into
 # the include directory
 set(HEADERS_NO_INSTALL cfortran.h frontal.h lapack_qz.h mumps.h)
@@ -287,8 +285,6 @@ if(OOMPH_HAS_MPI)
                                           MPI::MPI_Fortran)
 endif()
 
-# FIXME: BLAS/LAPACK are just implementation details; do we actually need it for
-# anything other than SuperLU?
 target_link_libraries(${LIBNAME} PUBLIC ${OpenBLAS_LIBRARIES})
 
 # NOTE: We publicly link to third-party libraries so that these libraries get

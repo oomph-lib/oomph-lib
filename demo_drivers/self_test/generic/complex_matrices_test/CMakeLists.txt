@@ -26,12 +26,6 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-# TODO: Check this actually works and it doesn't just become an extra label
-set(EXTRA_FLAGS)
-if(OOMPH_HAS_MPI)
-  set(EXTRA_FLAGS)
-endif()
-
 oomph_add_test(
   TEST_NAME self_test.generic.complex_matrices_test
   DEPENDS_ON dense_complex_matrix_test cr_complex_matrix_test

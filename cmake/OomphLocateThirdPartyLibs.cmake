@@ -8,8 +8,6 @@ message(VERBOSE "Locating third-party libraries")
 # Targets to store the accumulated compiler flags and external libs to link
 set(EXTERNAL_DIST_CXX_DEFINITIONS "")
 
-# TODO: Possibly remove this since all of these options are "required" by oomph-lib so they must
-# be set by this point
 if(NOT (OOMPH_USE_GKLIB_FROM AND OOMPH_USE_METIS_FROM AND OOMPH_USE_SUPERLU_FROM))
   message(
     FATAL_ERROR
@@ -37,7 +35,6 @@ if(OOMPH_USE_SUPERLU_FROM OR OOMPH_USE_SUPERLU_DIST_FROM)
   # SuperLU_DIST. They will internally read the variables OOMPH_USE_GKLIB_FROM, OOMPH_USE_METIS_FROM,
   # OOMPH_USE_PARMETIS_FROM and OOMPH_USE_SUPERLU_DIST_FROM, respectively. The CMake code for
   # SuperLU itself has been written properly so we can import it like a normal version CMake library
-  # TODO: GKlib is found but we don't explicitly use it anywhere...
   find_package(GKlib REQUIRED GLOBAL)
   find_package(METIS REQUIRED GLOBAL)
   find_package(superlu 6.0.1 REQUIRED GLOBAL PATHS ${OOMPH_USE_SUPERLU_FROM} NO_DEFAULT_PATH)

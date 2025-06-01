@@ -139,7 +139,7 @@ def generate_oomph_preset(
     generator="Ninja",
 ) -> dict:
     """
-    Create a dictionary representing CMakeUserPresets.json for the root oomph-lib project.
+    Create a dictionary representing CMakeUserPresets.json for the oomph-lib project.
     oomph_cache_vars is a dict of {var_name: var_value}.
     """
     preset_dict = {
@@ -229,7 +229,7 @@ def configure_build_and_install_external_libs(
     print_time(time_elapsed, verbose=verbose)
 
 
-def configure_build_and_install_root(
+def configure_build_and_install_oomph(
     args: Namespace,
     oomph_dir: Path,
     oomph_build_dir: Path,
@@ -237,7 +237,7 @@ def configure_build_and_install_root(
     verbose: bool
 ):
     """
-    Generate root project presets, run cmake configure and build+install.
+    Generate oomph-lib project presets, run cmake configure and build+install.
     ext_flags is the dict of flags read from the external JSON file.
     """
     # Convert oomph- arguments to a dict of {OOMPH_*: value, CMAKE_*: value}
@@ -272,7 +272,7 @@ def configure_build_and_install_root(
     for (k, v) in oomph_cache_vars.items():
         final_cache[k] = v
 
-    # Generate root presets
+    # Generate oomph-lib presets
     presets_dict = generate_oomph_preset(oomph_build_dir, final_cache, args.generator)
     preset_path = oomph_dir / "CMakeUserPresets.json"
     write_presets_file(presets_dict, preset_path)
@@ -359,7 +359,7 @@ def parse_args():
 
     # Flags recognised by CMake
     general_group = parser.add_argument_group("general cmake flags")
-    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and root.")
+    general_group.add_argument("-c", "--config", default="Release", choices=["Debug", "Release", "RelWithDebInfo", "MinSizeRel"], help="Specify CMAKE_BUILD_TYPE (default: Release) for both external and oomph-lib.")
     general_group.add_argument("-g", "--generator", default="Ninja", help="CMake generator to use. For example, 'Unix Makefiles' or 'Ninja' (default: Ninja).")
     general_group.add_argument(      "--enable-ccache", action="store_true", help="Enable use of 'ccache' for compilation.")
 
@@ -461,45 +461,33 @@ if __name__ == "__main__":
             for d in (external_dist_build_dir, external_dist_install_dir):
                 if d.exists():
                     found_dirty_directory = True
-                    message = f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
-                    if args.reuse_tpl:
-                        print(bold_yellow(barrier))
-                        print(bold_yellow(message))
-                        print(bold_yellow(barrier))
-                    else:
+                    if not args.reuse_tpl:
                         raise DirectoryExistsError(
-                            f"{message}. You can bypass this error with the flag '--reuse-tpl' or wipe them with '--wipe-tpl'")
+                            f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-tpl' or wipe them with '--wipe-tpl'"
+                        )
 
-        # Warn the user that the root project build/install dirs already exist. We can skip this
+        # Warn the user that the oomph-lib project build/install dirs already exist. We can skip this
         # warning if the user is only building the third-party libraries, or if they've silenced
         # the warnings
         if args.build_oomph:
             for d in (oomph_build_dir, oomph_install_dir):
                 if d.exists():
                     found_dirty_directory = True
-                    message = f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
-                    if args.reuse_root:
-                        print(bold_yellow(barrier))
-                        print(bold_yellow(message))
-                        print(bold_yellow(barrier))
-                    else:
+                    if not args.reuse_oomph:
                         raise DirectoryExistsError(
-                            f"{message}. You can bypass this error with the flag '--reuse-oomph' or wipe them with '--wipe-oomph'")
+                            f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-oomph' or wipe them with '--wipe-oomph'"
+                        )
 
-        # Warn the user that the root project build/install dirs already exist. We can skip this
+        # Warn the user that the oomph-lib project build/install dirs already exist. We can skip this
         # warning if the user is only building the third-party libraries, or if they've silenced
         # the warnings
         if args.build_doc:
             if doc_build_dir.exists():
                 found_dirty_directory = True
-                message = f"\nWARNING: Directory:\n\n\t{doc_build_dir}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\n"
-                if args.reuse_doc:
-                    print(bold_yellow(barrier))
-                    print(bold_yellow(message))
-                    print(bold_yellow(barrier))
-                else:
+                if not args.reuse_doc:
                     raise DirectoryExistsError(
-                        f"{message}. You can bypass this error with the flag '--reuse-doc' or wipe them with '--wipe-doc'")
+                        f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-doc' or wipe them with '--wipe-doc'"
+                    )
 
         # Pause long enough for the user to see this warning
         if found_dirty_directory:
@@ -515,25 +503,25 @@ if __name__ == "__main__":
     else:
         print_progress(">>> Skipping build of third-party libraries")
 
-    # If we've *silently* built the third-party libs but the user isn't building the root
+    # If we've *silently* built the third-party libs but the user isn't building the oomph-lib
     # project, we should dump the usage instructions incase they want to do it themselves
     if args.build_tpl and not args.build_oomph and not args.verbose:
         contents = (external_dist_build_dir / "usage.txt").read_text()
         print(f"{contents}\n")
 
-    # Configure, build, and install root (main) project
+    # Configure, build, and install oomph-lib (main) project
     if args.build_oomph:
         # Attempt to locate 'cmake_flags_for_oomph_lib.json'
         if not external_dist_json_path.is_file():
             print("ERROR: Could not find 'cmake_flags_for_oomph_lib.json' after building external_distributions.", file=sys.stderr)
             sys.exit(1)
 
-        # Read external JSON file to get flags to pass to root project
+        # Read external JSON file to get flags to pass to oomph-lib project
         ext_flags = read_external_json_file(external_dist_json_path)
 
-        configure_build_and_install_root(args, project_root, oomph_build_dir, ext_flags, args.verbose)
+        configure_build_and_install_oomph(args, project_root, oomph_build_dir, ext_flags, args.verbose)
     else:
-        print_progress(">>> Skipping build of root project")
+        print_progress(">>> Skipping build of oomph-lib project")
 
     # Configure and build the docs
     if args.build_doc:

@@ -9,7 +9,7 @@ if(NOT oomphlib_FOUND)
 endif()
 include(CTest)
 
-# FIXME: Compiler (on macOS) producing a warning about
+# NOTE: The compiler (on macOS) produces a warning about
 # std::experimental::filesystem being deprecated into favour of C++17's
 # std::filesystem and "This experimental version will be removed in LLVM 11.".
 # Should revert to C++17 but will need to patch the issue with Trilinos if it is
