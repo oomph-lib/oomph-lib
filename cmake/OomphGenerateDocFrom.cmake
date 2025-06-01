@@ -87,12 +87,12 @@ function(oomph_generate_doc_from)
   add_custom_command(
     TARGET build_docs_${PATH_HASH}
     POST_BUILD
-    COMMAND doxygen
+    COMMAND doxygen -q
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${OOMPH_ROOT_DIR}/doc/figures/doxygen.png" html/doxygen.png
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/html"
-               "${CMAKE_CURRENT_SOURCE_DIR}/latex"
+               "${CMAKE_CURRENT_SOURCE_DIR}/latex" OUTPUT_QUIET
     VERBATIM)
 
   # Optional PDF build
@@ -108,7 +108,10 @@ function(oomph_generate_doc_from)
         mv refman.tex refman.tex.back &&
         '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex &&
         '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' &&
-        make -i || echo PDF build failed &&
+        make -s -i \
+             PDFLATEX='pdflatex -interaction=batchmode -halt-on-error' \
+             MAKEINDEX='makeindex -q' \
+          || { echo 'PDF build failed!  See latex/refman.log'; false; } &&
         cp refman.pdf '${PDF_OUT}' &&
         ln -sf '../${DOC_STEM}.pdf' refman.pdf
       "
