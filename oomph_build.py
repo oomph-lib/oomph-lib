@@ -463,7 +463,7 @@ if __name__ == "__main__":
                     found_dirty_directory = True
                     if not args.reuse_tpl:
                         raise DirectoryExistsError(
-                            f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-tpl' or wipe them with '--wipe-tpl'"
+                            f"The directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib. You can bypass this error with the flag '--reuse-tpl' or wipe them with '--wipe-tpl'"
                         )
 
         # Warn the user that the oomph-lib project build/install dirs already exist. We can skip this
@@ -475,7 +475,7 @@ if __name__ == "__main__":
                     found_dirty_directory = True
                     if not args.reuse_oomph:
                         raise DirectoryExistsError(
-                            f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-oomph' or wipe them with '--wipe-oomph'"
+                            f"The directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib. You can bypass this error with the flag '--reuse-oomph' or wipe them with '--wipe-oomph'"
                         )
 
         # Warn the user that the oomph-lib project build/install dirs already exist. We can skip this
@@ -486,7 +486,7 @@ if __name__ == "__main__":
                 found_dirty_directory = True
                 if not args.reuse_doc:
                     raise DirectoryExistsError(
-                        f"\nWARNING: Directory:\n\n\t{d}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib.\nYou can bypass this error with the flag '--reuse-doc' or wipe them with '--wipe-doc'"
+                        f"The directory:\n\n\t{doc_build_dir}\n\nalready exists. If you have changed any settings you should wipe this directory before\nreinstalling oomph-lib. You can bypass this error with the flag '--reuse-doc' or wipe them with '--wipe-doc'"
                     )
 
         # Pause long enough for the user to see this warning

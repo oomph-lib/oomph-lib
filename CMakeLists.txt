@@ -106,7 +106,6 @@ endif()
 oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" ${OOMPH_DEFAULT_TO_MUMPS_SOLVER})
 
 # Fine-grained control of build of external_srcs.
-# FIXME: Make sure the SUPPRESS variables below actually work
 # TODO: Discuss with MH; do we actually want these options anymore?
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
