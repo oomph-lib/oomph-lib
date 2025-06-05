@@ -3146,7 +3146,8 @@ namespace oomph
         << "Boundary coordinates have not been set\n"
         << "[Note: In refineable problems, the boundary coordinates\n"
         << "       will only be interpolated to newly created nodes\n"
-        << "       if Mesh::Boundary_coordinate_exists_stored_as_unsigned[...] \n"
+        << "       if Mesh::Boundary_coordinate_exists_stored_as_unsigned[...] "
+           "\n"
         << "       has been set to 1 (as proxy for true)!]\n";
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
@@ -3195,7 +3196,8 @@ namespace oomph
         << "Boundary coordinates have not been set\n"
         << "[Note: In refineable problems, the boundary coordinates\n"
         << "       will only be interpolated to newly created nodes\n"
-        << "       if Mesh::Boundary_coordinate_exists_stored_as_unsigned[...]\n"
+        << "       if "
+           "Mesh::Boundary_coordinate_exists_stored_as_unsigned[...]\n"
         << "       has been set to 1 (as proxy for true)!]\n";
       throw OomphLibError(
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
