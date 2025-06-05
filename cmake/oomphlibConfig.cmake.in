@@ -40,7 +40,7 @@ if(NOT IS_MULTI_CONFIG)
       message(
         STATUS
           "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but no build "
-          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'."
+          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'. "
           ""
           "NOTE: You can disable this behaviour with -DOOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE=OFF."
       )
@@ -53,7 +53,7 @@ if(NOT IS_MULTI_CONFIG)
         STATUS
           "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are "
           "now configuring with the build type '${CMAKE_BUILD_TYPE}'. Did you mean to add "
-          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}?"
+          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}? "
           ""
           "NOTE: You can silence this warning with -DOOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE=OFF."
       )
@@ -163,7 +163,7 @@ endif()
 # Search for OpenBLAS/LAPACK libraries
 find_dependency(OpenBLAS 0.3.25 REQUIRED GLOBAL PATHS ${OOMPH_USE_OPENBLAS_FROM} NO_DEFAULT_PATH)
 
-# FIXME: This oddity (of looking for BLAS even though we've already found
+# NOTE: This oddity (of looking for BLAS even though we've already found
 # OpenBLAS) is to handle an issue in HYPRE. Although we built HYPRE with
 # OpenBLAS, HYPRE searches (using CMake) for the BLAS library (not OpenBLAS). In
 # some cases it won't be able to find it, resulting in an unexpected error

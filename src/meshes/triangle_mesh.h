@@ -775,7 +775,7 @@ namespace oomph
       input_string_stream << "-pA -a -a" << element_area << "q30";
 
       // Verify if creation of new points on boundaries is allowed
-      if (!this->is_creation_of_vertices_on_boundaries_allowed())
+      if (!this->is_automatic_creation_of_vertices_on_boundaries_allowed())
       {
         input_string_stream << " -YY";
       }

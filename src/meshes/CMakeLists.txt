@@ -17,7 +17,6 @@
 # class, make sure to mark it as "inline" otherwise you may well get warnings
 # about duplicate symbols!
 # ==============================================================================
-# TODO: Add "include_guard()" to all CMakeLists.txt files
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered meshes subdirectory")
 
@@ -135,10 +134,8 @@ oomph_library_config(
   HEADERS_NO_COMBINE ${TEMPLATE_IMPL_HEADERS}
   LINKLIBS ${LINKLIBS})
 
-# The meshes library relies on the generic
-target_include_directories(
-  ${LIBNAME}
-  INTERFACE $<TARGET_PROPERTY:oomph::generic,INTERFACE_INCLUDE_DIRECTORIES>)
+# The meshes library relies on the generic library.
+target_link_libraries(meshes INTERFACE oomph::generic)
 
 message(VERBOSE "Leaving meshes subdirectory")
 # ------------------------------------------------------------------------------

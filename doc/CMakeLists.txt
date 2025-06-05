@@ -33,12 +33,6 @@ add_custom_target(
   BYPRODUCTS ${INDEX_HTML_BYPRODUCTS}
   COMMENT "Generating index.html files for demo drivers")
 
-# TODO: Update "the_distribution"; it's based on the soon-to-be-deprecated
-# Makefile.am stuff
-
-# TODO: Switch to using add_custom_command(...) in OomphGenerateDocFrom.cmake
-# instead of add_custom_target(...) to avoid constantly rebuilding...
-
 # Recurse!
 set(SUBDIRS
     people

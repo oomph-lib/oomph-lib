@@ -25,12 +25,10 @@ oomph_add_executable(
   LIBRARIES oomph::navier_stokes oomph::meshes oomph::generic)
 
 # Create a symlink to the built mesh from the scripts directory
-#
-# TODO: Ask whether it's better to make this a copy rather a symlink since the
-# build/ directory is likely to be deleted
 add_custom_target(
-  install_fig2poly COMMAND ln -sf "${CMAKE_BINARY_DIR}/fig2poly"
-                           "${OOMPH_ROOT_DIR}/scripts/fig2poly")
+  install_fig2poly
+  COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_BINARY_DIR}/fig2poly"
+          "${OOMPH_ROOT_DIR}/scripts/fig2poly")
 oomph_get_target_name(fig2poly FIG2POLY_HASHED_TARGET_NAME)
 add_dependencies(install_fig2poly ${FIG2POLY_HASHED_TARGET_NAME})
 

@@ -359,7 +359,6 @@ sudo ninja oomph_uninstall
 
 where you again have to use your root privileges (`sudo`).
 
-
 #### Further build options
 
 You can customise your build by passing flags of the form `-D<FLAG>` to `cmake` during the configuration stage. For reference, the table below contains a list of options that the user can control. The build and installation steps will remain the same.
@@ -448,10 +447,10 @@ Below is a comprehensive list of the options and their purposes:
 
 - **`--build-doc`**: By default, the script does not build the documentation (to save time and space). If you want to generate the full HTML (and PDF) documentation for oomph-lib, include the `--build-doc` flag. This will build the documentation (using Doxygen and LaTeX) as part of the build process. *Note:* Building documentation can be time-consuming and requires Doxygen (and a LaTeX distribution for PDFs) to be installed. If these tools are missing, the doc build will fail – in that case, either install the necessary tools or omit this option.
 
-- **`--root-CMAKE_INSTALL_PREFIX`**: Use this option when you intend to provide a custom installation location.
-- **`--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it into `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`. If you also specify `--root-CMAKE_INSTALL_PREFIX`, this flag will have no effect.
-  > **Important:** When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with `sudo` if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run `oomph_build.py --root-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. Building as a non-root user helps avoid permission issues in the build directory.
-- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, the root project, and the documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
+- **`--oomph-CMAKE_INSTALL_PREFIX`**: Use this option when you intend to provide a custom installation location.
+- **`--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it in `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`. If you also specify `--oomph-CMAKE_INSTALL_PREFIX`, this flag will have no effect.)
+  > **Important:** When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run oomph_build.py `--oomph-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.
+- **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
 
   ```bash
   # Wipe the default build/installation directories used when building

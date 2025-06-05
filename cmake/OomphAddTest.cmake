@@ -12,7 +12,8 @@
 #                    DEPENDS_ON            <executables/targets-required-by-test>
 #                    COMMAND               <command-to-run-test>
 #                    [TEST_FILES           <files-required-by-test>]
-#                    [SILENCE_MISSING_VALIDATA_WARNING])
+#                    [SILENCE_MISSING_VALIDATA_WARNING]
+#                    [ASSUME_PURE_CMAKE_TARGET_NAMES])
 #
 # By default we assume that a validata/ and a validate.sh script are always
 # required for a test. Here, TEST_FILES is provided so that the user can
@@ -45,7 +46,7 @@ include_guard()
 function(oomph_add_test)
   # Define the supported set of keywords
   set(PREFIX ARG)
-  set(FLAGS SILENCE_MISSING_VALIDATA_WARNING)
+  set(FLAGS SILENCE_MISSING_VALIDATA_WARNING ASSUME_PURE_CMAKE_TARGET_NAMES)
   set(SINGLE_VALUE_ARGS TEST_NAME)
   set(MULTI_VALUE_ARGS TEST_FILES DEPENDS_ON COMMAND)
 
@@ -57,6 +58,8 @@ function(oomph_add_test)
   # Redefine the variables in this scope without a prefix for clarity
   set(SILENCE_MISSING_VALIDATA_WARNING
       ${${PREFIX}_SILENCE_MISSING_VALIDATA_WARNING})
+  set(ASSUME_PURE_CMAKE_TARGET_NAMES
+      ${${PREFIX}_ASSUME_PURE_CMAKE_TARGET_NAMES})
   set(TEST_NAME ${${PREFIX}_TEST_NAME})
   set(VALIDATE_SH_COMMAND ${${PREFIX}_COMMAND})
   set(DEPENDS_ON ${${PREFIX}_DEPENDS_ON})
@@ -189,8 +192,12 @@ function(oomph_add_test)
 
   # Add on commands to build the targets we need
   foreach(TARGET_DEPENDENCY IN LISTS DEPENDS_ON)
-    add_dependencies(build_targets_${PATH_HASH}
-                     ${TARGET_DEPENDENCY}_${PATH_HASH})
+    if(ASSUME_PURE_CMAKE_TARGET_NAMES)
+      add_dependencies(build_targets_${PATH_HASH} ${TARGET_DEPENDENCY})
+    else()
+      add_dependencies(build_targets_${PATH_HASH}
+                       ${TARGET_DEPENDENCY}_${PATH_HASH})
+    endif()
   endforeach()
   # ----------------------------------------------------------------------------
 

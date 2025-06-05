@@ -134,7 +134,7 @@ function(oomph_library_config)
   if(SOURCES)
     add_library(${LIBNAME} ${LIBTYPE} ${LIBRARY_DEPS})
     set(INCLUDE_TYPE PUBLIC)
-    set(LINK_TYPE PRIVATE)
+    set(LINK_TYPE PUBLIC)
   else()
     add_library(${LIBNAME} INTERFACE)
     set(INCLUDE_TYPE INTERFACE)
@@ -227,10 +227,6 @@ function(oomph_library_config)
   # obvious -- it is just the name of the library itself, e.g. the <SUBDIR> of
   # the "generic" library, src/generic/, contains the header files.
   #
-  # TODO: Add a note somewhere that the library directory should either match
-  # the library name or be set
-  # TODO: The <SUBDIR> value should NOT be the path from src/ as this would
-  # break for the build.
   # FIXME: We should, for good practice, include the full path from the root
   # project directory to preserve the folder structure. E.g. for the
   # 'space_time_block_preconditioner' library defined in
