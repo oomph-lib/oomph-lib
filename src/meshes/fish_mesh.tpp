@@ -115,8 +115,8 @@ namespace oomph
 
     // We will store boundary coordinates on the curvilinear boundaries
     //(boundaries  0 and 4) along the fish's belly and its back.
-    Boundary_coordinate_exists[0] = true;
-    Boundary_coordinate_exists[4] = true;
+    set_boundary_coordinate_exists(0);
+    set_boundary_coordinate_exists(4);
 
     // Allocate the storage for the elements
     unsigned nelem = 4;

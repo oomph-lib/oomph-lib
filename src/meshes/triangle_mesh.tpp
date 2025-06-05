@@ -43653,7 +43653,7 @@ namespace oomph
     RefineableTriangleMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)
   {
     // Quick return
-    if (!Boundary_coordinate_exists[b])
+    if (!boundary_coordinate_exists(b))
     {
       return;
     }

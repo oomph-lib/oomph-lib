@@ -253,7 +253,7 @@ public:
        nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     }
-   this->Boundary_coordinate_exists[4]=true;
+   this->set_boundary_coordinate_exists(4);
    set_lagrangian_nodal_coordinates();
   }
 

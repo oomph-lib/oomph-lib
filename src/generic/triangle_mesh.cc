@@ -53,7 +53,7 @@ namespace oomph
       unsigned nb = nboundary();
       for (unsigned b = 0; b < nb; b++)
       {
-        if (Boundary_coordinate_exists[b])
+       if (boundary_coordinate_exists(b))
         {
           dump_file << "1 # Boundary coordinate for boundary " << b
                     << " does exist\n";
@@ -143,7 +143,7 @@ namespace oomph
         if (bound_coord_exists == 1)
         {
           // Remember it!
-          Boundary_coordinate_exists[b] = true;
+         set_boundary_coordinate_exists(b);
 
           // Read line up to termination sign
           getline(restart_file, input_string, '#');

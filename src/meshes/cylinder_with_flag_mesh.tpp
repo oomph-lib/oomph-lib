@@ -860,9 +860,9 @@ namespace oomph
     }
 
     // We have parametrised boundary 5,6 and 7
-    this->Boundary_coordinate_exists[5] = true;
-    this->Boundary_coordinate_exists[6] = true;
-    this->Boundary_coordinate_exists[7] = true;
+    this->set_boundary_coordinate_exists(5);
+    this->set_boundary_coordinate_exists(6);
+    this->set_boundary_coordinate_exists(7);
 
     // Loop over all elements and set macro element pointer
     for (unsigned e = 0; e < 31; e++)

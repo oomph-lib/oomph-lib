@@ -524,7 +524,7 @@ namespace oomph
           zeta[0] = boundary_node_pt(b, i)->xi(0) - origin[0];
           boundary_node_pt(b, i)->set_coordinates_on_boundary(b, zeta);
         }
-        Boundary_coordinate_exists[b] = true;
+        set_boundary_coordinate_exists(b);
       }
 
       // Loop over boundaries 1 and 3 where xi_1 is the varying
@@ -542,7 +542,7 @@ namespace oomph
                     0.5 * (this->Ymax - this->Ymin);
           boundary_node_pt(b, i)->set_coordinates_on_boundary(b, zeta);
         }
-        Boundary_coordinate_exists[b] = true;
+        set_boundary_coordinate_exists(b);
       }
     }
   };

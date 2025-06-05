@@ -113,10 +113,10 @@ namespace oomph
       }
     }
 
-    this->Boundary_coordinate_exists[0] = true;
-    this->Boundary_coordinate_exists[1] = true;
-    this->Boundary_coordinate_exists[2] = true;
-    this->Boundary_coordinate_exists[3] = true;
+    this->set_boundary_coordinate_exists(0);
+    this->set_boundary_coordinate_exists(1);
+    this->set_boundary_coordinate_exists(2);
+    this->set_boundary_coordinate_exists(3);
   }
 
 } // namespace oomph

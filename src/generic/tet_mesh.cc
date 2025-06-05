@@ -541,7 +541,7 @@ namespace oomph
       }
 
       // We need boundary coordinates!
-      if (!Boundary_coordinate_exists[b])
+      if (!boundary_coordinate_exists(b))
       {
         reason << "-- no boundary coordinates were set up\n";
         do_it = false;

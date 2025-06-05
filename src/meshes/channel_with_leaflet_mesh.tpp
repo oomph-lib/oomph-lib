@@ -221,8 +221,8 @@ namespace oomph
     this->setup_boundary_element_info();
 
     // We have parametrised boundary 4 and 5
-    this->Boundary_coordinate_exists[4] = true;
-    this->Boundary_coordinate_exists[5] = true;
+    this->set_boundary_coordinate_exists(4);
+    this->set_boundary_coordinate_exists(5);
 
   } // end of constructor
 

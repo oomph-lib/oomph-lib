@@ -250,7 +250,7 @@ namespace oomph
     RefineableTetgenMesh<ELEMENT>*& new_mesh_pt, const unsigned& b)
   {
     // Quick return
-    if (!Boundary_coordinate_exists[b])
+    if (!boundary_coordinate_exists(b))
     {
       oomph_info << "Not snapping nodes on boundary " << b
                  << " because no boundary coordinate has been set up.\n";

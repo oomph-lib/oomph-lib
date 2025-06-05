@@ -186,7 +186,7 @@ namespace oomph
     this->setup_boundary_element_info();
 
     // We have only bothered to parametrise boundary 3
-    this->Boundary_coordinate_exists[3] = true;
+    this->set_boundary_coordinate_exists(3);
   }
 
 

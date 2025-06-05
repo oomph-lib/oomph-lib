@@ -499,7 +499,7 @@ public:
        nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     } // End of loop over horizontal elements
-   this->Boundary_coordinate_exists[4] = true;
+   this->set_boundary_coordinate_exists(4);
    
    // Set up the boundary element information
    this->setup_boundary_element_info();

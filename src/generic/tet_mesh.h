@@ -1575,7 +1575,7 @@ namespace oomph
       // Indicate that boundary coordinate has been set up
       if (do_for_real == 1)
       {
-        Boundary_coordinate_exists[b] = true;
+       set_boundary_coordinate_exists(b);
 
         // Facet associated with this boundary?
         if (f_pt != 0)

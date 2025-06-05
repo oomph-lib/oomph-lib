@@ -1090,8 +1090,10 @@ namespace oomph
 #endif
 
       unsigned nbound = nboundary();
-      Boundary_coordinate_exists.resize(nbound, false);
 
+      // This call also initialises the boundary coordinate scheme
+      set_nboundary(nbound);
+      
       // Now build the new scaffold
       this->Tmp_mesh_pt = new TriangleScaffoldMesh(this->Triangulateio);
 

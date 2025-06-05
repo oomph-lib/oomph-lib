@@ -314,7 +314,7 @@ namespace oomph
       unsigned b = boundary_ids[ib];
 
       // We'll setup boundary coordinates for this one
-      Boundary_coordinate_exists[b] = true;
+      set_boundary_coordinate_exists(b);
 
       // Remember for future reference
       FSI_boundary_id.push_back(b);

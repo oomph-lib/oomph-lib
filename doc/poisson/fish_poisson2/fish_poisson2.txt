@@ -495,19 +495,16 @@ The actual functionality to store boundary coordinates is only
 provided in (and required by) the derived \c BoundaryNode class.]
 
 Since the storage of boundary coordinates is optional, 
-the \c Mesh base class provides a protected vector of bools,
-\code
-std::vector<bool> Mesh::Boundary_coordinate_exists;
-\endcode
-that indicates if the boundary coordinates have been stored for
-all \c Nodes on a specific mesh boundary. This vector
+the \c Mesh base class provides storage
+to indicate if the boundary coordinates have been stored for
+all \c Nodes on a specific mesh boundary. The storage 
 is resized and its entries are initialised to \c false, when
 the number of mesh boundaries is declared with a call
 to \c Mesh::set_nboundary(...). If, during mesh refinement, 
 a new  \c BoundaryNode is created on the mesh's boundary \c b, 
 its boundary coordinates are computed by interpolation from the
 corresponding values at the nodes in the father element, if 
-\c Mesh::Boundary_coordinate_exists[b] has been set to \c true.
+boundary coordinates had been set up on boundary \c b.
 
 We regard it as good practice to set boundary coordinates for
 all \c BoundaryNodes that are located on curvlinear mesh boundaries. 

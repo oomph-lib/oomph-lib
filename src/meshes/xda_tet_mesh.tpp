@@ -585,7 +585,7 @@ namespace oomph
     }
 
     // Indicate that boundary coordinate has been set up
-    Boundary_coordinate_exists[b] = true;
+    set_boundary_coordinate_exists(b);
 
     // Cleanup
     unsigned n = face_el_pt.size();

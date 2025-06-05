@@ -76,6 +76,7 @@ namespace oomph
 
 
   protected:
+   
     /// Vector of Vector of pointers to nodes on the boundaries:
     /// Boundary_node_pt(b,n). Note that this is private to force
     /// the use of the add_boundary_node() function, which ensures
@@ -185,9 +186,6 @@ namespace oomph
     /// Vector of pointers to generalised elements
     Vector<GeneralisedElement*> Element_pt;
 
-    /// Vector of boolean data that indicates whether the boundary
-    /// coordinates have been set for the boundary
-    std::vector<bool> Boundary_coordinate_exists;
 
     /// A function that upgrades an ordinary node to a boundary node
     /// We shouldn't ever really use this, but it does make life that
@@ -201,7 +199,17 @@ namespace oomph
     void convert_to_boundary_node(Node*& node_pt);
 
 
+  private:
+   
+
+   /// Indicate whether the boundary coordinates have been set for the
+   /// specified boundary. Note: Vector of unsigneds to avoid problems with
+   /// vector<bool> 0 = false; 1= true.
+   Vector<unsigned> Boundary_coordinate_exists_stored_as_unsigned;
+
+   
   public:
+   
 #ifdef OOMPH_HAS_MPI
 
 
@@ -303,7 +311,7 @@ namespace oomph
     void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
     {
       if (nelement() == 0) return;
-      if (!Boundary_coordinate_exists[b])
+      if (!(Boundary_coordinate_exists_stored_as_unsigned[b]==1))
       {
         oomph_info << "No boundary coordinates were set up for boundary " << b
                    << std::endl;
@@ -506,16 +514,8 @@ namespace oomph
     {
       Boundary_node_pt.resize(nbound);
 
-      // ODD: this should work but causes problems...
-      // Boundary_coordinate_exists.resize(nbound, false);
-
-      // ...so rewrite manually
-      unsigned nb_old = Boundary_coordinate_exists.size();
-      Boundary_coordinate_exists.resize(nbound);
-      for (unsigned b = nb_old; b < nbound; b++)
-      {
-        Boundary_coordinate_exists[b] = false;
-      }
+      // 0 is proxy for false
+      Boundary_coordinate_exists_stored_as_unsigned.resize(nbound,0);
     }
 
     /// Clear all pointers to boundary nodes
@@ -574,26 +574,29 @@ namespace oomph
     // return false
     bool boundary_coordinate_exists(const unsigned& i) const
     {
-      if (Boundary_coordinate_exists.empty())
+     if (Boundary_coordinate_exists_stored_as_unsigned.empty())
       {
-        return false;
+       return false;
       }
-      // ALH: This bounds-checking code needs to remain, because
-      // Boundary_coordinate_exists is
-      // an stl vector not our overloaded Vector class
-#ifdef RANGE_CHECKING
-      if (i >= Boundary_coordinate_exists.size())
-      {
-        std::ostringstream error_message;
-        error_message << "Range Error: " << i << " is not in the range (0,"
-                      << Boundary_coordinate_exists.size() - 1 << std::endl;
 
-        throw OomphLibError(error_message.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      return Boundary_coordinate_exists[i];
+     // 1 is proxy for true
+     return (Boundary_coordinate_exists_stored_as_unsigned[i]==1);
+    }
+
+
+   
+   /// Set boundary coordinate on the i-th boundary to be existing
+   void set_boundary_coordinate_exists(const unsigned& i)
+    {
+     // 1 is proxy for true
+     Boundary_coordinate_exists_stored_as_unsigned[i]=1;
+    }
+   
+   /// Set boundary coordinate on the i-th boundary to be non-existing
+   void set_boundary_coordinate_does_not_exist(const unsigned& i)
+    {
+     // 0 is proxy for false
+     Boundary_coordinate_exists_stored_as_unsigned[i]=0;
     }
 
     /// Return number of elements in the mesh
