@@ -280,6 +280,8 @@ def configure_build_and_install_oomph(
     # Configure with the 'main' preset
     print_progress(">>> Configuring main project", pad_to=60, end="\n" if verbose else "")
     config_cmd = ["cmake", "--preset", "main"]
+    if args.oomph_extra_flags:
+        config_cmd += args.oomph_extra_flags
     start_time = time.perf_counter()
     run_command(config_cmd, oomph_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -399,7 +401,7 @@ def parse_args():
     # External distributions flags
     ext_group = parser.add_argument_group("external_distributions flags")
     ext_group.add_argument("--ext-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom install directory for third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries.")
+    ext_group.add_argument("--ext-OOMPH_BUILD_OPENBLAS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build OpenBLAS in third-party libraries (ignored if --ext-OOMPH_USE_OPENBLAS_FROM is given).")
     ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU in third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_BUILD_SUPERLU_DIST", metavar="ON/OFF", choices=["ON", "OFF"], help="Build SuperLU_DIST in third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_BUILD_CGAL", metavar="ON/OFF", choices=["ON", "OFF"], help="Build CGAL in third-party libraries.")
@@ -407,16 +409,16 @@ def parse_args():
     ext_group.add_argument("--ext-OOMPH_BUILD_HYPRE", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Hypre in third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_BUILD_TRILINOS", metavar="ON/OFF", choices=["ON", "OFF"], help="Build Trilinos in third-party libraries.")
     ext_group.add_argument("--ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable tests for third-party libraries.")
-    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled OpenBLAS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled GKlib from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled METIS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled ParMETIS from the given path.")
-    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path.")
+    ext_group.add_argument("--ext-OOMPH_USE_OPENBLAS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled OpenBLAS from the given path (overrides --ext-OOMPH_BUILD_OPENBLAS).")
+    ext_group.add_argument("--ext-OOMPH_USE_GKLIB_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled GKlib from the given path; used by SuperLU.")
+    ext_group.add_argument("--ext-OOMPH_USE_METIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled METIS from the given path; used by SuperLU.")
+    ext_group.add_argument("--ext-OOMPH_USE_PARMETIS_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled ParMETIS from the given path; used by SuperLU_DIST.")
+    ext_group.add_argument("--ext-OOMPH_USE_BOOST_FROM", type=expanded_path, metavar="PATH", help="Use a preinstalled Boost from the given path; used by CGAL.")
 
     # Any additional flags for the external distributions project
-    ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
+    ext_group.add_argument("--ext-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
 
-    # Root project oomph-lib flags
+    # oomph-lib flags
     oomph_group = parser.add_argument_group("oomph-lib project flags")
     oomph_group.add_argument("--oomph-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
     oomph_group.add_argument("--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set).")
@@ -425,10 +427,13 @@ def parse_args():
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib.")
-    oomph_group.add_argument("--oomph-OOMPH_ENABLE_SANITIZER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitiser support in oomph-lib (default: OFF).")
+    oomph_group.add_argument("--oomph-OOMPH_ENABLE_SANITIZER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable LLVM/GCC run-time sanitizers: AddressSanitizer detects out-of-bounds and use-after-free accesses, UndefinedBehaviorSanitizer traps undefined-behaviour errors, and LeakSanitizer reports unreleased heap memory (default: OFF).")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library.")
     oomph_group.add_argument("--oomph-OOMPH_SUPPRESS_TETGEN_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library.")
+
+    # Any additional flags for oomph-lib
+    oomph_group.add_argument("--oomph-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for oomph-lib (e.g. -DXYZ=VALUE).")
     # fmt: on
     args = parser.parse_args()
     return args
