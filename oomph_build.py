@@ -422,6 +422,30 @@ def parse_args():
     return args
 
 
+def is_empty_and_untracked_tracked_dir(path: Path) -> bool:
+    """
+    Return True if `path` (file or folder) is known/tracked in the current Git index.
+    If you pass a directory, Git treats it as “does any tracked item start with path/?”
+    """
+    is_empty_dir = not any(path.iterdir())
+
+    # Make sure we pass a relative or absolute path in a form Git understands.
+    # If you're not at repo root, you may need to prefix with the repo’s root dir
+    # or `-C <repo_root>`; here we assume you run this from inside the repo.
+    is_untracked = True
+    try:
+        subprocess.run(
+            ["git", "ls-files", "--error-unmatch", path],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True
+        )
+        is_untracked = False
+    except subprocess.CalledProcessError:
+        pass
+    return is_empty_dir and is_untracked
+
+
 if __name__ == "__main__":
     args = parse_args()
 
@@ -457,12 +481,29 @@ if __name__ == "__main__":
         wipe_dir_if_found(oomph_build_dir)
         wipe_dir_if_found(oomph_install_dir)
     if args.wipe_doc:
+        # There is a 'clean' target that can be invoked to clean up *most* (but not all) of
+        # the generated files.
+        # clean_up_cmd = ["git", "clean", "-xdf", "."]
+        clean_up_cmd = ["cmake", "--build", "build", "--target", "clean"]
+        run_command(clean_up_cmd, doc_dir, args.verbose)
+
+        # Now we need to go to the demo drivers directory and clean up the empty validata/
+        # directories (which used to have an index.html file in)
+        demo_drivers_dir = project_root / "demo_drivers"
+        if not demo_drivers_dir.exists():
+            raise FileNotFoundError(f"Unable to locate 'demo_drivers' directory at: {demo_drivers_dir}")
+
+        # Clear out the generated validata/ dirs. We'll make sure they're empty and not tracked
+        # by Git before we actually delete them
+        for d in demo_drivers_dir.rglob("validata/"):
+            if is_empty_and_untracked_tracked_dir(d):
+                if args.verbose:
+                    print(f"Removing '{d}'")
+                d.rmdir()
+
+        # Now kill the build directory
         wipe_dir_if_found(doc_build_dir)
 
-        # The doc/ directory does not place the documentation in the build/ directory so we have
-        # to handle the additional clean-up using 'git'
-        clean_up_cmd = ["git", "clean", "-xdf", "."]
-        run_command(clean_up_cmd, doc_dir, args.verbose)
 
     # Where to inherit the flags output by external_distributions after we've built
     # the third-party libraries that we want

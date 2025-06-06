@@ -20,75 +20,83 @@ oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE doc.txt)
 set(MAKE_INDEX_SCRIPT
     "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash")
 
-# Ask the helper script what by-products it will create
+# Ask the helper script which files it will (re)create
 execute_process(
   COMMAND "${MAKE_INDEX_SCRIPT}" --list-byproducts
   OUTPUT_VARIABLE _index_raw
   OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(REPLACE "\n" ";" INDEX_HTML_BYPRODUCTS "${_index_raw}")
 
-add_custom_target(
-  make_index_html_in_demo_drivers ALL
+# Convert its newline output into a true CMake list.
+string(REPLACE "\n" ";" INDEX_HTML_FILES "${_index_raw}")
+
+# One custom command that claims *every* html file as an OUTPUT
+add_custom_command(
+  OUTPUT ${INDEX_HTML_FILES}
   COMMAND "${MAKE_INDEX_SCRIPT}"
-  BYPRODUCTS ${INDEX_HTML_BYPRODUCTS}
-  COMMENT "Generating index.html files for demo drivers")
+  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  COMMENT "Generating index.html files for demo drivers"
+  VERBATIM)
+
+# A convenience target that the build can depend on
+add_custom_target(make_index_html_in_demo_drivers ALL
+                  DEPENDS ${INDEX_HTML_FILES})
 
 # Recurse!
 set(SUBDIRS
-    people
-    index
-    picture_show
-    optimisation
-    contact
-    publications
-    coding_conventions
-    copyright
-    intro
     FAQ
-    meshes
-    tar_files
-    the_distribution
-    example_code_list
-    the_data_structure
-    quick_guide
-    poisson
-    unsteady_heat
-    linear_wave
-    helmholtz
-    navier_stokes
-    axisym_navier_stokes
+    acknowledgements
+    acoustic_fsi
     advection_diffusion
+    axisym_linear_elasticity
+    axisym_navier_stokes
     beam
-    shell
-    solid
-    interaction
-    multi_physics
-    eigenproblems
-    leftovers
-    order_of_action_functions
-    hijacking
-    change_log
     bugs
-    linear_solvers
-    paraview
-    preconditioners
-    to_be_written
-    young_laplace
-    mpi
+    change_log
+    coding_conventions
+    contact
+    copyright
     creating_doc
-    linear_elasticity
-    time_harmonic_fourier_decomposed_linear_elasticity
+    deliberately_broken_doc_for_checking
+    eigenproblems
+    example_code_list
+    fourier_decomposed_acoustic_fsi
     fourier_decomposed_helmholtz
-    time_harmonic_linear_elasticity
+    helmholtz
+    hijacking
+    index
+    interaction
+    intro
+    leftovers
+    linear_elasticity
+    linear_solvers
+    linear_wave
+    meshes
+    mpi
+    multi_physics
+    navier_stokes
+    optimisation
+    order_of_action_functions
+    paraview
+    people
+    picture_show
     pml_fourier_decomposed_helmholtz
     pml_helmholtz
-    axisym_linear_elasticity
-    acoustic_fsi
-    fourier_decomposed_acoustic_fsi
     pml_time_harmonic_linear_elasticity
-    deliberately_broken_doc_for_checking
-    acknowledgements
-    search_results)
+    poisson
+    preconditioners
+    publications
+    quick_guide
+    search_results
+    shell
+    solid
+    tar_files
+    the_data_structure
+    the_distribution
+    time_harmonic_fourier_decomposed_linear_elasticity
+    time_harmonic_linear_elasticity
+    to_be_written
+    unsteady_heat
+    young_laplace)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
