@@ -39,24 +39,22 @@ if(NOT IS_MULTI_CONFIG)
     if(OOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE)
       message(
         STATUS
-          "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but no build "
-          "type has been specified. Overriding to '${OOMPH_CMAKE_BUILD_TYPE}'. "
-          ""
-          "NOTE: You can disable this behaviour with -DOOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE=OFF."
-      )
+          "No -DCMAKE_BUILD_TYPE was provided.  Falling back to the build type "
+          "used to compile oomph-lib (\"${OOMPH_CMAKE_BUILD_TYPE}\").\n"
+          "Pass a build type explicitly, or disable this behaviour with "
+          "-DOOMPH_OVERRIDE_EMPTY_CMAKE_BUILD_TYPE=OFF.")
       set(CMAKE_BUILD_TYPE "${OOMPH_CMAKE_BUILD_TYPE}" CACHE STRING
           "Build type" FORCE)
     endif()
-  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}")
+  elseif(NOT "${CMAKE_BUILD_TYPE}" STREQUAL "${OOMPH_CMAKE_BUILD_TYPE}")
     if(OOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE)
       message(
-        STATUS
-          "oomph-lib was built with the build type '${OOMPH_CMAKE_BUILD_TYPE}' but you are "
-          "now configuring with the build type '${CMAKE_BUILD_TYPE}'. Did you mean to add "
-          "-DCMAKE_BUILD_TYPE=${OOMPH_CMAKE_BUILD_TYPE}? "
-          ""
-          "NOTE: You can silence this warning with -DOOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE=OFF."
-      )
+        WARNING
+          "oomph-lib was built with CMAKE_BUILD_TYPE=\"${OOMPH_CMAKE_BUILD_TYPE}\", "
+          "but you are configuring with CMAKE_BUILD_TYPE=\"${CMAKE_BUILD_TYPE}\".  "
+          "Mixing build types can lead to link errors or undefined behaviour.\n"
+          "If you know what you're doing, silence this warning with "
+          "-DOOMPH_WARN_ABOUT_MISMATCHED_CMAKE_BUILD_TYPE=OFF.")
     endif()
   endif()
 endif()
