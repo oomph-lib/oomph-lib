@@ -9,9 +9,7 @@ if(NOT oomphlib_FOUND)
 endif()
 include(CTest)
 
-set(SUBDIRS
-  joe_cool) # <--- Add your own user driver directory here
-
+set(SUBDIRS joe_cool) # <--- Add your own user driver directory here
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})
