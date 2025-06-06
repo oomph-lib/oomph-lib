@@ -2308,5 +2308,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "gmsh_tet_mesh.tpp"
+#include "gmsh_tet_mesh.template.cc"
 #endif

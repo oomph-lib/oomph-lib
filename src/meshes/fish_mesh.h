@@ -526,5 +526,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "fish_mesh.tpp"
+#include "fish_mesh.template.cc"
 #endif

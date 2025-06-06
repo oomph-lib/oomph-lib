@@ -825,5 +825,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "tetgen_mesh.tpp"
+#include "tetgen_mesh.template.cc"
 #endif

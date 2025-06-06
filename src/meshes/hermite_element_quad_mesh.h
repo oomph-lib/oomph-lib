@@ -241,5 +241,5 @@ namespace oomph
     MeshSpacingFnPtr Node_spacing_fn;
   };
 } // namespace oomph
-#include "hermite_element_quad_mesh.tpp"
+#include "hermite_element_quad_mesh.template.cc"
 #endif

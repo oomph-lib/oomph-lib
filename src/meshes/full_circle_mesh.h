@@ -172,5 +172,5 @@ namespace oomph
   };
 
 } // namespace oomph
-#include "full_circle_mesh.tpp"
+#include "full_circle_mesh.template.cc"
 #endif

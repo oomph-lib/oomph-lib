@@ -89,5 +89,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "simple_cubic_tet_mesh.tpp"
+#include "simple_cubic_tet_mesh.template.cc"
 #endif

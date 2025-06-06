@@ -199,5 +199,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "circular_shell_mesh.tpp"
+#include "circular_shell_mesh.template.cc"
 #endif

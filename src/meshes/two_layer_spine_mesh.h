@@ -269,5 +269,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "two_layer_spine_mesh.tpp"
+#include "two_layer_spine_mesh.template.cc"
 #endif

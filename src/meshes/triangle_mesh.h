@@ -3955,5 +3955,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "triangle_mesh.tpp"
+#include "triangle_mesh.template.cc"
 #endif

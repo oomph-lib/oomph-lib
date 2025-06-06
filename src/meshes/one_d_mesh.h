@@ -152,5 +152,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "one_d_mesh.tpp"
+#include "one_d_mesh.template.cc"
 #endif

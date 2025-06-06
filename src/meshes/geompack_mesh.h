@@ -75,5 +75,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "geompack_mesh.tpp"
+#include "geompack_mesh.template.cc"
 #endif

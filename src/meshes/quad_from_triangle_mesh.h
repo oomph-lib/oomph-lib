@@ -746,5 +746,5 @@ namespace oomph
 } // namespace oomph
 
 
-#include "quad_from_triangle_mesh.tpp" // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
+#include "quad_from_triangle_mesh.template.cc" // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
 #endif // OOMPH_QUAD_FROM_TRIANGLE_MESH_HEADER
