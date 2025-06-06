@@ -34,11 +34,22 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
-  VERSION 2.9.0
+  VERSION 3.0.0
   HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
   LANGUAGES C CXX Fortran)
 
