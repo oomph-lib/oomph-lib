@@ -882,7 +882,7 @@ oomph_add_executable(
 
 Note that this directory is completely unconnected to the `oomph-lib` directory. To be able to find the `oomph-lib` installation directory, if it is not in one of the system-wide standard locations such as `/usr/local`, it must be declared somehow.
 
-This is most easily done by exporting the `oomphlib_ROOT` environment variable, as discussed [above](#option-2-specifying-a-custom-installation-location). Note that this is necessary even if `oomph-lib` is installed to its default installation directory, `install/`, in the `oomph-lib` root directory -- remember that the current directory is completely unconnected to the oomph-lib installation. Alternatively, you can specify the directory where `oomph-lib` is installed when configuring the current project. 
+This is most easily done by exporting the `oomphlib_ROOT` environment variable, as discussed [above](#option-2-specifying-a-custom-installation-location). Note that this is necessary even if `oomph-lib` is installed to its default installation directory, `install/`, in the `oomph-lib` root directory -- remember that the current directory is completely unconnected to the `oomph-lib` installation. Alternatively, you can specify the directory where `oomph-lib` is installed when configuring the current project. 
 
 So, assuming `oomph-lib` was installed to `/home/joe_user/oomph_lib_install` the driver code can be built using
 

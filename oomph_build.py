@@ -365,9 +365,6 @@ def parse_args():
 
     # Flags common to both external_distributions and the oomph-lib project
     common_group = parser.add_argument_group("common build flags")
-
-    # hierher MH likes defaults
-    # common_group.add_argument("--OOMPH_ENABLE_MPI", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external (third party) distributions and in oomph-lib; default: OFF")
     common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and oomph-lib project.")
 
     # External distributions flags
@@ -392,19 +389,6 @@ def parse_args():
     ext_group.add_argument("--ext-extra-flags", nargs="+", dest="ext_extra_flags", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
 
     # Root project oomph-lib flags
-
-    # hierher MH likes defaults...
-    #    root_group = parser.add_argument_group("root project oomph-lib flags")
-    #    root_group.add_argument("--root-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
-    #    root_group.add_argument("--root-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set); default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_DONT_SILENCE_USELESS_WARNINGS", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib; default OFF.")
-    #    root_group.add_argument("--root-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_ENABLE_PARANOID", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_ENABLE_RANGE_CHECKING", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_ENABLE_SANITISER_SUPPORT", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_SUPPRESS_TRIANGLE_LIB", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library; default: OFF.")
-    #    root_group.add_argument("--root-OOMPH_SUPPRESS_TETGEN_LIB", default="OFF" , metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library; default: OFF.")
     oomph_group = parser.add_argument_group("oomph-lib project flags")
     oomph_group.add_argument("--oomph-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
     oomph_group.add_argument("--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set).")
