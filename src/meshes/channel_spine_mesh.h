@@ -320,5 +320,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "channel_spine_mesh.tpp"
+#include "channel_spine_mesh.template.cc"
 #endif

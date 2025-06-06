@@ -288,5 +288,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "rectangle_with_hole_mesh.tpp"
+#include "rectangle_with_hole_mesh.template.cc"
 #endif

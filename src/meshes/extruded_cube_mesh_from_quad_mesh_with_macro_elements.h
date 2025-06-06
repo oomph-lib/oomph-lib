@@ -259,5 +259,5 @@ namespace oomph
 
 } // End of namespace oomph
 
-#include "extruded_cube_mesh_from_quad_mesh_with_macro_elements.tpp"
+#include "extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.cc"
 #endif

@@ -656,5 +656,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "quarter_circle_sector_mesh.tpp"
+#include "quarter_circle_sector_mesh.template.cc"
 #endif

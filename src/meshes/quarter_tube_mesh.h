@@ -641,5 +641,5 @@ namespace oomph
   };
 
 } // namespace oomph
-#include "quarter_tube_mesh.tpp"
+#include "quarter_tube_mesh.template.cc"
 #endif

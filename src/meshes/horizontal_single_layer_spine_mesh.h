@@ -80,5 +80,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "horizontal_single_layer_spine_mesh.tpp"
+#include "horizontal_single_layer_spine_mesh.template.cc"
 #endif

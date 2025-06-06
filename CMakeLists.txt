@@ -86,7 +86,7 @@ option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the
 
 # Control the installation
 oomph_option(OOMPH_ALLOW_INSTALL_AS_SUPERUSER "Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set)" OFF)
-oomph_option(OOMPH_INSTALL_HEADERS_AS_SYMLINKS "Install symlinks to the oomph-lib headers instead of copying them" ON)
+oomph_option(OOMPH_INSTALL_HEADERS_AS_SYMLINKS "Install symlinks to the oomph-lib headers instead of copying them" OFF)
 
 # General build options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)

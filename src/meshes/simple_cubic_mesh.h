@@ -210,5 +210,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "simple_cubic_mesh.tpp"
+#include "simple_cubic_mesh.template.cc"
 #endif

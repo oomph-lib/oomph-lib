@@ -635,5 +635,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "rectangular_quadmesh.tpp"
+#include "rectangular_quadmesh.template.cc"
 #endif
