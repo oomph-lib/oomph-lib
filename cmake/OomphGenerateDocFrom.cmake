@@ -102,18 +102,18 @@ function(oomph_generate_doc_from)
       POST_BUILD
       COMMAND
         ${CMAKE_COMMAND} -E chdir latex /bin/sh -c
-        "
-        rm -f refman.pdf &&
-        echo '\\end{document}' >> index.tex &&
-        mv refman.tex refman.tex.back &&
-        '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex &&
-        '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' &&
+        "\
+        rm -f refman.pdf &&\
+        echo '\\\\end{document}' >> index.tex &&\
+        mv refman.tex refman.tex.back &&\
+        '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex &&\
+        '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' && \
         make -s -i \
              PDFLATEX='pdflatex -interaction=batchmode -halt-on-error' \
              MAKEINDEX='makeindex -q' \
-          || { echo 'PDF build failed!  See latex/refman.log'; false; } &&
-        cp refman.pdf '${PDF_OUT}' &&
-        ln -sf '../${DOC_STEM}.pdf' refman.pdf
+          || { echo 'PDF build failed!  See latex/refman.log'; false; } &&\
+        cp refman.pdf '${PDF_OUT}' &&\
+        ln -sf '../${DOC_STEM}.pdf' refman.pdf\
       "
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
       BYPRODUCTS "${PDF_OUT}"
