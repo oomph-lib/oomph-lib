@@ -368,5 +368,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "two_layer_perturbed_spine_mesh.tpp"
+#include "two_layer_perturbed_spine_mesh.template.cc"
 #endif

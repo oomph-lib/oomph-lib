@@ -81,7 +81,7 @@ for dir in "$@"; do
         -o -name '*.cpp' \
         -o -name '*.h' \
         -o -name '*.hpp' \
-        -o -name '*.tpp' \) \
+        -o -name '*.template.cc' \) \
          ! -name 'cfortran.h'  \
          ! -name 'lapack_qz.h' \
         -exec "${FMT}" -i '{}' \;

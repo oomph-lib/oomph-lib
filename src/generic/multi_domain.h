@@ -523,5 +523,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "multi_domain.tpp"
+#include "multi_domain.template.cc"
 #endif

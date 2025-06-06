@@ -30,7 +30,7 @@
 #include "refineable_elements.h"
 // Include the tree template to fill in the C++ split function
 // Must be called after refineable_element.h
-#include "tree.tpp"
+#include "tree.template.cc"
 #include "error_estimator.h"
 
 namespace oomph
@@ -1055,5 +1055,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "refineable_mesh.tpp"
+#include "refineable_mesh.template.cc"
 #endif
