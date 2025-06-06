@@ -94,7 +94,7 @@ oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OF
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
-oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
+oomph_option(OOMPH_ENABLE_SANITIZER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
 
 # Choose the default linear solver. By default, we'll enable Mumps if it is provided
 # and MPI is enabled. The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=OFF
@@ -252,7 +252,7 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
 endif()
 
 # Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
-if(OOMPH_ENABLE_SANITISER_SUPPORT)
+if(OOMPH_ENABLE_SANITIZER_SUPPORT)
   include(OomphAddSanitizerSupport)
 endif()
 

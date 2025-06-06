@@ -4,7 +4,7 @@
 # ------------
 # This file provides CMake logic to enable sanitizer support (AddressSanitizer,
 # UndefinedBehaviorSanitizer, etc.) in Debug builds when the user sets the
-# OOMPH_ENABLE_SANITISER_SUPPORT option to ON. The sanitizers help detect memory
+# OOMPH_ENABLE_SANITIZER_SUPPORT option to ON. The sanitizers help detect memory
 # errors such as out-of-bounds writes, use-after-free, and other undefined
 # behaviors at runtime.
 #
@@ -16,7 +16,7 @@
 #
 # 2) Optionally enable sanitizers (only in Debug mode):
 #
-#    cmake -DOOMPH_ENABLE_SANITISER_SUPPORT=ON [other cmake args...]
+#    cmake -DOOMPH_ENABLE_SANITIZER_SUPPORT=ON [other cmake args...]
 #
 # 3) Then call the provided function on any target you wish to instrument:
 #
@@ -35,7 +35,7 @@
 # IMPORTANT:
 # ----------
 # Sanitisers will only be enabled if:
-#   1. OOMPH_ENABLE_SANITISER_SUPPORT is ON,
+#   1. OOMPH_ENABLE_SANITIZER_SUPPORT is ON,
 #   2. CMAKE_BUILD_TYPE is "Debug",
 #   3. Compiler is GCC or Clang,
 #   4. and the compiler supports the requested flags.
@@ -46,7 +46,7 @@ include_guard()
 # Sanity checks
 
 # Did they actually request sanitizer support?
-if(NOT OOMPH_ENABLE_SANITISER_SUPPORT)
+if(NOT OOMPH_ENABLE_SANITIZER_SUPPORT)
   return()
 endif()
 
@@ -126,7 +126,7 @@ if(NOT (OOMPH_SANITIZER_COMPILE_FLAGS OR OOMPH_SANITIZER_LINK_FLAGS))
   message(
     FATAL_ERROR
       "Sanitizers requested but -fsanitize flags not supported. "
-      "Disable them by reconfiguring with -DOOMPH_ENABLE_SANITISER_SUPPORT=OFF."
+      "Disable them by reconfiguring with -DOOMPH_ENABLE_SANITIZER_SUPPORT=OFF."
   )
 endif()
 

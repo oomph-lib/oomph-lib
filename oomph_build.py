@@ -425,7 +425,7 @@ def parse_args():
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_RANGE_CHECKING", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable range checking in oomph-lib.")
-    oomph_group.add_argument("--oomph-OOMPH_ENABLE_SANITISER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitizer support in oomph-lib.")
+    oomph_group.add_argument("--oomph-OOMPH_ENABLE_SANITIZER_SUPPORT", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable sanitiser support in oomph-lib (default: OFF).")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER", metavar="ON/OFF", choices=["ON", "OFF"], help="Use MUMPS as the default solver in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_SUPPRESS_TRIANGLE_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of Triangle library.")
     oomph_group.add_argument("--oomph-OOMPH_SUPPRESS_TETGEN_LIB", metavar="ON/OFF", choices=["ON", "OFF"], help="Suppress usage of TetGen library.")
