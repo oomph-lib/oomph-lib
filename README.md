@@ -768,10 +768,28 @@ The fact that CMake separates the source and build directories means this won't 
 
 to your `.emacs` file will produce equivalent behaviour. You can now edit the source code in its directory; [F4] will then compile in the build directory (again, you can specify the name of a specific executable by editing the command line that appears at the bottom of the emacs window); [F12] will then go through errors in the source file(s).
 
+## Adding your own driver code
+Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to begin by modifying an existing driver code anyway. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `user_drivers` directory. This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. We already provide a sample directory `user_drivers/joe_cool` that shows you what to do. Simply add your own directory there and in the first instance copy across the files from the existing `joe_cool` directory. So assuming you're called Jack Cool you could do:
+```bash
+cd user_drivers
+mkdir jack_cool
+cp joe_cool/one_d_poisson.cc joe_cool/CMakeLists.txt jack_cool
+```
+You can then configure/build the code as usual:
+```bash
+cd jack_cool
+cmake -G Ninja -B build
+cd build
+ninja
+./one_d_poisson
+```
+It is not necessary to add the new sub-directory to `user_drivers/CMakeLists.txt`, though if you do, the modified version must not be checked into the library's GitHub repository! Now add additional driver codes to your directory `user_drivers/jack_cool` and add them to `user_drivers/jack_cool/CMakeLists.txt` file, following the embedded instructions.
+
+
 ## Linking a stand-alone project to `oomph-lib`
+Adding your code into a new subdirectory in `user_drivers` directory has the advantage of your code being embedded into the `oomph-lib` build machinery. This is particularly useful for developers who tend to modify their driver and the library at the same time.
 
-
-Developing your own code in an existing demo driver directory is a quick-and-dirty way to get started, especially since you are most likely to begin by modifying an existing driver code anyway. However, long-term this is not a sensible solution. One slightly more attractive alternative is to create a new directory, just for your code, in the `demo_drivers` directory; described further [below](#creating-new-demo-driver-directories). This approach has the advantage of not interfering with existing `oomph-lib` driver codes and the associated test machinery. However, your code isn't really a demo driver so it should really live somewhere else. Of course, once you're outside the `oomph-lib` framework you'll have to provide all kinds of additional information, particularly the location of the `oomph-lib` libraries and associated third-party libraries. CMake helps with that. 
+If you are not a developer and you simply wish to use `oomph-lib` as a library, you may prefer to have your driver code in a completely separate location. Given that you are then outside the `oomph-lib` framework you'll have to provide all kinds of additional information, particularly the location of the `oomph-lib` libraries and associated third-party libraries. CMake helps with that. 
 
 To illustrate the advantage of this approach, assume that you have a stand-alone driver code `non_oomph_lib_one_d_poisson.cc` that does not require the `oomph-lib` library. Using `g++` as the compiler you may want to compile this code using
 ```bash
