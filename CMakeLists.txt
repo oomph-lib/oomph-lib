@@ -303,9 +303,6 @@ oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 # Configure all of the main oomph-lib library sources
 add_subdirectory(src)
 
-# Configure all of the user_drivers
-add_subdirectory(user_drivers)
-
 message(VERBOSE "<====== Finished oomph-lib library configuration ======>")
 
 # --------------------------------[ EXPORTING ]---------------------------------
