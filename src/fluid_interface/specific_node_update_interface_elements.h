@@ -29,7 +29,7 @@
 #ifndef OOMPH_SPECIFIC_NODE_UPDATE_INTERFACE_ELEMENTS_HEADER
 #define OOMPH_SPECIFIC_NODE_UPDATE_INTERFACE_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

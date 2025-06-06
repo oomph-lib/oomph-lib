@@ -35,7 +35,7 @@
 #ifndef OOMPH_MULTI_DOMAIN_HEADER
 #define OOMPH_MULTI_DOMAIN_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

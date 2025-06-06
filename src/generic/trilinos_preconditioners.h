@@ -26,7 +26,7 @@
 #ifndef OOMPH_TRILINOS_OPERATORS_HEADER
 #define OOMPH_TRILINOS_OPERATORS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

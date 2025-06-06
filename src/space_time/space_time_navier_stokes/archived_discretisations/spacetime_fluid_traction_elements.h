@@ -30,7 +30,7 @@
 #ifndef OOMPH_SPACETIME_FLUID_TRACTION_ELEMENTS_HEADER
 #define OOMPH_SPACETIME_FLUID_TRACTION_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

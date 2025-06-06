@@ -29,7 +29,7 @@
 #ifndef OOMPH_REFINEABLE_GEN_AXISYM_ADVECTION_DIFFUSION_ELEMENTS_HEADER
 #define OOMPH_REFINEABLE_GEN_AXISYM_ADVECTION_DIFFUSION_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

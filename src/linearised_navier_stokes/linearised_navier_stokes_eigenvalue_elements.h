@@ -31,7 +31,7 @@
 #define LINEARISED_NAVIER_STOKES_EIGENVALUE_ELEMENTS_HEADER
 
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

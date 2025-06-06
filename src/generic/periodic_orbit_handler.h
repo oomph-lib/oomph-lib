@@ -26,7 +26,7 @@
 #ifndef OOMPH_PERIODIC_ORBIT_HANDLER_CLASS_HEADER
 #define OOMPH_PERIODIC_ORBIT_HANDLER_CLASS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

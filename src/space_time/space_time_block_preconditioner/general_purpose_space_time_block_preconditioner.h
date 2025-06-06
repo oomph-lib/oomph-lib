@@ -27,7 +27,7 @@
 #ifndef OOMPH_GENERAL_PURPOSE_SPACE_TIME_BLOCK_PRECONDITIONER_HEADER
 #define OOMPH_GENERAL_PURPOSE_SPACE_TIME_BLOCK_PRECONDITIONER_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

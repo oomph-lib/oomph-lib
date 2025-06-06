@@ -26,7 +26,7 @@
 #ifndef OOMPH_EXTRUDED_MACRO_ELEMENT_HEADER
 #define OOMPH_EXTRUDED_MACRO_ELEMENT_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

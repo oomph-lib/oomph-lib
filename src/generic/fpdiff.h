@@ -31,7 +31,7 @@
 #include <string>
 #include <vector>
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

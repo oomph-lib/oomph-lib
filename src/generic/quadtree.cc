@@ -26,7 +26,7 @@
 // Non-inline and non-templated functions for QuadTree and QuadTreeForest
 // classes
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

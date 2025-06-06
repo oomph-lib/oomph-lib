@@ -27,7 +27,7 @@
 #ifndef OOMPH_NAVIER_STOKES_FLUX_CONTROL_ELEMENTS
 #define OOMPH_NAVIER_STOKES_FLUX_CONTROL_ELEMENTS
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

@@ -28,7 +28,7 @@
 #ifndef OOMPH_LINEARISED_NAVIER_STOKES_ELEMENTS_HEADER
 #define OOMPH_LINEARISED_NAVIER_STOKES_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

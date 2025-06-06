@@ -27,7 +27,7 @@
 #ifndef OOMPH_QUAD_MESH_HEADER
 #define OOMPH_QUAD_MESH_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif
