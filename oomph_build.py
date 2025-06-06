@@ -319,6 +319,35 @@ def configure_build_doc(
     print_time(time_elapsed, verbose=verbose)
 
 
+def is_empty_and_untracked_tracked_dir(path: Path) -> bool:
+    """
+    Return True if `path` (file or folder) is known/tracked in the current Git index.
+    If you pass a directory, Git treats it as "does any tracked item start with path/?"
+    """
+    is_empty_dir = not any(path.iterdir())
+
+    # Make sure we pass a relative or absolute path in a form Git understands.
+    # If you're not at repo root, you may need to prefix with the repo’s root dir
+    # or `-C <repo_root>`; here we assume you run this from inside the repo.
+    is_untracked = True
+    try:
+        subprocess.run(
+            ["git", "ls-files", "--error-unmatch", path],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True
+        )
+        is_untracked = False
+    except subprocess.CalledProcessError:
+        pass
+    return is_empty_dir and is_untracked
+
+
+def wipe_dir_if_found(p: Path):
+    if p.exists() and p.is_dir():
+        shutil.rmtree(p)
+
+
 def parse_args():
     """
     Parse and return command-line arguments via argparse.
@@ -408,6 +437,7 @@ def parse_args():
     oomph_group = parser.add_argument_group("oomph-lib project flags")
     oomph_group.add_argument("--oomph-CMAKE_INSTALL_PREFIX", type=expanded_path, metavar="PATH", help="Custom installation directory for the main project.")
     oomph_group.add_argument("--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set).")
+    oomph_group.add_argument("--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS", metavar="ON/OFF", choices=["ON", "OFF"], help="Install symlinks to the oomph-lib headers instead of copying them (default: OFF).")
     oomph_group.add_argument("--oomph-OOMPH_DONT_SILENCE_USELESS_WARNINGS", metavar="ON/OFF", choices=["ON", "OFF"], help="Don't silence certain warnings in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION", metavar="ON/OFF", choices=["ON", "OFF"], help="Allow MPI oversubscription in oomph-lib.")
     oomph_group.add_argument("--oomph-OOMPH_ENABLE_PARANOID", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable paranoid checks in oomph-lib.")
@@ -446,23 +476,37 @@ if __name__ == "__main__":
     if args.oomph_CMAKE_INSTALL_PREFIX:
         oomph_install_dir = args.oomph_CMAKE_INSTALL_PREFIX
 
-    def wipe_dir_if_found(p: Path):
-        if p.exists() and p.is_dir():
-            shutil.rmtree(p)
-
     if args.wipe_tpl:
         wipe_dir_if_found(external_dist_build_dir)
         wipe_dir_if_found(external_dist_install_dir)
+
     if args.wipe_oomph:
         wipe_dir_if_found(oomph_build_dir)
         wipe_dir_if_found(oomph_install_dir)
-    if args.wipe_doc:
-        wipe_dir_if_found(doc_build_dir)
 
-        # The doc/ directory does not place the documentation in the build/ directory so we have
-        # to handle the additional clean-up using 'git'
-        clean_up_cmd = ["git", "clean", "-xdf", "."]
-        run_command(clean_up_cmd, doc_dir, args.verbose)
+    if args.wipe_doc:
+        # There is a 'clean' target that can be invoked to clean up *most* (but not all) of
+        # the generated files.
+        if doc_build_dir.exists():
+            clean_up_cmd = ["cmake", "--build", "build", "--target", "clean"]
+            run_command(clean_up_cmd, doc_dir, args.verbose)
+
+        # Now we need to go to the demo drivers directory and clean up the empty validata/
+        # directories (which used to have an index.html file in)
+        demo_drivers_dir = project_root / "demo_drivers"
+        if not demo_drivers_dir.exists():
+            raise FileNotFoundError(f"Unable to locate 'demo_drivers' directory at: {demo_drivers_dir}")
+
+        # Clear out the generated validata/ dirs. We'll make sure they're empty and not tracked
+        # by Git before we actually delete them
+        for d in demo_drivers_dir.rglob("validata/"):
+            if is_empty_and_untracked_tracked_dir(d):
+                if args.verbose:
+                    print(f"Removing '{d}'")
+                d.rmdir()
+
+        # Now kill the build directory
+        wipe_dir_if_found(doc_build_dir)
 
     # Where to inherit the flags output by external_distributions after we've built
     # the third-party libraries that we want

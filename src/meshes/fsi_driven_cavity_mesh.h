@@ -240,5 +240,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "fsi_driven_cavity_mesh.tpp"
+#include "fsi_driven_cavity_mesh.template.cc"
 #endif

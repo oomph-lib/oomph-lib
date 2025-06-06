@@ -104,7 +104,7 @@ function(oomph_generate_doc_from)
         ${CMAKE_COMMAND} -E chdir latex /bin/sh -c
         "
         rm -f refman.pdf &&
-        echo '\\end{document}' >> index.tex &&
+        echo '\\\\end{document}' >> index.tex &&
         mv refman.tex refman.tex.back &&
         '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex &&
         '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' &&

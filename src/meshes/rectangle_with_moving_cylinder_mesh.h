@@ -358,5 +358,5 @@ namespace oomph
   };
 } // End of namespace oomph
 
-#include "rectangle_with_moving_cylinder_mesh.tpp"
+#include "rectangle_with_moving_cylinder_mesh.template.cc"
 #endif

@@ -297,8 +297,21 @@ function(oomph_library_config)
   # Combine everything that shouldn't be built into a single variable
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
-  # Install (or symlink) the headers
-  install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
+  # Instead of "install(FILES ...)", create a symlink for each header
+  if(OOMPH_INSTALL_HEADERS_AS_SYMLINKS)
+    foreach(HEADER IN LISTS ALL_HEADERS)
+      get_filename_component(HEADER_NAME ${HEADER} NAME)
+      install(
+        CODE "execute_process(
+        COMMAND \"${CMAKE_COMMAND}\" -E create_symlink
+                \"${CMAKE_CURRENT_SOURCE_DIR}/${HEADER}\"
+                \"\${CMAKE_INSTALL_PREFIX}/${INCLUDE_DIR_FOR_THIS_LIBRARY}/${HEADER_NAME}\"
+      )")
+    endforeach()
+  else()
+    # ...or just install copies of the headers
+    install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
+  endif()
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------

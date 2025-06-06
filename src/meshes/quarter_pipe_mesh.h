@@ -259,5 +259,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "quarter_pipe_mesh.tpp"
+#include "quarter_pipe_mesh.template.cc"
 #endif

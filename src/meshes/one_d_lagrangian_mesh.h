@@ -78,5 +78,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "one_d_lagrangian_mesh.tpp"
+#include "one_d_lagrangian_mesh.template.cc"
 #endif

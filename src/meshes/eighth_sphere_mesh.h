@@ -126,5 +126,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "eighth_sphere_mesh.tpp"
+#include "eighth_sphere_mesh.template.cc"
 #endif

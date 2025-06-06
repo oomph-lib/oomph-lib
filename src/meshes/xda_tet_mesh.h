@@ -145,5 +145,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "xda_tet_mesh.tpp"
+#include "xda_tet_mesh.template.cc"
 #endif

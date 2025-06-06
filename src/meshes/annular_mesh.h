@@ -244,5 +244,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "annular_mesh.tpp"
+#include "annular_mesh.template.cc"
 #endif

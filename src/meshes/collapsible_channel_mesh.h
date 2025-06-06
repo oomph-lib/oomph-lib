@@ -673,5 +673,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "collapsible_channel_mesh.tpp"
+#include "collapsible_channel_mesh.template.cc"
 #endif

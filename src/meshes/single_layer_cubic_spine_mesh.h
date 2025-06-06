@@ -81,5 +81,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "single_layer_cubic_spine_mesh.tpp"
+#include "single_layer_cubic_spine_mesh.template.cc"
 #endif

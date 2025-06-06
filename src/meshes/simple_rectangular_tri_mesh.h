@@ -88,5 +88,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "simple_rectangular_tri_mesh.tpp"
+#include "simple_rectangular_tri_mesh.template.cc"
 #endif

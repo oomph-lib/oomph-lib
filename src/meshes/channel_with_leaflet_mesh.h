@@ -575,5 +575,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "channel_with_leaflet_mesh.tpp"
+#include "channel_with_leaflet_mesh.template.cc"
 #endif

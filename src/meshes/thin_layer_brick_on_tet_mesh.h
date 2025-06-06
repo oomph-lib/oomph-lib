@@ -281,5 +281,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "thin_layer_brick_on_tet_mesh.tpp"
+#include "thin_layer_brick_on_tet_mesh.template.cc"
 #endif

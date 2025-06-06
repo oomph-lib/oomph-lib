@@ -12,12 +12,12 @@ oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
 
 add_custom_target(
   generate_domain_gif ALL
-  COMMAND rm -f figures/domain.gif
+  COMMAND ${CMAKE_COMMAND} -E remove
+          "${CMAKE_CURRENT_SOURCE_DIR}/figures/domain.gif"
   COMMAND
-    ln -s
+    ${CMAKE_COMMAND} -E create_symlink
     "${CMAKE_CURRENT_SOURCE_DIR}/../two_d_unsteady_heat_ALE/figures/domain.gif"
-    figures/domain.gif
-  BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/figures/domain.gif"
+    "${CMAKE_CURRENT_SOURCE_DIR}/figures/domain.gif"
   WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 message(VERBOSE "Leaving two_d_unsteady_heat_2adapt subdirectory")

@@ -294,5 +294,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "brick_from_tet_mesh.tpp"
+#include "brick_from_tet_mesh.template.cc"
 #endif

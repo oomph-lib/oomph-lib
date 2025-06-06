@@ -403,5 +403,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "cylinder_with_flag_mesh.tpp"
+#include "cylinder_with_flag_mesh.template.cc"
 #endif

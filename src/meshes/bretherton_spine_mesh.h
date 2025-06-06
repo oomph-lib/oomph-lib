@@ -542,5 +542,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "bretherton_spine_mesh.tpp"
+#include "bretherton_spine_mesh.template.cc"
 #endif
