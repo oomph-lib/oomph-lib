@@ -319,6 +319,35 @@ def configure_build_doc(
     print_time(time_elapsed, verbose=verbose)
 
 
+def is_empty_and_untracked_tracked_dir(path: Path) -> bool:
+    """
+    Return True if `path` (file or folder) is known/tracked in the current Git index.
+    If you pass a directory, Git treats it as "does any tracked item start with path/?"
+    """
+    is_empty_dir = not any(path.iterdir())
+
+    # Make sure we pass a relative or absolute path in a form Git understands.
+    # If you're not at repo root, you may need to prefix with the repo’s root dir
+    # or `-C <repo_root>`; here we assume you run this from inside the repo.
+    is_untracked = True
+    try:
+        subprocess.run(
+            ["git", "ls-files", "--error-unmatch", path],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True
+        )
+        is_untracked = False
+    except subprocess.CalledProcessError:
+        pass
+    return is_empty_dir and is_untracked
+
+
+def wipe_dir_if_found(p: Path):
+    if p.exists() and p.is_dir():
+        shutil.rmtree(p)
+
+
 def parse_args():
     """
     Parse and return command-line arguments via argparse.
@@ -405,30 +434,6 @@ def parse_args():
     return args
 
 
-def is_empty_and_untracked_tracked_dir(path: Path) -> bool:
-    """
-    Return True if `path` (file or folder) is known/tracked in the current Git index.
-    If you pass a directory, Git treats it as “does any tracked item start with path/?”
-    """
-    is_empty_dir = not any(path.iterdir())
-
-    # Make sure we pass a relative or absolute path in a form Git understands.
-    # If you're not at repo root, you may need to prefix with the repo’s root dir
-    # or `-C <repo_root>`; here we assume you run this from inside the repo.
-    is_untracked = True
-    try:
-        subprocess.run(
-            ["git", "ls-files", "--error-unmatch", path],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=True
-        )
-        is_untracked = False
-    except subprocess.CalledProcessError:
-        pass
-    return is_empty_dir and is_untracked
-
-
 if __name__ == "__main__":
     args = parse_args()
 
@@ -453,22 +458,20 @@ if __name__ == "__main__":
     if args.oomph_CMAKE_INSTALL_PREFIX:
         oomph_install_dir = args.oomph_CMAKE_INSTALL_PREFIX
 
-    def wipe_dir_if_found(p: Path):
-        if p.exists() and p.is_dir():
-            shutil.rmtree(p)
-
     if args.wipe_tpl:
         wipe_dir_if_found(external_dist_build_dir)
         wipe_dir_if_found(external_dist_install_dir)
+
     if args.wipe_oomph:
         wipe_dir_if_found(oomph_build_dir)
         wipe_dir_if_found(oomph_install_dir)
+
     if args.wipe_doc:
         # There is a 'clean' target that can be invoked to clean up *most* (but not all) of
         # the generated files.
-        # clean_up_cmd = ["git", "clean", "-xdf", "."]
-        clean_up_cmd = ["cmake", "--build", "build", "--target", "clean"]
-        run_command(clean_up_cmd, doc_dir, args.verbose)
+        if doc_build_dir.exists():
+            clean_up_cmd = ["cmake", "--build", "build", "--target", "clean"]
+            run_command(clean_up_cmd, doc_dir, args.verbose)
 
         # Now we need to go to the demo drivers directory and clean up the empty validata/
         # directories (which used to have an index.html file in)
@@ -486,7 +489,6 @@ if __name__ == "__main__":
 
         # Now kill the build directory
         wipe_dir_if_found(doc_build_dir)
-
 
     # Where to inherit the flags output by external_distributions after we've built
     # the third-party libraries that we want
