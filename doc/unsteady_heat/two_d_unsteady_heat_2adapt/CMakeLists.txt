@@ -12,7 +12,7 @@ oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
 
 add_custom_target(
   generate_domain_gif ALL
-  COMMAND ${CMAKE_COMMAND} -E remove_if_exists
+  COMMAND ${CMAKE_COMMAND} -E remove
           "${CMAKE_CURRENT_SOURCE_DIR}/figures/domain.gif"
   COMMAND
     ${CMAKE_COMMAND} -E create_symlink
