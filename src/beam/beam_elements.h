@@ -27,7 +27,7 @@
 #ifndef OOMPH_KIRCHHOFF_LOVE_BEAM_ELEMENTS_HEADER
 #define OOMPH_KIRCHHOFF_LOVE_BEAM_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

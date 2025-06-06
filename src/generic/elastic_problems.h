@@ -26,7 +26,7 @@
 #ifndef OOMPH_ELASTIC_PROBLEMS_HEADER
 #define OOMPH_ELASTIC_PROBLEMS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

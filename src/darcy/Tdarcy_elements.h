@@ -26,7 +26,7 @@
 #ifndef OOMPH_TRAVIART_THOMAS_DARCY_HEADER
 #define OOMPH_TRAVIART_THOMAS_DARCY_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

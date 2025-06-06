@@ -29,7 +29,7 @@
 #define OOMPH_AXISYM_ADV_DIFF_ELEMENTS_HEADER
 
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

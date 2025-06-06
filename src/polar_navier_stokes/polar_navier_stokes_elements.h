@@ -88,7 +88,7 @@
 #ifndef OOMPH_POLAR_NAVIER_STOKES
 #define OOMPH_POLAR_NAVIER_STOKES
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

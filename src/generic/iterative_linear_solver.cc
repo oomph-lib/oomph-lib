@@ -26,7 +26,7 @@
 // The actual solve functions for Iterative solvers.
 
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

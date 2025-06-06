@@ -30,7 +30,7 @@
 #ifndef OOMPH_MESH_AS_GEOMETRIC_OBJECT_HEADER
 #define OOMPH_MESH_AS_GEOMETRIC_OBJECT_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

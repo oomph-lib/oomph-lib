@@ -27,7 +27,7 @@
 #define OOMPH_NAVIER_STOKES_PRECONDITIONERS_HEADER
 
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

@@ -30,7 +30,7 @@
 #ifndef CONSTRAINED_FLUID_VOLUME_ELEMENTS_HEADER
 #define CONSTRAINED_FLUID_VOLUME_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif

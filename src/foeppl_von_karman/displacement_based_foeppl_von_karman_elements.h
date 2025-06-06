@@ -27,7 +27,7 @@
 #ifndef OOMPH_FOEPPLVONKARMAN_DISPLACEMENT_ELEMENTS_HEADER
 #define OOMPH_FOEPPLVONKARMAN_DISPLACEMENT_ELEMENTS_HEADER
 
-// Config header 
+// Config header
 #ifdef HAVE_CONFIG_H
 #include <oomph-lib-config.h>
 #endif
