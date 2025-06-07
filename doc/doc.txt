@@ -54,9 +54,9 @@
   <p><code>oomph-lib</code> is an object-oriented, open-source
   finite-element library for the simulation of multi-physics
   problems. It is developed and maintained by <a href=
-  "http://www.maths.man.ac.uk/~mheil">Matthias Heil</a> and <a href=
-  "http://www.maths.man.ac.uk/~ahazel">Andrew Hazel</a> of the
-  <a href="http://www.maths.manchester.ac.uk/">School of
+  "https://www.matthias-heil.co.uk/new_webpage/index.html">Matthias Heil</a> and <a href=
+  "https://personalpages.manchester.ac.uk/staff/Andrew.Hazel/">Andrew Hazel</a> of the
+  <a href="http://www.maths.manchester.ac.uk/">Department of
   Mathematics</a> at <a href="http://www.manchester.ac.uk/">The
   University of Manchester</a>, along with many <a href=
   "../people/html/index.html">other contributors</a>.</p>
@@ -224,96 +224,29 @@
   
   <article class="tab-pane" id="get">
   <h1>How do I get/install the code?</h1>
-  <h2>Downloads</h2>
+  <h2>Download/Installation</h2>
   <p><code>oomph-lib</code> is hosted on and distributed via GitHub at
   <center><a href="https://github.com/oomph-lib/oomph-lib">
-  https://github.com/oomph-lib/oomph-lib</a>.</center><br>
-  For more information on how to download and install the library see
-  the <a href="../the_distribution/html/index.html">installation
-  guide</a>. </p>
-  <h2>Prerequisites</h2>
+  https://github.com/oomph-lib/oomph-lib</a></center><br>
+  where we provide detailed build instructions.</p>
+
   <p><code>oomph-lib</code> has been/is primarily being developed in
   Linux so it is well tested there. However several people
   successfully run it on Windows and Mac OS X. Our continuous
   integration on GitHub currently checks Linux and Mac OS X builds.
   In order to minimise
-  the dependence on external libraries we include "frozen" versions
-  of certain external libraries (<a href=
+  the dependence on external libraries our CMake-based build machinery
+  provides the option to automatically install all required
+  external libraries (such as <a href=
   "http://www-users.cs.umn.edu/~karypis/metis/">METIS</a>, <a href=
-  "http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</a>, ...) with our
-  distribution. The idea is that you should only have to unpack,
-  build and install one distribution to produce the fully compiled
+  "http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</a>, ...). This avoids 
+  the common and frustrating scenario where to install library A, you
+  first need to install library B, which in turns requires library C etc.
+  With <code>oomph-lib</code> you simply clone our GitHub reposiory and
+  run our build script to produce the fully installed
   library, the html-based documentation and working example
   codes.</p>
-  For this purpose you <b>must have</b>:
-  <ul>
-  <li>A computer with a linux (or unix) operating system. [<b>Note
-  for windows users:</b> We believe that <code>oomph-lib</code> can
-  be installed in a windows environment, using <a href=
-  "http://www.cygwin.com/">cygwin</a>, though we haven't tried this
-  for a long time.]</li>
-  <li>Compilers for C++, C and Fortran77. The open-source <a href=
-  "http://gcc.gnu.org/">GNU gcc compiler suite</a> version 9.3.0. or
-  later is fine. [ <b>Note:</b> The Fortran77 and C compilers are
-  only required to compile some external libraries --
-  <code>oomph-lib</code> itself is written entirely in C++. We assume
-  that your C++ compiler can handle the C++11 standard. If it doesn't
-  you may have to add the <code>-std=c++11</code> option to the
-  <code>CXXFLAGS</code> during the configure stage.]</li>
-  </ul>
-  The following programs are helpful but not essential:
-  <ul>
-  <li>GNU's <a href=
-  "http://www.gnu.org/software/autoconf/">autoconf</a>, <a href=
-  "http://www.gnu.org/software/automake/">automake</a> and <a href=
-  "http://www.gnu.org/software/libtool/">libtool</a> are required if
-  you wish to add additional features to your local copy of
-  <code>oomph-lib</code>; see <a href=
-  "../the_distribution/html/index.html">the <code>oomph-lib</code>
-  download page</a> for more details.</li>
-  <li><a href="http://www.python.org/download/">python3</a> is needed
-  to analyse the results of the extensive self-tests that may be
-  performed at the end of the installation to verify that the build
-  process was completed successfully. If python3 is not available, the
-  self-test will compile and run all test codes but it will not be
-  possible to verify the correctness of the results.</li>
-  <li><a href="http://www.doxygen.org">doxygen</a> is needed to build
-  a local copy of <code>oomph-lib</code>'s extensive online
-  documentation. If doxygen is not installed on your system you can
-  consult the latest version of the online documentation on <a href=
-  "http://www.oomph-lib.org">the <code>oomph-lib</code>
-  homepage.</a></li>
-  </ul>
-  The <code>oomph-lib</code> distribution is built under <a href=
-  "http://www.gnu.org/software/autoconf/">autoconf</a> / <a href=
-  "http://www.gnu.org/software/automake/">automake</a> control,
-  making the installation completely straightforward. We provide two
-  main installation mechanisms:
-  <ul>
-  <li><code>oomph-lib</code> can be built/installed/tested with GNU's
-  standard <code>configure; make; make install; make check</code>
-  procedure.</li>
-  <li>We also provide a customised build script,
-  <code>autogen.sh</code>, that guides the "non-expert" user through
-  the installation. The script facilitates the specification of
-  various build options, such as optimisation levels etc.</li>
-  </ul>
-  Subject to the minimum requirements, listed above, you should be
-  able to install and use our libraries "anywhere". However, as
-  anybody who has ever ported any code to a different platform knows,
-  things are rarely that simple -- even with <a href=
-  "http://www.gnu.org/software/autoconf/">autoconf</a>, <a href=
-  "http://www.gnu.org/software/automake/">automake</a> and <a href=
-  "http://www.gnu.org/software/libtool/">libtool</a>... Having said
-  that, we have successfully installed and tested our installation on
-  the following platforms:
-  <ul>
-  <li>Ubuntu (version 16.04) with gcc compilers (version 5.4.0). The
-  tests included the MPI part of the library, which we compiled with
-  <a href="https://www.open-mpi.org/">OpenMPI</a> (version
-  1.10.2).</li>
-  <li> ... </li>
- </ul>
+
 
   <h2>Preparing a ubuntu box for <code>oomph-lib</code></h2>
   Typically, when we install <code>oomph-lib</code> on a machine with
@@ -327,31 +260,15 @@ apt-get install git
   </tt>
   <br>
   <tt>
-apt-get install make
-  </tt>
-  <br>
-  <tt>
-apt-get install automake
-  </tt>
-  <br>
-  <tt>
-apt-get install libtool
-  </tt>
-  <br>
-  <tt>
-apt-get install libtool-bin
-  </tt>
-  <br>
-  <tt>
 apt-get install cmake
   </tt>
   <br>
   <tt>
-apt-get install python2
+apt-get install ninja
   </tt>
   <br>
   <tt>
-apt-get install autoconf
+apt-get install python3
   </tt>
   <br>
   <tt>
@@ -381,7 +298,7 @@ apt-get install texlive texlive-latex-extra texlive-font-utils
   <br>
   <br>
   <tt>
-apt-get install git make automake libtool libtool-bin cmake python2 autoconf doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
+apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
   </tt>
   </article>
   
