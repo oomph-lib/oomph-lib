@@ -199,7 +199,7 @@ function(oomph_library_config)
   endif()
 
   # If the user requested that we enable sanitisers
-  if(OOMPH_ENABLE_SANITISER_SUPPORT)
+  if(OOMPH_ENABLE_SANITIZER_SUPPORT)
     oomph_enable_sanitizers(${LIBNAME})
   endif()
 

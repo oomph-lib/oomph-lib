@@ -34,11 +34,22 @@
 # format CMake files. Do not delete them.
 # ==============================================================================
 # cmake-format: on
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
-  VERSION 2.9.0
+  VERSION 3.0.0
   HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
   LANGUAGES C CXX Fortran)
 
@@ -94,7 +105,7 @@ oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OF
 oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
 oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
 oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
-oomph_option(OOMPH_ENABLE_SANITISER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
+oomph_option(OOMPH_ENABLE_SANITIZER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
 
 # Choose the default linear solver. By default, we'll disable
 # Mumps because it not only requires mpi (which would be easy to
@@ -251,7 +262,7 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
 endif()
 
 # Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
-if(OOMPH_ENABLE_SANITISER_SUPPORT)
+if(OOMPH_ENABLE_SANITIZER_SUPPORT)
   include(OomphAddSanitizerSupport)
 endif()
 

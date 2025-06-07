@@ -20,6 +20,17 @@
 # This library is distributed with a GNU LGPL License; see LICENSE.txt.
 # ==============================================================================
 # cmake-format: on
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomph_lib_third_party_libraries

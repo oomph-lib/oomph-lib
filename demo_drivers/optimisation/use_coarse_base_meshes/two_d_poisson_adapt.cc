@@ -41,7 +41,7 @@
 // We need to include the refineable_quad_mesh's 
 // templated source here to allow the build of
 // all templates. 
-//#include "generic/refineable_quad_mesh.tpp"
+//#include "generic/refineable_quad_mesh.template.cc"
 
 
 using namespace std;

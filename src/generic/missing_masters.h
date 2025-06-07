@@ -238,5 +238,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "missing_masters.tpp"
+#include "missing_masters.template.cc"
 #endif

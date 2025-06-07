@@ -233,7 +233,8 @@ set(HEADERS_NO_INSTALL cfortran.h frontal.h lapack_qz.h mumps.h)
 
 # Template-only files: Need to be installed to include directory but should not
 # be listed in combined header file
-set(TEMPLATES tree.tpp refineable_mesh.tpp multi_domain.tpp missing_masters.tpp)
+set(TEMPLATES tree.template.cc refineable_mesh.template.cc
+    multi_domain.template.cc missing_masters.template.cc)
 
 # The generic library relies on the external sources
 set(LINKLIBS ${EXTERNAL_SRC_LIBS})
