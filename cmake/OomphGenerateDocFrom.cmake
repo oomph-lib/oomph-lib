@@ -136,12 +136,26 @@ function(oomph_generate_doc_from)
   # Define the target that needs to be built
   add_custom_target(build_docs_${PATH_HASH} ALL DEPENDS ${DOC_OUTPUTS})
 
+  # The "stuff" we have to make sure to clean up. Normally you can tell CMake
+  # what the byproducts are and it will help clean it up, but these are
+  # directories and CMake objects to deleting non-empty directories with the
+  # typical workflow. To get around this, we will tell it to make sure to clean
+  # up these extra folders (and possibly symlinks)
+  set(ADDITIONAL_CLEAN_UP "${CMAKE_CURRENT_SOURCE_DIR}/html"
+      "${CMAKE_CURRENT_SOURCE_DIR}/latex")
+
+  # If we're also generating a symlink
+  if(NOT EXISTS "${STYLE_LINK}")
+    list(APPEND ADDITIONAL_CLEAN_UP "${STYLE_LINK}")
+  endif()
+
+  # Now tell CMake to make sure to clean these files up
   set_property(
     TARGET build_docs_${PATH_HASH}
     APPEND
-    PROPERTY ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/html"
-             "${CMAKE_CURRENT_SOURCE_DIR}/latex")
+    PROPERTY ADDITIONAL_CLEAN_FILES ${ADDITIONAL_CLEAN_UP})
 
+  # Make the target name visible to the outside scope
   if(DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE)
     set(BUILD_DOCS_TARGET "build_docs_${PATH_HASH}" PARENT_SCOPE)
   endif()
