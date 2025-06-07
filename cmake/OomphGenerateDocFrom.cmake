@@ -69,21 +69,28 @@ function(oomph_generate_doc_from)
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     VERBATIM)
 
+  # The targets we'll build to generate the docs
+  set(TARGETS_REQUIRED_FOR_BUILD_DOCS "${DOXIFY_OUT}" "${HTML_HEADER}"
+      "${HTML_FOOTER}")
+
   # LaTeX style symlink
-  if(NOT EXISTS "${STYLE_LINK}" AND NOT IS_SYMLINK "${STYLE_LINK}")
+  if(NOT EXISTS "${STYLE_LINK}")
     add_custom_command(
       OUTPUT "${STYLE_LINK}"
       COMMAND ${CMAKE_COMMAND} -E create_symlink
               "${OOMPH_ROOT_DIR}/doc/extra_latex_style_files" "${STYLE_LINK}"
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
       VERBATIM)
+
+    # We're also generating a symlink ourselves
+    list(APPEND TARGETS_REQUIRED_FOR_BUILD_DOCS "${STYLE_LINK}")
   endif()
 
-  # Run doxygen
-  add_custom_target(
-    build_docs_${PATH_HASH} ALL DEPENDS "${DOXIFY_OUT}" "${HTML_HEADER}"
-                                        "${HTML_FOOTER}" "${STYLE_LINK}")
+  # Define the target that needs to be built to build the docs
+  add_custom_target(build_docs_${PATH_HASH} ALL
+                    DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS})
 
+  # Run doxygen
   add_custom_command(
     TARGET build_docs_${PATH_HASH}
     POST_BUILD
@@ -102,32 +109,30 @@ function(oomph_generate_doc_from)
       POST_BUILD
       COMMAND
         ${CMAKE_COMMAND} -E chdir latex /bin/sh -c
-        "
-        rm -f refman.pdf &&
-        echo '\\\\end{document}' >> index.tex &&
-        mv refman.tex refman.tex.back &&
-        '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex &&
-        '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' &&
+        " \
+        rm -f refman.pdf && \
+        echo '\\\\end{document}' >> index.tex && \
+        mv refman.tex refman.tex.back && \
+        '${OOMPH_ROOT_DIR}/scripts/customise_latex.bash' refman.tex.back > refman.tex && \
+        '${OOMPH_ROOT_DIR}/scripts/tweak_doxygen_latex_style_file.bash' && \
         make -s -i \
              PDFLATEX='pdflatex -interaction=batchmode -halt-on-error' \
              MAKEINDEX='makeindex -q' \
-          || { echo 'PDF build failed!  See latex/refman.log'; false; } &&
-        cp refman.pdf '${PDF_OUT}' &&
-        ln -sf '../${DOC_STEM}.pdf' refman.pdf
+          || { echo 'PDF build failed!  See latex/refman.log'; false; } && \
+        cp refman.pdf '${PDF_OUT}' && \
+        ln -sf '../${DOC_STEM}.pdf' refman.pdf \
       "
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
       BYPRODUCTS "${PDF_OUT}"
       VERBATIM)
   endif()
 
-  # ------------------ F) allow clean to wipe dirs ----------------
   set_property(
     TARGET build_docs_${PATH_HASH}
     APPEND
     PROPERTY ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/html"
              "${CMAKE_CURRENT_SOURCE_DIR}/latex")
 
-  # ------------------ G) return target name (flag API) ------------
   if(ARG_BUILD_DOCS_TARGET)
     set(BUILD_DOCS_TARGET "build_docs_${PATH_HASH}" PARENT_SCOPE)
   endif()
