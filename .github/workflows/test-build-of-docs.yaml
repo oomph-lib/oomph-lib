@@ -25,7 +25,7 @@ jobs:
         run: doxygen --version
 
       - name: Build doc
-        run: cmake -G Ninja -B build
+        run: cmake -G Ninja -B build && cmake --build build
         working-directory: doc
 
       - name: Check incremental build works
