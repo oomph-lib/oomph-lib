@@ -71,16 +71,16 @@ function(oomph_generate_doc_from)
 
   # The targets we'll build to generate the docs
   set(TARGETS_REQUIRED_FOR_BUILD_DOCS "${DOXIFY_OUT}" "${HTML_HEADER}"
-                                      "${HTML_FOOTER}")
+      "${HTML_FOOTER}")
 
   # LaTeX style symlink
   if(NOT EXISTS "${STYLE_LINK}")
     add_custom_command(
-     OUTPUT "${STYLE_LINK}"
-     COMMAND ${CMAKE_COMMAND} -E create_symlink
-    "${OOMPH_ROOT_DIR}/doc/extra_latex_style_files" "${STYLE_LINK}"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    VERBATIM)
+      OUTPUT "${STYLE_LINK}"
+      COMMAND ${CMAKE_COMMAND} -E create_symlink
+              "${OOMPH_ROOT_DIR}/doc/extra_latex_style_files" "${STYLE_LINK}"
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+      VERBATIM)
 
     # We're also generating a symlink ourselves
     list(APPEND TARGETS_REQUIRED_FOR_BUILD_DOCS "${STYLE_LINK}")
@@ -88,7 +88,7 @@ function(oomph_generate_doc_from)
 
   # Define the target that needs to be built to build the docs
   add_custom_target(build_docs_${PATH_HASH} ALL
-     DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS})
+                    DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS})
 
   # Run doxygen
   add_custom_command(
