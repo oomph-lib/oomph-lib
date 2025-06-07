@@ -14,12 +14,11 @@
 # ------------------------------------------------------------------------------
 # oomph-lib is an object-oriented, open-source finite-element library for the
 # simulation of multi-physics problems. It is developed and maintained by
-# Matthias Heil and Andrew Hazel of the School of Mathematics at The University
-# of Manchester, along with many other contributors.
-#
-# This library is distributed with a GNU LGPL License; see LICENSE.txt.
+# Matthias Heil and Andrew Hazel of the Department of Mathematics at The
+# University of Manchester, along with many other contributors.
 # ==============================================================================
 # cmake-format: on
+
 # ------------------------------------------------------------------------------
 # OOMPH auto-inserted: warn once if user configures inside an existing build.
 if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
