@@ -474,24 +474,12 @@ if __name__ == "__main__":
 
     if args.wipe_doc:
         # There is a 'clean' target that can be invoked to clean up *most* (but not all) of
-        # the generated files.
-        if doc_build_dir.exists():
+        # the generated files. It's also possible that the configuration was interrupted
+        # early and no CMakeCache.txt was generated so we may not be able to invoke the
+        # 'clean' target using CMake
+        if doc_build_dir.exists() and (doc_build_dir / "CMakeCache.txt").exists():
             clean_up_cmd = ["cmake", "--build", "build", "--target", "clean"]
             run_command(clean_up_cmd, doc_dir, args.verbose)
-
-        # Now we need to go to the demo drivers directory and clean up the empty validata/
-        # directories (which used to have an index.html file in)
-        demo_drivers_dir = project_root / "demo_drivers"
-        if not demo_drivers_dir.exists():
-            raise FileNotFoundError(f"Unable to locate 'demo_drivers' directory at: {demo_drivers_dir}")
-
-        # Clear out the generated validata/ dirs. We'll make sure they're empty and not tracked
-        # by Git before we actually delete them
-        for d in demo_drivers_dir.rglob("validata/"):
-            if is_empty_and_untracked_tracked_dir(d):
-                if args.verbose:
-                    print(f"Removing '{d}'")
-                d.rmdir()
 
         # Now kill the build directory
         wipe_dir_if_found(doc_build_dir)

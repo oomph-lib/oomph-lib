@@ -90,6 +90,7 @@ function(oomph_generate_doc_from)
   add_custom_target(build_docs_${PATH_HASH} ALL
      DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS})
 
+  # Run doxygen
   add_custom_command(
     TARGET build_docs_${PATH_HASH}
     POST_BUILD
@@ -126,14 +127,12 @@ function(oomph_generate_doc_from)
       VERBATIM)
   endif()
 
-  # ------------------ F) allow clean to wipe dirs ----------------
   set_property(
     TARGET build_docs_${PATH_HASH}
     APPEND
     PROPERTY ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/html"
              "${CMAKE_CURRENT_SOURCE_DIR}/latex")
 
-  # ------------------ G) return target name (flag API) ------------
   if(ARG_BUILD_DOCS_TARGET)
     set(BUILD_DOCS_TARGET "build_docs_${PATH_HASH}" PARENT_SCOPE)
   endif()

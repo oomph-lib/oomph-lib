@@ -14,26 +14,11 @@
 # ------------------------------------------------------------------------------
 # oomph-lib is an object-oriented, open-source finite-element library for the
 # simulation of multi-physics problems. It is developed and maintained by
-# Matthias Heil and Andrew Hazel of the School of Mathematics at The University
-# of Manchester, along with many other contributors.
-#
-# This library is distributed with a GNU LGPL License; see LICENSE.txt.
-# ------------------------------------------------------------------------------
-# The version number follows the symantic versioning strategy here:
-#                           https://semver.org/
-# ------------------------------------------------------------------------------
-# See https://cmake-basis.github.io/standard/fhs.html for a description of
-# recommended source, build, and installation layouts.
-#
-# Additional notes for post-renovation:
-# See: https://nvie.com/posts/a-successful-git-branching-model/ for a Git
-# branching model.
-# ------------------------------------------------------------------------------
-# The "cmake-format" commands littered around the project are used to
-# disable/enable the use of the cmake-format extension used to automatically
-# format CMake files. Do not delete them.
+# Matthias Heil and Andrew Hazel of the Department of Mathematics at The
+# University of Manchester, along with many other contributors.
 # ==============================================================================
 # cmake-format: on
+
 # ------------------------------------------------------------------------------
 # OOMPH auto-inserted: warn once if user configures inside an existing build.
 if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"

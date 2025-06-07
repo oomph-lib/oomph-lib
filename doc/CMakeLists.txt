@@ -16,6 +16,7 @@ set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE doc.txt)
 
+# ------------------------------------------------------------------------------
 # Demo-driver index pages
 set(MAKE_INDEX_SCRIPT
     "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash")
@@ -40,6 +41,7 @@ add_custom_command(
 # A convenience target that the build can depend on
 add_custom_target(make_index_html_in_demo_drivers ALL
                   DEPENDS ${INDEX_HTML_FILES})
+# ------------------------------------------------------------------------------
 
 # Recurse!
 set(SUBDIRS
