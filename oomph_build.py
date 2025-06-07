@@ -396,9 +396,6 @@ def parse_args():
 
     # Flags common to both external_distributions and the oomph-lib project
     common_group = parser.add_argument_group("common build flags")
-
-    # hierher MH likes defaults
-    # common_group.add_argument("--OOMPH_ENABLE_MPI", default="OFF", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external (third party) distributions and in oomph-lib; default: OFF")
     common_group.add_argument("--OOMPH_ENABLE_MPI", metavar="ON/OFF", choices=["ON", "OFF"], help="Enable MPI in both external distributions and oomph-lib project.")
 
     # External distributions flags
@@ -420,7 +417,6 @@ def parse_args():
 
     # Any additional flags for the external distributions project
     ext_group.add_argument("--ext-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for external_distributions (e.g. -DXYZ=VALUE).")
-
 
     # oomph-lib flags
     oomph_group = parser.add_argument_group("oomph-lib project flags")
