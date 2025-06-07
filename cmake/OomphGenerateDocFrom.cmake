@@ -3,7 +3,8 @@ include_guard()
 function(oomph_generate_doc_from)
   # ----------------------- argument parsing -----------------------
   set(PREFIX ARG)
-  set(FLAGS BUILD_DOCS_TARGET SUPPRESS_LATEX_IN_THIS_DIRECTORY)
+  set(FLAGS DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE
+      SUPPRESS_LATEX_IN_THIS_DIRECTORY)
   set(SINGLE_VALUE_ARGS OOMPH_ROOT_DIR DOCFILE)
   include(CMakeParseArguments)
   cmake_parse_arguments(PARSE_ARGV 0 ${PREFIX} "${FLAGS}"
@@ -12,6 +13,8 @@ function(oomph_generate_doc_from)
   set(OOMPH_ROOT_DIR "${ARG_OOMPH_ROOT_DIR}")
   set(DOCFILE "${ARG_DOCFILE}")
   set(SUPPRESS_PDF "${ARG_SUPPRESS_LATEX_IN_THIS_DIRECTORY}")
+  set(DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE
+      "${ARG_DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE}")
 
   find_package(Doxygen 1.9.6 REQUIRED)
   if(NOT DEFINED PATH_TO_PDFLATEX)
@@ -86,27 +89,26 @@ function(oomph_generate_doc_from)
     list(APPEND TARGETS_REQUIRED_FOR_BUILD_DOCS "${STYLE_LINK}")
   endif()
 
-  # Define the target that needs to be built to build the docs
-  add_custom_target(build_docs_${PATH_HASH} ALL
-                    DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS})
-
-  # Run doxygen
+  # Run Doxygen (when any of its deps have changed)
   add_custom_command(
-    TARGET build_docs_${PATH_HASH}
-    POST_BUILD
+    OUTPUT "${HTML_INDEX}"
     COMMAND doxygen -q
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${OOMPH_ROOT_DIR}/doc/figures/doxygen.png" html/doxygen.png
+    DEPENDS ${TARGETS_REQUIRED_FOR_BUILD_DOCS}
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/html"
-               "${CMAKE_CURRENT_SOURCE_DIR}/latex" OUTPUT_QUIET
+               "${CMAKE_CURRENT_SOURCE_DIR}/latex"
+    COMMENT "Generating HTML & LaTeX documentation"
     VERBATIM)
 
-  # Optional PDF build
+  # We're always going to output the index.html
+  set(DOC_OUTPUTS "${HTML_INDEX}")
+
+  # Optional PDF build (depend on "html/index.html" to determine when to rerun)
   if(PATH_TO_PDFLATEX AND NOT SUPPRESS_PDF)
     add_custom_command(
-      TARGET build_docs_${PATH_HASH}
-      POST_BUILD
+      OUTPUT "${PDF_OUT}"
       COMMAND
         ${CMAKE_COMMAND} -E chdir latex /bin/sh -c
         " \
@@ -122,10 +124,17 @@ function(oomph_generate_doc_from)
         cp refman.pdf '${PDF_OUT}' && \
         ln -sf '../${DOC_STEM}.pdf' refman.pdf \
       "
+      DEPENDS "${HTML_INDEX}"
       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-      BYPRODUCTS "${PDF_OUT}"
+      COMMENT "Building PDF documentation"
       VERBATIM)
+
+    # ...and we'll also output a PDF
+    list(APPEND DOC_OUTPUTS "${PDF_OUT}")
   endif()
+
+  # Define the target that needs to be built
+  add_custom_target(build_docs_${PATH_HASH} ALL DEPENDS ${DOC_OUTPUTS})
 
   set_property(
     TARGET build_docs_${PATH_HASH}
@@ -133,7 +142,7 @@ function(oomph_generate_doc_from)
     PROPERTY ADDITIONAL_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/html"
              "${CMAKE_CURRENT_SOURCE_DIR}/latex")
 
-  if(ARG_BUILD_DOCS_TARGET)
+  if(DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE)
     set(BUILD_DOCS_TARGET "build_docs_${PATH_HASH}" PARENT_SCOPE)
   endif()
 endfunction()
