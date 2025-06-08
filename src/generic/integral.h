@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1702,6 +1702,51 @@ namespace oomph
     }
   }
 
+
+#ifdef OOMPH_3_5_BRICK_FOR_MESHING_ONLY_NO_INTEGRATION
+  //=========================================================
+  /// 3D Dummy Gaussian integration class,
+  /// so that we can make a <3,5> brick for meshing
+  //=========================================================
+  template<>
+  class Gauss<3, 5> : public Integral
+  {
+  private:
+    /// Number of integration points in the scheme
+    static const unsigned Npts = 125;
+
+    /// Array to hold the weights and knots (defined in cc file)
+    static const double Knot[125][3], Weight[125];
+
+  public:
+    /// Default constructor (empty)
+    Gauss() {};
+
+    /// Broken copy constructor
+    Gauss(const Gauss& dummy) = delete;
+
+    /// Broken assignment operator
+    void operator=(const Gauss&) = delete;
+
+    /// Number of integration points of the scheme
+    unsigned nweight() const
+    {
+      return Npts;
+    }
+
+    /// Return coordinate s[j] of integration point i
+    double knot(const unsigned& i, const unsigned& j) const
+    {
+      return Knot[i][j];
+    }
+
+    /// Return weight of integration point i
+    double weight(const unsigned& i) const
+    {
+      return Weight[i];
+    }
+  };
+#endif
 
 } // namespace oomph
 
