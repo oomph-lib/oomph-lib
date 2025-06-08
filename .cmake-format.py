@@ -112,7 +112,7 @@ with section("parse"):
         },
         "oomph_generate_doc_from": {
             "flags": [
-                "BUILD_DOCS_TARGET",
+                "DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE",
                 "BUILD_DOXY_HEADER_TARGET",
                 "SUPPRESS_LATEX_IN_THIS_DIRECTORY",
             ],

@@ -10,7 +10,7 @@ include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(
   OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}"
   DOCFILE the_data_structure.txt
-  BUILD_DOCS_TARGET)
+  DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE)
 
 # Patch html/ files after the docs have been built
 add_custom_command(
