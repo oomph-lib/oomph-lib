@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1041,6 +1041,17 @@ namespace oomph
       }
     }
 
+    /// Add an element to a particular region; this helper checks if the
+    /// specified element and region ID already exist, so can be used to move
+    /// an existing element to an existing region, to add an existing element
+    /// to a new region, or to add a new element to a new region
+    void add_element_in_region_pt(FiniteElement* const& elem_pt,
+                                  const unsigned& region_id);
+
+
+    /// Clear and regenerate the lookup schemes for bulk elements and their
+    /// corresponding face indices which are adjacent to mesh boundaries
+    void regenerate_region_boundary_lookups();
 
     /// Return the number of regions specified by attributes
     unsigned nregion()
@@ -2679,42 +2690,7 @@ namespace oomph
     // ------------------------------------------
     // Step 2: Clear and regenerate lookups
 
-    Face_index_region_at_boundary.clear();
-    Boundary_region_element_pt.clear();
-
-    Face_index_region_at_boundary.resize(nboundary());
-    Boundary_region_element_pt.resize(nboundary());
-
-    for (unsigned b = 0; b < nboundary(); b++)
-    {
-      // Loop over elements next to that boundary
-      unsigned nel = this->nboundary_element(b);
-      for (unsigned e = 0; e < nel; e++)
-      {
-        FiniteElement* el_pt = boundary_element_pt(b, e);
-
-        // now search for it in each region
-        for (unsigned r_index = 0; r_index < Region_attribute.size(); r_index++)
-        {
-          unsigned region_id = static_cast<unsigned>(Region_attribute[r_index]);
-
-          Vector<FiniteElement*>::iterator it =
-            std::find(Region_element_pt[r_index].begin(),
-                      Region_element_pt[r_index].end(),
-                      el_pt);
-
-          // if we find this element in the current region, then update our
-          // lookups
-          if (it != Region_element_pt[r_index].end())
-          {
-            Boundary_region_element_pt[b][region_id].push_back(el_pt);
-
-            unsigned face_index = face_index_at_boundary(b, e);
-            Face_index_region_at_boundary[b][region_id].push_back(face_index);
-          }
-        }
-      }
-    }
+    regenerate_region_boundary_lookups();
 
     oomph_info << "\nNumber of outer corner elements split: "
                << old_to_new_corner_element_map.size() << "\n\n";

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2024 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1018,6 +1018,10 @@ namespace oomph
         project_problem_pt->mesh_pt() = new_mesh_pt;
         project_problem_pt->project(this);
         delete project_problem_pt;
+
+        // Re-setup terminate helper (which was reset by the
+        // deconstructor of project_problem_pt)
+        TerminateHelper::setup();
 
         // ##################################################################
         oomph_info
