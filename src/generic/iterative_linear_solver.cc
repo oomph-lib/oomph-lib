@@ -2125,7 +2125,7 @@ namespace oomph
 
 
   //==================================================================
-  /// \Short Re-solve the system defined by the last assembled Jacobian
+  /// Re-solve the system defined by the last assembled Jacobian
   /// and the rhs vector specified here. Solution is returned in
   /// the vector result.
   //==================================================================
@@ -2824,7 +2824,7 @@ namespace oomph
   };
 
   //==================================================================
-  /// \Short Re-solve the system defined by the last assembled Jacobian
+  /// Re-solve the system defined by the last assembled Jacobian
   /// and the rhs vector specified here. Solution is returned in
   /// the vector result.
   //==================================================================

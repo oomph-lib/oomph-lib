@@ -56,8 +56,8 @@ namespace oomph
   ///  // This is a 4 by 5 matrix with all entries set to -1.
   ///
   ///  std::cout << vector_matrix[3][3] << " "
-  //             << vector_matrix.nrow() << " "
-  //             << vector_matrix.col() << std::endl;
+  ///            << vector_matrix.nrow() << " "
+  ///            << vector_matrix.col() << std::endl;
   ///
   ///  // Output:
   ///  // -1 4 5

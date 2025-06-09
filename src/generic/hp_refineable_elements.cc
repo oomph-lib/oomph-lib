@@ -2819,7 +2819,7 @@ namespace oomph
       /// /BENFLAG:
       // std::cout << "Checking that all the nodes have this as their update
       // element..." << std::endl;
-      /// /std::cout << "this = " << this << std::endl;
+      // std::cout << "this = " << this << std::endl;
       // for(unsigned j=0; j<this->nnode(); j++)
       // {
       //  //std::cout << this->node_pt(j) << ":   [" << this->node_pt(j)->x(0)

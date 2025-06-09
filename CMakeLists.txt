@@ -25,8 +25,10 @@ if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
    AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
   message(
     WARNING
-      "You're re-configuring an existing build tree. For a clean configuration, "
-      "delete the whole build folder and start with a fresh directory.")
+      "You're re-configuring an existing build tree."
+      "Delete the whole build folder and start with a fresh directory"
+      "if your attempt to re-configure leads to strange error messages"
+      "below here.")
 endif()
 # ------------------------------------------------------------------------------
 

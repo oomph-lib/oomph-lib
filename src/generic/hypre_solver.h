@@ -399,7 +399,7 @@ namespace oomph
     ///     - 18 : \f$\ell_1\f$-scaled jacobi
     ///     - 19 : Gaussian elimination (old version)
     ///     - 21 : The same as 8 except forcing serialization on CPU
-    ///     (#OMP-thread = 1)
+    ///     ( # OMP-thread = 1)
     ///     - 29 : Direct solve: use Gaussian elimination & BLAS
     ///                         (with pivoting) (old version)
     ///     - 30 : Kaczmarz

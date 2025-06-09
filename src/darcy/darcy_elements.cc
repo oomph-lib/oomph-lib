@@ -92,7 +92,7 @@ namespace oomph
   }
 
   //=====================================================================
-  /// Output FE representation of soln: x,y,q1,q2,div_q,p,q \cdot n
+  /// Output FE representation of soln: \f$ x,y,q1,q2,div_q,p,q \cdot n \f$
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_with_projected_flux(

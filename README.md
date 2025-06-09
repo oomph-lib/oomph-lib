@@ -89,7 +89,7 @@
 - [Testing the installation](#testing-the-installation)
   - [Testing the entire installation](#testing-the-entire-installation)
   - [How to analyse failed tests](#how-to-analyse-failed-tests)
-  - [Testing specific demo driver codes](#testing-specific-demo-driver-codes)
+  - [Testing specific demo driver codes and how to analyse failed tests](#testing-specific-demo-driver-codes-and-how-to-analyse-failed-tests)
   - [Selective testing](#selective-testing)
     - [Filtering by `TEST_NAME`](#filtering-by-test_name)
     - [Filtering tests by keywords appearing in demo driver codes](#filtering-tests-by-keywords-appearing-in-demo-driver-codes)
@@ -110,6 +110,12 @@
 - [Cheat sheet: autotools vs. cmake](#cheat-sheet-autotools-vs-cmake)
 - [Dos and Don'ts](#dos-and-donts)
 - [Additional information for developers](#additional-information-for-developers)
+  - [Use symbolic links for header files](#use-symbolic-links-for-header-files)
+  - [Creating robust `validata` for self tests](#creating-robust-validata-for-self-tests)
+    - [A self-test fails even though the output files produced by the code are correct](#a-self-test-fails-even-though-the-output-files-produced-by-the-code-are-correct)
+    - [Handling non-deterministic output](#handling-non-deterministic-output)
+    - [Careful with driver codes that use `triangle` to generate meshes](#careful-with-driver-codes-that-use-triangle-to-generate-meshes)
+  - [How to update third-party libraries to later versions](#how-to-update-third-party-libraries-to-later-versions)
 - [Appendix](#appendix)
   - [CMake resources](#cmake-resources)
   - [Building CMake](#building-cmake) 
@@ -378,7 +384,6 @@ FLAG                                    | Description                           
 `OOMPH_SUPPRESS_TRIANGLE_LIB`           | Suppress build of oomph-lib's copy of the triangle library                   | OFF
 `OOMPH_SUPPRESS_TETGEN_LIB`             | Suppress build of oomph-lib's copy of the tetgen library                     | OFF
 
-** hierher Puneet: should add the symlink option here too or is this a completely native CMake thing? If so, it's already discussed below **
 
 For instance, to build `oomph-lib` with MPI support, use
 ```bash
@@ -412,6 +417,14 @@ double some_function(const double& x)
  [...]
 ```
 The `RANGE_CHECKING` macro is mainly used within `oomph-lib`'s own containers but can/should also be used for any other newly-created objects where an array-like index has to be in a certain range.
+
+
+Finally, developers should install the library headers as symbolic links to the actual header files. If you don't do this you'll go insane while fixing bugs in copies of header files that immediately get over-written when the (supposed to be fixed) library is reinstalled. So install the library as follows if you intend to work on it.
+```bash
+cmake -G Ninja -B build -E create_symlink`
+```
+Obviously don't do this if you want to install the library in a permanent location and then delete the sources! 
+
 
 ## Recommended alternative: Building with `oomph_build.py`
 
@@ -555,7 +568,7 @@ ctest --rerun-failed --output-on-failure
 ```
 To investigate/debug/fix the failed test, `cd` into the relevant `demo_drivers` directory and follow the instructions in the next section.
 
-### Testing specific demo driver codes
+### Testing specific demo driver codes and how to analyse failed tests
 
 It is also possible to test a single driver code (or rather all the demo drivers below a specific subdirectory of `demo_drivers`):
 
@@ -1445,12 +1458,15 @@ There's no need for an installation.
 
 Note that building the documentation takes a long time and simply duplicates the documentation already available on the `oomph-lib` webpage. It is therefore mainly of interest to developers or other volunteers who want to provide new (or fix broken) tutorials. Once the build process is complete you can navigate your local copy of the `oomph-lib` webpages starting from `doc/html/index.html`. 
 
-To uninstall the documentation do
+The way the documentation is built/installed is slightly different from how it's done when building the library itself, so simply deleting the `build` directory won't get rid of everything that's been created. To clean up do the following
 ```bash
- ** hierher Puneet -- help! **
+cd doc/build
+ninja clean
+cd ..
+rm -rf build
 ```
 
-To add new tutorials to the `doc` directory, follow the same steps used for adding new demo drivers.
+To add new tutorials to the `doc` directory, follow the same steps used for adding new demo drivers. Detailed instructions on what's required and how the documentation is generated are available on the `oomph-lib` webpage.
 
 
 
@@ -1767,11 +1783,11 @@ cmake --install build<br>
 
 ## Dos and Don'ts
 - Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because it would lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose seg faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign it yourself! 
-
+- Do (re-)build the library with `PARANOID` or `RANGE_CHECKING` enabled if you develop any new machinery or work on a new driver code. The code will run more slowly but the warnings will save you years of your life!
 
 ## Additional information for developers
-### Use symbolic links:
-- Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py`
+### Use symbolic links for header files:
+Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the library with `oomph_lib.py`
 ```bash
 ./oomph_build.py [...] --oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON
 ``` 
@@ -1781,8 +1797,65 @@ cmake -G Ninja -B build -E create_symlink`
 ```
 With these flags, the header files in the `install` directories (usually copied from the `src` directory) are replaced by symbolic links to the original files in the `src` directory. This means that, if you build a library and are alerted to an error in a header file you don't accidentally edit a copy (that is then duly overwritten when you reinstall the library).
 
+### Creating robust `validata` for self tests
+It is important to make sure that the `validata` is robust. While the `scripts/fpdiff.py` 
+allows for floating point tolerances (both absolute and relative) it
+cannot cope with data appearing in a different order. This can be very 
+confusing to debug because the code then produces the correct results 
+and plotting packages will display it correctly, but yet the tests fail.
+
+Such problems are usually caused by the use of wildcards
+in the validations scripts, the comparison of data that is stored 
+in certain STL containers, or the use of non-deterministic algorithms
+(especially the mesh generation with `triangle`).
+
+#### A self-test fails even though the output files produced by the code are correct
+Self-tests are performed by
+the \c validate.sh shell script, which runs the executable and
+concatenates selected output files to a single file whose contents
+are compared against the reference file in the \c validata directory.
+While it is tempting to write
+\code
+cat RESLT* /soln0.dat > results_file.dat
+\endcode
+it is important to realise that the order in which the files are
+concatenated is machine- and/or operating-system dependent. If
+the above command is run in a directory with the following structure
+\code
+|-- RESLT
+|   |-- soln0.dat
+|   `-- trace.dat
+|-- RESLT_elastic
+|   |-- soln0.dat
+|   `-- trace.dat
+\endcode
+some operating systems will expand the command to
+\code
+cat RESLT/soln0.dat RESLT_elastic/soln0.dat > results_file.dat
+\endcode
+while others will execute
+\code
+cat RESLT_elastic/soln0.dat RESLT/soln0.dat > results_file.dat
+\endcode
+In this case the self-test will report a failure, even though the
+solution files are correct. The <CODE>validate.sh</CODE> scripts
+should therefore not contain any wildcards.
+
+#### Handling non-deterministic output
+Similar problems can arise if the validation data includes
+data that is stored in certain STL containers such as sets.
+The order in which items are stored in such containers may
+vary from machine to machine and from compiler to compiler.
+If such data is to be included in a self-test the data should be
+sorted first, based on a user-controllable sorting criterion.
+
+#### Careful with driver codes that use `triangle` to generate meshes
+We provide a wrapper to the third-party `triangle` code to generate unstructured 2D meshes. When using these it is important to realise that the meshes generated can change, depending the machine the code is run on and even the optimisation level of the code. `validata` for such codes must therefore use intergral data such as
+norms of the solution, rather than element-by-element output. 
+
+
 ### How to update third-party libraries to later versions
-The third-party libraries in `external_distributions` are pulled in from their respective GitHub repositories. The version of the libraries is typically encoded in the `<library_name>_TARBALL_URL` variable name in the files `external_distributions/cmake/OomphGetExternal<library_name>.cmake` file. An upgrade should (usually) just require a change to the tarball name, though if a more recent version of the library requires different build steps the relevant `*.cmake` will have to be modified further. 
+The third-party libraries in `external_distributions` are pulled in from their respective GitHub repositories. The version of the libraries is typically encoded in the `<library_name>_TARBALL_URL` variable name in the files `external_distributions/cmake/OomphGetExternal<library_name>.cmake` file. An upgrade should (usually) just require a change to the tarball name, though if a more recent version of the library requires different build steps the relevant `*.cmake` file will, of course, have to be modified further. Make sure that the relevant self-tests still produce the same results after upgrading to a new version of a third-party library!
 
 
 
