@@ -350,7 +350,7 @@ namespace oomph
 
   private:
 #ifdef OOMPH_HAS_MPI
-   
+
     /// the MPI_Comm communicator
     MPI_Comm Comm;
 
@@ -364,9 +364,9 @@ namespace oomph
     bool Serial_communicator;
 
 #endif
-   
+
   }; // end of class Communicator
- 
+
 } // namespace oomph
 
 #endif
