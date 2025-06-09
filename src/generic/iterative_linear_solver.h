@@ -1857,7 +1857,7 @@ namespace oomph
 
     /// Helper function: Generate a plane rotation. This is done by
     /// finding the values of \f$ \cos(\theta) \f$ (i.e. cs) and
-   /// \f$ \sin(\theta) \f$  (i.e. sn) such that:
+    /// \f$ \sin(\theta) \f$  (i.e. sn) such that:
     /// \f[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \f]
     /// where \f$ r=\sqrt{pow(dx,2)+pow(dy,2)} \f$. The values of a and b are
     /// given by:
