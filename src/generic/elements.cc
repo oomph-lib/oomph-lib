@@ -5114,8 +5114,9 @@ namespace oomph
   /// The information will typically be used in interaction problems in
   /// which the FiniteElement provides a forcing term for an
   /// ElementWithExternalElement. The Data must be provided as
-  /// \c paired_load data containing (a) the pointer to a Data object
-  /// and (b) the index of the value in that Data object.
+  /// \c paired_load data containing
+  /// - the pointer to a Data object
+  /// - the index of the value in that Data object
   /// The generic implementation (should be overloaded in more specific
   /// applications) is to include all nodal and internal Data stored in
   /// the FiniteElement. Note that the geometric data,
@@ -5123,25 +5124,25 @@ namespace oomph
   /// of SolidNodes, is treated separately by the function
   /// \c identify_geometric_data()
   //======================================================================
-  void FiniteElement::identify_field_data_for_interactions(
-    std::set<std::pair<Data*, unsigned>>& paired_field_data)
-  {
-    // Loop over all internal data
-    const unsigned n_internal = this->ninternal_data();
-    for (unsigned n = 0; n < n_internal; n++)
-    {
-      // Cache the data pointer
-      Data* const dat_pt = this->internal_data_pt(n);
-      // Find the number of data values stored in the data object
-      const unsigned n_value = dat_pt->nvalue();
-      // Add the index of each data value and the pointer to the set
-      // of pairs
-      for (unsigned i = 0; i < n_value; i++)
-      {
-        paired_field_data.insert(std::make_pair(dat_pt, i));
-      }
-    }
-
+ void FiniteElement::identify_field_data_for_interactions(
+  std::set<std::pair<Data*, unsigned>>& paired_field_data)
+ {
+  // Loop over all internal data
+  const unsigned n_internal = this->ninternal_data();
+  for (unsigned n = 0; n < n_internal; n++)
+   {
+    // Cache the data pointer
+    Data* const dat_pt = this->internal_data_pt(n);
+    // Find the number of data values stored in the data object
+    const unsigned n_value = dat_pt->nvalue();
+    // Add the index of each data value and the pointer to the set
+    // of pairs
+    for (unsigned i = 0; i < n_value; i++)
+     {
+      paired_field_data.insert(std::make_pair(dat_pt, i));
+     }
+   }
+  
     // Loop over all the nodes
     const unsigned n_node = this->nnode();
     for (unsigned n = 0; n < n_node; n++)
