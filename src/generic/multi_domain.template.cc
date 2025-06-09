@@ -553,10 +553,10 @@ namespace oomph
     // Bail out?
     if (n_mesh == 0) return;
 
-    // Multi-domain setup will not work for elements with
-    // nonuniformly spaced nodes
-    // Must check type of elements in the mesh and in the external mesh
-    //(assume element type is the same for all elements in each mesh)
+      // Multi-domain setup will not work for elements with
+      // nonuniformly spaced nodes
+      // Must check type of elements in the mesh and in the external mesh
+      //(assume element type is the same for all elements in each mesh)
 
 #ifdef PARANOID
 
