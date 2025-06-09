@@ -52,9 +52,7 @@ namespace oomph
   //=========================================================================
   class OomphCommunicator
   {
-   
   public:
-   
 #ifdef OOMPH_HAS_MPI
     /// Construct a communicator from a MPI_Comm object.
     /// if the bool owns_mpi_comm is true then this communicator is responsible
@@ -77,7 +75,8 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
       : Owns_mpi_comm(false), Serial_communicator(true)
 #endif
-    {}
+    {
+    }
 
     /// Copy constructor.
     OomphCommunicator(const OomphCommunicator& communicator)
@@ -95,7 +94,8 @@ namespace oomph
       }
     }
 #else
-    {}
+    {
+    }
 #endif
 
     /// Pointer (copy) constructor.
@@ -114,7 +114,8 @@ namespace oomph
       }
     }
 #else
-    {}
+    {
+    }
 #endif
 
     /// Destructor. If MPI and this preconditioner owns the MPI_Comm
@@ -348,8 +349,6 @@ namespace oomph
 #endif
 
   private:
-
-   
 #ifdef OOMPH_HAS_MPI
    
     /// the MPI_Comm communicator
