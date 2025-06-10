@@ -592,11 +592,9 @@ namespace oomph
       Vector<Vector<double>>& inner_product_vector);
 
   public:
+    /// Virtual destructor to clean up any memory allocated by the object.
+    virtual ~GeneralisedElement();
 
-
-   /// Virtual destructor to clean up any memory allocated by the object.
-   virtual ~GeneralisedElement();
-   
     /// Broken copy constructor
     GeneralisedElement(const GeneralisedElement&) = delete;
 
@@ -1220,8 +1218,8 @@ namespace oomph
         error_message.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-   /// Constructor: Initialise all pointers and all values to zero
-   GeneralisedElement()
+    /// Constructor: Initialise all pointers and all values to zero
+    GeneralisedElement()
       : Eqn_number(0),
         Dof_pt(0),
         Data_pt(0),
@@ -1230,12 +1228,12 @@ namespace oomph
         Ninternal_data(0),
         Nexternal_data(0)
 #ifdef OOMPH_HAS_MPI
-        , Non_halo_proc_ID(-1), Must_be_kept_as_halo(false)
+        ,
+        Non_halo_proc_ID(-1),
+        Must_be_kept_as_halo(false)
 #endif
     {
     }
-
-   
   };
 
   /// Enumeration a finite element's geometry "type". Either "Q" (square,
