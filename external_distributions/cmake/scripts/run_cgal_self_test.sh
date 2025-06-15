@@ -15,21 +15,24 @@ if [ -e oomph_test ]; then
     rm -rf oomph_test
 fi
 
+driver_src_dir=Spatial_searching/examples/Spatial_searching
+scripts_src_dir=Scripts/scripts
+
 mkdir oomph_test
-cp examples/Spatial_searching/nearest_neighbor_searching.cpp oomph_test
+cp ${driver_src_dir}/nearest_neighbor_searching.cpp oomph_test
 cd oomph_test
 
-if [ ! -e ../scripts/cgal_create_CMakeLists ]; then
+if [ ! -e ../${scripts_src_dir}/cgal_create_CMakeLists ]; then
     echo "ERROR: The CGAL script "
     echo " "
-    echo "   scripts/cgal_create_CMakeLists"
+    echo "   ${scripts_src_dir}/cgal_create_CMakeLists"
     echo " "
     echo "that we use to test our CGAL installation doesn't exist (any more?)"
     exit 1
 fi
 
 # Create CMakeLists file
-../scripts/cgal_create_CMakeLists -s nearest_neighbor_searching &>"${LOG_DIR}/build.log"
+../${scripts_src_dir}/cgal_create_CMakeLists -s nearest_neighbor_searching &>"${LOG_DIR}/build.log"
 
 # Configure
 echo "Building CGAL test with compiler_spec_string: "$compiler_spec_string
@@ -47,7 +50,7 @@ if [ ! -e ./nearest_neighbor_searching ]; then
     echo " "
     echo "which was copied from "
     echo" "
-    echo "    examples/Spatial_searching/"
+    echo "    ${driver_src_dir}"
     echo " "
     echo "failed to build. Check ${LOG_DIR}/build.log!"
     exit 1
@@ -56,7 +59,7 @@ else
     echo " "
     echo "  "$(pwd)"/nearest_neighbor_searching"
     echo " "
-    echo "which was copied from examples/Spatial_searching/"
+    echo "which was copied from ${driver_src_dir}"
     echo "was built!"
     output=$(./nearest_neighbor_searching)
     echo " "

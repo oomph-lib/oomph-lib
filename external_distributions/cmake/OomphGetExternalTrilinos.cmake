@@ -132,7 +132,7 @@ oomph_get_external_project_helper(
   CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${TRILINOS_CMAKE_CONFIGURE_ARGS} -B=build
   BUILD_COMMAND ${CMAKE_COMMAND} --build build
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
-  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${NUM_JOBS} --output-on-failure --verbose -E "${CTEST_EXCLUDE_REGEX_STRING}")
+  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${OOMPH_NUM_JOBS} --output-on-failure --verbose -E "${CTEST_EXCLUDE_REGEX_STRING}")
 
 # Trilinos depends on OpenBLAS. If we're building OpenBLAS ourselves then we
 # need to make sure that it gets built before Trilinos

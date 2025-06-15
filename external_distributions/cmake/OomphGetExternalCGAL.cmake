@@ -38,13 +38,13 @@ endif()
 # ----------------------------------------
 if(NOT OOMPH_USE_BOOST_FROM)
   oomph_get_external_project_helper(
-    PROJECT_NAME   boost
+    PROJECT_NAME boost
     GIT_REPOSITORY ${BOOST_GIT_URL}
     GIT_TAG ${BOOST_GIT_TAG}
     GIT_SUBMODULES_RECURSE TRUE
     INSTALL_DIR "${BOOST_INSTALL_DIR}"
     CONFIGURE_COMMAND ./bootstrap.sh --prefix=<INSTALL_DIR> --with-libraries=thread,system,program_options CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER}
-    BUILD_COMMAND ./b2 install --jobs=${NUM_JOBS}
+    BUILD_COMMAND ./b2 install --jobs=${OOMPH_NUM_JOBS}
     INSTALL_COMMAND ""
   )
 endif()
@@ -76,7 +76,7 @@ oomph_get_external_project_helper(
   INSTALL_DIR ${CGAL_INSTALL_DIR}
   PATCH_COMMAND ${CMAKE_CURRENT_LIST_DIR}/patches/patch_cgal.sh <SOURCE_DIR>
   CONFIGURE_COMMAND ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${CGAL_CMAKE_ARGS} -B=build
-  BUILD_COMMAND ${CMAKE_COMMAND} --build build --parallel ${NUM_JOBS} --verbose
+  BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${OOMPH_NUM_JOBS} --verbose
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
   TEST_COMMAND ${CMAKE_CURRENT_LIST_DIR}/scripts/run_cgal_self_test.sh <SOURCE_DIR> <LOG_DIR> ${CGAL_SELFTEST_ARGS}
 )

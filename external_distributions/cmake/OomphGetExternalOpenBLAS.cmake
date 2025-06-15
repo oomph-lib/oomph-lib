@@ -20,33 +20,53 @@
 # =============================================================================
 include_guard()
 
-# Where to get the code from and where to install it to
+# TODO: Upload to oomph-lib repo
 set(OPENBLAS_GIT_URL https://github.com/OpenMathLib/OpenBLAS.git)
 set(OPENBLAS_GIT_TAG v0.3.29)
 set(OPENBLAS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/openblas")
 
-# MUMPS build options
-set(OPENBLAS_CMAKE_ARGS
-  -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-  -DCMAKE_BUILD_TYPE=Release
-  -DBUILD_SHARED_LIBS=OFF
-)
+if(APPLE)
+  set(OPENBLAS_CMAKE_ARGS
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DBUILD_SHARED_LIBS=OFF
+    -DBUILD_WITHOUT_LAPACK=OFF
+    -DBUILD_WITHOUT_LAPACKE=OFF
+    -DBUILD_WITHOUT_CBLAS=OFF
+    -DBUILD_LAPACK_DEPRECATED=ON
+    -DBUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
+    -DBUILD_BENCHMARKS=OFF
+    -DC_LAPACK=OFF
+    -DDYNAMIC_ARCH=ON
+  )
 
-# Define how to configure/build/install the project
-oomph_get_external_project_helper(
-  PROJECT_NAME openblas
-  GIT_REPOSITORY ${OPENBLAS_GIT_URL}
-  GIT_TAG ${OPENBLAS_GIT_TAG}
-  INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -G=${CMAKE_GENERATOR} -B=build ${OPENBLAS_CMAKE_ARGS}
-  BUILD_COMMAND ${CMAKE_COMMAND} --build build
-  INSTALL_COMMAND ${CMAKE_COMMAND} --install build)
+  # Define how to configure/build/install the project
+  oomph_get_external_project_helper(
+    PROJECT_NAME openblas
+    GIT_REPOSITORY ${OPENBLAS_GIT_URL}
+    GIT_TAG ${OPENBLAS_GIT_TAG}
+    INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
+    CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> ${OPENBLAS_CMAKE_ARGS} -G ${CMAKE_GENERATOR} -B build
+    BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${OOMPH_NUM_JOBS}
+    INSTALL_COMMAND ${CMAKE_COMMAND} --install build)
+
+else()
+
+  # Define how to configure/build/install the project
+  oomph_get_external_project_helper(
+    PROJECT_NAME openblas
+    GIT_REPOSITORY ${OPENBLAS_GIT_URL}
+    GIT_TAG ${OPENBLAS_GIT_TAG}
+    INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
+    CONFIGURE_HANDLED_BY_BUILD
+    BUILD_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} FC=${CMAKE_Fortran_COMPILER}
+    INSTALL_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} PREFIX=${OPENBLAS_INSTALL_DIR} install)
+
+endif()
 
 # Define the global variables OpenBLAS_ROOT and OpenBLAS_LIBRARIES for MUMPS,
 # HYPRE and Trilinos to use
 set(OpenBLAS_LIBNAME "${CMAKE_STATIC_LIBRARY_PREFIX}openblas${CMAKE_STATIC_LIBRARY_SUFFIX}")
 set(OpenBLAS_LIBRARIES "${OPENBLAS_INSTALL_DIR}/lib/${OpenBLAS_LIBNAME}" CACHE PATH "" FORCE)
-set(OpenBLAS_ROOT ${OPENBLAS_INSTALL_DIR} CACHE PATH "" FORCE)
 
 # ---------------------------------------------------------------------------------
 # cmake-format: on

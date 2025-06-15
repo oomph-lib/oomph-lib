@@ -48,13 +48,20 @@ jobs:
         run: cmake --version
 
       - name: Configure, build, and install
+
         id: build
         run: |
           python3 oomph_build.py \
             --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
             --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
             --no-build-oomph \
-            --verbose
+            --verbose \
+            --ext-OOMPH_BUILD_SUPERLU OFF \
+            --ext-OOMPH_BUILD_SUPERLU_DIST OFF \
+            --ext-OOMPH_BUILD_HYPRE OFF \
+            --ext-OOMPH_BUILD_TRILINOS OFF \
+            --ext-OOMPH_BUILD_MUMPS ON \
+            --ext-OOMPH_BUILD_CGAL OFF
         continue-on-error: true
 
       - name: Rename build logs

@@ -40,6 +40,11 @@ function(oomph_get_external_project_helper)
     message(FATAL_ERROR "oomph_get_external_project: URL or GIT_REPOSITORY is required")
   endif()
 
+  # Set default
+  if(NOT ARG_GIT_SUBMODULES_RECURSE)
+    set(ARG_GIT_SUBMODULES_RECURSE TRUE)
+  endif()
+
   # Define how to configure/build/install the project
   if(ARG_GIT_REPOSITORY)
     ExternalProject_Add(

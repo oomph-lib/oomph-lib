@@ -56,7 +56,7 @@ oomph_get_external_project_helper(
   GIT_TAG ${HYPRE_GIT_TAG}
   INSTALL_DIR ${HYPRE_INSTALL_DIR}
   CONFIGURE_COMMAND ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> ${HYPRE_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -S=src -B=src/cmbuild
-  BUILD_COMMAND ${CMAKE_COMMAND} --build src/cmbuild -j ${NUM_JOBS}
+  BUILD_COMMAND ${CMAKE_COMMAND} --build src/cmbuild -j ${OOMPH_NUM_JOBS}
   INSTALL_COMMAND ${CMAKE_COMMAND} --install src/cmbuild
   # TEST_COMMAND    ./src/cmbuild/test/ij
 )
