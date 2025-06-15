@@ -67,9 +67,9 @@ The table below contains the version of each library that you can install with t
 
 Library    | Version
 -----------|--------
-`OpenBLAS` | 0.3.25
+`OpenBLAS` | 0.3.29
 `Boost`    | 1.83.0
-`CGAL`     | 5.6
+`CGAL`     | 6.0.1
 `MUMPS`    | 5.6.2
 `HYPRE`    | 2.32.0
 `Trilinos` | 16.0.0
