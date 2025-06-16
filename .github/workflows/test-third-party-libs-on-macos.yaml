@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: brew install ninja automake && brew reinstall gcc
+        run: brew install ninja automake openblas && brew reinstall gcc
 
       - name: Install MPI dependencies (if required)
         if: matrix.mpi == 'ON'
@@ -53,14 +53,9 @@ jobs:
           python3 oomph_build.py \
              --OOMPH_ENABLE_MPI=${{ matrix.mpi }} \
              --ext-OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
+             --ext-OOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) \
              --no-build-oomph \
-             --verbose \
-             --ext-OOMPH_BUILD_SUPERLU OFF \
-             --ext-OOMPH_BUILD_SUPERLU_DIST OFF \
-             --ext-OOMPH_BUILD_HYPRE OFF \
-             --ext-OOMPH_BUILD_TRILINOS OFF \
-             --ext-OOMPH_BUILD_MUMPS ON \
-             --ext-OOMPH_BUILD_CGAL OFF
+             --verbose
         continue-on-error: true
 
       - name: Rename build logs
