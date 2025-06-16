@@ -60,7 +60,7 @@ namespace oomph
     set_nboundary(3);
 
     // We have only bothered to parametrise boundary 1
-    Boundary_coordinate_exists[1] = true;
+    set_boundary_coordinate_exists(1);
 
     // Allocate the store for the elements
     Element_pt.resize(3);

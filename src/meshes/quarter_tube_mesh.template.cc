@@ -60,7 +60,7 @@ namespace oomph
     set_nboundary(5);
 
     // We have only bothered to parametrise boundary 3
-    Boundary_coordinate_exists[3] = true;
+    set_boundary_coordinate_exists(3);
 
     // Allocate the store for the elements
     unsigned nelem = 3 * nlayer;

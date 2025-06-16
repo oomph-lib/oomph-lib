@@ -18,6 +18,7 @@
 # ...to be filled in...
 #
 # =============================================================================
+# cmake-format: on
 include_guard()
 
 # Where to get the code from and where to install it to
@@ -56,10 +57,12 @@ oomph_get_external_project_helper(
   GIT_REPOSITORY ${MUMPS_GIT_URL}
   GIT_TAG ${MUMPS_GIT_TAG}
   INSTALL_DIR ${MUMPS_INSTALL_DIR}
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} ${MUMPS_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -B=build
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} ${MUMPS_CMAKE_CONFIGURE_ARGS}
+                    -G=${CMAKE_GENERATOR} -B=build
   BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${OOMPH_NUM_JOBS}
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
-  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${OOMPH_NUM_JOBS} --output-on-failure)
+  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${OOMPH_NUM_JOBS}
+               --output-on-failure)
 
 # If we're building OpenBLAS, make sure we build it before we get around to
 # building MUMPS
@@ -68,4 +71,3 @@ if(TARGET openblas)
 endif()
 
 # ---------------------------------------------------------------------------------
-# cmake-format: on

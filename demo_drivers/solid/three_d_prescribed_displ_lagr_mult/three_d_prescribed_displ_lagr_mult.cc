@@ -217,7 +217,7 @@ public:
       zeta[1]=nod_pt->x(1);
       nod_pt->set_coordinates_on_boundary(b,zeta);
      }
-    this->Boundary_coordinate_exists[b]=true;
+    this->set_boundary_coordinate_exists(b);
    }
 
   }
@@ -271,7 +271,7 @@ public:
       zeta[1]=nod_pt->x(1);
       nod_pt->set_coordinates_on_boundary(b,zeta);
      }
-    this->Boundary_coordinate_exists[b]=true;
+    this->set_boundary_coordinate_exists(b);
    }
 
   }

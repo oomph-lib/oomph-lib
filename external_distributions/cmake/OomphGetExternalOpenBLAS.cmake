@@ -85,11 +85,11 @@ endif()
 set(OpenBLAS_LIBNAME "${CMAKE_STATIC_LIBRARY_PREFIX}openblas${CMAKE_STATIC_LIBRARY_SUFFIX}")
 set(OpenBLAS_LIBRARIES "${OPENBLAS_INSTALL_DIR}/lib/${OpenBLAS_LIBNAME}" CACHE PATH "" FORCE)
 
-# When OpenBLAS is installed with the CMake build system; this is different to
-# when it is installed with a package manager, where the include directory would
-# just be OpenBLAS_ROOT/include/. As of 0.3.29, this include directory is hardcoded
-# so we have to set it like below for MUMPS to work:
-set(OpenBLAS_INCLUDE_DIRS "${OPENBLAS_INSTALL_DIR}/include/openblas" CACHE PATH "" FORCE)
+# # When OpenBLAS is installed with the CMake build system; this is different to
+# # when it is installed with a package manager, where the include directory would
+# # just be OpenBLAS_ROOT/include/. As of 0.3.29, this include directory is hardcoded
+# # so we have to set it like below for MUMPS to work:
+# set(OpenBLAS_INCLUDE_DIRS "${OPENBLAS_INSTALL_DIR}/include/openblas" CACHE PATH "" FORCE)
 
 # ---------------------------------------------------------------------------------
 # cmake-format: on

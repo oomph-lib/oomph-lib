@@ -58,7 +58,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: brew install ninja fd openblas ccache && brew reinstall gcc
+        run: exit 1
+        # run: brew install ninja fd openblas ccache && brew reinstall gcc
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'

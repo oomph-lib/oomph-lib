@@ -58,9 +58,7 @@ public:
 //=================================================================
 /// A class for all elements that solve the simple one-dimensional
 /// eigenvalue problem
-/// \f[ 
-/// \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0
-/// \f] 
+/// \f[ \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0 \f]
 /// These elements are very closely related to the Poisson
 /// elements and could inherit from them. They are here developed
 /// from scratch for pedagogical purposes.
