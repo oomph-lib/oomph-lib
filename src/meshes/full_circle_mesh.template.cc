@@ -68,7 +68,7 @@ namespace oomph
     set_nboundary(1);
 
     // We have only bothered to parametrise the only boundary (boundary 0)
-    Boundary_coordinate_exists[0] = true;
+    set_boundary_coordinate_exists(0);
 
     // Allocate the store for the elements
     const unsigned nelem = 5;

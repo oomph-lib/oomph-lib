@@ -44,9 +44,7 @@ namespace oomph
 /// \f[ y = Y_c + R \sin(\zeta)  \f]
 /// The ring's vertical position \f$ Y_c \f$ is
 /// determined by "pseudo elasticity":
-/// \f[
-/// 0 = f_{load} - Y_c \ k_{stiff} 
-/// \f]
+/// \f[ 0 = f_{load} - Y_c \ k_{stiff} \f]
 /// This simulates the case where the centre of the ring is mounted on 
 /// an elastic spring of stiffness \f$ k_{stiff} \f$ and loaded by 
 /// the force \f$ f_{load}. \f$ The "load" is specified by the 

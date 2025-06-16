@@ -379,7 +379,7 @@ namespace oomph
     double c;
 
     /// Fraction of the cut-off strain rate below which the viscosity is
-    /// constant 0 <= \alpha < 1
+    /// constant 0 <= alpha < 1
     double alpha;
 
 

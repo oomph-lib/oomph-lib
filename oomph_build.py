@@ -434,6 +434,7 @@ def parse_args():
 
     # Any additional flags for oomph-lib
     oomph_group.add_argument("--oomph-extra-flags", nargs="+", metavar="FLAG", help="Additional raw CMake flags for oomph-lib (e.g. -DXYZ=VALUE).")
+
     # fmt: on
     args = parser.parse_args()
     return args

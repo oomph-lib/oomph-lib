@@ -5114,8 +5114,9 @@ namespace oomph
   /// The information will typically be used in interaction problems in
   /// which the FiniteElement provides a forcing term for an
   /// ElementWithExternalElement. The Data must be provided as
-  /// \c paired_load data containing (a) the pointer to a Data object
-  /// and (b) the index of the value in that Data object.
+  /// \c paired_load data containing
+  /// - the pointer to a Data object
+  /// - the index of the value in that Data object
   /// The generic implementation (should be overloaded in more specific
   /// applications) is to include all nodal and internal Data stored in
   /// the FiniteElement. Note that the geometric data,

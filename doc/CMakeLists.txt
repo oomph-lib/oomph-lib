@@ -93,7 +93,6 @@ set(SUBDIRS
     solid
     tar_files
     the_data_structure
-    the_distribution
     time_harmonic_fourier_decomposed_linear_elasticity
     time_harmonic_linear_elasticity
     to_be_written

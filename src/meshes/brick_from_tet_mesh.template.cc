@@ -4490,7 +4490,7 @@ namespace oomph
             // Specify boundary id in bulk mesh (needed to extract
             // boundary coordinate)
             unsigned b = (*(*bnd_pt).begin());
-            Boundary_coordinate_exists[b] = true;
+            set_boundary_coordinate_exists(b);
             face_el_pt->set_boundary_number_in_bulk_mesh(b);
 
             // Now set up the brick nodes on this face, enumerated as
@@ -9257,7 +9257,7 @@ namespace oomph
             // Specify boundary id in bulk mesh (needed to extract
             // boundary coordinate)
             unsigned b = (*(*bnd_pt).begin());
-            Boundary_coordinate_exists[b] = true;
+            set_boundary_coordinate_exists(b);
             face_el_pt->set_boundary_number_in_bulk_mesh(b);
 
             // Now set up the brick nodes on this face, enumerated as

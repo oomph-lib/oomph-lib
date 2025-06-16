@@ -5591,7 +5591,7 @@ namespace oomph
     } // if (nel > 0), from the beginning of the method
 
     // Indicate that boundary coordinate has been set up
-    Boundary_coordinate_exists[b] = true;
+    set_boundary_coordinate_exists(b);
   }
 
 

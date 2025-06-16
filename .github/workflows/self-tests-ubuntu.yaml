@@ -58,7 +58,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build ccache
+        run: exit 1
+        # run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build ccache
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'

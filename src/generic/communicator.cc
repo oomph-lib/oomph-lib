@@ -38,9 +38,9 @@ namespace oomph
 {
 #ifdef OOMPH_HAS_MPI
 
-  //=============================================================================
+  //=========================================================================
   /// A broadcast function for DenseMatrix<double>
-  //=============================================================================
+  //=========================================================================
   void OomphCommunicator::broadcast(const int& source, DenseMatrix<double>& x)
   {
     // Get number of entries on processor source (where the matrix exists)

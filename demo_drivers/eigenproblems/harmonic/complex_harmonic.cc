@@ -76,12 +76,8 @@ public:
 
 //=================================================================
 /// A class for all elements that solve the eigenvalue problem
-/// \f[ 
-/// \frac{\partial w}{\partial x}  = \lambda u
-/// \f] 
-/// \f[
-/// \frac{\partial u}{\partial x} = (\lambda - \mu) w
-/// \f]
+/// \f[  \frac{\partial w}{\partial x}  = \lambda u \f]
+/// \f[ \frac{\partial u}{\partial x} = (\lambda - \mu) w \f]
 /// This class  contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //================================================================
