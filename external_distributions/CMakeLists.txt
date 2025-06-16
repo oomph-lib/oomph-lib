@@ -127,12 +127,12 @@ include(OomphGetExternalProjectHelper)
 # --------------------------------[ GENERAL ]----------------------------------
 
 # Decide on number of jobs to use for building projects
-ProcessorCount(NUM_JOBS)
-if(NUM_JOBS EQUAL 0)
-  set(NUM_JOBS 1)
+ProcessorCount(OOMPH_NUM_JOBS)
+if(OOMPH_NUM_JOBS EQUAL 0)
+  set(OOMPH_NUM_JOBS 1)
   message(WARNING "Could not determine CPU cores. Using single job.")
 else()
-  message(STATUS "Number of jobs for parallel make: ${NUM_JOBS}")
+  message(STATUS "Number of jobs for parallel make: ${OOMPH_NUM_JOBS}")
 endif()
 
 # Where to download files from and where to install to TODO: Upload HYPRE and

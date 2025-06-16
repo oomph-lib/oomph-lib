@@ -20,10 +20,15 @@
 # =============================================================================
 include_guard()
 
-set(TRILINOS_TARBALL_URL
-    https://github.com/trilinos/Trilinos/archive/refs/tags/trilinos-release-16-0-0.tar.gz
-)
+set(TRILINOS_GIT_URL  https://github.com/trilinos/Trilinos.git)
+set(TRILINOS_GIT_TAG  trilinos-release-16-0-0)
 set(TRILINOS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/trilinos")
+
+# TODO: Handle deprecated packages more gracefully
+message(
+  WARNING
+    "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 without making the necessary oomph-lib changes to handle this."
+)
 
 # On Ubuntu, Trilinos doesn't appear to link to gfortran when using OpenBLAS,
 # resulting in error described here:
@@ -55,28 +60,12 @@ set(TRILINOS_CMAKE_CONFIGURE_ARGS
     -DTPL_LAPACK_LIBRARIES=${OpenBLAS_LIBRARIES}
     -DTPL_ENABLE_MPI=${OOMPH_ENABLE_MPI})
 
-set(DESIRED_TRILINOS_PACKAGES
-    Amesos
-    Anasazi
-    AztecOO
-    Epetra
-    EpetraExt
-    Ifpack
-    ML
-    Teuchos
-    Triutils)
-
-# TODO: Handle deprecated packages more gracefully
-message(
-  WARNING
-    "Disabling deprecated Trilinos package warnings. Do not move past v16.0.0 without making the necessary oomph-lib changes to handle this."
-)
+set(DESIRED_TRILINOS_PACKAGES Amesos Anasazi AztecOO Epetra EpetraExt Ifpack ML Teuchos Triutils)
 
 # Enable the package but disable the deprecated warning
 foreach(TPL_PACKAGE IN LISTS DESIRED_TRILINOS_PACKAGES)
   list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS -DTrilinos_ENABLE_${TPL_PACKAGE}=ON)
-  list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS
-       -D${TPL_PACKAGE}_SHOW_DEPRECATED_WARNINGS=OFF)
+  list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS -D${TPL_PACKAGE}_SHOW_DEPRECATED_WARNINGS=OFF)
 endforeach()
 
 if(OOMPH_ENABLE_MPI)
@@ -122,35 +111,28 @@ if(OOMPH_ENABLE_MPI)
   list(APPEND TRILINOS_CMAKE_CONFIGURE_ARGS -DMPI_BASE_DIR=${MPI_BASE_DIR})
 endif()
 
-
+# TODO: The TeuchosCore_TypeConversions_UnitTest and *_MPI_4 tests die on macOS. Not sure
+# how to fix this yet why so we'll just filter it out for now. Need to come back to this.
 set(CTEST_EXCLUDE_REGEX_STRING "")
 if(APPLE)
-  # TODO: The TeuchosCore_TypeConversions_UnitTest and *_MPI_4 tests die on macOS. Not sure
-  # how to fix this yet why so we'll just filter it out for now. Need to come back to this.
   set(CTEST_EXCLUDE_REGEX_STRING "(TeuchosCore_TypeConversions_UnitTest|.*_MPI_4)")
 endif()
 
 # There's an issue with one of the test files; we need to patch it
-set(PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Patch-packages-amesos-test-Test_Basic-Amesos_TestDri.patch)
-
-# Look for 'patch'
 find_program(PATCH_EXECUTABLE NAMES patch REQUIRED)
-
-# Throw an error if it's not found
-if(NOT PATCH_EXECUTABLE)
-  message(FATAL_ERROR "Error: 'patch' command not found! Please install patch (e.g., 'apt install patch' or 'brew install patch').")
-endif()
+set(PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/patches/0001-Patch-packages-amesos-test-Test_Basic-Amesos_TestDri.patch)
 
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(
   PROJECT_NAME trilinos
-  URL "${TRILINOS_TARBALL_URL}"
+  GIT_REPOSITORY ${TRILINOS_GIT_URL}
+  GIT_TAG ${TRILINOS_GIT_TAG}
   INSTALL_DIR "${TRILINOS_INSTALL_DIR}"
   PATCH_COMMAND ${PATCH_EXECUTABLE} -p1 -i ${PATCH_FILE}
   CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -G=${CMAKE_GENERATOR} ${TRILINOS_CMAKE_CONFIGURE_ARGS} -B=build
-  BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${NUM_JOBS}
+  BUILD_COMMAND ${CMAKE_COMMAND} --build build
   INSTALL_COMMAND ${CMAKE_COMMAND} --install build
-  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${NUM_JOBS} --output-on-failure --verbose -E "${CTEST_EXCLUDE_REGEX_STRING}")
+  TEST_COMMAND ${CMAKE_CTEST_COMMAND} --test-dir build -j ${OOMPH_NUM_JOBS} --output-on-failure --verbose -E "${CTEST_EXCLUDE_REGEX_STRING}")
 
 # Trilinos depends on OpenBLAS. If we're building OpenBLAS ourselves then we
 # need to make sure that it gets built before Trilinos

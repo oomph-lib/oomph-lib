@@ -4,8 +4,7 @@
 SUBDIRS=
 
 # Extra files for distribution
-EXTRA_DIST=\
-archived_discretisations
+EXTRA_DIST=
 
 #---------------------------------------------------------------------------
 # Define the headers
