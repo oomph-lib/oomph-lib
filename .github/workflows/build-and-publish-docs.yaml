@@ -44,6 +44,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: "gh-pages" # The branch the action should deploy to.
+          BRANCH: ${{ github.event.inputs.publishBranch }} # The branch the action should deploy to.
           FOLDER: build/website # The folder the action should deploy.
           CLEAN: true
