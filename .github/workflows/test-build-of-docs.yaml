@@ -2,6 +2,10 @@ name: Test build of docs
 
 on:
   push:
+    # Never run on main
+    branches-ignore:
+      - main
+    # but on any other branch watch for changes to these paths
     paths:
       - ".github/workflows/test-build-of-docs.yaml"
       - "demo_drivers/**"
