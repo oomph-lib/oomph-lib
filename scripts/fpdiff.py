@@ -1,57 +1,37 @@
 #!/usr/bin/env python3
 
 import sys
+import gzip
+import math
+import re
+from typing import List
 
 
-def gettype(a):
+def get_type(a: str) -> int:
     """ Distinguish between a number and a string:
 
         Returns integer 1 if the argument is a number,
                         2 if the argument is a string.
     """
-    import re
-    type1 = re.compile(
-        "(^[+-]?[0-9]*[.]?[0-9]+$)|(^[+-]?[0-9]+[.]?[0-9]*$)|(^[+-]?[0-9]?[.]?[0-9]+[EeDd][+-][0-9]+$)")
-    if type1.match(a):
-        return 1
-    else:
-        return 2
+    pattern = re.compile(r"^[+-]?(?:\d*\.\d+|\d+\.\d*|\d+)(?:[EeDd][+-]?\d+)?$")
+    return 1 if pattern.match(a) else 2
 
 
-def stuff(string, symbol, number):
-    """ Add number copies of symbol to  string
-
-        Returns modified string.
-    """
-    for i in range(number):
-        string += symbol
-    string += " "
-    return string
+def append_symbols(string: str, symbol: str, count: int) -> str:
+    """Append a given number of symbols to the string followed by a space."""
+    return string + (symbol * count) + " "
 
 
-def read_file(filename):
-    """ Read file into a list of strings, uncluding direct reading of ".gz" files
-    Different operations required for gzip files in Python 3 because they are
-    read as binary (rather than text) files
-    """
-    import gzip
-
-    # If the first file is a gzipped file, open it via the gzip module
-    if(filename.find(".gz") != -1):
-        F = gzip.open(filename)
-        filedata = [l.decode() for l in F.readlines()]
-        F.close()
-    # Otherwise open as normal
-    else:
-        F = open(filename)
-        filedata = F.readlines()
-        F.close()
-
-    return filedata
+def read_file(filename: str) -> List[str]:
+    """Read file into a list of strings, supporting gzip files."""
+    if filename.endswith(".gz"):
+        with gzip.open(filename, "rt") as f:
+            return f.readlines()
+    with open(filename, "r", encoding="utf-8") as f:
+        return f.readlines()
 
 
-def fpdiff_helper(filename1, filename2, relative_error, small,
-                  outstream, details_stream):
+def fpdiff_helper(filename1, filename2, relative_error, small, outstream, details_stream):
     """ Calculate the floating-point difference between two data files.
         The idea is to use a looser tolerance than the UNIX diff command,
         so that if two entries have a relative error less than the argument
@@ -72,229 +52,144 @@ def fpdiff_helper(filename1, filename2, relative_error, small,
         (i.e. what "small" would need to be set as for there to be no
         differences).
     """
+    # Load the files, the rearrange so the first file has more lines than the second
+    (file1, file2) = (read_file(filename1), read_file(filename2))
+    (n1, n2) = (len(file1), len(file2))
+    (file1, file2, n) = (file1, file2, n2) if (n1 >= n2) else (file2, file1, n1)
 
-    import math
-
-    # Storage for worst case error sizes
-    max_rel_diff = 0
-    max_wrong_entry = 0
-
-    # Open the files (if run as a script then open failures are handled higher
-    # up by catching the error, otherwise it is the parent program's job to
-    # handle the error and so we shouldn't do anything weird here).
-    tmpfile1 = read_file(filename1)
-    tmpfile2 = read_file(filename2)
-
-    # Find the number of lines in each file
-    n1 = len(tmpfile1)
-    n2 = len(tmpfile2)
-
-    # If file1 has more lines than file2, keep order the same
-    if n1 >= n2:
-        file1 = tmpfile1
-        file2 = tmpfile2
-        n = n2
-    # Otherwise swap the order of the files
-    else:
-        file1 = tmpfile2
-        file2 = tmpfile1
-        n = n1
-
-    # Counter for the number of errors
-    nerr = 0
-    # Counter for the number of lines
-    count = -1
-    # Counter for the number of lines with errors
-    nline_error = 0
+    # Storage for worst case error sizes, number of errors and number of lines with errors
+    (max_rel_diff, max_wrong_entry, nerr, nline_error) = (0, 0, 0, 0)
 
     # Loop over the lines in file1 (the file with the most lines!)
-    for line1 in file1:
-        # Increase the counter
-        count += 1
+    for (count, line1) in enumerate(file1):
         # If we've run over the end of the file2, issue a warning and end the loop
         if count >= n:
-            details_stream.write(
-                "\nWarning: files have different numbers of lines")
-            details_stream.write(
-                "\nResults are for first %d lines of both files\n" % count)
+            details_stream.write("\nWarning: files have different numbers of lines")
+            details_stream.write(f"\nResults are for first {count} lines of both files\n")
             nerr += 1
             break
-        # Read the next line from file2
+
+        # Read the next line from file2. If the lines are the same, we're done
         line2 = file2[count]
-
-        # If the lines are the same, we're done
-        if(line1 == line2):
+        if line1 == line2:
             continue
-        # If not need to do more work
-        else:
-            # Split each line into its separate fields
-            fields1 = line1.split()
-            fields2 = line2.split()
-            # Find the number of fields in each line
-            nfields1 = len(fields1)
-            nfields2 = len(fields2)
 
-            # If the number of fields is not the same, report it as an error
-            if nfields1 != nfields2:
-                details_stream.write("\n =====> line %d: different number of fields\n"
-                                     % (count+1))
-                details_stream.write("%s fields: %s" % (nfields1, line1))
-                details_stream.write("%s fields: %s" % (nfields2, line2))
-                nerr += 1
+        # Split each line into its separate fields then find the number of fields in each
+        # line. If the number of fields is not the same, report it as an error
+        (fields1, fields2) = (line1.split(), line2.split())
+        (nfields1, nfields2) = (len(fields1), len(fields2))
+        if nfields1 != nfields2:
+            details_stream.write(f"\n =====> line {count+1}: different number of fields\n")
+            details_stream.write(f"{nfields1} fields: {line1}")
+            details_stream.write(f"{nfields2} fields: {line2}")
+            nerr += 1
+            continue
+
+        # Otherwise, we now compare field by field
+
+        # Flag to indicate whether there has been a problem in the field
+        problem = 0
+        # Strings that will hold the output data
+        (outputline1, outputline2, outputline3) = ("", "", "")
+
+        # Loop over the fields
+        for (f1, f2) in zip(fields1, fields2):
+            max_len = max(len(f1), len(f2))
+            outputline1 += f1.ljust(max_len) + " "
+            outputline3 += f2.ljust(max_len) + " "
+
+            # If the fields are identical, we are fine
+            if f1 == f2:
+                # Put spaces into the error line
+                outputline2 = append_symbols(outputline2, " ", max_len)
                 continue
 
-            # Otherwise, we now compare field by field
-            else:
-                # Flag to indicate whether there has been a problem in the field
-                problem = 0
-                # Strings that will hold the output data
-                outputline1 = ""
-                outputline2 = ""
-                outputline3 = ""
+            # Find the type (numeric or string) of each field
+            (type1, type2) = (get_type(f1), get_type(f2))
 
-                # Loop over the fields
-                for i in range(nfields1):
-                    # Start by loading the fields into the outputlines (plus whitespace)
-                    outputline1 += fields1[i] + " "
-                    outputline3 += fields2[i] + " "
+            # If the data-types aren't the same issue an error
+            if type1 != type2:
+                problem = 1
+                nerr += 1
+                outputline2 = append_symbols(outputline2, "*", max_len)
+                continue
 
-                    # Find the lengths of the fields
-                    length1 = len(fields1[i])
-                    length2 = len(fields2[i])
+            # If the types are both strings then report the error
+            if type1 == 2:
+                problem = 1
+                nerr += 1
+                outputline2 = append_symbols(outputline2, "%", max_len)
+                continue
 
-                    # Pad the shortest field so the lengths are the same
-                    if length1 < length2:
-                        fieldlength = length2
-                        for j in range(length2-length1):
-                            outputline1 += " "
-                    else:
-                        fieldlength = length1
-                        for j in range(length1 - length2):
-                            outputline3 += " "
+            # Convert strings to floating point number
+            x1 = float(f1.lower().replace("d", "e"))
+            x2 = float(f2.lower().replace("d", "e"))
 
-                    # If the fields are identical, we are fine
-                    if fields1[i] == fields2[i]:
-                        # Put spaces into the error line
-                        outputline2 = stuff(outputline2, " ", fieldlength)
-                    # Otherwise time for yet more analysis
-                    else:
-                        # Find the type (numeric or string) of each field
-                        type1 = gettype(fields1[i])
-                        type2 = gettype(fields2[i])
+            # If both numbers are very small, that's fine
+            if (math.fabs(x1) <= small) and (math.fabs(x2) <= small):
+                # Put spaces into the error line
+                outputline2 = append_symbols(outputline2, " ", max_len)
+                continue
 
-                        # If the data-types aren't the same issue an error
-                        if type1 != type2:
-                            problem = 1
-                            nerr += 1
-                            # Put the appropriate symbol into the error line
-                            outputline2 = stuff(outputline2, "*", fieldlength)
-                        # Otherwise more analysis
-                        # If the types are both strings then report the error
-                        elif type1 == 2:
-                            problem = 1
-                            nerr += 1
-                            # Put the appropriate symbol into the error line
-                            outputline2 = stuff(outputline2, "%", fieldlength)
-                        else:
-                            # Convert strings to floating point number
-                            x1 = float(fields1[i].lower().replace("d", "e"))
-                            x2 = float(fields2[i].lower().replace("d", "e"))
+            # Find the relative difference based on the largest number
+            # Note that this "minimises" the relative error (in some sense)
+            # but means that I don't have to separately trap the cases
+            # when x1, x2 are zero
+            diff = 100.0 * (math.fabs(x1 - x2) / max(math.fabs(x1), math.fabs(x2)))
 
-                            # If both numbers are very small, that's fine
-                            if math.fabs(x1) <= small and math.fabs(x2) <= small:
-                                # Put spaces into the error line
-                                outputline2 = stuff(
-                                    outputline2, " ", fieldlength)
-                            else:
-                                # Find the relative difference based on the largest number
-                                # Note that this "minimises" the relative error (in some sense)
-                                # but means that I don't have to separately trap the cases
-                                # when x1, x2 are zero
-                                if math.fabs(x1) > math.fabs(x2):
-                                    diff = 100.0 * \
-                                        (math.fabs(x1 - x2) / math.fabs(x1))
-                                else:
-                                    diff = 100.0 * \
-                                        (math.fabs(x1 - x2) / math.fabs(x2))
+            # If the relative error is smaller than the tolerance, that's fine
+            if diff <= relative_error:
+                outputline2 = append_symbols(outputline2, " ", max_len)
+                continue
 
-                                # If the relative error is smaller than the tolerance, that's fine
-                                if diff <= relative_error:
-                                    # Put spaces into the error line
-                                    outputline2 = stuff(
-                                        outputline2, " ", fieldlength)
-                                # Otherwise issue an error
-                                else:
-                                    problem = 1
-                                    nerr += 1
-                                    # Put the appropriate symbols into the error line
-                                    outputline2 = stuff(
-                                        outputline2, "-", fieldlength)
+            # Otherwise issue an error
+            problem = 1
+            nerr += 1
+            outputline2 = append_symbols(outputline2, "-", max_len)
 
-                                    # Record any changes in the worst case values
-                                    if diff > max_rel_diff:
-                                        max_rel_diff = diff
+            # Track worst case values
+            max_rel_diff = max(diff, max_rel_diff)
+            max_wrong_entry = max(max_wrong_entry, max(math.fabs(x1), math.fabs(x2)))
 
-                                    if math.fabs(x1) > max_wrong_entry:
-                                        max_wrong_entry = math.fabs(x1)
-                                    elif math.fabs(x2) > max_wrong_entry:
-                                        max_wrong_entry = math.fabs(x2)
+        # If there has been any sort of error, print it
+        if problem == 1:
+            nline_error += 1
+            details_stream.write(f"\n =====> line {count+1}\n")
+            details_stream.write(f"{outputline1}\n")
+            details_stream.write(f"{outputline2}\n")
+            details_stream.write(f"{outputline3}\n")
 
-            # If there has been any sort of error, print it
-            if problem == 1:
-                nline_error += 1
-                details_stream.write("\n =====> line %d\n" % (count+1))
-                details_stream.write("%s\n%s\n%s\n" %
-                                     (outputline1, outputline2, outputline3))
-
-    # Final print out, once loop over lines is complete
     if nerr > 0:
-        outstream.write("\n In files %s %s" % (filename1, filename2))
-        outstream.write("\n number of lines processed: %d" % count)
-        outstream.write(
-            "\n number of lines containing errors: %d" % nline_error)
-        outstream.write("\n number of errors: %d " % nerr)
-        outstream.write("\n largest relative error: %g " % max_rel_diff)
-        outstream.write("\n largest abs value of an entry which caused an error: %g "
-                        % max_wrong_entry)
-        outstream.write(
-            "\n========================================================")
+        outstream.write(f"\n In files {filename1} {filename2}")
+        outstream.write(f"\n number of lines processed: {count}")
+        outstream.write(f"\n number of lines containing errors: {nline_error}")
+        outstream.write(f"\n number of errors: {nerr} ")
+        outstream.write(f"\n largest relative error: {max_rel_diff} ")
+        outstream.write(f"\n largest abs value of an entry which caused an error: {max_wrong_entry}")
+        outstream.write("\n========================================================")
         outstream.write("\n    Parameters used:")
-        outstream.write("\n        threshold for numerical zero : %g" % small)
-        outstream.write(
-            "\n        maximum rel. difference [percent] : %g" % relative_error)
+        outstream.write(f"\n        threshold for numerical zero : {small}")
+        outstream.write(f"\n        maximum rel. difference [percent] : {relative_error}")
         outstream.write("\n    Legend: ")
-        outstream.write(
-            "\n        *******  means differences in data type (string vs number)")
-        outstream.write(
-            "\n        -------  means real data exceeded the relative difference maximum")
-        outstream.write(
-            "\n        %%%%%%%  means that two strings are different")
-        outstream.write(
-            "\n========================================================")
+        outstream.write("\n        *******  means differences in data type (string vs number)")
+        outstream.write("\n        -------  means real data exceeded the relative difference maximum")
+        outstream.write("\n        %%%%%%%  means that two strings are different")
+        outstream.write("\n========================================================")
         outstream.write("\n\n   [FAILED]\n")
-        # Return failure
-        return 2, max_rel_diff, max_wrong_entry
-
+        return (2, max_rel_diff, max_wrong_entry)
     else:
-        outstream.write("\n\n In files %s %s" % (filename1, filename2))
-        outstream.write(
-            "\n   [OK] for fpdiff.py parameters: - max. rel. error = %g " % relative_error)
-        outstream.write("%")
-        outstream.write(
-            "\n                                  - numerical zero  = %g\n" % small)
-        # Return success
-        return 0, max_rel_diff, max_wrong_entry
+        outstream.write(f"\n\n In files {filename1} {filename2}")
+        outstream.write(f"\n   [OK] for fpdiff.py parameters: - max. rel. error = {relative_error} ")
+        outstream.write(f"\n                                  - numerical zero  = {small}\n")
+        return (0, max_rel_diff, max_wrong_entry)
 
 
-def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14,
-           outstream=sys.stdout, details_stream=sys.stdout):
+def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14, outstream=sys.stdout, details_stream=sys.stdout):
     """Wrapper for using fpdiff inside python. Has default args and returns a
     bool."""
-    ok, max_rel_diff, max_wrong_entry = \
-        fpdiff_helper(filename1, filename2, relative_error, small,
-                      outstream, details_stream)
-
-    return (ok == 0), max_rel_diff, max_wrong_entry
+    results = fpdiff_helper(filename1, filename2, relative_error, small, outstream, details_stream)
+    (ok, max_rel_diff, max_wrong_entry) = results
+    return ((ok == 0), max_rel_diff, max_wrong_entry)
 
 
 def run_as_script(argv):
@@ -318,14 +213,11 @@ def run_as_script(argv):
     # If we're out of range, issue a usage message
     if narg < 2 or narg > 4:
         sys.stdout.write("\n      *********   ERROR   **********\n")
-        sys.stdout.write(
-            "\nMust specify 2, 3 or 4 keywords on the command line. ")
-        sys.stdout.write("You have specified %d" % narg)
+        sys.stdout.write("\nMust specify 2, 3 or 4 keywords on the command line. ")
+        sys.stdout.write(f"\nYou have specified {narg}")
         sys.stdout.write("\n   Proper usage:  ")
-        sys.stdout.write(
-            "\n         fpdiff file1 file2 [max_rel_diff_percent] [small]\n")
-        sys.stdout.write(
-            "\n      *********  PROGRAM TERMINATING   ***********")
+        sys.stdout.write("\n         fpdiff file1 file2 [max_rel_diff_percent] [small]\n")
+        sys.stdout.write("\n      *********  PROGRAM TERMINATING   ***********")
         sys.stdout.write("\n   [FAILED] \n")
         sys.exit(4)
 
@@ -335,32 +227,16 @@ def run_as_script(argv):
         if narg == 4:
             small = float(argv[3])
 
-    # Run the diff
+    # Run the diff and if there is an IO error then fail with a useful message
     try:
-        error_code, _, _ = fpdiff_helper(argv[0], argv[1], maxreld, small,
-                                         sys.stdout, sys.stdout)
-
-    # If there has been an IO error then fail with a useful message
-    except IOError:
-
-        # Get the exception that was raised
-        _, err, _ = sys.exc_info()
-        # We have to get exceptions manually using this function instead of the
-        # usual `except IOError as err:` or `except IOError, err:` for
-        # compatibility with both the ancient version of python on the wulfling
-        # and python3+.
-
-        # Write the message
-        sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
-                         % (err.errno, err.strerror, err.filename))
-
+        (error_code, _, _) = fpdiff_helper(argv[0], argv[1], maxreld, small, sys.stdout, sys.stdout)
+    except IOError as err:
+        sys.stdout.write(f"\n   [FAILED] I/O error({err.errno}): {err.strerror} \"{err.filename}\"\n")
         return 5
-
     return error_code
 
 
 # What to do if this is run as a script, rather than loaded as a module
 if __name__ == "__main__":
-
     # Run and return whether it succeeded or not
     sys.exit(run_as_script(sys.argv))

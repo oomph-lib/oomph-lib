@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered unsteady_vmtk_fsi subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(unsteady_vmtk_fsi C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -36,8 +47,7 @@ oomph_add_test(
              solid.1.face
              solid.1.node
              solid_quadratic_nodes.dat
-             boundary_enumeration.dat
-  LABELS interaction unsteady_vmtk_fsi)
+             boundary_enumeration.dat)
 
 message(VERBOSE "Leaving unsteady_vmtk_fsi subdirectory")
 # ------------------------------------------------------------------------------

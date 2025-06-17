@@ -28,8 +28,8 @@ for dir in `echo $dir_names_list`; do
     cd $root_dir
     rm combined_mine.vtu
     rm  combined_other.vtu
-    ln -s $root_dir/$dir"/combined.vtu" combined_mine.vtu
-    ln -s $other_root_dir/$dir"/combined.vtu" combined_other.vtu
+    ln -sf $root_dir/$dir"/combined.vtu" combined_mine.vtu
+    ln -sf $other_root_dir/$dir"/combined.vtu" combined_other.vtu
     paraview --state=compare.pvsm
 
 done

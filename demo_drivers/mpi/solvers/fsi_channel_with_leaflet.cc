@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -670,7 +670,8 @@ public :
     new NavierStokesSchurComplementPreconditioner(problem_pt);
 
    // Create the Solid preconditioner
-   Solid_preconditioner_pt = new ExactPreconditioner;
+   Solid_preconditioner_pt =
+    ExactPreconditionerFactory::create_exact_preconditioner();
 
    // Create the matrix-vector product operator
    Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;

@@ -16,7 +16,7 @@ mkdir Validation
 
 cd Validation
 
-ln -s ../short_coarse_mesh_files
+ln -sf ../short_coarse_mesh_files
 
 
 # Validation for quadratic mesh smoothing

@@ -22,6 +22,7 @@ with section("parse"):
         "oomph_add_test": {
             "flags": [
                 "SILENCE_MISSING_VALIDATA_WARNING",
+                "ASSUME_PURE_CMAKE_TARGET_NAME",
             ],
             "kwargs": {
                 "TEST_NAME": 1,
@@ -111,7 +112,7 @@ with section("parse"):
         },
         "oomph_generate_doc_from": {
             "flags": [
-                "BUILD_DOCS_TARGET",
+                "DEFINE_BUILD_DOCS_TARGET_IN_CURRENT_SCOPE",
                 "BUILD_DOXY_HEADER_TARGET",
                 "SUPPRESS_LATEX_IN_THIS_DIRECTORY",
             ],
@@ -163,12 +164,19 @@ with section("parse"):
             "kwargs": {
                 "PROJECT_NAME": 1,
                 "URL": 1,
+                "URL_HASH": 1,
+                "GIT_REPOSITORY": 1,
+                "GIT_TAG": 1,
+                "GIT_SUBMODULES_RECURSE": 1,
                 "INSTALL_DIR": 1,
+                "GIT_SUBMODULES": "*",
+                "CMAKE_ARGS": "*",
                 "PATCH_COMMAND": "*",
                 "CONFIGURE_COMMAND": "*",
                 "BUILD_COMMAND": "*",
                 "INSTALL_COMMAND": "*",
                 "TEST_COMMAND": "*",
+                "BUILD_BYPRODUCTS": "*",
                 "INSTALL_BYPRODUCTS": "*",
                 "CMAKE_CACHE_ARGS": "*",
             },

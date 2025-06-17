@@ -1,19 +1,30 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE
         "Entered deliberately_broken_code_for_self_test_test subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(deliberately_broken_code_for_self_test_test C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 # Make sure we get warned about unused variables
 oomph_add_executable(NAME code_with_warning SOURCES code_with_warning.cc)
 set(CODE_WITH_WARNING_TARGET)
-oomph_get_hashed_target_name(code_with_warning CODE_WITH_WARNING_TARGET)
+oomph_get_target_name(code_with_warning CODE_WITH_WARNING_TARGET)
 target_compile_options(${CODE_WITH_WARNING_TARGET} PRIVATE -Wunused-variable)
 
 # Define the executable the normal way but just make sure we avoid building the
@@ -32,8 +43,7 @@ oomph_add_test(
     self_test.deliberately_broken_code_for_self_test_test.code_with_warning
   DEPENDS_ON code_with_warning
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS deliberately_broken_code_for_self_test_test code_with_warning)
+  TEST_FILES validate.sh validata)
 
 # Just try to build the driver code
 add_test(

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -2148,7 +2148,7 @@ void AirwayReopeningProblem<ELEMENT>::parameter_study(const unsigned& nsteps,
  double fraction = 0.45;*/
 
  // Open trace file
- char filename[100], dumpfile[100];   
+ char filename[100], dumpfile[500];   
  snprintf(filename, sizeof(filename), "%s/trace.dat",doc_info.directory().c_str());
  Trace_file.open(filename);
 

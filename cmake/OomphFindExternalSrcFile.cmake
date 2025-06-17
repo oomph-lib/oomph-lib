@@ -31,6 +31,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_find_external_src_file)
   # Define the supported set of keywords. The value of PREFIX will be prepended
   # to each keyword after passing through cmake_parse_arguments(...).
@@ -130,3 +131,4 @@ function(oomph_find_external_src_file)
   # previous call will be used (which we don't want!)
   unset(PATH_TO_FILE CACHE)
 endfunction()
+# ------------------------------------------------------------------------------

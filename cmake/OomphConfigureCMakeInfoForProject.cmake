@@ -1,7 +1,4 @@
-# ==============================================================================
-# Modified version of the file here:
-# https://github.com/pablospe/cmake-example-library/blob/master/cmake/SetEnv.cmake
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # Print the logo
 file(READ "${CMAKE_CURRENT_LIST_DIR}/AsciiLogo.txt" ASCII_OOMPH_LIB_LOGO)
 message("${ASCII_OOMPH_LIB_LOGO}")
@@ -16,10 +13,10 @@ endif()
 
 # If the user hasn't specified a custom installation path, we're going to
 # install to the install/ subdirectory. However, if the user builds with the
-# flag -DENABLE_INSTALL_AS_SUPERUSER=ON to force us to use the default system
-# install path
+# flag -DOOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON to force us to use the default
+# system install path
 if(PROJECT_IS_TOP_LEVEL
-   AND (NOT ENABLE_INSTALL_AS_SUPERUSER)
+   AND (NOT OOMPH_ALLOW_INSTALL_AS_SUPERUSER)
    AND (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT))
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH
       "Default installation path" FORCE)
@@ -37,6 +34,9 @@ if(PROJECT_IS_TOP_LEVEL)
   set(OOMPH_IS_MAIN_PROJECT TRUE)
 endif()
 
+# Emit a compile_commands.json; can be used by clang-tidy for code analysis
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 # ------------------------------------------------------------------------------
 # Configuration variables; create custom variables to avoid issues with regular
 # variables being overriden by third-party libraries or by parties that import
@@ -45,9 +45,7 @@ endif()
 # cmake-format: off
 
 # The project directory; passed to consumers of the exported library in case they
-# need to use anything from there, e.g. the demo_drivers nearly all need the
-# fpdiff.py script from the scripts/ subdirectory.
-# FIXME: Change this as we will be installing the fpdiff.py file...
+# need to use anything from there
 set(OOMPH_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 # Define the key files we need to install
@@ -92,7 +90,7 @@ set(PROJECT_NAMESPACE oomph)
 # Storage for the list of libraries exported by oomph-lib
 set(OOMPHLIB_LIBRARIES CACHE INTERNAL "" FORCE)
 
-# Storage for the list of libraries exported by oomph-lib
+# Storage for key configuration variables used by oomph-lib
 set(OOMPH_CONFIG_VARS
     CMAKE_BUILD_TYPE
     BUILD_SHARED_LIBS
@@ -112,6 +110,5 @@ set(CMAKE_MINSIZEREL_POSTFIX "mr")
 
 # Set the export target for libraries built by oomph-lib
 set(TARGETS_EXPORT_NAME ${PROJECT_NAME}Exports)
-
-# cmake-format: on
 # ------------------------------------------------------------------------------
+# cmake-format: on

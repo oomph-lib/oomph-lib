@@ -23,6 +23,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_target_silence_warnings)
   # Define the supported set of keywords
   set(PREFIX ARG)
@@ -98,3 +99,4 @@ function(oomph_target_silence_warnings)
     endif()
   endforeach()
 endfunction()
+# ------------------------------------------------------------------------------

@@ -65,7 +65,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/oomphlibUninstall.cmake"
 
 # The list of modules to copy to the build directory
 set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
-    "${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphGetTargetName.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddPureCppTest.cmake"
@@ -74,19 +74,16 @@ set(OOMPH_FILES_TO_COPY_TO_BUILD_DIR
 
 # The list of modules to distribute with the library
 set(OOMPH_FILES_TO_INSTALL_TO_CMAKE_DIR
-    "${CMAKE_CURRENT_LIST_DIR}/FindGMP.cmake"
-    "${CMAKE_CURRENT_LIST_DIR}/FindMPFR.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/FindGKlib.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/FindMETIS.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/FindParMETIS.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/FindSuperLU_DIST.cmake"
-    "${CMAKE_CURRENT_LIST_DIR}/OomphGetHashedTargetName.cmake"
+    "${CMAKE_CURRENT_LIST_DIR}/OomphGetTargetName.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddExecutable.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphAddPureCppTest.cmake"
     "${CMAKE_CURRENT_LIST_DIR}/OomphDefineTestData.cmake"
-    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake"
-    "${OOMPH_ROOT_DIR}/scripts/fpdiff.py")
+    "${CMAKE_CURRENT_LIST_DIR}/OomphEnableCodeCoverage.cmake")
 
 # Copy files to the build directory at configure-time
 foreach(MODULE IN LISTS OOMPH_FILES_TO_COPY_TO_BUILD_DIR)

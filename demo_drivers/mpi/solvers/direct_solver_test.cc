@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -282,10 +282,6 @@ int main(int argc, char **argv)
  //Number of elements
  unsigned n_element=40;
 
- // global distribution
- // LinearAlgebraDistribution 
- //  distributed_dist(problem.communicator_pt(),ndof,true);
-
  // the doc info
  DocInfo doc_info;
  doc_info.set_directory("RESLT");
@@ -295,7 +291,6 @@ int main(int argc, char **argv)
  // SuperLU_dist Test
  //////////////////////////////////////////////////////////////////////////////
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (global)
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -321,7 +316,6 @@ int main(int argc, char **argv)
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_global.dat");
  }
 
- // MATRIX BASED SOLVE / CRDoubleMatrix (distributed)
  {
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"

@@ -3,6 +3,14 @@
 name: oomph-lib self-tests (Ubuntu)
 
 on:
+  # IMPORTANT: A schedule workflow action *must* be placed on the default branch
+  # of the repository. Only then will it run as scheduled. It is also placed in a
+  # queue when scheduled, so it may not run exactly at the requested time.
+  schedule:
+    # Calculated using crontab.guru. See here:
+    #     https://crontab.guru/#1_0_1_1_*.
+    # Every month on the first at midnight UTC
+    - cron: "0 0 1 * *"
   push:
     paths:
       # Only run the self-tests if we edited the demo drivers, sources, third-party
@@ -10,21 +18,21 @@ on:
       - ".github/workflows/self-tests-ubuntu.yaml"
       - "cmake/**"
       - "CMakeLists.txt"
+      - "CMakePresets.json"
       - "demo_drivers/**"
       - "external_distributions/CMakeLists.txt"
       - "external_distributions/cmake/**"
       - "external_src/**"
+      - "oomph_build.py"
       - "scripts/**"
       - "src/**"
-      # Don't run self-tests if we've just edited a Makefile.am
+      - "!**/.gitignore"
+      - "!**/README.md"
       - "!**/Makefile.am"
 
 # Environment variables that can be read during jobs
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  # Enable oversubscription for OpenMPI to handle MPI-enabled tests requiring
-  # more processors than are available
-  OMPI_MCA_rmaps_base_oversubscribe: 1
 
 # ------------------------------------------------------------------------------
 
@@ -40,7 +48,7 @@ jobs:
           ]
         build_third_party_libs: ["OFF", "ON"]
 
-    name: All self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
+    name: Ubuntu self-tests (MPI=${{ matrix.build_info.enable_mpi }}; TPL=${{matrix.build_third_party_libs}})
     runs-on: ubuntu-latest
     steps:
       # -------------------
@@ -50,11 +58,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get install -y gfortran ninja-build python2
+        run: sudo apt-get update && sudo apt-get install -y gfortran ninja-build ccache
 
       - name: Install MPI dependencies (if required)
         if: matrix.build_info.enable_mpi == 'ON'
-        run: sudo apt-get install openmpi-bin libopenmpi-dev
+        run: sudo apt-get install openmpi-bin libopenmpi-dev ccache
+
+      - name: Configure ccache
+        run: |
+          echo "CCACHE_DIR=${{ github.workspace }}/.oomph-build-cache" >> "$GITHUB_ENV"
+          echo "CCACHE_MAXSIZE=500M" >> "$GITHUB_ENV"
+          echo "CCACHE_COMPRESS=true" >> "$GITHUB_ENV"
+          ccache -z  # Reset statistics
+
+      - name: Restore CCache
+        uses: actions/cache/restore@v4
+        id: ccache-cache
+        with:
+          path: ${{ github.workspace }}/.oomph-build-cache
+          key: ccache-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Get CMake v3.24
         uses: lukka/get-cmake@latest
@@ -64,50 +86,90 @@ jobs:
       - name: Check CMake version
         run: cmake --version
 
+      # If these dependencies change, we'll need to rebuild the third-party libraries. Note
+      # that we won't need to rebuild if, e.g. ninja changes
+      - name: Get dependency versions
+        id: deps
+        run: |
+          dpkg -s gfortran | grep Version | awk '{print "gfortran="$2}' > deps.txt
+          if [ "${{ matrix.build_info.enable_mpi }}" = "ON" ]; then
+            dpkg -s openmpi-bin | grep Version | awk '{print "openmpi-bin="$2}' >> deps.txt
+            dpkg -s libopenmpi-dev | grep Version | awk '{print "libopenmpi-dev="$2}' >> deps.txt
+          fi
+          echo "Dependency versions:"
+          cat deps.txt
+
+          # Compute a hash from the dependency versions
+          HASH=$(sha256sum deps.txt | cut -d ' ' -f1)
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+
       # -------------------
       # THIRD-PARTY LIBS:
       # -------------------
-      - name: Configure desired third-party libraries
-        run: |
-          cmake -G Ninja \
-            -DOOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_OPENBLAS=ON \
-            -DOOMPH_BUILD_MUMPS=ON \
-            -DOOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
-            -DOOMPH_BUILD_CGAL=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
-            -DOOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS=ON \
-            -B build
-        working-directory: ./external_distributions/
+      # Cache the external distributions. We'll use a unique cache key based on whether
+      # we enabled MPI or TPLs. NOTE: It's very important that the CMake files in
+      # external_distributions/ grab packages based on a specific tarball or GitHub tag/SHA.
+      # They must NOT just pull from main/development otherwise the hash key won't change
+      # and thus neither will the cache.
+      - name: Cache third-party libraries artifacts
+        uses: actions/cache/restore@v4
+        id: tpl-cache
+        with:
+          path: |
+            external_distributions/install
+            external_distributions/build/cmake_flags_for_oomph_lib.txt
+            external_distributions/build/cmake_flags_for_oomph_lib.json
+          key: ${{ runner.os }}-tpl-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}-${{ steps.deps.outputs.hash }}-${{ hashFiles('external_distributions/CMakeLists.txt', 'external_distributions/cmake/*.cmake') }}
 
-      - name: Build third-party libraries
-        run: cmake --build build
-        working-directory: ./external_distributions/
+      - name: Configure, build and install third-party libraries
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
+        run: |
+          python3 oomph_build.py \
+             --enable-ccache \
+             --OOMPH_ENABLE_MPI=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_BUILD_OPENBLAS=ON \
+             --ext-OOMPH_BUILD_CGAL=ON \
+             --ext-OOMPH_BUILD_SUPERLU_DIST=${{ matrix.build_info.enable_mpi }} \
+             --ext-OOMPH_BUILD_HYPRE=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_MUMPS=${{ matrix.build_third_party_libs }} \
+             --ext-OOMPH_BUILD_TRILINOS=${{ matrix.build_third_party_libs }} \
+             --no-build-oomph \
+             --verbose
+
+      - name: Rename third-party libraries build logs
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
+        run: mv ./external_distributions/build/logs ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
 
       - name: Upload third-party libraries build logs
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: tpl_build_logs-${{ runner.os }}-ALL_TPL_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}
-          path: ./external_distributions/build/logs
+          name: tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}
+          path: ./tpl_build_logs-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}/
 
       # -------------------
       # BUILD MAIN PROJECT:
       # -------------------
-      - name: Configure
-        run: cmake --preset ${{ matrix.build_info.preset }} $(cat external_distributions/build/cmake_flags_for_oomph_lib.txt) -B build
-
-      - name: Build
-        run: cmake --build build
-
-      - name: Install
-        run: cmake --install build
+      - name: Configure, build and install main project
+        run: |
+          python3 oomph_build.py \
+            --enable-ccache \
+            --oomph-OOMPH_ENABLE_MPI_OVERSUBSCRIPTION=${{ matrix.build_info.enable_mpi }} \
+            --no-build-tpl \
+            --verbose
 
       # -------------------
       # DEMO DRIVERS:
       # -------------------
       - name: Configure demo drivers
-        run: cmake -G Ninja -S demo_drivers -B demo_drivers/build --log-level=VERBOSE
+        run: |
+          cmake -G Ninja \
+            -S demo_drivers \
+            -B demo_drivers/build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            --log-level=VERBOSE
 
       - name: Run demo driver self-tests
         id: demo_drivers
@@ -117,13 +179,42 @@ jobs:
       # -------------------
       # UPLOAD STUFF:
       # -------------------
+      - name: Print CCache stats
+        run: ccache -s
+
+      - name: Cache CCache artifacts
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ${{ github.workspace }}/.oomph-build-cache
+          # We need to make the cache key unique for the run because we want to upload the
+          # updated artifacts each time and we can't overwrite a previous cache. The old
+          # caches will eventually expire after a week anyway.
+          key: ${{ steps.ccache-cache.outputs.cache-primary-key }}-${{ github.run_id }}
+
+      - name: Cache third-party libraries artifacts if we built them
+        uses: actions/cache/save@v4
+        if: steps.tpl-cache.outputs.cache-hit != 'true'
+        with:
+          path: |
+            external_distributions/install
+            external_distributions/build/cmake_flags_for_oomph_lib.txt
+            external_distributions/build/cmake_flags_for_oomph_lib.json
+          key: ${{ steps.tpl-cache.outputs.cache-primary-key }}
+
+      - name: Summarise validation.log for GitHub
+        run: python3 .github/generate_validation_log_summary.py validation.log >> $GITHUB_STEP_SUMMARY
+
+      - name: Rename validation log file
+        run: mv ./validation.log ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
+
       - name: Upload validation log file
         uses: actions/upload-artifact@v4
         with:
-          name: validation-${{ runner.os }}-THIRD_PARTY_LIBS_${{ matrix.build_third_party_libs }}-MPI_${{ matrix.build_info.enable_mpi }}.log
-          path: ./validation.log
+          name: validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
+          path: ./validation-${{ runner.os }}-MPI_${{ matrix.build_info.enable_mpi }}-TPL_${{ matrix.build_third_party_libs }}.log
 
       - name: Propagate CTest test status
-        if: steps.self_tests.outcome == 'failure' || steps.demo_drivers.outcome == 'failure'
+        if: steps.demo_drivers.outcome == 'failure'
         run: exit 8
 # ------------------------------------------------------------------------------

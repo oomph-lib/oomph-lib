@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered locate_zeta subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(locate_zeta C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -37,8 +48,7 @@ oomph_add_test(
              locate_zeta_tester_triangle locate_zeta_tester_tetgen
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
   TEST_FILES validate.sh validata cube_hole.1.node cube_hole.1.ele
-             cube_hole.1.face
-  LABELS locate_zeta)
+             cube_hole.1.face)
 
 message(VERBOSE "Leaving locate_zeta subdirectory")
 # ------------------------------------------------------------------------------

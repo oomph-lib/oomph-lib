@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -316,6 +316,8 @@ private:
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
 {
+  // Override default solver tolerance
+  Newton_solver_tolerance = 1.0e-10;
 
  // Create timesteppers
  Solid_time_stepper_pt = new NewmarkBDF<2>;

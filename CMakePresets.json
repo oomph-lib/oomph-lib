@@ -52,25 +52,24 @@
       "name": "ci-base",
       "hidden": true,
       "inherits": "base",
-      "generator": "Ninja",
-      "cacheVariables": {}
+      "generator": "Ninja"
     },
     {
       "name": "ci",
       "inherits": "ci-base",
-      "displayName": "Build Config for CI/CD",
-      "cacheVariables": {}
+      "displayName": "Build Config for CI/CD"
     },
     {
       "name": "ci-mpi",
       "inherits": "ci-base",
       "displayName": "MPI Build Config for CI/CD",
       "cacheVariables": {
-        "OOMPH_ENABLE_MPI": "ON"
+        "OOMPH_ENABLE_MPI": "ON",
+        "OOMPH_ENABLE_MPI_OVERSUBSCRIPTION": "ON"
       }
     },
     {
-      "name": "dummy"
+      "name": "dummy-for-ci-demo-drivers"
     }
   ],
   "buildPresets": [
@@ -96,17 +95,16 @@
       "name": "test-base",
       "hidden": true,
       "output": {
-        "outputOnFailure": true,
-        "labelSummary": true
+        "outputOnFailure": true
       },
       "execution": {
-        "timeout": 10000,
+        "timeout": 3600,
         "noTestsAction": "error"
       }
     },
     {
       "name": "ci",
-      "configurePreset": "dummy",
+      "configurePreset": "dummy-for-ci-demo-drivers",
       "inherits": "test-base"
     }
   ]

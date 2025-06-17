@@ -20,24 +20,76 @@
 # =============================================================================
 include_guard()
 
-set(OPENBLAS_TARBALL_URL ${OOMPH_THIRD_PARTY_TAR_FILE_URL}/OpenBLAS-0.3.25.tar.gz)
-set(OPENBLAS_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/openblas")
+# TODO: Upload to oomph-lib repo
+set(OPENBLAS_GIT_URL https://github.com/OpenMathLib/OpenBLAS.git)
+set(OPENBLAS_GIT_TAG v0.3.29)
+set(OPENBLAS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/openblas")
 
-# Define how to configure/build/install the project
-oomph_get_external_project_helper(
-  PROJECT_NAME openblas
-  URL "${OPENBLAS_TARBALL_URL}"
-  INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
-  CONFIGURE_HANDLED_BY_BUILD
-  BUILD_COMMAND ${MAKE_EXECUTABLE} --jobs=${NUM_JOBS} CXX=${CMAKE_CXX_COMPILER}
-                CC=${CMAKE_C_COMPILER} FC=${CMAKE_Fortran_COMPILER}
-  INSTALL_COMMAND ${MAKE_EXECUTABLE} --jobs=${NUM_JOBS}
-                  PREFIX=${OPENBLAS_INSTALL_DIR} install)
+if(APPLE)
+  message(
+    FATAL_ERROR
+    "Building OpenBLAS is not currently supported on macOS. Instead, you need to "
+    "install it with a package manager, e.g. 'brew install openblas' then set "
+    "-DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas) during the project configuration "
+    "step. Adding OpenBLAS installation support on macOS is a work in progress."
+  )
+
+  # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  # We can make OpenBLAS install with the CMake build system on macOS (and I
+  # think(!)) on Linux, but the issue is with MUMPS/ScaLAPACK correctly locating
+  # the lib/include dirs afterwards. It's a bit of mess.
+  # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  # Relies on OpenBLAS 0.3.29:
+
+  # set(OPENBLAS_CMAKE_ARGS
+  #   -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+  #   -DCMAKE_INSTALL_PREFIX=${OPENBLAS_INSTALL_DIR}
+  #   -DBUILD_SHARED_LIBS=OFF
+  #   -DBUILD_WITHOUT_LAPACK=OFF
+  #   -DBUILD_WITHOUT_LAPACKE=OFF
+  #   -DBUILD_WITHOUT_CBLAS=OFF
+  #   -DBUILD_LAPACK_DEPRECATED=ON
+  #   -DBUILD_TESTING=${OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS}
+  #   -DBUILD_BENCHMARKS=OFF
+  #   -DC_LAPACK=OFF
+  #   -DDYNAMIC_ARCH=ON
+  # )
+
+  # # Define how to configure/build/install the project
+  # oomph_get_external_project_helper(
+  #   PROJECT_NAME openblas
+  #   GIT_REPOSITORY ${OPENBLAS_GIT_URL}
+  #   GIT_TAG ${OPENBLAS_GIT_TAG}
+  #   INSTALL_DIR ${OPENBLAS_INSTALL_DIR}
+  #   CONFIGURE_COMMAND ${CMAKE_COMMAND} ${OPENBLAS_CMAKE_ARGS} -G "${CMAKE_GENERATOR}" -B build
+  #   BUILD_COMMAND ${CMAKE_COMMAND} --build build -j ${OOMPH_NUM_JOBS}
+  #   INSTALL_COMMAND ${CMAKE_COMMAND} --install build)
+
+else()
+
+  # Define how to configure/build/install the project
+  oomph_get_external_project_helper(
+    PROJECT_NAME openblas
+    GIT_REPOSITORY ${OPENBLAS_GIT_URL}
+    GIT_TAG ${OPENBLAS_GIT_TAG}
+    INSTALL_DIR "${OPENBLAS_INSTALL_DIR}"
+    CONFIGURE_HANDLED_BY_BUILD
+    BUILD_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} FC=${CMAKE_Fortran_COMPILER}
+    INSTALL_COMMAND ${MAKE_EXECUTABLE} --jobs=${OOMPH_NUM_JOBS} PREFIX=${OPENBLAS_INSTALL_DIR} install)
+
+endif()
 
 # Define the global variables OpenBLAS_ROOT and OpenBLAS_LIBRARIES for MUMPS,
 # HYPRE and Trilinos to use
 set(OpenBLAS_LIBNAME "${CMAKE_STATIC_LIBRARY_PREFIX}openblas${CMAKE_STATIC_LIBRARY_SUFFIX}")
 set(OpenBLAS_LIBRARIES "${OPENBLAS_INSTALL_DIR}/lib/${OpenBLAS_LIBNAME}" CACHE PATH "" FORCE)
+
+# # When OpenBLAS is installed with the CMake build system; this is different to
+# # when it is installed with a package manager, where the include directory would
+# # just be OpenBLAS_ROOT/include/. As of 0.3.29, this include directory is hardcoded
+# # so we have to set it like below for MUMPS to work:
+# set(OpenBLAS_INCLUDE_DIRS "${OPENBLAS_INSTALL_DIR}/include/openblas" CACHE PATH "" FORCE)
 
 # ---------------------------------------------------------------------------------
 # cmake-format: on

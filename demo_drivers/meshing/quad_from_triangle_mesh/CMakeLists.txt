@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered quad_from_triangle_mesh subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(quad_from_triangle_mesh C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -46,8 +57,7 @@ oomph_add_test(
              solid.1.ele
              solid.1.node
              solid.1.poly
-             solid.poly
-  LABELS meshing quad_from_triangle_mesh)
+             solid.poly)
 
 message(VERBOSE "Leaving quad_from_triangle_mesh subdirectory")
 # ------------------------------------------------------------------------------

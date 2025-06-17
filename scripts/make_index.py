@@ -32,8 +32,8 @@ def get_key_and_link(entry):
   elif entry[1][0]=='^':
    anchor = entry[1].lstrip('^').strip().replace(' ','')
    synonym = "see entry on " + entry[1].lstrip('^').strip().replace('.',':')
-   link = "index/html/index.html#" + anchor[0].upper() + '.' + anchor 
- return (key,link,synonym)  
+   link = "index/html/index.html#" + anchor[0].upper() + '.' + anchor
+ return (key,link,synonym)
 
 #Output the key and link or cross-reference in pretty format
 def print_key(doc_root_directory,key,level,anchor):
@@ -50,7 +50,7 @@ def print_key(doc_root_directory,key,level,anchor):
   end_tag = "</h3>"
   #Uncomment to collapse anything below level 1 tags by default
   #  style = " style=\"display:none\""
- else: 
+ else:
   begin_tag = "<li>"
   end_tag = "</li>"
   #Uncomment to collapse anything below level 1 tags by default
@@ -67,11 +67,11 @@ def print_key(doc_root_directory,key,level,anchor):
  #If we don't have a link then it's a submenu heading, which we allow to
  #collapse and uncollapse by the following html magic
  #The link is to its own anchor so it shouldn't move much, but has the
- #same look as real links (In the end I found this confusing, so have removed 
+ #same look as real links (In the end I found this confusing, so have removed
  #it)
  if key[1]=='':
   print(begin_tag, anchor_string) #, \
-  #Uncomment for self anchor-tag 
+  #Uncomment for self anchor-tag
   #"\htmlonly",\
   #anchor_tag, key[0], "</a>"
   print(key[0])
@@ -104,8 +104,8 @@ def print_key(doc_root_directory,key,level,anchor):
 def nested_output(doc_root_directory,index,level=0,anchor=""):
  level += 1
  #Return when we have no subindex
- if index == []: 
-  return 
+ if index == []:
+  return
  if level>2 :
   print("<ul>")
 
@@ -153,7 +153,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
      x=1
     #Otherwise not a link so add to the subindex
     else:
-     subindex.append(entry[1:len(entry)]) 
+     subindex.append(entry[1:len(entry)])
 
  #Output final entry
  #Make unique anchor from the fields
@@ -186,7 +186,7 @@ def make_index(filename,doc_root_directory):
   entry = line.split('@')
   # Remove trailing whitespace
   out = [field.strip() for field in entry]
-  #Add stripped entries to the main list, if they have 
+  #Add stripped entries to the main list, if they have
   #Non-null first entry
   if len(out[0]) > 1:
    main_index.append(out)
@@ -223,13 +223,13 @@ def make_index(filename,doc_root_directory):
   first_letters += "<a href=" + doc_root_directory + \
   "/index/html/index.html#" + char + ">" + char + "</a>"
  first_letters += "</h1>"
- print("\htmlonly")
+ print(r"\htmlonly")
  print(first_letters)
 
  #Output the list
  nested_output(doc_root_directory,main_index)
- print("\endhtmlonly")
-  
+ print(r"\endhtmlonly")
+
 
 if __name__ == "__main__":
  import sys

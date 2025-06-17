@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -75,7 +75,8 @@ namespace oomph
         new NavierStokesSchurComplementPreconditioner(problem_pt);
 
       // Create the Solid preconditioner
-      Solid_preconditioner_pt = new ExactPreconditioner;
+      Solid_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Preconditioner hasn't been set up yet.
       Preconditioner_has_been_setup = false;
@@ -753,7 +754,8 @@ namespace oomph
     CRDoubleMatrix P_matrix = this->get_concatenated_block(selected_blocks);
 
     // Setup preconditioner (i.e. inexact solver) -- does the LU decomposition
-    Preconditioner_pt = new ExactPreconditioner;
+    Preconditioner_pt =
+      ExactPreconditionerFactory::create_exact_preconditioner();
     Preconditioner_pt->setup(&P_matrix);
   }
 

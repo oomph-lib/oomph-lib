@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered solvers subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(solvers C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -54,8 +65,7 @@ oomph_add_test(
   TEST_NAME mpi.solvers
   DEPENDS_ON ${TEST_TARGET_DEPS}
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata multi_poisson_partition.dat
-  LABELS mpi solvers)
+  TEST_FILES validate.sh validata multi_poisson_partition.dat)
 
 # Don't run this test alongside any other tests
 set_tests_properties(mpi.solvers PROPERTIES PROCESSORS ${OOMPH_MPI_NUM_PROC})

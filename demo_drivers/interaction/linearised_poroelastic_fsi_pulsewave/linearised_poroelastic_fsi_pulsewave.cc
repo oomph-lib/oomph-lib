@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -445,7 +445,6 @@ template<class FLUID_ELEMENT, class POROELASTICITY_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, POROELASTICITY_ELEMENT>::
 PressureWaveFSIProblem()
 {
-
   // Create timesteppers
  Poro_time_stepper_pt = new Newmark<2>;
  add_time_stepper_pt(Poro_time_stepper_pt);

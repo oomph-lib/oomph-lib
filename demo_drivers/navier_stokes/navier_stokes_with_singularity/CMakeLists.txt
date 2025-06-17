@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered navier_stokes_with_singularity subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(navier_stokes_with_singularity C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
   find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -48,8 +59,7 @@ oomph_add_test(
              circular_couette_without_pseudo_singularity_subtracted_off
              driven_cavity driven_cavity_without_singularity_subtracted_off
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR}
-  TEST_FILES validate.sh validata
-  LABELS navier_stokes navier_stokes_with_singularity)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving navier_stokes_with_singularity subdirectory")
 # ------------------------------------------------------------------------------

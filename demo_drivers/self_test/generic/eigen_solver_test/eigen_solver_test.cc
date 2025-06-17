@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -409,101 +409,6 @@ private:
 
 
 
-//============================================================================
-// Solve Eigenproblem Test class (Legacy version). Create an eigenproblem on a
-// templated ELEMENT and call the solve_eigenproblem function of the passed
-// eigen_solver_pt.
-//============================================================================
-template<class ELEMENT>
-class SolveEigenProblemLegacyTest
-{
-public:
-
- /// Constructor
- SolveEigenProblemLegacyTest(EigenSolver* const& eigen_solver_pt,
-                             const unsigned& N,
-                             const unsigned& n_timing_loops,
-                             DocInfo* const& doc_info_pt,
-                             bool do_adjoint_problem)
-  : Eigen_solver_pt(eigen_solver_pt),
-    Problem_pt(0),
-    Matrix_size(N),
-    N_eval(0),
-    Do_adjoint_problem(do_adjoint_problem),
-    N_timing_loops(n_timing_loops),
-    Doc_info_pt(doc_info_pt)
-  {
-   // Create Eigenproblem
-   Problem_pt = new Eigenproblem<ELEMENT>(Matrix_size);
-   
-   // Output the first 8 eigenvalues
-   N_eval = 8;
-   
-   // Store outputs
-   Vector<complex<double>> eval(N_eval);
-   Vector<DoubleVector> evec(N_eval);
-   
-   // Start clock
-   clock_t t_start = clock();
-   for (unsigned i = 0; i < N_timing_loops; i++)
-    {
-     // Call solve_eigenproblem
-     Eigen_solver_pt->solve_eigenproblem_legacy(
-      Problem_pt, N_eval, eval, evec, Do_adjoint_problem);
-    }
-   // Stop clock
-   clock_t t_end = clock();
-   
-   // Document duration
-   double t_length = (double)(t_end - t_start) / CLOCKS_PER_SEC;
-   ofstream timing_stream;
-   timing_stream.open("timing.dat", ios_base::app);
-   timing_stream << "test" << Doc_info_pt->number()
-                 << ", time: " << t_length / double(N_timing_loops) << endl;
-   timing_stream.close();
-   
-   // Document solution
-   string filename = Doc_info_pt->directory() + "test" +
-    to_string(Doc_info_pt->number()) + ".dat";
-   
-   ofstream output_stream;
-   output_stream.open(filename);
-   for (unsigned i = 0; i < N_eval; i++)
-    {
-     output_stream << eval[i].real() << " " << eval[i].imag() << endl;
-    }
-   output_stream.close();
-   
-   // Increment doc info number
-   Doc_info_pt->number()++;
-  }
- 
-private:
-
- 
- /// Eigen solver pointer
- EigenSolver* Eigen_solver_pt;
- 
- /// Eigenproblem
- Problem* Problem_pt;
-
- /// Matris size
- unsigned Matrix_size;
- 
- /// Number of eigenvalues required
- unsigned N_eval;
-
- /// Do adjoint or normal problem?
- bool Do_adjoint_problem;
- 
- /// Store the number of times the function should be call for improved timing
- unsigned N_timing_loops;
- 
- /// Pointer to doc_info
- DocInfo* Doc_info_pt;
-};
-
-
 
 //=======================================================================
 // Test the LAPACK_QZ solver against the appropriate problem and methods.
@@ -526,16 +431,6 @@ void test_lapack_qz(const unsigned N,
  SolveEigenProblemTest<AsymmetricEigenElement>(
   eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
  SolveEigenProblemTest<FixedRandomAsymmetricEigenElement>(
-  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
- 
- // Test the legacy solve_eigenproblem
- SolveEigenProblemLegacyTest<IdentityEigenElement>(
-  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
- SolveEigenProblemLegacyTest<RosserSymmetricEigenElement>(
-  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
- SolveEigenProblemLegacyTest<AsymmetricEigenElement>(
-  eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
- SolveEigenProblemLegacyTest<FixedRandomAsymmetricEigenElement>(
   eigen_solver_pt, N, n_timing_loops, doc_info_pt, do_adjoint_problem);
  
  // Free the eigen_solver_pt

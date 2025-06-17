@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -50,6 +50,11 @@ namespace oomph
   //==================================================================
   namespace HypreHelpers
   {
+    /// Number of active Hypre solvers (smart pointer like behaviuor
+    /// to make sure that the initialise/finalize functions are only
+    /// called the required number of times
+    extern unsigned Number_of_active_hypre_solvers;
+
     /// Default for AMG strength (0.25 recommended for 2D problems;
     /// larger (0.5-0.75, say) for 3D
     extern double AMG_strength;
@@ -151,6 +156,13 @@ namespace oomph
 #endif
 #endif
 
+      // Track number of instances of hypre solvers
+      if (HypreHelpers::Number_of_active_hypre_solvers == 0)
+      {
+        HYPRE_Initialize();
+      }
+      HypreHelpers::Number_of_active_hypre_solvers++;
+
       // setup the distribution
       Hypre_distribution_pt = new LinearAlgebraDistribution();
 
@@ -230,6 +242,25 @@ namespace oomph
 
       // delete teh oomph-lib distribution
       delete Hypre_distribution_pt;
+
+      // Track number of instances of hypre solvers
+      if (HypreHelpers::Number_of_active_hypre_solvers == 1)
+      {
+        HYPRE_Finalize();
+      }
+#ifdef PARANOID
+      if (HypreHelpers::Number_of_active_hypre_solvers == 0)
+      {
+        std::ostringstream error_message;
+        error_message << "What? HypreHelpers::Number_of_active_hypre_solvers = "
+                      << HypreHelpers::Number_of_active_hypre_solvers
+                      << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      HypreHelpers::Number_of_active_hypre_solvers--;
     }
 
     /// Broken copy constructor.
@@ -275,13 +306,6 @@ namespace oomph
       return Existing_preconditioner;
     }
 
-    //??ds comment, write access functions and move to protected?
-    bool AMGEuclidSmoother_use_block_jacobi;
-    bool AMGEuclidSmoother_use_row_scaling;
-    bool AMGEuclidSmoother_use_ilut;
-    unsigned AMGEuclidSmoother_level;
-    double AMGEuclidSmoother_drop_tol;
-    unsigned AMGEuclidSmoother_print_level;
 
   protected:
     /// Function deletes all solver data.
@@ -337,26 +361,75 @@ namespace oomph
     ///  AMG_complex_smoother flag are used in AMG
     bool AMG_using_simple_smoothing;
 
-    /// Simple smoothing methods used in BoomerAMG. Relaxation types
-    /// include:
-    ///  0 = Jacobi
-    ///  1 = Gauss-Seidel, sequential
-    ///      (very slow in parallel!)
-    ///  2 = Gauss-Seidel, interior points in parallel, boundary sequential
-    ///      (slow in parallel!)
-    ///  3 = hybrid Gauss-Seidel or SOR, forward solve
-    ///  4 = hybrid Gauss-Seidel or SOR, backward solve
-    ///  6 = hybrid symmetric Gauss-Seidel or SSOR
-    /// To use these methods set AMG_using_simple_smoothing to true
+    /// Simple smoothing methods used in BoomerAMG.
+    /// To use these methods set AMG_using_simple_smoothing to true.
+    /// Here are the current options (from hypre's HYPRE_parcsr_ls.h):
+    ///
+    ///  (Optional) Defines the smoother to be used. It uses the given
+    ///  smoother on the fine grid, the up and
+    ///  the down cycle and sets the solver on the coarsest level to Gaussian
+    ///  elimination (9). The default is \f$\ell_1\f$-Gauss-Seidel, forward solve (13)
+    ///  on the down cycle and backward solve (14) on the up cycle.
+    ///
+    ///  There are the following options for \e relax_type:
+    ///
+    ///     - 0  : Jacobi
+    ///     - 1  : Gauss-Seidel, sequential (very slow!)
+    ///     - 2  : Gauss-Seidel, interior points in parallel, boundary
+    ///     sequential (slow!)
+    ///     - 3  : hybrid Gauss-Seidel or SOR, forward solve
+    ///     - 4  : hybrid Gauss-Seidel or SOR, backward solve
+    ///     - 5  : hybrid chaotic Gauss-Seidel (works only with OpenMP)
+    ///     - 6  : hybrid symmetric Gauss-Seidel or SSOR
+    ///     - 7  : Jacobi (uses Matvec)
+    ///     - 8  : \f$\ell_1\f$-scaled hybrid symmetric Gauss-Seidel
+    ///     - 9  : Gaussian elimination (only on coarsest level)
+    ///     - 10 : On-processor direct forward solve for matrices with
+    ///            triangular structure
+    ///     - 11 : Two Stage approximation to GS. Uses the strict lower
+    ///            part of the diagonal matrix
+    ///     - 12 : Two Stage approximation to GS. Uses the strict lower
+    ///            part of the diagonal matrix and a second iteration
+    ///            for additional error approximation
+    ///     - 13 : \f$\ell_1\f$ Gauss-Seidel, forward solve
+    ///     - 14 : \f$\ell_1\f$ Gauss-Seidel, backward solve
+    ///     - 15 : CG (warning - not a fixed smoother - may require FGMRES)
+    ///     - 16 : Chebyshev
+    ///     - 17 : FCF-Jacobi
+    ///     - 18 : \f$\ell_1\f$-scaled jacobi
+    ///     - 19 : Gaussian elimination (old version)
+    ///     - 21 : The same as 8 except forcing serialization on CPU
+    ///     ( # OMP-thread = 1)
+    ///     - 29 : Direct solve: use Gaussian elimination & BLAS
+    ///                         (with pivoting) (old version)
+    ///     - 30 : Kaczmarz
+    ///     - 88:  The same methods as 8 with a convergent l1-term
+    ///     - 89:  Symmetric l1-hybrid Gauss-Seidel (i.e., 13 followed by 14)
+    ///     - 98 : LU with pivoting
+    ///     - 99 : LU with pivoting
+    ///     -199 : Matvec with the inverse
     unsigned AMG_simple_smoother;
 
-    /// Complex smoothing methods used in BoomerAMG. Relaxation types
-    /// are:
-    ///  6 = Schwarz
-    ///  7 = Pilut
-    ///  8 = ParaSails
-    ///  9 = Euclid
+    /// Complex smoothing methods used in BoomerAMG.
     /// To use these methods set AMG_using_simple_smoothing to false
+    /// Here are the current options (from hypre's HYPRE_parcsr_ls.h):
+    ///
+    ///    - 4 : FSAI (routines needed to set: HYPRE_BoomerAMGSetFSAIMaxSteps,
+    ///          HYPRE_BoomerAMGSetFSAIMaxStepSize,
+    ///          HYPRE_BoomerAMGSetFSAIEigMaxIters,
+    ///          HYPRE_BoomerAMGSetFSAIKapTolerance)
+    ///    - 5 : ParILUK (routines needed to set: HYPRE_ILUSetLevelOfFill,
+    ///    HYPRE_ILUSetType)
+    ///    - 6 : Schwarz (routines needed to set: HYPRE_BoomerAMGSetDomainType,
+    ///          HYPRE_BoomerAMGSetOverlap, HYPRE_BoomerAMGSetVariant,
+    ///          HYPRE_BoomerAMGSetSchwarzRlxWeight)
+    ///    - 7 : Pilut (routines needed to set: HYPRE_BoomerAMGSetDropTol,
+    ///          HYPRE_BoomerAMGSetMaxNzPerRow)
+    ///    - 8 : ParaSails (routines needed to set: HYPRE_BoomerAMGSetSym,
+    ///          HYPRE_BoomerAMGSetLevel, HYPRE_BoomerAMGSetFilter,
+    ///          HYPRE_BoomerAMGSetThreshold)
+    ///    - 9 : Euclid (routines needed to set: HYPRE_BoomerAMGSetEuclidFile)
+    ///
     unsigned AMG_complex_smoother;
 
     /// The number of smoother iterations to apply
@@ -424,9 +497,125 @@ namespace oomph
     /// 2: as 1 plus prints memory usage
     unsigned Euclid_print_level;
 
+
+    // If these are used comment and write access functions
+    bool AMGEuclidSmoother_use_block_jacobi;
+    bool AMGEuclidSmoother_use_row_scaling;
+    bool AMGEuclidSmoother_use_ilut;
+    unsigned AMGEuclidSmoother_level;
+    double AMGEuclidSmoother_drop_tol;
+    unsigned AMGEuclidSmoother_print_level;
+
     /// Used to set the Hypre printing level for the Krylov
     /// subspace solvers
     unsigned Krylov_print_level;
+
+    /// Doc parameters used in hypre solver
+    void doc_hypre_parameters()
+    {
+      oomph_info << " " << std::endl;
+      oomph_info << " " << std::endl;
+      oomph_info << "Hypre parameters:" << std::endl;
+      oomph_info << "=================" << std::endl;
+      oomph_info << "- Maximum number of iterations used in solver: Max_iter = "
+                 << Max_iter << std::endl;
+
+      oomph_info << "- Tolerance used to terminate solver: Tolerance = "
+                 << Tolerance << std::endl;
+
+      oomph_info << "- Hypre method flag. Valid values are specified in "
+                    "enumeration: Hypre_method = "
+                 << Hypre_method << std::endl;
+
+      oomph_info << "- Preconditioner method flag used with Hypre's PCG,"
+                 << std::endl;
+      oomph_info
+        << "  GMRES and BiCGStab in solve(...) or resolve(...). Valid values"
+        << std::endl;
+      oomph_info
+        << "  are BoomerAMG, Euclid, ParaSails or None (all enumerated above),"
+        << std::endl;
+      oomph_info << "  for any other value no preconditioner is set. "
+                 << std::endl;
+      oomph_info << "  Internal_preconditioner = " << Internal_preconditioner
+                 << std::endl;
+
+      oomph_info
+        << "- Flag to set the Hypre printing level for AMG: AMG_print_level = "
+        << AMG_print_level << std::endl;
+
+      oomph_info << "- Maximum number of levels used in AMG: AMG_max_levels = "
+                 << AMG_max_levels << std::endl;
+
+
+      oomph_info << "- Parameter to identify diagonally dominant parts of the "
+                    "matrix in AMG:"
+                 << std::endl;
+      oomph_info << "  AMG_max_row_sum = " << AMG_max_row_sum << std::endl;
+
+
+      oomph_info
+        << "- Flag to determine whether simple smoothers (determined by the"
+        << std::endl;
+      oomph_info
+        << "  AMG_simple_smoother flag) or complex smoothers (determined by the"
+        << std::endl;
+      oomph_info << "  AMG_complex_smoother flag are used in AMG" << std::endl;
+      oomph_info << "  AMG_using_simple_smoothing ="
+                 << AMG_using_simple_smoothing << std::endl;
+
+      oomph_info << "- Simple smoothing method used in BoomerAMG. "
+                 << std::endl;
+      oomph_info << "  (only used if AMG_using_simple_smoothing is true"
+                 << std::endl;
+      oomph_info << "  AMG_simple_smoother = " << AMG_simple_smoother
+                 << std::endl;
+
+
+      oomph_info << "- Complex smoothing method used in BoomerAMG. "
+                 << std::endl;
+      oomph_info << "  (only used if AMG_using_simple_smoothing is false"
+                 << std::endl;
+      oomph_info << "  AMG_complex_smoother = " << AMG_complex_smoother
+                 << std::endl;
+
+      oomph_info << "- The number of smoother iterations to apply: "
+                    "AMG_smoother_iterations = "
+                 << AMG_smoother_iterations << std::endl;
+
+      oomph_info
+        << "- Damping factor for BoomerAMG smoothed Jacobi or hybrid SOR: "
+        << "AMG_damping = " << AMG_damping << std::endl;
+
+
+      oomph_info << "- Connection strength threshold parameter for BoomerAMG: "
+                    "AMG_strength = "
+                 << AMG_strength << std::endl;
+
+
+      oomph_info
+        << "- Interpolation truncation factor for BoomerAMG:  AMG_truncation = "
+        << AMG_truncation << std::endl;
+
+      oomph_info << "- AMG coarsening strategy: AMG_coarsening = "
+                 << AMG_coarsening << std::endl;
+
+
+      oomph_info << "NOTE: Skipping parameters for ParaSails and Euclid"
+                 << std::endl;
+      oomph_info << "      feel free to document these if you use thes solvers"
+                 << std::endl;
+
+      oomph_info << "- Flag to control the Hypre printing level for the Krylov"
+                 << std::endl;
+      oomph_info << "  subspace solvers: Krylov_print_level = "
+                 << Krylov_print_level << std::endl;
+
+
+      oomph_info << " " << std::endl;
+      oomph_info << " " << std::endl;
+    }
+
 
     /// Flag to determine if non-zero values of the Hypre error flag
     /// plus Hypre error messages are output to screen at various points

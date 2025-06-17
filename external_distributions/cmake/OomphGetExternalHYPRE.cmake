@@ -18,16 +18,17 @@
 # ...to be filled in...
 #
 # =============================================================================
-# cmake-format: on
 include_guard()
 
-set(HYPRE_TARBALL_URL
-    https://github.com/hypre-space/hypre/archive/refs/tags/v2.29.0.tar.gz)
-set(HYPRE_INSTALL_DIR "${OOMPH_THIRD_PARTY_INSTALL_DIR}/hypre")
+# Where to get the code from and where to install it to
+set(HYPRE_GIT_URL https://github.com/hypre-space/hypre.git)
+set(HYPRE_GIT_TAG v2.32.0)
+set(HYPRE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/hypre")
 
 # Hypre build options
-set(HYPRE_CMAKE_BUILD_ARGS
-    -DCMAKE_BUILD_TYPE=Release
+set(HYPRE_CMAKE_CONFIGURE_ARGS
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DCMAKE_INSTALL_PREFIX=${HYPRE_INSTALL_DIR}
     -DHYPRE_ENABLE_SHARED=OFF
     -DHYPRE_ENABLE_BIGINT=OFF
     -DHYPRE_ENABLE_MIXEDINT=OFF
@@ -52,14 +53,14 @@ set(HYPRE_CMAKE_BUILD_ARGS
 # Define how to configure/build/install the project
 oomph_get_external_project_helper(
   PROJECT_NAME hypre
-  URL "${HYPRE_TARBALL_URL}"
-  INSTALL_DIR "${HYPRE_INSTALL_DIR}"
-  CONFIGURE_COMMAND
-    ${CMAKE_COMMAND} --install-prefix=<INSTALL_DIR> ${HYPRE_CMAKE_BUILD_ARGS}
-    -G=${CMAKE_GENERATOR} -S=src -B=src/cmbuild
-  BUILD_COMMAND cmake --build src/cmbuild -j ${NUM_JOBS}
-  INSTALL_COMMAND cmake --install src/cmbuild)
-# TEST_COMMAND ./src/cmbuild/test/ij)
+  GIT_REPOSITORY ${HYPRE_GIT_URL}
+  GIT_TAG ${HYPRE_GIT_TAG}
+  INSTALL_DIR ${HYPRE_INSTALL_DIR}
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} ${HYPRE_CMAKE_CONFIGURE_ARGS} -G=${CMAKE_GENERATOR} -S=src -B=src/cmbuild
+  BUILD_COMMAND ${CMAKE_COMMAND} --build src/cmbuild -j ${OOMPH_NUM_JOBS}
+  INSTALL_COMMAND ${CMAKE_COMMAND} --install src/cmbuild
+  # TEST_COMMAND    ./src/cmbuild/test/ij
+)
 
 # Hypre depends on OpenBLAS being built. If we're building OpenBLAS ourselves
 # then we need to make sure that it gets built before Hypre
@@ -68,3 +69,4 @@ if(TARGET openblas)
 endif()
 
 # ---------------------------------------------------------------------------------
+# cmake-format: on

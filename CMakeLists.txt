@@ -14,31 +14,30 @@
 # ------------------------------------------------------------------------------
 # oomph-lib is an object-oriented, open-source finite-element library for the
 # simulation of multi-physics problems. It is developed and maintained by
-# Matthias Heil and Andrew Hazel of the School of Mathematics at The University
-# of Manchester, along with many other contributors.
-#
-# This library is distributed with a GNU LGPL License; see LICENSE.txt.
-# ------------------------------------------------------------------------------
-# The version number follows the symantic versioning strategy here:
-#                           https://semver.org/
-# ------------------------------------------------------------------------------
-# See https://cmake-basis.github.io/standard/fhs.html for a description of
-# recommended source, build, and installation layouts.
-#
-# Additional notes for post-renovation:
-# See: https://nvie.com/posts/a-successful-git-branching-model/ for a Git
-# branching model.
-# ------------------------------------------------------------------------------
-# The "cmake-format" commands littered around the project are used to
-# disable/enable the use of the cmake-format extension used to automatically
-# format CMake files. Do not delete them.
+# Matthias Heil and Andrew Hazel of the Department of Mathematics at The
+# University of Manchester, along with many other contributors.
 # ==============================================================================
 # cmake-format: on
+
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING "=====================================================\n"
+            "You're re-configuring an existing build tree. \n"
+            "Delete the whole build folder and start with a fresh \n"
+            "directory if your attempt to re-configure leads to \n"
+            "strange error messages below here. \n"
+            "=====================================================\n")
+endif()
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomphlib
   DESCRIPTION "A finite-element library for simulating multi-physics problems."
-  VERSION 2.9.0
+  VERSION 3.0.0
   HOMEPAGE_URL "https://oomph-lib.github.io/oomph-lib/doc/html/"
   LANGUAGES C CXX Fortran)
 
@@ -53,8 +52,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
-if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance."
+      FORCE)
+endif()
+
+# Flag that we'll use to enable Debug-specific options
+set(HAVE_DEBUG_BUILD FALSE)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(HAVE_DEBUG_BUILD TRUE)
 endif()
 
 # Sort out config files
@@ -77,15 +83,29 @@ include(OomphCustomOptions)
 # Regular CMake option; doesn't influence the build so we won't print its value at the end
 option(OOMPH_PRINT_SETTINGS_AFTER_INSTALL "Display the oomph-lib settings at the end of the install step" ON)
 
-# General options
+# Control the installation
+oomph_option(OOMPH_ALLOW_INSTALL_AS_SUPERUSER "Allow the user to install to the default system install path (if CMAKE_INSTALL_PREFIX is not set)" OFF)
+oomph_option(OOMPH_INSTALL_HEADERS_AS_SYMLINKS "Install symlinks to the oomph-lib headers instead of copying them" OFF)
+
+# General build options
 oomph_option(OOMPH_DONT_SILENCE_USELESS_WARNINGS "Display (harmless) warnings from external_src/ and src/ that are silenced" OFF)
 oomph_option(OOMPH_ENABLE_MPI "Enable the use of MPI for parallel processing" OFF)
-oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" OFF)
-oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" OFF)
+oomph_option(OOMPH_ENABLE_MPI_OVERSUBSCRIPTION "Enable oversubscription with MPI" OFF)
+oomph_option(OOMPH_ENABLE_PARANOID "Enable the PARANOID flag in Debug" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_RANGE_CHECKING "Enable RANGE_CHECKING flag in Debug" ${HAVE_DEBUG_BUILD})
+oomph_option(OOMPH_ENABLE_SANITIZER_SUPPORT "Enable sanitizer support in Debug builds" OFF)
+
+# Choose the default linear solver. By default, we'll disable
+# Mumps because it not only requires mpi (which would be easy to
+# check) but also requires MPI to have been initialised in the driver
+# code before it can be used; not good for all the serial self-tests.
+# The user can set -DOOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER=ON
+# to override this setting.
+oomph_option(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER "Use MumpsSolver as the default linear solver (when available)" OFF)
+
 
 # Fine-grained control of build of external_srcs.
-# FIXME: Make sure the SUPPRESS variables below actually work
-# TODO: These should be set on the fly after checking whether the appropriate variable WITH_* has been set...
+# TODO: Discuss with MH; do we actually want these options anymore?
 oomph_option(OOMPH_SUPPRESS_TRIANGLE_LIB "Suppress build of oomph-lib's copy of the triangle library" OFF)
 oomph_option(OOMPH_SUPPRESS_TETGEN_LIB "Suppress build of oomph-lib's copy of the tetgen library" OFF)
 
@@ -125,14 +145,6 @@ oomph_path_option(
 oomph_path_option(
   FLAG OOMPH_USE_MPI_FROM
   DOCSTRING "Path to MPI installation"
-)
-oomph_path_option(
-  FLAG OOMPH_USE_GMP_FROM
-  DOCSTRING "Path to GMP installation"
-)
-oomph_path_option(
-  FLAG OOMPH_USE_MPFR_FROM
-  DOCSTRING "Path to MPFR installation"
 )
 oomph_path_option(
   FLAG OOMPH_USE_BOOST_FROM
@@ -212,6 +224,10 @@ endif()
 # Set up MPI functionality (see cmake/OomphMPI.cmake)
 if(OOMPH_ENABLE_MPI)
   include(OomphMPI)
+else()
+  if(OOMPH_USE_SUPERLU_DIST_FROM)
+    message(FATAL_ERROR "You can only enable SuperLU_DIST when MPI is enabled!")
+  endif()
 endif()
 
 # Add PARANOID and RANGE_CHECKING for Debug configurations (ONLY!) if desired
@@ -233,6 +249,16 @@ if(OOMPH_ENABLE_RANGE_CHECKING)
   oomph_add_cxx_compile_definitions($<$<CONFIG:DEBUG,>:RANGE_CHECKING>)
 endif()
 
+# Enable Address, UndefinedBehaviour, Leak sanitizer support, if desired
+if(OOMPH_ENABLE_SANITIZER_SUPPORT)
+  include(OomphAddSanitizerSupport)
+endif()
+
+# Do we want Mumps to override SuperLU as the default solver?
+if(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+  oomph_add_cxx_compile_definitions(OOMPH_ENABLE_MUMPS_AS_DEFAULT_LINEAR_SOLVER)
+endif()
+
 # --------------------------[ FIND REQUIRED HEADERS ]---------------------------
 
 include(OomphCheckForRequiredHeaders)
@@ -250,28 +276,28 @@ endif()
 
 # ------------------------------[ BUILD LIBRARY ]-------------------------------
 
-message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
-
-# Configure the external sources (i.e. third-party libraries that oomph-lib
-# always ships with)
-add_subdirectory(external_src)
-
 # FIXME: Having to duplicate CXX definitions for C code to make SuperLUDist code
 # work...
 
-# Add C++ definitions for all of the defined third-party sources that we build
-# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
-oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
-oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+message(VERBOSE "<====== Starting oomph-lib library configuration ======>")
 
 # Locate the third-party libraries that the user has provided via the
 # OOMPH_USE_<LIBRARY>_FROM flags
-include(OomphLocateOptionalThirdPartyLibs)
+include(OomphLocateThirdPartyLibs)
 
 # Add C++ definitions for all of the defined (optional) third-party libraries,
 # e.g. -DOOMPH_HAS_CGAL, -DOOMPH_HAS_MUMPS, etc.
 oomph_add_c_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
 oomph_add_cxx_compile_definitions(${EXTERNAL_DIST_CXX_DEFINITIONS})
+
+# Configure the external sources (i.e. third-party libraries that oomph-lib
+# always ships with)
+add_subdirectory(external_src)
+
+# Add C++ definitions for all of the defined third-party sources that we build
+# with oomph-lib, e.g. -DOOMPH_HAS_SUPERLU, -DOOMPH_HAS_TRIANGLE, etc.
+oomph_add_c_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
+oomph_add_cxx_compile_definitions(${EXTERNAL_SRC_CXX_DEFINITIONS})
 
 # Configure all of the main oomph-lib library sources
 add_subdirectory(src)

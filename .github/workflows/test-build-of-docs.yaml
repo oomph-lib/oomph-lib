@@ -1,0 +1,46 @@
+name: Test build of docs
+
+on:
+  push:
+    # Never run on main
+    branches-ignore:
+      - main
+    # but on any other branch watch for changes to these paths
+    paths:
+      - ".github/workflows/test-build-of-docs.yaml"
+      - "demo_drivers/**"
+      - "doc/**"
+      - "oomph_build.py"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install requirements (minus doxygen)
+        run: sudo apt-get install cmake ninja-build doxygen texlive texlive-latex-extra texlive-font-utils
+
+      - name: Check doxygen version
+        run: doxygen --version
+
+      - name: Build doc
+        run: cmake -G Ninja -B build && cmake --build build
+        working-directory: doc
+
+      - name: Check incremental build works
+        run: touch doc.txt && cmake --build build
+        working-directory: doc
+
+      - name: Clean build dir
+        run: cmake --build build --target clean --verbose
+        working-directory: doc
+
+      - name: Check for successful clean
+        run: |
+          git ls-files --others --directory --exclude-standard doc
+          git ls-files --others --directory --exclude-standard demo_drivers

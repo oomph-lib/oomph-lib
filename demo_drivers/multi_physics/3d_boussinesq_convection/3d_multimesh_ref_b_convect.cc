@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -372,7 +372,6 @@ switch_to_iterative_linear_solver()
    HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
    Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
     static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
-   //ExactPreconditioner* Temperature_prec_pt =new ExactPreconditioner;
    prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
    
    //Set up the internal preconditioners

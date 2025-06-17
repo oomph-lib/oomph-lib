@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -236,8 +236,8 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible)
  //PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
  // mesh_pt()->element_pt());
 
- //Attach the boundary conditions to the mesh
- cout << assign_eqn_numbers() << std::endl; 
+  // Attach the boundary conditions to the mesh
+  oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
 } 
 
 

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -1009,8 +1009,7 @@ namespace oomph
           if (nreq_sparse[p] == 0)
           {
             MPI_Request req1;
-            MPI_Isend(
-              &zero, 1, MPI_UNSIGNED, p, 31, comm_pt()->mpi_comm(), &req1);
+            MPI_Isend(&zero, 1, MPI_INT, p, 31, comm_pt()->mpi_comm(), &req1);
             send_requests_sparse.push_back(req1);
           }
 

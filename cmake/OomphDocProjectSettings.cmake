@@ -76,14 +76,9 @@ function(oomph_doc_project_settings)
   string(
     APPEND
     OOMPH_SETTINGS_MESSAGE
-    "********************************************************************************\n"
-  )
-  string(APPEND OOMPH_SETTINGS_MESSAGE
-         "${BOLD}OOMPH-LIB THIRD-PARTY LIBRARIES OPTIONS:${RESET}\n")
-  string(
-    APPEND
-    OOMPH_SETTINGS_MESSAGE
-    "********************************************************************************\n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    "                       ${BOLD}OOMPH-LIB LIBRARY OPTIONS${RESET}                   \n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
   )
   foreach(OPTION IN LISTS OOMPH_CONFIG_VARS)
     if(NOT ${OPTION})
@@ -101,7 +96,9 @@ function(oomph_doc_project_settings)
   string(
     APPEND
     OOMPH_SETTINGS_MESSAGE
-    "********************************************************************************\n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    "                       ${BOLD}OOMPH-LIB LIBRARY OPTIONS${RESET}                   \n"
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
   )
 
   # Doc it

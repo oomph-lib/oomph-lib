@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -37,6 +37,11 @@
 
 namespace oomph
 {
+  /// Static boolean to suppress warnings about any repeated
+  /// data. Defaults to false.
+  bool GeneralisedElement::Suppress_warning_about_any_repeated_data = false;
+
+
   /// Static boolean to suppress warnings about repeated internal
   /// data. Defaults to false
   bool GeneralisedElement::Suppress_warning_about_repeated_internal_data =
@@ -920,8 +925,31 @@ namespace oomph
       }
 
 
-      throw OomphLibError(
-        error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      // Shout?
+      if (!Suppress_warning_about_any_repeated_data)
+      {
+        error_stream << std::endl << std::endl;
+        error_stream
+          << "---------------------------------------------------------------"
+             "--"
+          << std::endl
+          << "Note: You can suppress this warning by recompiling without"
+          << "\n      PARANOID or setting the boolean \n"
+          << "\n      "
+             "GeneralisedElement::Suppress_warning_about_any_repeated_data"
+          << "\n\n      to true." << std::endl
+          << std::endl
+          << "Only do this if you know what you're doing; repeated equation\n"
+          << "numbers are usually a sign of trouble...\n"
+          << "---------------------------------------------------------------"
+             "--"
+          << std::endl
+          << std::endl;
+
+        // Issue warning
+        OomphLibWarning(
+          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+      }
     }
 #endif
   }
@@ -1889,7 +1917,9 @@ namespace oomph
         error_stream << " ii) switching OFF the PARANOID flag" << std::endl
                      << std::endl;
 
-        throw OomphLibError(
+        /// Throw an inverted error so it can be caught by the adaptive
+        /// timestepper and arc length continuation for example.
+        throw InvertedElementError(
           error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5084,8 +5114,9 @@ namespace oomph
   /// The information will typically be used in interaction problems in
   /// which the FiniteElement provides a forcing term for an
   /// ElementWithExternalElement. The Data must be provided as
-  /// \c paired_load data containing (a) the pointer to a Data object
-  /// and (b) the index of the value in that Data object.
+  /// \c paired_load data containing
+  /// - the pointer to a Data object
+  /// - the index of the value in that Data object
   /// The generic implementation (should be overloaded in more specific
   /// applications) is to include all nodal and internal Data stored in
   /// the FiniteElement. Note that the geometric data,

@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -92,7 +92,7 @@ namespace oomph
   }
 
   //=====================================================================
-  /// Output FE representation of soln: x,y,q1,q2,div_q,p,q \cdot n
+  /// Output FE representation of soln: \f$ x,y,q1,q2,div_q,p,q \cdot n \f$
   //=====================================================================
   template<unsigned DIM>
   void DarcyEquations<DIM>::output_with_projected_flux(

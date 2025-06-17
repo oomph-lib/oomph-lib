@@ -29,10 +29,10 @@ for file in $(echo $makefile_list); do
     cd $(dirname $file)
     dir_list='. validata'
     for dir in $(echo $dir_list); do
-        if [ ${JUST_LIST_BYPRODUCTS} -eq 1 ]; then
-            echo "${demo_drivers_dir}/$(dirname $file)/${dir}/index.html"
-        else
-            if [ -e $dir ]; then
+        if [ -e $dir ]; then
+            if [ ${JUST_LIST_BYPRODUCTS} -eq 1 ]; then
+                echo "${demo_drivers_dir}/$(dirname $file)/${dir}/index.html"
+            else
                 cd $dir
                 echo "Creating index.html in: " $(pwd)
                 echo "<!-- Automatically generated file; don't edit! -->" >index.html

@@ -44,7 +44,7 @@ echo "I'm working in "`pwd`
 echo "========================================================================"
 cp vmtk_files/*vtp vmtk_working_dir
 cd vmtk_working_dir
-ln -s ../xda_to_poly_fsi
+ln -sf ../xda_to_poly_fsi
 
 # Read the vtp file and turn into vtu: 0.6 for fine 0.8 for coarse
 #-----------------------------------------------------------------

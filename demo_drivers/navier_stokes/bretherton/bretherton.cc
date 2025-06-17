@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -817,7 +817,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
 {
 
  // Increase maximum residual
- Problem::Max_residuals=100.0;
+ Problem::Max_residuals=500.0;
 
  // Set output directory
  DocInfo doc_info;
@@ -854,7 +854,7 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
    // a certain tolerance: This is cheaper to check than restarting
    // the Newton method after divergence (we'd also need to back up
    // the previous solution)
-   double maxres=100.0;
+   double maxres = Problem::Max_residuals;
    while (true)
     {
      cout << "Checking max. res for Ca = " 

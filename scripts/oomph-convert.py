@@ -189,7 +189,7 @@ def main(argv):
 
         # Convert from oomph-lib Tecplot format to VTP XML format
         elif isuffix == "dat" and osuffix == "vtp":
-            tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
+            tecplot_to_vtpxml(ifilename, ofilename,int(argdim))
 
         else:   
             error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
@@ -1019,7 +1019,8 @@ class InputPoints:
             for i, value in enumerate(values):
                 
                 # Define regular expression for floating point number
-                float_point_re=re.compile('[-+]?[0-9]*\.?[0-9]*([e,E][-+]?[0-9]+)?') 
+                #float_point_re= re.compile('[-+]?[0-9]*\.?[0-9]*([e,E][-+]?[0-9]+)?') 
+                float_point_re = re.compile(r'[-+]?[0-9]*\.?[0-9]*([eE][-+]?[0-9]+)?')
                 
                 match_index=re.match(float_point_re,value)
                 if match_index is not None:

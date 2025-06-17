@@ -39,9 +39,7 @@ set(OOMPH_GMSH_PROGRAM)
 cmake_path(GET OOMPH_USE_GMSH_FROM STEM OOMPH_GMSH_PROGRAM)
 cmake_path(GET OOMPH_USE_GMSH_FROM PARENT_PATH OOMPH_GMSH_DIR)
 
-# Search for a program;
-#
-# TODO: Add a 'VALIDATOR' argument to check that gmsh works
+# Search for a program
 find_program(
   OOMPH_GMSH_COMMAND
   NAMES gmsh ${OOMPH_GMSH_PROGRAM}

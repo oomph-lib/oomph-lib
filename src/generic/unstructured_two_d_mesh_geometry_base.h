@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -5591,7 +5591,7 @@ namespace oomph
     } // if (nel > 0), from the beginning of the method
 
     // Indicate that boundary coordinate has been set up
-    Boundary_coordinate_exists[b] = true;
+    set_boundary_coordinate_exists(b);
   }
 
 

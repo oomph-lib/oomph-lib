@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@
 #include "refineable_elements.h"
 // Include the tree template to fill in the C++ split function
 // Must be called after refineable_element.h
-#include "tree.tpp"
+#include "tree.template.cc"
 #include "error_estimator.h"
 
 namespace oomph
@@ -1055,5 +1055,5 @@ namespace oomph
 
 } // namespace oomph
 
-#include "refineable_mesh.tpp"
+#include "refineable_mesh.template.cc"
 #endif

@@ -14,12 +14,22 @@
 # ------------------------------------------------------------------------------
 # oomph-lib is an object-oriented, open-source finite-element library for the
 # simulation of multi-physics problems. It is developed and maintained by
-# Matthias Heil and Andrew Hazel of the School of Mathematics at The University
-# of Manchester, along with many other contributors.
-#
-# This library is distributed with a GNU LGPL License; see LICENSE.txt.
+# Matthias Heil and Andrew Hazel of the Department of Mathematics at The
+# University of Manchester, along with many other contributors.
 # ==============================================================================
 # cmake-format: on
+
+# ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 project(
   oomph_lib_third_party_libraries
@@ -29,6 +39,9 @@ project(
   LANGUAGES C CXX Fortran)
 
 # ---------------------------[ INITIAL PROJECT SETUP ]--------------------------
+
+# There is no 'install' step here; just configure and build!
+set(CMAKE_SKIP_INSTALL_RULES ON)
 
 # Handle warning about timestamps when downloading archives via ExternalProject
 if(POLICY CMP0135)
@@ -44,9 +57,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 # Build in Release (fully optimised) mode by default
-if((NOT CMAKE_BUILD_TYPE) OR (NOT DEFINED ENV{CMAKE_BUILD_TYPE}))
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING
-      "Build in Release mode for improved runtime performance.")
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build mode for performance."
+      FORCE)
 endif()
 
 # Select level of verbosity (e.g. STATUS, VERBOSE, etc.)
@@ -62,17 +75,17 @@ oomph_option(OOMPH_BUILD_OPENBLAS "Build OpenBLAS?" ON)
 oomph_option(OOMPH_BUILD_SUPERLU "Build SuperLU?" ON)
 oomph_option(OOMPH_BUILD_SUPERLU_DIST "Build SuperLUDist?" ${OOMPH_ENABLE_MPI})
 oomph_option(OOMPH_BUILD_CGAL "Build CGAL?" ON)
-oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ${OOMPH_ENABLE_MPI})
+oomph_option(OOMPH_BUILD_MUMPS "Build MUMPS?" ON)
 oomph_option(OOMPH_BUILD_HYPRE "Build Hypre?" ON)
 oomph_option(OOMPH_BUILD_TRILINOS "Build Trilinos?" ON)
-oomph_option(OOMPH_DISABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
+oomph_option(OOMPH_ENABLE_THIRD_PARTY_LIBRARY_TESTS "Disable testing when building the third-party libraries?" OFF)
+
+# Set the default installation path
+if(PROJECT_IS_TOP_LEVEL AND CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/install" CACHE PATH "Install path prefix" FORCE)
+endif()
 
 # Path-like flags
-oomph_path_option(
-  FLAG OOMPH_THIRD_PARTY_INSTALL_DIR
-  DEFAULT "${CMAKE_CURRENT_LIST_DIR}/install"
-  DOCSTRING "Base installation directory for third-party libraries."
-)
 oomph_path_option(
   FLAG OOMPH_USE_OPENBLAS_FROM
   DOCSTRING "The path to a preinstalled version of OpenBLAS."
@@ -88,14 +101,6 @@ oomph_path_option(
 oomph_path_option(
   FLAG OOMPH_USE_PARMETIS_FROM
   DOCSTRING "The path to a preinstalled version of ParMETIS."
-)
-oomph_path_option(
-  FLAG OOMPH_USE_GMP_FROM
-  DOCSTRING "The path to a preinstalled version of GMP."
-)
-oomph_path_option(
-  FLAG OOMPH_USE_MPFR_FROM
-  DOCSTRING "The path to a preinstalled version of MPFR."
 )
 oomph_path_option(
   FLAG OOMPH_USE_BOOST_FROM
@@ -122,19 +127,16 @@ include(OomphGetExternalProjectHelper)
 # --------------------------------[ GENERAL ]----------------------------------
 
 # Decide on number of jobs to use for building projects
-ProcessorCount(NUM_PROCESSOR)
-set(NUM_JOBS 1)
-if(NUM_PROCESSOR EQUAL 0)
-  message(
-    WARNING
-      "Encountered error trying to determine the number of available CPU cores. Will build Makefile-based projects with just 1 job."
-  )
+ProcessorCount(OOMPH_NUM_JOBS)
+if(OOMPH_NUM_JOBS EQUAL 0)
+  set(OOMPH_NUM_JOBS 1)
+  message(WARNING "Could not determine CPU cores. Using single job.")
 else()
-  set(NUM_JOBS ${NUM_PROCESSOR})
-  message(STATUS "Number of jobs for parallel make: ${NUM_JOBS}")
+  message(STATUS "Number of jobs for parallel make: ${OOMPH_NUM_JOBS}")
 endif()
 
-# Where to download files from and where to install to
+# Where to download files from and where to install to TODO: Upload HYPRE and
+# Trilinos here
 set(OOMPH_THIRD_PARTY_TAR_FILE_URL
     "https://github.com/puneetmatharu/oomph-lib/releases/download/v3.0.0.pre-alpha"
 )
@@ -162,15 +164,23 @@ if(OpenBLAS_LIBRARIES)
   set(OpenBLAS_ROOT "${OpenBLAS_ROOT}" CACHE PATH "" FORCE)
 endif()
 
+if(NOT OpenBLAS_LIBRARIES)
+  if(OOMPH_BUILD_HYPRE OR OOMPH_BUILD_TRILINOS)
+    message(FATAL_ERROR "Refusing to build HYPRE or Trilinos without OpenBLAS!")
+  endif()
+endif()
+
 # -------------------------------[ SUPERLUDIST ]-------------------------------
+
+# TODO: Try updating SuperLU to v9
 
 # If we're given SuperLUDist or need to build it
 if(OOMPH_BUILD_SUPERLU OR OOMPH_BUILD_SUPERLU_DIST)
   if((OOMPH_BUILD_SUPERLU_DIST) AND (NOT OOMPH_ENABLE_MPI))
+    set(OOMPH_BUILD_SUPERLU_DIST "OFF")
     message(
-      FATAL_ERROR
-        "Cannot build SuperLUDist unless MPI is enabled (with -DOOMPH_ENABLE_MPI=ON)!"
-    )
+      WARNING
+        "Not building SuperLUDist (despite request) because MPI is disabled!")
   endif()
 
   # If we're given GKlib
@@ -222,17 +232,8 @@ endif()
 
 # If we're given CGAL or need to build it
 if(OOMPH_BUILD_CGAL)
-  # If we're given GMP
-  if(OOMPH_USE_GMP_FROM)
-    find_package(GMP REQUIRED)
-  endif()
-
-  # If we're given MPFR
-  if(OOMPH_USE_MPFR_FROM)
-    find_package(MPFR REQUIRED)
-  endif()
-
-  # If we're given Boost
+  # If we're given Boost. This form of find_package(...) will search for the
+  # BoostConfig.cmake shipped with Boost
   if(OOMPH_USE_BOOST_FROM)
     find_package(
       Boost 1.83.0 REQUIRED
@@ -240,32 +241,16 @@ if(OOMPH_BUILD_CGAL)
       NO_DEFAULT_PATH)
   endif()
 
-  # If we're given CGAL
+  # Get CGAL
   include(OomphGetExternalCGAL)
-  set(GMP_FOUND TRUE)
-  set(MPFR_FOUND TRUE)
   set(BOOST_FOUND TRUE)
   set(CGAL_FOUND TRUE)
-else()
-  # If we haven't been asked to build CGAL but the user (bizarrely) told us
-  # where to find GMP, MPFR and/or Boost...
-  set(OOMPH_PASSED_CGAL_DEPS)
-  if(OOMPH_USE_GMP_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_GMP_FROM'")
-  endif()
-  if(OOMPH_USE_MPFR_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_MPFR_FROM'")
-  endif()
-  if(OOMPH_USE_BOOST_FROM)
-    list(APPEND OOMPH_PASSED_CGAL_DEPS "'OOMPH_USE_BOOST_FROM'")
-  endif()
-  if(OOMPH_PASSED_CGAL_DEPS)
-    string(JOIN " and " OOMPH_PASSED_CGAL_DEPS_AS_STR ${OOMPH_PASSED_CGAL_DEPS})
-    message(
-      WARNING
-        "\nYou specified ${OOMPH_PASSED_CGAL_DEPS_AS_STR} but did not enable the build of CGAL. Did you forget to pass '-DOOMPH_BUILD_CGAL=ON'?"
-    )
-  endif()
+elseif(OOMPH_USE_BOOST_FROM)
+  # ...then why did the user tell us where to find Boost?
+  message(
+    WARNING
+      "\nYou specified 'OOMPH_USE_BOOST_FROM' but did not enable the build of CGAL. Did you forget to pass '-DOOMPH_BUILD_CGAL=ON'?"
+  )
 endif()
 
 # ----------------------------------[ MUMPS ]----------------------------------
@@ -277,18 +262,12 @@ endif()
 # ----------------------------------[ HYPRE ]----------------------------------
 
 if(OOMPH_BUILD_HYPRE)
-  if(NOT OpenBLAS_LIBRARIES)
-    message(FATAL_ERROR "Refusing to build HYPRE without OpenBLAS!")
-  endif()
   include(OomphGetExternalHYPRE)
 endif()
 
 # ---------------------------------[ TRILINOS ]--------------------------------
 
 if(OOMPH_BUILD_TRILINOS)
-  if(NOT OpenBLAS_LIBRARIES)
-    message(FATAL_ERROR "Refusing to build Trilinos without OpenBLAS!")
-  endif()
   include(OomphGetExternalTrilinos)
 endif()
 

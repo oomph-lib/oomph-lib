@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@
 // We need to include the refineable_quad_mesh's 
 // templated source here to allow the build of
 // all templates. 
-//#include "generic/refineable_quad_mesh.tpp"
+//#include "generic/refineable_quad_mesh.template.cc"
 
 
 using namespace std;

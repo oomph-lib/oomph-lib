@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -595,8 +595,10 @@ namespace oomph
     if (Doc_time)
     {
       double norm = AztecOO_solver_pt->TrueResidual();
-      oomph_info << "Linear solver iterations    : " << Iterations << std::endl;
-      oomph_info << "Final Relative Residual Norm: " << norm << std::endl;
+      oomph_info << "Number of iterations to convergence: " << Iterations
+                 << std::endl;
+      oomph_info << "Final relative residual norm       : " << norm
+                 << std::endl;
     }
   }
 

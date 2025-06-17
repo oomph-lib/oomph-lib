@@ -22,18 +22,14 @@ jobs:
           persist-credentials: false
 
       - name: Install requirements (minus doxygen)
-        run: sudo apt-get install cmake doxygen gawk ninja-build make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-font-utils
+        run: sudo apt-get install cmake ninja-build doxygen texlive texlive-latex-extra texlive-font-utils
 
-      - name: Install requirements
-        run: |
-          sudo apt-get install make automake libtool libtool-bin autoconf gfortran g++ texlive texlive-latex-extra texlive-font-utils doxygen
-          doxygen --version
+      - name: Check doxygen version
+        run: doxygen --version
 
       - name: Build doc
-        run: |
-          cmake -G Ninja -S doc/ -B doc/build
-          cmake --build doc/build
-          rm -rf doc/build
+        run: cmake -G Ninja -B build && cmake --build build && rm -rf build
+        working-directory: doc
 
       - name: Run website install script
         run: ./scripts/website_install.sh
@@ -44,7 +40,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: "gh-pages" # The branch the action should deploy to.
-          FOLDER: build/website # The folder the action should deploy.
-          CLEAN: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.inputs.publishBranch }} # The branch the action should deploy to.
+          folder: build/website # The folder the action should deploy.
+          clean: true

@@ -18,22 +18,22 @@ mkdir Validation
 
 cd Validation
 mkdir RESLT_static_disk_compression0
-ln -s RESLT_static_disk_compression0 RESLT0
+ln -sf RESLT_static_disk_compression0 RESLT0
 
 mkdir RESLT_static_disk_compression1
-ln -s RESLT_static_disk_compression1 RESLT1
+ln -sf RESLT_static_disk_compression1 RESLT1
 
 mkdir RESLT_static_disk_compression2
-ln -s RESLT_static_disk_compression2 RESLT2
+ln -sf RESLT_static_disk_compression2 RESLT2
 
 mkdir RESLT_static_disk_compression3
-ln -s RESLT_static_disk_compression3 RESLT3
+ln -sf RESLT_static_disk_compression3 RESLT3
 
 mkdir RESLT_static_disk_compression4
-ln -s RESLT_static_disk_compression4 RESLT4
+ln -sf RESLT_static_disk_compression4 RESLT4
 
 mkdir RESLT_static_disk_compression5
-ln -s RESLT_static_disk_compression5 RESLT5
+ln -sf RESLT_static_disk_compression5 RESLT5
 
 
 echo "Running static disk compression validation "

@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -58,9 +58,7 @@ public:
 //=================================================================
 /// A class for all elements that solve the simple one-dimensional
 /// eigenvalue problem
-/// \f[ 
-/// \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0
-/// \f] 
+/// \f[ \frac{\partial^2 u}{\partial x_i^2}  + \lambda u = 0 \f]
 /// These elements are very closely related to the Poisson
 /// elements and could inherit from them. They are here developed
 /// from scratch for pedagogical purposes.

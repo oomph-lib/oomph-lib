@@ -1,23 +1,22 @@
 # ==============================================================================
 # NOTE:
 #
-# Mesh files generally come in two parts: *.h and *.tpp. Usually there are no
-# *.cc files because meshes are fully templated. It therefore doesn't make any
-# sense to compile mesh sources into a library. Instead, we combine the two
-# files into a combined mesh header, *.h, which can be included into a driver
-# code. This means that the entire code (headers and function implementations)
-# can get (re-)compiled with the appropriate element types in each specific
-# driver code. If the constant re-compilation of the (possibly lengthy) mesh
-# sources in *.tpp gets too costly, then *.h and *.tpp can be included in a
-# separate file where the instantiation of a mesh with a specific element type
-# can be enforced with a template statement.
+# Mesh files generally come in two parts: *.h and *.template.cc. Usually there
+# are no *.cc files because meshes are fully templated. It therefore doesn't
+# make any sense to compile mesh sources into a library. Instead, we combine the
+# two files into a combined mesh header, *.h, which can be included into a
+# driver code. This means that the entire code (headers and function
+# implementations) can get (re-)compiled with the appropriate element types in
+# each specific driver code. If the constant re-compilation of the (possibly
+# lengthy) mesh sources in *.template.cc gets too costly, then *.h and
+# *.template.cc can be included in a separate file where the instantiation of a
+# mesh with a specific element type can be enforced with a template statement.
 # ------------------------------------------------------------------------------
 # Provide Domain definitions in their respective headers; don't write the
 # definitions in source files. If you provide the definitions outside of the
 # class, make sure to mark it as "inline" otherwise you may well get warnings
 # about duplicate symbols!
 # ==============================================================================
-# TODO: Add "include_guard()" to all CMakeLists.txt files
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered meshes subdirectory")
 
@@ -67,46 +66,46 @@ set(TEMPLATE_HEADERS
 # Define the template implementation headers (these are not source files as
 # we're not trying to build them)
 set(TEMPLATE_IMPL_HEADERS
-    one_d_mesh.tpp
-    simple_rectangular_quadmesh.tpp
-    rectangular_quadmesh.tpp
-    quarter_circle_sector_mesh.tpp
-    fish_mesh.tpp
-    one_d_lagrangian_mesh.tpp
-    two_layer_spine_mesh.tpp
-    single_layer_spine_mesh.tpp
-    bretherton_spine_mesh.tpp
-    quarter_tube_mesh.tpp
-    eighth_sphere_mesh.tpp
-    channel_spine_mesh.tpp
-    collapsible_channel_mesh.tpp
-    triangle_mesh.tpp
-    geompack_mesh.tpp
-    tetgen_mesh.tpp
-    simple_rectangular_tri_mesh.tpp
-    simple_cubic_tet_mesh.tpp
-    simple_cubic_mesh.tpp
-    single_layer_cubic_spine_mesh.tpp
-    channel_with_leaflet_mesh.tpp
-    cylinder_with_flag_mesh.tpp
-    fsi_driven_cavity_mesh.tpp
-    hermite_element_quad_mesh.tpp
-    circular_shell_mesh.tpp
-    tube_mesh.tpp
-    backward_step_mesh.tpp
-    full_circle_mesh.tpp
-    horizontal_single_layer_spine_mesh.tpp
-    xda_tet_mesh.tpp
-    thin_layer_brick_on_tet_mesh.tpp
-    brick_from_tet_mesh.tpp
-    quarter_pipe_mesh.tpp
-    annular_mesh.tpp
-    rectangle_with_hole_mesh.tpp
-    quad_from_triangle_mesh.tpp
-    refineable_tetgen_mesh.tpp
-    gmsh_tet_mesh.tpp
-    rectangle_with_moving_cylinder_mesh.tpp
-    extruded_cube_mesh_from_quad_mesh_with_macro_elements.tpp)
+    one_d_mesh.template.cc
+    simple_rectangular_quadmesh.template.cc
+    rectangular_quadmesh.template.cc
+    quarter_circle_sector_mesh.template.cc
+    fish_mesh.template.cc
+    one_d_lagrangian_mesh.template.cc
+    two_layer_spine_mesh.template.cc
+    single_layer_spine_mesh.template.cc
+    bretherton_spine_mesh.template.cc
+    quarter_tube_mesh.template.cc
+    eighth_sphere_mesh.template.cc
+    channel_spine_mesh.template.cc
+    collapsible_channel_mesh.template.cc
+    triangle_mesh.template.cc
+    geompack_mesh.template.cc
+    tetgen_mesh.template.cc
+    simple_rectangular_tri_mesh.template.cc
+    simple_cubic_tet_mesh.template.cc
+    simple_cubic_mesh.template.cc
+    single_layer_cubic_spine_mesh.template.cc
+    channel_with_leaflet_mesh.template.cc
+    cylinder_with_flag_mesh.template.cc
+    fsi_driven_cavity_mesh.template.cc
+    hermite_element_quad_mesh.template.cc
+    circular_shell_mesh.template.cc
+    tube_mesh.template.cc
+    backward_step_mesh.template.cc
+    full_circle_mesh.template.cc
+    horizontal_single_layer_spine_mesh.template.cc
+    xda_tet_mesh.template.cc
+    thin_layer_brick_on_tet_mesh.template.cc
+    brick_from_tet_mesh.template.cc
+    quarter_pipe_mesh.template.cc
+    annular_mesh.template.cc
+    rectangle_with_hole_mesh.template.cc
+    quad_from_triangle_mesh.template.cc
+    refineable_tetgen_mesh.template.cc
+    gmsh_tet_mesh.template.cc
+    rectangle_with_moving_cylinder_mesh.template.cc
+    extruded_cube_mesh_from_quad_mesh_with_macro_elements.template.cc)
 
 # Define the non-mesh headers
 set(NON_MESH_HEADERS
@@ -124,9 +123,6 @@ set(NON_MESH_HEADERS
     annular_domain.h
     rectangle_with_hole_domain.h)
 
-# The meshes library relies on the generic
-set(LINKLIBS generic)
-
 # Set the name of the library
 set(LIBNAME meshes)
 
@@ -137,6 +133,9 @@ oomph_library_config(
   HEADERS ${TEMPLATE_HEADERS} ${NON_MESH_HEADERS}
   HEADERS_NO_COMBINE ${TEMPLATE_IMPL_HEADERS}
   LINKLIBS ${LINKLIBS})
+
+# The meshes library relies on the generic library.
+target_link_libraries(meshes INTERFACE oomph::generic)
 
 message(VERBOSE "Leaving meshes subdirectory")
 # ------------------------------------------------------------------------------

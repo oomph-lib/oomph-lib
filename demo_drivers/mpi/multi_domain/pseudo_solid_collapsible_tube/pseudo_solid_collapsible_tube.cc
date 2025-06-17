@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -158,14 +158,11 @@ namespace LSC_Preconditioner_Helper
  {
   HyprePreconditioner* hypre_preconditioner_pt
    = new HyprePreconditioner;
-  hypre_preconditioner_pt->set_amg_iterations(2);
-  hypre_preconditioner_pt->amg_using_simple_smoothing();
-  hypre_preconditioner_pt->amg_simple_smoother() = 0;
-  hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
-  hypre_preconditioner_pt->amg_strength() = 0.25;
-  hypre_preconditioner_pt->amg_coarsening() = 6;
-  hypre_preconditioner_pt->amg_damping() = 0.5;
-  hypre_preconditioner_pt->disable_doc_time();
+
+  // Use default Navier Stokes settings
+  Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+   static_cast<HyprePreconditioner*>(hypre_preconditioner_pt));
+
   return hypre_preconditioner_pt;
  }
 }
@@ -256,7 +253,7 @@ public:
        nod_pt->set_coordinates_on_boundary(4,zeta);
       }
     }
-   this->Boundary_coordinate_exists[4]=true;
+   this->set_boundary_coordinate_exists(4);
    set_lagrangian_nodal_coordinates();
   }
 
@@ -1709,7 +1706,7 @@ int main(int argc, char* argv[])
                                                                 
 #ifdef OOMPH_HAS_MPI                                                    
    MPI_Helpers::init(argc,argv);                                          
-#endif         
+#endif
 
  // Switch off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
@@ -1843,10 +1840,10 @@ PseudoElasticCollapsibleChannelProblem
  // Steady run
  problem.steady_run(doc_info);
 
- // Unteady run
+ // Unsteady run
  problem.unsteady_run(doc_info);
 
-                                                         
+                                
 #ifdef OOMPH_HAS_MPI                                                    
  MPI_Helpers::finalize();
 #endif         

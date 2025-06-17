@@ -3,7 +3,7 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -352,8 +352,9 @@ void parallel_test(const unsigned& n_refine_first,
               << "]: " << t_tot << std::endl;
  
    n_dof=problem_pt->ndof();
-   sprintf(
+   snprintf(
     filename,
+    sizeof(filename),
     "%s/two_d_initial_refinement_nrefinement_%i_ndofbefore_%i_ndofafter_%i.dat",
     doc_info.directory().c_str(),
     n_refine_first,
@@ -425,8 +426,9 @@ void parallel_test(const unsigned& n_refine_first,
    oomph_info << "Time for problem distribution [ndof=" << problem_pt->ndof() 
               << "]: " << t_tot << std::endl;
 
-   sprintf(
+   snprintf(
     filename,
+    sizeof(filename),
     "%s/two_d_initial_distr_np_%i_nrefinement_%i_ndof_%i.dat",
     doc_info.directory().c_str(),
     n_proc,
@@ -530,8 +532,9 @@ void parallel_test(const unsigned& n_refine_first,
      string snippet="";
      if (!redistribute) snippet="out";
 
-     sprintf(
+     snprintf(
       filename,
+      sizeof(filename),
       "%s/two_d_distributed_refinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i_with%sredistribution.dat",
       doc_info.directory().c_str(),
       n_proc,
@@ -579,8 +582,9 @@ void parallel_test(const unsigned& n_refine_first,
                    << min_efficiency << " " 
                    << max_efficiency << " " 
                    << std::endl;
-        sprintf(
+        snprintf(
          filename,
+         sizeof(filename),
          "%s/two_d_redistribution_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
          doc_info.directory().c_str(),
          n_proc,
@@ -688,8 +692,9 @@ void parallel_test(const unsigned& n_refine_first,
      // Number of dofs after unrefinement
      n_dof=problem_pt->ndof();
      
-     sprintf(
+     snprintf(
       filename,
+      sizeof(filename),
       "%s/two_d_distributed_unrefinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
       doc_info.directory().c_str(),
       n_proc,

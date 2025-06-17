@@ -74,11 +74,25 @@ function(oomph_define_test_data)
     endif()
   endforeach()
 
+  # To silence the warning about a missing COMMAND key in the
+  # add_custom_command(...) command below. We're going to just enable the policy
+  # locally (by pushing to the policy stack then popping after)
+  if(POLICY CMP0175)
+    cmake_policy(PUSH)
+    cmake_policy(VERSION 3.31)
+    cmake_policy(SET CMP0175 OLD)
+  endif()
+
   # Identify the files that we'll copy as by-products so that they can be
   # cleaned up by running "make clean" if the user uses Makefile Generators
   add_custom_command(
     TARGET copy_${PATH_HASH}
     POST_BUILD
     BYPRODUCTS ${TEST_BYPRODUCTS})
+
+  if(POLICY CMP0175)
+    # Remove the policy enabled above
+    cmake_policy(POP)
+  endif()
 endfunction()
 # ------------------------------------------------------------------------------

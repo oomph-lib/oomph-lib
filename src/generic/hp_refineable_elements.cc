@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -2819,7 +2819,7 @@ namespace oomph
       /// /BENFLAG:
       // std::cout << "Checking that all the nodes have this as their update
       // element..." << std::endl;
-      /// /std::cout << "this = " << this << std::endl;
+      // std::cout << "this = " << this << std::endl;
       // for(unsigned j=0; j<this->nnode(); j++)
       // {
       //  //std::cout << this->node_pt(j) << ":   [" << this->node_pt(j)->x(0)

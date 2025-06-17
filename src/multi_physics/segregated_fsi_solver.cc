@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -898,11 +898,17 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw RanOutOfIterationsInSegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           break;
 
@@ -920,11 +926,17 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw RanOutOfIterationsInSegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           break;
 
@@ -942,11 +954,17 @@ namespace oomph
           // Throw an error indicating if we ran out of iterations
           if (iter_taken == Max_picard)
           {
-            throw SegregatedSolverError(true);
+            throw RanOutOfIterationsInSegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           else
           {
-            throw SegregatedSolverError(false);
+            throw SegregatedSolverError(
+              "Error occured in Segregated solver. \n",
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
           }
           break;
       }
@@ -986,20 +1004,11 @@ namespace oomph
       conv_data = segregated_solve();
     }
     // Catch any exceptions thrown in the segregated solver
-    catch (SegregatedSolverError& error)
+    catch (RanOutOfIterationsInSegregatedSolverError& error)
     {
-      if (!error.Ran_out_of_iterations)
-      {
-        std::ostringstream error_stream;
-        error_stream << "Error occured in Segregated solver. " << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-      else
-      {
-        oomph_info << "Note: Ran out of iterations but continuing anyway"
-                   << std::endl;
-      }
+      // Continue, but output note
+      oomph_info << "Note: Ran out of iterations but continuing anyway"
+                 << std::endl;
     }
 
     // Reset the is_steady status of all timesteppers that
@@ -1080,20 +1089,11 @@ namespace oomph
       conv_data = segregated_solve();
     }
     // Catch any exceptions thrown in the segregated solver
-    catch (SegregatedSolverError& error)
+    catch (RanOutOfIterationsInSegregatedSolverError& error)
     {
-      if (!error.Ran_out_of_iterations)
-      {
-        std::ostringstream error_stream;
-        error_stream << "Error occured in Segregated solver. " << std::endl;
-        throw OomphLibError(
-          error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
-      }
-      else
-      {
-        oomph_info << "Note: Ran out of iterations but continuing anyway"
-                   << std::endl;
-      }
+      // Continue, but output note
+      oomph_info << "Note: Ran out of iterations but continuing anyway"
+                 << std::endl;
     }
 
     // Now update anything that needs updating after the timestep

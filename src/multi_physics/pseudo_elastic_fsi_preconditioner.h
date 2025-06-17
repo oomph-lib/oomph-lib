@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -81,7 +81,8 @@ namespace oomph
       Pseudo_elastic_preconditioner_pt = new PseudoElasticPreconditioner();
 
       // using Schur complement preconditioner for NS
-      Navier_stokes_preconditioner_pt = new ExactPreconditioner;
+      Navier_stokes_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
       Navier_stokes_schur_complement_preconditioner_pt =
         new NavierStokesSchurComplementPreconditioner(problem_pt);
 
@@ -89,7 +90,8 @@ namespace oomph
       Using_default_solid_preconditioner = true;
 
       // default super lu
-      Solid_preconditioner_pt = new ExactPreconditioner;
+      Solid_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // create the matrix vector product operatrs
       Solid_fluid_matvec_pt = new MatrixVectorProduct;

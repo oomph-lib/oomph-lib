@@ -20,6 +20,7 @@
 # cmake-format: on
 include_guard()
 
+# ------------------------------------------------------------------------------
 function(oomph_add_cxx_compile_definitions)
   foreach(CXX_DEFINITION IN LISTS ARGN)
     add_compile_definitions($<$<COMPILE_LANGUAGE:CXX>:${CXX_DEFINITION}>)

@@ -2,88 +2,102 @@
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered doc subdirectory")
 
+# Project meta & global options
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
-project(doc C CXX Fortran)
-set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../")
+project(doc LANGUAGES C CXX Fortran)
 
+# This doc build is *configure + build* only
+set(CMAKE_SKIP_INSTALL_RULES ON)
+
+# Root of the whole repo
+set(OOMPH_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
+
+# Generate the top-level doc from doc.txt
 include("${OOMPH_ROOT_DIR}/cmake/OomphGenerateDocFrom.cmake")
 oomph_generate_doc_from(OOMPH_ROOT_DIR "${OOMPH_ROOT_DIR}" DOCFILE doc.txt)
 
-# Get the list of index.html files that will be produced by
-# make_index_html_in_demo_driver_dirs.bash
+# ------------------------------------------------------------------------------
+# Demo-driver index pages
+set(MAKE_INDEX_SCRIPT
+    "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash")
+
+# Ask the helper script which files it will (re)create
 execute_process(
-  COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
-          --list-byproducts OUTPUT_VARIABLE INDEX_HTML_BYPRODUCTS)
-string(REPLACE "\n" ";" INDEX_HTML_BYPRODUCTS_AS_LIST ${INDEX_HTML_BYPRODUCTS})
+  COMMAND "${MAKE_INDEX_SCRIPT}" --list-byproducts
+  OUTPUT_VARIABLE _index_raw
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-# Target to generate index.html files for the demo drivers
-add_custom_target(
-  make_index_html_in_demo_drivers ALL
-  COMMAND "${OOMPH_ROOT_DIR}/scripts/make_index_html_in_demo_driver_dirs.bash"
-  BYPRODUCTS ${INDEX_HTML_BYPRODUCTS_AS_LIST})
+# Convert its newline output into a true CMake list.
+string(REPLACE "\n" ";" INDEX_HTML_FILES "${_index_raw}")
 
-# TODO: Update "the_distribution"; it's based on the soon-to-be-deprecated
-# Makefile.am stuff
+# One custom command that claims *every* html file as an OUTPUT
+add_custom_command(
+  OUTPUT ${INDEX_HTML_FILES}
+  COMMAND "${MAKE_INDEX_SCRIPT}"
+  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  COMMENT "Generating index.html files for demo drivers"
+  VERBATIM)
 
-# TODO: Switch to using add_custom_command(...) in OomphGenerateDocFrom.cmake
-# instead of add_custom_target(...) to avoid constantly rebuilding...
+# A convenience target that the build can depend on
+add_custom_target(make_index_html_in_demo_drivers ALL
+                  DEPENDS ${INDEX_HTML_FILES})
+# ------------------------------------------------------------------------------
 
 # Recurse!
 set(SUBDIRS
-    people
-    index
-    picture_show
-    optimisation
-    contact
-    publications
-    coding_conventions
-    copyright
-    intro
     FAQ
-    meshes
-    tar_files
-    the_distribution
-    example_code_list
-    the_data_structure
-    quick_guide
-    poisson
-    unsteady_heat
-    linear_wave
-    helmholtz
-    navier_stokes
-    axisym_navier_stokes
+    acknowledgements
+    acoustic_fsi
     advection_diffusion
+    axisym_linear_elasticity
+    axisym_navier_stokes
     beam
-    shell
-    solid
-    interaction
-    multi_physics
-    eigenproblems
-    leftovers
-    order_of_action_functions
-    hijacking
-    change_log
     bugs
-    linear_solvers
-    paraview
-    preconditioners
-    to_be_written
-    young_laplace
-    mpi
+    change_log
+    coding_conventions
+    contact
+    copyright
     creating_doc
-    linear_elasticity
-    time_harmonic_fourier_decomposed_linear_elasticity
+    deliberately_broken_doc_for_checking
+    eigenproblems
+    example_code_list
+    fourier_decomposed_acoustic_fsi
     fourier_decomposed_helmholtz
-    time_harmonic_linear_elasticity
+    helmholtz
+    hijacking
+    index
+    interaction
+    intro
+    leftovers
+    linear_elasticity
+    linear_solvers
+    linear_wave
+    meshes
+    mpi
+    multi_physics
+    navier_stokes
+    optimisation
+    order_of_action_functions
+    paraview
+    people
+    picture_show
     pml_fourier_decomposed_helmholtz
     pml_helmholtz
-    axisym_linear_elasticity
-    acoustic_fsi
-    fourier_decomposed_acoustic_fsi
     pml_time_harmonic_linear_elasticity
-    deliberately_broken_doc_for_checking
-    acknowledgements
-    search_results)
+    poisson
+    preconditioners
+    publications
+    quick_guide
+    search_results
+    shell
+    solid
+    tar_files
+    the_data_structure
+    time_harmonic_fourier_decomposed_linear_elasticity
+    time_harmonic_linear_elasticity
+    to_be_written
+    unsteady_heat
+    young_laplace)
 
 foreach(SUBDIR IN LISTS SUBDIRS)
   add_subdirectory(${SUBDIR})

@@ -2,68 +2,84 @@
 # =============================================================================
 # DESCRIPTION:
 # ------------
-# Generalise the creation of an oomph-lib library for the cases the process is
-# easy to automate. This typically occurs when we have a set of headers and
-# (possibly) a set of sources, and all we want to do is create a library from
-# these headers/sources then install them in the standard location (i.e.
-# build/include). A combined header will be created in build/include/ with the
-# name ${LIBNAME}.h which includes the relevant headers/sources that will be
-# installed to build/include/${LIBNAME}/.
+# A convenience function to automate the creation and installation of an
+# oomph-lib library, typically consisting of one or more headers and sources.
+# The function:
+#   - Creates a (potentially) compiled library or an INTERFACE library (if no
+#     sources).
+#   - Generates a "combined" header named <LIBNAME>.h in the build include
+#     directory that includes relevant headers and any SOURCES_NO_BUILD files.
+#   - Installs the library artifacts (if built) and headers to the standard
+#     locations under <INSTALL-DIR>/include/<LIBNAME>.
+#   - Optionally installs additional headers (HEADERS_NO_COMBINE) without
+#     including them in the combined header.
+#   - Excludes certain headers (HEADERS_NO_INSTALL) from installation
+#     or the combined header.
 #
-# If no sources are provided then we assume that the library should be
-# header-only and it will thus be created as an INTERFACE library.
-#
-# IMPORTANT:
-# ----------
-# This function must be called from the directory containing the files we need
-# to build the library as the ${CMAKE_CURRENT_SOURCE_DIR} variable will hold the
-# path to the calling directory, so we won't need to ask the user to provide it.
-# For more details, see pg. 59 of:
-#
-#           "Scott Craig (2021), Professional CMake: A Practical Guide"
+# Arguments
+# ---------
+#   - LIBNAME (Required): The name of the library to create.
+#   - HEADERS (Optional): Headers to be installed and included in the combined
+#       header.
+#   - SOURCES (Optional): Source files to compile and install (if provided, the
+#       library is built as STATIC/SHARED, unless overridden by LIBTYPE).
+#   - SOURCES_NO_BUILD (Optional): Source files that should be installed and
+#       added to the combined header but NOT compiled (e.g., template
+#       implementations).
+#   - HEADERS_NO_COMBINE (Optional): Headers that should be installed but not
+#       included in the combined header (e.g., external or system headers).
+#   - HEADERS_NO_INSTALL (Optional): Headers that should NOT be installed or
+#       included in the combined header (e.g., Fortran headers).
+#   - LIBTYPE (Optional): Overrides the default library type (STATIC/SHARED).
+#       If omitted and SOURCES are provided, it respects the global
+#       BUILD_SHARED_LIBS setting; if no SOURCES, an INTERFACE library is used.
+#   - INCLUDE_SUBDIRECTORY (Optional): Subdirectory name under
+#       <INSTALL-DIR>/include/ for the headers. Defaults to <LIBNAME> if not
+#       provided.
+#   - LINKLIBS (Optional): Additional libraries to link against.
 #
 # USAGE:
 # ------
-#     include(OomphLibraryConfig)
-#     oomph_library_config(LIBNAME             <library-name>
-#                          [HEADERS            <headers-of-the-library>]
-#                          [SOURCES            <sources-of-the-library>]
-#                          [SOURCES_NO_BUILD   <sources-to-install-only>]
-#                          [HEADERS_NO_COMBINE <headers-to-install-only>]
-#                          [HEADERS_NO_INSTALL <headers-to-not-install>])
+#   include(OomphLibraryConfig)
 #
-# The keyword HEADERS_NO_COMBINE is used to define extra headers that need to be
-# installed in build/include but should not be placed in the combined header.
-# These are typically headers that the system defines and not those associated
-# with the library itself. The keyword SOURCES_NO_BUILD is used to refer to
-# sources that are part of the library but should not be built such as template
-# implementation headers (for pure template headers, e.g. meshes). These files
-# will be installed to the include directory and also added in the combined
-# header. The keyword HEADERS_NO_INSTALL is used to refer to headers that the
-# library depends on but should not be part of the combined header or be placed
-# in build/include/. This is helpful, for example, for fortran headers, like in
-# src/generic.
+#   oomph_library_config(
+#     LIBNAME             my_library
+#     HEADERS             foo.h bar.h
+#     SOURCES             foo.cc bar.cc
+#     SOURCES_NO_BUILD    baz.cc
+#     HEADERS_NO_COMBINE  system_header.h
+#     HEADERS_NO_INSTALL  fortran-wrapper.h
+#     LIBTYPE             STATIC
+#     INCLUDE_SUBDIRECTORY my_lib
+#     LINKLIBS            other_dependency
+#   )
 #
-# The above is summarised in the table below:
+# Once configured, the library can be linked via:
+#   target_link_libraries(your_target PRIVATE <PROJECT_NAMESPACE>::my_library)
 #
+# SUMMARY:
+# --------
 #   +--------------------+--------------+--------------------+-------------+
-#   |           ARGUMENT | LIBRARY DEP. | IN COMBINED HEADER |  INSTALLED  |
+#   |     ARGUMENT       | LIBRARY DEP. | IN COMBINED HEADER |  INSTALLED  |
 #   +--------------------+--------------+--------------------+-------------+
-#   |            HEADERS |      x       |         x          |      x      |
-#   |            SOURCES |      x       |                    |      x      |
-#   |   SOURCES_NO_BUILD |      x       |         x          |      x      |
+#   | HEADERS            |      x       |         x          |      x      |
+#   | SOURCES            |      x       |                    |      x      |
+#   | SOURCES_NO_BUILD   |      x       |         x          |      x      |
 #   | HEADERS_NO_COMBINE |      x       |                    |      x      |
 #   | HEADERS_NO_INSTALL |      x       |                    |             |
 #   +--------------------+--------------+--------------------+-------------+
+#
+# -----------------------------------------------------------------------------
+# IMPORTANT:
+# ----------
+# This function should be called from the directory containing all the
+# headers/sources for your library (so that CMAKE_CURRENT_SOURCE_DIR is set
+# correctly).
 # =============================================================================
 # cmake-format: on
 include_guard()
 
-# cmake-format: off
-# TODO: Add functionality to include .cc files that shouldn't be compiled:
-# KEYWORD: SOURCES_NO_BUILD = ...
-# cmake-format: on
-
+# ------------------------------------------------------------------------------
 function(oomph_library_config)
   # Define the supported set of keywords
   set(PREFIX ARG)
@@ -85,33 +101,33 @@ function(oomph_library_config)
   # We must be given the directory containing the sources/headers, the name of
   # the library we need to create, and header files. If any of these fields are
   # empty then issue a fatal error and stop.
-  if(NOT ${PREFIX}_LIBNAME)
-    message(FATAL_ERROR "Missing ${${PREFIX}_LIBNAME}.")
+  if(NOT ARG_LIBNAME)
+    message(FATAL_ERROR "Missing ${ARG_LIBNAME}.")
   endif()
 
   # Redefine the headers, sources, and the name of the library in this scope but
   # with clearer variable names
-  set(HEADERS ${${PREFIX}_HEADERS})
-  set(SOURCES ${${PREFIX}_SOURCES})
-  set(LIBNAME ${${PREFIX}_LIBNAME})
-  set(LIBTYPE ${${PREFIX}_LIBTYPE})
-  set(INCLUDE_SUBDIRECTORY ${${PREFIX}_INCLUDE_SUBDIRECTORY})
-  set(LINKLIBS ${${PREFIX}_LINKLIBS})
-  set(HEADERS_NO_COMBINE ${${PREFIX}_HEADERS_NO_COMBINE})
-  set(HEADERS_NO_INSTALL ${${PREFIX}_HEADERS_NO_INSTALL})
-  set(SOURCES_NO_BUILD ${${PREFIX}_SOURCES_NO_BUILD})
+  set(HEADERS ${ARG_HEADERS})
+  set(SOURCES ${ARG_SOURCES})
+  set(LIBNAME ${ARG_LIBNAME})
+  set(LIBTYPE ${ARG_LIBTYPE})
+  set(INCLUDE_SUBDIRECTORY ${ARG_INCLUDE_SUBDIRECTORY})
+  set(LINKLIBS ${ARG_LINKLIBS})
+  set(HEADERS_NO_COMBINE ${ARG_HEADERS_NO_COMBINE})
+  set(HEADERS_NO_INSTALL ${ARG_HEADERS_NO_INSTALL})
+  set(SOURCES_NO_BUILD ${ARG_SOURCES_NO_BUILD})
   set(LIBRARY_DEPS ${SOURCES} ${HEADERS} ${HEADERS_NO_COMBINE}
       ${HEADERS_NO_INSTALL} ${SOURCES_NO_BUILD})
 
-  # If sources that should not be built (SOURCES_NO_BUILD) are provided then
-  # mark them as headers so that they do not get compiled in the library build
+  # Mark any files in SOURCES_NO_BUILD as headers, so they aren't compiled
   set_source_files_properties(${SOURCES_NO_BUILD} PROPERTIES HEADER_FILE_ONLY
                                                              TRUE)
 
   # Create the library and specify the library type. If no sources are provided,
   # we assume it is a header-only library, in which case it should be created as
   # an INTERFACE library. Note, in this case, it makes no sense to specify the
-  # library type, as the library itself will not be built/compiled.
+  # library type (i.e. static/shared), as the library itself will not be
+  # built/compiled.
   #
   # NOTE: If the user does not specify LIBTYPE, it will be inferred from the
   # CMake cache variable BUILD_SHARED_LIBS.
@@ -182,29 +198,23 @@ function(oomph_library_config)
                                   CXX_COMPILE_FLAGS -Wno-undefined-var-template)
   endif()
 
-  if(APPLE)
-    target_link_options(${LIBNAME} ${LINK_TYPE} -Wl,-no_compact_unwind)
+  # If the user requested that we enable sanitisers
+  if(OOMPH_ENABLE_SANITIZER_SUPPORT)
+    oomph_enable_sanitizers(${LIBNAME})
   endif()
 
   # ----------------------------------------------------------------------------
   # The install rules: we want to do the following
   #
-  # 1. Install ${LIBNAME} in <INSTALL-DIR>/lib,
-  # 2. Install ${LIBNAME}.h in <INSTALL-DIR>/include, and
-  # 3. Install ${HEADERS} in <INSTALL-DIR>/include/${LIBNAME}
+  # 1. Install ${LIBNAME} in <INSTALL-DIR>/lib/${PROJECT_NAME},
+  # 2. Install ${LIBNAME}.h in <INSTALL-DIR>/include/${PROJECT_NAME}, and
+  # 3. Install ${HEADERS} in <INSTALL-DIR>/include/${PROJECT_NAME}/${LIBNAME}
   #
   # The header ${LIBNAME}.h in <INSTALL-DIR>/include will include the relevant
   # headers from <INSTALL-DIR>/include/${LIBNAME}/. This allows us to group
   # associated headers together.
   # ----------------------------------------------------------------------------
   # ~~~
-  # TODO: Add a note somewhere that the library directory should either match
-  # the library name or be set
-  # TODO: The <SUBDIR> value should NOT be the path from src/ as this would
-  # break for the build.
-  # FIXME: We should, for good practice, include the full path from the root
-  # source directory...
-  #
   # When headers get installed to "<INSTALL-PATH>/oomphlib/include/<SUBDIR>/",
   # we provide a combined header in the ".../include/" directory that can be
   # included by the user to include all files shipped with a library. The
@@ -215,12 +225,30 @@ function(oomph_library_config)
   # The "<SUBDIR>" is simply the folder that encloses it.
   # Therefore we need to the correct "<SUBDIR>" value. In most cases, this is
   # obvious -- it is just the name of the library itself, e.g. the <SUBDIR> of
-  # the "generic" library src/generic/ contains the
-  # definition of
+  # the "generic" library, src/generic/, contains the header files.
+  #
+  # FIXME: We should, for good practice, include the full path from the root
+  # project directory to preserve the folder structure. E.g. for the
+  # 'space_time_block_preconditioner' library defined in
+  #             src/space_time/space_time_block_preconditioner/
+  # we install the combined header to
+  #                 <INSTALL-DIR>/include/${PROJECT_NAME}/
+  # and the files to
+  #    <INSTALL-DIR>/include/${PROJECT_NAME}/space_time_block_preconditioner/
+  # instead of
+  #  <INSTALL-DIR>/include/${PROJECT_NAME}/space_time/space_time_block_preconditioner/
+  # This could be problematic if we create libraries with the same name. Ideally
+  # we would install the combined header to
+  #             <INSTALL-DIR>/include/${PROJECT_NAME}/space_time/
+  # so the user gets access to all the files with the following include:
+  #         #include "space_time/space_time_block_preconditioner.h"
+  # instead of
+  #             #include "space_time_block_preconditioner.h"
+  # as is currently done.
   # ~~~
   #
   # We want to provide a combined header above the level of a library directory
-  # which includes the path to files in the livrary The include paths we provide
+  # which includes the path to files in the library The include paths we provide
   # for #headers In general, the name of the folder that encloses the definition
   # of a library is the same as the name of the library, e.g. src/generic/
   # contains the definition of the "generic" library. However, in some cases the
@@ -250,14 +278,8 @@ function(oomph_library_config)
     TARGETS ${LIBNAME}
     EXPORT ${TARGETS_EXPORT_NAME}
     LIBRARY DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
-            COMPONENT ${PROJECT_NAME}_Runtime
-            NAMELINK_COMPONENT ${PROJECT_NAME}_Development
     ARCHIVE DESTINATION "${OOMPH_INSTALL_LIB_DIR}"
-            COMPONENT ${PROJECT_NAME}_Development
-    RUNTIME DESTINATION "${OOMPH_INSTALL_BIN_DIR}"
-            COMPONENT ${PROJECT_NAME}_Runtime
-    INCLUDES
-    DESTINATION "${OOMPH_INSTALL_INCLUDE_DIR}")
+    RUNTIME DESTINATION "${OOMPH_INSTALL_BIN_DIR}")
 
   # Install the combined header
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/../${LIBNAME}.h"
@@ -275,8 +297,21 @@ function(oomph_library_config)
   # Combine everything that shouldn't be built into a single variable
   set(ALL_HEADERS ${HEADERS} ${HEADERS_NO_COMBINE} ${SOURCES_NO_BUILD})
 
-  # Install (or symlink) the headers
-  install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
+  # Instead of "install(FILES ...)", create a symlink for each header
+  if(OOMPH_INSTALL_HEADERS_AS_SYMLINKS)
+    foreach(HEADER IN LISTS ALL_HEADERS)
+      get_filename_component(HEADER_NAME ${HEADER} NAME)
+      install(
+        CODE "execute_process(
+        COMMAND \"${CMAKE_COMMAND}\" -E create_symlink
+                \"${CMAKE_CURRENT_SOURCE_DIR}/${HEADER}\"
+                \"\${CMAKE_INSTALL_PREFIX}/${INCLUDE_DIR_FOR_THIS_LIBRARY}/${HEADER_NAME}\"
+      )")
+    endforeach()
+  else()
+    # ...or just install copies of the headers
+    install(FILES ${ALL_HEADERS} DESTINATION "${INCLUDE_DIR_FOR_THIS_LIBRARY}")
+  endif()
   # ----------------------------------------------------------------------------
 endfunction()
 # ------------------------------------------------------------------------------

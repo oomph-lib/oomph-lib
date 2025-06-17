@@ -1,12 +1,23 @@
 # ------------------------------------------------------------------------------
+# OOMPH auto-inserted: warn once if user configures inside an existing build.
+if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   AND CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  message(
+    WARNING
+      "You're re-configuring an existing build tree. For a clean configuration, "
+      "delete the whole build folder and start with a fresh directory.")
+endif()
+# ------------------------------------------------------------------------------
 list(APPEND CMAKE_MESSAGE_INDENT " ")
 message(VERBOSE "Entered complex_matrices_test subdirectory")
 
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 project(complex_matrices_test C CXX Fortran)
+
 if(NOT oomphlib_FOUND)
-  find_package(oomphlib CONFIG REQUIRED PATHS "../../../install")
+  find_package(oomphlib CONFIG REQUIRED PATHS "../../../../install")
 endif()
+
 include(CTest)
 
 oomph_add_executable(
@@ -26,22 +37,12 @@ oomph_add_executable(
 
 # ---------------------------------- TESTING ----------------------------------
 
-# TODO: Check this actually works and it doesn't just become an extra label
-set(EXTRA_FLAGS)
-if(OOMPH_HAS_MPI)
-  set(EXTRA_FLAGS)
-endif()
-
 oomph_add_test(
   TEST_NAME self_test.generic.complex_matrices_test
   DEPENDS_ON dense_complex_matrix_test cr_complex_matrix_test
              cc_complex_matrix_test
   COMMAND ./validate.sh ${OOMPH_ROOT_DIR} ${OOMPH_MPI_RUN_COMMAND}
-  TEST_FILES validate.sh validata
-  LABELS complex matrix ${EXTRA_FLAGS})
-
-set_tests_properties(self_test.generic.complex_matrices_test PROPERTIES DISABLED
-                                                                        TRUE)
+  TEST_FILES validate.sh validata)
 
 message(VERBOSE "Leaving complex_matrices_test subdirectory")
 # ------------------------------------------------------------------------------

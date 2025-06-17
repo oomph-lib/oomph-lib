@@ -3,7 +3,7 @@
 // LIC// multi-physics finite-element library, available
 // LIC// at http://www.oomph-lib.org.
 // LIC//
-// LIC// Copyright (C) 2006-2023 Matthias Heil and Andrew Hazel
+// LIC// Copyright (C) 2006-2025 Matthias Heil and Andrew Hazel
 // LIC//
 // LIC// This library is free software; you can redistribute it and/or
 // LIC// modify it under the terms of the GNU Lesser General Public
@@ -345,7 +345,8 @@ namespace oomph
     if (P_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      P_preconditioner_pt = new ExactPreconditioner;
+      P_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_p_preconditioner = true;
@@ -364,7 +365,8 @@ namespace oomph
     if (F_preconditioner_pt == 0)
     {
       // Just use SuperLU
-      F_preconditioner_pt = new ExactPreconditioner;
+      F_preconditioner_pt =
+        ExactPreconditionerFactory::create_exact_preconditioner();
 
       // Indicate that we're using the default preconditioner
       Using_default_f_preconditioner = true;

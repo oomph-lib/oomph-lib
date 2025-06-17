@@ -503,8 +503,8 @@ Described below is an alternative way to pull changes from the official reposito
   Imagine that somebody has written a piece of code that you want to use, but they are not yet ready to create a pull request to the main `oomph-lib` development branch. Obviously, they could just send you the code, but the better way is to ask them to create a pull request to a branch on your forked copy of the repository. Ideally, you should create a new branch specifically to pull in the changes, but you could also pull into the development branch. You should follow the steps described in [Code review](#code-review) to pull those changes into your branch. You now have the problem that your upstream repository is different from the local copy on your machine, but you can solve this problem with the git merge command.
 
  1. Make sure that you fetch the upstream copy of repository that includes the changes pulled in
-   from the external source. 
-   ```bash
+    from the external source. 
+    ```bash
     >>> git pull upstream external-feature-branch
     ```
 
