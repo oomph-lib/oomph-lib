@@ -1574,7 +1574,7 @@ To add new tutorials to the `doc` directory, follow the same steps used for addi
 
 ## Cheat sheet: Autotools vs. CMake
 
-Earlier releases of `oomph-lib` used Autotools to build/install the library. To ease the conversion to the new way of doing things, the table below provides a side-by-side comparison of key operations. Note that we also provide a script, `scripts/oomph_generate_cmake_script.py`, that (attempts to) converts an `oomph-lib` autotools `Makefile.am` into a corresponding `CMakeLists.txt`. It may need a bit work/checking but it tends to do most of the work.
+Earlier releases of `oomph-lib` used Autotools to build/install the library. To ease the conversion to the new way of doing things, the list below provides a comparison of key operations. Note that we also provide a script, `scripts/oomph_generate_cmake_script.py`, that (attempts to) converts an `oomph-lib` Autotools `Makefile.am` into a corresponding `CMakeLists.txt`. It may need a bit work/checking but it tends to do most of the work.
 
 In all the examples shown below we assume that `$oomph_home_dir` is the `oomph-lib` home directory:
 
