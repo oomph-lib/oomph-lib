@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import json
 import shutil
 import subprocess
@@ -99,6 +100,12 @@ def write_presets_file(presets_dict: dict, json_path: Path):
     """
     with open(json_path, "w") as f:
         json.dump(presets_dict, f, indent=2)
+
+
+def get_extra_build_args(args: Namespace) -> list[str]:
+    if args.generator == "Ninja":
+        return []
+    return ["-j", str(os.cpu_count() or 1)]
 
 
 def generate_external_dist_preset(
@@ -222,7 +229,8 @@ def configure_build_and_install_external_libs(
 
     # Build and install external
     print_progress(">>> Building and installing third-party libraries", pad_to=60, end=end)
-    build_cmd = ["cmake", "--build", "--preset", "tpl"]
+    extra_build_args = get_extra_build_args(args)
+    build_cmd = ["cmake", "--build", "--preset", "tpl"] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, external_dist_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -289,7 +297,8 @@ def configure_build_and_install_oomph(
 
     # Build and install in one go
     print_progress(">>> Building and installing main project", pad_to=60, end="\n" if verbose else "")
-    build_cmd = ["cmake", "--build", "--preset", "main", "--target", "install"]
+    extra_build_args = get_extra_build_args(args)
+    build_cmd = ["cmake", "--build", "--preset", "main", "--target", "install"] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, oomph_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
@@ -314,7 +323,8 @@ def configure_build_doc(
 
     # Build
     print_progress(">>> Building", pad_to=60, end="\n" if verbose else "")
-    build_cmd = ["cmake", "--build", "build"]
+    extra_build_args = get_extra_build_args(args)
+    build_cmd = ["cmake", "--build", "build"] + extra_build_args
     start_time = time.perf_counter()
     run_command(build_cmd, doc_dir, verbose)
     time_elapsed = time.perf_counter() - start_time
