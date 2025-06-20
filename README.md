@@ -73,8 +73,9 @@
 - [Prerequisites](#prerequisites)
   - [CMake](#cmake)
   - [Ninja](#ninja)
-  - [OpenBLAS](#openblas)
+  - [[macOS only: OpenBLAS]](#macos-only-openblas)
   - [Compilers](#compilers)
+  - [Other tools (and how to install all the prerequisites)](#other-tools-and-how-to-install-all-the-prerequisites-in-one-go)
 - [Building, installing and uninstalling `oomph-lib`](#building-installing-and-uninstalling-oomph-lib)
   - [Step 1: Installing the third-party libraries](#step-1-installing-the-third-party-libraries)
   - [Step 2: Installing oomph-lib](#step-2-installing-oomph-lib)
@@ -144,7 +145,9 @@
   - [CMake resources](#cmake-resources)
   - [Building CMake](#building-cmake)
     - [Ubuntu](#ubuntu)
-  - [macOS](#macos)
+    - [macOS](#macos)
+
+
 
 ## Overview
 
@@ -168,7 +171,7 @@ We assume you have checked out `oomph-lib` from its [GitHub repository](https://
 git clone https://github.com/oomph-lib/oomph-lib.git
 ```
 
-`oomph-lib` uses CMake and Ninja to build and install the project. You will also need a sufficiently up-to-date compiler. Make sure you have sufficiently recent versions of these programs installed on your computer. The requirements are as follows:
+`oomph-lib` uses CMake and Ninja to build and install the project. You will also need a sufficiently up-to-date compiler. The minimum requirements are as follows:
 
 ### CMake
 
@@ -205,7 +208,7 @@ sudo apt install ninja-build
 
 will do the trick.
 
-### OpenBLAS
+### [MacOS only: OpenBLAS]
 
 > [!IMPORTANT]
 > Building OpenBLAS as part of the third-party libraries build is not currently supported on macOS. Instead, you need to install it with a package manager, e.g.
@@ -220,7 +223,7 @@ will do the trick.
 > -DOOMPH_USE_OPENBLAS_FROM=$(brew --prefix openblas)
 > ```
 >
-> during the project configuration step. Adding OpenBLAS installation support on macOS is a work in progress.
+> during the project configuration step (see below). Adding OpenBLAS installation support on macOS is a work in progress.
 
 ### Compilers
 
@@ -229,6 +232,13 @@ will do the trick.
 ```bash
 sudo apt install gfortran
 ```
+
+### Other tools (and how to install all the prerequisites in one go)
+If you also want to build the documentation (which will give you a local copy of the `oomph-lib` webpages) you need a few other tools. On Ubuntu the following command should give you all you need:
+```bash
+sudo apt-get install git cmake ninja python3 doxygen gfortran g++ texlive texlive-latex-extra texlive-font-utils
+```
+
 
 ## Building, installing and uninstalling `oomph-lib`
 
@@ -504,7 +514,7 @@ By default, this will build the third-party libraries, configure the `oomph-lib`
 After running `oomph_build.py`, if it completes without errors, `oomph-lib` should be built and installed in the specified location. You can then proceed to test the installation as described in the next section.
 
 > [!NOTE]
-> On Unix-like systems, you can make the script executable by running `chmod +x oomph_build.py` and then invoking it with `./oomph_build.py`. Using `python3 ...` is equivalent to `./...` (after making the script executable.
+> On Unix-like systems, you can make the script executable by running `chmod +x oomph_build.py` and then invoking it with `./oomph_build.py`. Using `python3 ...` is equivalent to `./...` (after making the script executable).
 
 ### Command line options
 
@@ -522,7 +532,7 @@ Below is a comprehensive list of the options and their purposes:
 - **`--oomph-OOMPH_ALLOW_INSTALL_AS_SUPERUSER`**: Use this option when you intend to install `oomph-lib` system-wide (by installing it in `/usr/local/`) using root privileges. This flag tells the script to configure the installation prefix to the system's default location (`/usr/local`) and to set any required internal CMake switches such as`OOMPH_ALLOW_INSTALL_AS_SUPERUSER=ON`. If you also specify `--oomph-CMAKE_INSTALL_PREFIX`, this flag will have no effect.)
 
 > [!IMPORTANT]
-> When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run oomph_build.py `--oomph-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.
+> When using this option, you will need to run the installation step with administrative privileges. The script will attempt to perform the installation step with sudo if possible, or it will remind you to re-run the script as root for the install phase. It is generally recommended to run oomph_build.py `--oomph-CMAKE_INSTALL_PREFIX` as a normal user for the build, and let it prompt for a password or instruct you for the install, rather than running the entire build as root. (Building as a non-root user helps avoid permission issues in the build directory.)
 
 - **`--wipe-tpl`**, **`--wipe-root`**, **`--wipe-doc`**: These options tell the script to remove the specified build/installation directories that would be written to when building the third-party libraries, root project, and documentation, respectively. Use the `--wipe-*` flags if you want a completely clean rebuild. For example
 
@@ -891,7 +901,7 @@ It is not necessary to add the new sub-directory to `user_drivers/CMakeLists.txt
 
 ## Linking a stand-alone project to `oomph-lib`
 
-Adding your code into a new subdirectory in `user_drivers` directory has the advantage of your code being embedded into the `oomph-lib` build machinery. This is particularly useful for developers who tend to modify their driver and the library at the same time.
+Adding your code into a new subdirectory in `user_drivers` directory has the advantage of your code being embedded into the `oomph-lib` build machinery. This is particularly useful for developers who tend to modify their driver codes and the library at the same time.
 
 If you are not a developer and you simply wish to use `oomph-lib` as a library, you may prefer to have your driver code in a completely separate location. Given that you are then outside the `oomph-lib` framework you'll have to provide all kinds of additional information, particularly the location of the `oomph-lib` libraries and associated third-party libraries. CMake helps with that.
 
@@ -1005,7 +1015,7 @@ cmake -G Ninja -B -Doomphlib_ROOT=/home/joe_user/oomph_lib_install
 # oomph-lib installation to the find_package(...) call by replacing
 #   find_package(oomphlib CONFIG REQUIRED)
 # with
-#   find_package(oomphlib CONFIG REQUIRED PATHS "/home/joe_cool/oomph_lib_install_dir")
+#   find_package(oomphlib CONFIG REQUIRED PATHS "/home/joe_cool/oomph_lib_install")
 # then configure the project
 cmake -G Ninja -B build
 
@@ -1094,7 +1104,7 @@ will replicate the `g++` command shown above (but also link the code against `oo
 
 If you are comfortable with CMake, you may wish to control the target properties of executables in a `CMakeLists.txt` file using native CMake commands. When doing this it is important to realise that the `NAME` specified in the call to `oomph_add_executable(...)` is not the name used by CMake itself. (The reason is technical: we create a modified, hashed version of the name which includes the path relative to the `demo_drivers` directory to avoid clashes between demo driver codes).
 
-To use native CMake commands to customise the properties of an executable, you first have to obtain the hashed name that is used by CMake. For this purpose
+To use native CMake commands when customising the properties of an executable, you first have to obtain the hashed name that is used by CMake. For this purpose
 we provide the `oomph_get_target_name(...)` function provided by `oomph-lib`:
 
 ```cmake
@@ -1625,7 +1635,7 @@ make install
 
 ```bash
 # Go to home directory
-cd $oomph_home_dir<br>
+cd $oomph_home_dir
 
 # Build third-party libraries and install them locally; no separate
 # "install" step required.
@@ -1856,7 +1866,7 @@ cmake --install build
 
 ## Dos and Don'ts
 
-- Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because it would lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose seg faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign it yourself!
+- Do not (re-)define the `PARANOID` or `RANGE_CHECKING` macros in your driver code because it would lead to inconsistencies between the header files and the installed libraries, potentially leading to nasty and hard-to-diagnose seg faults. The macros used when building the library are automatically imported into your driver code, so their status is available. Just don't assign them yourself!
 - Do (re-)build the library with `PARANOID` or `RANGE_CHECKING` enabled if you develop any new machinery or work on a new driver code. The code will run more slowly but the warnings will save you years of your life!
 
 ## Additional information for developers
@@ -1872,10 +1882,10 @@ Use the `--oomph-OOMPH_INSTALL_HEADERS_AS_SYMLINKS=ON` flag when building the li
 or use `-E create_symlink` when configuring the `oomph-lib` build directly
 
 ```bash
-cmake -G Ninja -B build -E create_symlink`
+cmake -G Ninja -B build -E create_symlink
 ```
 
-With these flags, the header files in the `install` directories (usually copied from the `src` directory) are replaced by symbolic links to the original files in the `src` directory. This means that, if you build a library and are alerted to an error in a header file you don't accidentally edit a copy (that is then duly overwritten when you reinstall the library).
+With these flags, the header files in the `install` directories (usually copied from the `src` directory) are replaced by symbolic links to the original files in the `src` directory. This means that, if you build a library and are alerted to an error in a header file you don't accidentally edit a copy (that is then promptly overwritten when you reinstall the library).
 
 ### Creating robust `validata` for self tests
 
@@ -1883,7 +1893,7 @@ It is important to make sure that the `validata` is robust. While the `scripts/f
 allows for floating point tolerances (both absolute and relative) it
 cannot cope with data appearing in a different order. This can be very
 confusing to debug because the code then produces the correct results
-and plotting packages will display it correctly, but yet the tests fail.
+and plotting packages will display them correctly, but yet the tests fail.
 
 Such problems are usually caused by the use of wildcards
 in the validations scripts, the comparison of data that is stored
@@ -1892,7 +1902,7 @@ in certain STL containers, or the use of non-deterministic algorithms
 
 #### A self-test fails even though the output files produced by the code are correct
 
-Self-tests are performed by the `validate.sh` shell script, which runs the executable and
+Self-tests are performed by the `validate.sh` shell script, which typically runs the executable and
 concatenates selected output files to a single file whose contents
 are compared against the reference file in the `validata` directory.
 While it is tempting to write
@@ -1937,12 +1947,12 @@ sorted first, based on a user-controllable sorting criterion.
 
 #### Careful with driver codes that use `triangle` to generate meshes
 
-We provide a wrapper to the third-party `triangle` code to generate unstructured 2D meshes. When using these it is important to realise that the meshes generated can change, depending the machine the code is run on and even the optimisation level of the code. `validata` for such codes must therefore use intergral data such as
+We provide a wrapper to the third-party `triangle` code to generate unstructured 2D meshes. When using these it is important to realise that the meshes generated can change, depending on the machine the code is run on and even the optimisation level of the code. `validata` for such codes must therefore use intergral data such as
 norms of the solution, rather than element-by-element output.
 
 ### How to update third-party libraries to later versions
 
-The third-party libraries in `external_distributions` are pulled in from their respective GitHub repositories. The version of the libraries is typically encoded in the `<library_name>_TARBALL_URL` variable name in the files `external_distributions/cmake/OomphGetExternal<library_name>.cmake` file. An upgrade should (usually) just require a change to the tarball name, though if a more recent version of the library requires different build steps the relevant `*.cmake` file will, of course, have to be modified further. Make sure that the relevant self-tests still produce the same results after upgrading to a new version of a third-party library!
+The third-party libraries in `external_distributions` are pulled in from their respective GitHub repositories. The version of the libraries is typically encoded in the `GIT_TAG` variable name in the files `external_distributions/cmake/OomphGetExternal<library_name>.cmake` file. An upgrade should (usually) just require a change to that tag, though if a more recent version of the library requires different build steps the relevant `*.cmake` file will, of course, have to be modified further. Make sure that the relevant self-tests still produce the same results after upgrading to a new version of a third-party library!
 
 ## Appendix
 
