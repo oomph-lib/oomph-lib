@@ -4,11 +4,11 @@
 demo_drivers_dir=$(dirname $0)/../demo_drivers
 cd $demo_drivers_dir
 
-# Which directories contain a Makefile.am ?
-makefile_list=$(find . -name 'Makefile.am')
+# Which directories contain a CMakeLists.txt ?
+cmakefile_list=$(find . -name 'CMakeLists.txt')
 
-if [ -z "${makefile_list}" ]; then
-    echo "ERROR: Couldn't find any Makefile.am files!"
+if [ -z "${cmakefile_list}" ]; then
+    echo "ERROR: Couldn't find any CMakeLists.txt files!"
     exit 1
 fi
 
@@ -25,7 +25,7 @@ fi
 # subdirectory (they are the ones people will want to look at from the
 # documentation). Note that the Validation directory is temporary and will not
 # have been built on the github hosted webpage
-for file in $(echo $makefile_list); do
+for file in $(echo $cmakefile_list); do
     cd $(dirname $file)
     dir_list='. validata'
     for dir in $(echo $dir_list); do
