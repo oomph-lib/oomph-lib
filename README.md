@@ -208,7 +208,7 @@ sudo apt install ninja-build
 
 will do the trick.
 
-### [MacOS only: OpenBLAS]
+### [macOS only: OpenBLAS]
 
 > [!IMPORTANT]
 > Building OpenBLAS as part of the third-party libraries build is not currently supported on macOS. Instead, you need to install it with a package manager, e.g.
