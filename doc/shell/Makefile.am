@@ -1,2 +1,0 @@
-SUBDIRS = clamped_shell
-

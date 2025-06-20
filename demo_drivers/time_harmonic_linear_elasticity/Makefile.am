@@ -1,4 +1,0 @@
-SUBDIRS = \
-elastic_annulus
-
-

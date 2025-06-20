@@ -1,2 +1,0 @@
-SUBDIRS = \
-eluting_sphere
